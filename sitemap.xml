@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.echodemo.cc/about/index.html</loc>
+    
+    <lastmod>2018-03-08T14:44:02.041Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.echodemo.cc/guestbook/index.html</loc>
     
     <lastmod>2018-03-08T14:40:00.078Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://www.echodemo.cc/2018/03/08/This-is-my-first-blog/</loc>
     
     <lastmod>2018-03-08T08:06:02.713Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.echodemo.cc/about/index.html</loc>
-    
-    <lastmod>2018-03-08T07:33:04.555Z</lastmod>
     
   </url>
   
