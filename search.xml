@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Git push to github]]></title>
+    <url>%2F2018%2F03%2F08%2FGit-push-to-github%2F</url>
+    <content type="text"><![CDATA[1、git status 查看目前代码的修改状态 a) 已暂存 (changes to be committed) new file //表示新建文件 modified //表示修改文件 deleted //表示删除文件 b) 已修改 (changed but not updated) modified //表示修改文件 deleted //表示删除文件 c) 未跟踪 (untracked files) 另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout – 2、git diff 查看代码修改的内容(按q键退出) 比较某文件与最近提交节点的差异。 注意：如果该文件已暂存，那么应该使用git diff –cached 技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符) 3、git add [filename] 暂存需要提交的文件 如果是新建的文件则git add 如果是修改的文件则git add 如果是删除的文件则 git rm 4、git commit -m “description informations” 提交已暂存的文件 注意注释填写规范。 git commit –amend 修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。 5、git pull origin master –allow-unrelated-histories 如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。 命令：git checkout – &lt;有冲突的文件路径&gt; 6、git push -u origin master&lt;本地分支名&gt; 如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。 7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。 git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[This is my first blog!]]></title>
+    <url>%2F2018%2F03%2F08%2FThis-is-my-first-blog%2F</url>
+    <content type="text"><![CDATA[不知道 不知道 头顶遥远的苍穹闪烁的星光 在无穷无尽里飞行了多少光年 终于赶来与我的目光相会 不知道 手中捧握的书卷古老的诗篇 在岁月长河中留存了多少记忆 此刻也将属于我的悉心珍藏 不知道 你与我不断发酵生酯的相逢 在冥冥注定中酝酿了多少韶华 但我仍然记得你发梢的芳香]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>诗词</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F03%2F08%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
