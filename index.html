@@ -476,7 +476,6 @@
 
 b) 已修改 (changed but not updated)
     modified //表示修改文件
-
     deleted //表示删除文件
 
 c) 未跟踪 (untracked files)
@@ -492,10 +491,8 @@ c) 未跟踪 (untracked files)
 <pre><code>如果是新建的文件则git add
 如果是修改的文件则git add
 如果是删除的文件则 git rm
-</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件</p>
-<pre><code>  注意注释填写规范。
-
-git commit –amend
+</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件(注意注释填写规范)</p>
+<pre><code>git commit –amend
 修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。
 </code></pre><p>5、git pull origin master –allow-unrelated-histories</p>
 <pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。

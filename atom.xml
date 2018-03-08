@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-08T08:16:45.412Z</updated>
+  <updated>2018-03-08T13:17:09.224Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.echodemo.cc/2018/03/08/Git-push-to-github/"/>
     <id>http://www.echodemo.cc/2018/03/08/Git-push-to-github/</id>
     <published>2018-03-08T08:05:11.000Z</published>
-    <updated>2018-03-08T08:16:45.412Z</updated>
+    <updated>2018-03-08T13:17:09.224Z</updated>
     
-    <content type="html"><![CDATA[<p>1、git status 查看目前代码的修改状态</p><pre><code>a) 已暂存 (changes to be committed)    new file //表示新建文件    modified //表示修改文件    deleted //表示删除文件b) 已修改 (changed but not updated)    modified //表示修改文件    deleted //表示删除文件c) 未跟踪 (untracked files)另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout –</code></pre><p>2、git diff 查看代码修改的内容(按q键退出)</p><pre><code>比较某文件与最近提交节点的差异。注意：如果该文件已暂存，那么应该使用git diff –cached技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符)</code></pre><p>3、git add [filename] 暂存需要提交的文件</p><pre><code>如果是新建的文件则git add如果是修改的文件则git add如果是删除的文件则 git rm</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件</p><pre><code>  注意注释填写规范。git commit –amend修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。</code></pre><p>5、git pull origin master –allow-unrelated-histories</p><pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。命令：git checkout – &lt;有冲突的文件路径&gt;</code></pre><p>6、git push -u origin master&lt;本地分支名&gt; </p><pre><code>如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。</code></pre><p>7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。</p><pre><code>git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>1、git status 查看目前代码的修改状态</p><pre><code>a) 已暂存 (changes to be committed)    new file //表示新建文件    modified //表示修改文件    deleted //表示删除文件b) 已修改 (changed but not updated)    modified //表示修改文件    deleted //表示删除文件c) 未跟踪 (untracked files)另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout –</code></pre><p>2、git diff 查看代码修改的内容(按q键退出)</p><pre><code>比较某文件与最近提交节点的差异。注意：如果该文件已暂存，那么应该使用git diff –cached技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符)</code></pre><p>3、git add [filename] 暂存需要提交的文件</p><pre><code>如果是新建的文件则git add如果是修改的文件则git add如果是删除的文件则 git rm</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件(注意注释填写规范)</p><pre><code>git commit –amend修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。</code></pre><p>5、git pull origin master –allow-unrelated-histories</p><pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。命令：git checkout – &lt;有冲突的文件路径&gt;</code></pre><p>6、git push -u origin master&lt;本地分支名&gt; </p><pre><code>如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。</code></pre><p>7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。</p><pre><code>git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。</code></pre>]]></content>
     
     <summary type="html">
     
