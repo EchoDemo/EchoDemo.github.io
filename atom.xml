@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-08T13:17:09.224Z</updated>
+  <updated>2018-03-09T12:52:12.531Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为博客添加标签和分类选项</title>
+    <link href="http://www.echodemo.cc/2018/03/09/Add-tags-and-categories-to-Blogs/"/>
+    <id>http://www.echodemo.cc/2018/03/09/Add-tags-and-categories-to-Blogs/</id>
+    <published>2018-03-09T12:50:20.000Z</published>
+    <updated>2018-03-09T12:52:12.531Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、添加标签tags页面</p><pre><code>定位到 Hexo 站点目录下，使用 hexo new page 新建一个页面，命名为 tags，布局格式为page:$ cd hexo目录$ hexo new page tags内容如下所示，如果要关闭tags页面的评论可以设置comments为false:---title: 标签date: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false---这样以后tags页面在每次执行hexo generate后自动更新。</code></pre><p>2、添加分类页面</p><pre><code>和上面的一样，在hexo目录下执行下面命令：$ hexo new page categories内容为：---title: 分类date: 2014-12-22 12:39:04type: &quot;categories&quot;comments: false---</code></pre><p>3、添加404页面</p><pre><code>新建一个404.html文件，放到themes\next\source目录下，内容你自己定。</code></pre><p>4、添加博文</p><pre><code>$ hexo new [filename]---title: filename!date: create_timetags: tagscategories: categories---或者写好文章后，找到菜单栏的“导出到本地”选项.以md格式导出到本地，然后copy该md文件，粘贴到你当初建的博客站点文件夹下的source\ _posts目录下，一个md文件对应一篇博客文章。</code></pre><p>5、多标签和多分类的表示方法</p><pre><code>tags: [tags1,tags2,tags3]categories: [cat1,cat2,cat3]</code></pre><p>6、对本地作出的修改进行测试和上传</p><pre><code>在你博客站点文件夹下右键空白处，选择Git Bash Here，输入：hexo generate，回车，生成静态页面， 再输入：hexo server，回车，到localhost:4000预览博客效果， 最后输入：hexo deploy，回车，同步到github上去就行了。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、添加标签tags页面&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;定位到 Hexo 站点目录下，使用 hexo new page 新建一个页面，命名为 tags，布局格式为page:
+
+$ cd hexo目录
+$ hexo new page tags
+内容如下所示，如果要关闭tags
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="hexo" scheme="http://www.echodemo.cc/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Git push to github</title>
