@@ -478,42 +478,21 @@
       
         
           
-            <p>1、git status 查看目前代码的修改状态</p>
-<pre><code>a) 已暂存 (changes to be committed)
+          1、git status 查看目前代码的修改状态
+a) 已暂存 (changes to be committed)
     new file //表示新建文件
     modified //表示修改文件
     deleted //表示删除文件
 
-b) 已修改 (changed but not updated)
-    modified //表示修改文件
-    deleted //表示删除文件
-
-c) 未跟踪 (untracked files)
-
-另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout –
-</code></pre><p>2、git diff 查看代码修改的内容(按q键退出)</p>
-<pre><code>比较某文件与最近提交节点的差异。
-
-注意：如果该文件已暂存，那么应该使用git diff –cached
-
-技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符)
-</code></pre><p>3、git add [filename] 暂存需要提交的文件</p>
-<pre><code>如果是新建的文件则git add
-如果是修改的文件则git add
-如果是删除的文件则 git rm
-</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件(注意注释填写规范)</p>
-<pre><code>git commit –amend
-修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。
-</code></pre><p>5、git pull origin master –allow-unrelated-histories</p>
-<pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。
-
-命令：git checkout – &lt;有冲突的文件路径&gt;
-</code></pre><p>6、git push -u origin master&lt;本地分支名&gt; </p>
-<pre><code>如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。
-</code></pre><p>7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。</p>
-<pre><code>git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。
-</code></pre>
-          
+b) 已修改 (changed but not up
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/08/Git-push-to-github/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -703,24 +682,31 @@ c) 未跟踪 (untracked files)
       
         
           
-            <h2 id="不知道"><a href="#不知道" class="headerlink" title="不知道"></a><em>不知道</em></h2><hr>
-<p><img src="/images/2018/3/moon.jpg" alt=""></p>
-<p>不知道</p>
-<p>头顶遥远的苍穹闪烁的星光</p>
-<p>在无穷无尽里飞行了多少光年</p>
-<p>终于赶来与我的目光相会</p>
-<p><img src="/images/2018/3/book.jpg" alt=""></p>
-<p>不知道</p>
-<p>手中捧握的书卷古老的诗篇</p>
-<p>在岁月长河中留存了多少记忆</p>
-<p>此刻也将属于我的悉心珍藏</p>
-<p><img src="/images/2018/3/hair.jpg" alt=""></p>
-<p>不知道</p>
-<p>你与我不断发酵生酯的相逢</p>
-<p>在冥冥注定中酝酿了多少韶华</p>
-<p>但我仍然记得你发梢的芳香</p>
+          不知道
+
+不知道
+头顶遥远的苍穹闪烁的星光
+在无穷无尽里飞行了多少光年
+终于赶来与我的目光相会
+
+不知道
+手中捧握的书卷古老的诗篇
+在岁月长河中留存了多少记忆
+此刻也将属于我的悉心珍藏
+
+不知道
+你与我不断发酵生酯的相逢
+在冥冥注定中酝酿了多少韶华
+但我仍然记得你发梢的芳香
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/08/This-is-my-first-blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -888,17 +874,15 @@ c) 未跟踪 (untracked files)
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/08/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
