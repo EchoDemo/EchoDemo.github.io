@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[为博客添加标签和分类选项]]></title>
+    <title><![CDATA[为博客添加标签和分类页面]]></title>
     <url>%2F2018%2F03%2F09%2FAdd-tags-and-categories-to-Blogs%2F</url>
-    <content type="text"><![CDATA[1、添加标签tags页面 定位到 Hexo 站点目录下，使用 hexo new page 新建一个页面，命名为 tags，布局格式为page: $ cd hexo目录 $ hexo new page tags 内容如下所示，如果要关闭tags页面的评论可以设置comments为false: --- title: 标签 date: 2014-12-22 12:39:04 type: &quot;tags&quot; comments: false --- 这样以后tags页面在每次执行hexo generate后自动更新。 2、添加分类页面 和上面的一样，在hexo目录下执行下面命令： $ hexo new page categories 内容为： --- title: 分类 date: 2014-12-22 12:39:04 type: &quot;categories&quot; comments: false --- 3、添加404页面 新建一个404.html文件，放到themes\next\source目录下，内容你自己定。 4、添加博文 $ hexo new [filename] --- title: filename! date: create_time tags: tags categories: categories --- 或者写好文章后，找到菜单栏的“导出到本地”选项.以md格式导出到本地，然后copy该md文件，粘贴到你当初建的博客站点文件夹下的source\ _posts目录下，一个md文件对应一篇博客文章。 5、多标签和多分类的表示方法 tags: [tags1,tags2,tags3] categories: [cat1,cat2,cat3] 6、对本地作出的修改进行测试和上传 在你博客站点文件夹下右键空白处，选择Git Bash Here， 输入：hexo generate，回车，生成静态页面， 再输入：hexo server，回车，到localhost:4000预览博客效果， 最后输入：hexo deploy，回车，同步到github上去就行了。]]></content>
+    <content type="text"><![CDATA[1、添加标签页面 定位到 Hexo 站点目录下，使用 hexo new page 新建一个页面，命名为 tags，布局格式为page: $ cd hexo目录 $ hexo new page tags 内容如下所示，如果要关闭tags页面的评论可以设置comments为false: --- title: 标签 date: 2014-12-22 12:39:04 type: &quot;tags&quot; comments: false --- 这样以后tags页面在每次执行hexo generate后自动更新。 2、添加分类页面 和上面的一样，在hexo目录下执行下面命令： $ hexo new page categories 内容为： --- title: 分类 date: 2014-12-22 12:39:04 type: &quot;categories&quot; comments: false --- 3、添加404页面 新建一个404.html文件，放到themes\next\source目录下，内容你自己定。 4、添加博文 $ hexo new [filename] --- title: filename! date: create_time tags: tags categories: categories --- 或者写好文章后，找到菜单栏的“导出到本地”选项.以md格式导出到本地，然后copy该md文件，粘贴到你当初建的博客站点文件夹下的source\ _posts目录下，一个md文件对应一篇博客文章。 5、多标签和多分类的表示方法 tags: [tags1,tags2,tags3] categories: [cat1,cat2,cat3] 6、对本地作出的修改进行测试和上传 在你博客站点文件夹下右键空白处，选择Git Bash Here， 输入：hexo generate，回车，生成静态页面， 再输入：hexo server，回车，到localhost:4000预览博客效果， 最后输入：hexo deploy，回车，同步到github上去就行了。]]></content>
       <categories>
         <category>技术</category>
       </categories>
