@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-10T14:10:15.486Z</updated>
+  <updated>2018-03-11T10:44:06.502Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中需要注意的Points</title>
+    <link href="http://www.echodemo.cc/2018/03/11/Java%E4%B8%AD%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84Points/"/>
+    <id>http://www.echodemo.cc/2018/03/11/Java中需要注意的Points/</id>
+    <published>2018-03-11T10:43:44.000Z</published>
+    <updated>2018-03-11T10:44:06.502Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、数组的创建不同于基本数据类型变量的声明，声明一个数组变量时并不在内存中给数组分配任何空间。它只是创建一个对数组的引用的存储位置。</p><p>2、在给方法传值的过程中，对于基本数据类型来说，传递的是实参的值，而方法内部的形参获得的值的改变并不会造成方法外部的值的变化；而对于数组类型来说，传递的是数组的引用，也就是说方法中的数组和方法外的数组是一样的，所以如果改变方法中的数组，那么方法外的数组也跟着变化了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、数组的创建不同于基本数据类型变量的声明，声明一个数组变量时并不在内存中给数组分配任何空间。它只是创建一个对数组的引用的存储位置。&lt;/p&gt;
+&lt;p&gt;2、在给方法传值的过程中，对于基本数据类型来说，传递的是实参的值，而方法内部的形参获得的值的改变并不会造成方法外部的值的变化；
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>为博客添加标签和分类页面</title>
