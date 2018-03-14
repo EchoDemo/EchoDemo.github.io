@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-11T11:21:00.263Z</updated>
+  <updated>2018-03-14T06:21:44.316Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>早</title>
+    <link href="http://www.echodemo.cc/2018/03/14/%E6%97%A9/"/>
+    <id>http://www.echodemo.cc/2018/03/14/早/</id>
+    <published>2018-03-14T06:19:32.000Z</published>
+    <updated>2018-03-14T06:21:44.316Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>为hexo的next主题添加点击出现桃心效果的功能</title>
