@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-14T07:14:48.690Z</updated>
+  <updated>2018-03-14T09:01:20.730Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>大整数加法</title>
+    <link href="http://www.echodemo.cc/2018/03/14/%E5%A4%A7%E6%95%B4%E6%95%B0%E5%8A%A0%E6%B3%95/"/>
+    <id>http://www.echodemo.cc/2018/03/14/大整数加法/</id>
+    <published>2018-03-14T08:51:34.000Z</published>
+    <updated>2018-03-14T09:01:20.730Z</updated>
+    
+    <content type="html"><![CDATA[<p>大整数加法又称之为高精度加法，大整数其含义就是基本数据类型无法存储的整数。如果A+B的范围在int范围外，比如A和B是有着1000个数位的整数。那么该如何进行相加呢？其实本质上和小学的加法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。在相加完成之后再将其反向输出就行了。具体的算法如下：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;#include&lt;string.h&gt;using namespace std;struct bign {    int d[1000];//使用int型数组存放大整数的每一位。    int len;//记录大整数的长度。    bign() {//&quot;构造函数&quot;用于初始化结构体。        memset(d, 0, sizeof(d));        len=0;    }};bign change(char str[]) {//将存储在字符数组中的大整数转换为bign    bign a;    a.len = strlen(str);    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;    }    return a;}bign add(bign a, bign b) {//a+b。    bign c;    int carry = 0;//存储进位。    for (int i = 0;i &lt; a.len || i &lt; b.len;i++) {        int temp = a.d[i] + b.d[i] + carry;        c.d[c.len++] = temp % 10;//两数之和的个位。        carry = temp / 10;//两数之和的十位。    }    if (carry != 0)        c.d[c.len++] = carry;//两个大整数的最高位相加之后有进位。    return c;}void print(bign a) {//输出bign。    for (int i = a.len - 1;i &gt;= 0;i--) {        cout &lt;&lt; a.d[i];    }}int main() {    char str1[1000], str2[1000];    cin &gt;&gt; str1 &gt;&gt; str2;    bign a = change(str1);    bign b = change(str2);    print(add(a, b));    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;大整数加法又称之为高精度加法，大整数其含义就是基本数据类型无法存储的整数。如果A+B的范围在int范围外，比如A和B是有着1000个数位的整数。那么该如何进行相加呢？其实本质上和小学的加法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+      <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的String</title>
