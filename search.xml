@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[大整数与int型数据的除法]]></title>
+    <url>%2F2018%2F03%2F15%2F%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B8%8Eint%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E9%99%A4%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[大整数与int型数据的除法也可以叫做高精度与低精度的除法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相除呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从大整数的高位开始，上一步的余数(余数的初始值为0)乘以10加上该步的位，得到该步临时的被除数，将其与除数比较：如果不够除，则该位的商为0；如果够除，则商即为对应的商，余数即为对应的余数。最后一步需要注意高位可能有多余的0，要去除，但同时也要保证至少有一位数。有一点需要注意的是：这里的除法函数当中使用了引用变量，引用不产生副本，而是给原变量取了一个别名，对引用变量的操作就是对原变量(即算法中的全局变量)的操作。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下： #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;string.h&gt; using namespace std; struct bign { int d[1000];//使用int型数组存放大整数的每一位。 int len;//记录大整数的长度。 bign() {//&quot;构造函数&quot;用于初始化结构体。 memset(d, 0, sizeof(d)); len=0; } }; bign change(char str[]) {//将存储在字符数组中的大整数转换为bign bign a; a.len = strlen(str); for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。 a.d[i] = str[a.len - i - 1] - &apos;0&apos;; } return a; } bign divide(bign a, int b,int &amp;r) {//a/b bign c; c.len = a.len;//被除数的每一位和商的每一位是一一对应的。 for (int i = c.len - 1;i &gt;= 0;i--) {//从高位开始除。 r = r * 10 + a.d[i];//和上一位的余数进行组合。这里的r是引用变量，对引用变量的操作就是对原全局变量的操作。 if (r &lt; b) c.d[i] = 0;//不够除，该位的商为0。 else { c.d[i] = r / b;//商 r = r % b;//获得新的余数。 } } while((c.len-1&gt;=1)&amp;&amp;c.d[c.len-1]==0){ c.len--;//去除高位的0，同时至少保留一位最低位。 } return c; } void print(bign a) {//输出bign。 for (int i = a.len - 1;i &gt;= 0;i--) { cout &lt;&lt; a.d[i]; } } int main() { char str1[1000]; int b,r=0; cin &gt;&gt; str1 &gt;&gt; b; bign a = change(str1); print(divide(a, b,r));//商 cout &lt;&lt;&quot; &quot;&lt;&lt; r;//余数 system(&quot;pause&quot;); return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[大整数与int型数据的乘法]]></title>
     <url>%2F2018%2F03%2F14%2F%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B8%8Eint%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B9%98%E6%B3%95%2F</url>
     <content type="text"><![CDATA[大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下： #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;string.h&gt; using namespace std; struct bign { int d[1000];//使用int型数组存放大整数的每一位。 int len;//记录大整数的长度。 bign() {//&quot;构造函数&quot;用于初始化结构体。 memset(d, 0, sizeof(d)); len=0; } }; bign change(char str[]) {//将存储在字符数组中的大整数转换为bign bign a; a.len = strlen(str); for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。 a.d[i] = str[a.len - i - 1] - &apos;0&apos;; } return a; } bign multi(bign a, int b) {//a*b bign c; int carry = 0;//进位 for (int i = 0;i &lt; a.len;i++) { int temp = a.d[i] * b + carry; c.d[c.len++] = temp % 10;//个位作为该位的结果。 carry = temp / 10;//高位部分作为新的进位。 } while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。 c.d[c.len++] = carry % 10; carry /= 10; } return c; } void print(bign a) {//输出bign。 for (int i = a.len - 1;i &gt;= 0;i--) { cout &lt;&lt; a.d[i]; } } int main() { char str1[1000]; int b; cin &gt;&gt; str1 &gt;&gt; b; bign a = change(str1); print(multi(a, b)); system(&quot;pause&quot;); return 0; }]]></content>
