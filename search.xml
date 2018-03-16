@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hexo的next主题使用过程中所遇见的问题及解决措施]]></title>
+    <url>%2F2018%2F03%2F16%2Fhexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%89%80%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%8E%AA%E6%96%BD%2F</url>
+    <content type="text"><![CDATA[1、有时在hexo s之后本地没有问题，但是在hexo d推送到GitHub之后没有样式显示，此时很可能是GitHub网站本身的原因，稍微等等再刷新就没事了。实在不行的话就把刚才的修改内容改回之前的状态。先hexo clean清理缓存，再hexo g;hexo d刷新查看。 2、平时对博客的修改和更新直接使用hexo g;hexo s查看本地无误之后一般就hexo d就行了。但是在其中某一步执行完报错之后，记得要先hexo clean再重新执行其他的操作。 3、博客在本地显示正常，deploy到github上后只显示框架，内容空白时。进入next主题的source目录，将vendors文件的文件名改成任意其他名字，如：VEN。接着在next主题的配置文件_config.yml中,将vendors: 块中的_internal: vendors项改成前面重命名文件夹的名称,如_internal: VEN，保存。(注意在hexo中的大多数情况之下冒号和要填写数据之间必须有一个空格符，否则会在hexo g时便报错)。接下来hexo clean;hexo g;hexo d;打开博客主页，清理缓存，多刷新几次即可。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[大整数与int型数据的除法]]></title>
     <url>%2F2018%2F03%2F15%2F%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B8%8Eint%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E9%99%A4%E6%B3%95%2F</url>
     <content type="text"><![CDATA[大整数与int型数据的除法也可以叫做高精度与低精度的除法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相除呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从大整数的高位开始，上一步的余数(余数的初始值为0)乘以10加上该步的位，得到该步临时的被除数，将其与除数比较：如果不够除，则该位的商为0；如果够除，则商即为对应的商，余数即为对应的余数。最后一步需要注意高位可能有多余的0，要去除，但同时也要保证至少有一位数。有一点需要注意的是：这里的除法函数当中使用了引用变量，引用不产生副本，而是给原变量取了一个别名，对引用变量的操作就是对原变量(即算法中的全局变量)的操作。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下： #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;string.h&gt; using namespace std; struct bign { int d[1000];//使用int型数组存放大整数的每一位。 int len;//记录大整数的长度。 bign() {//&quot;构造函数&quot;用于初始化结构体。 memset(d, 0, sizeof(d)); len=0; } }; bign change(char str[]) {//将存储在字符数组中的大整数转换为bign bign a; a.len = strlen(str); for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。 a.d[i] = str[a.len - i - 1] - &apos;0&apos;; } return a; } bign divide(bign a, int b,int &amp;r) {//a/b bign c; c.len = a.len;//被除数的每一位和商的每一位是一一对应的。 for (int i = c.len - 1;i &gt;= 0;i--) {//从高位开始除。 r = r * 10 + a.d[i];//和上一位的余数进行组合。这里的r是引用变量，对引用变量的操作就是对原全局变量的操作。 if (r &lt; b) c.d[i] = 0;//不够除，该位的商为0。 else { c.d[i] = r / b;//商 r = r % b;//获得新的余数。 } } while((c.len-1&gt;=1)&amp;&amp;c.d[c.len-1]==0){ c.len--;//去除高位的0，同时至少保留一位最低位。 } return c; } void print(bign a) {//输出bign。 for (int i = a.len - 1;i &gt;= 0;i--) { cout &lt;&lt; a.d[i]; } } int main() { char str1[1000]; int b,r=0; cin &gt;&gt; str1 &gt;&gt; b; bign a = change(str1); print(divide(a, b,r));//商 cout &lt;&lt;&quot; &quot;&lt;&lt; r;//余数 system(&quot;pause&quot;); return 0; }]]></content>
