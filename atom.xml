@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-16T05:30:03.438Z</updated>
+  <updated>2018-03-16T05:33:39.488Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.echodemo.cc/2018/03/16/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%89%80%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%8E%AA%E6%96%BD/"/>
     <id>http://www.echodemo.cc/2018/03/16/hexo的next主题使用过程中所遇见的问题及解决措施/</id>
     <published>2018-03-16T05:29:30.000Z</published>
-    <updated>2018-03-16T05:30:03.438Z</updated>
+    <updated>2018-03-16T05:33:39.488Z</updated>
     
-    <content type="html"><![CDATA[<p>1、有时在hexo s之后本地没有问题，但是在hexo d推送到GitHub之后没有样式显示，此时很可能是GitHub网站本身的原因，稍微等等再刷新就没事了。实在不行的话就把刚才的修改内容改回之前的状态。先hexo clean清理缓存，再hexo g;hexo d刷新查看。</p><p>2、平时对博客的修改和更新直接使用hexo g;hexo s查看本地无误之后一般就hexo d就行了。但是在其中某一步执行完报错之后，记得要先hexo clean再重新执行其他的操作。</p><p>3、博客在本地显示正常，deploy到github上后只显示框架，内容空白时。进入next主题的source目录，将vendors文件的文件名改成任意其他名字，如：VEN。接着在next主题的配置文件_config.yml中,将vendors: 块中的_internal: vendors项改成前面重命名文件夹的名称,如_internal: VEN，保存。(注意在hexo中的大多数情况之下冒号和要填写数据之间必须有一个空格符，否则会在hexo g时便报错)。接下来hexo clean;hexo g;hexo d;打开博客主页，清理缓存，多刷新几次即可。</p>]]></content>
+    <content type="html"><![CDATA[<p>1、有时在hexo s之后本地没有问题，但是在hexo d推送到GitHub之后没有样式显示，此时很可能是GitHub网站本身的原因，稍微等等再刷新就没事了。实在不行的话就把刚才的修改内容改回之前的状态。先hexo clean清理缓存，再hexo g;hexo d刷新查看。</p><p>2、平时对博客的修改和更新直接使用hexo g;hexo s查看本地无误之后一般直接hexo d就行了。但是在其中某一步执行完报错之后，记得要先hexo clean再重新执行其他的操作。</p><p>3、博客在本地显示正常，hexo d到github上后只显示框架，内容空白时。进入next主题的source目录，将vendors文件的文件名改成任意其他名字，如：VEN。接着在next主题的配置文件_config.yml中,将vendors: 块中的_internal: vendors项改成前面重命名文件夹的名称,如_internal: VEN，保存。(注意在hexo中的大多数情况之下冒号和要填写数据之间必须有一个空格符，否则会在hexo g时便报错)。接下来hexo clean;hexo g;hexo d;打开博客主页，清理缓存，多刷新几次即可。</p>]]></content>
     
     <summary type="html">
     
