@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C++中的vector]]></title>
+    <url>%2F2018%2F03%2F16%2FC-%E4%B8%AD%E7%9A%84vector%2F</url>
+    <content type="text"><![CDATA[在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include还有命名空间”using namespace std;”。 1、vector的定义:vector name;例如: vector&lt;int&gt; name; //声明一个int向量 vector&lt;int&gt; name(10); //声明一个初始大小为10的int型向量 vector&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型向量 vector&lt;int&gt; name(a); //声明一个初始大小为a的int型向量 vector&lt;node&gt; name; //node是结构体的类型 如果typename是vector，定义的时候记得在&gt;&gt;符号之间加上空格: vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格 2、vector数组的定义:vector arrayname[arraysize];例如: vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器 与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。 3、元素容器内元素的访问 (1)通过下标访问，即vi[0]~vi[size-1]进行访问。 (2)通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:vector&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问vector中的元素例如: #include&lt;iostream&gt; #include&lt;vector&gt; using namespace std ; int main(){ vector&lt;int&gt; vi; for(int i=1;i&lt;=5;i++){ vi.push_back(i); } vector&lt;int&gt;::iterator it=vi.begin();//vi.begin()为取vi的首元素地址，而it指向这个地址 for(int i=0;i&lt;5;i++){ cout&lt;&lt;*(it+i); } return 0; } 上述程序中出现了去vi的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。 另外，vector的迭代器不支持it&lt;vi.end()的写法，因此循环条件只能用it!=vi.end()。除此之外，迭代器还实现了两种自加操作:it++和++it(自减操作同理)。 4、vector常用的函数 (1)push_back(x):在vector后面添加一个元素，时间复杂度为O(1)。 (2)pop_back():用以删除vector的尾元素，时间复杂度为O(1)。 (3)size():用来获得vector中的元素的个数，时间复杂度为O(1)。返回的是unsigned类型。 (4)clear():用来清空vector中的所有元素，时间复杂度为O(N)。N为vector中元素的个数。 (5)insert(it,x):用来向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)。 (6)erase():有两种用法:删除单个元素，删除一个区间内的所有元素，时间复杂度O(N)。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>STL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hexo的next主题使用过程中所遇见的问题及解决措施]]></title>
     <url>%2F2018%2F03%2F16%2Fhexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%89%80%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%8E%AA%E6%96%BD%2F</url>
     <content type="text"><![CDATA[1、有时在hexo s之后本地没有问题，但是在hexo d推送到GitHub之后没有样式显示，此时很可能是GitHub网站本身的原因，稍微等等再刷新就没事了。实在不行的话就把刚才的修改内容改回之前的状态。先hexo clean清理缓存，再hexo g;hexo d刷新查看。 2、平时对博客的修改和更新直接使用hexo g;hexo s查看本地无误之后一般直接hexo d就行了。但是在其中某一步执行完报错之后，记得要先hexo clean再重新执行其他的操作。 3、博客在本地显示正常，hexo d到github上后只显示框架，内容空白时。进入next主题的source目录，将vendors文件的文件名改成任意其他名字，如：VEN。接着在next主题的配置文件_config.yml中,将vendors: 块中的_internal: vendors项改成前面重命名文件夹的名称,如_internal: VEN，保存。(注意在hexo中的大多数情况之下冒号和要填写数据之间必须有一个空格符，否则会在hexo g时便报错)。接下来hexo clean;hexo g;hexo d;打开博客主页，清理缓存，多刷新几次即可。]]></content>
