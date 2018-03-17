@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一">
+<meta name="description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 <meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++中的vector">
 <meta property="og:url" content="http://www.echodemo.cc/2018/03/16/C-中的vector/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一">
+<meta property="og:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-17T07:08:23.047Z">
+<meta property="og:updated_time" content="2018-03-17T08:44:15.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的vector">
-<meta name="twitter:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一">
+<meta name="twitter:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  810
+                  855
                 </span>
               
 
@@ -473,7 +473,7 @@
       
 
       
-        <p>在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include<vector>还有命名空间”using namespace std;”。</vector></p>
+        <p>在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include<vector>还有命名空间”using namespace std;”。</vector></p>
 <p>1、vector的定义:vector&lt;typename> name;例如:</p>
 <pre><code>vector&lt;int&gt; name;      //声明一个int向量
 vector&lt;int&gt; name(10);  //声明一个初始大小为10的int型向量
@@ -515,7 +515,7 @@ int main(){
 (3)size():用来获得vector中的元素的个数，时间复杂度为O(1)。返回的是unsigned类型。
 (4)clear():用来清空vector中的所有元素，时间复杂度为O(N)。N为vector中元素的个数。
 (5)insert(it,x):用来向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)。
-(6)erase():有两种用法:删除单个元素，删除一个区间内的所有元素，时间复杂度O(N)。
+(6)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(N);a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。
 </code></pre>
       
     </div>
@@ -591,6 +591,10 @@ int main(){
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/03/17/C-中的set/" rel="prev" title="C++中的set">
+                C++中的set <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -652,7 +656,7 @@ int main(){
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -789,7 +793,7 @@ int main(){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.7k字</span>
+  <span class="post-count">博客全站共6.6k字</span>
 </div>
 
 
