@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T11:45:29.600Z">
+<meta property="og:updated_time" content="2018-03-17T07:08:23.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的vector">
 <meta name="twitter:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  808
+                  810
                 </span>
               
 
@@ -474,7 +474,7 @@
 
       
         <p>在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include<vector>还有命名空间”using namespace std;”。</vector></p>
-<p>1、vector的定义:vector<typename> name;例如:</typename></p>
+<p>1、vector的定义:vector&lt;typename> name;例如:</p>
 <pre><code>vector&lt;int&gt; name;      //声明一个int向量
 vector&lt;int&gt; name(10);  //声明一个初始大小为10的int型向量
 vector&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型向量
@@ -483,7 +483,7 @@ vector&lt;node&gt; name;     //node是结构体的类型
 
 如果typename是vector，定义的时候记得在&gt;&gt;符号之间加上空格:
 vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格
-</code></pre><p>2、vector数组的定义:vector<typename> arrayname[arraysize];例如:</typename></p>
+</code></pre><p>2、vector数组的定义:vector&lt;typename> arrayname[arraysize];例如:</p>
 <pre><code>vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器
 
 与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。
