@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-18T11:39:17.493Z</updated>
+  <updated>2018-03-18T12:19:19.457Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++中的stack</title>
+    <link href="http://www.echodemo.cc/2018/03/18/C-%E4%B8%AD%E7%9A%84stack/"/>
+    <id>http://www.echodemo.cc/2018/03/18/C-中的stack/</id>
+    <published>2018-03-18T12:17:19.000Z</published>
+    <updated>2018-03-18T12:19:19.457Z</updated>
+    
+    <content type="html"><![CDATA[<p>在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack是一种先进后出的数据结构。要使用stack，必须包含头文件#include<stack>还有命名空间”using namespace std;”。</stack></p><p>1、stack的定义:stack&lt;typename> name;例如:</p><pre><code>stack&lt;int&gt; name;</code></pre><p>2、stack容器内元素的访问</p><pre><code>#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;int main(){    stack&lt;int&gt; st;    for(int i=1;i&lt;=5;i++){        st.push(i);//push(i)将i压入队列    }    cout&lt;&lt;st.top();//取栈顶元素    return 0;}</code></pre><p>4、stack常用的函数</p><pre><code>(1)push(x):将x进行入栈，时间复杂度为O(1)。(2)pop():栈顶元素出栈，时间复杂度为O(1)。(3)top():获得栈顶元素，时间复杂度为O(1)。(5)empty():检测stack是否为空，时间复杂度为O(1)。(6)size():返回stack内的元素个数，时间复杂度为O(1)。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+      <category term="STL" scheme="http://www.echodemo.cc/tags/STL/"/>
+    
+  </entry>
   
   <entry>
     <title>C++中的queue</title>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C++中的stack]]></title>
+    <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84stack%2F</url>
+    <content type="text"><![CDATA[在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack是一种先进后出的数据结构。要使用stack，必须包含头文件#include还有命名空间”using namespace std;”。 1、stack的定义:stack&lt;typename> name;例如: stack&lt;int&gt; name; 2、stack容器内元素的访问 #include&lt;stdio.h&gt; #include&lt;iostream&gt; #include&lt;stack&gt; using namespace std; int main(){ stack&lt;int&gt; st; for(int i=1;i&lt;=5;i++){ st.push(i);//push(i)将i压入队列 } cout&lt;&lt;st.top();//取栈顶元素 return 0; } 4、stack常用的函数 (1)push(x):将x进行入栈，时间复杂度为O(1)。 (2)pop():栈顶元素出栈，时间复杂度为O(1)。 (3)top():获得栈顶元素，时间复杂度为O(1)。 (5)empty():检测stack是否为空，时间复杂度为O(1)。 (6)size():返回stack内的元素个数，时间复杂度为O(1)。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>STL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[C++中的queue]]></title>
     <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84queue%2F</url>
     <content type="text"><![CDATA[在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最大元素置于队首的容器。 1、queue的定义:queue&lt;typename> name;例如: queue&lt;int&gt; name;//typename可以是任意基本数据类型或容器 2、queue容器内元素的访问 由于队列queue是一种先进先出的限制性数据结构,因此在STL中只能通过front()来访问队首元素,或者通过back()来访问队尾元素。 #include&lt;stdio.h&gt; #include&lt;iostream&gt; #include&lt;queue&gt; using namespace std; int main(){ queue&lt;int&gt; q; for(int i=1;i&lt;=5;i++){ q.push(i);//push(i)将i压入队列 } cout&lt;&lt;q.front()&lt;&lt;&quot; &quot;&lt;&lt;q.back(); return 0; } 4、queue常用的函数 (1)push(x):将x进行入队，时间复杂度为O(1)。 (2)pop():令队首元素出队，时间复杂度为O(1)。使用pop()函数之前必须用empty()判断队列是否为空。 (3)front():获得队首元素，时间复杂度为O(1)。使用front()函数之前必须用empty()判断队列是否为空。 (4)back():获得队尾元素，时间复杂度为O(1)。 (5)empty():检测queue是否为空，时间复杂度为O(1)。 (6)size():返回queue内的元素个数，时间复杂度为O(1)。]]></content>
