@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-17T08:44:15.708Z">
+<meta property="og:updated_time" content="2018-03-18T08:48:21.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的vector">
 <meta name="twitter:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  855
+                  854
                 </span>
               
 
@@ -487,7 +487,7 @@ vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格
 <pre><code>vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器
 
 与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。
-</code></pre><p>3、元素容器内元素的访问</p>
+</code></pre><p>3、vector容器内元素的访问</p>
 <pre><code>(1)通过下标访问，即vi[0]~vi[size-1]进行访问。
 (2)通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:vector&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问vector中的元素例如:
 
