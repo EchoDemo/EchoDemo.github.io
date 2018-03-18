@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序。如果需要使用set，必须包含头文件#include还有命名空间”using">
+<meta name="description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#incl">
 <meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++中的set">
 <meta property="og:url" content="http://www.echodemo.cc/2018/03/17/C-中的set/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序。如果需要使用set，必须包含头文件#include还有命名空间”using">
+<meta property="og:description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#incl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T10:52:14.512Z">
+<meta property="og:updated_time" content="2018-03-18T14:08:04.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的set">
-<meta name="twitter:description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序。如果需要使用set，必须包含头文件#include还有命名空间”using">
+<meta name="twitter:description" content="在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#incl">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  871
+                  886
                 </span>
               
 
@@ -473,7 +473,7 @@
       
 
       
-        <p>在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序。如果需要使用set，必须包含头文件#include<set>还有命名空间”using namespace std;”。</set></p>
+        <p>在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#include<set>还有命名空间”using namespace std;”。</set></p>
 <p>1、set的定义:set&lt;typename> name;例如:</p>
 <pre><code>set&lt;int&gt; name;      //声明一个int容器
 set&lt;int&gt; name(10);  //声明一个初始大小为10的int型容器
