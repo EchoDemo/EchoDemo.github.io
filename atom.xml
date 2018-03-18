@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-18T12:19:19.457Z</updated>
+  <updated>2018-03-18T12:21:34.427Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.echodemo.cc/2018/03/18/C-%E4%B8%AD%E7%9A%84stack/"/>
     <id>http://www.echodemo.cc/2018/03/18/C-中的stack/</id>
     <published>2018-03-18T12:17:19.000Z</published>
-    <updated>2018-03-18T12:19:19.457Z</updated>
+    <updated>2018-03-18T12:21:34.427Z</updated>
     
-    <content type="html"><![CDATA[<p>在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack是一种先进后出的数据结构。要使用stack，必须包含头文件#include<stack>还有命名空间”using namespace std;”。</stack></p><p>1、stack的定义:stack&lt;typename> name;例如:</p><pre><code>stack&lt;int&gt; name;</code></pre><p>2、stack容器内元素的访问</p><pre><code>#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;int main(){    stack&lt;int&gt; st;    for(int i=1;i&lt;=5;i++){        st.push(i);//push(i)将i压入队列    }    cout&lt;&lt;st.top();//取栈顶元素    return 0;}</code></pre><p>4、stack常用的函数</p><pre><code>(1)push(x):将x进行入栈，时间复杂度为O(1)。(2)pop():栈顶元素出栈，时间复杂度为O(1)。(3)top():获得栈顶元素，时间复杂度为O(1)。(5)empty():检测stack是否为空，时间复杂度为O(1)。(6)size():返回stack内的元素个数，时间复杂度为O(1)。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack是一种先进后出的数据结构。要使用stack，必须包含头文件#include<stack>还有命名空间”using namespace std;”。</stack></p><p>1、stack的定义:stack&lt;typename> name;例如:</p><pre><code>stack&lt;int&gt; name;</code></pre><p>2、stack容器内元素的访问</p><pre><code>#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;int main(){    stack&lt;int&gt; st;    for(int i=1;i&lt;=5;i++){        st.push(i);//push(i)将i压入队列    }    cout&lt;&lt;st.top();//取栈顶元素    return 0;}</code></pre><p>3、stack常用的函数</p><pre><code>(1)push(x):将x进行入栈，时间复杂度为O(1)。(2)pop():栈顶元素出栈，时间复杂度为O(1)。(3)top():获得栈顶元素，时间复杂度为O(1)。(5)empty():检测stack是否为空，时间复杂度为O(1)。(6)size():返回stack内的元素个数，时间复杂度为O(1)。</code></pre>]]></content>
     
     <summary type="html">
     
@@ -48,9 +48,9 @@
     <link href="http://www.echodemo.cc/2018/03/18/C-%E4%B8%AD%E7%9A%84queue/"/>
     <id>http://www.echodemo.cc/2018/03/18/C-中的queue/</id>
     <published>2018-03-18T10:44:01.000Z</published>
-    <updated>2018-03-18T11:39:17.493Z</updated>
+    <updated>2018-03-18T12:21:43.042Z</updated>
     
-    <content type="html"><![CDATA[<p>在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include<queue>还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最大元素置于队首的容器。</queue></p><p>1、queue的定义:queue&lt;typename> name;例如:</p><pre><code>queue&lt;int&gt; name;//typename可以是任意基本数据类型或容器</code></pre><p>2、queue容器内元素的访问</p><pre><code>由于队列queue是一种先进先出的限制性数据结构,因此在STL中只能通过front()来访问队首元素,或者通过back()来访问队尾元素。#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;int main(){    queue&lt;int&gt; q;    for(int i=1;i&lt;=5;i++){        q.push(i);//push(i)将i压入队列    }    cout&lt;&lt;q.front()&lt;&lt;&quot; &quot;&lt;&lt;q.back();    return 0;}</code></pre><p>4、queue常用的函数</p><pre><code>(1)push(x):将x进行入队，时间复杂度为O(1)。(2)pop():令队首元素出队，时间复杂度为O(1)。使用pop()函数之前必须用empty()判断队列是否为空。(3)front():获得队首元素，时间复杂度为O(1)。使用front()函数之前必须用empty()判断队列是否为空。(4)back():获得队尾元素，时间复杂度为O(1)。(5)empty():检测queue是否为空，时间复杂度为O(1)。(6)size():返回queue内的元素个数，时间复杂度为O(1)。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include<queue>还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最大元素置于队首的容器。</queue></p><p>1、queue的定义:queue&lt;typename> name;例如:</p><pre><code>queue&lt;int&gt; name;//typename可以是任意基本数据类型或容器</code></pre><p>2、queue容器内元素的访问</p><pre><code>由于队列queue是一种先进先出的限制性数据结构,因此在STL中只能通过front()来访问队首元素,或者通过back()来访问队尾元素。#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;int main(){    queue&lt;int&gt; q;    for(int i=1;i&lt;=5;i++){        q.push(i);//push(i)将i压入队列    }    cout&lt;&lt;q.front()&lt;&lt;&quot; &quot;&lt;&lt;q.back();    return 0;}</code></pre><p>3、queue常用的函数</p><pre><code>(1)push(x):将x进行入队，时间复杂度为O(1)。(2)pop():令队首元素出队，时间复杂度为O(1)。使用pop()函数之前必须用empty()判断队列是否为空。(3)front():获得队首元素，时间复杂度为O(1)。使用front()函数之前必须用empty()判断队列是否为空。(4)back():获得队尾元素，时间复杂度为O(1)。(5)empty():检测queue是否为空，时间复杂度为O(1)。(6)size():返回queue内的元素个数，时间复杂度为O(1)。</code></pre>]]></content>
     
     <summary type="html">
     
@@ -75,9 +75,9 @@
     <link href="http://www.echodemo.cc/2018/03/18/C-%E4%B8%AD%E7%9A%84map/"/>
     <id>http://www.echodemo.cc/2018/03/18/C-中的map/</id>
     <published>2018-03-18T10:27:33.000Z</published>
-    <updated>2018-03-18T10:28:29.431Z</updated>
+    <updated>2018-03-18T12:22:15.766Z</updated>
     
-    <content type="html"><![CDATA[<p>在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&lt;&gt;内填写两个类型。需要注意的是:map中的键是唯一的，而且map会以键从小到大的顺序自动排序(这是由于map内部是使用红黑树实现的，set也是，在建立映射的过程中会自动实现从小到大的排序功能)。如果需要使用map，必须包含头文件#include<map>还有命名空间”using namespace std;”。</map></p><p>1、map的定义:map&lt;typename1,typename2> name;例如:</p><pre><code>map&lt;string,int&gt; name;//如果是字符串到整型的映射，必须使用string而不能用char数组map&lt;set&lt;int&gt;,string&gt; name;//将一个set容器映射到一个字符串</code></pre><p>2、map容器内元素的访问</p><pre><code>(1)通过下标访问，例如：一个定义为map&lt;char,int&gt; name的map来说，可以直接使用name[&apos;c&apos;]来访问对应的整数。(2)通过迭代器访问,其定义是:map&lt;typename1,typename2&gt;::iterator it;但map迭代器的使用方式和其他STL容器的迭代器不同,因为map的每一对映射都有两个typename,此时我们可以使用it-&gt;first来访问键，使用it-&gt;second来访问值。#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;map&gt;using namespace std;int main(){    map&lt;char,int&gt; mp;    mp[&apos;m&apos;]=20;    mp[&apos;r&apos;]=30;    mp[&apos;a&apos;]=40;    for(map&lt;char,int&gt;::iterator it=mp.begin();it!=mp.end();it++){        cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second;    }    return 0;}上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。另外,map的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。</code></pre><p>4、map常用的函数</p><pre><code>(1)find(key):用以返回键为key的映射的迭代器，时间复杂度为O(logN)。map&lt;char,int&gt;::iterator it=mp.find(&apos;b&apos;)(2)size():用来获得map中映射的对数，时间复杂度为O(1)。(3)clear():用来清空map中的所有元素，时间复杂度为O(N)。(4)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:mp.erase(it),it位所需要删除元素的迭代器,时间复杂度O(1);mp.erase(key),key为欲删除的映射的键,时间复杂度为O(logN)。删除一个区间内的所有元素:mp.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。时间复杂度为O(last-first)。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&lt;&gt;内填写两个类型。需要注意的是:map中的键是唯一的，而且map会以键从小到大的顺序自动排序(这是由于map内部是使用红黑树实现的，set也是，在建立映射的过程中会自动实现从小到大的排序功能)。如果需要使用map，必须包含头文件#include<map>还有命名空间”using namespace std;”。</map></p><p>1、map的定义:map&lt;typename1,typename2> name;例如:</p><pre><code>map&lt;string,int&gt; name;//如果是字符串到整型的映射，必须使用string而不能用char数组map&lt;set&lt;int&gt;,string&gt; name;//将一个set容器映射到一个字符串</code></pre><p>2、map容器内元素的访问</p><pre><code>(1)通过下标访问，例如：一个定义为map&lt;char,int&gt; name的map来说，可以直接使用name[&apos;c&apos;]来访问对应的整数。(2)通过迭代器访问,其定义是:map&lt;typename1,typename2&gt;::iterator it;但map迭代器的使用方式和其他STL容器的迭代器不同,因为map的每一对映射都有两个typename,此时我们可以使用it-&gt;first来访问键，使用it-&gt;second来访问值。#include&lt;stdio.h&gt;#include&lt;iostream&gt;#include&lt;map&gt;using namespace std;int main(){    map&lt;char,int&gt; mp;    mp[&apos;m&apos;]=20;    mp[&apos;r&apos;]=30;    mp[&apos;a&apos;]=40;    for(map&lt;char,int&gt;::iterator it=mp.begin();it!=mp.end();it++){        cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second;    }    return 0;}上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。另外,map的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。</code></pre><p>3、map常用的函数</p><pre><code>(1)find(key):用以返回键为key的映射的迭代器，时间复杂度为O(logN)。map&lt;char,int&gt;::iterator it=mp.find(&apos;b&apos;)(2)size():用来获得map中映射的对数，时间复杂度为O(1)。(3)clear():用来清空map中的所有元素，时间复杂度为O(N)。(4)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:mp.erase(it),it位所需要删除元素的迭代器,时间复杂度O(1);mp.erase(key),key为欲删除的映射的键,时间复杂度为O(logN)。删除一个区间内的所有元素:mp.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。时间复杂度为O(last-first)。</code></pre>]]></content>
     
     <summary type="html">
     

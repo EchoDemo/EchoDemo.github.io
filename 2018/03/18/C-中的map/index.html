@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&amp;lt;&amp;gt;内填写两个类型。需要注意的是:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T10:28:29.431Z">
+<meta property="og:updated_time" content="2018-03-18T12:22:15.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的map">
 <meta name="twitter:description" content="在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&amp;lt;&amp;gt;内填写两个类型。需要注意的是:">
@@ -499,7 +499,7 @@ int main(){
 
 上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。
 另外,map的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。
-</code></pre><p>4、map常用的函数</p>
+</code></pre><p>3、map常用的函数</p>
 <pre><code>(1)find(key):用以返回键为key的映射的迭代器，时间复杂度为O(logN)。map&lt;char,int&gt;::iterator it=mp.find(&apos;b&apos;)
 (2)size():用来获得map中映射的对数，时间复杂度为O(1)。
 (3)clear():用来清空map中的所有元素，时间复杂度为O(N)。
