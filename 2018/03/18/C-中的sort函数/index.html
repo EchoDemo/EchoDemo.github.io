@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="EchoDemo" />
+  <meta name="keywords" content="C++,STL," />
 
 
 
@@ -108,16 +108,18 @@
 
 
 
-<meta name="description" content="Less interests,more interest。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="EchoDemo&#39;s Blogs">
-<meta property="og:url" content="http://www.echodemo.cc/archives/2018/page/2/index.html">
+<meta name="description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
+<meta name="keywords" content="C++,STL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中的sort函数">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/18/C-中的sort函数/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="Less interests,more interest。">
+<meta property="og:description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-18T13:59:27.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EchoDemo&#39;s Blogs">
-<meta name="twitter:description" content="Less interests,more interest。">
+<meta name="twitter:title" content="C++中的sort函数">
+<meta name="twitter:description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
 
 
 
@@ -145,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/archives/2018/page/2/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/18/C-中的sort函数/"/>
 
 
 
 
 
-  <title> 归档 | EchoDemo's Blogs </title>
+  <title> C++中的sort函数 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,366 +319,310 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 19 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/18/C-中的sort函数/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++中的sort函数
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-18T21:57:42+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/18/C-中的sort函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/18/C-中的sort函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  780
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include<algorithm>头文件和”using namespace std;”</algorithm></p>
+<p>1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数</p>
+<pre><code>(1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。
+(2)abs(x)返回x的绝对值,这里的x必须是整数,浮点数需要使用math头文件下的fabs。
+(3)swap()用来交换x和y的值,注意:这里的swap()函数和Java中的swap()函数有着本质的不同。
+(4)reverse(x,y)将数组指针在[x,y)之间的元素或容器的迭代器在[x,y)范围内的元素进行反转。
+(5)next_permutation(x,y)给出一个序列在全排列的下一个序列。
+(6)fill(x,y,a)可以把数组或容器中的array[x]~array[y-1]区间赋值为a。和memset不同,这里的赋值可以是数组类型对应范围中的任意值。
+(7)lower_bound(first,last,val)和upper_bound(first,last,val)分别用来寻找在数组或容器[first,last)范围内第一个值大于等于val和第一个值大于val的元素的位置,如果是数组,则返回该位置的指针;如果是容器,则返回该位置的迭代器。如果数组或者容器中没有需要寻找的元素,则两个函数均返回可以插入该元素的位置的指针或者迭代器,它们的时间复杂度均为O(log(last-first))。
+</code></pre><p>2、sort()函数</p>
+<pre><code>(1)使用方式:sort(首元素地址(必填),尾元素地址的下一个地址(必填),比较函数(非必填));
+如果不填比较函数,则默认对前面给出的区间[first,last)进行递增排序。
+
+(2)比较函数cmp
+a、基本数据类型数组的排序
+
+bool cmp(int a,int b){//int型数据递减排序
+    return a&gt;b;//当a&gt;b是把a放在b前面
+}
+
+bool cmp(double a,double b){//double型数据递减排序
+    return a&gt;b;
+}
+
+bool cmp(char a,char b){//char型数据递减排序
+    return a&gt;b;
+}
+
+其实这里也可不必如此:sort(a,a+10,greater&lt;typename&gt;());也可以实现以上三个比较函数的功能。 
+
+b、结构体数组的排序
+
+struct node{
+    int x,y;
+}st[10];
+
+bool cmp(node a,node b){//递减排序
+    return a.x&gt;b.x;
+}
+
+bool cmp(node a,node b){//先按x从大到小排序,但当x相等时,按照y从小到大来排序
+    if(a.x!=b.x) return a.x&gt;b.x;
+    else return a.y&lt;b.y;
+}
+
+sort(st,st+3,cmp);//对下标为0,1,2的结构体类型排序
+
+c、容器的排序
+
+在STL标准容器中,只有vector、string、deque是可以使用sort的。这是因为set、map这种容器是用红黑树实现的,元素本身有序,故不允许使用sort排序。以vector为例:
+
+bool cmp(int a,int b){
+    return a&gt;b;
+}
+
+vector&lt;int&gt; v;
+v.push_back(3);
+v.push_back(1);
+v.push_back(2);
+sort(v.begin(),v.end(),cmp);//对整个vector排序
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/STL/" rel="tag"># STL</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/大整数加法/" itemprop="url">
-              
-                <span itemprop="name">大整数加法</span>
-              
-            </a>
-        
-      </h2>
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/18/C-中的stack/" rel="next" title="C++中的stack">
+                <i class="fa fa-chevron-left"></i> C++中的stack
+              </a>
+            
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T16:51:34+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/Java中的String/" itemprop="url">
-              
-                <span itemprop="name">Java中的String</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T14:56:23+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/早/" itemprop="url">
-              
-                <span itemprop="name">早</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T14:19:32+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/为hexo的next主题添加点击出现桃心效果的功能/" itemprop="url">
-              
-                <span itemprop="name">为hexo的next主题添加点击出现桃心效果的功能</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T18:54:30+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/Java中需要注意的Points/" itemprop="url">
-              
-                <span itemprop="name">Java中需要注意的Points</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T18:43:44+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/09/Add-tags-and-categories-to-Blogs/" itemprop="url">
-              
-                <span itemprop="name">为博客添加标签和分类页面</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T20:50:20+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Git-push-to-github/" itemprop="url">
-              
-                <span itemprop="name">Git push to github</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T16:05:11+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/终于等到你/" itemprop="url">
-              
-                <span itemprop="name">终于等到你</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T11:46:44+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T11:12:28+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
-
-
+    </div>
+  </div>
 
           
           </div>
@@ -684,6 +630,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -946,11 +898,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
@@ -983,6 +933,10 @@
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 
