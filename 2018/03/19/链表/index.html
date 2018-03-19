@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T13:17:51.367Z">
+<meta property="og:updated_time" content="2018-03-19T13:38:03.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表">
 <meta name="twitter:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  641
+                  977
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -551,6 +551,15 @@ int main() {
         }
     }
 }
+</code></pre><p>以上所述都是动态链表的范畴，需要指针来建立节点之间的连接关系。而对于有些问题来说，节点的地址是比较小的整数(例如5位数的地址)，这样就没有必要去建立动态链表，而应该使用方便得多的静态链表。静态链表的实现原理是hash，即通过建立一个结构体数组，并令数组的下标直接表示节点的地址，以此来达到直接访问数组中的元素就能访问节点的效果。需要注意的是：在使用静态链表时，尽量不要把结构体类型名和结构体变量名取成相同的名字。其定义方法如下：</p>
+<pre><code>struct Node{
+    typename date;//数据域
+    int next;//指针域
+}node[size];
+</code></pre><p>其中的next是一个int型的整数，用来存放下一个节点的地址(事实上就是数组下标)，例如：如果初始节点的地址为11111，第二个节点的地址为22222，第三个节点的地址为33333，且第三个节点为链表末尾，那么整个静态链表的节点就可以通过下面的写法连接起来：</p>
+<pre><code>node[11111]=22222;
+node[22222]=33333;
+node[33333]=-1;//-1对应动态链表中的NULL，表示没有后继节点
 </code></pre>
       
     </div>
@@ -822,7 +831,7 @@ int main() {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.3k字</span>
+  <span class="post-count">博客全站共12.6k字</span>
 </div>
 
 
