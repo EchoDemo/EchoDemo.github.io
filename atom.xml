@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-19T09:38:12.547Z</updated>
+  <updated>2018-03-19T12:07:40.485Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C/C++申请动态内存</title>
+    <link href="http://www.echodemo.cc/2018/03/19/2018-3-19-C-C-%E7%94%B3%E8%AF%B7%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/"/>
+    <id>http://www.echodemo.cc/2018/03/19/2018-3-19-C-C-申请动态内存/</id>
+    <published>2018-03-19T12:01:44.000Z</published>
+    <updated>2018-03-19T12:07:40.485Z</updated>
+    
+    <content type="html"><![CDATA[<p>(1)malloc函数</p><p>malloc函数时C语言中#include&lt;stdlib.h&gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=(typename*)malloc(sizeof(typename));int* p=(int*)malloc(sizeof(int));node* p=(node*)malloc(sizeof(node));</code></pre><p>这个写法的解释如下：以需要申请的内存空间大小(即sizeof(node))为malloc函数的参数，这样malloc函数就会向内存申请一块大小为sizeof(node)的空间，并且返回指向这块空间的指针。但是此时这个指针是一个为确定类型的指针void<em>，因此需要把它强制转换成node</em>型的指针，在malloc之前加上(node<em>)。再把这个指针赋给node</em>型的指针变量p，就成功地申请了一块node类型大小的内存空间。如果申请失败，则会返回空指针NULL。申请失败一般在使用malloc申请了较大动态数组时发生。</p><p>在使用完malloc开辟出来的空间后必须将其释放，否则会造成内存的泄露。malloc函数需要使用free函数来进行内存的释放。假设需要释放的内存空间的指针变量为p，则：free(p);就可以实现内存的释放了。</p><p>(2)new运算符</p><p>new是C++中用来申请动态空间的运算符，其返回类型同样是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=new typename;int* p=new int;node* p=new node;</code></pre><p>相比于malloc函数来说，new的写法要简洁得多。另外，如果new运算符申请动态空间失败，则会启动异常机制处理而不是像malloc那样返回NULL。和malloc一样的是：申请失败一般是在申请了较大动态数组时发生。与此同时，new运算符也有对应的释放内存函数：delete(p);</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;(1)malloc函数&lt;/p&gt;
+&lt;p&gt;malloc函数时C语言中#include&amp;lt;stdlib.h&amp;gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;typename* p=(typename*)
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+      <category term="C" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>Codeup 1918 简单计算器</title>
@@ -536,36 +565,6 @@ $ hexo new page tags
       <category term="git" scheme="http://www.echodemo.cc/tags/git/"/>
     
       <category term="github" scheme="http://www.echodemo.cc/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>终于等到你</title>
-    <link href="http://www.echodemo.cc/2018/03/08/2018-03-8-%E7%BB%88%E4%BA%8E%E7%AD%89%E5%88%B0%E4%BD%A0/"/>
-    <id>http://www.echodemo.cc/2018/03/08/2018-03-8-终于等到你/</id>
-    <published>2018-03-08T03:46:44.000Z</published>
-    <updated>2018-03-18T11:03:54.493Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="不知道"><a href="#不知道" class="headerlink" title="不知道"></a>不知道</h1><p>不知道</p><p>头顶遥远的苍穹闪烁的星光</p><p>在无穷无尽里飞行了多少光年</p><p>终于赶来与我的目光相会</p><p><br><br>不知道</p><p>手中捧握的书卷古老的诗篇</p><p>在岁月长河中留存了多少记忆</p><p>此刻也将属于我的悉心珍藏</p><p><br><br>不知道</p><p>你与我不断发酵生酯的相逢</p><p>在冥冥注定中酝酿了多少韶华</p><p>但我仍然记得你发梢的芳香</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;不知道&quot;&gt;&lt;a href=&quot;#不知道&quot; class=&quot;headerlink&quot; title=&quot;不知道&quot;&gt;&lt;/a&gt;不知道&lt;/h1&gt;&lt;p&gt;不知道&lt;/p&gt;
-&lt;p&gt;头顶遥远的苍穹闪烁的星光&lt;/p&gt;
-&lt;p&gt;在无穷无尽里飞行了多少光年&lt;/p&gt;
-&lt;p&gt;终于赶来与我的目光相会&lt;/p
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
     
   </entry>
   
