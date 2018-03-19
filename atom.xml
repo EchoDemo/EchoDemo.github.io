@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-19T12:07:40.485Z</updated>
+  <updated>2018-03-19T13:15:16.383Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,20 +17,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>链表</title>
+    <link href="http://www.echodemo.cc/2018/03/19/2018-3-19-%E9%93%BE%E8%A1%A8/"/>
+    <id>http://www.echodemo.cc/2018/03/19/2018-3-19-链表/</id>
+    <published>2018-03-19T13:13:34.000Z</published>
+    <updated>2018-03-19T13:15:16.383Z</updated>
+    
+    <content type="html"><![CDATA[<p>链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域：</p><pre><code>struct node{    int data;    node* next;};</code></pre><p>(1)创建一个链表：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;struct node {    int data;    node* next;};node* create(int Array[]) {    node *p, *pre, *head;//pre保存当前节点的前驱节点，head为头结点    head = new node;//创建头结点    head-&gt;next = NULL;//头结点不需要数据，且指针域指向NULL    pre = head;//记录pre为head    for (int i = 0;i &lt; 5;i++) {        p = new node;//新建节点        p-&gt;data = Array[i];//将Array[i]赋给新建的节点作为数据域，也可以cin输入        p-&gt;next = NULL;//新节点的指针域设为NULL        pre-&gt;next = p;//前驱节点的指针域设为当前新建节点的地址        pre = p;//把p设为pre，作为下一个节点的前驱节点    }    return head;//返回头结点指针}int main() {    int Array[5] = { 5,3,6,1,2 };    node* L = create(Array);//新建链表，返回头指针head给L    L = L-&gt;next;//从第一个节点开始有数据域    while (L != NULL) {        cout &lt;&lt; L-&gt;data &lt;&lt; endl;//输出每个节点的数据域        L = L-&gt;next;    }    system(&quot;pause&quot;);    return 0;}</code></pre><p>(2)查找元素：</p><pre><code>int search(node* head, int x) {    int count = 0;//计数器    node* p = head-&gt;next;//指向链表的第一个节点    while (p != NULL) {//遍历整个链表        if (p-&gt;data == x) count++;//当节点数据域为x时，则count++        p = p-&gt;next;//指向下一个节点    }    return count;}</code></pre><p>(3)插入元素：</p><pre><code>void insert(node* head, int pos, int x) {    node* p = head;//指向链表的头节点    for (int i = 0;i &lt; pos - 1;i++) {//遍历到链表的pos-1的位置，即插入位置的前一个节点位置        p = p-&gt;next;    }    node* q = new node;//新建节点    q-&gt;data = x;//其数据域为x    q-&gt;next = p-&gt;next;//新节点的下一个节点指向原先插入位置的节点    p-&gt;next = q;//前一个位置的节点指向新节点}</code></pre><p>(4)删除元素</p><pre><code>void del(node* head, int x) {    node* p = head;//指向链表的头结点    node* q = p-&gt;next;//指向链表的第一个节点    while (q != NULL) {        if (q-&gt;data == x) {//数据域为x，删除q节点            p-&gt;next = q-&gt;next;//删除q节点            delete(q);//释放内存空间            q = p-&gt;next;        }else {//数据域不为x，p、q节点同时后移一位            p = q;            q = q-&gt;next;        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;s
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C/C++申请动态内存</title>
     <link href="http://www.echodemo.cc/2018/03/19/2018-3-19-C-C-%E7%94%B3%E8%AF%B7%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/"/>
     <id>http://www.echodemo.cc/2018/03/19/2018-3-19-C-C-申请动态内存/</id>
     <published>2018-03-19T12:01:44.000Z</published>
-    <updated>2018-03-19T12:07:40.485Z</updated>
+    <updated>2018-03-19T12:37:16.753Z</updated>
     
-    <content type="html"><![CDATA[<p>(1)malloc函数</p><p>malloc函数时C语言中#include&lt;stdlib.h&gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=(typename*)malloc(sizeof(typename));int* p=(int*)malloc(sizeof(int));node* p=(node*)malloc(sizeof(node));</code></pre><p>这个写法的解释如下：以需要申请的内存空间大小(即sizeof(node))为malloc函数的参数，这样malloc函数就会向内存申请一块大小为sizeof(node)的空间，并且返回指向这块空间的指针。但是此时这个指针是一个为确定类型的指针void<em>，因此需要把它强制转换成node</em>型的指针，在malloc之前加上(node<em>)。再把这个指针赋给node</em>型的指针变量p，就成功地申请了一块node类型大小的内存空间。如果申请失败，则会返回空指针NULL。申请失败一般在使用malloc申请了较大动态数组时发生。</p><p>在使用完malloc开辟出来的空间后必须将其释放，否则会造成内存的泄露。malloc函数需要使用free函数来进行内存的释放。假设需要释放的内存空间的指针变量为p，则：free(p);就可以实现内存的释放了。</p><p>(2)new运算符</p><p>new是C++中用来申请动态空间的运算符，其返回类型同样是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=new typename;int* p=new int;node* p=new node;</code></pre><p>相比于malloc函数来说，new的写法要简洁得多。另外，如果new运算符申请动态空间失败，则会启动异常机制处理而不是像malloc那样返回NULL。和malloc一样的是：申请失败一般是在申请了较大动态数组时发生。与此同时，new运算符也有对应的释放内存函数：delete(p);</p>]]></content>
+    <content type="html"><![CDATA[<p>(1)malloc函数</p><p>malloc函数是C语言中#include&lt;stdlib.h&gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=(typename*)malloc(sizeof(typename));int* p=(int*)malloc(sizeof(int));node* p=(node*)malloc(sizeof(node));</code></pre><p>这个写法的解释如下：以需要申请的内存空间大小(即sizeof(node))为malloc函数的参数，这样malloc函数就会向内存申请一块大小为sizeof(node)的空间，并且返回指向这块空间的指针。但是此时这个指针是一个为确定类型的指针void<em>，因此需要把它强制转换成node</em>型的指针，在malloc之前加上(node<em>)。再把这个指针赋给node</em>型的指针变量p，就成功地申请了一块node类型大小的内存空间。如果申请失败，则会返回空指针NULL。申请失败一般在使用malloc申请了较大动态数组时发生。</p><p>在使用完malloc开辟出来的空间后必须将其释放，否则会造成内存的泄露。malloc函数需要使用free函数来进行内存的释放。假设需要释放的内存空间的指针变量为p，则：free(p);就可以实现内存的释放了。</p><p>(2)new运算符</p><p>new是C++中用来申请动态空间的运算符，其返回类型同样是申请的同变量类型的指针，其基本用法如下：</p><pre><code>typename* p=new typename;int* p=new int;node* p=new node;</code></pre><p>相比于malloc函数来说，new的写法要简洁得多。另外，如果new运算符申请动态空间失败，则会启动异常机制处理而不是像malloc那样返回NULL。和malloc一样的是：申请失败一般是在申请了较大动态数组时发生。与此同时，new运算符也有对应的释放内存函数：delete(p);</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;(1)malloc函数&lt;/p&gt;
-&lt;p&gt;malloc函数时C语言中#include&amp;lt;stdlib.h&amp;gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：&lt;/p&gt;
+&lt;p&gt;malloc函数是C语言中#include&amp;lt;stdlib.h&amp;gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;typename* p=(typename*)
       
     
@@ -534,37 +560,6 @@ $ hexo new page tags
     
     
       <category term="hexo" scheme="http://www.echodemo.cc/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git push to github</title>
-    <link href="http://www.echodemo.cc/2018/03/08/Git-push-to-github/"/>
-    <id>http://www.echodemo.cc/2018/03/08/Git-push-to-github/</id>
-    <published>2018-03-08T08:05:11.000Z</published>
-    <updated>2018-03-08T13:17:09.224Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、git status 查看目前代码的修改状态</p><pre><code>a) 已暂存 (changes to be committed)    new file //表示新建文件    modified //表示修改文件    deleted //表示删除文件b) 已修改 (changed but not updated)    modified //表示修改文件    deleted //表示删除文件c) 未跟踪 (untracked files)另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout –</code></pre><p>2、git diff 查看代码修改的内容(按q键退出)</p><pre><code>比较某文件与最近提交节点的差异。注意：如果该文件已暂存，那么应该使用git diff –cached技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符)</code></pre><p>3、git add [filename] 暂存需要提交的文件</p><pre><code>如果是新建的文件则git add如果是修改的文件则git add如果是删除的文件则 git rm</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件(注意注释填写规范)</p><pre><code>git commit –amend修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。</code></pre><p>5、git pull origin master –allow-unrelated-histories</p><pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。命令：git checkout – &lt;有冲突的文件路径&gt;</code></pre><p>6、git push -u origin master&lt;本地分支名&gt; </p><pre><code>如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。</code></pre><p>7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。</p><pre><code>git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、git status 查看目前代码的修改状态&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;a) 已暂存 (changes to be committed)
-    new file //表示新建文件
-    modified //表示修改文件
-    deleted //表示删除文件
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="git" scheme="http://www.echodemo.cc/tags/git/"/>
-    
-      <category term="github" scheme="http://www.echodemo.cc/tags/github/"/>
     
   </entry>
   
