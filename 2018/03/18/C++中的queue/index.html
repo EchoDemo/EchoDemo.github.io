@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++,算法," />
+  <meta name="keywords" content="C++,STL," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
-<meta name="keywords" content="C++,算法">
+<meta name="description" content="在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最">
+<meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大整数与int型数据的乘法">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/index.html">
+<meta property="og:title" content="C++中的queue">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/18/C++中的queue/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta property="og:description" content="在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:07:32.847Z">
+<meta property="og:updated_time" content="2018-03-18T12:21:43.042Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大整数与int型数据的乘法">
-<meta name="twitter:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta name="twitter:title" content="C++中的queue">
+<meta name="twitter:description" content="在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/18/C++中的queue/"/>
 
 
 
 
 
-  <title> 大整数与int型数据的乘法 | EchoDemo's Blogs </title>
+  <title> C++中的queue | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/18/C++中的queue/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                大整数与int型数据的乘法
+                C++中的queue
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T22:56:12+08:00">
-                2018-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-18T18:44:01+08:00">
+                2018-03-18
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/14/大整数与int型数据的乘法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/大整数与int型数据的乘法/" itemprop="commentsCount"></span>
+                <a href="/2018/03/18/C++中的queue/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/18/C++中的queue/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  494
+                  416
                 </span>
               
 
@@ -473,61 +473,31 @@
       
 
       
-        <p>大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下：</p>
-<pre><code>#include &quot;stdafx.h&quot;
+        <p>在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include<queue>还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最大元素置于队首的容器。</queue></p>
+<p>1、queue的定义:queue&lt;typename> name;例如:</p>
+<pre><code>queue&lt;int&gt; name;//typename可以是任意基本数据类型或容器
+</code></pre><p>2、queue容器内元素的访问</p>
+<pre><code>由于队列queue是一种先进先出的限制性数据结构,因此在STL中只能通过front()来访问队首元素,或者通过back()来访问队尾元素。
+
+#include&lt;stdio.h&gt;
 #include&lt;iostream&gt;
-#include&lt;stdlib.h&gt;
-#include&lt;string.h&gt;
+#include&lt;queue&gt;
 using namespace std;
-
-struct bign {
-    int d[1000];//使用int型数组存放大整数的每一位。
-    int len;//记录大整数的长度。
-    bign() {//&quot;构造函数&quot;用于初始化结构体。
-        memset(d, 0, sizeof(d));
-        len=0;
+int main(){
+    queue&lt;int&gt; q;
+    for(int i=1;i&lt;=5;i++){
+        q.push(i);//push(i)将i压入队列
     }
-};
-
-bign change(char str[]) {//将存储在字符数组中的大整数转换为bign
-    bign a;
-    a.len = strlen(str);
-    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。
-        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;
-    }
-    return a;
-}
-
-bign multi(bign a, int b) {//a*b
-    bign c;
-    int carry = 0;//进位
-    for (int i = 0;i &lt; a.len;i++) {
-        int temp = a.d[i] * b + carry;
-        c.d[c.len++] = temp % 10;//个位作为该位的结果。
-        carry = temp / 10;//高位部分作为新的进位。
-    }
-    while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。
-        c.d[c.len++] = carry % 10;
-        carry /= 10;
-    }
-    return c;
-}
-
-void print(bign a) {//输出bign。
-    for (int i = a.len - 1;i &gt;= 0;i--) {
-        cout &lt;&lt; a.d[i];
-    }
-}
-
-int main() {
-    char str1[1000];
-    int b;
-    cin &gt;&gt; str1 &gt;&gt; b;
-    bign a = change(str1);
-    print(multi(a, b));
-    system(&quot;pause&quot;);
+    cout&lt;&lt;q.front()&lt;&lt;&quot; &quot;&lt;&lt;q.back();
     return 0;
 }
+</code></pre><p>3、queue常用的函数</p>
+<pre><code>(1)push(x):将x进行入队，时间复杂度为O(1)。
+(2)pop():令队首元素出队，时间复杂度为O(1)。使用pop()函数之前必须用empty()判断队列是否为空。
+(3)front():获得队首元素，时间复杂度为O(1)。使用front()函数之前必须用empty()判断队列是否为空。
+(4)back():获得队尾元素，时间复杂度为O(1)。
+(5)empty():检测queue是否为空，时间复杂度为O(1)。
+(6)size():返回queue内的元素个数，时间复杂度为O(1)。
 </code></pre>
       
     </div>
@@ -543,7 +513,7 @@ int main() {
           
             <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
         </div>
       
@@ -593,8 +563,8 @@ int main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/14/大整数减法/" rel="next" title="大整数减法">
-                <i class="fa fa-chevron-left"></i> 大整数减法
+              <a href="/2018/03/18/C++中的map/" rel="next" title="C++中的map">
+                <i class="fa fa-chevron-left"></i> C++中的map
               </a>
             
           </div>
@@ -603,8 +573,8 @@ int main() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/15/大整数与int型数据的除法/" rel="prev" title="大整数与int型数据的除法">
-                大整数与int型数据的除法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/18/C++中的stack/" rel="prev" title="C++中的stack">
+                C++中的stack <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

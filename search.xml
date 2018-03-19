@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[C++中的sort函数]]></title>
-    <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84sort%E5%87%BD%E6%95%B0%2F</url>
+    <url>%2F2018%2F03%2F18%2FC%2B%2B%E4%B8%AD%E7%9A%84sort%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)abs(x)返回x的绝对值,这里的x必须是整数,浮点数需要使用math头文件下的fabs。 (3)swap()用来交换x和y的值,注意:这里的swap()函数和Java中的swap()函数有着本质的不同。 (4)reverse(x,y)将数组指针在[x,y)之间的元素或容器的迭代器在[x,y)范围内的元素进行反转。 (5)next_permutation(x,y)给出一个序列在全排列的下一个序列。 (6)fill(x,y,a)可以把数组或容器中的array[x]~array[y-1]区间赋值为a。和memset不同,这里的赋值可以是数组类型对应范围中的任意值。 (7)lower_bound(first,last,val)和upper_bound(first,last,val)分别用来寻找在数组或容器[first,last)范围内第一个值大于等于val和第一个值大于val的元素的位置,如果是数组,则返回该位置的指针;如果是容器,则返回该位置的迭代器。如果数组或者容器中没有需要寻找的元素,则两个函数均返回可以插入该元素的位置的指针或者迭代器,它们的时间复杂度均为O(log(last-first))。 2、sort()函数 (1)使用方式:sort(首元素地址(必填),尾元素地址的下一个地址(必填),比较函数(非必填)); 如果不填比较函数,则默认对前面给出的区间[first,last)进行递增排序。 (2)比较函数cmp a、基本数据类型数组的排序 bool cmp(int a,int b){//int型数据递减排序 return a&gt;b;//当a&gt;b是把a放在b前面 } bool cmp(double a,double b){//double型数据递减排序 return a&gt;b; } bool cmp(char a,char b){//char型数据递减排序 return a&gt;b; } 其实这里也可不必如此:sort(a,a+10,greater&lt;typename&gt;());也可以实现以上三个比较函数的功能。 b、结构体数组的排序 struct node{ int x,y; }st[10]; bool cmp(node a,node b){//递减排序 return a.x&gt;b.x; } bool cmp(node a,node b){//先按x从大到小排序,但当x相等时,按照y从小到大来排序 if(a.x!=b.x) return a.x&gt;b.x; else return a.y&lt;b.y; } sort(st,st+3,cmp);//对下标为0,1,2的结构体类型排序 c、容器的排序 在STL标准容器中,只有vector、string、deque是可以使用sort的。这是因为set、map这种容器是用红黑树实现的,元素本身有序,故不允许使用sort排序。以vector为例: bool cmp(int a,int b){ return a&gt;b; } vector&lt;int&gt; v; v.push_back(3); v.push_back(1); v.push_back(2); sort(v.begin(),v.end(),cmp);//对整个vector排序]]></content>
       <categories>
         <category>技术</category>
@@ -14,7 +14,7 @@
   </entry>
   <entry>
     <title><![CDATA[C++中的stack]]></title>
-    <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84stack%2F</url>
+    <url>%2F2018%2F03%2F18%2FC%2B%2B%E4%B8%AD%E7%9A%84stack%2F</url>
     <content type="text"><![CDATA[在编程过程中，常常使用stack用来模拟实现一些递归，防止程序对栈内存的限制而导致程序运行出错。一般来说，程序的栈内存空间很小，对有些题目来说，如果用普通的函数来递归，一旦递归层数过深，则会导致程序运行崩溃。如果用栈来模拟递归算法的实现，则可以避免这一方面的问题。stack是一种先进后出的数据结构。要使用stack，必须包含头文件#include还有命名空间”using namespace std;”。 1、stack的定义:stack&lt;typename> name;例如: stack&lt;int&gt; name; 2、stack容器内元素的访问 #include&lt;stdio.h&gt; #include&lt;iostream&gt; #include&lt;stack&gt; using namespace std; int main(){ stack&lt;int&gt; st; for(int i=1;i&lt;=5;i++){ st.push(i);//push(i)将i压入队列 } cout&lt;&lt;st.top();//取栈顶元素 return 0; } 3、stack常用的函数 (1)push(x):将x进行入栈，时间复杂度为O(1)。 (2)pop():栈顶元素出栈，时间复杂度为O(1)。 (3)top():获得栈顶元素，时间复杂度为O(1)。 (5)empty():检测stack是否为空，时间复杂度为O(1)。 (6)size():返回stack内的元素个数，时间复杂度为O(1)。]]></content>
       <categories>
         <category>技术</category>
@@ -26,7 +26,7 @@
   </entry>
   <entry>
     <title><![CDATA[C++中的queue]]></title>
-    <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84queue%2F</url>
+    <url>%2F2018%2F03%2F18%2FC%2B%2B%E4%B8%AD%E7%9A%84queue%2F</url>
     <content type="text"><![CDATA[在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最大元素置于队首的容器。 1、queue的定义:queue&lt;typename> name;例如: queue&lt;int&gt; name;//typename可以是任意基本数据类型或容器 2、queue容器内元素的访问 由于队列queue是一种先进先出的限制性数据结构,因此在STL中只能通过front()来访问队首元素,或者通过back()来访问队尾元素。 #include&lt;stdio.h&gt; #include&lt;iostream&gt; #include&lt;queue&gt; using namespace std; int main(){ queue&lt;int&gt; q; for(int i=1;i&lt;=5;i++){ q.push(i);//push(i)将i压入队列 } cout&lt;&lt;q.front()&lt;&lt;&quot; &quot;&lt;&lt;q.back(); return 0; } 3、queue常用的函数 (1)push(x):将x进行入队，时间复杂度为O(1)。 (2)pop():令队首元素出队，时间复杂度为O(1)。使用pop()函数之前必须用empty()判断队列是否为空。 (3)front():获得队首元素，时间复杂度为O(1)。使用front()函数之前必须用empty()判断队列是否为空。 (4)back():获得队尾元素，时间复杂度为O(1)。 (5)empty():检测queue是否为空，时间复杂度为O(1)。 (6)size():返回queue内的元素个数，时间复杂度为O(1)。]]></content>
       <categories>
         <category>技术</category>
@@ -38,7 +38,7 @@
   </entry>
   <entry>
     <title><![CDATA[C++中的map]]></title>
-    <url>%2F2018%2F03%2F18%2FC-%E4%B8%AD%E7%9A%84map%2F</url>
+    <url>%2F2018%2F03%2F18%2FC%2B%2B%E4%B8%AD%E7%9A%84map%2F</url>
     <content type="text"><![CDATA[在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&lt;&gt;内填写两个类型。需要注意的是:map中的键是唯一的，而且map会以键从小到大的顺序自动排序(这是由于map内部是使用红黑树实现的，set也是，在建立映射的过程中会自动实现从小到大的排序功能)。如果需要使用map，必须包含头文件#include还有命名空间”using namespace std;”。 1、map的定义:map&lt;typename1,typename2> name;例如: map&lt;string,int&gt; name;//如果是字符串到整型的映射，必须使用string而不能用char数组 map&lt;set&lt;int&gt;,string&gt; name;//将一个set容器映射到一个字符串 2、map容器内元素的访问 (1)通过下标访问，例如：一个定义为map&lt;char,int&gt; name的map来说，可以直接使用name[&apos;c&apos;]来访问对应的整数。 (2)通过迭代器访问,其定义是:map&lt;typename1,typename2&gt;::iterator it;但map迭代器的使用方式和其他STL容器的迭代器不同,因为map的每一对映射都有两个typename,此时我们可以使用it-&gt;first来访问键，使用it-&gt;second来访问值。 #include&lt;stdio.h&gt; #include&lt;iostream&gt; #include&lt;map&gt; using namespace std; int main(){ map&lt;char,int&gt; mp; mp[&apos;m&apos;]=20; mp[&apos;r&apos;]=30; mp[&apos;a&apos;]=40; for(map&lt;char,int&gt;::iterator it=mp.begin();it!=mp.end();it++){ cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second; } return 0; } 上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。 另外,map的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。 3、map常用的函数 (1)find(key):用以返回键为key的映射的迭代器，时间复杂度为O(logN)。map&lt;char,int&gt;::iterator it=mp.find(&apos;b&apos;) (2)size():用来获得map中映射的对数，时间复杂度为O(1)。 (3)clear():用来清空map中的所有元素，时间复杂度为O(N)。 (4)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:mp.erase(it),it位所需要删除元素的迭代器,时间复杂度O(1);mp.erase(key),key为欲删除的映射的键,时间复杂度为O(logN)。删除一个区间内的所有元素:mp.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。时间复杂度为O(last-first)。]]></content>
       <categories>
         <category>技术</category>
@@ -50,7 +50,7 @@
   </entry>
   <entry>
     <title><![CDATA[C++中的set]]></title>
-    <url>%2F2018%2F03%2F17%2FC-%E4%B8%AD%E7%9A%84set%2F</url>
+    <url>%2F2018%2F03%2F17%2FC%2B%2B%E4%B8%AD%E7%9A%84set%2F</url>
     <content type="text"><![CDATA[在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#include还有命名空间”using namespace std;”。 1、set的定义:set&lt;typename> name;例如: set&lt;int&gt; name; //声明一个int容器 set&lt;int&gt; name(10); //声明一个初始大小为10的int型容器 set&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型容器 set&lt;int&gt; name(a); //声明一个初始大小为a的int型容器 set&lt;node&gt; name; //node是结构体的类型 如果typename是set，定义的时候记得在&gt;&gt;符号之间加上空格: set&lt;set&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格 2、set数组的定义:set&lt;typename> arrayname[arraysize];例如: set&lt;int&gt; a[100];//a[0]~a[99]中的每一个都是一个set容器 与set&lt;set&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。 3、set容器内元素的访问 set只能通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:set&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问set中的元素例如: #include&lt;iostream&gt; #include&lt;set&gt; using namespace std ; int main(){ set&lt;int&gt; a; a.insert(3);//将3插入set中 a.insert(5); a.insert(2); a.insert(3); for(set&lt;int&gt;::iterator it=a.begin();it!=a.end();it++){//a.begin()为取a的首元素地址，而it指向这个地址 cout&lt;&lt;*it; } return 0; } 上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。 另外,set的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。另外,除vector和string之外的STL容器都不支持*(it+i)的访问方式。因此只能按如上的方式枚举。 4、set常用的函数 (1)insert(x):在set容器中添加一个元素,并自动递增排序,时间复杂度为O(logN),N为set内元素个数。 (2)find(x):用以返回set中对应值为x的迭代器，时间复杂度为O(logN)。set&lt;int&gt;::iterator it=a.find(2) (3)size():用来获得set中的元素的个数，时间复杂度为O(1)。 (4)clear():用来清空set中的所有元素，时间复杂度为O(N)。 (6)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(1);a.erase(x),x为所要删除元素的值,时间复杂度为O(logN)。删除一个区间内的所有元素:a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。]]></content>
       <categories>
         <category>技术</category>
@@ -62,7 +62,7 @@
   </entry>
   <entry>
     <title><![CDATA[C++中的vector]]></title>
-    <url>%2F2018%2F03%2F16%2FC-%E4%B8%AD%E7%9A%84vector%2F</url>
+    <url>%2F2018%2F03%2F16%2FC%2B%2B%E4%B8%AD%E7%9A%84vector%2F</url>
     <content type="text"><![CDATA[在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include还有命名空间”using namespace std;”。 1、vector的定义:vector&lt;typename> name;例如: vector&lt;int&gt; name; //声明一个int向量 vector&lt;int&gt; name(10); //声明一个初始大小为10的int型向量 vector&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型向量 vector&lt;int&gt; name(a); //声明一个初始大小为a的int型向量 vector&lt;node&gt; name; //node是结构体的类型 如果typename是vector，定义的时候记得在&gt;&gt;符号之间加上空格: vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格 2、vector数组的定义:vector&lt;typename> arrayname[arraysize];例如: vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器 与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。 3、vector容器内元素的访问 (1)通过下标访问，即vi[0]~vi[size-1]进行访问。 (2)通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:vector&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问vector中的元素例如: #include&lt;iostream&gt; #include&lt;vector&gt; using namespace std ; int main(){ vector&lt;int&gt; vi; for(int i=1;i&lt;=5;i++){ vi.push_back(i); } vector&lt;int&gt;::iterator it=vi.begin();//vi.begin()为取vi的首元素地址，而it指向这个地址 for(int i=0;i&lt;5;i++){ cout&lt;&lt;*(it+i); } return 0; } 上述程序中出现了去vi的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。 另外，vector的迭代器不支持it&lt;vi.end()的写法，因此循环条件只能用it!=vi.end()。除此之外，迭代器还实现了两种自加操作:it++和++it(自减操作同理)。 4、vector常用的函数 (1)push_back(x):在vector后面添加一个元素，时间复杂度为O(1)。 (2)pop_back():用以删除vector的尾元素，时间复杂度为O(1)。 (3)size():用来获得vector中的元素的个数，时间复杂度为O(1)。返回的是unsigned类型。 (4)clear():用来清空vector中的所有元素，时间复杂度为O(N)。N为vector中元素的个数。 (5)insert(it,x):用来向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)。 (6)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(N);a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。]]></content>
       <categories>
         <category>技术</category>
@@ -202,7 +202,7 @@
   </entry>
   <entry>
     <title><![CDATA[终于等到你]]></title>
-    <url>%2F2018%2F03%2F08%2F%E7%BB%88%E4%BA%8E%E7%AD%89%E5%88%B0%E4%BD%A0%2F</url>
+    <url>%2F2018%2F03%2F08%2F2018-03-8-%E7%BB%88%E4%BA%8E%E7%AD%89%E5%88%B0%E4%BD%A0%2F</url>
     <content type="text"><![CDATA[不知道不知道 头顶遥远的苍穹闪烁的星光 在无穷无尽里飞行了多少光年 终于赶来与我的目光相会 不知道 手中捧握的书卷古老的诗篇 在岁月长河中留存了多少记忆 此刻也将属于我的悉心珍藏 不知道 你与我不断发酵生酯的相逢 在冥冥注定中酝酿了多少韶华 但我仍然记得你发梢的芳香]]></content>
       <categories>
         <category>生活</category>
@@ -211,10 +211,5 @@
         <tag>随笔</tag>
         <tag>诗词</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F03%2F08%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
 </search>

@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++,算法," />
+  <meta name="keywords" content="C++,STL," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
-<meta name="keywords" content="C++,算法">
+<meta name="description" content="在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&amp;lt;&amp;gt;内填写两个类型。需要注意的是:">
+<meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大整数与int型数据的乘法">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/index.html">
+<meta property="og:title" content="C++中的map">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/18/C++中的map/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta property="og:description" content="在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&amp;lt;&amp;gt;内填写两个类型。需要注意的是:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:07:32.847Z">
+<meta property="og:updated_time" content="2018-03-18T12:22:15.766Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大整数与int型数据的乘法">
-<meta name="twitter:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta name="twitter:title" content="C++中的map">
+<meta name="twitter:description" content="在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&amp;lt;&amp;gt;内填写两个类型。需要注意的是:">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/18/C++中的map/"/>
 
 
 
 
 
-  <title> 大整数与int型数据的乘法 | EchoDemo's Blogs </title>
+  <title> C++中的map | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/18/C++中的map/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                大整数与int型数据的乘法
+                C++中的map
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T22:56:12+08:00">
-                2018-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-18T18:27:33+08:00">
+                2018-03-18
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/14/大整数与int型数据的乘法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/大整数与int型数据的乘法/" itemprop="commentsCount"></span>
+                <a href="/2018/03/18/C++中的map/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/18/C++中的map/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  494
+                  799
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -473,61 +473,37 @@
       
 
       
-        <p>大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下：</p>
-<pre><code>#include &quot;stdafx.h&quot;
+        <p>在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，因为map需要确定映射前类型(键key)和映射后类型(值value),所以需要在&lt;&gt;内填写两个类型。需要注意的是:map中的键是唯一的，而且map会以键从小到大的顺序自动排序(这是由于map内部是使用红黑树实现的，set也是，在建立映射的过程中会自动实现从小到大的排序功能)。如果需要使用map，必须包含头文件#include<map>还有命名空间”using namespace std;”。</map></p>
+<p>1、map的定义:map&lt;typename1,typename2> name;例如:</p>
+<pre><code>map&lt;string,int&gt; name;//如果是字符串到整型的映射，必须使用string而不能用char数组
+map&lt;set&lt;int&gt;,string&gt; name;//将一个set容器映射到一个字符串
+</code></pre><p>2、map容器内元素的访问</p>
+<pre><code>(1)通过下标访问，例如：一个定义为map&lt;char,int&gt; name的map来说，可以直接使用name[&apos;c&apos;]来访问对应的整数。
+
+(2)通过迭代器访问,其定义是:map&lt;typename1,typename2&gt;::iterator it;但map迭代器的使用方式和其他STL容器的迭代器不同,因为map的每一对映射都有两个typename,此时我们可以使用it-&gt;first来访问键，使用it-&gt;second来访问值。
+
+#include&lt;stdio.h&gt;
 #include&lt;iostream&gt;
-#include&lt;stdlib.h&gt;
-#include&lt;string.h&gt;
+#include&lt;map&gt;
 using namespace std;
-
-struct bign {
-    int d[1000];//使用int型数组存放大整数的每一位。
-    int len;//记录大整数的长度。
-    bign() {//&quot;构造函数&quot;用于初始化结构体。
-        memset(d, 0, sizeof(d));
-        len=0;
+int main(){
+    map&lt;char,int&gt; mp;
+    mp[&apos;m&apos;]=20;
+    mp[&apos;r&apos;]=30;
+    mp[&apos;a&apos;]=40;
+    for(map&lt;char,int&gt;::iterator it=mp.begin();it!=mp.end();it++){
+        cout&lt;&lt;it-&gt;first&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;second;
     }
-};
-
-bign change(char str[]) {//将存储在字符数组中的大整数转换为bign
-    bign a;
-    a.len = strlen(str);
-    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。
-        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;
-    }
-    return a;
-}
-
-bign multi(bign a, int b) {//a*b
-    bign c;
-    int carry = 0;//进位
-    for (int i = 0;i &lt; a.len;i++) {
-        int temp = a.d[i] * b + carry;
-        c.d[c.len++] = temp % 10;//个位作为该位的结果。
-        carry = temp / 10;//高位部分作为新的进位。
-    }
-    while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。
-        c.d[c.len++] = carry % 10;
-        carry /= 10;
-    }
-    return c;
-}
-
-void print(bign a) {//输出bign。
-    for (int i = a.len - 1;i &gt;= 0;i--) {
-        cout &lt;&lt; a.d[i];
-    }
-}
-
-int main() {
-    char str1[1000];
-    int b;
-    cin &gt;&gt; str1 &gt;&gt; b;
-    bign a = change(str1);
-    print(multi(a, b));
-    system(&quot;pause&quot;);
     return 0;
 }
+
+上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。
+另外,map的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。
+</code></pre><p>3、map常用的函数</p>
+<pre><code>(1)find(key):用以返回键为key的映射的迭代器，时间复杂度为O(logN)。map&lt;char,int&gt;::iterator it=mp.find(&apos;b&apos;)
+(2)size():用来获得map中映射的对数，时间复杂度为O(1)。
+(3)clear():用来清空map中的所有元素，时间复杂度为O(N)。
+(4)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:mp.erase(it),it位所需要删除元素的迭代器,时间复杂度O(1);mp.erase(key),key为欲删除的映射的键,时间复杂度为O(logN)。删除一个区间内的所有元素:mp.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。时间复杂度为O(last-first)。
 </code></pre>
       
     </div>
@@ -543,7 +519,7 @@ int main() {
           
             <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
         </div>
       
@@ -593,8 +569,8 @@ int main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/14/大整数减法/" rel="next" title="大整数减法">
-                <i class="fa fa-chevron-left"></i> 大整数减法
+              <a href="/2018/03/17/C++中的set/" rel="next" title="C++中的set">
+                <i class="fa fa-chevron-left"></i> C++中的set
               </a>
             
           </div>
@@ -603,8 +579,8 @@ int main() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/15/大整数与int型数据的除法/" rel="prev" title="大整数与int型数据的除法">
-                大整数与int型数据的除法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/18/C++中的queue/" rel="prev" title="C++中的queue">
+                C++中的queue <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

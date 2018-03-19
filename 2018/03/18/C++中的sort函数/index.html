@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++,算法," />
+  <meta name="keywords" content="C++,STL," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
-<meta name="keywords" content="C++,算法">
+<meta name="description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
+<meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大整数与int型数据的乘法">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/index.html">
+<meta property="og:title" content="C++中的sort函数">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/18/C++中的sort函数/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta property="og:description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:07:32.847Z">
+<meta property="og:updated_time" content="2018-03-18T13:59:27.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大整数与int型数据的乘法">
-<meta name="twitter:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta name="twitter:title" content="C++中的sort函数">
+<meta name="twitter:description" content="sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include头文件和”using namespace std;” 1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数 (1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。 (2)a">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/18/C++中的sort函数/"/>
 
 
 
 
 
-  <title> 大整数与int型数据的乘法 | EchoDemo's Blogs </title>
+  <title> C++中的sort函数 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/18/C++中的sort函数/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                大整数与int型数据的乘法
+                C++中的sort函数
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T22:56:12+08:00">
-                2018-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-18T21:57:42+08:00">
+                2018-03-18
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/14/大整数与int型数据的乘法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/大整数与int型数据的乘法/" itemprop="commentsCount"></span>
+                <a href="/2018/03/18/C++中的sort函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/18/C++中的sort函数/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  494
+                  780
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -473,61 +473,66 @@
       
 
       
-        <p>大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下：</p>
-<pre><code>#include &quot;stdafx.h&quot;
-#include&lt;iostream&gt;
-#include&lt;stdlib.h&gt;
-#include&lt;string.h&gt;
-using namespace std;
+        <p>sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include<algorithm>头文件和”using namespace std;”</algorithm></p>
+<p>1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数</p>
+<pre><code>(1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。
+(2)abs(x)返回x的绝对值,这里的x必须是整数,浮点数需要使用math头文件下的fabs。
+(3)swap()用来交换x和y的值,注意:这里的swap()函数和Java中的swap()函数有着本质的不同。
+(4)reverse(x,y)将数组指针在[x,y)之间的元素或容器的迭代器在[x,y)范围内的元素进行反转。
+(5)next_permutation(x,y)给出一个序列在全排列的下一个序列。
+(6)fill(x,y,a)可以把数组或容器中的array[x]~array[y-1]区间赋值为a。和memset不同,这里的赋值可以是数组类型对应范围中的任意值。
+(7)lower_bound(first,last,val)和upper_bound(first,last,val)分别用来寻找在数组或容器[first,last)范围内第一个值大于等于val和第一个值大于val的元素的位置,如果是数组,则返回该位置的指针;如果是容器,则返回该位置的迭代器。如果数组或者容器中没有需要寻找的元素,则两个函数均返回可以插入该元素的位置的指针或者迭代器,它们的时间复杂度均为O(log(last-first))。
+</code></pre><p>2、sort()函数</p>
+<pre><code>(1)使用方式:sort(首元素地址(必填),尾元素地址的下一个地址(必填),比较函数(非必填));
+如果不填比较函数,则默认对前面给出的区间[first,last)进行递增排序。
 
-struct bign {
-    int d[1000];//使用int型数组存放大整数的每一位。
-    int len;//记录大整数的长度。
-    bign() {//&quot;构造函数&quot;用于初始化结构体。
-        memset(d, 0, sizeof(d));
-        len=0;
-    }
-};
+(2)比较函数cmp
+a、基本数据类型数组的排序
 
-bign change(char str[]) {//将存储在字符数组中的大整数转换为bign
-    bign a;
-    a.len = strlen(str);
-    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。
-        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;
-    }
-    return a;
+bool cmp(int a,int b){//int型数据递减排序
+    return a&gt;b;//当a&gt;b是把a放在b前面
 }
 
-bign multi(bign a, int b) {//a*b
-    bign c;
-    int carry = 0;//进位
-    for (int i = 0;i &lt; a.len;i++) {
-        int temp = a.d[i] * b + carry;
-        c.d[c.len++] = temp % 10;//个位作为该位的结果。
-        carry = temp / 10;//高位部分作为新的进位。
-    }
-    while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。
-        c.d[c.len++] = carry % 10;
-        carry /= 10;
-    }
-    return c;
+bool cmp(double a,double b){//double型数据递减排序
+    return a&gt;b;
 }
 
-void print(bign a) {//输出bign。
-    for (int i = a.len - 1;i &gt;= 0;i--) {
-        cout &lt;&lt; a.d[i];
-    }
+bool cmp(char a,char b){//char型数据递减排序
+    return a&gt;b;
 }
 
-int main() {
-    char str1[1000];
-    int b;
-    cin &gt;&gt; str1 &gt;&gt; b;
-    bign a = change(str1);
-    print(multi(a, b));
-    system(&quot;pause&quot;);
-    return 0;
+其实这里也可不必如此:sort(a,a+10,greater&lt;typename&gt;());也可以实现以上三个比较函数的功能。 
+
+b、结构体数组的排序
+
+struct node{
+    int x,y;
+}st[10];
+
+bool cmp(node a,node b){//递减排序
+    return a.x&gt;b.x;
 }
+
+bool cmp(node a,node b){//先按x从大到小排序,但当x相等时,按照y从小到大来排序
+    if(a.x!=b.x) return a.x&gt;b.x;
+    else return a.y&lt;b.y;
+}
+
+sort(st,st+3,cmp);//对下标为0,1,2的结构体类型排序
+
+c、容器的排序
+
+在STL标准容器中,只有vector、string、deque是可以使用sort的。这是因为set、map这种容器是用红黑树实现的,元素本身有序,故不允许使用sort排序。以vector为例:
+
+bool cmp(int a,int b){
+    return a&gt;b;
+}
+
+vector&lt;int&gt; v;
+v.push_back(3);
+v.push_back(1);
+v.push_back(2);
+sort(v.begin(),v.end(),cmp);//对整个vector排序
 </code></pre>
       
     </div>
@@ -543,7 +548,7 @@ int main() {
           
             <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
         </div>
       
@@ -593,8 +598,8 @@ int main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/14/大整数减法/" rel="next" title="大整数减法">
-                <i class="fa fa-chevron-left"></i> 大整数减法
+              <a href="/2018/03/18/C++中的stack/" rel="next" title="C++中的stack">
+                <i class="fa fa-chevron-left"></i> C++中的stack
               </a>
             
           </div>
@@ -602,10 +607,6 @@ int main() {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/15/大整数与int型数据的除法/" rel="prev" title="大整数与int型数据的除法">
-                大整数与int型数据的除法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++,算法," />
+  <meta name="keywords" content="C++,STL," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
-<meta name="keywords" content="C++,算法">
+<meta name="description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
+<meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大整数与int型数据的乘法">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/index.html">
+<meta property="og:title" content="C++中的vector">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/16/C++中的vector/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta property="og:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:07:32.847Z">
+<meta property="og:updated_time" content="2018-03-18T08:48:21.798Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大整数与int型数据的乘法">
-<meta name="twitter:description" content="大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加">
+<meta name="twitter:title" content="C++中的vector">
+<meta name="twitter:description" content="在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/16/C++中的vector/"/>
 
 
 
 
 
-  <title> 大整数与int型数据的乘法 | EchoDemo's Blogs </title>
+  <title> C++中的vector | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/16/C++中的vector/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                大整数与int型数据的乘法
+                C++中的vector
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T22:56:12+08:00">
-                2018-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-16T19:41:49+08:00">
+                2018-03-16
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/14/大整数与int型数据的乘法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/大整数与int型数据的乘法/" itemprop="commentsCount"></span>
+                <a href="/2018/03/16/C++中的vector/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/16/C++中的vector/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  494
+                  854
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -473,61 +473,49 @@
       
 
       
-        <p>大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下：</p>
-<pre><code>#include &quot;stdafx.h&quot;
+        <p>在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include<vector>还有命名空间”using namespace std;”。</vector></p>
+<p>1、vector的定义:vector&lt;typename> name;例如:</p>
+<pre><code>vector&lt;int&gt; name;      //声明一个int向量
+vector&lt;int&gt; name(10);  //声明一个初始大小为10的int型向量
+vector&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型向量
+vector&lt;int&gt; name(a);   //声明一个初始大小为a的int型向量
+vector&lt;node&gt; name;     //node是结构体的类型
+
+如果typename是vector，定义的时候记得在&gt;&gt;符号之间加上空格:
+vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格
+</code></pre><p>2、vector数组的定义:vector&lt;typename> arrayname[arraysize];例如:</p>
+<pre><code>vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器
+
+与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。
+</code></pre><p>3、vector容器内元素的访问</p>
+<pre><code>(1)通过下标访问，即vi[0]~vi[size-1]进行访问。
+(2)通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:vector&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问vector中的元素例如:
+
 #include&lt;iostream&gt;
-#include&lt;stdlib.h&gt;
-#include&lt;string.h&gt;
-using namespace std;
+#include&lt;vector&gt;
+using namespace std ;
 
-struct bign {
-    int d[1000];//使用int型数组存放大整数的每一位。
-    int len;//记录大整数的长度。
-    bign() {//&quot;构造函数&quot;用于初始化结构体。
-        memset(d, 0, sizeof(d));
-        len=0;
+int main(){
+    vector&lt;int&gt; vi;
+    for(int i=1;i&lt;=5;i++){
+        vi.push_back(i);
     }
-};
-
-bign change(char str[]) {//将存储在字符数组中的大整数转换为bign
-    bign a;
-    a.len = strlen(str);
-    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。
-        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;
+    vector&lt;int&gt;::iterator it=vi.begin();//vi.begin()为取vi的首元素地址，而it指向这个地址
+    for(int i=0;i&lt;5;i++){
+        cout&lt;&lt;*(it+i);
     }
-    return a;
-}
-
-bign multi(bign a, int b) {//a*b
-    bign c;
-    int carry = 0;//进位
-    for (int i = 0;i &lt; a.len;i++) {
-        int temp = a.d[i] * b + carry;
-        c.d[c.len++] = temp % 10;//个位作为该位的结果。
-        carry = temp / 10;//高位部分作为新的进位。
-    }
-    while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。
-        c.d[c.len++] = carry % 10;
-        carry /= 10;
-    }
-    return c;
-}
-
-void print(bign a) {//输出bign。
-    for (int i = a.len - 1;i &gt;= 0;i--) {
-        cout &lt;&lt; a.d[i];
-    }
-}
-
-int main() {
-    char str1[1000];
-    int b;
-    cin &gt;&gt; str1 &gt;&gt; b;
-    bign a = change(str1);
-    print(multi(a, b));
-    system(&quot;pause&quot;);
     return 0;
 }
+
+上述程序中出现了去vi的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。
+另外，vector的迭代器不支持it&lt;vi.end()的写法，因此循环条件只能用it!=vi.end()。除此之外，迭代器还实现了两种自加操作:it++和++it(自减操作同理)。
+</code></pre><p>4、vector常用的函数</p>
+<pre><code>(1)push_back(x):在vector后面添加一个元素，时间复杂度为O(1)。
+(2)pop_back():用以删除vector的尾元素，时间复杂度为O(1)。
+(3)size():用来获得vector中的元素的个数，时间复杂度为O(1)。返回的是unsigned类型。
+(4)clear():用来清空vector中的所有元素，时间复杂度为O(N)。N为vector中元素的个数。
+(5)insert(it,x):用来向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)。
+(6)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(N);a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。
 </code></pre>
       
     </div>
@@ -543,7 +531,7 @@ int main() {
           
             <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/STL/" rel="tag"># STL</a>
           
         </div>
       
@@ -593,8 +581,8 @@ int main() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/14/大整数减法/" rel="next" title="大整数减法">
-                <i class="fa fa-chevron-left"></i> 大整数减法
+              <a href="/2018/03/16/hexo的next主题使用过程中所遇见的问题及解决措施/" rel="next" title="hexo的next主题使用过程中所遇见的问题及解决措施">
+                <i class="fa fa-chevron-left"></i> hexo的next主题使用过程中所遇见的问题及解决措施
               </a>
             
           </div>
@@ -603,8 +591,8 @@ int main() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/15/大整数与int型数据的除法/" rel="prev" title="大整数与int型数据的除法">
-                大整数与int型数据的除法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/17/C++中的set/" rel="prev" title="C++中的set">
+                C++中的set <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
