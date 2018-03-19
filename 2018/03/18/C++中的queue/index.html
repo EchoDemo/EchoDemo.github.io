@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T12:21:43.042Z">
+<meta property="og:updated_time" content="2018-03-19T03:00:41.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的queue">
 <meta name="twitter:description" content="在编程过程中，当需要实现广度优先搜索时，可以不用自己手动实现一个队列，而是用queue作为代替，以提高程序的准确性。要使用queue，必须包含头文件#include还有命名空间”using namespace std;”。STL的容器中还有两种容器和队列有关，分别是双端队列(deque)和优先队列(priority_queue)，前者是首位皆可以插入和删除的队列，后者是使用堆实现的默认将当前队列最">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  416
+                  463
                 </span>
               
 
@@ -498,6 +498,10 @@ int main(){
 (4)back():获得队尾元素，时间复杂度为O(1)。
 (5)empty():检测queue是否为空，时间复杂度为O(1)。
 (6)size():返回queue内的元素个数，时间复杂度为O(1)。
+(7)STL中没有实现队列的清空，如果需要实现队列的清空，可以用一个while循环反复pop出元素直到队列为空：
+    while(!q.empty){
+        q.pop();
+    }
 </code></pre>
       
     </div>
@@ -775,7 +779,7 @@ int main(){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共9.8k字</span>
+  <span class="post-count">博客全站共9.9k字</span>
 </div>
 
 
