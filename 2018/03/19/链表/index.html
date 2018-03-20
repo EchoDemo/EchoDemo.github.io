@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
+<meta name="description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个动态链表： #include">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表">
 <meta property="og:url" content="http://www.echodemo.cc/2018/03/19/链表/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
+<meta property="og:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个动态链表： #include">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T01:37:24.629Z">
+<meta property="og:updated_time" content="2018-03-20T06:15:22.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表">
-<meta name="twitter:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
+<meta name="twitter:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个动态链表： #include">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  980
+                  1,566
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -473,12 +473,12 @@
       
 
       
-        <p>链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域：</p>
+        <p>链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域：</p>
 <pre><code>struct node{
     int data;
     node* next;
 };
-</code></pre><p>(1)创建一个链表：</p>
+</code></pre><p>(1)创建一个动态链表：</p>
 <pre><code>#include &quot;stdafx.h&quot;
 #include&lt;iostream&gt;
 #include&lt;stdlib.h&gt;
@@ -515,7 +515,7 @@ int main() {
     system(&quot;pause&quot;);
     return 0;
 }
-</code></pre><p>(2)查找元素：</p>
+</code></pre><p>(2)动态链表查找元素：</p>
 <pre><code>int search(node* head, int x) {
     int count = 0;//计数器
     node* p = head-&gt;next;//指向链表的第一个节点
@@ -525,7 +525,7 @@ int main() {
     }
     return count;
 }
-</code></pre><p>(3)插入元素：</p>
+</code></pre><p>(3)动态链表插入元素：</p>
 <pre><code>void insert(node* head, int pos, int x) {
     node* p = head;//指向链表的头节点
     for (int i = 0;i &lt; pos - 1;i++) {//遍历到链表的pos-1的位置，即插入位置的前一个节点位置
@@ -536,7 +536,7 @@ int main() {
     q-&gt;next = p-&gt;next;//新节点的下一个节点指向原先插入位置的节点
     p-&gt;next = q;//前一个位置的节点指向新节点
 }
-</code></pre><p>(4)删除元素</p>
+</code></pre><p>(4)动态链表删除元素：</p>
 <pre><code>void del(node* head, int x) {
     node* p = head;//指向链表的头结点
     node* q = p-&gt;next;//指向链表的第一个节点
@@ -555,11 +555,31 @@ int main() {
 <pre><code>struct Node{
     typename date;//数据域
     int next;//指针域
-}node[size];
+    XXX;//节点的某个性质，不同的题目会有不同的设置
+}node[maxn];
 </code></pre><p>其中的next是一个int型的整数，用来存放下一个节点的地址(事实上就是数组下标)，例如：如果初始节点的地址为11111，第二个节点的地址为22222，第三个节点的地址为33333，且第三个节点为链表末尾，那么整个静态链表的节点就可以通过下面的写法连接起来：</p>
 <pre><code>node[11111].next=22222;
 node[22222].next=33333;
 node[33333].next=-1;//-1对应动态链表中的NULL，表示没有后继节点
+</code></pre><p>一般来说，静态链表的初始化需要对定义中的XXX进行初始化，将其定义为正常情况下达不到的数字(而常常需要小于所能达到的数字)，例：</p>
+<pre><code>for(int i=0;i&lt;maxn;i++){
+    node[i].XXX=0;
+}
+</code></pre><p>一般的题目都会给出一条静态链表的首节点的地址，因此我们可以依据这个地址来遍历得到整条链表。这一步同时也是对节点性质XXX进行标记，并且对有效节点的个数进行计数的时候，例如对节点是否在链表上这个性质来说，当我们遍历链表时，就可以把XXX置为1。</p>
+<pre><code>int p=begin,count=0;
+while(p!=-1){//-1代表静态链表结束
+    XXX=1;
+    count++;
+    p=node[p].next;
+}
+</code></pre><p>由于使用静态链表时时直接采用地址映射的方式，这就会使得数组小标的不连续。而很多时候题目给出的节点并不都是有效节点(即不在静态链表上的节点)。为了能够可控地访问有效节点，一般都需要对数组进行排序来把有效节点移动到数组的左端。这里我们用到上面所提及的XXX，这也就是为什么在XXX进行初始化时要取比正常取值要小的值。因为无效节点并不会执行XXX=1这一步，因此一定比有效节点的XXX小。于是在写sort函数的排序函数cmp时就可以在cmp的两个参数节点中有无效节点时按XXX从大到小排序，这样就能把有效节点全部移动到数组左端。当然，在cmp函数中还可以有第二级的排序，例如：题目可能要求把链表按节点顺序排序，此时就需要在cmp函数中建立第二级的排序：</p>
+<pre><code>bool cmp(Node a,Node b){
+    if(a.XXX==-1||b.XXX==-1){//如果有节点是无效节点，就把它放到数组的后端
+        return a.XXX&gt;b.XXX;
+    }else{//否则就按节点的数据域从大到小排序
+        return a.data&gt;b.data;
+    }
+}
 </code></pre>
       
     </div>
@@ -835,7 +855,7 @@ node[33333].next=-1;//-1对应动态链表中的NULL，表示没有后继节点
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.3k字</span>
+  <span class="post-count">博客全站共13.9k字</span>
 </div>
 
 
