@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-20T03:07:59.597Z</updated>
+  <updated>2018-03-20T08:16:42.179Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT A1052 Linked List Sorting</title>
+    <link href="http://www.echodemo.cc/2018/03/20/PAT-A1052-Linked-List-Sorting/"/>
+    <id>http://www.echodemo.cc/2018/03/20/PAT-A1052-Linked-List-Sorting/</id>
+    <published>2018-03-20T08:09:22.000Z</published>
+    <updated>2018-03-20T08:16:42.179Z</updated>
+    
+    <content type="html"><![CDATA[<p>A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now given a linked list, you are supposed to sort the structures according to their key values in increasing order.</p><p>Input Specification:</p><p>Each input file contains one test case. For each case, the first line contains a positive N (&lt; 105) and an address of the head node, where N is the total number of nodes in memory and the address of a node is a 5-digit positive integer. NULL is represented by -1.Then N lines follow, each describes a node in the format:</p><pre><code>Address Key next</code></pre><p>where Address is the address of the node in memory, Key is an integer in [-105, 105], and Next is the address of the next node. It is guaranteed that all the keys are distinct and there is no cycle in the linked list starting from the head node.</p><p>Output Specification:</p><p>For each test case, the output format is the same as that of the input, where N is the total number of nodes in the list and all the nodes must be sorted order.</p><pre><code>Sample Input:5 0000111111 100 -100001 0 2222233333 100000 1111112345 -1 3333322222 1000 12345Sample Output:5 1234512345 -1 0000100001 0 1111111111 100 2222222222 1000 3333333333 100000 -1</code></pre><p>题目大意：给出一个静态链表，将链表按照数据域data的值从小到大进行排序，然后把排序后的静态链表上的结点从头结点顺序输出。</p><p>分析：建立存储静态节点的结构体数组，从首节点开始的顺序(直到-1)遍历整个静态链表，将在静态链表中节点的flag标记为true，并且统计count(有效结点的个数)大小，这里是因为有的你输入的节点根本不在静态链表上。之后将静态链表进行排序，这里需要进行二次排序：如果两个节点中有一个节点的标志位为false就把它移动到后面(reuturn a.flag&gt;b.flag)，否则就按照节点数据域从小到大进行排序(return a.data&lt;b.data)。最后只输出前count个静态链表节点。</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;stdlib.h&gt;using namespace std;const int maxn = 100010;struct Node {    int address;    int data;    int next;    bool flag;}node[maxn];bool cmp(Node a, Node b) {    if (a.flag == false || b.flag == false) {        return a.flag &gt; b.flag;//将无效节点放到后面    }    else {        return a.data &lt; b.data;//按照数据域的顺序从大到小排列    }}int main() {    int n, x;    cin &gt;&gt; n &gt;&gt; x;    int address, data, next;    for (int i = 0;i&lt;n;i++) {//初始化静态链表        cin &gt;&gt; address &gt;&gt; data &gt;&gt; next;        node[address].address = address;        node[address].data = data;        node[address].next = next;    }    for (int i = 0;i &lt; maxn;i++) {        node[i].flag = false;//初始化标志位    }    int count = 0;    while (x != -1) {//遍历静态链表，对有效的节点进行标记，同时统计有效节点的个数(因为存在一些你输入的节点但是不在链表上情况)        node[x].flag = true;        count++;        x = node[x].next;    }    if (count == 0) {//如果头结点为-1，即链表中没有节点        cout &lt;&lt; &quot;0 -1&quot; &lt;&lt; endl;    }    else {        sort(node, node + maxn, cmp);//筛选有效节点，按data从小到大排列        printf(&quot;%d %05d\n&quot;, count, node[0].address);        for (int i = 0;i &lt; count;i++) {        if (i==count-1)            printf(&quot;%05d %d -1\n&quot;, node[i].address, node[i].data);        else            printf(&quot;%05d %d %05d\n&quot;, node[i].address, node[i].data, node[i+1].address);        }    }    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT A1032 Sharing</title>
@@ -48,7 +75,7 @@
     <link href="http://www.echodemo.cc/2018/03/19/%E9%93%BE%E8%A1%A8/"/>
     <id>http://www.echodemo.cc/2018/03/19/链表/</id>
     <published>2018-03-19T13:13:34.000Z</published>
-    <updated>2018-03-20T06:15:22.754Z</updated>
+    <updated>2018-03-20T08:09:00.754Z</updated>
     
     <content type="html"><![CDATA[<p>链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域：</p><pre><code>struct node{    int data;    node* next;};</code></pre><p>(1)创建一个动态链表：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;struct node {    int data;    node* next;};node* create(int Array[]) {    node *p, *pre, *head;//pre保存当前节点的前驱节点，head为头结点    head = new node;//创建头结点    head-&gt;next = NULL;//头结点不需要数据，且指针域指向NULL    pre = head;//记录pre为head    for (int i = 0;i &lt; 5;i++) {        p = new node;//新建节点        p-&gt;data = Array[i];//将Array[i]赋给新建的节点作为数据域，也可以cin输入        p-&gt;next = NULL;//新节点的指针域设为NULL        pre-&gt;next = p;//前驱节点的指针域设为当前新建节点的地址        pre = p;//把p设为pre，作为下一个节点的前驱节点    }    return head;//返回头结点指针}int main() {    int Array[5] = { 5,3,6,1,2 };    node* L = create(Array);//新建链表，返回头指针head给L    L = L-&gt;next;//从第一个节点开始有数据域    while (L != NULL) {        cout &lt;&lt; L-&gt;data &lt;&lt; endl;//输出每个节点的数据域        L = L-&gt;next;    }    system(&quot;pause&quot;);    return 0;}</code></pre><p>(2)动态链表查找元素：</p><pre><code>int search(node* head, int x) {    int count = 0;//计数器    node* p = head-&gt;next;//指向链表的第一个节点    while (p != NULL) {//遍历整个链表        if (p-&gt;data == x) count++;//当节点数据域为x时，则count++        p = p-&gt;next;//指向下一个节点    }    return count;}</code></pre><p>(3)动态链表插入元素：</p><pre><code>void insert(node* head, int pos, int x) {    node* p = head;//指向链表的头节点    for (int i = 0;i &lt; pos - 1;i++) {//遍历到链表的pos-1的位置，即插入位置的前一个节点位置        p = p-&gt;next;    }    node* q = new node;//新建节点    q-&gt;data = x;//其数据域为x    q-&gt;next = p-&gt;next;//新节点的下一个节点指向原先插入位置的节点    p-&gt;next = q;//前一个位置的节点指向新节点}</code></pre><p>(4)动态链表删除元素：</p><pre><code>void del(node* head, int x) {    node* p = head;//指向链表的头结点    node* q = p-&gt;next;//指向链表的第一个节点    while (q != NULL) {        if (q-&gt;data == x) {//数据域为x，删除q节点            p-&gt;next = q-&gt;next;//删除q节点            delete(q);//释放内存空间            q = p-&gt;next;        }else {//数据域不为x，p、q节点同时后移一位            p = q;            q = q-&gt;next;        }    }}</code></pre><p>以上所述都是动态链表的范畴，需要指针来建立节点之间的连接关系。而对于有些问题来说，节点的地址是比较小的整数(例如5位数的地址)，这样就没有必要去建立动态链表，而应该使用方便得多的静态链表。静态链表的实现原理是hash，即通过建立一个结构体数组，并令数组的下标直接表示节点的地址，以此来达到直接访问数组中的元素就能访问节点的效果。需要注意的是：在使用静态链表时，尽量不要把结构体类型名和结构体变量名取成相同的名字。其定义方法如下：</p><pre><code>struct Node{    typename date;//数据域    int next;//指针域    XXX;//节点的某个性质，不同的题目会有不同的设置}node[maxn];</code></pre><p>其中的next是一个int型的整数，用来存放下一个节点的地址(事实上就是数组下标)，例如：如果初始节点的地址为11111，第二个节点的地址为22222，第三个节点的地址为33333，且第三个节点为链表末尾，那么整个静态链表的节点就可以通过下面的写法连接起来：</p><pre><code>node[11111].next=22222;node[22222].next=33333;node[33333].next=-1;//-1对应动态链表中的NULL，表示没有后继节点</code></pre><p>一般来说，静态链表的初始化需要对定义中的XXX进行初始化，将其定义为正常情况下达不到的数字(而常常需要小于所能达到的数字)，例：</p><pre><code>for(int i=0;i&lt;maxn;i++){    node[i].XXX=0;}</code></pre><p>一般的题目都会给出一条静态链表的首节点的地址，因此我们可以依据这个地址来遍历得到整条链表。这一步同时也是对节点性质XXX进行标记，并且对有效节点的个数进行计数的时候，例如对节点是否在链表上这个性质来说，当我们遍历链表时，就可以把XXX置为1。</p><pre><code>int p=begin,count=0;while(p!=-1){//-1代表静态链表结束    XXX=1;    count++;    p=node[p].next;}</code></pre><p>由于使用静态链表时时直接采用地址映射的方式，这就会使得数组小标的不连续。而很多时候题目给出的节点并不都是有效节点(即不在静态链表上的节点)。为了能够可控地访问有效节点，一般都需要对数组进行排序来把有效节点移动到数组的左端。这里我们用到上面所提及的XXX，这也就是为什么在XXX进行初始化时要取比正常取值要小的值。因为无效节点并不会执行XXX=1这一步，因此一定比有效节点的XXX小。于是在写sort函数的排序函数cmp时就可以在cmp的两个参数节点中有无效节点时按XXX从大到小排序，这样就能把有效节点全部移动到数组左端。当然，在cmp函数中还可以有第二级的排序，例如：题目可能要求把链表按节点顺序排序，此时就需要在cmp函数中建立第二级的排序：</p><pre><code>bool cmp(Node a,Node b){    if(a.XXX==-1||b.XXX==-1){//如果有节点是无效节点，就把它放到数组的后端        return a.XXX&gt;b.XXX;    }else{//否则就按节点的数据域从大到小排序        return a.data&gt;b.data;    }}</code></pre>]]></content>
     
@@ -531,32 +558,6 @@
       <category term="hexo" scheme="http://www.echodemo.cc/tags/hexo/"/>
     
       <category term="next" scheme="http://www.echodemo.cc/tags/next/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中需要注意的Points</title>
-    <link href="http://www.echodemo.cc/2018/03/11/Java%E4%B8%AD%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84Points/"/>
-    <id>http://www.echodemo.cc/2018/03/11/Java中需要注意的Points/</id>
-    <published>2018-03-11T10:43:44.000Z</published>
-    <updated>2018-03-13T08:29:53.785Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、数组的创建不同于基本数据类型变量的声明，声明一个数组变量时并不在内存中给数组分配任何空间。它只是创建一个对数组的引用的存储位置。</p><p>2、在给方法传值的过程中，对于基本数据类型来说，传递的是实参的值，而方法内部的形参获得的值的改变并不会造成方法外部的值的变化；而对于数组类型来说，传递的是数组的引用，也就是说方法中的数组和方法外的数组是一样的，所以如果改变方法中的数组，那么方法外的数组也跟着变化了。</p><p>3、对象是通过对象引用变量来访问的，通常在实例化一个类时包括：声明对象引用变量、创建对象以及将对象的引用赋值给这个变量。其实此处类似于数组的创建，从严格意义上来讲，对象引用变量和对象是不同的，但大多数情况下可以忽略这种不同。另外，类中的数据域(即类中的属性)如果未被初始化，那么会被赋予默认值：引用类型的数据域的默认值是null，数值类型的数据域的默认值是0，boolean是false，char是’\u0000’。但是java没有给方法中的局部变量赋默认值。</p><p>4、java中的静态变量可以被一个类的所有实例共享数据，如果某一个对象修改了静态变量的值，那么同一个类的所有对象都会受到影响。java中的静态变量和静态方法都无须创建类的实例就可以被调用。但是实例方法和实例变量只能在实例方法中使用，不能在静态方法中使用。由此可知，math类中的所有数据域和方法都是静态的。</p><p>5、在类、方法、和数据域前使用public修饰符表示可以在任何其他的类中进行访问；如果没有使用可见性修饰符，那么默认为类、方法和数据域是可以被同一个包中的任何一个类访问；private修饰符限定方法和数据域只能在它自己的类中被访问。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、数组的创建不同于基本数据类型变量的声明，声明一个数组变量时并不在内存中给数组分配任何空间。它只是创建一个对数组的引用的存储位置。&lt;/p&gt;
-&lt;p&gt;2、在给方法传值的过程中，对于基本数据类型来说，传递的是实参的值，而方法内部的形参获得的值的改变并不会造成方法外部的值的变化；
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
     
   </entry>
   
