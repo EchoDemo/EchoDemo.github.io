@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T13:38:03.634Z">
+<meta property="og:updated_time" content="2018-03-20T01:37:24.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表">
 <meta name="twitter:description" content="链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。除此之外，链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此链表的节点一般由两部分构成，即数据域和指针域： struct node{     int data;     node* next; }; (1)创建一个链表： #include &amp;quot;stdafx.">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  977
+                  980
                 </span>
               
 
@@ -557,9 +557,9 @@ int main() {
     int next;//指针域
 }node[size];
 </code></pre><p>其中的next是一个int型的整数，用来存放下一个节点的地址(事实上就是数组下标)，例如：如果初始节点的地址为11111，第二个节点的地址为22222，第三个节点的地址为33333，且第三个节点为链表末尾，那么整个静态链表的节点就可以通过下面的写法连接起来：</p>
-<pre><code>node[11111]=22222;
-node[22222]=33333;
-node[33333]=-1;//-1对应动态链表中的NULL，表示没有后继节点
+<pre><code>node[11111].next=22222;
+node[22222].next=33333;
+node[33333].next=-1;//-1对应动态链表中的NULL，表示没有后继节点
 </code></pre>
       
     </div>
