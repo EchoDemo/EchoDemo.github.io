@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T03:04:02.036Z">
+<meta property="og:updated_time" content="2018-03-20T03:07:59.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT A1032 Sharing">
 <meta name="twitter:description" content="To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example,">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  653
+                  652
                 </span>
               
 
@@ -507,7 +507,6 @@ Sample Output 2:
 <pre><code>#include &quot;stdafx.h&quot;
 #include&lt;iostream&gt;
 #include&lt;stdlib.h&gt;
-#include&lt;stdio.h&gt;
 using namespace std;
 
 struct Node {
@@ -539,6 +538,7 @@ int main() {
     for (i = y;i != -1;i = node[i].next) {
         if (node[i].flag == true) {
             printf(&quot;%5d&quot;, i);//如果此时的节点的标志位为true说明是公共节点
+            system(&quot;pause&quot;);
             return 0;
         }
     }
