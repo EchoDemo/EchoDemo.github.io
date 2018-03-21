@@ -1,0 +1,1341 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MYSQL," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="EchoDemo's Blogs" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。 1、MYSQL的特点(1)Mysql是">
+<meta name="keywords" content="MYSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MYSQL基础">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/21/MYSQL基础/index.html">
+<meta property="og:site_name" content="EchoDemo&#39;s Blogs">
+<meta property="og:description" content="Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。 1、MYSQL的特点(1)Mysql是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-21T02:27:15.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MYSQL基础">
+<meta name="twitter:description" content="Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。 1、MYSQL的特点(1)Mysql是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/21/MYSQL基础/"/>
+
+
+
+
+
+  <title> MYSQL基础 | EchoDemo's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?340874ba9357cbe81570aa4ac1185941";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EchoDemo's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description">自我管理，知识管理，时间管理，阅读。</h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/21/MYSQL基础/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                MYSQL基础
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T10:21:25+08:00">
+                2018-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/21/MYSQL基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/21/MYSQL基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,165
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。</p>
+<h1 id="1、MYSQL的特点"><a href="#1、MYSQL的特点" class="headerlink" title="1、MYSQL的特点"></a>1、MYSQL的特点</h1><pre><code>(1)Mysql是开源的，所以你不需要支付额外的费用。
+
+(2)Mysql支持大型的数据库。可以处理拥有上千万条记录的大型数据库。
+
+(3)MySQL使用标准的SQL数据语言形式。
+
+(4)Mysql可以允许于多个系统上，并且支持多种语言。这些编程语言包括C、C++、Python、Java、Perl、PHP、Eiffel、Ruby和Tcl等。
+
+(5)Mysql是可以定制的，采用了GPL协议，你可以修改源码来开发自己的Mysql系统。
+</code></pre><h1 id="2、MYSQL的管理"><a href="#2、MYSQL的管理" class="headerlink" title="2、MYSQL的管理"></a>2、MYSQL的管理</h1><h2 id="1-为MYSQL数据库中的user表添加新用户"><a href="#1-为MYSQL数据库中的user表添加新用户" class="headerlink" title="(1)为MYSQL数据库中的user表添加新用户"></a>(1)为MYSQL数据库中的user表添加新用户</h2><pre><code>root@host# mysql -u root -p
+Enter password:*******
+mysql&gt; use mysql;
+Database changed
+
+mysql&gt; INSERT INTO user 
+          (host, user, password, 
+           select_priv, insert_priv, update_priv) 
+           VALUES (&apos;localhost&apos;, &apos;guest&apos;, 
+           PASSWORD(&apos;guest123&apos;), &apos;Y&apos;, &apos;Y&apos;, &apos;Y&apos;);
+Query OK, 1 row affected (0.20 sec)
+
+mysql&gt; FLUSH PRIVILEGES;
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; SELECT host, user, password FROM user WHERE user = &apos;guest&apos;;
++-----------+---------+------------------+
+| host      | user    | password         |
++-----------+---------+------------------+
+| localhost | guest | 6f8c114b58f2ce9e |
++-----------+---------+------------------+
+1 row in set (0.00 sec)
+</code></pre><p>注意需要执行FLUSH PRIVILEGES语句。 这个命令执行后会重新载入授权表。如果你不使用该命令，你就无法使用新创建的用户来连接MYSQL服务器，除非你重启MYSQL服务器。</p>
+<p>你可以在创建用户时，为用户指定权限，在对应的权限列中，在插入语句中设置为 ‘Y’ 即可，用户权限列表如下：</p>
+<pre><code>Select_priv
+Insert_priv
+Update_priv
+Delete_priv
+Create_priv
+Drop_priv
+Reload_priv
+Shutdown_priv
+Process_priv
+File_priv
+Grant_priv
+References_priv
+Index_priv
+Alter_priv
+</code></pre><p>另外一种添加用户的方法为通过SQL的GRANT命令，以下命令会给指定数据库TUTORIALS添加用户zara，密码为zara123 。</p>
+<pre><code>root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use mysql;
+Database changed
+
+mysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
+    -&gt; ON TUTORIALS.*
+    -&gt; TO &apos;zara&apos;@&apos;localhost&apos;
+    -&gt; IDENTIFIED BY &apos;zara123&apos;;
+
+*MySQL的SQL语句以分号 (;) 作为结束标识。
+</code></pre><h2 id="2-管理MySQL的命令"><a href="#2-管理MySQL的命令" class="headerlink" title="(2)管理MySQL的命令"></a>(2)管理MySQL的命令</h2><h3 id="a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"><a href="#a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。" class="headerlink" title="a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"></a>a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</h3><pre><code>mysql&gt; use RUNOOB;
+Database changed
+</code></pre><h3 id="b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。"><a href="#b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。" class="headerlink" title="b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。"></a>b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。</h3><pre><code>mysql&gt; SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| RUNOOB             |
+| cdcol              |
+| mysql              |
+| onethink           |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| wecenter           |
+| wordpress          |
++--------------------+
+10 rows in set (0.02 sec)
+</code></pre><h3 id="c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"><a href="#c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。" class="headerlink" title="c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"></a>c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。</h3><pre><code>mysql&gt; use RUNOOB;
+Database changed
+mysql&gt; SHOW TABLES;
++------------------+
+| Tables_in_runoob |
++------------------+
+| employee_tbl     |
+| runoob_tbl       |
+| tcount_tbl       |
++------------------+
+3 rows in set (0.00 sec)
+</code></pre><h3 id="d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。"><a href="#d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。" class="headerlink" title="d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。"></a>d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。</h3><pre><code>mysql&gt; SHOW COLUMNS FROM runoob_tbl;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| runoob_id       | int(11)      | NO   | PRI | NULL    |       |
+| runoob_title    | varchar(255) | YES  |     | NULL    |       |
+| runoob_author   | varchar(255) | YES  |     | NULL    |       |
+| submission_date | date         | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+</code></pre><h3 id="e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。"><a href="#e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。" class="headerlink" title="e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。"></a>e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</h3><pre><code>mysql&gt; SHOW INDEX FROM runoob_tbl;
++------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| runoob_tbl |          0 | PRIMARY  |            1 | runoob_id   | A         |           2 |     NULL | NULL   |      | BTREE      |         |               |
++------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+1 row in set (0.00 sec)
+</code></pre><h3 id="f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。"><a href="#f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。" class="headerlink" title="f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。"></a>f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。</h3><pre><code>mysql&gt; SHOW TABLE STATUS  FROM RUNOOB;   # 显示数据库 RUNOOB 中所有表的信息
+
+mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &apos;runoob%&apos;;     # 表名以runoob开头的表的信息
+mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &apos;runoob%&apos;\G;   # 加上 \G，查询结果按列打印
+</code></pre><h1 id="3、数据库的基本操作语句"><a href="#3、数据库的基本操作语句" class="headerlink" title="3、数据库的基本操作语句"></a>3、数据库的基本操作语句</h1><h2 id="1-创建数据表"><a href="#1-创建数据表" class="headerlink" title="(1)创建数据表"></a>(1)创建数据表</h2><pre><code>CREATE TABLE table_name (column_name column_type);
+
+root@host# mysql -u root -p
+Enter password:*******
+mysql&gt; use RUNOOB;
+Database changed
+mysql&gt; CREATE TABLE runoob_tbl(
+   -&gt; runoob_id INT NOT NULL AUTO_INCREMENT,
+   -&gt; runoob_title VARCHAR(100) NOT NULL,
+   -&gt; runoob_author VARCHAR(40) NOT NULL,
+   -&gt; submission_date DATE,
+   -&gt; PRIMARY KEY ( runoob_id )
+   -&gt; )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected (0.16 sec)
+mysql&gt;
+
+*如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL，在操作数据库时如果输入该字段的数据为NULL ，就会报错。
+
+*AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。
+
+*PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。
+
+*ENGINE 设置存储引擎，CHARSET 设置编码。
+</code></pre><h2 id="2-删除数据表"><a href="#2-删除数据表" class="headerlink" title="(2)删除数据表"></a>(2)删除数据表</h2><pre><code>DROP TABLE table_name ;
+
+root@host# mysql -u root -p
+Enter password:*******
+mysql&gt; use RUNOOB;
+Database changed
+mysql&gt; DROP TABLE runoob_tbl
+Query OK, 0 rows affected (0.8 sec)
+mysql&gt;
+
+查看一下：
+
+mysql&gt; show tables;
+Empty set (0.01 sec)
+</code></pre><h2 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="(3)插入数据"></a>(3)插入数据</h2><pre><code>INSERT INTO table_name ( field1, field2,...fieldN ) VALUES ( value1,value2,...valueN );
+
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use RUNOOB;
+Database changed
+mysql&gt; INSERT INTO runoob_tbl 
+    -&gt; (runoob_title, runoob_author, submission_date)
+    -&gt; VALUES
+    -&gt; (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());
+Query OK, 1 rows affected, 1 warnings (0.01 sec)
+mysql&gt; INSERT INTO runoob_tbl
+    -&gt; (runoob_title, runoob_author, submission_date)
+    -&gt; VALUES
+    -&gt; (&quot;学习 MySQL&quot;, &quot;菜鸟教程&quot;, NOW());
+Query OK, 1 rows affected, 1 warnings (0.01 sec)
+mysql&gt; INSERT INTO runoob_tbl
+    -&gt; (runoob_title, runoob_author, submission_date)
+    -&gt; VALUES
+    -&gt; (&quot;JAVA 教程&quot;, &quot;RUNOOB.COM&quot;, &apos;2016-05-06&apos;);
+Query OK, 1 rows affected (0.00 sec)
+mysql&gt;
+
+*如果数据是字符型，必须使用单引号或者双引号，如：&quot;value&quot;。
+
+*使用箭头标记-&gt;不是SQL语句的一部分，它仅仅表示一个新行，如果一条SQL语句太长，我们可以通过回车键来创建一个新行来编写SQL语句，SQL语句的命令结束符为分号 ;。
+</code></pre><h2 id="4-查询数据"><a href="#4-查询数据" class="headerlink" title="(4)查询数据"></a>(4)查询数据</h2><pre><code>SELECT column_name,column_name FROM table_name [WHERE Clause][LIMIT N][ OFFSET M];
+
+select * from runoob_tbl;
+
+SELECT * from runoob_tbl WHERE runoob_author=&apos;菜鸟教程&apos;;
+
+*查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。
+
+*SELECT 命令可以读取一条或者多条记录。你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据
+
+*你可以使用 WHERE 语句来包含任何条件。例如使用 AND 或者 OR 指定一个或多个条件。WHERE子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令。WHERE子句类似于程序语言中的 if 条件，根据 MySQL 表中的字段值来读取指定的数据。MySQL 的 WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY 关键字来设定 WHERE 子句的字符串比较是区分大小写的。
+
+*你可以使用 LIMIT 属性来设定返回的记录数。
+
+*你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。
+</code></pre><h2 id="5-更新数据表"><a href="#5-更新数据表" class="headerlink" title="(5)更新数据表"></a>(5)更新数据表</h2><pre><code>UPDATE table_name SET field1=new-value1, field2=new-value2 [WHERE Clause];
+
+mysql&gt; UPDATE runoob_tbl SET runoob_title=&apos;学习 C++&apos; WHERE runoob_id=3;
+Query OK, 1 rows affected (0.01 sec)
+
+mysql&gt; SELECT * from runoob_tbl WHERE runoob_id=3;
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+| 3         | 学习 C++   | RUNOOB.COM    | 2016-05-06      |
++-----------+--------------+---------------+-----------------+
+1 rows in set (0.01 sec)
+
+*你可以同时更新一个或多个字段。
+
+*你可以在 WHERE 子句中指定任何条件。
+
+*你可以在一个单独表中同时更新数据。
+</code></pre><h2 id="6-删除MySQL数据表中的记录"><a href="#6-删除MySQL数据表中的记录" class="headerlink" title="(6)删除MySQL数据表中的记录"></a>(6)删除MySQL数据表中的记录</h2><pre><code>DELETE FROM table_name [WHERE Clause];
+
+mysql&gt; use RUNOOB;
+Database changed
+mysql&gt; DELETE FROM runoob_tbl WHERE runoob_id=3;
+Query OK, 1 row affected (0.23 sec)
+
+*如果没有指定 WHERE 子句，MySQL 表中的所有记录将被删除。
+
+*你可以在 WHERE 子句中指定任何条件
+
+*您可以在单个表中一次性删除记录。
+</code></pre><h2 id="7-删除，添加或修改表字段"><a href="#7-删除，添加或修改表字段" class="headerlink" title="(7)删除，添加或修改表字段"></a>(7)删除，添加或修改表字段</h2><pre><code>删除：ALTER TABLE alter_tbl  DROP columnname;删除指定字段
+
+添加：ALTER TABLE alter_tbl ADD new_column_name new_typename AFTER columnname;指定添加位置
+
+修改： ALTER TABLE alter_tbl MODIFY columnname new_typename;修改字段类型
+
+       ALTER TABLE alter_tbl CHANGE oldcolumnname newcolumnname newtypename;修改字段及类型
+
+       ALTER TABLE alter_tbl RENAME TO alter_tb2;修改表名
+</code></pre><h2 id="8-UNION操作符"><a href="#8-UNION操作符" class="headerlink" title="(8)UNION操作符"></a>(8)UNION操作符</h2><pre><code>SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions]
+UNION [ALL | DISTINCT]
+SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions];
+
+*expression1, expression2, ... expression_n: 要检索的列。
+
+*tables: 要检索的数据表。
+
+*WHERE conditions: 可选， 检索条件。
+
+*DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。
+
+*ALL: 可选，返回所有结果集，包含重复数据。
+</code></pre><h2 id="9-排序"><a href="#9-排序" class="headerlink" title="(9)排序"></a>(9)排序</h2><pre><code>SELECT field1, field2,...fieldN table_name1, table_name2...ORDER BY field1, [field2...] [ASC [DESC]];
+
+SELECT * from runoob_tbl ORDER BY submission_date ASC;
+SELECT * from runoob_tbl ORDER BY submission_date DESC;
+
+*你可以使用任何字段来作为排序的条件，从而返回排序后的查询结果。
+
+*你可以设定多个字段来排序。
+
+*你可以使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。默认情况下，它是按升序排列。
+
+*你可以添加 WHERE...LIKE 子句来设置条件。
+</code></pre><h2 id="10-GROUP-BY语法"><a href="#10-GROUP-BY语法" class="headerlink" title="(10)GROUP BY语法"></a>(10)GROUP BY语法</h2><pre><code>SELECT column_name, function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name;
+
+SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;将数据表按名字进行分组，并统计每个人有多少条记录
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/MYSQL/" rel="tag"># MYSQL</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/PAT-A1052-Linked-List-Sorting/" rel="next" title="PAT A1052 Linked List Sorting">
+                <i class="fa fa-chevron-left"></i> PAT A1052 Linked List Sorting
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="EchoDemo" />
+          <p class="site-author-name" itemprop="name">EchoDemo</p>
+          <p class="site-description motion-element" itemprop="description">Less interests,more interest。</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/EchoDemo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/149464811/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/5496500419/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.liuchuo.net/" title="柳女神" target="_blank">柳女神</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lvxiong7zg.com" title="吕雄" target="_blank">吕雄</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.ezlippi.com" title="EZLippi-浮生志" target="_blank">EZLippi-浮生志</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、MYSQL的特点"><span class="nav-number">1.</span> <span class="nav-text">1、MYSQL的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、MYSQL的管理"><span class="nav-number">2.</span> <span class="nav-text">2、MYSQL的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为MYSQL数据库中的user表添加新用户"><span class="nav-number">2.1.</span> <span class="nav-text">(1)为MYSQL数据库中的user表添加新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-管理MySQL的命令"><span class="nav-number">2.2.</span> <span class="nav-text">(2)管理MySQL的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"><span class="nav-number">2.2.1.</span> <span class="nav-text">a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。"><span class="nav-number">2.2.2.</span> <span class="nav-text">b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"><span class="nav-number">2.2.3.</span> <span class="nav-text">c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。"><span class="nav-number">2.2.4.</span> <span class="nav-text">d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。"><span class="nav-number">2.2.5.</span> <span class="nav-text">e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。"><span class="nav-number">2.2.6.</span> <span class="nav-text">f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、数据库的基本操作语句"><span class="nav-number">3.</span> <span class="nav-text">3、数据库的基本操作语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建数据表"><span class="nav-number">3.1.</span> <span class="nav-text">(1)创建数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-删除数据表"><span class="nav-number">3.2.</span> <span class="nav-text">(2)删除数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-插入数据"><span class="nav-number">3.3.</span> <span class="nav-text">(3)插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-查询数据"><span class="nav-number">3.4.</span> <span class="nav-text">(4)查询数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-更新数据表"><span class="nav-number">3.5.</span> <span class="nav-text">(5)更新数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-删除MySQL数据表中的记录"><span class="nav-number">3.6.</span> <span class="nav-text">(6)删除MySQL数据表中的记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-删除，添加或修改表字段"><span class="nav-number">3.7.</span> <span class="nav-text">(7)删除，添加或修改表字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-UNION操作符"><span class="nav-number">3.8.</span> <span class="nav-text">(8)UNION操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-排序"><span class="nav-number">3.9.</span> <span class="nav-text">(9)排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-GROUP-BY语法"><span class="nav-number">3.10.</span> <span class="nav-text">(10)GROUP BY语法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoDemo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共16.8k字</span>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+  <script type="text/javascript" color="0,0,0" opacity='0.3' zIndex="-2" count="30" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
