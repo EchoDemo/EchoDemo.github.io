@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-21T09:23:07.888Z</updated>
+  <updated>2018-03-21T09:26:12.219Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://www.echodemo.cc/2018/03/21/PAT-A1051-Pop-Sequence/"/>
     <id>http://www.echodemo.cc/2018/03/21/PAT-A1051-Pop-Sequence/</id>
     <published>2018-03-21T09:18:43.000Z</published>
-    <updated>2018-03-21T09:23:07.888Z</updated>
+    <updated>2018-03-21T09:26:12.219Z</updated>
     
     <content type="html"><![CDATA[<p>Given a stack which can keep M numbers at most. Push N numbers in the order of 1, 2, 3, …, N and pop randomly. You are supposed to tell if a given sequence of numbers is a possible pop sequence of the stack. For example, if M is 5 and N is 7, we can obtain 1, 2, 3, 4, 5, 6, 7 from the stack, but not 3, 2, 1, 7, 5, 6, 4.</p><p>Input Specification:</p><p>Each input file contains one test case. For each case, the first line contains 3 numbers (all no more than 1000): M (the maximum capacity of the stack), N (the length of push sequence), and K (the number of pop sequences to be checked). Then K lines follow, each contains a pop sequence of N numbers. All the numbers in a line are separated by a space.</p><p>Output Specification:</p><p>For each pop sequence, print in one line “YES” if it is indeed a possible pop sequence of the stack, or “NO” if not.</p><pre><code>Sample Input:5 7 51 2 3 4 5 6 73 2 1 7 5 6 47 6 5 4 3 2 15 6 4 3 7 2 11 7 6 5 4 3 2Sample Output:YESNONOYESNO</code></pre><p>题目大意：给出size为M大小的栈，分别把1…N入栈，给出K组出栈顺序，问入栈出栈顺序是否顺利。</p><p>分析：先把需要判断的序列放进一维数组当中，给出数组的当前下标为0，然后1…N顺序入栈，如果元素入栈之后，栈的size大于M，则此序列不符合；如果栈的size小于等于M，在while循环中如果栈非空且其值等于此时的数组元素，则栈顶元素出栈，数组的下标自增一位。以上所有步骤进行K次。</p><p>注意：能用一维数组时尽量别用二维数组</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stack&gt;#include&lt;vector&gt;#include&lt;stdlib.h&gt;using namespace std;int main() {    int M, N, K;    cin &gt;&gt; M &gt;&gt; N &gt;&gt; K;    vector&lt;int&gt; a(N);//定义可变长的一维数组    stack&lt;int&gt; st;//引入STL中的栈    for (int i = 0;i &lt; K;i++) {//一共有K组数据        while (!st.empty()) st.pop();//清空栈        for (int j = 0;j &lt; N;j++) {//读入一组数据            cin &gt;&gt; a[j];        }        int n=0;        for (int x = 1;x &lt;= N;x++) {            st.push(x);            if (st.size() &gt; M) {//序列有误                break;            }else{                while (!st.empty() &amp;&amp; st.top() == a[n]) {//如果栈非空且栈顶元素等于当前的序列当前位置值就把顶部元素出栈，验证序列后移一位                    st.pop();                    n++;                }            }        }        if (!st.empty())            cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;        else            cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl;    }    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
     
