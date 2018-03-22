@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[水流众生]]></title>
+    <url>%2F2018%2F03%2F22%2F2018-3-22-%E6%B0%B4%E6%B5%81%E4%BC%97%E7%94%9F%2F</url>
+    <content type="text"><![CDATA[李健的《水流众生》是诞生在他西藏的旅途中的，他的歌，总是充满了灵性与自然。在平淡当中述说，却又蕴含深切的主题。这首歌是写他自己的，也是给众生的，同时还是写给这个社会的。当今社会物质的极大丰富并无法满足人们的欲望，相反的是，对物质无止境的追求、对自然的过分索取导致人们都迷失了自我，深陷其中，无法自拔却并不自知。李健为了寻求他的解脱之法，于是踏上旅途，当然他的旅途不是我们当下传统意义上的旅行，不是组团或者邀约三五好友匆匆赶赴著名的旅游景点拍照留恋而后又匆匆而归的旅行。他的旅途是内心和自然的相互倾听和感受。当然，最终他还是从自然里、在旅途中找到了自我，看见了辽阔的。每一个人都需要反省，自我观照，在水自成旋涡之前及时转身。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT A1051 Pop Sequence]]></title>
     <url>%2F2018%2F03%2F21%2FPAT-A1051-Pop-Sequence%2F</url>
     <content type="text"><![CDATA[Given a stack which can keep M numbers at most. Push N numbers in the order of 1, 2, 3, …, N and pop randomly. You are supposed to tell if a given sequence of numbers is a possible pop sequence of the stack. For example, if M is 5 and N is 7, we can obtain 1, 2, 3, 4, 5, 6, 7 from the stack, but not 3, 2, 1, 7, 5, 6, 4. Input Specification: Each input file contains one test case. For each case, the first line contains 3 numbers (all no more than 1000): M (the maximum capacity of the stack), N (the length of push sequence), and K (the number of pop sequences to be checked). Then K lines follow, each contains a pop sequence of N numbers. All the numbers in a line are separated by a space. Output Specification: For each pop sequence, print in one line “YES” if it is indeed a possible pop sequence of the stack, or “NO” if not. Sample Input: 5 7 5 1 2 3 4 5 6 7 3 2 1 7 5 6 4 7 6 5 4 3 2 1 5 6 4 3 7 2 1 1 7 6 5 4 3 2 Sample Output: YES NO NO YES NO 题目大意：给出size为M大小的栈，分别把1…N入栈，给出K组出栈顺序，问入栈出栈顺序是否顺利。 分析：先把需要判断的序列放进一维数组当中，给出数组的当前下标为0，然后1…N顺序入栈，如果元素入栈之后，栈的size大于M，则此序列不符合；如果栈的size小于等于M，在while循环中如果栈非空且其值等于此时的数组元素，则栈顶元素出栈，数组的下标自增一位。以上所有步骤进行K次。 注意：能用一维数组时尽量别用二维数组 #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stack&gt; #include&lt;vector&gt; #include&lt;stdlib.h&gt; using namespace std; int main() { int M, N, K; cin &gt;&gt; M &gt;&gt; N &gt;&gt; K; vector&lt;int&gt; a(N);//定义可变长的一维数组 stack&lt;int&gt; st;//引入STL中的栈 for (int i = 0;i &lt; K;i++) {//一共有K组数据 while (!st.empty()) st.pop();//清空栈 for (int j = 0;j &lt; N;j++) {//读入一组数据 cin &gt;&gt; a[j]; } int n=0; for (int x = 1;x &lt;= N;x++) { st.push(x); if (st.size() &gt; M) {//序列有误 break; }else{ while (!st.empty() &amp;&amp; st.top() == a[n]) {//如果栈非空且栈顶元素等于当前的序列当前位置值就把顶部元素出栈，验证序列后移一位 st.pop(); n++; } } } if (!st.empty()) cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl; else cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl; } system(&quot;pause&quot;); return 0; }]]></content>

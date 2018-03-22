@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-21T09:26:12.219Z</updated>
+  <updated>2018-03-22T02:00:22.836Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>水流众生</title>
+    <link href="http://www.echodemo.cc/2018/03/22/2018-3-22-%E6%B0%B4%E6%B5%81%E4%BC%97%E7%94%9F/"/>
+    <id>http://www.echodemo.cc/2018/03/22/2018-3-22-水流众生/</id>
+    <published>2018-03-22T01:57:12.000Z</published>
+    <updated>2018-03-22T02:00:22.836Z</updated>
+    
+    <content type="html"><![CDATA[<p>李健的《水流众生》是诞生在他西藏的旅途中的，他的歌，总是充满了灵性与自然。在平淡当中述说，却又蕴含深切的主题。这首歌是写他自己的，也是给众生的，同时还是写给这个社会的。当今社会物质的极大丰富并无法满足人们的欲望，相反的是，对物质无止境的追求、对自然的过分索取导致人们都迷失了自我，深陷其中，无法自拔却并不自知。李健为了寻求他的解脱之法，于是踏上旅途，当然他的旅途不是我们当下传统意义上的旅行，不是组团或者邀约三五好友匆匆赶赴著名的旅游景点拍照留恋而后又匆匆而归的旅行。他的旅途是内心和自然的相互倾听和感受。当然，最终他还是从自然里、在旅途中找到了自我，看见了辽阔的。每一个人都需要反省，自我观照，在水自成旋涡之前及时转身。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;李健的《水流众生》是诞生在他西藏的旅途中的，他的歌，总是充满了灵性与自然。在平淡当中述说，却又蕴含深切的主题。这首歌是写他自己的，也是给众生的，同时还是写给这个社会的。当今社会物质的极大丰富并无法满足人们的欲望，相反的是，对物质无止境的追求、对自然的过分索取导致人们都迷失了
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT A1051 Pop Sequence</title>
@@ -529,32 +554,6 @@
       <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
     
       <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的String</title>
-    <link href="http://www.echodemo.cc/2018/03/14/Java%E4%B8%AD%E7%9A%84String/"/>
-    <id>http://www.echodemo.cc/2018/03/14/Java中的String/</id>
-    <published>2018-03-14T06:56:23.000Z</published>
-    <updated>2018-03-14T07:14:48.690Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、在Java中字符串是一个对象，同样的，String变量存储的是对String对象的引用。且Sting对象的内容是不可变的，但保存String引用的变量是可变的，即String变量存储其他的String对象的引用。</p><p>2、Java虚拟机为了提高效率并节约内存，对具有相同字符串序列的字符串直接量(请注意这里不是指具有相同字符串序列的String对象)使用同一个实例。</p><p>3、字符串的比较：运算符==只能检测两个String是否指向同一个对象，但不会告诉你他们的内容是否相等。而equals方法则可以用来判断两个字符串变量的内容是否相等。compareTo方法用来比较两个字符串时的返回值是，两个字符串从左到右第一个不同字符之间的差值。</p><p>4、StringBuffer类和StringBuilder类都比String类更灵活且这两个类是很相似的，它们创建的对象的值都可以被修改。不过在多任务并发访问的情况下就使用StringBuffer；而如果是单任务访问，就使用StringBuilder更有效。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、在Java中字符串是一个对象，同样的，String变量存储的是对String对象的引用。且Sting对象的内容是不可变的，但保存String引用的变量是可变的，即String变量存储其他的String对象的引用。&lt;/p&gt;
-&lt;p&gt;2、Java虚拟机为了提高效率并节约内存，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
     
   </entry>
   
