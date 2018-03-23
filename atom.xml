@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-22T02:08:47.843Z</updated>
+  <updated>2018-03-22T11:59:01.995Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++中的成员变量、全局变量和局部变量</title>
+    <link href="http://www.echodemo.cc/2018/03/22/C++%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
+    <id>http://www.echodemo.cc/2018/03/22/C++中的成员变量和全局变量和局部变量/</id>
+    <published>2018-03-22T11:56:53.000Z</published>
+    <updated>2018-03-22T11:59:01.995Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、成员变量:写在类声明的大括号中的变量,称之为成员变量(属性,实例变量)成员变量只能通过对象来访问。</p><pre><code>注意:成员变量不能离开类,离开类之后就不是成员变量,成员变量不能在定义的同时进行初始化。存储:堆(当前对象对应的堆的存储空间中)存储在堆中的数据,不会被自动释放,只能程序员手动释放。</code></pre><p>2、全局变量:写在函数和大括号外部的变量,称之为全局变量。</p><pre><code>作用域:从定义的那一行开始,一直到文件末尾。全局变量可以先定义再初始化,也可以定义的同时初始化。存储:静态区。程序一启动就会分配存储空间,直到程序结束才会释放。</code></pre><p>3、局部变量:写在函数或者代码块中的变量,称之为局部变量。</p><pre><code>作用域:从定义的那一行开始,一直到遇到大括号或者return。局部变量可以先定义再初始化,也可以定义的同时初始化。存储:栈。存储在栈中的数据有一个特点,系统会自动给我们释放。</code></pre><p>*全局变量，静态局部变量，静态全局变量都在静态存储区分配空间，而局部变量在栈里分配空间。</p><p>*非静态全局变量的作用域是整个源程序，当一个源程序由多个源文件组成时，非静态的全局变量在各个源文件中都是有效的。而静态全局变量则限制了其作用域，即只在定义该变量的源文件内有效，在同一源程序的其它源文件中不能使用它。由于静态全局变量的作用域局限于一个源文件内，只能为该源文件内的函数公用，因此可以避免在其它源文件中引起错误。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、成员变量:写在类声明的大括号中的变量,称之为成员变量(属性,实例变量)成员变量只能通过对象来访问。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;注意:成员变量不能离开类,离开类之后就不是成员变量,成员变量不能在定义的同时进行初始化。
+
+存储:堆(当前对象对应的堆的存储空间中)存储在堆
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>《眠空》摘句</title>
@@ -514,33 +542,6 @@
       
       
         &lt;p&gt;大整数与int型数据的除法也可以叫做高精度与低精度的除法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相除呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进i
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
-    
-      <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大整数与int型数据的乘法</title>
-    <link href="http://www.echodemo.cc/2018/03/14/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B8%8Eint%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B9%98%E6%B3%95/"/>
-    <id>http://www.echodemo.cc/2018/03/14/大整数与int型数据的乘法/</id>
-    <published>2018-03-14T14:56:12.000Z</published>
-    <updated>2018-03-14T15:07:32.847Z</updated>
-    
-    <content type="html"><![CDATA[<p>大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进int型的数组，大整数的高位存储在数组的高位，低位存储在数组的低位。从int型数组的低位开始取数与int型数据相乘，再与进位相加，所得的结果的个位数作为该位的结果，高部位作为新的进位。这里的算法没有考虑大整数和整数为负的情况。具体的算法如下：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;#include&lt;string.h&gt;using namespace std;struct bign {    int d[1000];//使用int型数组存放大整数的每一位。    int len;//记录大整数的长度。    bign() {//&quot;构造函数&quot;用于初始化结构体。        memset(d, 0, sizeof(d));        len=0;    }};bign change(char str[]) {//将存储在字符数组中的大整数转换为bign    bign a;    a.len = strlen(str);    for (int i = 0;i &lt; a.len;i++) {//大整数的高位存储在数组的高位，低位存储在数组的低位。        a.d[i] = str[a.len - i - 1] - &apos;0&apos;;    }    return a;}bign multi(bign a, int b) {//a*b    bign c;    int carry = 0;//进位    for (int i = 0;i &lt; a.len;i++) {        int temp = a.d[i] * b + carry;        c.d[c.len++] = temp % 10;//个位作为该位的结果。        carry = temp / 10;//高位部分作为新的进位。    }    while (carry != 0) {//此处和加法略有不同，乘法的进位可能不止一位。        c.d[c.len++] = carry % 10;        carry /= 10;    }    return c;}void print(bign a) {//输出bign。    for (int i = a.len - 1;i &gt;= 0;i--) {        cout &lt;&lt; a.d[i];    }}int main() {    char str1[1000];    int b;    cin &gt;&gt; str1 &gt;&gt; b;    bign a = change(str1);    print(multi(a, b));    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;大整数与int型数据的乘法也可以叫做高精度与低精度的乘法，所谓的高精度就是基本数据类型无法存储的数据，比如1000个数位的整数；而所谓的低精度就是可以用基本数据类型存储的数据，比如int类型。那么该如何进行相乘呢？其实本质上和小学的乘法是一样的。我们将无法储存的大整数放进i
       
     
     </summary>
