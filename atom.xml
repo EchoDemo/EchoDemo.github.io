@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-25T05:28:14.385Z</updated>
+  <updated>2018-03-25T11:40:23.150Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>指针和引用的区别</title>
+    <link href="http://www.echodemo.cc/2018/03/25/%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.echodemo.cc/2018/03/25/指针和引用的区别/</id>
+    <published>2018-03-25T11:23:26.000Z</published>
+    <updated>2018-03-25T11:40:23.150Z</updated>
+    
+    <content type="html"><![CDATA[<p>(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。</p><p>(2)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。</p><p>(3)可以有const指针，但是没有const引用。</p><p>(4)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;&a;是不合法的)。</p><p>(5)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。</p><p>(6)”sizeof(引用)”得到的是所指向的变量(对象)的大小(即引用的sizeof为所引用的对象在内存中分配空间的大小(单位字节))，而”sizeof(指针)”得到的是指针本身的大小。在C++当中，存放一个地址和一个int类型的大小相同：4字节。即sizeof(指针)=4。</p><p>(7)指针和引用的自增(++)运算意义不一样。指针自增是所指的数据类型变量的下一个数据类型的地址。而引用是引用所指向的变量的值加1。</p><p>(8)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。</p><p>注意：要把引用的&amp;和取地址运算符&amp;区分开来，引用并不是取地址的意思，引用符号是类型标识的一部分。由于引用是产生变量的别名，故常量不可使用引用。指针变量其实是unsigned类型的整数，这也解释了为什么在C++当中指针类型的变量的sizeof就是4个字节。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。&lt;/p&gt;
+&lt;p&gt;(2)指针可以是
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++中的问题整理(一)</title>
+    <link href="http://www.echodemo.cc/2018/03/25/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E4%B8%80)/"/>
+    <id>http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/</id>
+    <published>2018-03-25T11:19:51.000Z</published>
+    <updated>2018-03-25T11:41:17.620Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><a href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别" class="headerlink" title="1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?"></a>1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</h3><p>答：对于#include&lt;filename.h&gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。</p><h3 id="2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><a href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”" class="headerlink" title="2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?"></a>2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</h3><p>答：C++语言支持函数重载,C语言不支持函数重载。函数被C++编译后在库中的名字与C语言的不同。假设某个函数的原型为:void foo(int x, int y);该函数被C编译器编译后在库中的名字为_foo,而C++编译器则会产生像_foo_int_int 之类的名字。C++提供了C连接交换指定符号extern“C”来解决名字匹配问题。</p><h3 id="3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><a href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的" class="headerlink" title="3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?"></a>3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</h3><p>答：先执行基类的(如果基类当中有虚基类,要先执行虚基类的,其他基类则按照声明派生类时的顺序依次执行),再执行成员对象的,最后执行自己的。</p><h3 id="4、New-delete与malloc-free的区别是什么？"><a href="#4、New-delete与malloc-free的区别是什么？" class="headerlink" title="4、New/delete与malloc/free的区别是什么？"></a>4、New/delete与malloc/free的区别是什么？</h3><p>(1)new/delete是C++的操作符，而malloc/free是C中的函数。</p><p>(2)new做两件事，一是分配内存，二是调用类的构造函数；同样，delete会调用类的析构函数和释放内存。而malloc和free只是分配和释放内存。</p><p>(3)new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。</p><p>(4)new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。</p><h3 id="5、Struct和class的区别是什么？"><a href="#5、Struct和class的区别是什么？" class="headerlink" title="5、Struct和class的区别是什么？"></a>5、Struct和class的区别是什么？</h3><pre><code>答：struct中成员变量和成员函数默认访问权限是public,class是private。</code></pre><h3 id="6、"><a href="#6、" class="headerlink" title="6、"></a>6、</h3><h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>1、内存对齐是指首地址对齐，而不是说每个变量大小对齐。2、内存对齐是指首地址对齐，而不是说每个变量大小对齐。3、结构体对齐除了第2点之外还要求结构体数组也必须是对齐的，也就是说每个相邻的结构体内部都是对齐的。具体可以看这篇文章:http://www.cppblog.com/cc/archive/2006/08/01/10765.html</code></pre><h3 id="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><a href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。" class="headerlink" title="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"></a>8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</h3><h3 id="9、const-有什么用途？"><a href="#9、const-有什么用途？" class="headerlink" title="9、const 有什么用途？"></a>9、const 有什么用途？</h3><p>(1)可以定义const常量。</p><p>(2)const可以修饰函数的参数、返回值，甚至函数的定义体。被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。被const修饰的函数定义体的函数能被const或者非const对象调用，但是const对象只能调用被const修饰过定义体的函数。</p><h3 id="10、什么事内联函数？"><a href="#10、什么事内联函数？" class="headerlink" title="10、什么事内联函数？"></a>10、什么事内联函数？</h3><p>(1)编译器使用相应的函数代码替换函数调用，对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数快，但代价是需要占用更多的内存。例如：如果程序在10个不同的地方调用了同一个内联函数，则该程序将包含该代码的10个副本。</p><p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别&quot;&gt;&lt;a href=&quot;#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别&quot; class=&quot;hea
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+  </entry>
   
   <entry>
     <title>诗词入门(一)</title>
@@ -486,60 +537,6 @@
       
       
         &lt;p&gt;在编程过程中，如果需要建立字符(或者字符串)与整数之间的映射;判断大整数或者其他类型数据是否存在;甚至是字符串和字符串之间的映射。此时我们应当想到map，因为map可以将任何基本类型(包括STL容器)映射到任何基本类型(包括STL容器)。map和其他的STL容器有点不一样，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="STL" scheme="http://www.echodemo.cc/tags/STL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的set</title>
-    <link href="http://www.echodemo.cc/2018/03/17/C++%E4%B8%AD%E7%9A%84set/"/>
-    <id>http://www.echodemo.cc/2018/03/17/C++中的set/</id>
-    <published>2018-03-17T08:09:21.000Z</published>
-    <updated>2018-03-24T11:11:11.093Z</updated>
-    
-    <content type="html"><![CDATA[<p>在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的值都唯一，而且系统能根据元素的值自动进行递增排序,这是因为其内部是用红黑树实现的。如果需要使用set，必须包含头文件#include<set>还有命名空间”using namespace std;”。</set></p><p>1、set的定义:set&lt;typename> name;例如:</p><pre><code>set&lt;int&gt; name;      //声明一个int容器set&lt;int&gt; name(10);  //声明一个初始大小为10的int型容器set&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型容器set&lt;int&gt; name(a);   //声明一个初始大小为a的int型容器set&lt;node&gt; name;     //node是结构体的类型如果typename是set，定义的时候记得在&gt;&gt;符号之间加上空格:set&lt;set&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格</code></pre><p>2、set数组的定义:set&lt;typename> arrayname[arraysize];例如:</p><pre><code>set&lt;int&gt; a[100];//a[0]~a[99]中的每一个都是一个set容器与set&lt;set&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。</code></pre><p>3、set容器内元素的访问</p><pre><code>set只能通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:set&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问set中的元素例如:#include&lt;iostream&gt;#include&lt;set&gt;using namespace std ;int main(){    set&lt;int&gt; a;    a.insert(3);//将3插入set中    a.insert(5);    a.insert(2);    a.insert(3);    for(set&lt;int&gt;::iterator it=a.begin();it!=a.end();it++){//a.begin()为取a的首元素地址，而it指向这个地址        cout&lt;&lt;*it;    }    return 0;}上述程序中出现了去a的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。另外,set的迭代器不支持it&lt;a.end()的写法,因此循环条件只能用it!=a.end()。除此之外,迭代器还实现了两种自加操作:it++和++it(自减操作同理)。另外,除vector和string之外的STL容器都不支持*(it+i)的访问方式。因此只能按如上的方式枚举。</code></pre><p>4、set常用的函数</p><pre><code>(1)insert(x):在set容器中添加一个元素,并自动递增排序,时间复杂度为O(logN),N为set内元素个数。(2)find(x):用以返回set中对应值为x的迭代器，时间复杂度为O(logN)。set&lt;int&gt;::iterator it=a.find(2)(3)size():用来获得set中的元素的个数，时间复杂度为O(1)。(4)clear():用来清空set中的所有元素，时间复杂度为O(N)。(5)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。删除单个元素有两种用法:a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(1);a.erase(x),x为所要删除元素的值,时间复杂度为O(logN)。删除一个区间内的所有元素:a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在编程过程中，有时经常出现去掉重复元素的情况，而且有可能因为这些元素比较大或者类型不是int型而不能直接开散列表。此时我们应当想到set，set是关联式容器。其作为一个容器是用来存储同一类型数据的数据类型，比如：int、char、double、结构体等。在set中每个元素的
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="STL" scheme="http://www.echodemo.cc/tags/STL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的vector</title>
-    <link href="http://www.echodemo.cc/2018/03/16/C++%E4%B8%AD%E7%9A%84vector/"/>
-    <id>http://www.echodemo.cc/2018/03/16/C++中的vector/</id>
-    <published>2018-03-16T11:41:49.000Z</published>
-    <updated>2018-03-24T11:10:51.664Z</updated>
-    
-    <content type="html"><![CDATA[<p>在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称为容器。与string相同,vector同属于STL(Standard Template Library,标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版。vector是一个能够存放任意类型的动态数组。如果需要使用vector，必须包含头文件#include<vector>还有命名空间”using namespace std;”。</vector></p><p>1、vector的定义:vector&lt;typename> name;例如:</p><pre><code>vector&lt;int&gt; name;      //声明一个int向量vector&lt;int&gt; name(10);  //声明一个初始大小为10的int型向量vector&lt;int&gt; name(10,1);//声明一个初始大小为10且初始值都为1的int型向量vector&lt;int&gt; name(a);   //声明一个初始大小为a的int型向量vector&lt;node&gt; name;     //node是结构体的类型如果typename是vector，定义的时候记得在&gt;&gt;符号之间加上空格:vector&lt;vector&lt;int&gt; &gt; name;//&gt;&gt;之间要有空格</code></pre><p>2、vector数组的定义:vector&lt;typename> arrayname[arraysize];例如:</p><pre><code>vector&lt;int&gt; vi[100];//vi[0]~vi[99]中的每一个都是一个vector容器与vector&lt;vector&lt;int&gt; &gt; name;不同的是，这种写法的一维长度已经固定为arraysize，另一维才是变长的。</code></pre><p>3、vector容器内元素的访问</p><pre><code>(1)通过下标访问，即vi[0]~vi[size-1]进行访问。(2)通过迭代器访问,迭代器可以理解为一种类似指针的东西，其定义是:vector&lt;typename&gt;::iterator it;这样得到迭代器it之后，就可以通过*it来访问vector中的元素例如:#include&lt;iostream&gt;#include&lt;vector&gt;using namespace std ;int main(){    vector&lt;int&gt; vi;    for(int i=1;i&lt;=5;i++){        vi.push_back(i);    }    vector&lt;int&gt;::iterator it=vi.begin();//vi.begin()为取vi的首元素地址，而it指向这个地址    for(int i=0;i&lt;5;i++){        cout&lt;&lt;*(it+i);    }    return 0;}上述程序中出现了去vi的首地址的begin()函数,那么就不得不提到end()函数。与begin()函数不同的是,end()函数作为迭代器的末尾标志,取的是尾元素地址的下一个地址,不存储任何元素。另外，vector的迭代器不支持it&lt;vi.end()的写法，因此循环条件只能用it!=vi.end()。除此之外，迭代器还实现了两种自加操作:it++和++it(自减操作同理)。</code></pre><p>4、vector常用的函数</p><pre><code>(1)push_back(x):在vector后面添加一个元素，时间复杂度为O(1)。(2)pop_back():用以删除vector的尾元素，时间复杂度为O(1)。(3)size():用来获得vector中的元素的个数，时间复杂度为O(1)。返回的是unsigned类型。(4)clear():用来清空vector中的所有元素，时间复杂度为O(N)。N为vector中元素的个数。(5)insert(it,x):用来向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)。(6)erase():有两种用法:删除单个元素,删除一个区间内的所有元素。a.erase(it),it为所需要删除元素的迭代器,时间复杂度O(N);a.erase(first,last),first为起始迭代器,而last为删除区间的末尾迭代器的下一个地址。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在编程过程中，有时经常出现普通数组浪费大量的内存空间或者无法使用邻接矩阵(节点数太多)又害怕使用指针实现邻接表的情况。此时我们应当想到vector。向量vector是一种对象实体, 能够容纳许多其他类型相同的元素,比如：int、char、double、结构体等。 因此又被称
       
     
     </summary>

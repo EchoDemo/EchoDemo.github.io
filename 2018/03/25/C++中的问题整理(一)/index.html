@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="EchoDemo" />
+  <meta name="keywords" content="CPP," />
 
 
 
@@ -108,16 +108,18 @@
 
 
 
-<meta name="description" content="Less interests,more interest。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="EchoDemo&#39;s Blogs">
-<meta property="og:url" content="http://www.echodemo.cc/tags/C/index.html">
+<meta name="description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
+<meta name="keywords" content="CPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中的问题整理(一)">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="Less interests,more interest。">
+<meta property="og:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-25T11:41:17.620Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EchoDemo&#39;s Blogs">
-<meta name="twitter:description" content="Less interests,more interest。">
+<meta name="twitter:title" content="C++中的问题整理(一)">
+<meta name="twitter:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
 
 
 
@@ -145,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/tags/C/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/"/>
 
 
 
 
 
-  <title> 标签: C | EchoDemo's Blogs </title>
+  <title> C++中的问题整理(一) | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,46 +319,271 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        C
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++中的问题整理(一)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T19:19:51+08:00">
+                2018-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/25/C++中的问题整理(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/25/C++中的问题整理(一)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  959
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h3 id="1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><a href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别" class="headerlink" title="1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?"></a>1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</h3><p>答：对于#include&lt;filename.h&gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。</p>
+<h3 id="2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><a href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”" class="headerlink" title="2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?"></a>2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</h3><p>答：C++语言支持函数重载,C语言不支持函数重载。函数被C++编译后在库中的名字与C语言的不同。假设某个函数的原型为:void foo(int x, int y);该函数被C编译器编译后在库中的名字为_foo,而C++编译器则会产生像_foo_int_int 之类的名字。C++提供了C连接交换指定符号extern“C”来解决名字匹配问题。</p>
+<h3 id="3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><a href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的" class="headerlink" title="3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?"></a>3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</h3><p>答：先执行基类的(如果基类当中有虚基类,要先执行虚基类的,其他基类则按照声明派生类时的顺序依次执行),再执行成员对象的,最后执行自己的。</p>
+<h3 id="4、New-delete与malloc-free的区别是什么？"><a href="#4、New-delete与malloc-free的区别是什么？" class="headerlink" title="4、New/delete与malloc/free的区别是什么？"></a>4、New/delete与malloc/free的区别是什么？</h3><p>(1)new/delete是C++的操作符，而malloc/free是C中的函数。</p>
+<p>(2)new做两件事，一是分配内存，二是调用类的构造函数；同样，delete会调用类的析构函数和释放内存。而malloc和free只是分配和释放内存。</p>
+<p>(3)new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。</p>
+<p>(4)new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。</p>
+<h3 id="5、Struct和class的区别是什么？"><a href="#5、Struct和class的区别是什么？" class="headerlink" title="5、Struct和class的区别是什么？"></a>5、Struct和class的区别是什么？</h3><pre><code>答：struct中成员变量和成员函数默认访问权限是public,class是private。
+</code></pre><h3 id="6、"><a href="#6、" class="headerlink" title="6、"></a>6、</h3><h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>1、内存对齐是指首地址对齐，而不是说每个变量大小对齐。
 
-      <h2 class="post-title">
+2、内存对齐是指首地址对齐，而不是说每个变量大小对齐。
+
+3、结构体对齐除了第2点之外还要求结构体数组也必须是对齐的，也就是说每个相邻的结构体内部都是对齐的。
+
+具体可以看这篇文章:http://www.cppblog.com/cc/archive/2006/08/01/10765.html
+</code></pre><h3 id="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><a href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。" class="headerlink" title="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"></a>8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</h3><h3 id="9、const-有什么用途？"><a href="#9、const-有什么用途？" class="headerlink" title="9、const 有什么用途？"></a>9、const 有什么用途？</h3><p>(1)可以定义const常量。</p>
+<p>(2)const可以修饰函数的参数、返回值，甚至函数的定义体。被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。被const修饰的函数定义体的函数能被const或者非const对象调用，但是const对象只能调用被const修饰过定义体的函数。</p>
+<h3 id="10、什么事内联函数？"><a href="#10、什么事内联函数？" class="headerlink" title="10、什么事内联函数？"></a>10、什么事内联函数？</h3><p>(1)编译器使用相应的函数代码替换函数调用，对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数快，但代价是需要占用更多的内存。例如：如果程序在10个不同的地方调用了同一个内联函数，则该程序将包含该代码的10个副本。</p>
+<p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2018/03/19/C-C++申请动态内存/" itemprop="url">
-              
-                <span itemprop="name">C/C++申请动态内存</span>
-              
-            </a>
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
+          
+        </div>
+      
+
+
+    <div>
+      
         
-      </h2>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-19T20:01:44+08:00"
-              content="2018-03-19" >
-          03-19
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/24/诗词入门(一)/" rel="next" title="诗词入门(一)">
+                <i class="fa fa-chevron-left"></i> 诗词入门(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/25/指针和引用的区别/" rel="prev" title="指针和引用的区别">
+                指针和引用的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -364,6 +591,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -383,8 +616,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -498,6 +740,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><span class="nav-number">1.</span> <span class="nav-text">1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><span class="nav-number">2.</span> <span class="nav-text">2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><span class="nav-number">3.</span> <span class="nav-text">3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、New-delete与malloc-free的区别是什么？"><span class="nav-number">4.</span> <span class="nav-text">4、New/delete与malloc/free的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Struct和class的区别是什么？"><span class="nav-number">5.</span> <span class="nav-text">5、Struct和class的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、"><span class="nav-number">6.</span> <span class="nav-text">6、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><span class="nav-number">7.</span> <span class="nav-text">7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><span class="nav-number">8.</span> <span class="nav-text">8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、const-有什么用途？"><span class="nav-number">9.</span> <span class="nav-text">9、const 有什么用途？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、什么事内联函数？"><span class="nav-number">10.</span> <span class="nav-text">10、什么事内联函数？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -626,6 +884,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -657,6 +919,10 @@
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 
