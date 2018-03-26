@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T11:41:17.620Z">
+<meta property="og:updated_time" content="2018-03-26T00:23:41.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的问题整理(一)">
 <meta name="twitter:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  959
+                  1,095
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -481,7 +481,8 @@
 <p>(3)new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。</p>
 <p>(4)new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。</p>
 <h3 id="5、Struct和class的区别是什么？"><a href="#5、Struct和class的区别是什么？" class="headerlink" title="5、Struct和class的区别是什么？"></a>5、Struct和class的区别是什么？</h3><pre><code>答：struct中成员变量和成员函数默认访问权限是public,class是private。
-</code></pre><h3 id="6、"><a href="#6、" class="headerlink" title="6、"></a>6、</h3><h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>1、内存对齐是指首地址对齐，而不是说每个变量大小对齐。
+</code></pre><h3 id="6、多态有哪些分类？"><a href="#6、多态有哪些分类？" class="headerlink" title="6、多态有哪些分类？"></a>6、多态有哪些分类？</h3><p>答：多态可以分为编译时多态和运行时多态。编译时多态可以通过函数的重载来实现，具体表现在根据参数的个数和类型的不同选择合适的同名函数。运行时多态通过虚函数实现，就是运行时根据对象类型自动选择正确的调用函数(也叫动态绑定)。模板属于编译时多态性，因为编译时自动根据模板生成模板函数。</p>
+<h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>1、内存对齐是指首地址对齐，而不是说每个变量大小对齐。
 
 2、内存对齐是指首地址对齐，而不是说每个变量大小对齐。
 
@@ -750,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><span class="nav-number">1.</span> <span class="nav-text">1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><span class="nav-number">2.</span> <span class="nav-text">2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><span class="nav-number">3.</span> <span class="nav-text">3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、New-delete与malloc-free的区别是什么？"><span class="nav-number">4.</span> <span class="nav-text">4、New/delete与malloc/free的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Struct和class的区别是什么？"><span class="nav-number">5.</span> <span class="nav-text">5、Struct和class的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、"><span class="nav-number">6.</span> <span class="nav-text">6、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><span class="nav-number">7.</span> <span class="nav-text">7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><span class="nav-number">8.</span> <span class="nav-text">8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、const-有什么用途？"><span class="nav-number">9.</span> <span class="nav-text">9、const 有什么用途？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、什么事内联函数？"><span class="nav-number">10.</span> <span class="nav-text">10、什么事内联函数？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><span class="nav-number">1.</span> <span class="nav-text">1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><span class="nav-number">2.</span> <span class="nav-text">2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><span class="nav-number">3.</span> <span class="nav-text">3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、New-delete与malloc-free的区别是什么？"><span class="nav-number">4.</span> <span class="nav-text">4、New/delete与malloc/free的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Struct和class的区别是什么？"><span class="nav-number">5.</span> <span class="nav-text">5、Struct和class的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、多态有哪些分类？"><span class="nav-number">6.</span> <span class="nav-text">6、多态有哪些分类？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><span class="nav-number">7.</span> <span class="nav-text">7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><span class="nav-number">8.</span> <span class="nav-text">8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、const-有什么用途？"><span class="nav-number">9.</span> <span class="nav-text">9、const 有什么用途？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、什么事内联函数？"><span class="nav-number">10.</span> <span class="nav-text">10、什么事内联函数？</span></a></li></ol></div>
             
 
           </div>
@@ -792,7 +793,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共23.9k字</span>
+  <span class="post-count">博客全站共24.0k字</span>
 </div>
 
 
