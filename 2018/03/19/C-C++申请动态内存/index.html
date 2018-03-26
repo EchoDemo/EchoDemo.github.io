@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="(1)malloc函数 malloc函数是C语言中#include&amp;lt;stdlib.h&amp;gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下： typename* p=(typename*)malloc(sizeof(typename));  int* p=(int*)malloc(sizeof(int)); node* p=(node*)malloc(si">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-24T11:07:02.281Z">
+<meta property="og:updated_time" content="2018-03-26T08:01:26.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++申请动态内存">
 <meta name="twitter:description" content="(1)malloc函数 malloc函数是C语言中#include&amp;lt;stdlib.h&amp;gt;头文件下用于申请动态内存的函数，其返回类型是申请的同变量类型的指针，其基本用法如下： typename* p=(typename*)malloc(sizeof(typename));  int* p=(int*)malloc(sizeof(int)); node* p=(node*)malloc(si">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  484
+                  485
                 </span>
               
 
@@ -479,7 +479,7 @@
 
 int* p=(int*)malloc(sizeof(int));
 node* p=(node*)malloc(sizeof(node));
-</code></pre><p>这个写法的解释如下：以需要申请的内存空间大小(即sizeof(node))为malloc函数的参数，这样malloc函数就会向内存申请一块大小为sizeof(node)的空间，并且返回指向这块空间的指针。但是此时这个指针是一个为确定类型的指针void<em>，因此需要把它强制转换成node</em>型的指针，在malloc之前加上(node<em>)。再把这个指针赋给node</em>型的指针变量p，就成功地申请了一块node类型大小的内存空间。如果申请失败，则会返回空指针NULL。申请失败一般在使用malloc申请了较大动态数组时发生。</p>
+</code></pre><p>这个写法的解释如下：以需要申请的内存空间大小(即sizeof(node))为malloc函数的参数，这样malloc函数就会向内存申请一块大小为sizeof(node)的空间，并且返回指向这块空间的指针。但是此时这个指针是一个为确定类型的指针void*，因此需要把它强制转换成node<em>型的指针，在malloc之前加上(node</em>)。再把这个指针赋给node*型的指针变量p，就成功地申请了一块node类型大小的内存空间。如果申请失败，则会返回空指针NULL。申请失败一般在使用malloc申请了较大动态数组时发生。</p>
 <p>在使用完malloc开辟出来的空间后必须将其释放，否则会造成内存的泄露。malloc函数需要使用free函数来进行内存的释放。假设需要释放的内存空间的指针变量为p，则：free(p);就可以实现内存的释放了。</p>
 <p>(2)new运算符</p>
 <p>new是C++中用来申请动态空间的运算符，其返回类型同样是申请的同变量类型的指针，其基本用法如下：</p>
@@ -628,7 +628,7 @@ node* p=new node;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -765,7 +765,7 @@ node* p=new node;
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共25.9k字</span>
+  <span class="post-count">博客全站共26.5k字</span>
 </div>
 
 
