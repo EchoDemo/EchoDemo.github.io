@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
+<meta name="description" content="1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。 2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。 3、构造函数初始化时必须采用初始化列表一共有三种情况 (1)需要初始化的数据成员是对象(继承时调用基类构造函数)  (2)需要初始化con">
 <meta name="keywords" content="CPP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++中的问题整理(一)">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/index.html">
+<meta property="og:title" content="C++中的问题整理(二)">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/26/C++中的问题整理(二)/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
+<meta property="og:description" content="1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。 2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。 3、构造函数初始化时必须采用初始化列表一共有三种情况 (1)需要初始化的数据成员是对象(继承时调用基类构造函数)  (2)需要初始化con">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-26T01:12:10.824Z">
+<meta property="og:updated_time" content="2018-03-26T07:18:54.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++中的问题整理(一)">
-<meta name="twitter:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
+<meta name="twitter:title" content="C++中的问题整理(二)">
+<meta name="twitter:description" content="1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。 2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。 3、构造函数初始化时必须采用初始化列表一共有三种情况 (1)需要初始化的数据成员是对象(继承时调用基类构造函数)  (2)需要初始化con">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/26/C++中的问题整理(二)/"/>
 
 
 
 
 
-  <title> C++中的问题整理(一) | EchoDemo's Blogs </title>
+  <title> C++中的问题整理(二) | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/26/C++中的问题整理(二)/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                C++中的问题整理(一)
+                C++中的问题整理(二)
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T19:19:51+08:00">
-                2018-03-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T15:12:01+08:00">
+                2018-03-26
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/25/C++中的问题整理(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/25/C++中的问题整理(一)/" itemprop="commentsCount"></span>
+                <a href="/2018/03/26/C++中的问题整理(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/26/C++中的问题整理(二)/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,221
+                  1,563
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -473,29 +473,50 @@
       
 
       
-        <h3 id="1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><a href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别" class="headerlink" title="1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?"></a>1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</h3><p>答：对于#include&lt;filename.h&gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。</p>
-<h3 id="2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><a href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”" class="headerlink" title="2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?"></a>2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</h3><p>答：C++语言支持函数重载,C语言不支持函数重载。函数被C++编译后在库中的名字与C语言的不同。假设某个函数的原型为:void foo(int x, int y);该函数被C编译器编译后在库中的名字为_foo,而C++编译器则会产生像_foo_int_int 之类的名字。C++提供了C连接交换指定符号extern“C”来解决名字匹配问题。</p>
-<h3 id="3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><a href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的" class="headerlink" title="3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?"></a>3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</h3><p>答：先执行基类的(如果基类当中有虚基类,要先执行虚基类的,其他基类则按照声明派生类时的顺序依次执行),再执行成员对象的,最后执行自己的。</p>
-<h3 id="4、New-delete与malloc-free的区别是什么？"><a href="#4、New-delete与malloc-free的区别是什么？" class="headerlink" title="4、New/delete与malloc/free的区别是什么？"></a>4、New/delete与malloc/free的区别是什么？</h3><p>(1)new/delete是C++的操作符，而malloc/free是C中的函数。</p>
-<p>(2)new做两件事，一是分配内存，二是调用类的构造函数；同样，delete会调用类的析构函数和释放内存。而malloc和free只是分配和释放内存。</p>
-<p>(3)new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。</p>
-<p>(4)new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。</p>
-<h3 id="5、Struct和class的区别是什么？"><a href="#5、Struct和class的区别是什么？" class="headerlink" title="5、Struct和class的区别是什么？"></a>5、Struct和class的区别是什么？</h3><pre><code>答：struct中成员变量和成员函数默认访问权限是public,class是private。
-</code></pre><h3 id="6、多态有哪些分类？"><a href="#6、多态有哪些分类？" class="headerlink" title="6、多态有哪些分类？"></a>6、多态有哪些分类？</h3><p>答：多态可以分为编译时多态和运行时多态。编译时多态可以通过函数的重载来实现，具体表现在根据参数的个数和类型的不同选择合适的同名函数。运行时多态通过虚函数实现，就是运行时根据对象类型自动选择正确的调用函数(也叫动态绑定)。模板属于编译时多态性，因为编译时自动根据模板生成模板函数。虚函数的动态绑定仅在基类指针或引用绑定派生类对象时发生。如果函数的形参不是指针或者引用，则调用哪个类的函数就已经确定。</p>
-<h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>(1)默认情况下，编译器的对齐系数为8
+        <p>1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。</p>
+<p>2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。</p>
+<p>3、构造函数初始化时必须采用初始化列表一共有三种情况</p>
+<pre><code>(1)需要初始化的数据成员是对象(继承时调用基类构造函数)
 
-(2)内存对齐：就是每个成员的起始位置必须是对齐系数与成员自身大小二者中较小者的整数倍。
+(2)需要初始化const修饰的类成员
 
-(3)内存补齐：取结构体或类的成员中最大的那个值，与对齐系统相比，取二者中的较小者。然后保证整个对象结尾地址的下一个地址是较小者的整数倍。
+(3)需要初始化引用成员数据
 
-(4)结构体对齐除了第1点之外还要求结构体数组也必须是对齐的，也就是说每个相邻的结构体内部都是对齐的。
+*由于static属于类并不属于具体的对象，所以static成员是不允许在类内初始化的。static const 成员也不在初始化列表中。
 
-可以看一下这篇文章:http://www.cppblog.com/cc/archive/2006/08/01/10765.html
-</code></pre><h3 id="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><a href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。" class="headerlink" title="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"></a>8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</h3><h3 id="9、const-有什么用途？"><a href="#9、const-有什么用途？" class="headerlink" title="9、const 有什么用途？"></a>9、const 有什么用途？</h3><p>(1)可以定义const常量。</p>
-<p>(2)const可以修饰函数的参数、返回值，甚至函数的定义体。被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。被const修饰的函数定义体的函数能被const或者非const对象调用，但是const对象只能调用被const修饰过定义体的函数。</p>
-<h3 id="10、什么是内联函数？"><a href="#10、什么是内联函数？" class="headerlink" title="10、什么是内联函数？"></a>10、什么是内联函数？</h3><p>(1)编译器使用相应的函数代码替换函数调用，对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数快，但代价是需要占用更多的内存。例如：如果程序在10个不同的地方调用了同一个内联函数，则该程序将包含该代码的10个副本。</p>
-<p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。</p>
+*static属于类，它在未实例化的时候就已经存在了，而构造函数的初始化列表，只有在实例化的时候才执行。
 
+*static成员不属于对象。我们在调用构造函数自然是创建对象，一个跟对象没直接关系的成员没有必要初始化。
+</code></pre><p>4、实参可以是任何类型（可以是常量，变量或表达式），但是形参却不能是表达式。C语言中最简单的数据类型包括整型、实型(实型又称浮点数或者实数)、字符型。在C语言中，没有专门的逻辑型数据类型，而是用0和1来表示逻辑值。</p>
+<p>5、类的大小只与成员变量（非static数据成员变量）和虚函数指针有关，还要考虑到对齐。基类中存在虚函数时，派生类会继承基类的虚函数(虚函数也是类的成员函数)，因此派生类中不再增加虚函数的存储空间（因为所有的虚函数共享一块内存区域），而仅仅需要考虑派生类中添加进来的非static数据成员的内存空间大小。(指向虚函数的指针为4个字节)</p>
+<p>6、fork()与clone的区别</p>
+<pre><code>函数复制时将父进程的所有资源都通过复制数据结构进行了复制，然后传递给子进程，所以fork()函数不带参数；clone()函数
+则是将部分父进程的资源的数据结构进行复制，复制哪些资源是可以通过参数设定选择的，所以clone()函数带参数，没有复制的资源可以通过指针共享给子进程。
+</code></pre><p>7、关于浅复制和深复制</p>
+<pre><code>所谓浅复制，就是在构造函数当中直接为复制的对象的数据成员赋值。在很多情况下，这是可以的。创建新的对象，要为对象的数据成员分配存储空间，直接赋值就将值保存在相应的空间中。但是如果在构造函数当中出现了指针类型的数据成员时，也按照上面那样直接赋值而未经过地址的分配就会在调试的时候出错，这种指针被称为“野指针”。解决这样的问题的方法，就是在构造函数中，为指针类型的成员，分配专门的空间。以这条规则构建的复制，称作为深复制。
+</code></pre><p>8、C语言中的未定义行为(Undefined Behavior)</p>
+<pre><code>未定义行为是指C语言标准未做规定的行为。同时，标准也从没要求编译器判断未定义行为，所以这些行为有编译器自行处理，在不同的编译器可能会产生不同的结果，又或者如果程序调用未定义的行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。
+</code></pre><p>9、C++面向对象的三个基本特征(封装、继承和多态)</p>
+<pre><code>(1)封装：将客观事物抽象成类，每个类对自身的数据和方法实行。封装是实现信息隐蔽的一种技术，其目的是使类的定义和实现分离。
+
+(2)继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。
+
+(3)多态：是对于不同对象接收相同消息时产生不同的动作。允许将子类类型的指针赋值给父类类型的指针。在程序运行时的多态性通过继承和虚函数来体现；在程序编译时多态性体现在函数和运算符的重载上。
+
+*封装可以隐藏实现细节，使得代码模块化；继承可以扩展已存在的代码模块（类）；它们的目的都是为了——代码重用。而多态则是为了实现接口重用！
+</code></pre><p>10、虚函数如何实现的</p>
+<pre><code>(1)虚函数是通过一张虚函数表实现的，有多少个虚函数，就有多少个指针。
+
+(2)在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题。
+
+(3)实际上在编译的时候，编译器会自动加上虚表。
+
+(4)虚函数的作用实现动态联编，也就是说在程序运行阶段动态的选择合适的成员函数，在定义了虚函数之后，可以在基类的派生类中对虚函数重新定义。
+
+(5)虚表的使用方法是如果派生类在自己定义中没有修改基类的虚函数，我们就指向基类的虚函数；如果派生类改写了基类的虚函数，这时续表则将原来指向基类的虚函数的地址替换为指向自身虚函数的指针。
+
+(6)必须通过基类类型的引用或指针进行函数调用才会发生多态。
+</code></pre>
       
     </div>
 
@@ -558,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/24/诗词入门(一)/" rel="next" title="诗词入门(一)">
-                <i class="fa fa-chevron-left"></i> 诗词入门(一)
+              <a href="/2018/03/26/Windows中个人常用快捷键/" rel="next" title="Windows中个人常用快捷键">
+                <i class="fa fa-chevron-left"></i> Windows中个人常用快捷键
               </a>
             
           </div>
@@ -567,10 +588,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/25/指针和引用的区别/" rel="prev" title="指针和引用的区别">
-                指针和引用的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,17 +636,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -743,22 +751,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><span class="nav-number">1.</span> <span class="nav-text">1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><span class="nav-number">2.</span> <span class="nav-text">2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><span class="nav-number">3.</span> <span class="nav-text">3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、New-delete与malloc-free的区别是什么？"><span class="nav-number">4.</span> <span class="nav-text">4、New/delete与malloc/free的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Struct和class的区别是什么？"><span class="nav-number">5.</span> <span class="nav-text">5、Struct和class的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、多态有哪些分类？"><span class="nav-number">6.</span> <span class="nav-text">6、多态有哪些分类？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><span class="nav-number">7.</span> <span class="nav-text">7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><span class="nav-number">8.</span> <span class="nav-text">8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、const-有什么用途？"><span class="nav-number">9.</span> <span class="nav-text">9、const 有什么用途？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、什么是内联函数？"><span class="nav-number">10.</span> <span class="nav-text">10、什么是内联函数？</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>

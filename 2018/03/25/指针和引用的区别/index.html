@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。 (2)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。 (3)可以有const指针，但">
+<meta name="description" content="(1)可以有const指针，但是没有const引用。 (2)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;amp;&amp;a;是不合法的)。 (3)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。 (4)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。 (5)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被">
 <meta name="keywords" content="CPP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指针和引用的区别">
 <meta property="og:url" content="http://www.echodemo.cc/2018/03/25/指针和引用的区别/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。 (2)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。 (3)可以有const指针，但">
+<meta property="og:description" content="(1)可以有const指针，但是没有const引用。 (2)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;amp;&amp;a;是不合法的)。 (3)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。 (4)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。 (5)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T11:40:23.150Z">
+<meta property="og:updated_time" content="2018-03-26T07:22:21.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针和引用的区别">
-<meta name="twitter:description" content="(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。 (2)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。 (3)可以有const指针，但">
+<meta name="twitter:description" content="(1)可以有const指针，但是没有const引用。 (2)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;amp;&amp;a;是不合法的)。 (3)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。 (4)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。 (5)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被">
 
 
 
@@ -473,14 +473,14 @@
       
 
       
-        <p>(1)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。</p>
-<p>(2)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。</p>
-<p>(3)可以有const指针，但是没有const引用。</p>
-<p>(4)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;&a;是不合法的)。</p>
-<p>(5)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。</p>
-<p>(6)”sizeof(引用)”得到的是所指向的变量(对象)的大小(即引用的sizeof为所引用的对象在内存中分配空间的大小(单位字节))，而”sizeof(指针)”得到的是指针本身的大小。在C++当中，存放一个地址和一个int类型的大小相同：4字节。即sizeof(指针)=4。</p>
-<p>(7)指针和引用的自增(++)运算意义不一样。指针自增是所指的数据类型变量的下一个数据类型的地址。而引用是引用所指向的变量的值加1。</p>
-<p>(8)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。</p>
+        <p>(1)可以有const指针，但是没有const引用。</p>
+<p>(2)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;&a;是不合法的)。</p>
+<p>(3)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。</p>
+<p>(4)指针的值在初始化后可以改变，即指向其它的存储单元，而引用在进行初始化后就不会再改变了。</p>
+<p>(5)指针可以是空值，可以在任何时候被初始化。而引用不可以为空且在被创建的时候，必须初始化。此处引用类似于const的指针。</p>
+<p>(6)指针和引用的自增(++)运算意义不一样。指针自增是所指的数据类型变量的下一个数据类型的地址。而引用是引用所指向的变量的值加1。</p>
+<p>(7)”sizeof(引用)”得到的是所指向的变量(对象)的大小(即引用的sizeof为所引用的对象在内存中分配空间的大小(单位字节))，而”sizeof(指针)”得到的是指针本身的大小。在C++当中，存放一个地址和一个int类型的大小相同：4字节。即sizeof(指针)=4。</p>
+<p>(8)指针是一个变量，只不过这个变量存储的是一个地址，是指向内存的一个存储单元；而引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。引用变量的主要作用是用作函数的形参，通过将引用变量用作形参，函数将使用原始数据，而不是其副本。</p>
 <p>注意：要把引用的&amp;和取地址运算符&amp;区分开来，引用并不是取地址的意思，引用符号是类型标识的一部分。由于引用是产生变量的别名，故常量不可使用引用。指针变量其实是unsigned类型的整数，这也解释了为什么在C++当中指针类型的变量的sizeof就是4个字节。</p>
 
       
@@ -555,6 +555,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/03/26/Windows中个人常用快捷键/" rel="prev" title="Windows中个人常用快捷键">
+                Windows中个人常用快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -616,7 +620,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -634,7 +638,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -753,7 +757,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共24.0k字</span>
+  <span class="post-count">博客全站共25.9k字</span>
 </div>
 
 
