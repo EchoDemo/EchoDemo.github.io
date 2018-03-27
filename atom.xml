@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-27T11:30:11.879Z</updated>
+  <updated>2018-03-27T11:54:38.037Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三月二十七号</title>
+    <link href="http://www.echodemo.cc/2018/03/27/%E4%B8%89%E6%9C%88%E4%BA%8C%E5%8D%81%E4%B8%83%E5%8F%B7/"/>
+    <id>http://www.echodemo.cc/2018/03/27/三月二十七号/</id>
+    <published>2018-03-27T11:51:27.000Z</published>
+    <updated>2018-03-27T11:54:38.037Z</updated>
+    
+    <content type="html"><![CDATA[<p>奔走于图书馆和教学楼之间的小径，仲春时节。湖北海棠开得热烈，散发出浓厚的香气；迎春花点缀在桥的两头，静静躺卧；溪中的水生植被在被割去旧年的枝干之后，在流水中已生发出嫩绿的新叶；晨梦亭下有人读书；阳光的热度适合出游与赏玩。自身脚步匆匆，但春日里的生机能够感受得到，这是一种力量的传递与引导，人与自然需要一定的联结。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;奔走于图书馆和教学楼之间的小径，仲春时节。湖北海棠开得热烈，散发出浓厚的香气；迎春花点缀在桥的两头，静静躺卧；溪中的水生植被在被割去旧年的枝干之后，在流水中已生发出嫩绿的新叶；晨梦亭下有人读书；阳光的热度适合出游与赏玩。自身脚步匆匆，但春日里的生机能够感受得到，这是一种力量
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>《眠空》摘句(二)</title>
@@ -531,33 +556,6 @@
       <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
     
       <category term="Codeup" scheme="http://www.echodemo.cc/tags/Codeup/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT A1060 Are They Equal</title>
-    <link href="http://www.echodemo.cc/2018/03/19/PAT-A1060-Are-They-Equal/"/>
-    <id>http://www.echodemo.cc/2018/03/19/PAT-A1060-Are-They-Equal/</id>
-    <published>2018-03-19T02:21:15.000Z</published>
-    <updated>2018-03-24T11:07:34.482Z</updated>
-    
-    <content type="html"><![CDATA[<p>If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.123*105 with simple chopping. Now given the number of significant digits on a machine and two float numbers, you are supposed to tell if they are treated equal in that machine.</p><p>Input Specification:</p><p>Each input file contains one test case which gives three numbers N, A and B, where N (&lt;100) is the number of significant digits, and A and B are the two float numbers to be compared. Each float number is non-negative, no greater than 10100, and that its total digit number is less than 100.</p><p>Output Specification:</p><p>For each test case, print in a line “YES” if the two numbers are treated equal, and then the number in the standard form “0.d1…dN*10^k” (d1&gt;0 unless the number is 0); or “NO” if they are not treated equal, and then the two numbers in their standard form. All the terms must be separated by a space, with no extra space at the end of a line.</p><p>Note: Simple chopping is assumed without rounding.</p><pre><code>Sample Input 1:3 12300 12358.9Sample Output 1:YES 0.123*10^5Sample Input 2:3 120 128Sample Output 2:NO 0.120*10^3 0.128*10^3</code></pre><p>题目大意：给出两个数，问将它们写成保留N位小数的科学计数法后是否相等。如果相等，输出YES，同时输出他们的科学记数法表示的方式；如果不相等输出NO，分别输出他们的科学计数法表示方式。</p><p>注意：无需四舍五入。</p><p>分析：将两个数以字符串的形式输入，如果他们有前导0则删除前导0。删除前导0之后会碰到两种情况：如果是小数点，说明这个数小于1，接下来将小数点删除，如果删除小数点之后的那个数值是0需要把0删除同时令指数相应地减1，直到不为0为止；如果不是小数点的话，则在while循环当中去寻找后面可能存在的小数点，在没有找到小数点之前，字符串下标每向后移动一位，指数便加1。跳出while循环之后，如果字符串下标小于字符串此时的长度，说明找到了小数点，删除小数点。在这两种情况都处理完之后，如果字符串的长度为0，则说明这个数为0。接下来令数组下标为0，在while循环中只要题目要求的精度没有达到就不断执行。而只要字符串此时的下标还小于字符串的长度就直接把数字加到新字符串的末尾，否则就添0。</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;#include&lt;string&gt;using namespace std;int n;//有效位数string deal(string s, int &amp;e) {    int k = 0;//s的下标    while (s.length() &gt; 0 &amp;&amp; s[0] == &apos;0&apos;) {        s.erase(s.begin());//删除前导0    }    if (s[0] == &apos;.&apos;) {//删除前导0之后是小数点，说明s是小于1的小数        s.erase(s.begin());//删除小数点        while (s.length() &gt; 0 &amp;&amp; s[0] == &apos;0&apos;) {            s.erase(s.begin());//删除小数点后非0位前的所有0            e--;//每删除一个0，指数就减1        }    }else {//删除前导0之后不是小数点，则找到后面的小数点删除        while (k &lt; s.length() &amp;&amp; s[k] != &apos;.&apos;) {            k++;            e++;//只要没碰到小数点指数就加1        }        if (k &lt; s.length())            s.erase(s.begin() + k);//如果此时k&lt;s.length()则说明碰到了小数点，删除小数点    }    if (s.length() == 0) e = 0;//删除前导0之后s的长度变为0，说明这个数是0    int num = 0;    k = 0;    string res;    while (num &lt; n) {        if (k &lt; s.length()) res += s[k++];//只要还有数字，就加到res的末尾        else res += &apos;0&apos;;//否则就在res的末尾加0        num++;//精度加1    }    return res;}int main() {    string s1, s2, s3, s4;    cin &gt;&gt; n &gt;&gt; s1 &gt;&gt; s2;    int e1 = 0, e2 = 0;    s3 = deal(s1, e1);    s4 = deal(s2, e2);    if (s3 == s4&amp;&amp;e1 == e2)        cout &lt;&lt; &quot;YES 0.&quot; &lt;&lt; s3 &lt;&lt; &quot;*10^&quot; &lt;&lt; e1 &lt;&lt; endl;    else        cout &lt;&lt; &quot;NO 0.&quot; &lt;&lt; s3 &lt;&lt; &quot;*10^&quot; &lt;&lt; e1 &lt;&lt; &quot; 0.&quot; &lt;&lt; s4 &lt;&lt; &quot;*10^&quot;&lt;&lt; e2 &lt;&lt; endl;    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
     
   </entry>
   
