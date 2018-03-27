@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-26T10:15:01.624Z</updated>
+  <updated>2018-03-27T11:30:11.879Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《眠空》摘句(二)</title>
+    <link href="http://www.echodemo.cc/2018/03/27/%E3%80%8A%E7%9C%A0%E7%A9%BA%E3%80%8B%E6%91%98%E5%8F%A5(%E4%BA%8C)/"/>
+    <id>http://www.echodemo.cc/2018/03/27/《眠空》摘句(二)/</id>
+    <published>2018-03-27T11:29:09.000Z</published>
+    <updated>2018-03-27T11:30:11.879Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、在这个苍茫的人世，还会有谁一直等着我，又会有谁这样忍着难过甘心让我远远走掉。我带着行囊在这视线中默默转身，不曾想过某一天有诀别。我不知道他去了哪里。我们是否会重逢。唯一确认的是，他以自己的方式爱过我，在我的血液里留下悲剧性的烙印。这些黑暗的质素缓慢流淌，一刻也不曾停息。仿佛一种强悍的无法屈服的意愿。</p><p>2、我们最终所得到的训练无非是，面对无所知、无常、虚妄，时时抚平心绪，保持警惕、平静、坚强、有方向地活下去。并且静观这个世间所有破落的碎片擦身而过。</p><p>3、人的生活需要公园。它为日常生活提供一处停顿。停顿意味暂时没有心念，没有目标，略作小憩，与己共存。</p><p>4、如果要做到不伤害他人，前提是不要对他人抱有期待。同时也不让他人抱有对你的期待。做到后一条更为困难。这意味着在某些时刻，你必须显示你自己真实的立场，而没有一丝自私的隐藏或者造作。</p><p>5、有时，我们爱人，是取悦自己渴望被爱的欲求；对他人的提供，是试图填补内在匮乏的需求；憎恶或攻击他人，是被对方提醒了不愿意被揭示的遮蔽的暗处；愤恨或者狂躁，联结着内心长期积累的软弱和无力。。。自我战争不过是冲突于牢笼之中。</p><p>6、时间很重要，物证很重要。它们会使某些曾经被蒙蔽或忽略的情感，在很久之后被澄清和浮出。我也会手写书信给生命中真正重要的人。只为了让他或她，在以后某天终会明白我的心。</p><p>7、摘完杏，和农夫闲聊。他说果实在树上，阳光的温度或突降的暴雨都会给予它影响。每一天它的内在都在发生变化，都在面临无常。所以，及时地摘下并享用它即是最好的方式。</p><p>8、人由自我限制而生发的对他人的狭窄念头，毫发无损于对方，只使自己捉襟见肘。若能置身事外，才不会画地为牢。</p><p>9、当下享受是最好的态度。接受无常，接纳完整的存在，而不试图重新塑造，也不扭曲自己和他人。关系第一原则，应是允许他人以独立和自愿的方式存在。期望是自以为是的权力。</p><p>10、在一本书里，读者感受到作者的精神方式、观念、特质，觉得与之契合，有共鸣，遂在心里把他当作一个知己。他们之间的关系，有时会比生活中实际相处的人抵达更为深邃的心灵限度。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、在这个苍茫的人世，还会有谁一直等着我，又会有谁这样忍着难过甘心让我远远走掉。我带着行囊在这视线中默默转身，不曾想过某一天有诀别。我不知道他去了哪里。我们是否会重逢。唯一确认的是，他以自己的方式爱过我，在我的血液里留下悲剧性的烙印。这些黑暗的质素缓慢流淌，一刻也不曾停息。
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>C++中的问题整理(三)</title>
@@ -533,34 +558,6 @@
       <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
     
       <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的sort函数</title>
-    <link href="http://www.echodemo.cc/2018/03/18/C++%E4%B8%AD%E7%9A%84sort%E5%87%BD%E6%95%B0/"/>
-    <id>http://www.echodemo.cc/2018/03/18/C++中的sort函数/</id>
-    <published>2018-03-18T13:57:42.000Z</published>
-    <updated>2018-03-24T11:06:32.848Z</updated>
-    
-    <content type="html"><![CDATA[<p>sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include<algorithm>头文件和”using namespace std;”</algorithm></p><p>1、在介绍sort()函数之前,先来了解algorithm头文件下一些其他的函数</p><pre><code>(1)max(x,y)和min(x,y)分别返回x和y中的最大值和最小值(x和y可以是浮点数)。(2)abs(x)返回x的绝对值,这里的x必须是整数,浮点数需要使用math头文件下的fabs。(3)swap()用来交换x和y的值,注意:这里的swap()函数和Java中的swap()函数有着本质的不同。(4)reverse(x,y)将数组指针在[x,y)之间的元素或容器的迭代器在[x,y)范围内的元素进行反转。(5)next_permutation(x,y)给出一个序列在全排列的下一个序列。(6)fill(x,y,a)可以把数组或容器中的array[x]~array[y-1]区间赋值为a。和memset不同,这里的赋值可以是数组类型对应范围中的任意值。(7)lower_bound(first,last,val)和upper_bound(first,last,val)分别用来寻找在数组或容器[first,last)范围内第一个值大于等于val和第一个值大于val的元素的位置,如果是数组,则返回该位置的指针;如果是容器,则返回该位置的迭代器。如果数组或者容器中没有需要寻找的元素,则两个函数均返回可以插入该元素的位置的指针或者迭代器,它们的时间复杂度均为O(log(last-first))。</code></pre><p>2、sort()函数</p><pre><code>(1)使用方式:sort(首元素地址(必填),尾元素地址的下一个地址(必填),比较函数(非必填));如果不填比较函数,则默认对前面给出的区间[first,last)进行递增排序。(2)比较函数cmpa、基本数据类型数组的排序bool cmp(int a,int b){//int型数据递减排序    return a&gt;b;//当a&gt;b是把a放在b前面}bool cmp(double a,double b){//double型数据递减排序    return a&gt;b;}bool cmp(char a,char b){//char型数据递减排序    return a&gt;b;}其实这里也可不必如此:sort(a,a+10,greater&lt;typename&gt;());也可以实现以上三个比较函数的功能。 b、结构体数组的排序struct node{    int x,y;}st[10];bool cmp(node a,node b){//递减排序    return a.x&gt;b.x;}bool cmp(node a,node b){//先按x从大到小排序,但当x相等时,按照y从小到大来排序    if(a.x!=b.x) return a.x&gt;b.x;    else return a.y&lt;b.y;}sort(st,st+3,cmp);//对下标为0,1,2的结构体类型排序c、容器的排序在STL标准容器中,只有vector、string、deque是可以使用sort的。这是因为set、map这种容器是用红黑树实现的,元素本身有序,故不允许使用sort排序。以vector为例:bool cmp(int a,int b){    return a&gt;b;}vector&lt;int&gt; v;v.push_back(3);v.push_back(1);v.push_back(2);sort(v.begin(),v.end(),cmp);//对整个vector排序</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;sort()函数使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n)。要使用algorithm头文件下的sort()函数,需要加上#include&lt;algorithm&gt;头文件和”using namespace std;”&lt;/algorithm&gt;&lt;/p&gt;
-&lt;p&gt;1
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="STL" scheme="http://www.echodemo.cc/tags/STL/"/>
     
   </entry>
   
