@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="EchoDemo" />
+  <meta name="keywords" content="CPP," />
 
 
 
@@ -108,17 +108,18 @@
 
 
 
-<meta name="description" content="我一直在for循环里徘徊又彳亍，等待那个让我中止的你。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="留言">
-<meta property="og:url" content="http://www.echodemo.cc/guestbook/index.html">
+<meta name="description" content="(1)strcpy函数的代码实现 char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防止修改源字符串。     assert(dst != NULL &amp;amp;&amp;amp; src != NULL);//检查指针的有效性，如果它的条件返回错误，则终止程序执行。     char *ret = dst;     while ((*dst+">
+<meta name="keywords" content="CPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Strcpy函数的实现">
+<meta property="og:url" content="http://www.echodemo.cc/2018/03/28/Strcpy函数的实现/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="我一直在for循环里徘徊又彳亍，等待那个让我中止的你。">
+<meta property="og:description" content="(1)strcpy函数的代码实现 char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防止修改源字符串。     assert(dst != NULL &amp;amp;&amp;amp; src != NULL);//检查指针的有效性，如果它的条件返回错误，则终止程序执行。     char *ret = dst;     while ((*dst+">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-08T14:40:00.078Z">
+<meta property="og:updated_time" content="2018-03-28T10:57:39.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="留言">
-<meta name="twitter:description" content="我一直在for循环里徘徊又彳亍，等待那个让我中止的你。">
+<meta name="twitter:title" content="Strcpy函数的实现">
+<meta name="twitter:description" content="(1)strcpy函数的代码实现 char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防止修改源字符串。     assert(dst != NULL &amp;amp;&amp;amp; src != NULL);//检查指针的有效性，如果它的条件返回错误，则终止程序执行。     char *ret = dst;     while ((*dst+">
 
 
 
@@ -146,19 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/guestbook/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/03/28/Strcpy函数的实现/"/>
 
 
 
 
 
-  <title>
-  
-
-  
-    留言 | EchoDemo's Blogs
-  
-</title>
+  <title> Strcpy函数的实现 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -189,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -325,18 +320,284 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h2 class="post-title" itemprop="name headline">留言</h2>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/28/Strcpy函数的实现/">
 
-</header>
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Strcpy函数的实现
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T18:54:17+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/28/Strcpy函数的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/28/Strcpy函数的实现/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  345
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
     
-      <h4 id="我一直在for循环里徘徊又彳亍，等待那个让我中止的你。"><a href="#我一直在for循环里徘徊又彳亍，等待那个让我中止的你。" class="headerlink" title="我一直在for循环里徘徊又彳亍，等待那个让我中止的你。"></a><center>我一直在for循环里徘徊又彳亍，等待那个让我中止的你。</center></h4>
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>(1)strcpy函数的代码实现</p>
+<pre><code>char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防止修改源字符串。
+    assert(dst != NULL &amp;&amp; src != NULL);//检查指针的有效性，如果它的条件返回错误，则终止程序执行。
+    char *ret = dst;
+    while ((*dst++=*src++)!=&apos;\0&apos;);
+    return ret;
+}
+</code></pre><p>(2)为什么要返回char *?</p>
+<pre><code>返回dst的原始值使函数能够支持链式表达式。链式表达式的形式如：int l=strlen(strcpy(strA,strB));又如：char * strA=strcpy(new char[10],strB);
+
+返回strSrc的原始值是错误的。
+
+其一，源字符串肯定是已知的，返回它没有意义。
+其二，不能支持形如第二例的表达式。
+其三，把const char *作为char *返回，类型不符，编译报错。
+</code></pre><p>(3)考虑dst和src内存重叠的情况</p>
+<p>所谓重叠，就是src未处理的部分已经被dst给覆盖了，只有一种情况：src&lt;=dst&lt;=src+strlen(src)。C函数memcpy自带内存重叠检测功能，下面给出memcpy的实现my_memcpy。</p>
+<pre><code>char *strcpy(char *dst,const char *src){
+    assert(dst != NULL &amp;&amp; src != NULL);
+    char *ret = dst;
+    my_memcpy(dst, src, strlen(src)+1);
+    return ret;
+}
+</code></pre><p>my_memcpy的实现：</p>
+<pre><code>char *my_memcpy(char *dst, const char* src, int cnt){
+    assert(dst != NULL &amp;&amp; src != NULL);
+    char *ret = dst; 
+    if(dst &gt;= src &amp;&amp; dst &lt;= src+cnt-1){//内存重叠，从高地址开始复制
+        dst = dst+cnt-1;
+        src = src+cnt-1;
+        while (cnt--)
+            *dst-- = *src--;
+    }else{//正常情况，从低地址开始复制
+        while (cnt--)
+            *dst++ = *src++;
+    }
+    return ret;
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        <div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/27/三月二十七号/" rel="next" title="三月二十七号">
+                <i class="fa fa-chevron-left"></i> 三月二十七号
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
           
@@ -613,6 +874,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
