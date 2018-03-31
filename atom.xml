@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-31T07:34:57.915Z</updated>
+  <updated>2018-03-31T08:06:39.689Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>柴</title>
+    <link href="http://www.echodemo.cc/2018/03/31/%E6%9F%B4/"/>
+    <id>http://www.echodemo.cc/2018/03/31/柴/</id>
+    <published>2018-03-31T08:03:52.000Z</published>
+    <updated>2018-03-31T08:06:39.689Z</updated>
+    
+    <content type="html"><![CDATA[<p>你本是泥土里的种子</p><p>春雨下来，便破土而出，发芽又抽绿</p><p>阳光透过乔木和灌木的叶子漏下来</p><p>照耀着你微弱的身体</p><p><br><br>后来呀，雨露下来，寒风穿过</p><p>土壤也时而干燥</p><p>根在土里生长</p><p>叶在空气里徜徉</p><p>向着更广阔的空间里延伸</p><p>春夏秋冬地过去，轮回。</p><p><br><br>那一日，我手持柴刀独自上山</p><p>无意间来到你的身旁</p><p>此时的你已巍然成木</p><p>在多少次的手起刀落后</p><p>在洁白的木屑四散飞溅后</p><p>你轰然倒下</p><p>倒在你无比熟悉的地点</p><p>我残忍地脱去你的外衣，卸下你的臂膀</p><p>甚至头颅。</p><p><br><br>你已经死了</p><p>你的尸体跟随我下了山</p><p>你永远地离开了生生世世守护的这方土地</p><p>被我丢弃在陌生的沙土之上</p><p>无情的斧子借着外力将你的尸体大卸八块</p><p>陈列在清灰色瓦片盖的土坯房子里</p><p>静静等候与烈火的相遇</p><p>化为炊烟又化为尘土</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;你本是泥土里的种子&lt;/p&gt;
+&lt;p&gt;春雨下来，便破土而出，发芽又抽绿&lt;/p&gt;
+&lt;p&gt;阳光透过乔木和灌木的叶子漏下来&lt;/p&gt;
+&lt;p&gt;照耀着你微弱的身体&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;后来呀，雨露下来，寒风穿过&lt;/p&gt;
+&lt;p&gt;土壤也时而干燥&lt;/p&gt;
+&lt;p&gt;根在土里生长&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>文字</title>
@@ -520,31 +554,6 @@
       <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
     
       <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL基础</title>
-    <link href="http://www.echodemo.cc/2018/03/21/MYSQL%E5%9F%BA%E7%A1%80/"/>
-    <id>http://www.echodemo.cc/2018/03/21/MYSQL基础/</id>
-    <published>2018-03-21T02:21:25.000Z</published>
-    <updated>2018-03-21T02:27:15.818Z</updated>
-    
-    <content type="html"><![CDATA[<p>Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。</p><h1 id="1、MYSQL的特点"><a href="#1、MYSQL的特点" class="headerlink" title="1、MYSQL的特点"></a>1、MYSQL的特点</h1><pre><code>(1)Mysql是开源的，所以你不需要支付额外的费用。(2)Mysql支持大型的数据库。可以处理拥有上千万条记录的大型数据库。(3)MySQL使用标准的SQL数据语言形式。(4)Mysql可以允许于多个系统上，并且支持多种语言。这些编程语言包括C、C++、Python、Java、Perl、PHP、Eiffel、Ruby和Tcl等。(5)Mysql是可以定制的，采用了GPL协议，你可以修改源码来开发自己的Mysql系统。</code></pre><h1 id="2、MYSQL的管理"><a href="#2、MYSQL的管理" class="headerlink" title="2、MYSQL的管理"></a>2、MYSQL的管理</h1><h2 id="1-为MYSQL数据库中的user表添加新用户"><a href="#1-为MYSQL数据库中的user表添加新用户" class="headerlink" title="(1)为MYSQL数据库中的user表添加新用户"></a>(1)为MYSQL数据库中的user表添加新用户</h2><pre><code>root@host# mysql -u root -pEnter password:*******mysql&gt; use mysql;Database changedmysql&gt; INSERT INTO user           (host, user, password,            select_priv, insert_priv, update_priv)            VALUES (&apos;localhost&apos;, &apos;guest&apos;,            PASSWORD(&apos;guest123&apos;), &apos;Y&apos;, &apos;Y&apos;, &apos;Y&apos;);Query OK, 1 row affected (0.20 sec)mysql&gt; FLUSH PRIVILEGES;Query OK, 1 row affected (0.01 sec)mysql&gt; SELECT host, user, password FROM user WHERE user = &apos;guest&apos;;+-----------+---------+------------------+| host      | user    | password         |+-----------+---------+------------------+| localhost | guest | 6f8c114b58f2ce9e |+-----------+---------+------------------+1 row in set (0.00 sec)</code></pre><p>注意需要执行FLUSH PRIVILEGES语句。 这个命令执行后会重新载入授权表。如果你不使用该命令，你就无法使用新创建的用户来连接MYSQL服务器，除非你重启MYSQL服务器。</p><p>你可以在创建用户时，为用户指定权限，在对应的权限列中，在插入语句中设置为 ‘Y’ 即可，用户权限列表如下：</p><pre><code>Select_privInsert_privUpdate_privDelete_privCreate_privDrop_privReload_privShutdown_privProcess_privFile_privGrant_privReferences_privIndex_privAlter_priv</code></pre><p>另外一种添加用户的方法为通过SQL的GRANT命令，以下命令会给指定数据库TUTORIALS添加用户zara，密码为zara123 。</p><pre><code>root@host# mysql -u root -p password;Enter password:*******mysql&gt; use mysql;Database changedmysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP    -&gt; ON TUTORIALS.*    -&gt; TO &apos;zara&apos;@&apos;localhost&apos;    -&gt; IDENTIFIED BY &apos;zara123&apos;;*MySQL的SQL语句以分号 (;) 作为结束标识。</code></pre><h2 id="2-管理MySQL的命令"><a href="#2-管理MySQL的命令" class="headerlink" title="(2)管理MySQL的命令"></a>(2)管理MySQL的命令</h2><h3 id="a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"><a href="#a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。" class="headerlink" title="a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"></a>a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</h3><pre><code>mysql&gt; use RUNOOB;Database changed</code></pre><h3 id="b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。"><a href="#b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。" class="headerlink" title="b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。"></a>b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。</h3><pre><code>mysql&gt; SHOW DATABASES;+--------------------+| Database           |+--------------------+| information_schema || RUNOOB             || cdcol              || mysql              || onethink           || performance_schema || phpmyadmin         || test               || wecenter           || wordpress          |+--------------------+10 rows in set (0.02 sec)</code></pre><h3 id="c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"><a href="#c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。" class="headerlink" title="c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"></a>c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。</h3><pre><code>mysql&gt; use RUNOOB;Database changedmysql&gt; SHOW TABLES;+------------------+| Tables_in_runoob |+------------------+| employee_tbl     || runoob_tbl       || tcount_tbl       |+------------------+3 rows in set (0.00 sec)</code></pre><h3 id="d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。"><a href="#d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。" class="headerlink" title="d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。"></a>d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。</h3><pre><code>mysql&gt; SHOW COLUMNS FROM runoob_tbl;+-----------------+--------------+------+-----+---------+-------+| Field           | Type         | Null | Key | Default | Extra |+-----------------+--------------+------+-----+---------+-------+| runoob_id       | int(11)      | NO   | PRI | NULL    |       || runoob_title    | varchar(255) | YES  |     | NULL    |       || runoob_author   | varchar(255) | YES  |     | NULL    |       || submission_date | date         | YES  |     | NULL    |       |+-----------------+--------------+------+-----+---------+-------+4 rows in set (0.01 sec)</code></pre><h3 id="e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。"><a href="#e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。" class="headerlink" title="e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。"></a>e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</h3><pre><code>mysql&gt; SHOW INDEX FROM runoob_tbl;+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+| Table      | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+| runoob_tbl |          0 | PRIMARY  |            1 | runoob_id   | A         |           2 |     NULL | NULL   |      | BTREE      |         |               |+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+1 row in set (0.00 sec)</code></pre><h3 id="f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。"><a href="#f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。" class="headerlink" title="f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。"></a>f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。</h3><pre><code>mysql&gt; SHOW TABLE STATUS  FROM RUNOOB;   # 显示数据库 RUNOOB 中所有表的信息mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &apos;runoob%&apos;;     # 表名以runoob开头的表的信息mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &apos;runoob%&apos;\G;   # 加上 \G，查询结果按列打印</code></pre><h1 id="3、数据库的基本操作语句"><a href="#3、数据库的基本操作语句" class="headerlink" title="3、数据库的基本操作语句"></a>3、数据库的基本操作语句</h1><h2 id="1-创建数据表"><a href="#1-创建数据表" class="headerlink" title="(1)创建数据表"></a>(1)创建数据表</h2><pre><code>CREATE TABLE table_name (column_name column_type);root@host# mysql -u root -pEnter password:*******mysql&gt; use RUNOOB;Database changedmysql&gt; CREATE TABLE runoob_tbl(   -&gt; runoob_id INT NOT NULL AUTO_INCREMENT,   -&gt; runoob_title VARCHAR(100) NOT NULL,   -&gt; runoob_author VARCHAR(40) NOT NULL,   -&gt; submission_date DATE,   -&gt; PRIMARY KEY ( runoob_id )   -&gt; )ENGINE=InnoDB DEFAULT CHARSET=utf8;Query OK, 0 rows affected (0.16 sec)mysql&gt;*如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL，在操作数据库时如果输入该字段的数据为NULL ，就会报错。*AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。*PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。*ENGINE 设置存储引擎，CHARSET 设置编码。</code></pre><h2 id="2-删除数据表"><a href="#2-删除数据表" class="headerlink" title="(2)删除数据表"></a>(2)删除数据表</h2><pre><code>DROP TABLE table_name ;root@host# mysql -u root -pEnter password:*******mysql&gt; use RUNOOB;Database changedmysql&gt; DROP TABLE runoob_tblQuery OK, 0 rows affected (0.8 sec)mysql&gt;查看一下：mysql&gt; show tables;Empty set (0.01 sec)</code></pre><h2 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="(3)插入数据"></a>(3)插入数据</h2><pre><code>INSERT INTO table_name ( field1, field2,...fieldN ) VALUES ( value1,value2,...valueN );root@host# mysql -u root -p password;Enter password:*******mysql&gt; use RUNOOB;Database changedmysql&gt; INSERT INTO runoob_tbl     -&gt; (runoob_title, runoob_author, submission_date)    -&gt; VALUES    -&gt; (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());Query OK, 1 rows affected, 1 warnings (0.01 sec)mysql&gt; INSERT INTO runoob_tbl    -&gt; (runoob_title, runoob_author, submission_date)    -&gt; VALUES    -&gt; (&quot;学习 MySQL&quot;, &quot;菜鸟教程&quot;, NOW());Query OK, 1 rows affected, 1 warnings (0.01 sec)mysql&gt; INSERT INTO runoob_tbl    -&gt; (runoob_title, runoob_author, submission_date)    -&gt; VALUES    -&gt; (&quot;JAVA 教程&quot;, &quot;RUNOOB.COM&quot;, &apos;2016-05-06&apos;);Query OK, 1 rows affected (0.00 sec)mysql&gt;*如果数据是字符型，必须使用单引号或者双引号，如：&quot;value&quot;。*使用箭头标记-&gt;不是SQL语句的一部分，它仅仅表示一个新行，如果一条SQL语句太长，我们可以通过回车键来创建一个新行来编写SQL语句，SQL语句的命令结束符为分号 ;。</code></pre><h2 id="4-查询数据"><a href="#4-查询数据" class="headerlink" title="(4)查询数据"></a>(4)查询数据</h2><pre><code>SELECT column_name,column_name FROM table_name [WHERE Clause][LIMIT N][ OFFSET M];select * from runoob_tbl;SELECT * from runoob_tbl WHERE runoob_author=&apos;菜鸟教程&apos;;*查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。*SELECT 命令可以读取一条或者多条记录。你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据*你可以使用 WHERE 语句来包含任何条件。例如使用 AND 或者 OR 指定一个或多个条件。WHERE子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令。WHERE子句类似于程序语言中的 if 条件，根据 MySQL 表中的字段值来读取指定的数据。MySQL 的 WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY 关键字来设定 WHERE 子句的字符串比较是区分大小写的。*你可以使用 LIMIT 属性来设定返回的记录数。*你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。</code></pre><h2 id="5-更新数据表"><a href="#5-更新数据表" class="headerlink" title="(5)更新数据表"></a>(5)更新数据表</h2><pre><code>UPDATE table_name SET field1=new-value1, field2=new-value2 [WHERE Clause];mysql&gt; UPDATE runoob_tbl SET runoob_title=&apos;学习 C++&apos; WHERE runoob_id=3;Query OK, 1 rows affected (0.01 sec)mysql&gt; SELECT * from runoob_tbl WHERE runoob_id=3;+-----------+--------------+---------------+-----------------+| runoob_id | runoob_title | runoob_author | submission_date |+-----------+--------------+---------------+-----------------+| 3         | 学习 C++   | RUNOOB.COM    | 2016-05-06      |+-----------+--------------+---------------+-----------------+1 rows in set (0.01 sec)*你可以同时更新一个或多个字段。*你可以在 WHERE 子句中指定任何条件。*你可以在一个单独表中同时更新数据。</code></pre><h2 id="6-删除MySQL数据表中的记录"><a href="#6-删除MySQL数据表中的记录" class="headerlink" title="(6)删除MySQL数据表中的记录"></a>(6)删除MySQL数据表中的记录</h2><pre><code>DELETE FROM table_name [WHERE Clause];mysql&gt; use RUNOOB;Database changedmysql&gt; DELETE FROM runoob_tbl WHERE runoob_id=3;Query OK, 1 row affected (0.23 sec)*如果没有指定 WHERE 子句，MySQL 表中的所有记录将被删除。*你可以在 WHERE 子句中指定任何条件*您可以在单个表中一次性删除记录。</code></pre><h2 id="7-删除，添加或修改表字段"><a href="#7-删除，添加或修改表字段" class="headerlink" title="(7)删除，添加或修改表字段"></a>(7)删除，添加或修改表字段</h2><pre><code>删除：ALTER TABLE alter_tbl  DROP columnname;删除指定字段添加：ALTER TABLE alter_tbl ADD new_column_name new_typename AFTER columnname;指定添加位置修改： ALTER TABLE alter_tbl MODIFY columnname new_typename;修改字段类型       ALTER TABLE alter_tbl CHANGE oldcolumnname newcolumnname newtypename;修改字段及类型       ALTER TABLE alter_tbl RENAME TO alter_tb2;修改表名</code></pre><h2 id="8-UNION操作符"><a href="#8-UNION操作符" class="headerlink" title="(8)UNION操作符"></a>(8)UNION操作符</h2><pre><code>SELECT expression1, expression2, ... expression_nFROM tables[WHERE conditions]UNION [ALL | DISTINCT]SELECT expression1, expression2, ... expression_nFROM tables[WHERE conditions];*expression1, expression2, ... expression_n: 要检索的列。*tables: 要检索的数据表。*WHERE conditions: 可选， 检索条件。*DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。*ALL: 可选，返回所有结果集，包含重复数据。</code></pre><h2 id="9-排序"><a href="#9-排序" class="headerlink" title="(9)排序"></a>(9)排序</h2><pre><code>SELECT field1, field2,...fieldN table_name1, table_name2...ORDER BY field1, [field2...] [ASC [DESC]];SELECT * from runoob_tbl ORDER BY submission_date ASC;SELECT * from runoob_tbl ORDER BY submission_date DESC;*你可以使用任何字段来作为排序的条件，从而返回排序后的查询结果。*你可以设定多个字段来排序。*你可以使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。默认情况下，它是按升序排列。*你可以添加 WHERE...LIKE 子句来设置条件。</code></pre><h2 id="10-GROUP-BY语法"><a href="#10-GROUP-BY语法" class="headerlink" title="(10)GROUP BY语法"></a>(10)GROUP BY语法</h2><pre><code>SELECT column_name, function(column_name)FROM table_nameWHERE column_name operator valueGROUP BY column_name;SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;将数据表按名字进行分组，并统计每个人有多少条记录</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
     
   </entry>
   
