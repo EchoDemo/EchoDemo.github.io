@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-28T12:28:30.244Z</updated>
+  <updated>2018-03-31T07:34:57.915Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文字</title>
+    <link href="http://www.echodemo.cc/2018/03/31/%E6%96%87%E5%AD%97/"/>
+    <id>http://www.echodemo.cc/2018/03/31/文字/</id>
+    <published>2018-03-31T07:29:11.000Z</published>
+    <updated>2018-03-31T07:34:57.915Z</updated>
+    
+    <content type="html"><![CDATA[<p>庆山在书中写到：文字具备即刻的意义，记下的观点和细节，过后回望，已显得不再重要或已无关，但从记录中回溯，可看到自我构建和行进的一个过程。那么我想写博客的意义也大抵如此，文件夹中所有的文件前缀清晰地呈现出文件创建的日期，文件的标题可以一眼看出这其中包含了什么。那么点开“阅读全文”的扩展链接，你会知道自己在某天的某个时间段做了什么。可能是有关学习的知识点，可能是有关生活的感悟或自己的思考，又或者仅仅是记录了一件事情的发生。所有这些，过后回望的确会有及其深刻的意义。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;庆山在书中写到：文字具备即刻的意义，记下的观点和细节，过后回望，已显得不再重要或已无关，但从记录中回溯，可看到自我构建和行进的一个过程。那么我想写博客的意义也大抵如此，文件夹中所有的文件前缀清晰地呈现出文件创建的日期，文件的标题可以一眼看出这其中包含了什么。那么点开“阅读全
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《眠空》摘句(三)</title>
+    <link href="http://www.echodemo.cc/2018/03/31/%E3%80%8A%E7%9C%A0%E7%A9%BA%E3%80%8B%E6%91%98%E5%8F%A5(%E4%B8%89)/"/>
+    <id>http://www.echodemo.cc/2018/03/31/《眠空》摘句(三)/</id>
+    <published>2018-03-31T07:13:57.000Z</published>
+    <updated>2018-03-31T07:14:55.216Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、家里花园池塘，荷花已盛开。通常先有一朵最早绽放，一夜之间，其他次第开放。荷叶可煮米粥，白米汤染上微润绿汁，带有莲花清香，和上冰糖。荷叶在米粥煮熟即将熄火时放入覆盖。今年，一池塘红色荷花唯独长出一株白莲。不知它因何而起。</p><p>2、经过提纯的内心空间，不是不懂，不知，而是不问，不计较，不介意，不追究。愿意把别人想得好一些，不把人想得复杂，考虑到对方的立场。可说，可不说时，不如选择不说。</p><p>4、不存在无可救药的人、感情、生活。一切终究有变化。如果你认为它无可救药，不过是沉溺。我们可以选择完全的放下，或者完全的承担。唯独不能伪装成一个懒怠的理所当然的姿势。你尽可拖延和故作不知，企图获得其他妥协。命运静静等待一侧，旁观你辗转煎熬，最终会逼迫你把脚步移向注定的一格。实践一旦进行，错误和方式就会自动调整和归位。出发时首要的。</p><p>5、跪拜只是一个仪式，为了让心恭敬谦卑平和柔顺，在毫无杂念从事这一重复举动时训练和观照自己。调伏这颗充满傲慢我执的刚硬的心。这是一个修行的任务。</p><p>6、</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、家里花园池塘，荷花已盛开。通常先有一朵最早绽放，一夜之间，其他次第开放。荷叶可煮米粥，白米汤染上微润绿汁，带有莲花清香，和上冰糖。荷叶在米粥煮熟即将熄火时放入覆盖。今年，一池塘红色荷花唯独长出一株白莲。不知它因何而起。&lt;/p&gt;
+&lt;p&gt;2、经过提纯的内心空间，不是不懂，不
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的抽象类和接口</title>
+    <link href="http://www.echodemo.cc/2018/03/31/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://www.echodemo.cc/2018/03/31/Java中的抽象类和接口/</id>
+    <published>2018-03-31T07:01:20.000Z</published>
+    <updated>2018-03-31T07:02:41.750Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、抽象类和常规类很像，但是不能使用new操作符创建它的实例，但抽象类可以用作一种数据类型，因此：GeometricObject[] objects=new GeometricObject[10];objects[0]=new Circle();像上面这样创建一个元素是GeometricObject类型的数组，然后创建一个GeometricObject的实例，并将它的引用赋值给数组是可以的。虽然不能使用new操作符创建它的实例，但仍然可以定义它的构造方法，抽象类的构造方法定义为protected，因为它只被子类使用。抽象方法只有定义而没有实现。它的实现由子类提供。</p><p>2、抽象方法不能包含在非抽象类中，也就是说一个包含抽象方法的类必须声明为抽象类。但是，可以定义一个不包含抽象方法的抽象类(同样不能使用new操作符创建它的实例)，这种类是用来定义新子类的基类的。如果抽象父类的子类不能实现所有的抽象方法，那么这个子类也必须定义为抽象的。另外，抽象方法是非静态的。</p><p>3、即使子类的父类是具体的，这个子类也可以是抽象的。比如：object类是具体的，但继承于它的类却可以是抽象的。子类可以覆盖父类的方法并将它定义为abstract(这是很少见的)，但是它在当父类的方法实现在子类中变得不合法时是很有用的。在这种情况下，子类必须为abstract。</p><p>4、接口是一种与类相似的结构，只包含常量和抽象方法。它和抽象类相似，不能使用new操作创建接口的实例。由于接口中所有的数据域都是public final static而且所有的方法都是public abstract，所以java允许忽略这些修饰符。</p><p>5、Java只允许为类的扩展做单一继承，但是允许使用接口做多重继承。用关键字extends，接口可以继承其他接口，但是不可扩展类。一个类可以扩展它的父类同时实现多个接口。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、抽象类和常规类很像，但是不能使用new操作符创建它的实例，但抽象类可以用作一种数据类型，因此：GeometricObject[] objects=new GeometricObject[10];objects[0]=new Circle();像上面这样创建一个元素是Ge
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>画地为牢</title>
@@ -123,9 +199,9 @@
     <link href="http://www.echodemo.cc/2018/03/26/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E4%B8%89)/"/>
     <id>http://www.echodemo.cc/2018/03/26/C++中的问题整理(三)/</id>
     <published>2018-03-26T10:10:23.000Z</published>
-    <updated>2018-03-29T02:53:38.054Z</updated>
+    <updated>2018-03-31T07:00:52.662Z</updated>
     
-    <content type="html"><![CDATA[<p>1、define与const的区别</p><p>(1)define在预处理阶段进行替换;const在编译时确定其值。</p><p>(2)用define可以定义一些简单的函数，const是不可以定义函数的。</p><p>(3)用define定义的常量是不可以用指针变量去指向的，用const定义的常量是可以用指针去指向该常量的地址的。</p><p>(4)define无类型，不进行类型安全检查，可能会产生意想不到的错误;const有数据类型,编译时会进行类型检查。</p><p>(5)define不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大;const在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝。</p><p>(6)宏定义的作用范围仅限于当前文件;而const对象在默认状态下，只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字(在声明和定义时都要加。</p><p>2、构造函数不能为虚函数，而析构函数可以且常常是虚函数</p><p>(1)如果构造函数是虚函数，那么就需要通过vtable来调用，但此时面对一块raw memeory是找不到vtable的，vtable是在构造函数中才初始化的，而不是在其之前。因此构造函数不能为虚函数。</p><p>(2)析构函数可以是虚函数,此时vtable已经初始化了,况且我们通常通过基类的指针来销毁对象，如果析构函数不为虚的话，就不能正确识别对象类型，从而不能正确销毁对象。</p><p>3、虚函数和纯虚函数的作用与区别</p><p>(1)虚函数为了重载和多态的需要，在基类中是有定义的，即便定义是空，所以子类中可以重写也可以不重写基类中的此函数。</p><p>(2)纯虚函数在基类中是没有定义的，必须在子类中加以实现，很像java中的接口函数。它不能直接实例化，需要派生类来实现函数定义。</p><p>4、面向对象编程关注的是编程的数据方面，而泛型编程关注的是算法。他们之间的共同点是抽象和创建可重用代码，但它们的理念决然不同。泛型编程旨在编写独立于数据类型的代码。在C++中，完成通用程序的工具是模板，模板使得算法独立于存储的数据类型，而迭代器使算法独立于使用的容器类型，它们都是STL通用方法的重要组成部分。</p><p>5、头文件中的#ifndef/#define/#endif的作用</p><p>其作用是防止该头文件被重复引用。”被重复引用”是指一个头文件在同一个cpp文件中被include了多次，这种错误常常是由于include嵌套造成的。比如：存在a.h文件#include “c.h”而此时b.cpp文件导入了#include”a.h”和#include”c.h”此时就会造成c.h重复引用。有些头文件重复引用只是增加了编译工作的工作量，不会引起太大的问题，仅仅是编译效率低一些。但是对于大工程而言编译效率低下就会是一件很痛苦的事情了。</p><p>6、动态内存分配的初始化问题</p><p>1)malloc函数：void *malloc(unsigned int size)</p><p>在内存的动态分配区域中分配一个长度为size的连续空间，如果分配成功，则返回所分配内存空间的首地址，否则返回NULL，申请的内存不会进行初始化。</p><p>2)calloc函数： void *calloc(unsigned int num, unsigned int size)</p><p>按照所给的数据个数和数据类型所占字节数，分配一个 num * size 连续的空间。calloc申请内存空间后，会自动初始化内存空间为 0，但是malloc不会进行初始化，其内存空间存储的是一些随机数据。</p><p>3)realloc函数：void <em>realloc(void </em>ptr, unsigned int size)</p><p>动态分配一个长度为size的内存空间，并把内存空间的首地址赋值给ptr，把ptr内存空间调整为size。申请的内存空间不会进行初始化。</p><p>4)new是动态分配内存的运算符，自动计算需要分配的空间，在分配类类型的内存空间时，同时调用类的构造函数，对内存空间进行初始化，即完成类的初始化工作。动态分配内置类型是否自动初始化取决于变量定义的位置，在函数体外定义的变量都初始化为0，在函数体内定义的内置类型变量都不进行初始化。</p><p>7、指针和const</p><pre><code>int * const x = &amp;y;       //指针所指向的内存不可变，内存中的值可以改变。const int *x = &amp;y;        //指针所指向的内存可变，但内存中的值不能通过指针改变。int const *x = &amp;y;        //指针所指向的内存可变，但内存中的值不能通过指针改变。const int const *x = &amp;y;  //指针所指向的内存不可变，内存中的值也不能通过指针改变。const int * const x = &amp;y; //指针所指向的内存不可变，内存中的值也不能通过指针改变。当const在*的左边，则表示指针所指向的空间的内容不能通过改变*p的值来修改，或者说指针所指向空间的值不能被修改。当const在*的右边，则表示指针的地址不能被修改，或者说指针的指向不能被修改。</code></pre><p>8、无论是整型数组还是字符数组，数组名作为右值的时候都代表数组首元素的首地址。数组发生降级(数组名退化为数组首元素的地址)的情况：数组传参、数组名参与运算。数组名不会发生降级的情况：sizeof(数组名)、取地址数组名(取到的是整个数组的地址而不是首元素的地址)。</p><p>9、重载、覆盖和隐藏</p><pre><code>(1)成员函数被重载的特征：a、相同的范围(在同一个类中)；b、函数名字相同；c、参数不同；d、virtual 关键字可有可无。(2)覆盖是指派生类函数覆盖基类函数，只作用于派生类函数，特征是：a、不同的范围(分别位于派生类与基类)；b、函数名字相同；c、参数相同；d、基类函数必须有virtual 关键字。实际上虚函数的作用，就是实现覆盖。(3)“隐藏”是指派生类的函数屏蔽了与其同名的基类函数，规则如下：a、如果派生类的函数与基类的函数同名，但是参数不同。此时，不论有无virtual关键字，基类的函数将被隐藏(注意别与重载混淆)。b、如果派生类的函数与基类的函数同名，并且参数也相同，但是基类函数没有virtual 关键字。此时，基类的函数被隐藏(注意别与覆盖混淆)。</code></pre><p>10、类模板与模板类的概念</p><p>(1)类模板:一个类模板(也称为类属类或类生成类)允许用户为类定义一种模式，使得类中的某些数据成员、默认成员函数的参数、某些成员函数的返回值，能够取任意类型（包括系统预定义的和用户自定义的）。如果一个类中数据成员的数据类型不能确定，或者是某个成员函数的参数或返回值的类型不能确定，就必须将此类声明为模板，它的存在不是代表一个具体的、实际的类，而是代表着一类类。</p><p>(2)模板类是类模板实例化后的一个产物。可以从类模板派生出新的类，既可以派生类模板，也可以派生非模板类。<br>类模板的重点是模板，表示的是一个模板，专门用于产生类的模子。模板类的重点是类，表示的是由一个模板生成而来的类。</p>]]></content>
+    <content type="html"><![CDATA[<p>1、define与const的区别</p><p>(1)define在预处理阶段进行替换;const在编译时确定其值。</p><p>(2)用define可以定义一些简单的函数，const是不可以定义函数的。</p><p>(3)用define定义的常量是不可以用指针变量去指向的，用const定义的常量是可以用指针去指向该常量的地址的。</p><p>(4)define无类型，不进行类型安全检查，可能会产生意想不到的错误;const有数据类型,编译时会进行类型检查。</p><p>(5)define不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大;const在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝。</p><p>(6)宏定义的作用范围仅限于当前文件;而const对象在默认状态下，只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字(在声明和定义时都要加。</p><p>2、构造函数不能为虚函数，而析构函数可以且常常是虚函数</p><p>(1)如果构造函数是虚函数，那么就需要通过vtable来调用，但此时面对一块raw memeory是找不到vtable的，vtable是在构造函数中才初始化的，而不是在其之前。因此构造函数不能为虚函数。</p><p>(2)析构函数可以是虚函数,此时vtable已经初始化了,况且我们通常通过基类的指针来销毁对象，如果析构函数不为虚的话，就不能正确识别对象类型，从而不能正确销毁对象。</p><p>3、虚函数和纯虚函数的作用与区别</p><p>(1)虚函数为了重载和多态的需要，在基类中是有定义的，即便定义是空，所以子类中可以重写也可以不重写基类中的此函数。</p><p>(2)纯虚函数在基类中是没有定义的，必须在子类中加以实现，很像java中的接口函数。它不能直接实例化，需要派生类来实现函数定义。</p><p>4、面向对象编程关注的是编程的数据方面，而泛型编程关注的是算法。他们之间的共同点是抽象和创建可重用代码，但它们的理念决然不同。泛型编程旨在编写独立于数据类型的代码。在C++中，完成通用程序的工具是模板，模板使得算法独立于存储的数据类型，而迭代器使算法独立于使用的容器类型，它们都是STL通用方法的重要组成部分。</p><p>5、头文件中的#ifndef/#define/#endif的作用</p><p>其作用是防止该头文件被重复引用。”被重复引用”是指一个头文件在同一个cpp文件中被include了多次，这种错误常常是由于include嵌套造成的。比如：存在a.h文件#include “c.h”而此时b.cpp文件导入了#include”a.h”和#include”c.h”此时就会造成c.h重复引用。有些头文件重复引用只是增加了编译工作的工作量，不会引起太大的问题，仅仅是编译效率低一些。但是对于大工程而言编译效率低下就会是一件很痛苦的事情了。</p><p>6、动态内存分配的初始化问题</p><p>1)malloc函数：void *malloc(unsigned int size)</p><p>在内存的动态分配区域中分配一个长度为size的连续空间，如果分配成功，则返回所分配内存空间的首地址，否则返回NULL，申请的内存不会进行初始化。</p><p>2)calloc函数： void *calloc(unsigned int num, unsigned int size)</p><p>按照所给的数据个数和数据类型所占字节数，分配一个 num * size 连续的空间。calloc申请内存空间后，会自动初始化内存空间为 0，但是malloc不会进行初始化，其内存空间存储的是一些随机数据。</p><p>3)realloc函数：void <em>realloc(void </em>ptr, unsigned int size)</p><p>动态分配一个长度为size的内存空间，并把内存空间的首地址赋值给ptr，把ptr内存空间调整为size。申请的内存空间不会进行初始化。</p><p>4)new是动态分配内存的运算符，自动计算需要分配的空间，在分配类类型的内存空间时，同时调用类的构造函数，对内存空间进行初始化，即完成类的初始化工作。动态分配内置类型是否自动初始化取决于变量定义的位置，在函数体外定义的变量都初始化为0，在函数体内定义的内置类型变量都不进行初始化。</p><p>7、指针和const</p><pre><code>int * const x = &amp;y;       //指针所指向的内存不可变，内存中的值可以改变。const int *x = &amp;y;        //指针所指向的内存可变，但内存中的值不能通过指针改变。int const *x = &amp;y;        //指针所指向的内存可变，但内存中的值不能通过指针改变。const int const *x = &amp;y;  //指针所指向的内存不可变，内存中的值也不能通过指针改变。const int * const x = &amp;y; //指针所指向的内存不可变，内存中的值也不能通过指针改变。当const在*的左边，则表示指针所指向的空间的内容不能通过改变*p的值来修改，或者说指针所指向空间的值不能被修改。当const在*的右边，则表示指针的地址不能被修改，或者说指针的指向不能被修改。</code></pre><p>8、无论是整型数组还是字符数组，数组名作为右值的时候都代表数组首元素的首地址。数组发生降级(数组名退化为数组首元素的地址)的情况：数组传参、数组名参与运算。数组名不会发生降级的情况：sizeof(数组名)、取地址数组名(取到的是整个数组的地址而不是首元素的地址)。</p><p>9、重载、覆盖和隐藏</p><pre><code>(1)成员函数被重载的特征：a、相同的范围(在同一个类中)；b、函数名字相同；c、参数不同；d、virtual关键字可有可无。(2)覆盖是指派生类函数覆盖基类函数，只作用于派生类函数，特征是：a、不同的范围(分别位于派生类与基类)；b、函数名字相同；c、参数相同；d、基类函数必须有virtual关键字。实际上虚函数的作用，就是实现覆盖。(3)“隐藏”是指派生类的函数屏蔽了与其同名的基类函数，规则如下：a、如果派生类的函数与基类的函数同名，但是参数不同。此时，不论有无virtual关键字，基类的函数将被隐藏(注意别与重载混淆)。b、如果派生类的函数与基类的函数同名，并且参数也相同，但是基类函数没有virtual关键字。此时，基类的函数被隐藏(注意别与覆盖混淆)。</code></pre><p>10、类模板与模板类的概念</p><p>(1)类模板:一个类模板(也称为类属类或类生成类)允许用户为类定义一种模式，使得类中的某些数据成员、默认成员函数的参数、某些成员函数的返回值，能够取任意类型（包括系统预定义的和用户自定义的）。如果一个类中数据成员的数据类型不能确定，或者是某个成员函数的参数或返回值的类型不能确定，就必须将此类声明为模板，它的存在不是代表一个具体的、实际的类，而是代表着一类类。</p><p>(2)模板类是类模板实例化后的一个产物。可以从类模板派生出新的类，既可以派生类模板，也可以派生非模板类。<br>类模板的重点是模板，表示的是一个模板，专门用于产生类的模子。模板类的重点是类，表示的是由一个模板生成而来的类。</p>]]></content>
     
     <summary type="html">
     
@@ -151,9 +227,9 @@
     <link href="http://www.echodemo.cc/2018/03/26/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E4%BA%8C)/"/>
     <id>http://www.echodemo.cc/2018/03/26/C++中的问题整理(二)/</id>
     <published>2018-03-26T07:12:01.000Z</published>
-    <updated>2018-03-28T09:00:05.372Z</updated>
+    <updated>2018-03-31T07:07:25.739Z</updated>
     
-    <content type="html"><![CDATA[<p>1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。</p><p>2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。</p><p>3、构造函数初始化时必须采用初始化列表的一共有三种情况</p><pre><code>(1)需要初始化的数据成员是对象(继承时调用基类构造函数)(2)需要初始化const修饰的类成员(3)需要初始化引用成员数据*由于static属于类并不属于具体的对象，所以static成员是不允许在类内初始化的。static const成员也不在初始化列表中。*static属于类，它在未实例化的时候就已经存在了，而构造函数的初始化列表，只有在实例化的时候才执行。*static成员不属于对象。我们在调用构造函数自然是创建对象，一个跟对象没直接关系的成员没有必要初始化。</code></pre><p>4、实参可以是任何类型（可以是常量，变量或表达式），但是形参却不能是表达式。C语言中最简单的数据类型包括整型、实型(实型又称浮点数或者实数)、字符型。在C语言中，没有专门的逻辑型数据类型，而是用0和1来表示逻辑值。</p><p>5、类的大小只与成员变量（非static数据成员变量）和虚函数指针有关，还要考虑到对齐。基类中存在虚函数时，派生类会继承基类的虚函数(虚函数也是类的成员函数)，因此派生类中不再增加虚函数的存储空间（因为所有的虚函数共享一块内存区域），而仅仅需要考虑派生类中添加进来的非static数据成员的内存空间大小。(指向虚函数的指针为4个字节)</p><p>6、fork()与clone的区别</p><p>函数复制时将父进程的所有资源都通过复制数据结构进行了复制，然后传递给子进程，所以fork()函数不带参数；clone()函数则是将部分父进程的资源的数据结构进行复制，复制哪些资源是可以通过参数设定选择的，所以clone()函数带参数，没有复制的资源可以通过指针共享给子进程。</p><p>7、关于浅复制和深复制</p><p>所谓浅复制，就是在构造函数当中直接为复制的对象的数据成员赋值。在很多情况下，这是可以的。创建新的对象，要为对象的数据成员分配存储空间，直接赋值就将值保存在相应的空间中。但是如果在构造函数当中出现了指针类型的数据成员时，也按照上面那样直接赋值而未经过地址的分配就会在调试的时候出错，这种指针被称为“野指针”。解决这样的问题的方法，就是在构造函数中，为指针类型的成员，分配专门的空间。以这条规则构建的复制，称作为深复制。</p><p>8、C语言中的未定义行为(Undefined Behavior)</p><p>未定义行为是指C语言标准未做规定的行为。同时，标准也从没要求编译器判断未定义行为，所以这些行为有编译器自行处理，在不同的编译器可能会产生不同的结果，又或者如果程序调用未定义的行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p><p>9、C++面向对象的三个基本特征(封装、继承和多态)</p><p>(1)封装：将客观事物抽象成类，每个类对自身的数据和方法实行。封装是实现信息隐蔽的一种技术，其目的是使类的定义和实现分离。</p><p>(2)继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p><p>(3)多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。在程序运行时的多态性通过继承和虚函数来体现；在程序编译时多态性体现在函数和运算符的重载上。</p><p>*封装可以隐藏实现细节，使得代码模块化；继承可以扩展已存在的代码模块（类）；它们的目的都是为了——代码重用。而多态则是为了实现接口重用！</p><p>10、虚函数如何实现的</p><pre><code>(1)虚函数是通过一张虚函数表实现的，有多少个虚函数，就有多少个指针。(2)在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题。(3)实际上在编译的时候，编译器会自动加上虚表。(4)虚函数的作用实现动态联编，也就是说在程序运行阶段动态的选择合适的成员函数，在定义了虚函数之后，可以在基类的派生类中对虚函数重新定义。(5)虚表的使用方法是如果派生类在自己定义中没有修改基类的虚函数，我们就指向基类的虚函数；如果派生类改写了基类的虚函数，这时续表则将原来指向基类的虚函数的地址替换为指向自身虚函数的指针。(6)必须通过基类类型的引用或指针进行函数调用才会发生多态。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。</p><p>2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。</p><p>3、构造函数初始化时必须采用初始化列表的一共有三种情况</p><pre><code>(1)需要初始化的数据成员是对象(继承时调用基类构造函数)(2)需要初始化const修饰的类成员(3)需要初始化引用成员数据*由于static属于类并不属于具体的对象，所以static成员是不允许在类内初始化的。static const成员也不在初始化列表中。*static属于类，它在未实例化的时候就已经存在了，而构造函数的初始化列表，只有在实例化的时候才执行。*static成员不属于对象。我们在调用构造函数自然是创建对象，一个跟对象没直接关系的成员没有必要初始化。</code></pre><p>4、实参可以是任何类型（可以是常量，变量或表达式），但是形参却不能是表达式。C语言中最简单的数据类型包括整型、实型(实型又称浮点数或者实数)、字符型。在C语言中，没有专门的逻辑型数据类型，而是用0和1来表示逻辑值。</p><p>5、类的大小只与成员变量（非static数据成员变量）和虚函数指针有关，还要考虑到对齐。基类中存在虚函数时，派生类会继承基类的虚函数(虚函数也是类的成员函数)，因此派生类中不再增加虚函数的存储空间（因为所有的虚函数共享一块内存区域），而仅仅需要考虑派生类中添加进来的非static数据成员的内存空间大小。(指向虚函数的指针为4个字节)</p><p>6、fork()与clone的区别</p><p>函数复制时将父进程的所有资源都通过复制数据结构进行了复制，然后传递给子进程，所以fork()函数不带参数；clone()函数则是将部分父进程的资源的数据结构进行复制，复制哪些资源是可以通过参数设定选择的，所以clone()函数带参数，没有复制的资源可以通过指针共享给子进程。</p><p>7、关于浅复制和深复制</p><p>所谓浅复制，就是在构造函数当中直接为复制的对象的数据成员赋值。在很多情况下，这是可以的。创建新的对象，要为对象的数据成员分配存储空间，直接赋值就将值保存在相应的空间中。但是如果在构造函数当中出现了指针类型的数据成员时，也按照上面那样直接赋值而未经过地址的分配就会在调试的时候出错，这种指针被称为“野指针”。解决这样的问题的方法，就是在构造函数中，为指针类型的成员，分配专门的空间。以这条规则构建的复制，称作为深复制。</p><p>8、C语言中的未定义行为(Undefined Behavior)</p><p>未定义行为是指C语言标准未做规定的行为。同时，标准也从没要求编译器判断未定义行为，所以这些行为有编译器自行处理，在不同的编译器可能会产生不同的结果，又或者如果程序调用未定义的行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p><p>9、C++面向对象的三个基本特征(封装、继承和多态)</p><p>(1)封装：将客观事物抽象成类，每个类对自身的数据和方法实行。封装是实现信息隐蔽的一种技术，其目的是使类的定义和实现分离。</p><p>(2)继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p><p>(3)多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。在程序运行时的多态性通过继承和虚函数来体现；在程序编译时多态性体现在函数和运算符的重载上。同时又有这些多态的形式，参数多态：指参数方面，包含函数模板与类模板；包含多态：含有virtual关键字；重载多态：函数名相同，但函数参数的个数或类型不同构成多态；强制多态：通过强制类型转换形成；重载多态和强制多态是指特定多态。参数多态和包含多态是指通用多态。</p><p>*封装可以隐藏实现细节，使得代码模块化；继承可以扩展已存在的代码模块（类）；它们的目的都是为了——代码重用。而多态则是为了实现接口重用！</p><p>10、虚函数如何实现的</p><pre><code>(1)虚函数是通过一张虚函数表实现的，有多少个虚函数，就有多少个指针。(2)在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题。(3)实际上在编译的时候，编译器会自动加上虚表。(4)虚函数的作用实现动态联编，也就是说在程序运行阶段动态的选择合适的成员函数，在定义了虚函数之后，可以在基类的派生类中对虚函数重新定义。(5)虚表的使用方法是如果派生类在自己定义中没有修改基类的虚函数，我们就指向基类的虚函数；如果派生类改写了基类的虚函数，这时续表则将原来指向基类的虚函数的地址替换为指向自身虚函数的指针。(6)必须通过基类类型的引用或指针进行函数调用才会发生多态。</code></pre>]]></content>
     
     <summary type="html">
     
@@ -469,86 +545,6 @@
     
     
       <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT A1052 Linked List Sorting</title>
-    <link href="http://www.echodemo.cc/2018/03/20/PAT-A1052-Linked-List-Sorting/"/>
-    <id>http://www.echodemo.cc/2018/03/20/PAT-A1052-Linked-List-Sorting/</id>
-    <published>2018-03-20T08:09:22.000Z</published>
-    <updated>2018-03-24T11:08:11.263Z</updated>
-    
-    <content type="html"><![CDATA[<p>A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now given a linked list, you are supposed to sort the structures according to their key values in increasing order.</p><p>Input Specification:</p><p>Each input file contains one test case. For each case, the first line contains a positive N (&lt; 105) and an address of the head node, where N is the total number of nodes in memory and the address of a node is a 5-digit positive integer. NULL is represented by -1.Then N lines follow, each describes a node in the format:</p><pre><code>Address Key next</code></pre><p>where Address is the address of the node in memory, Key is an integer in [-105, 105], and Next is the address of the next node. It is guaranteed that all the keys are distinct and there is no cycle in the linked list starting from the head node.</p><p>Output Specification:</p><p>For each test case, the output format is the same as that of the input, where N is the total number of nodes in the list and all the nodes must be sorted order.</p><pre><code>Sample Input:5 0000111111 100 -100001 0 2222233333 100000 1111112345 -1 3333322222 1000 12345Sample Output:5 1234512345 -1 0000100001 0 1111111111 100 2222222222 1000 3333333333 100000 -1</code></pre><p>题目大意：给出一个静态链表，将链表按照数据域data的值从小到大进行排序，然后把排序后的静态链表上的结点从头结点顺序输出。</p><p>分析：建立存储静态节点的结构体数组，从首节点开始的顺序(直到-1)遍历整个静态链表，将在静态链表中节点的flag标记为true，并且统计count(有效结点的个数)大小，这里是因为有的你输入的节点根本不在静态链表上。之后将静态链表进行排序，这里需要进行二次排序：如果两个节点中有一个节点的标志位为false就把它移动到后面(reuturn a.flag&gt;b.flag)，否则就按照节点数据域从小到大进行排序(return a.data&lt;b.data)。最后只输出前count个静态链表节点。</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;stdlib.h&gt;using namespace std;const int maxn = 100010;struct Node {    int address;    int data;    int next;    bool flag;}node[maxn];bool cmp(Node a, Node b) {    if (a.flag == false || b.flag == false) {        return a.flag &gt; b.flag;//将无效节点放到后面    }    else {        return a.data &lt; b.data;//按照数据域的顺序从大到小排列    }}int main() {    int n, x;    cin &gt;&gt; n &gt;&gt; x;    int address, data, next;    for (int i = 0;i&lt;n;i++) {//初始化静态链表        cin &gt;&gt; address &gt;&gt; data &gt;&gt; next;        node[address].address = address;        node[address].data = data;        node[address].next = next;    }    for (int i = 0;i &lt; maxn;i++) {        node[i].flag = false;//初始化标志位    }    int count = 0;    while (x != -1) {//遍历静态链表，对有效的节点进行标记，同时统计有效节点的个数(因为存在一些你输入的节点但是不在链表上情况)        node[x].flag = true;        count++;        x = node[x].next;    }    if (count == 0) {//如果头结点为-1，即链表中没有节点        cout &lt;&lt; &quot;0 -1&quot; &lt;&lt; endl;    }    else {        sort(node, node + maxn, cmp);//筛选有效节点，按data从小到大排列        printf(&quot;%d %05d\n&quot;, count, node[0].address);        for (int i = 0;i &lt; count;i++) {        if (i==count-1)            printf(&quot;%05d %d -1\n&quot;, node[i].address, node[i].data);        else            printf(&quot;%05d %d %05d\n&quot;, node[i].address, node[i].data, node[i+1].address);        }    }    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT A1032 Sharing</title>
-    <link href="http://www.echodemo.cc/2018/03/20/PAT-A1032-Sharing/"/>
-    <id>http://www.echodemo.cc/2018/03/20/PAT-A1032-Sharing/</id>
-    <published>2018-03-20T02:58:51.000Z</published>
-    <updated>2018-03-24T11:08:02.658Z</updated>
-    
-    <content type="html"><![CDATA[<p>To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, “loading” and “being” are stored as showed in Figure 1.You are supposed to find the starting position of the common suffix (e.g. the position of “i” in Figure 1).</p><p>Input Specification:</p><p>Each input file contains one test case. For each case, the first line contains two addresses of nodes and a positive N (&lt;= 105), where the two addresses are the addresses of the first nodes of the two words, and N is the total number of nodes. The address of a node is a 5-digit positive integer, and NULL is represented by -1.<br>Then N lines follow, each describes a node in the format:</p><pre><code>Address Data Next</code></pre><p>where Address is the position of the node, Data is the letter contained by this node which is an English letter chosen from {a-z, A-Z}, and Next is the position of the next node.</p><p>Output Specification:</p><p>For each case, simply output the 5-digit starting position of the common suffix. If the two words have no common suffix, output “-1” instead.</p><pre><code>Sample Input 1:11111 22222 967890 i 0000200010 a 1234500003 g -112345 D 6789000002 n 0000322222 B 2345611111 L 0000123456 e 6789000001 o 00010Sample Output 1:67890Sample Input 2:00001 00002 400001 a 1000110001 s -100002 a 1000210002 t -1Sample Output 2:-1</code></pre><p>题目大意：求两个存储英语单词的字母链表的首个公共结点的地址。如果没有，就输出-1</p><p>分析：本题是在链表当中寻找起始公共节点的位置且地址的范围比较小，此处选择使用静态链表来处理。用结构体数组进行存储，node[i]表示地址为i的结点，data表示值，next为下一个结点的地址，flag表示第一条链表有没有该结点。遍历第一条链表，将访问过的结点的flag都标记为true，当遍历第二条结点的时候，如果遇到了true的结点就输出并结束程序，没有遇到就输出-1。</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;struct Node {    char data;    int next;    bool flag;//用于判断公共节点的初始位置}node[100010];void Create(int n) {//创建一个静态链表    int address, next;    char data;    for (int i = 0;i &lt; 100010;i++) {//初始化链表节点的标志为false        node[i].flag = false;    }    for (int i = 0;i &lt; n;i++) {        cin &gt;&gt; address &gt;&gt; data &gt;&gt; next;        node[address].data = data;        node[address].next = next;    }}int main() {    int x, y, n,i;    cin &gt;&gt; x &gt;&gt; y &gt;&gt; n;    Create(n);//创建一个静态链表    for (i = x;i != -1;i = node[i].next) {//将第一个单词走过的节点的标志位设为true        node[i].flag = true;    }    for (i = y;i != -1;i = node[i].next) {        if (node[i].flag == true) {            printf(&quot;%5d&quot;, i);//如果此时的节点的标志位为true说明是公共节点            system(&quot;pause&quot;);            return 0;        }    }    printf(&quot;-1&quot;);//否则输出-1    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words sha
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>链表</title>
-    <link href="http://www.echodemo.cc/2018/03/19/%E9%93%BE%E8%A1%A8/"/>
-    <id>http://www.echodemo.cc/2018/03/19/链表/</id>
-    <published>2018-03-19T13:13:34.000Z</published>
-    <updated>2018-03-20T08:09:00.754Z</updated>
-    
-    <content type="html"><![CDATA[<p>链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域：</p><pre><code>struct node{    int data;    node* next;};</code></pre><p>(1)创建一个动态链表：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;struct node {    int data;    node* next;};node* create(int Array[]) {    node *p, *pre, *head;//pre保存当前节点的前驱节点，head为头结点    head = new node;//创建头结点    head-&gt;next = NULL;//头结点不需要数据，且指针域指向NULL    pre = head;//记录pre为head    for (int i = 0;i &lt; 5;i++) {        p = new node;//新建节点        p-&gt;data = Array[i];//将Array[i]赋给新建的节点作为数据域，也可以cin输入        p-&gt;next = NULL;//新节点的指针域设为NULL        pre-&gt;next = p;//前驱节点的指针域设为当前新建节点的地址        pre = p;//把p设为pre，作为下一个节点的前驱节点    }    return head;//返回头结点指针}int main() {    int Array[5] = { 5,3,6,1,2 };    node* L = create(Array);//新建链表，返回头指针head给L    L = L-&gt;next;//从第一个节点开始有数据域    while (L != NULL) {        cout &lt;&lt; L-&gt;data &lt;&lt; endl;//输出每个节点的数据域        L = L-&gt;next;    }    system(&quot;pause&quot;);    return 0;}</code></pre><p>(2)动态链表查找元素：</p><pre><code>int search(node* head, int x) {    int count = 0;//计数器    node* p = head-&gt;next;//指向链表的第一个节点    while (p != NULL) {//遍历整个链表        if (p-&gt;data == x) count++;//当节点数据域为x时，则count++        p = p-&gt;next;//指向下一个节点    }    return count;}</code></pre><p>(3)动态链表插入元素：</p><pre><code>void insert(node* head, int pos, int x) {    node* p = head;//指向链表的头节点    for (int i = 0;i &lt; pos - 1;i++) {//遍历到链表的pos-1的位置，即插入位置的前一个节点位置        p = p-&gt;next;    }    node* q = new node;//新建节点    q-&gt;data = x;//其数据域为x    q-&gt;next = p-&gt;next;//新节点的下一个节点指向原先插入位置的节点    p-&gt;next = q;//前一个位置的节点指向新节点}</code></pre><p>(4)动态链表删除元素：</p><pre><code>void del(node* head, int x) {    node* p = head;//指向链表的头结点    node* q = p-&gt;next;//指向链表的第一个节点    while (q != NULL) {        if (q-&gt;data == x) {//数据域为x，删除q节点            p-&gt;next = q-&gt;next;//删除q节点            delete(q);//释放内存空间            q = p-&gt;next;        }else {//数据域不为x，p、q节点同时后移一位            p = q;            q = q-&gt;next;        }    }}</code></pre><p>以上所述都是动态链表的范畴，需要指针来建立节点之间的连接关系。而对于有些问题来说，节点的地址是比较小的整数(例如5位数的地址)，这样就没有必要去建立动态链表，而应该使用方便得多的静态链表。静态链表的实现原理是hash，即通过建立一个结构体数组，并令数组的下标直接表示节点的地址，以此来达到直接访问数组中的元素就能访问节点的效果。需要注意的是：在使用静态链表时，尽量不要把结构体类型名和结构体变量名取成相同的名字。其定义方法如下：</p><pre><code>struct Node{    typename date;//数据域    int next;//指针域    XXX;//节点的某个性质，不同的题目会有不同的设置}node[maxn];</code></pre><p>其中的next是一个int型的整数，用来存放下一个节点的地址(事实上就是数组下标)，例如：如果初始节点的地址为11111，第二个节点的地址为22222，第三个节点的地址为33333，且第三个节点为链表末尾，那么整个静态链表的节点就可以通过下面的写法连接起来：</p><pre><code>node[11111].next=22222;node[22222].next=33333;node[33333].next=-1;//-1对应动态链表中的NULL，表示没有后继节点</code></pre><p>一般来说，静态链表的初始化需要对定义中的XXX进行初始化，将其定义为正常情况下达不到的数字(而常常需要小于所能达到的数字)，例：</p><pre><code>for(int i=0;i&lt;maxn;i++){    node[i].XXX=0;}</code></pre><p>一般的题目都会给出一条静态链表的首节点的地址，因此我们可以依据这个地址来遍历得到整条链表。这一步同时也是对节点性质XXX进行标记，并且对有效节点的个数进行计数的时候，例如对节点是否在链表上这个性质来说，当我们遍历链表时，就可以把XXX置为1。</p><pre><code>int p=begin,count=0;while(p!=-1){//-1代表静态链表结束    XXX=1;    count++;    p=node[p].next;}</code></pre><p>由于使用静态链表时时直接采用地址映射的方式，这就会使得数组小标的不连续。而很多时候题目给出的节点并不都是有效节点(即不在静态链表上的节点)。为了能够可控地访问有效节点，一般都需要对数组进行排序来把有效节点移动到数组的左端。这里我们用到上面所提及的XXX，这也就是为什么在XXX进行初始化时要取比正常取值要小的值。因为无效节点并不会执行XXX=1这一步，因此一定比有效节点的XXX小。于是在写sort函数的排序函数cmp时就可以在cmp的两个参数节点中有无效节点时按XXX从大到小排序，这样就能把有效节点全部移动到数组左端。当然，在cmp函数中还可以有第二级的排序，例如：题目可能要求把链表按节点顺序排序，此时就需要在cmp函数中建立第二级的排序：</p><pre><code>bool cmp(Node a,Node b){    if(a.XXX==-1||b.XXX==-1){//如果有节点是无效节点，就把它放到数组的后端        return a.XXX&gt;b.XXX;    }else{//否则就按节点的数据域从大到小排序        return a.data&gt;b.data;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;链表属于线性表中的一种数据结构，它由若干个节点组成(每个节点代表一个元素)，且节点在内存中的存储位置通常是不连续的。这里我们先来了解动态链表，动态链表的两个节点之间一般通过一个指针来从一个节点指向另一个节点 ，因此动态链表的节点一般由两部分构成，即数据域和指针域：&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
