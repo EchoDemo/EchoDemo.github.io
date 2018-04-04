@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。 1、MYSQL的特点(1)Mysql是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-21T02:27:15.818Z">
+<meta property="og:updated_time" content="2018-04-04T15:39:32.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL基础">
 <meta name="twitter:description" content="Mysql是最流行的关系型数据库管理系统(关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。)，在WEB应用方面MySQL是最好的RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。由瑞典MySQL AB公司开发，目前属于Oracle公司。 1、MYSQL的特点(1)Mysql是">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,165
+                  2,906
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  10
+                  13
                 </span>
               
             </div>
@@ -697,9 +697,9 @@ Query OK, 1 row affected (0.23 sec)
 
 修改： ALTER TABLE alter_tbl MODIFY columnname new_typename;修改字段类型
 
-       ALTER TABLE alter_tbl CHANGE oldcolumnname newcolumnname newtypename;修改字段及类型
+      ALTER TABLE alter_tbl CHANGE oldcolumnname newcolumnname newtypename;修改字段及类型
 
-       ALTER TABLE alter_tbl RENAME TO alter_tb2;修改表名
+      ALTER TABLE alter_tbl RENAME TO alter_tb2;修改表名
 </code></pre><h2 id="8-UNION操作符"><a href="#8-UNION操作符" class="headerlink" title="(8)UNION操作符"></a>(8)UNION操作符</h2><pre><code>SELECT expression1, expression2, ... expression_n
 FROM tables
 [WHERE conditions]
@@ -708,15 +708,24 @@ SELECT expression1, expression2, ... expression_n
 FROM tables
 [WHERE conditions];
 
+使用 UNION ALL 从 &quot;Websites&quot; 和 &quot;apps&quot; 表中选取所有的中国(CN)的数据（也有重复的值）：
+
+SELECT country, name FROM Websites
+WHERE country=&apos;CN&apos;
+UNION ALL
+SELECT country, app_name FROM apps
+WHERE country=&apos;CN&apos;
+ORDER BY country;
+
 *expression1, expression2, ... expression_n: 要检索的列。
 
 *tables: 要检索的数据表。
 
-*WHERE conditions: 可选， 检索条件。
+*WHERE conditions: 可选，检索条件。
 
 *DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。
 
-*ALL: 可选，返回所有结果集，包含重复数据。
+*UNION 只会选取不同的值。请使用 UNION ALL 来选取重复的值。    
 </code></pre><h2 id="9-排序"><a href="#9-排序" class="headerlink" title="(9)排序"></a>(9)排序</h2><pre><code>SELECT field1, field2,...fieldN table_name1, table_name2...ORDER BY field1, [field2...] [ASC [DESC]];
 
 SELECT * from runoob_tbl ORDER BY submission_date ASC;
@@ -735,6 +744,93 @@ WHERE column_name operator value
 GROUP BY column_name;
 
 SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;将数据表按名字进行分组，并统计每个人有多少条记录
+</code></pre><h2 id="11-LIKE子句"><a href="#11-LIKE子句" class="headerlink" title="(11)LIKE子句"></a>(11)LIKE子句</h2><pre><code>SELECT field1, field2,...fieldN 
+FROM table_name
+WHERE field1 LIKE condition1 [AND [OR]] filed2 = &apos;somevalue&apos;
+
+在 runoob_tbl 表中获取 runoob_author 字段中以 COM 为结尾的的所有记录：
+
+mysql&gt; SELECT * from runoob_tbl  WHERE runoob_author LIKE &apos;%COM&apos;;
++-----------+---------------+---------------+-----------------+
+| runoob_id | runoob_title  | runoob_author | submission_date |
++-----------+---------------+---------------+-----------------+
+| 3         | 学习 Java   | RUNOOB.COM    | 2015-05-01      |
+| 4         | 学习 Python | RUNOOB.COM    | 2016-03-06      |
++-----------+---------------+---------------+-----------------+
+2 rows in set (0.01 sec)
+
+*你可以在 WHERE 子句中指定任何条件。
+
+*你可以在 WHERE 子句中使用LIKE子句。
+
+*你可以使用LIKE子句代替等号 =。
+
+*LIKE子句中使用百分号 % 字符来表示任意字符，类似于UNIX或正则表达式中的星号 * 。
+
+*你可以使用 AND 或者 OR 指定一个或多个条件。
+
+*你可以在 DELETE 或 UPDATE 命令中使用 WHERE...LIKE 子句来指定条件。
+</code></pre><h2 id="12-连接的使用"><a href="#12-连接的使用" class="headerlink" title="(12)连接的使用"></a>(12)连接的使用</h2><pre><code>INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。
+
+LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录。
+
+RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。
+
+a、内连接示例
+
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a INNER 
+JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+等价于
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, 
+tcount_tbl b WHERE a.runoob_author = b.runoob_author;
+
+b、左连接示例
+
+读取左边的数据表 runoob_tbl 的所有选取的字段数据，即便在右侧表 tcount_tbl中 没有对应的 runoob_author 字段值。
+
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a LEFT 
+JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+
+c、右连接示例
+
+读取右边的数据表 tcount_tbl 的所有选取的字段数据，即便在左侧表 runoob_tbl 中没有对应的runoob_author 字段值。
+
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a RIGHT 
+JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+</code></pre><h2 id="13-NULL值处理"><a href="#13-NULL值处理" class="headerlink" title="(13)NULL值处理"></a>(13)NULL值处理</h2><pre><code>IS NULL: 当列的值是 NULL,此运算符返回 true。
+
+IS NOT NULL: 当列的值不为 NULL, 运算符返回 true。
+
+&lt;=&gt;: 比较操作符（不同于=运算符），当比较的的两个值为 NULL 时返回 true。
+
+*关于 NULL 的条件比较运算是比较特殊的。你不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。
+
+*在 MySQL 中，NULL 值与任何其它值的比较（即使是 NULL）永远返回 false，即 NULL = NULL 返回false 。
+</code></pre><h2 id="14-索引"><a href="#14-索引" class="headerlink" title="(14)索引"></a>(14)索引</h2><pre><code>CREATE INDEX indexName ON mytable(username(length)); 创建索引
+
+ALTER table tableName ADD INDEX indexName(columnName); 修改表结构(添加索引)
+
+创建表的时候直接指定索引
+
+CREATE TABLE mytable(
+    ID INT NOT NULL,
+    username VARCHAR(16) NOT NULL,
+    INDEX [indexName] (username(length))
+);
+
+DROP INDEX [indexName] ON mytable; 删除索引
+
+CREATE UNIQUE INDEX indexName ON mytable(username(length)); 创建唯一索引
+
+ALTER table mytable ADD UNIQUE [indexName] (username(length)); 修改表结构
+
+创建表的时候直接指定唯一索引
+
+CREATE TABLE mytable(
+    ID INT NOT NULL,
+    username VARCHAR(16) NOT NULL,
+    UNIQUE [indexName] (username(length))
+);
 </code></pre>
       
     </div>
@@ -993,7 +1089,7 @@ SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;将数据表按名字进
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、MYSQL的特点"><span class="nav-number">1.</span> <span class="nav-text">1、MYSQL的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、MYSQL的管理"><span class="nav-number">2.</span> <span class="nav-text">2、MYSQL的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为MYSQL数据库中的user表添加新用户"><span class="nav-number">2.1.</span> <span class="nav-text">(1)为MYSQL数据库中的user表添加新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-管理MySQL的命令"><span class="nav-number">2.2.</span> <span class="nav-text">(2)管理MySQL的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"><span class="nav-number">2.2.1.</span> <span class="nav-text">a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。"><span class="nav-number">2.2.2.</span> <span class="nav-text">b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"><span class="nav-number">2.2.3.</span> <span class="nav-text">c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。"><span class="nav-number">2.2.4.</span> <span class="nav-text">d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。"><span class="nav-number">2.2.5.</span> <span class="nav-text">e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。"><span class="nav-number">2.2.6.</span> <span class="nav-text">f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、数据库的基本操作语句"><span class="nav-number">3.</span> <span class="nav-text">3、数据库的基本操作语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建数据表"><span class="nav-number">3.1.</span> <span class="nav-text">(1)创建数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-删除数据表"><span class="nav-number">3.2.</span> <span class="nav-text">(2)删除数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-插入数据"><span class="nav-number">3.3.</span> <span class="nav-text">(3)插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-查询数据"><span class="nav-number">3.4.</span> <span class="nav-text">(4)查询数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-更新数据表"><span class="nav-number">3.5.</span> <span class="nav-text">(5)更新数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-删除MySQL数据表中的记录"><span class="nav-number">3.6.</span> <span class="nav-text">(6)删除MySQL数据表中的记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-删除，添加或修改表字段"><span class="nav-number">3.7.</span> <span class="nav-text">(7)删除，添加或修改表字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-UNION操作符"><span class="nav-number">3.8.</span> <span class="nav-text">(8)UNION操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-排序"><span class="nav-number">3.9.</span> <span class="nav-text">(9)排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-GROUP-BY语法"><span class="nav-number">3.10.</span> <span class="nav-text">(10)GROUP BY语法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、MYSQL的特点"><span class="nav-number">1.</span> <span class="nav-text">1、MYSQL的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、MYSQL的管理"><span class="nav-number">2.</span> <span class="nav-text">2、MYSQL的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为MYSQL数据库中的user表添加新用户"><span class="nav-number">2.1.</span> <span class="nav-text">(1)为MYSQL数据库中的user表添加新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-管理MySQL的命令"><span class="nav-number">2.2.</span> <span class="nav-text">(2)管理MySQL的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a、USE-数据库名-选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。"><span class="nav-number">2.2.1.</span> <span class="nav-text">a、USE 数据库名;选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b、SHOW-DATABASES-列出MySQL数据库管理系统当前的数据库列表。"><span class="nav-number">2.2.2.</span> <span class="nav-text">b、SHOW DATABASES;列出MySQL数据库管理系统当前的数据库列表。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c、SHOW-TABLES-显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。"><span class="nav-number">2.2.3.</span> <span class="nav-text">c、SHOW TABLES;显示指定数据库的所有表，使用该命令前需要使用USE命令来选择要操作的数据库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d、SHOW-COLUMNS-FROM-数据表-显示数据表的属性，属性类型，主键信息-，是否为-NULL，默认值等其他信息。"><span class="nav-number">2.2.4.</span> <span class="nav-text">d、SHOW COLUMNS FROM 数据表;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e、SHOW-INDEX-FROM-数据表-显示数据表的详细索引信息，包括PRIMARY-KEY（主键）。"><span class="nav-number">2.2.5.</span> <span class="nav-text">e、SHOW INDEX FROM 数据表;显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f、SHOW-TABLE-STATUS-LIKE-FROM-db-name-LIKE-‘pattern’-G-该命令将输出Mysql数据库管理系统的性能及统计信息。"><span class="nav-number">2.2.6.</span> <span class="nav-text">f、SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G;该命令将输出Mysql数据库管理系统的性能及统计信息。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、数据库的基本操作语句"><span class="nav-number">3.</span> <span class="nav-text">3、数据库的基本操作语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建数据表"><span class="nav-number">3.1.</span> <span class="nav-text">(1)创建数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-删除数据表"><span class="nav-number">3.2.</span> <span class="nav-text">(2)删除数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-插入数据"><span class="nav-number">3.3.</span> <span class="nav-text">(3)插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-查询数据"><span class="nav-number">3.4.</span> <span class="nav-text">(4)查询数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-更新数据表"><span class="nav-number">3.5.</span> <span class="nav-text">(5)更新数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-删除MySQL数据表中的记录"><span class="nav-number">3.6.</span> <span class="nav-text">(6)删除MySQL数据表中的记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-删除，添加或修改表字段"><span class="nav-number">3.7.</span> <span class="nav-text">(7)删除，添加或修改表字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-UNION操作符"><span class="nav-number">3.8.</span> <span class="nav-text">(8)UNION操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-排序"><span class="nav-number">3.9.</span> <span class="nav-text">(9)排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-GROUP-BY语法"><span class="nav-number">3.10.</span> <span class="nav-text">(10)GROUP BY语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-LIKE子句"><span class="nav-number">3.11.</span> <span class="nav-text">(11)LIKE子句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-连接的使用"><span class="nav-number">3.12.</span> <span class="nav-text">(12)连接的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-NULL值处理"><span class="nav-number">3.13.</span> <span class="nav-text">(13)NULL值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-索引"><span class="nav-number">3.14.</span> <span class="nav-text">(14)索引</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1035,7 +1131,7 @@ SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;将数据表按名字进
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共32.1k字</span>
+  <span class="post-count">博客全站共33.8k字</span>
 </div>
 
 
