@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-03-31T08:06:39.689Z</updated>
+  <updated>2018-04-04T01:54:43.356Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>红黑树</title>
+    <link href="http://www.echodemo.cc/2018/04/04/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
+    <id>http://www.echodemo.cc/2018/04/04/红黑树/</id>
+    <published>2018-04-04T01:50:20.000Z</published>
+    <updated>2018-04-04T01:54:43.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、在学习红黑树之前有必要先来了解一下二叉查找树。二叉查找树是基于二分查找的思想，查找所需的次数为二叉查找树的高度；在插入节点时也是通过一层一层的比较来找到合适插入的位置。但它仍然存在缺陷，就是当插入的数据是依次递增时，它会不断地插在节点的右子树上(或者是当插入的数据是依次递减时，它会不断地插在节点的左子树)。此时的二叉查找树的查找性能几乎变成了线性。那么如何解决二叉查找树多次插入新节点而导致的不平衡呢？红黑树也就应运而生了。</p><pre><code>二叉查找树的性质：a、左子树上所有结点的值均小于或等于它的根结点的值。b、右子树上所有结点的值均大于或等于它的根结点的值。c、左、右子树也分别为二叉排序树。</code></pre><p>2、红黑树(Red Black Tree)是一种平衡的二叉查找树(但不是一个完美的平衡二叉树)。它的应用有很多，Java中的TreeSet和TreeMap数据结构，Java8中的HashMap也用到了红黑树；在C++ STL中，很多部分(包括set, multiset, map, multimap)应用了红黑树的变体(SGI STL中的红黑树有一些变化，这些修改提供了更好的性能，以及对set操作的支持)。</p><p>(1)性质</p><pre><code>a、节点是红色或黑色。b、根节点是黑色。c、每个叶子节点都是黑色的空节点（NIL节点）。d、每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)e、从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。</code></pre><p>(2)左旋转：逆时针旋转红黑树的两个节点，使得父节点被自己的右子树取代，而父节点自己成为自己右子树(现在已经是父节点了)的左子树。现在已经是父节点的的左子树成为曾经的父节点的右子树。</p><p>(3)右旋转：顺时针旋转红黑树的两个节点，使得父节点被自己的左子树取代，而父节点自己成为自己左子树(现在已经是父节点了)的右子树。现在已经是父节点的的右子树成为曾经的父节点的左子树。</p><p>(4)具体的红黑树中插入和删除出现的有关旋转和变色的情况，请自行点击跳转至维基百科查看：<a href="https://en.m.wikipedia.org/wiki/Red%E2%80%93black_tree" target="_blank" rel="noopener">维基百科红黑树</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、在学习红黑树之前有必要先来了解一下二叉查找树。二叉查找树是基于二分查找的思想，查找所需的次数为二叉查找树的高度；在插入节点时也是通过一层一层的比较来找到合适插入的位置。但它仍然存在缺陷，就是当插入的数据是依次递增时，它会不断地插在节点的右子树上(或者是当插入的数据是依次
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>柴</title>
@@ -527,33 +552,6 @@
     
     
       <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT A1051 Pop Sequence</title>
-    <link href="http://www.echodemo.cc/2018/03/21/PAT-A1051-Pop-Sequence/"/>
-    <id>http://www.echodemo.cc/2018/03/21/PAT-A1051-Pop-Sequence/</id>
-    <published>2018-03-21T09:18:43.000Z</published>
-    <updated>2018-03-24T11:08:17.863Z</updated>
-    
-    <content type="html"><![CDATA[<p>Given a stack which can keep M numbers at most. Push N numbers in the order of 1, 2, 3, …, N and pop randomly. You are supposed to tell if a given sequence of numbers is a possible pop sequence of the stack. For example, if M is 5 and N is 7, we can obtain 1, 2, 3, 4, 5, 6, 7 from the stack, but not 3, 2, 1, 7, 5, 6, 4.</p><p>Input Specification:</p><p>Each input file contains one test case. For each case, the first line contains 3 numbers (all no more than 1000): M (the maximum capacity of the stack), N (the length of push sequence), and K (the number of pop sequences to be checked). Then K lines follow, each contains a pop sequence of N numbers. All the numbers in a line are separated by a space.</p><p>Output Specification:</p><p>For each pop sequence, print in one line “YES” if it is indeed a possible pop sequence of the stack, or “NO” if not.</p><pre><code>Sample Input:5 7 51 2 3 4 5 6 73 2 1 7 5 6 47 6 5 4 3 2 15 6 4 3 7 2 11 7 6 5 4 3 2Sample Output:YESNONOYESNO</code></pre><p>题目大意：给出size为M大小的栈，分别把1…N入栈，给出K组出栈顺序，问入栈出栈顺序是否顺利。</p><p>分析：先把需要判断的序列放进一维数组当中，给出数组的当前下标为0，然后1…N顺序入栈，如果元素入栈之后，栈的size大于M，则此序列不符合；如果栈的size小于等于M，在while循环中如果栈非空且其值等于此时的数组元素，则栈顶元素出栈，数组的下标自增一位。以上所有步骤进行K次。</p><p>注意：能用一维数组时尽量别用二维数组</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stack&gt;#include&lt;vector&gt;#include&lt;stdlib.h&gt;using namespace std;int main() {    int M, N, K;    cin &gt;&gt; M &gt;&gt; N &gt;&gt; K;    vector&lt;int&gt; a(N);//定义可变长的一维数组    stack&lt;int&gt; st;//引入STL中的栈    for (int i = 0;i &lt; K;i++) {//一共有K组数据        while (!st.empty()) st.pop();//清空栈        for (int j = 0;j &lt; N;j++) {//读入一组数据            cin &gt;&gt; a[j];        }        int n=0;        for (int x = 1;x &lt;= N;x++) {            st.push(x);            if (st.size() &gt; M) {//序列有误                break;            }else{                while (!st.empty() &amp;&amp; st.top() == a[n]) {//如果栈非空且栈顶元素等于当前的序列当前位置值就把顶部元素出栈，验证序列后移一位                    st.pop();                    n++;                }            }        }        if (!st.empty())            cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;        else            cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl;    }    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Given a stack which can keep M numbers at most. Push N numbers in the order of 1, 2, 3, …, N and pop randomly. You are supposed to tell i
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
     
   </entry>
   
