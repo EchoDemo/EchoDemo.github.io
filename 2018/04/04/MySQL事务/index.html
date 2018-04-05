@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！ (1)在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。  (2)事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-04T15:55:14.262Z">
+<meta property="og:updated_time" content="2018-04-05T01:44:57.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL事务">
 <meta name="twitter:description" content="MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！ (1)在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。  (2)事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  877
+                  1,212
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -483,7 +483,18 @@
 <p>(1)原子性：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
 <p>(2)一致性：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
 <p>(3)隔离性：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</p>
-<p>(4)持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
+<pre><code>a、未提交读（RU）：最弱的隔离级别，事务中的修改即使没有提交，对其他事务也都是可见的。（即脏读）
+
+b、不可重复读（RC）：大多数数据库系统的默认隔离级别。解决了脏读的问题，一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。一个事务两次执行同样的查询，可能会得到不一样的结果。
+
+c、可重复读（RR）：mysql默认隔离级别。解决了脏读的问题。该级别保证了在同一个事务中多次读取同样记录的结果是一致的。
+
+该级无法解决幻读的问题，幻读是当某个事务在读取某个范围内的记录时，一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻读。
+
+innodb和xtradb存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）解决了幻读的问题。
+
+d、可串行化：该级是最高的级别，通过强制事务串行执行，避免了幻读的问题，该级会在读取的每一行数据上都加锁，所以可能导致大量的超时和锁争用的问题，
+</code></pre><p>(4)持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
 <p>在 MySQL 命令行的默认设置下，事务都是自动提交的，即执行 SQL 语句后就会马上执行 COMMIT 操作。因此要显式地开启一个事务务必使用命令 BEGIN 或 START TRANSACTION，或者执行命令 SET AUTOCOMMIT=0，用来禁止使用当前会话的自动提交。</p>
 <p>事务控制语句：</p>
 <pre><code>(1)BEGIN或START TRANSACTION；显式地开启一个事务；
@@ -586,6 +597,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/05/MySQL中的问题整理/" rel="prev" title="MySQL中的问题整理">
+                MySQL中的问题整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -647,7 +662,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -784,7 +799,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.7k字</span>
+  <span class="post-count">博客全站共38.4k字</span>
 </div>
 
 
