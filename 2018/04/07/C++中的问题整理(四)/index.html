@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="日志," />
+  <meta name="keywords" content="CPP," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。">
-<meta name="keywords" content="日志">
+<meta name="description" content="1、C++中的BSS、数据段、代码段、堆、栈(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。 (2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配">
+<meta name="keywords" content="CPP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="早">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/14/早/index.html">
+<meta property="og:title" content="C++中的问题整理(四)">
+<meta property="og:url" content="http://www.echodemo.cc/2018/04/07/C++中的问题整理(四)/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。">
+<meta property="og:description" content="1、C++中的BSS、数据段、代码段、堆、栈(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。 (2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-24T11:10:34.653Z">
+<meta property="og:updated_time" content="2018-04-07T00:54:42.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="早">
-<meta name="twitter:description" content="昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。">
+<meta name="twitter:title" content="C++中的问题整理(四)">
+<meta name="twitter:description" content="1、C++中的BSS、数据段、代码段、堆、栈(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。 (2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/14/早/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/04/07/C++中的问题整理(四)/"/>
 
 
 
 
 
-  <title> 早 | EchoDemo's Blogs </title>
+  <title> C++中的问题整理(四) | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/14/早/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/04/07/C++中的问题整理(四)/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                早
+                C++中的问题整理(四)
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T14:19:32+08:00">
-                2018-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-07T08:45:34+08:00">
+                2018-04-07
               </time>
             
 
@@ -391,8 +391,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/14/早/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/早/" itemprop="commentsCount"></span>
+                <a href="/2018/04/07/C++中的问题整理(四)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/07/C++中的问题整理(四)/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  83
+                  1,257
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -473,8 +473,34 @@
       
 
       
-        <p>昨夜雨疏风骤，晨起的道上落满了香樟树的叶子，叶子大多橙黄，意味着新生。空气湿润，给人以深呼吸的欲望。上课的人群络绎不绝；环游车从耳旁呼啸而过；还有鸟儿藏在春日的绿里，送来阵阵悦耳的啼鸣。</p>
+        <h2 id="1、C-中的BSS、数据段、代码段、堆、栈"><a href="#1、C-中的BSS、数据段、代码段、堆、栈" class="headerlink" title="1、C++中的BSS、数据段、代码段、堆、栈"></a>1、C++中的BSS、数据段、代码段、堆、栈</h2><p>(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。</p>
+<p>(2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。</p>
+<p>(3)代码段：代码段(code segment/text segment)通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读,某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。</p>
+<p>(4)堆(heap)：堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上(堆被扩张)；当利用free等函数释放内存时，被释放的内存从堆中被剔除(堆被缩减)</p>
+<p>(5)栈(stack)：栈又称堆栈，是用户存放程序临时创建的局部变量，也就是说我们函数括弧“{}”中定义的变量(但不包括static声明的变量，static意味着在数据段中存放变量)。除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。由于栈的先进后出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</p>
+<h2 id="2、C-中的左值和右值"><a href="#2、C-中的左值和右值" class="headerlink" title="2、C++中的左值和右值"></a>2、C++中的左值和右值</h2><p>在C中，左值指的是既能够出现在等号左边也能出现在等号右边的变量(或表达式)，右值指的则是只能出现在等号右边的变量(或表达式)。通常等号左边表示引用，实质上就是内存地址。等号右边表示数据，从内存取的数据，直接给的数据，或者计算出来的数据。内存地址本身也是数据，也可以放到内存中。相当于C++中说的指针。因为等号左边表示地址，变量映射成地址值，也就等号左边不能是常数。</p>
+<h2 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h2><p>如果一个基本变量被volatile修饰，编译器将不会把它保存到寄存器中，而是每一次都去访问内存中实际保存该变量的位置上。这一点就避免了没有volatile修饰的变量在多线程的读写中所产生的由于编译器优化所导致的灾难性问题。所以多线程中必须要共享的基本变量一定要加上volatile修饰符。当然了，volatile还能让你在编译时期捕捉到非线程安全的代码。volatile的作用就是用来进行多线程编程。在单线程中那就是只能起到限制编译器优化的作用。以下是使用场景：</p>
+<pre><code>(1)中断服务程序中修改的供其它程序检测的变量需要加volatile。
+(2)多任务环境下各任务间共享的标志应该加volatile。
+(3)存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能由不同意义。
 
+*可以把一个非volatile int赋给volatile int，但是不能把非volatile对象赋给一个volatile对象。
+
+*除了基本类型外，对用户定义类型也可以用volatile类型进行修饰。
+
+*volatile像const一样会从类传递到它的成员。
+</code></pre><h2 id="4、枚举类型"><a href="#4、枚举类型" class="headerlink" title="4、枚举类型"></a>4、枚举类型</h2><pre><code>(1)定义：enum Suit { Diamonds, Hearts, Clubs, Spades };或enum Suit { Diamonds, Hearts, Clubs, Spades }a,b,c;
+
+(2)对于枚举类型来说，只定义了赋值运算符，没有为枚举定义算术运算。
+
+(3)能够将枚举量赋给非枚举变量，因为枚举量是符号常量，赋值编译器会自动把枚举量转换为int类型。
+
+(4)在不进行强制转换的前提下，只能将定义的枚举量赋值给该种枚举的变量，也就是说可以通过强制转换将其他类型值赋给枚举变量。
+
+(5)可以显式的设置枚举量的值(指定的值必须是整数)，也可以只显式的定义一部分枚举量的值。
+
+(6)未被初始化的枚举量的值默认比其前面的枚举量的值大1。当然，枚举量的值可以相同。
+</code></pre>
       
     </div>
 
@@ -487,7 +513,7 @@
   
         <div class="post-tags">
           
-            <a href="/tags/日志/" rel="tag"># 日志</a>
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
           
         </div>
       
@@ -537,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/11/为hexo的next主题添加点击出现桃心效果的功能/" rel="next" title="为hexo的next主题添加点击出现桃心效果的功能">
-                <i class="fa fa-chevron-left"></i> 为hexo的next主题添加点击出现桃心效果的功能
+              <a href="/2018/04/05/诗词入门(二)/" rel="next" title="诗词入门(二)">
+                <i class="fa fa-chevron-left"></i> 诗词入门(二)
               </a>
             
           </div>
@@ -546,10 +572,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/14/Java中的String/" rel="prev" title="Java中的String">
-                Java中的String <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -598,8 +620,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -713,6 +744,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、C-中的BSS、数据段、代码段、堆、栈"><span class="nav-number">1.</span> <span class="nav-text">1、C++中的BSS、数据段、代码段、堆、栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、C-中的左值和右值"><span class="nav-number">2.</span> <span class="nav-text">2、C++中的左值和右值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、volatile关键字"><span class="nav-number">3.</span> <span class="nav-text">3、volatile关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、枚举类型"><span class="nav-number">4.</span> <span class="nav-text">4、枚举类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

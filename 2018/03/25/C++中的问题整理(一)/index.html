@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-26T01:12:10.824Z">
+<meta property="og:updated_time" content="2018-04-07T00:54:30.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的问题整理(一)">
 <meta name="twitter:description" content="1、#include&amp;lt;filename.h&amp;gt;和#include“filename.h”有什么区别?答：对于#include&amp;lt;filename.h&amp;gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。 2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,221
+                  1,474
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -494,7 +494,9 @@
 </code></pre><h3 id="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><a href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。" class="headerlink" title="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"></a>8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</h3><h3 id="9、const-有什么用途？"><a href="#9、const-有什么用途？" class="headerlink" title="9、const 有什么用途？"></a>9、const 有什么用途？</h3><p>(1)可以定义const常量。</p>
 <p>(2)const可以修饰函数的参数、返回值，甚至函数的定义体。被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。被const修饰的函数定义体的函数能被const或者非const对象调用，但是const对象只能调用被const修饰过定义体的函数。</p>
 <h3 id="10、什么是内联函数？"><a href="#10、什么是内联函数？" class="headerlink" title="10、什么是内联函数？"></a>10、什么是内联函数？</h3><p>(1)编译器使用相应的函数代码替换函数调用，对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数快，但代价是需要占用更多的内存。例如：如果程序在10个不同的地方调用了同一个内联函数，则该程序将包含该代码的10个副本。</p>
-<p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。</p>
+<p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。关键字inline必须与函数定义体放在一起才能使函数成为内联，仅将inline放在函数声明前面不起任何作用。</p>
+<p>(3)定义在类声明之中的成员函数将自动地成为内联函数。所以不管是class声明中定义的inline函数，还是class实现中定义的inline函数，不存在优先不优先的问题，因为class的成员函数都是inline的，加了关键字inline也没什么特殊的。</p>
+<p>(4)由于使用inline关键字的函数只是用户希望它成为内联函数，但是编译器有权忽略这个请求，比如：若此函数体太大，则不会把它作为内联函数展开的。内联函数定义也可以放在源文件中，但此时只有定义的那个源文件可以用它，而且必须为每个源文件拷贝一份定义(即每个源文件里的定义必须是完全相同的)。</p>
 
       
     </div>
@@ -642,7 +644,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -795,7 +797,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共39.7k字</span>
+  <span class="post-count">博客全站共41.2k字</span>
 </div>
 
 
