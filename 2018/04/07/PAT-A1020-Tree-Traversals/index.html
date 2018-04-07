@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the cor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-07T08:45:27.936Z">
+<meta property="og:updated_time" content="2018-04-07T09:00:09.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT A1020 Tree Traversals">
 <meta name="twitter:description" content="Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the cor">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  747
+                  755
                 </span>
               
 
@@ -520,20 +520,24 @@ node* create(int in[], int post[], int inL, int inR, int postL, int postR) {//�
     return root;//返回根节点地址
 }
 
+
+int n;
+int j=0;
 void layerorder(node* root) {
     queue&lt;node*&gt; q;//存储节点地址的队列
     q.push(root);//根节点入队
     while (!q.empty()) {
-        node* n = q.front();
+        node* now = q.front();
         q.pop();//将队首元素出队
-        cout &lt;&lt; n-&gt;data &lt;&lt;&quot; &quot;;//访问队首元素
-        if (n-&gt;lchild != NULL) q.push(n-&gt;lchild);//如果左子树不空，将左子树入队
-        if (n-&gt;rchild != NULL) q.push(n-&gt;rchild);//如果右子树不空，将左子树入队
+        cout &lt;&lt; now-&gt;data;//访问队首元素
+        j++;
+        if(j&lt;n) cout&lt;&lt;&quot; &quot;;
+        if (now-&gt;lchild != NULL) q.push(now-&gt;lchild);//如果左子树不空，将左子树入队
+        if (now-&gt;rchild != NULL) q.push(now-&gt;rchild);//如果右子树不空，将左子树入队
     }
 }
 
 int main() {
-    int n;
     cin &gt;&gt; n;//输入二叉树的节点个数
     int *in = new int[n];//new一个变长的int型数组
     int *post = new int[n];
