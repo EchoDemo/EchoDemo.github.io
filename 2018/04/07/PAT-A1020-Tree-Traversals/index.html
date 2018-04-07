@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git,github," />
+  <meta name="keywords" content="CPP,PAT A," />
 
 
 
@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="1、git status 查看目前代码的修改状态 a) 已暂存 (changes to be committed)     new file //表示新建文件     modified //表示修改文件     deleted //表示删除文件  b) 已修改 (changed but not updated)     modified //表示修改文件     deleted //表示删除文件">
-<meta name="keywords" content="git,github">
+<meta name="description" content="Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the cor">
+<meta name="keywords" content="CPP,PAT A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git push to github">
-<meta property="og:url" content="http://www.echodemo.cc/2018/03/08/Git-push-to-github/index.html">
+<meta property="og:title" content="PAT A1020 Tree Traversals">
+<meta property="og:url" content="http://www.echodemo.cc/2018/04/07/PAT-A1020-Tree-Traversals/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="1、git status 查看目前代码的修改状态 a) 已暂存 (changes to be committed)     new file //表示新建文件     modified //表示修改文件     deleted //表示删除文件  b) 已修改 (changed but not updated)     modified //表示修改文件     deleted //表示删除文件">
+<meta property="og:description" content="Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the cor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-08T13:17:09.224Z">
+<meta property="og:updated_time" content="2018-04-07T08:45:27.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git push to github">
-<meta name="twitter:description" content="1、git status 查看目前代码的修改状态 a) 已暂存 (changes to be committed)     new file //表示新建文件     modified //表示修改文件     deleted //表示删除文件  b) 已修改 (changed but not updated)     modified //表示修改文件     deleted //表示删除文件">
+<meta name="twitter:title" content="PAT A1020 Tree Traversals">
+<meta name="twitter:description" content="Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the cor">
 
 
 
@@ -147,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/03/08/Git-push-to-github/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/04/07/PAT-A1020-Tree-Traversals/"/>
 
 
 
 
 
-  <title> Git push to github | EchoDemo's Blogs </title>
+  <title> PAT A1020 Tree Traversals | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/08/Git-push-to-github/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/04/07/PAT-A1020-Tree-Traversals/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +353,7 @@
             
             
               
-                Git push to github
+                PAT A1020 Tree Traversals
               
             
           </h2>
@@ -368,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-08T16:05:11+08:00">
-                2018-03-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-07T16:14:39+08:00">
+                2018-04-07
               </time>
             
 
@@ -410,8 +410,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/08/Git-push-to-github/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/08/Git-push-to-github/" itemprop="commentsCount"></span>
+                <a href="/2018/04/07/PAT-A1020-Tree-Traversals/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/07/PAT-A1020-Tree-Traversals/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  443
+                  747
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  4
                 </span>
               
             </div>
@@ -473,40 +473,83 @@
       
 
       
-        <p>1、git status 查看目前代码的修改状态</p>
-<pre><code>a) 已暂存 (changes to be committed)
-    new file //表示新建文件
-    modified //表示修改文件
-    deleted //表示删除文件
+        <p>Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder and inorder traversal sequences, you are supposed to output the level order traversal sequence of the corresponding binary tree.</p>
+<p>Input Specification:</p>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (&lt;=30), the total number of nodes in the binary tree. The second line gives the postorder sequence and the third line gives the inorder sequence. All the numbers in a line are separated by a space.</p>
+<p>Output Specification:</p>
+<p>For each test case, print in one line the level order traversal sequence of the corresponding binary tree. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<pre><code>Sample Input:
+7
+2 3 1 5 7 6 4
+1 2 3 4 5 6 7
 
-b) 已修改 (changed but not updated)
-    modified //表示修改文件
-    deleted //表示删除文件
+Sample Output:
+4 1 6 3 5 7 2
+</code></pre><p>题目大意：给出二叉树的后序和中序序列，输出这棵二叉树的层序序列。(所有的二叉树节点的数据都是互不相等的正整数)</p>
+<p>分析：根据二叉树的后序和中序序列可以重建二叉树，再对重建好的二叉树进行层序遍历。</p>
+<pre><code>#include &quot;stdafx.h&quot;
+#include&lt;iostream&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;queue&gt;
+using namespace std;
 
-c) 未跟踪 (untracked files)
+struct node {//二叉树的存储结构
+    int data;//数据域
+    node* lchild;//指向左子树根节点的指针
+    node* rchild;//指向右子树根节点的指针
+};
 
-另外，git 给出了可能需要的操作命令，git add/rm, gitcheckout –
-</code></pre><p>2、git diff 查看代码修改的内容(按q键退出)</p>
-<pre><code>比较某文件与最近提交节点的差异。
+node* create(int in[], int post[], int inL, int inR, int postL, int postR) {//根据中序序列和后序序列重建二叉树
+    if (inL&gt;inR) return NULL;//如果后序序列长度小于等于0，直接返回空
+    node* root = new node;//新建一个节点，用来存放当前二叉树的根节点
+    root-&gt;data = post[postR];//新建节点的数据域为根节点的值
+    int k;
+    for (k = inL;k &lt;= inR;k++) {
+        if (in[k] == post[postR]) {//在中序序列中找到根节点
+            break;
+        }
+    }
+    int num = k - inL;//左子树的节点个数
 
-注意：如果该文件已暂存，那么应该使用git diff –cached
+    //左子树的后序序列区间为[postL,postL+num-1],中序序列区间为[inL,k-1]
+    root-&gt;lchild = create(in, post, inL, k - 1, postL, postL + num - 1);//返回左子树的根节点地址，赋值给root的左指针
 
-技巧：如果省略后面一个hashcode，则默认表示与上一提交节点比较。(也可以利用^运算符)
-</code></pre><p>3、git add [filename] 暂存需要提交的文件</p>
-<pre><code>如果是新建的文件则git add
-如果是修改的文件则git add
-如果是删除的文件则 git rm
-</code></pre><p>4、git commit -m “description informations” 提交已暂存的文件(注意注释填写规范)</p>
-<pre><code>git commit –amend
-修改最近一次提交。有时候如果提交注释书写有误或者漏提文件，可以使用此命令。
-</code></pre><p>5、git pull origin master –allow-unrelated-histories</p>
-<pre><code>如果执行失败，就按照提示还原有冲突的文件，然后再次尝试同步。
+    //右子树的后序序列区间为[postL+num,postR-1],中序序列区间为[k+1,inR]
+    root-&gt;rchild = create(in, post, k + 1, inR, postL + num, postR - 1);//返回右子树的根节点地址，赋值给root的右指针
 
-命令：git checkout – &lt;有冲突的文件路径&gt;
-</code></pre><p>6、git push -u origin master&lt;本地分支名&gt; </p>
-<pre><code>如果执行失败，一般是没有将服务器代码同步到本地导致的，先执行上面的git pull命令。
-</code></pre><p>7、如果过程中出现‘please enter a commit message…’(即进入了vim),首先esc然后输入:wq即可。</p>
-<pre><code>git rm −r 我的文件夹/此处−r表示递归所有子目录，如果你要删除的，是空的文件夹，此处可以不用带上−r。
+    return root;//返回根节点地址
+}
+
+void layerorder(node* root) {
+    queue&lt;node*&gt; q;//存储节点地址的队列
+    q.push(root);//根节点入队
+    while (!q.empty()) {
+        node* n = q.front();
+        q.pop();//将队首元素出队
+        cout &lt;&lt; n-&gt;data &lt;&lt;&quot; &quot;;//访问队首元素
+        if (n-&gt;lchild != NULL) q.push(n-&gt;lchild);//如果左子树不空，将左子树入队
+        if (n-&gt;rchild != NULL) q.push(n-&gt;rchild);//如果右子树不空，将左子树入队
+    }
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;//输入二叉树的节点个数
+    int *in = new int[n];//new一个变长的int型数组
+    int *post = new int[n];
+    for (int i = 0;i &lt; n;i++) {//输入后序序列
+        cin &gt;&gt; post[i];
+    }
+    for (int i = 0;i &lt; n;i++) {//输入中序序列
+        cin &gt;&gt; in[i];
+    }
+    int inL = 0,postL = 0, inR = n - 1, postR = n - 1;
+    layerorder(create(in, post, inL, inR, postL, postR));
+    delete[] post;//释放内存空间
+    delete[] in;
+    system(&quot;pause&quot;);
+    return 0;
+}
 </code></pre>
       
     </div>
@@ -520,9 +563,9 @@ c) 未跟踪 (untracked files)
   
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
           
-            <a href="/tags/github/" rel="tag"># github</a>
+            <a href="/tags/PAT-A/" rel="tag"># PAT A</a>
           
         </div>
       
@@ -572,8 +615,8 @@ c) 未跟踪 (untracked files)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/08/终于等到你/" rel="next" title="终于等到你">
-                <i class="fa fa-chevron-left"></i> 终于等到你
+              <a href="/2018/04/07/由中序和后序序列输出先序序列/" rel="next" title="由中序和后序序列输出先序序列">
+                <i class="fa fa-chevron-left"></i> 由中序和后序序列输出先序序列
               </a>
             
           </div>
@@ -581,10 +624,6 @@ c) 未跟踪 (untracked files)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/09/Add-tags-and-categories-to-Blogs/" rel="prev" title="为博客添加标签和分类页面">
-                为博客添加标签和分类页面 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

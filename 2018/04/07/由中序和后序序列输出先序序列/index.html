@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法,C++," />
+  <meta name="keywords" content="CPP,算法," />
 
 
 
@@ -109,14 +109,14 @@
 
 
 <meta name="description" content="先由二叉树的中序序列和后序序列重建这棵二叉树，然后再输出二叉树的先序序列。由后序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下： #include &amp;quot;stdafx.h&amp;quot; #include&amp;lt;iostream&amp;gt; #include&amp;lt;stdlib.h&amp;gt; using namespace">
-<meta name="keywords" content="算法,C++">
+<meta name="keywords" content="CPP,算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由中序和后序序列输出先序序列">
 <meta property="og:url" content="http://www.echodemo.cc/2018/04/07/由中序和后序序列输出先序序列/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="先由二叉树的中序序列和后序序列重建这棵二叉树，然后再输出二叉树的先序序列。由后序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下： #include &amp;quot;stdafx.h&amp;quot; #include&amp;lt;iostream&amp;gt; #include&amp;lt;stdlib.h&amp;gt; using namespace">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-07T08:02:58.839Z">
+<meta property="og:updated_time" content="2018-04-07T08:40:36.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由中序和后序序列输出先序序列">
 <meta name="twitter:description" content="先由二叉树的中序序列和后序序列重建这棵二叉树，然后再输出二叉树的先序序列。由后序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下： #include &amp;quot;stdafx.h&amp;quot; #include&amp;lt;iostream&amp;gt; #include&amp;lt;stdlib.h&amp;gt; using namespace">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  544
+                  543
                 </span>
               
 
@@ -510,7 +510,7 @@ void preorder(node* root) {//先序遍历二叉树
     if (root == NULL) {
         return;//递归边界
     }
-    printf(&quot;%d &quot;, root-&gt;data);//访问根节点
+    cout&lt;&lt;root-&gt;data;//访问根节点
     preorder(root-&gt;lchild);//访问左子树
     preorder(root-&gt;rchild);//访问右子树
 }
@@ -546,9 +546,9 @@ int main() {
   
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
         </div>
       
@@ -607,6 +607,10 @@ int main() {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/07/PAT-A1020-Tree-Traversals/" rel="prev" title="PAT A1020 Tree Traversals">
+                PAT A1020 Tree Traversals <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -669,7 +673,7 @@ int main() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -687,7 +691,7 @@ int main() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -806,7 +810,7 @@ int main() {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共43.2k字</span>
+  <span class="post-count">博客全站共44.0k字</span>
 </div>
 
 
