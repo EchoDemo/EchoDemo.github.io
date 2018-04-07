@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="先由二叉树的先序序列和中序序列重建这棵二叉树，然后再输出二叉树的后序序列。由先序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下： #include &amp;quot;stdafx.h&amp;quot; #include&amp;lt;iostream&amp;gt; #include&amp;lt;stdlib.h&amp;gt; using namespace">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-07T07:06:43.989Z">
+<meta property="og:updated_time" content="2018-04-07T08:03:07.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由先序和中序序列输出后序序列">
 <meta name="twitter:description" content="先由二叉树的先序序列和中序序列重建这棵二叉树，然后再输出二叉树的后序序列。由先序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下： #include &amp;quot;stdafx.h&amp;quot; #include&amp;lt;iostream&amp;gt; #include&amp;lt;stdlib.h&amp;gt; using namespace">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  536
+                  544
                 </span>
               
 
@@ -528,6 +528,8 @@ int main() {
     }
     int preL = 0,inL = 0, preR = n - 1, inR = n - 1;
     postorder(create(pre,in,preL, preR, inL, inR));
+    delete[] in;//释放内存
+    delete[] pre;
     system(&quot;pause&quot;);
     return 0;
 }
