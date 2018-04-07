@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-07T00:54:42.950Z</updated>
+  <updated>2018-04-07T04:04:32.139Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>二叉树的基本操作</title>
+    <link href="http://www.echodemo.cc/2018/04/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>http://www.echodemo.cc/2018/04/07/二叉树的基本操作/</id>
+    <published>2018-04-07T04:01:09.000Z</published>
+    <updated>2018-04-07T04:04:32.139Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、二叉树的存储结构</p><pre><code>struct node {    typename data;//数据域    node* lchild;//指向左子树根节点的指针    node* rchild;//指向右子树根节点的指针};</code></pre><p>2、新建一个二叉树节点</p><pre><code>node* newNode(int n) {    node* Node = new node;//申请一个node型变量的地址空间    Node-&gt;data = n;//节点权值为n    Node-&gt;lchild = Node-&gt;rchild = NULL;//初始状态下左右孩子为空    return Node;//返回新建节点的地址}</code></pre><p>3、查找二叉树中节点数据域为x的节点，并将他们的数据域修改为newdata</p><pre><code>void search(node* root, int x, int newdata) {    if (root == NULL) {        return;//空树，死胡同(递归边界)    }    if (root-&gt;data == x) {        root-&gt;data = newdata;    }    search(root-&gt;lchild, x, newdata);//往左子树搜索x    search(root-&gt;rchild, x, newdata);//往右子树搜索x}</code></pre><p>4、二叉树节点的插入(二叉树节点的插入位置就是数据域在二叉树中查找失败的位置)</p><pre><code>void insert(node* &amp;root, int x) {    if (root == NULL) {        root = newNode(x);//空树，说明查找失败，也即插入的位置(递归边界)        return;    }    if (由二叉树的性质，x应该插在左子树) {        insert(root-&gt;lchild, x);//往左子树搜索(递归式)    }    else {        insert(root-&gt;rchild, x);//往右子树搜索(递归式)    }}</code></pre><p>这里的根节点指针root需要使用引用&amp;，这样才能直接修改原变量的值。与search函数不同的是，search函数中修改的是指针root指向的内容，而不是root本身，而对指针指向的节点内容的修改是不需要加引用的。一般来说，如果函数中需要新建节点，即对二叉树的结构做出修改，就需要加引用；如果只是修改当前已有节点的内容，或仅仅是遍历树，就不需要加引用。</p><p>5、二叉树的创建(其实就是二叉树节点的插入过程)</p><pre><code>node* create(int data[], int n) {    node* root = NULL;//新建空根节点    for (int i = 0;i &lt; n;i++) {        insert(root, data[i]);    }    return root;//返回根节点}</code></pre><p>6、二叉树的先序遍历(递归)</p><pre><code>void preorder(node* root){    if(root==NULL){        return;//递归边界    }    printf(&quot;%d\n&quot;,root-&gt;data);//访问根节点    preorder(root-&gt;lchild);//访问左子树    preorder(root-&gt;rchild);//访问右子树}</code></pre><p>7、二叉树的中序遍历(递归)</p><pre><code>void inorder(node* root){    if(root==NULL){        return;//递归边界    }        inorder(root-&gt;lchild);//访问左子树    printf(&quot;%d\n&quot;,root-&gt;data);//访问根节点    inorder(root-&gt;rchild);//访问右子树}</code></pre><p>8、二叉树的后序遍历(递归)</p><pre><code>void postorder(node* root){    if(root==NULL){        return;//递归边界    }        postorder(root-&gt;lchild);//访问左子树    postorder(root-&gt;rchild);//访问右子树    printf(&quot;%d\n&quot;,root-&gt;data);//访问根节点}</code></pre><p>9、二叉树的层序遍历</p><pre><code>void LayerOrder(node* root){    queue&lt;node*&gt; q;//队列当中存储的是地址    q.push(root);//将根节点地址入队    while(!q.empty()){        node* now=q.front();//取出队首元素        q.pop();        printf(&quot;%d&quot;,now-&gt;data);//访问队首元素        if(now-&gt;lchild!=NULL) q.push(now-&gt;lchild);//左子树非空        if(now-&gt;rchild!=NULL) q.push(now-&gt;rchild);//右子树非空    }}</code></pre><p>如果需要计算每个节点所处的层次，二叉树节点的定义如下：</p><pre><code>struct node{    typename data;//数据域    int layer;//层次    node* lchild;//左指针域    node* rchild;//右指针域}</code></pre><p>此时的层序遍历为：</p><pre><code>void LayerOrder(node* root){    queue&lt;node*&gt; q;//队列当中存储的是地址    root-&gt;layer=1;//根节点的层数为1    q.push(root);//将根节点地址入队    while(!q.empty()){        node* now=q.front();//取出队首元素        q.pop();        printf(&quot;%d&quot;,now-&gt;data);//访问队首元素        if(now-&gt;lchild!=NULL){//左子树非空            now-&gt;lchild-&gt;layer=now-&gt;layer+1;//左孩子的层数为当前层数加1            q.push(now-&gt;lchild);        }        if(now-&gt;rchild!=NULL){//右子树非空            now-&gt;rchild-&gt;layer=now-&gt;layer+1;//右孩子的层数为当前层数加1            q.push(now-&gt;rchild);        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、二叉树的存储结构&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;struct node {
+    typename data;//数据域
+    node* lchild;//指向左子树根节点的指针
+    node* rchild;//指向右子树根节点的指针
+};
+&lt;/code&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++中的问题整理(四)</title>
     <link href="http://www.echodemo.cc/2018/04/07/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E5%9B%9B)/"/>
     <id>http://www.echodemo.cc/2018/04/07/C++中的问题整理(四)/</id>
     <published>2018-04-07T00:45:34.000Z</published>
-    <updated>2018-04-07T00:54:42.950Z</updated>
+    <updated>2018-04-07T01:03:04.282Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1、C-中的BSS、数据段、代码段、堆、栈"><a href="#1、C-中的BSS、数据段、代码段、堆、栈" class="headerlink" title="1、C++中的BSS、数据段、代码段、堆、栈"></a>1、C++中的BSS、数据段、代码段、堆、栈</h2><p>(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。</p><p>(2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。</p><p>(3)代码段：代码段(code segment/text segment)通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读,某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。</p><p>(4)堆(heap)：堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上(堆被扩张)；当利用free等函数释放内存时，被释放的内存从堆中被剔除(堆被缩减)</p><p>(5)栈(stack)：栈又称堆栈，是用户存放程序临时创建的局部变量，也就是说我们函数括弧“{}”中定义的变量(但不包括static声明的变量，static意味着在数据段中存放变量)。除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。由于栈的先进后出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</p><h2 id="2、C-中的左值和右值"><a href="#2、C-中的左值和右值" class="headerlink" title="2、C++中的左值和右值"></a>2、C++中的左值和右值</h2><p>在C中，左值指的是既能够出现在等号左边也能出现在等号右边的变量(或表达式)，右值指的则是只能出现在等号右边的变量(或表达式)。通常等号左边表示引用，实质上就是内存地址。等号右边表示数据，从内存取的数据，直接给的数据，或者计算出来的数据。内存地址本身也是数据，也可以放到内存中。相当于C++中说的指针。因为等号左边表示地址，变量映射成地址值，也就等号左边不能是常数。</p><h2 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h2><p>如果一个基本变量被volatile修饰，编译器将不会把它保存到寄存器中，而是每一次都去访问内存中实际保存该变量的位置上。这一点就避免了没有volatile修饰的变量在多线程的读写中所产生的由于编译器优化所导致的灾难性问题。所以多线程中必须要共享的基本变量一定要加上volatile修饰符。当然了，volatile还能让你在编译时期捕捉到非线程安全的代码。volatile的作用就是用来进行多线程编程。在单线程中那就是只能起到限制编译器优化的作用。以下是使用场景：</p><pre><code>(1)中断服务程序中修改的供其它程序检测的变量需要加volatile。(2)多任务环境下各任务间共享的标志应该加volatile。(3)存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能由不同意义。*可以把一个非volatile int赋给volatile int，但是不能把非volatile对象赋给一个volatile对象。*除了基本类型外，对用户定义类型也可以用volatile类型进行修饰。*volatile像const一样会从类传递到它的成员。</code></pre><h2 id="4、枚举类型"><a href="#4、枚举类型" class="headerlink" title="4、枚举类型"></a>4、枚举类型</h2><pre><code>(1)定义：enum Suit { Diamonds, Hearts, Clubs, Spades };或enum Suit { Diamonds, Hearts, Clubs, Spades }a,b,c;(2)对于枚举类型来说，只定义了赋值运算符，没有为枚举定义算术运算。(3)能够将枚举量赋给非枚举变量，因为枚举量是符号常量，赋值编译器会自动把枚举量转换为int类型。(4)在不进行强制转换的前提下，只能将定义的枚举量赋值给该种枚举的变量，也就是说可以通过强制转换将其他类型值赋给枚举变量。(5)可以显式的设置枚举量的值(指定的值必须是整数)，也可以只显式的定义一部分枚举量的值。(6)未被初始化的枚举量的值默认比其前面的枚举量的值大1。当然，枚举量的值可以相同。</code></pre>]]></content>
     
@@ -526,32 +557,6 @@
     
     
       <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>论文参考文献标准格式要求</title>
-    <link href="http://www.echodemo.cc/2018/03/24/%E8%AE%BA%E6%96%87%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%87%E5%87%86%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82/"/>
-    <id>http://www.echodemo.cc/2018/03/24/论文参考文献标准格式要求/</id>
-    <published>2018-03-24T07:50:23.000Z</published>
-    <updated>2018-03-25T05:14:53.034Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1、参考文献的分类"><a href="#1、参考文献的分类" class="headerlink" title="1、参考文献的分类"></a>1、参考文献的分类</h2><p>按参考文献的提供目的划分,可分为引文文献、阅读型文献和推荐型文献3大类:</p><pre><code>(1)引文文献是著者在撰写或编辑论著的过程中,为正文中的直接引语(如数据、公式、理论、观点、图表等)或间接引语而提供的有关文献信息资源。(2)阅读型文献是著者在撰写或编辑论著的过程中,曾经阅读过的文献信息资源。(3)推荐型文献通常是专家或教师为特定读者、特定目的而提供的、可供读者查阅的文献信息资源。</code></pre><h2 id="2、文献类型和标识代码"><a href="#2、文献类型和标识代码" class="headerlink" title="2、文献类型和标识代码"></a>2、文献类型和标识代码</h2><p>参考文献目前共有16个文献类型和标识代码:普通图书M,会议录C,汇编G,报纸N,期刊J,学位论文D,报告R,标准S,专利P,数据库DB,计算机程序CP,电子公告EB,档案A,舆图CM,数据集DS,其他Z.凡无法归属于前15个类型的文献,均可以用Z来标志。</p><h2 id="3、参考文献格式要求"><a href="#3、参考文献格式要求" class="headerlink" title="3、参考文献格式要求"></a>3、参考文献格式要求</h2><p>1、参考文献按正文部分标注的序号依次列出,并在序号中加[]。</p><p>2、对于常见的各类参考文献标注方法如下:</p><pre><code>(1)著作:作者姓名,题名[M].出版地:出版者,出版年.(2)期刊论文:作者姓名.题名[J].期刊名称,年,卷(期):页码.(3)会议论文集:作者姓名.题名[C]//论文集名称,会议地点,会议日期.(4)学位论文:作者姓名.题名[D].出版地:出版者,出版年.(5)专利文献:专利申请者或所有者姓名.专利题名:专利国别,专利号[P].公告日期或公开日期.获取路径.(6)电子文献:作者姓名.题名[文献类型标志(含文献载体标志)见其它].出版地:出版者,出版年(更新或修改日期),获取路径.(7)报告:作者姓名. 题名[R].出版地:出版者,出版年.(8)标准:标准号.题名[S].出版地:出版者,出版年.</code></pre><p>3、同一著作中作者姓名不超过3名时,全部照录,超过3名时,只著录前3名作者,其后加“, 等”。</p><p>4、其他:数据库(DB),计算机程序(GP),光盘(CD),联机网络(OL)。</p><h2 id="4、参考文献著录格式"><a href="#4、参考文献著录格式" class="headerlink" title="4、参考文献著录格式"></a>4、参考文献著录格式</h2><p>参考文献按在正文中出现的先后次序列表于文后;表上以“参考文献:” (左顶格) 或“[参考文献]”(居中)作为标识;参考文献的序号左顶格,并用数字加方括号表示,如[1], [2],…,以与正文中的指示序号格式一致. 参照ISO690及ISO 6 9 0-2,每一参考文献条目的最后均以结束. 各类参考文献条目的编排格式及示例如下:</p><p>a.专著、论文集、学位论文、报告</p><pre><code>[序号]主要责任者. 文献题名[文献类型标识].出版地:出版者,出版年.[1]刘国钧,陈绍业,王凤者. 图书馆目录[M].北京:高等教育出版社,1957.[2]辛希孟. 信息技术与信息服务国际研讨会论文集:A集[C].北京:中国社会科学出版社,1994.[3]张筑生. 微分半动力系统的不变集[D].北京:北京大学数学系数学研究所,1983.[4]冯西桥. 核反应堆压力管道与压力容器的LBB分析[R].北京:清华大学核能技术设计研究院,1997.[5]尼葛洛庞帝. 数字化生存[M].胡泳,范海燕,译. 海口:海南出版社,19%.</code></pre><p>b.期刊文章</p><pre><code>[序号]主要责任者. 文献题名[J].刊名,年,卷 (期) :起止页码.[5]何龄修. 读顾城《南明史》[J].中国史研究,1998, (3) :167-173.[6]金显贺,王昌长,王忠东,等·一种用于在线检测局部放电的数字滤波技术[J].清华大学学报(自然科学版) , 1993, 33 (4) :62-67.</code></pre><p>c.论文集中的析出文献</p><pre><code>[序号]析出文献主要责任者. 析出文献题名[A].原文献主要责任者 (任选}.原文献题名[C].出版地:出版者,出版年. 析出文献起止页码.[7]钟文发·非线性规划在可燃毒物配置中的应用[A].赵玮. 运筹学的理论与应用-中国运筹学会第五届大会论文集[C].西安:西安电子科技大学出版社,1996.468-471.</code></pre><p>d.报纸文章</p><pre><code>[序号]主要责任者. 文献题名[N].报纸名,出版日期 (版次) .[8]谢希德. 创造学习的新思路[N].人民日报,1998-12-25 (10) .</code></pre><p>e.国际、国家标准</p><pre><code>[序号]标准编号,标准名称[S].[9]GB/T 16159-1996, 汉语拼音正词法基本规则[S].</code></pre><p>f.专利</p><pre><code>[序号]专利所有者,专利题名[P].专利国别:专利号,出版日期.[10]姜锡洲. 一种温热外敷药制备方案[P].中国专利:881056073, 1989-07-26.</code></pre><p>g.电子文献</p><pre><code>[序号]主要责任者. 电子文献题名[电子文献及载体类型标识].电子文献的出处或可获得地址,发表或更新日期/引用曰期 (任选) .[11]学术堂. 论文参考文献标准格式要求[EB/OL].http://www.lunwenstudy.com/cankaowenxian/130239.html.2018-03-14.[12]万锦堃. 中国大学学报论文文摘 (1983-1993) .英文版[D B/C D].北京:中国大百科全书出版社,19%.</code></pre><p>h.各种未定义类型的文献</p><pre><code>[序号]主要责任者. 文献题名[Z].出版地:出版者,出版年.</code></pre><h2 id="5、文内参考文献标注格式"><a href="#5、文内参考文献标注格式" class="headerlink" title="5、文内参考文献标注格式"></a>5、文内参考文献标注格式</h2><p>文内所列参考文献应限于作者直接阅读过的、最主要的、且为发表在正式出版物上的文章.私人通信和未发表 (含待发表) 的著作及论文,一般不宜作为参考文献. 参考文献还应注重权威性和时效性.文内标注参考文献时应按文献出现的先后顺序用阿拉伯数字连续编码,并将序号置于方括号中.可根据具体情况分别按下述3种格式之一标注.</p><pre><code>(1) 文中已标明原始文献作者姓名时,序号标注于作者姓名右上角.　　　　例如：Vairaktaris等[7]研究表明,MMP-9-1562C/T基因多态性与口腔癌关系密切.　　(2) 正文未标明作者或非原始文献作者时,序号标注于引用内容的句末.　　　　例如：……在中枢神经系统中具有保护神经的作用,减少缺氧、缺血对动物脑神经元的损害[1].　　(3) 正文直接述及文献序号时则将之作为语句的组成部分时不用角码标注.　　　　例如：肱动脉超声检查的方法见文献[2].　　</code></pre><p>　　<br>文中多次引用同一参考文献,只在第一次出现时编排序号 (在参考文献表中也只出现一次) , 其他处使用同一序号；如果多次引用的是同一参考文献的不同页的内容,则应参考文献表中按引用顺序一一列出页码.若某一问题使用了多篇文献说明,这时将各文献的序号在一个方括号内全部列出,中间加逗号,若遇连续序号,则在起止序号中间加“-”表示.如：……组织型RAS激活也成为心肌肥厚、心肌纤维化、心腔扩大、心力衰竭的主要因素[1,3,9-10].　　</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;1、参考文献的分类&quot;&gt;&lt;a href=&quot;#1、参考文献的分类&quot; class=&quot;headerlink&quot; title=&quot;1、参考文献的分类&quot;&gt;&lt;/a&gt;1、参考文献的分类&lt;/h2&gt;&lt;p&gt;按参考文献的提供目的划分,可分为引文文献、阅读型文献和推荐型文献3大类:&lt;/p&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="参考文献" scheme="http://www.echodemo.cc/tags/%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/"/>
     
   </entry>
   

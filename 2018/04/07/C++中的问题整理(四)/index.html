@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、C++中的BSS、数据段、代码段、堆、栈(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。 (2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-07T00:54:42.950Z">
+<meta property="og:updated_time" content="2018-04-07T01:03:04.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的问题整理(四)">
 <meta name="twitter:description" content="1、C++中的BSS、数据段、代码段、堆、栈(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。 (2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配">
@@ -481,7 +481,9 @@
 <h2 id="2、C-中的左值和右值"><a href="#2、C-中的左值和右值" class="headerlink" title="2、C++中的左值和右值"></a>2、C++中的左值和右值</h2><p>在C中，左值指的是既能够出现在等号左边也能出现在等号右边的变量(或表达式)，右值指的则是只能出现在等号右边的变量(或表达式)。通常等号左边表示引用，实质上就是内存地址。等号右边表示数据，从内存取的数据，直接给的数据，或者计算出来的数据。内存地址本身也是数据，也可以放到内存中。相当于C++中说的指针。因为等号左边表示地址，变量映射成地址值，也就等号左边不能是常数。</p>
 <h2 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h2><p>如果一个基本变量被volatile修饰，编译器将不会把它保存到寄存器中，而是每一次都去访问内存中实际保存该变量的位置上。这一点就避免了没有volatile修饰的变量在多线程的读写中所产生的由于编译器优化所导致的灾难性问题。所以多线程中必须要共享的基本变量一定要加上volatile修饰符。当然了，volatile还能让你在编译时期捕捉到非线程安全的代码。volatile的作用就是用来进行多线程编程。在单线程中那就是只能起到限制编译器优化的作用。以下是使用场景：</p>
 <pre><code>(1)中断服务程序中修改的供其它程序检测的变量需要加volatile。
+
 (2)多任务环境下各任务间共享的标志应该加volatile。
+
 (3)存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能由不同意义。
 
 *可以把一个非volatile int赋给volatile int，但是不能把非volatile对象赋给一个volatile对象。
@@ -573,6 +575,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/07/二叉树的基本操作/" rel="prev" title="二叉树的基本操作">
+                二叉树的基本操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -643,7 +649,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -796,7 +802,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共41.2k字</span>
+  <span class="post-count">博客全站共42.1k字</span>
 </div>
 
 
