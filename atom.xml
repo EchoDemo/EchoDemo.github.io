@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-07T07:06:43.989Z</updated>
+  <updated>2018-04-07T07:57:57.386Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>由中序和后序序列输出先序序列</title>
+    <link href="http://www.echodemo.cc/2018/04/07/%E7%94%B1%E4%B8%AD%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E5%BA%8F%E5%88%97%E8%BE%93%E5%87%BA%E5%85%88%E5%BA%8F%E5%BA%8F%E5%88%97/"/>
+    <id>http://www.echodemo.cc/2018/04/07/由中序和后序序列输出先序序列/</id>
+    <published>2018-04-07T07:55:20.000Z</published>
+    <updated>2018-04-07T07:57:57.386Z</updated>
+    
+    <content type="html"><![CDATA[<p>先由二叉树的中序序列和后序序列重建这棵二叉树，然后再输出二叉树的先序序列。由后序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下：</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;struct node {//二叉树的存储结构    int data;//数据域    node* lchild;//指向左子树根节点的指针    node* rchild;//指向右子树根节点的指针};node* create(int in[], int post[], int inL, int inR, int postL, int postR) {//根据中序序列和后序序列重建二叉树    if (inL&gt;inR) return NULL;//如果后序序列长度小于等于0，直接返回空    node* root = new node;//新建一个节点，用来存放当前二叉树的根节点    root-&gt;data = post[postR];//新建节点的数据域为根节点的值    int k;    for (k = inL;k &lt;= inR;k++) {        if (in[k] == post[postR]) {//在中序序列中找到根节点            break;        }    }    int num = k - inL;//左子树的节点个数    //左子树的后序序列区间为[postL,postL+num-1],中序序列区间为[inL,k-1]    root-&gt;lchild = create(in, post, inL, k - 1, postL, postL + num - 1);//返回左子树的根节点地址，赋值给root的左指针    //右子树的后序序列区间为[postL+num,postR-1],中序序列区间为[k+1,inR]    root-&gt;rchild = create(in, post, k + 1, inR, postL + num, postR - 1);//返回右子树的根节点地址，赋值给root的右指针    return root;//返回根节点地址}void preorder(node* root) {//先序遍历二叉树    if (root == NULL) {        return;//递归边界    }    printf(&quot;%d &quot;, root-&gt;data);//访问根节点    preorder(root-&gt;lchild);//访问左子树    preorder(root-&gt;rchild);//访问右子树}int main() {    int n;    cin &gt;&gt; n;//输入二叉树的节点个数    int *in = new int[n];//new一个变长的int型数组    int *post = new int[n];    for (int i = 0;i &lt; n;i++) {//输入中序序列        cin &gt;&gt; in[i];    }    for (int i = 0;i &lt; n;i++) {//输入后序序列        cin &gt;&gt; post[i];    }    int inL = 0,postL = 0, inR = n - 1, postR = n - 1;    preorder(create(in, post, inL, inR, postL, postR));    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;先由二叉树的中序序列和后序序列重建这棵二叉树，然后再输出二叉树的先序序列。由后序序列可以得到二叉树的根节点，再在中序序列中找到此根节点即可区分出左子树和右子树的范围，递归以上步骤即可重建二叉树。完整代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;quot;st
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="C++" scheme="http://www.echodemo.cc/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>由先序和中序序列输出后序序列</title>
@@ -526,31 +554,6 @@
 &lt;p&gt;(2)指针可以有多级，但是引用只能是一级(int **p;合法而int &amp;amp;&amp;a;是不合法的)。&lt;/p&gt;
 &lt;p&gt;(3)如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄漏。&lt;/p&gt;
 
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的问题整理(一)</title>
-    <link href="http://www.echodemo.cc/2018/03/25/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E4%B8%80)/"/>
-    <id>http://www.echodemo.cc/2018/03/25/C++中的问题整理(一)/</id>
-    <published>2018-03-25T11:19:51.000Z</published>
-    <updated>2018-04-07T00:54:30.122Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别"><a href="#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别" class="headerlink" title="1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?"></a>1、#include&lt;filename.h&gt;和#include“filename.h”有什么区别?</h3><p>答：对于#include&lt;filename.h&gt;,编译器从标准库路径开始搜索filename.h,而对于#include “filename.h”,编译器从用户的工作路径开始搜索filename.h。</p><h3 id="2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”"><a href="#2、在C-程序中调用被C编译器编译后的函数-为什么要加extern“C”" class="headerlink" title="2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?"></a>2、在C++程序中调用被C编译器编译后的函数,为什么要加extern“C”?</h3><p>答：C++语言支持函数重载,C语言不支持函数重载。函数被C++编译后在库中的名字与C语言的不同。假设某个函数的原型为:void foo(int x, int y);该函数被C编译器编译后在库中的名字为_foo,而C++编译器则会产生像_foo_int_int 之类的名字。C++提供了C连接交换指定符号extern“C”来解决名字匹配问题。</p><h3 id="3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的"><a href="#3、一个类有基类、内部有一个其他类的成员对象-构造函数的执行顺序是怎样的" class="headerlink" title="3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?"></a>3、一个类有基类、内部有一个其他类的成员对象,构造函数的执行顺序是怎样的?</h3><p>答：先执行基类的(如果基类当中有虚基类,要先执行虚基类的,其他基类则按照声明派生类时的顺序依次执行),再执行成员对象的,最后执行自己的。</p><h3 id="4、New-delete与malloc-free的区别是什么？"><a href="#4、New-delete与malloc-free的区别是什么？" class="headerlink" title="4、New/delete与malloc/free的区别是什么？"></a>4、New/delete与malloc/free的区别是什么？</h3><p>(1)new/delete是C++的操作符，而malloc/free是C中的函数。</p><p>(2)new做两件事，一是分配内存，二是调用类的构造函数；同样，delete会调用类的析构函数和释放内存。而malloc和free只是分配和释放内存。</p><p>(3)new建立的是一个对象，而malloc分配的是一块内存；new建立的对象可以用成员函数访问，不要直接访问它的地址空间；malloc分配的是一块内存区域，用指针访问，可以在里面移动指针；new出来的指针是带有类型信息的，而malloc返回的是void指针。</p><p>(4)new/delete是保留字，不需要头文件支持；malloc/free需要头文件库函数支持。</p><h3 id="5、Struct和class的区别是什么？"><a href="#5、Struct和class的区别是什么？" class="headerlink" title="5、Struct和class的区别是什么？"></a>5、Struct和class的区别是什么？</h3><pre><code>答：struct中成员变量和成员函数默认访问权限是public,class是private。</code></pre><h3 id="6、多态有哪些分类？"><a href="#6、多态有哪些分类？" class="headerlink" title="6、多态有哪些分类？"></a>6、多态有哪些分类？</h3><p>答：多态可以分为编译时多态和运行时多态。编译时多态可以通过函数的重载来实现，具体表现在根据参数的个数和类型的不同选择合适的同名函数。运行时多态通过虚函数实现，就是运行时根据对象类型自动选择正确的调用函数(也叫动态绑定)。模板属于编译时多态性，因为编译时自动根据模板生成模板函数。虚函数的动态绑定仅在基类指针或引用绑定派生类对象时发生。如果函数的形参不是指针或者引用，则调用哪个类的函数就已经确定。</p><h3 id="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"><a href="#7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？" class="headerlink" title="7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？"></a>7、为了提高访问内存的速度而进行内存对齐，说明内存对齐是什么？</h3><pre><code>(1)默认情况下，编译器的对齐系数为8(2)内存对齐：就是每个成员的起始位置必须是对齐系数与成员自身大小二者中较小者的整数倍。(3)内存补齐：取结构体或类的成员中最大的那个值，与对齐系统相比，取二者中的较小者。然后保证整个对象结尾地址的下一个地址是较小者的整数倍。(4)结构体对齐除了第1点之外还要求结构体数组也必须是对齐的，也就是说每个相邻的结构体内部都是对齐的。可以看一下这篇文章:http://www.cppblog.com/cc/archive/2006/08/01/10765.html</code></pre><h3 id="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"><a href="#8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。" class="headerlink" title="8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。"></a>8、在win32中创建一个窗口需要设计一个窗口类，注册窗口类，创建窗口，显示及刷新窗口等几个步骤。</h3><h3 id="9、const-有什么用途？"><a href="#9、const-有什么用途？" class="headerlink" title="9、const 有什么用途？"></a>9、const 有什么用途？</h3><p>(1)可以定义const常量。</p><p>(2)const可以修饰函数的参数、返回值，甚至函数的定义体。被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。被const修饰的函数定义体的函数能被const或者非const对象调用，但是const对象只能调用被const修饰过定义体的函数。</p><h3 id="10、什么是内联函数？"><a href="#10、什么是内联函数？" class="headerlink" title="10、什么是内联函数？"></a>10、什么是内联函数？</h3><p>(1)编译器使用相应的函数代码替换函数调用，对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数快，但代价是需要占用更多的内存。例如：如果程序在10个不同的地方调用了同一个内联函数，则该程序将包含该代码的10个副本。</p><p>(2)在函数声明之前加上关键字inline或者在函数定义之前加上inline。关键字inline必须与函数定义体放在一起才能使函数成为内联，仅将inline放在函数声明前面不起任何作用。</p><p>(3)定义在类声明之中的成员函数将自动地成为内联函数。所以不管是class声明中定义的inline函数，还是class实现中定义的inline函数，不存在优先不优先的问题，因为class的成员函数都是inline的，加了关键字inline也没什么特殊的。</p><p>(4)由于使用inline关键字的函数只是用户希望它成为内联函数，但是编译器有权忽略这个请求，比如：若此函数体太大，则不会把它作为内联函数展开的。内联函数定义也可以放在源文件中，但此时只有定义的那个源文件可以用它，而且必须为每个源文件拷贝一份定义(即每个源文件里的定义必须是完全相同的)。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别&quot;&gt;&lt;a href=&quot;#1、-include-lt-filename-h-gt-和-include“filename-h”有什么区别&quot; class=&quot;hea
       
     
     </summary>
