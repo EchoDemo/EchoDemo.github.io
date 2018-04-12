@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT A1001 A+B Format]]></title>
+    <url>%2F2018%2F04%2F12%2FPAT-A1001-A%2BB-Format%2F</url>
+    <content type="text"><![CDATA[Calculate a + b and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits). Input Specification: Each input file contains one test case. Each case contains a pair of integers a and b where -1000000 &lt;= a, b &lt;= 1000000. The numbers are separated by a space. Output Specification: For each test case, you should output the sum of a and b in one line. The sum must be written in the standard format. Sample Input -1000000 9 Sample Output -999,991 此题使用如下代码在PAT测试时出现一个段错误。如有大佬光临寒舍，还望多多指教。 #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;stack&gt; using namespace std; int main() { int a, b,sum=0; cin &gt;&gt; a &gt;&gt; b; sum = a + b; if (sum &lt; 0) cout &lt;&lt; &quot;-&quot;;//和为负数，就先把负号输出 sum = (sum &lt; 0) ? -sum : sum;//求绝对值 stack&lt;char&gt; s; int num = 0; while (sum) { s.push((sum % 10)+&apos;0&apos;);//从最低位开始入栈 num++;//统计sum中各个位入栈的个数 if (num % 3 == 0) s.push(&apos;,&apos;);//每当sum的位入栈三次，就把‘，’入栈 sum /= 10; } if (s.top() == &apos;,&apos;) s.pop();//如果全栈最顶为‘，’，则直接出栈 while (!s.empty()) { cout &lt;&lt; s.top();//输出栈顶元素 s.pop();//栈顶元素出栈 } system(&quot;pause&quot;); return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT A</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[梦境]]></title>
     <url>%2F2018%2F04%2F08%2F%E6%A2%A6%E5%A2%83%2F</url>
     <content type="text"><![CDATA[夜里入梦，梦见自己投身于《生化危机》般的世界。从城镇到山峦，再到陌生的工厂。梦境中的自己一直在逃亡，恐惧、杀戮和死亡如影随形。梦醒时分，才知是梦，但梦境确是异常清晰与真实，仿佛现实般存在。或许是由于这段时间的压力所带来的反应，不知怎的，觉得这样的感觉很好。似乎是压力释放的一种方式，人在极度的恐惧当中，往往会表现出最本真的自己，没有压抑也没有伪装。人需要有所畏惧，有所敬畏，生于忧患，死于安乐。]]></content>

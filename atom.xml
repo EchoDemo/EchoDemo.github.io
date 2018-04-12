@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-08T04:47:49.996Z</updated>
+  <updated>2018-04-12T09:51:44.778Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT A1001 A+B Format</title>
+    <link href="http://www.echodemo.cc/2018/04/12/PAT-A1001-A+B-Format/"/>
+    <id>http://www.echodemo.cc/2018/04/12/PAT-A1001-A+B-Format/</id>
+    <published>2018-04-12T09:09:21.000Z</published>
+    <updated>2018-04-12T09:51:44.778Z</updated>
+    
+    <content type="html"><![CDATA[<p>Calculate a + b and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits).</p><p>Input Specification:</p><p>Each input file contains one test case. Each case contains a pair of integers a and b where -1000000 &lt;= a, b &lt;= 1000000. The numbers are separated by a space.</p><p>Output Specification:</p><p>For each test case, you should output the sum of a and b in one line. The sum must be written in the standard format.</p><pre><code>Sample Input-1000000 9Sample Output-999,991</code></pre><p>此题使用如下代码在PAT测试时出现一个段错误。如有大佬光临寒舍，还望多多指教。</p><pre><code>#include &quot;stdafx.h&quot;#include&lt;iostream&gt;#include&lt;stdlib.h&gt;#include&lt;stack&gt;using namespace std;int main() {    int a, b,sum=0;    cin &gt;&gt; a &gt;&gt; b;    sum = a + b;    if (sum &lt; 0) cout &lt;&lt; &quot;-&quot;;//和为负数，就先把负号输出    sum = (sum &lt; 0) ? -sum : sum;//求绝对值    stack&lt;char&gt; s;    int num = 0;    while (sum) {        s.push((sum % 10)+&apos;0&apos;);//从最低位开始入栈        num++;//统计sum中各个位入栈的个数        if (num % 3 == 0) s.push(&apos;,&apos;);//每当sum的位入栈三次，就把‘，’入栈        sum /= 10;    }    if (s.top() == &apos;,&apos;) s.pop();//如果全栈最顶为‘，’，则直接出栈    while (!s.empty()) {        cout &lt;&lt; s.top();//输出栈顶元素        s.pop();//栈顶元素出栈    }    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Calculate a + b and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless ther
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT A" scheme="http://www.echodemo.cc/tags/PAT-A/"/>
+    
+  </entry>
   
   <entry>
     <title>梦境</title>
@@ -521,31 +548,6 @@
     
     
       <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>三月二十七号</title>
-    <link href="http://www.echodemo.cc/2018/03/27/%E4%B8%89%E6%9C%88%E4%BA%8C%E5%8D%81%E4%B8%83%E5%8F%B7/"/>
-    <id>http://www.echodemo.cc/2018/03/27/三月二十七号/</id>
-    <published>2018-03-27T11:51:27.000Z</published>
-    <updated>2018-03-27T11:54:38.037Z</updated>
-    
-    <content type="html"><![CDATA[<p>奔走于图书馆和教学楼之间的小径，仲春时节。湖北海棠开得热烈，散发出浓厚的香气；迎春花点缀在桥的两头，静静躺卧；溪中的水生植被在被割去旧年的枝干之后，在流水中已生发出嫩绿的新叶；晨梦亭下有人读书；阳光的热度适合出游与赏玩。自身脚步匆匆，但春日里的生机能够感受得到，这是一种力量的传递与引导，人与自然需要一定的联结。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;奔走于图书馆和教学楼之间的小径，仲春时节。湖北海棠开得热烈，散发出浓厚的香气；迎春花点缀在桥的两头，静静躺卧；溪中的水生植被在被割去旧年的枝干之后，在流水中已生发出嫩绿的新叶；晨梦亭下有人读书；阳光的热度适合出游与赏玩。自身脚步匆匆，但春日里的生机能够感受得到，这是一种力量
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
