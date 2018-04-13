@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT A1002 A+B for Polynomials]]></title>
+    <url>%2F2018%2F04%2F13%2FPAT-A1002-A%2BB-for-Polynomials%2F</url>
+    <content type="text"><![CDATA[This time, you are supposed to find A+B where A and B are two polynomials. Input Specification: Each input file contains one test case. Each case occupies 2 lines, and each line contains the information of a polynomial: K N1 aN1 N2 aN2 … NK aNK, where K is the number of nonzero terms in the polynomial, Ni and aNi (i=1, 2, …, K) are the exponents and coefficients, respectively. It is given that 1 &lt;= K &lt;= 10，0 &lt;= NK &lt; … &lt; N2 &lt; N1 &lt;=1000. Output Specification: For each test case you should output the sum of A and B in one line, with the same format as the input. Notice that there must be NO extra space at the end of each line. Please be accurate to 1 decimal place. Sample Input 2 1 2.4 0 3.2 2 2 1.5 1 0.5 Sample Output 3 2 1.5 1 2.9 0 3.2 此题在一开始写的时候没有注意到当输出系数不为零的个数为0时的情况，故导致格式错误。 #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;stdio.h&gt; using namespace std; int main() { double a[1001] = { 0.0 }, b[1001] = { 0.0 }, c[1001] = { 0.0 }; int m, n; cin &gt;&gt; m; for (int i = 0;i &lt; m;i++) {//初始化第一个多项式 int j; cin &gt;&gt; j; cin &gt;&gt; a[j]; c[j] += a[j]; } cin &gt;&gt; n; for (int i = 0;i &lt; n;i++) {//初始化第二个多项式 int j; cin &gt;&gt; j; cin &gt;&gt; b[j]; c[j] += b[j]; } int num = 0; for (int i = 0;i &lt; 1001;i++) {//计算系数非零的个数 if (c[i] != 0) num++; } cout &lt;&lt; num; if (num != 0) cout &lt;&lt; &quot; &quot;;//这里需要注意 for (int i = 1000;i &gt;= 0;i--) { if (c[i] == 0) continue; cout &lt;&lt; i &lt;&lt; &quot; &quot;; printf(&quot;%.1f&quot;, c[i]); num--; if (num != 0) cout &lt;&lt; &quot; &quot;; } system(&quot;pause&quot;); return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT A</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT A1001 A+B Format]]></title>
     <url>%2F2018%2F04%2F12%2FPAT-A1001-A%2BB-Format%2F</url>
     <content type="text"><![CDATA[Calculate a + b and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits). Input Specification: Each input file contains one test case. Each case contains a pair of integers a and b where -1000000 &lt;= a, b &lt;= 1000000. The numbers are separated by a space. Output Specification: For each test case, you should output the sum of a and b in one line. The sum must be written in the standard format. Sample Input -1000000 9 Sample Output -999,991 此题使用如下代码在PAT测试时出现一个段错误。如有大佬光临寒舍，还望多多指教。 #include &quot;stdafx.h&quot; #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;stack&gt; using namespace std; int main() { int a, b,sum=0; cin &gt;&gt; a &gt;&gt; b; sum = a + b; if (sum &lt; 0) cout &lt;&lt; &quot;-&quot;;//和为负数，就先把负号输出 sum = (sum &lt; 0) ? -sum : sum;//求绝对值 stack&lt;char&gt; s; int num = 0; while (sum) { s.push((sum % 10)+&apos;0&apos;);//从最低位开始入栈 num++;//统计sum中各个位入栈的个数 if (num % 3 == 0) s.push(&apos;,&apos;);//每当sum的位入栈三次，就把‘，’入栈 sum /= 10; } if (s.top() == &apos;,&apos;) s.pop();//如果全栈最顶为‘，’，则直接出栈 while (!s.empty()) { cout &lt;&lt; s.top();//输出栈顶元素 s.pop();//栈顶元素出栈 } system(&quot;pause&quot;); return 0; }]]></content>
