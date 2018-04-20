@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-13T13:57:54.726Z</updated>
+  <updated>2018-04-20T04:43:12.000Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态规划</title>
+    <link href="http://www.echodemo.cc/2018/04/20/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    <id>http://www.echodemo.cc/2018/04/20/动态规划/</id>
+    <published>2018-04-20T04:38:20.000Z</published>
+    <updated>2018-04-20T04:43:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、动态规划的递归写法(记忆化搜索)：重点在于如何记录子问题的解，从而避免下次遇到同样的子问题时重复计算。以斐波那契数列为例：</p><pre><code>int F(int n){    if(n==0||n==1) return 1;    else return F(n-1)+F(n-2);}</code></pre><p>然而上述代码会涉及很多的重复计算，由于没有对中间计算的结果进行保存，实际复杂度会高达O(2^n)。这里通过开一个数组来对已计算出来的数据进行保存。</p><pre><code>int dp[max];int F(int n){    if(n==0||n==1) return 1;    if(dp[n]!=-1) return dp[n];    else{        dp[n]=F(n-1)+F(n-2);        return dp[n];    }}</code></pre><p>这样可以将复杂度从O(2^n)降到O(n)。如果一个问题可以被分解成若干个子问题，且这些子问题会重复出现，那么就称这个问题拥有重叠子问题。因此，一个问题必须拥有重叠子问题，才能使用动态规划进行求解。</p><p>2、动态规划的递推写法：其使用的计算方式是自底向上，即从边界开始，不断向上解决问题，直到解决了目标问题为止；而递归写法是自顶向下，即从目标问题开始，将它分解成子问题的组合，直到分解至边界为止。以经典的数塔问题为例</p><p>首先开一个二维数组array[i][j]对每层的数据进行存放，由于除第一层之外，每一层都至少会有一条重合的路径。不妨零dp[i][j]表示从第i行第j个数字出发到达最底层的所有路径中能得到的最大和。也就会有dp[i][j]=max(dp[i+1][j],dp[i+1][j+1])+array[i][j]。这里把dp[i][j]称为问题的状态，把这个式子称为状态转移方程。数塔的边界是dp[n][j]==array[n][j]，而动态规划的递推写法总是从这些边界出发，通过状态转移方程扩散到整个dp数组。</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;using namespace std;const int maxn=1000;int array[maxn][maxn],dp[maxn][maxn];int main(){    int n;    cin&gt;&gt;n;    for(int i=1;i&lt;=n;i++){        for(int j=1;j&lt;=i;j++){            cin&gt;&gt;array[i][j];//初始化数塔        }    }    for(int i=1;i&lt;=n;i++){//边界        dp[n][i]=array[n][i];    }    for(int i=n-1;i&gt;=1;i--){        for(int j=1;j&lt;=i;j++){            dp[i][j]=max(dp[i+1][j],dp[i+1][j+1])+array[i][j];//状态转移方程        }    }    cout&lt;&lt;dp[1][1];    return 0}</code></pre><p>如果一个问题的最优解可以由其子问题的最优解有效地构造出来，那么就称这个问题拥有最优子结构。因此，一个问题必须拥有最优子结构，才能使用动态规划进行求解。</p><p>3、两组概念的区分</p><p>(1)分治和动态规划</p><p>分治和动态规划都是将问题分解为子问题，然后合并子问题的解得到原问题的解。但是不同的是，分治法分解出的子问题是不重叠的，因此分治法解决的问题不拥有重叠子问题，而动态规划解决的问题拥有重叠子问题。例如，归并排序和快速排序都是分别处理左序列和右序列，然后将左右序列的结果合并，过程中不出现重叠子问题，因此它们使用的都是分治法。另外，分治法解决问题不一定是最优化问题，而动态规划解决的问题一定是最优化问题。</p><p>(2)贪心和动态规划</p><p>贪心和动态规划都要求原问题必须拥有最优子结构。二者的区别在于，贪心法采用的计算方式类似于上面介绍的“自顶向下”，但是并不等待子问题求解完毕后再选择使用哪一个，而是通过一种策略直接选择一个子问题去求解，没被选择的子问题就不去求解了，直接抛弃。也就是说，它总是只在上一步选择的基础上继续选择，因此整个过程对数塔问题而言，贪心法从最上层开始，每次选择左下和右上两个数字中较大的一个，一直到最底层得到最后的结果，显然这不一定可以得到最优解。而动态规划不管是采用自底向上还是自顶下下的计算方式，都是从边界开始向上得到目标问题的解。也就是说，他总是会考虑所有的子问题，并选择继承能得到最优结果的那个，对暂时没被继承的子问题，由于重叠子问题的存在，后期可能会再次考虑它们，因此还有机会成为全局最优的一部分，不需要放弃。所以贪心是一种壮士割腕的决策，只要进行了选择，就不后悔；动态规划则要看哪个选择笑到了最后。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、动态规划的递归写法(记忆化搜索)：重点在于如何记录子问题的解，从而避免下次遇到同样的子问题时重复计算。以斐波那契数列为例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int F(int n){
+    if(n==0||n==1) return 1;
+    else return
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT A1002 A+B for Polynomials</title>
@@ -525,31 +553,6 @@
     
     
       <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>画地为牢</title>
-    <link href="http://www.echodemo.cc/2018/03/28/%E7%94%BB%E5%9C%B0%E4%B8%BA%E7%89%A2/"/>
-    <id>http://www.echodemo.cc/2018/03/28/画地为牢/</id>
-    <published>2018-03-28T12:25:39.000Z</published>
-    <updated>2018-03-28T12:28:30.244Z</updated>
-    
-    <content type="html"><![CDATA[<p>人需要去探索未知的领域，包括周围的环境、与专业相关的内容或者是周围的人群。因为在那些事物当中往往会有很多的惊喜等着你。或许它们一直都存在，只是很多时候受到各种条件的限制，尤其是来自于我们思想的禁锢和束缚。没有突破，置身其中，画地为牢，就连滋生好奇心的培养皿都没有。生活需要一双发现美的眼睛，同时也需要有伸向外界的触角和勇气。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;人需要去探索未知的领域，包括周围的环境、与专业相关的内容或者是周围的人群。因为在那些事物当中往往会有很多的惊喜等着你。或许它们一直都存在，只是很多时候受到各种条件的限制，尤其是来自于我们思想的禁锢和束缚。没有突破，置身其中，画地为牢，就连滋生好奇心的培养皿都没有。生活需要一
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
