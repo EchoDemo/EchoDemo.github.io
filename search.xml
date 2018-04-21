@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT B1002 写出这个数]]></title>
+    <url>%2F2018%2F04%2F21%2FPAT-B1002-%E5%86%99%E5%87%BA%E8%BF%99%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[读入一个自然数n，计算其各位数字之和，用汉语拼音写出和的每一位数字。 输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。这里保证n小于10^100。 输出格式：在一行内输出n的各位数字之和的每一位，拼音数字间有1 空格，但一行中最后一个拼音数字后没有空格。 输入样例： 1234567890987654321123456789 输出样例： yi san wu 题目代码： #include&lt;iostream&gt; #include&lt;string&gt; using namespace std; int main() { string s; cin &gt;&gt; s; string str[10] = { &quot;ling&quot;,&quot;yi&quot;,&quot;er&quot;,&quot;san&quot;,&quot;si&quot;,&quot;wu&quot;,&quot;liu&quot;,&quot;qi&quot;,&quot;ba&quot;,&quot;jiu&quot; }; int sum = 0; for (int i = 0;i &lt; s.length();i++) { sum += (s[i] - &apos;0&apos;); } string number = to_string(sum); for (int i = 0;i &lt; number.length();i++) { cout &lt;&lt; str[number[i] - &apos;0&apos;]; if (i &lt; (number.length()-1)) cout &lt;&lt; &quot; &quot;; } return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT B</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PAT B1001 害死人不偿命的(3n+1)猜想]]></title>
+    <url>%2F2018%2F04%2F21%2FPAT-B1001-%E5%AE%B3%E6%AD%BB%E4%BA%BA%E4%B8%8D%E5%81%BF%E5%91%BD%E7%9A%84(3n%2B1)%E7%8C%9C%E6%83%B3%2F</url>
+    <content type="text"><![CDATA[卡拉兹(Callatz)猜想： 对任何一个自然数n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把(3n+1)砍掉一半。这样一直反复砍下去，最后一定在某一步得到n=1。卡拉兹在1950年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证(3n+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……我们今天的题目不是证明卡拉兹猜想，而是对给定的任一不超过1000的正整数n，简单地数一下，需要多少步（砍几下）才能得到n=1？ 输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。 输出格式：输出从n计算到1需要的步数。 输入样例： 3 输出样例： 5 题目代码： #include&lt;iostream&gt; using namespace std; int main() { int n, num = 0; cin &gt;&gt; n; while (n != 1) { if (n % 2 == 0) n /= 2; else n = (3 * n + 1) / 2; num++; } cout &lt;&lt; num; return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT B</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最长不下降子序列]]></title>
+    <url>%2F2018%2F04%2F21%2F%E6%9C%80%E9%95%BF%E4%B8%8D%E4%B8%8B%E9%99%8D%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[在一个数字序列中，找到一个最长的子序列(可以不连续)，使得这个子序列是不下降(非递减)的。 分析：此题如若采用暴力的方法来解答，即对于每个元素有取或是不取两种选择，时间复杂度可以达到O(2^n)。 令dp[i]表示以A[i]结尾的最长不下降子序列长度(和最大连续子序列和问题一样，以A[i]结尾是强制的要求)。此时会有两种情况：一种是存在A[i]之前的元素Aj，使得A[j]&lt;=A[i]且dp[j]+1&gt;dpi,那么就把A[i]跟在以A[j]结尾的LIS后面，形成一条更长的不下降子序列(dp[i]=dp[j]+1)；另一种是A[i]之前的元素都比A[i]大，那么A[i]就只好自己形成一条LIS，此时的长度为1。则其状态转移方程为：dp[i]=max(1,dp[j]+1)(j=1,2,…,i-1&amp;&amp;A[j]&lt;A[i])，其边界条件就为：dp[i]=1(1&lt;=i&lt;=n)。其整体复杂度为O(n^2)。 #include&lt;iostream&gt; #include&lt;algorithm&gt; #include&lt;stdlib.h&gt; using namespace std; const int N=100; int A[N],dp[N]; int main(){ int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++){ cin&gt;&gt;A[i]; } int num=-1; for(int i=1;i&lt;=n;i++){ dp[i]=1;//边界初始条件 for(int j=1;j&lt;i;j++){ if((A[i]&gt;=A[j])&amp;&amp;(dp[j]+1&gt;dp[i])){ dp[i]=dp[j]+1; } } num=max(num,dp[i]); } cout&lt;&lt;num; system(&quot;pause&quot;); return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最大连续子序列的和]]></title>
+    <url>%2F2018%2F04%2F20%2F%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%92%8C%2F</url>
+    <content type="text"><![CDATA[给定一个数字序列A1，A2，…，An，求i,j(1&lt;=i&lt;=j&lt;=n)，使得Ai+…+Aj最大，输出这个最大的和。 分析：这个问题如若暴力来做，枚举i,j需要O(n^2)的复杂度，而计算A[i]+…+A[j]需要O(n)的复杂度，因此总的复杂度为O(n^3)。就算采用记录前缀和的方法(预处理S[i]=A[0]+A[1]+…+A[i],这样A[i]+…+A[j]=S[j]-S[i-1])使计算的时间变为O(1)，总的复杂度仍然有O(n^2)。 这里介绍动态规划的做法，复杂度为O(n)。令状态dp[i]表示以A[i]作为末尾的连续序列的最大和(这里的连续指的是从第一个元素开始)。其实所要求的最大和就是dp数组中的最大值。也就是说求dp[i]时，只要dp[i-1]小于零就舍弃前面的和，直接取A[i]的值作为dp[i]即可；而如果dp[i-1]大于零，dp[i]就等于dp[i-1]+A[i]。于是得到dp[i]=max(A[i],dp[i-1]+A[i])。而边界就是dp[0]=A[0]。 #include&lt;iostream&gt; #include&lt;stdlib.h&gt; #include&lt;algorithm&gt; using namespace std; const int maxn = 10010; int A[maxn], dp[maxn]; int main() { int n; cin &gt;&gt; n; for (int i = 0;i &lt; n;i++) { cin &gt;&gt; A[i]; } dp[0] = A[0];//边界 for (int i = 0;i &lt; n;i++) { dp[i] = max(A[i], dp[i - 1] + A[i]);//状态转移方程 } int k = 0; for (int i = 1;i &lt; n;i++) { if (dp[i] &gt; dp[k]) k = i; } cout &lt;&lt; dp[k]; system(&quot;pause&quot;); return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[动态规划]]></title>
     <url>%2F2018%2F04%2F20%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%2F</url>
     <content type="text"><![CDATA[1、动态规划的递归写法(记忆化搜索)：重点在于如何记录子问题的解，从而避免下次遇到同样的子问题时重复计算。以斐波那契数列为例： int F(int n){ if(n==0||n==1) return 1; else return F(n-1)+F(n-2); } 然而上述代码会涉及很多的重复计算，由于没有对中间计算的结果进行保存，实际复杂度会高达O(2^n)。这里通过开一个数组来对已计算出来的数据进行保存。 int dp[max]; int F(int n){ if(n==0||n==1) return 1; if(dp[n]!=-1) return dp[n]; else{ dp[n]=F(n-1)+F(n-2); return dp[n]; } } 这样可以将复杂度从O(2^n)降到O(n)。如果一个问题可以被分解成若干个子问题，且这些子问题会重复出现，那么就称这个问题拥有重叠子问题。因此，一个问题必须拥有重叠子问题，才能使用动态规划进行求解。 2、动态规划的递推写法：其使用的计算方式是自底向上，即从边界开始，不断向上解决问题，直到解决了目标问题为止；而递归写法是自顶向下，即从目标问题开始，将它分解成子问题的组合，直到分解至边界为止。以经典的数塔问题为例 首先开一个二维数组array[i][j]对每层的数据进行存放，由于除第一层之外，每一层都至少会有一条重合的路径。不妨零dp[i][j]表示从第i行第j个数字出发到达最底层的所有路径中能得到的最大和。也就会有dp[i][j]=max(dp[i+1][j],dp[i+1][j+1])+array[i][j]。这里把dp[i][j]称为问题的状态，把这个式子称为状态转移方程。数塔的边界是dp[n][j]==array[n][j]，而动态规划的递推写法总是从这些边界出发，通过状态转移方程扩散到整个dp数组。 #include&lt;iostream&gt; #include&lt;algorithm&gt; #include&lt;vector&gt; using namespace std; const int maxn=1000; int array[maxn][maxn],dp[maxn][maxn]; int main(){ int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++){ for(int j=1;j&lt;=i;j++){ cin&gt;&gt;array[i][j];//初始化数塔 } } for(int i=1;i&lt;=n;i++){//边界 dp[n][i]=array[n][i]; } for(int i=n-1;i&gt;=1;i--){ for(int j=1;j&lt;=i;j++){ dp[i][j]=max(dp[i+1][j],dp[i+1][j+1])+array[i][j];//状态转移方程 } } cout&lt;&lt;dp[1][1]; return 0 } 如果一个问题的最优解可以由其子问题的最优解有效地构造出来，那么就称这个问题拥有最优子结构。因此，一个问题必须拥有最优子结构，才能使用动态规划进行求解。 3、两组概念的区分 (1)分治和动态规划 分治和动态规划都是将问题分解为子问题，然后合并子问题的解得到原问题的解。但是不同的是，分治法分解出的子问题是不重叠的，因此分治法解决的问题不拥有重叠子问题，而动态规划解决的问题拥有重叠子问题。例如，归并排序和快速排序都是分别处理左序列和右序列，然后将左右序列的结果合并，过程中不出现重叠子问题，因此它们使用的都是分治法。另外，分治法解决问题不一定是最优化问题，而动态规划解决的问题一定是最优化问题。 (2)贪心和动态规划 贪心和动态规划都要求原问题必须拥有最优子结构。二者的区别在于，贪心法采用的计算方式类似于上面介绍的“自顶向下”，但是并不等待子问题求解完毕后再选择使用哪一个，而是通过一种策略直接选择一个子问题去求解，没被选择的子问题就不去求解了，直接抛弃。也就是说，它总是只在上一步选择的基础上继续选择，因此整个过程对数塔问题而言，贪心法从最上层开始，每次选择左下和右上两个数字中较大的一个，一直到最底层得到最后的结果，显然这不一定可以得到最优解。而动态规划不管是采用自底向上还是自顶下下的计算方式，都是从边界开始向上得到目标问题的解。也就是说，他总是会考虑所有的子问题，并选择继承能得到最优结果的那个，对暂时没被继承的子问题，由于重叠子问题的存在，后期可能会再次考虑它们，因此还有机会成为全局最优的一部分，不需要放弃。所以贪心是一种壮士割腕的决策，只要进行了选择，就不后悔；动态规划则要看哪个选择笑到了最后。]]></content>

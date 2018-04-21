@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-20T04:43:12.000Z</updated>
+  <updated>2018-04-21T03:12:13.025Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,120 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT B1002 写出这个数</title>
+    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1002-%E5%86%99%E5%87%BA%E8%BF%99%E4%B8%AA%E6%95%B0/"/>
+    <id>http://www.echodemo.cc/2018/04/21/PAT-B1002-写出这个数/</id>
+    <published>2018-04-21T03:10:23.000Z</published>
+    <updated>2018-04-21T03:12:13.025Z</updated>
+    
+    <content type="html"><![CDATA[<p>读入一个自然数n，计算其各位数字之和，用汉语拼音写出和的每一位数字。</p><p>输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。这里保证n小于10^100。</p><p>输出格式：在一行内输出n的各位数字之和的每一位，拼音数字间有1 空格，但一行中最后一个拼音数字后没有空格。</p><pre><code>输入样例：1234567890987654321123456789输出样例：yi san wu</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {  string s;  cin &gt;&gt; s;  string str[10] = { &quot;ling&quot;,&quot;yi&quot;,&quot;er&quot;,&quot;san&quot;,&quot;si&quot;,&quot;wu&quot;,&quot;liu&quot;,&quot;qi&quot;,&quot;ba&quot;,&quot;jiu&quot; };  int sum = 0;  for (int i = 0;i &lt; s.length();i++) {    sum += (s[i] - &apos;0&apos;);  }  string number = to_string(sum);  for (int i = 0;i &lt; number.length();i++) {    cout &lt;&lt; str[number[i] - &apos;0&apos;];    if (i &lt; (number.length()-1)) cout &lt;&lt; &quot; &quot;;  }  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;读入一个自然数n，计算其各位数字之和，用汉语拼音写出和的每一位数字。&lt;/p&gt;
+&lt;p&gt;输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。这里保证n小于10^100。&lt;/p&gt;
+&lt;p&gt;输出格式：在一行内输出n的各位数字之和的每一位，拼音数字间有1 空格，但一行中最后一个
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1001 害死人不偿命的(3n+1)猜想</title>
+    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1001-%E5%AE%B3%E6%AD%BB%E4%BA%BA%E4%B8%8D%E5%81%BF%E5%91%BD%E7%9A%84(3n+1)%E7%8C%9C%E6%83%B3/"/>
+    <id>http://www.echodemo.cc/2018/04/21/PAT-B1001-害死人不偿命的(3n+1)猜想/</id>
+    <published>2018-04-21T02:26:45.000Z</published>
+    <updated>2018-04-21T02:30:24.438Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>卡拉兹(Callatz)猜想：</code></pre><p>对任何一个自然数n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把(3n+1)砍掉一半。这样一直反复砍下去，最后一定在某一步得到n=1。卡拉兹在1950年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证(3n+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……我们今天的题目不是证明卡拉兹猜想，而是对给定的任一不超过1000的正整数n，简单地数一下，需要多少步（砍几下）才能得到n=1？</p><p>输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。</p><p>输出格式：输出从n计算到1需要的步数。</p><pre><code>输入样例：3输出样例：5</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;using namespace std;int main() {    int n, num = 0;    cin &gt;&gt; n;    while (n != 1) {        if (n % 2 == 0) n /= 2;        else n = (3 * n + 1) / 2;        num++;    }    cout &lt;&lt; num;    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;卡拉兹(Callatz)猜想：
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;对任何一个自然数n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把(3n+1)砍掉一半。这样一直反复砍下去，最后一定在某一步得到n=1。卡拉兹在1950年的世界数学家大会上公布了这个猜想，
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最长不下降子序列</title>
+    <link href="http://www.echodemo.cc/2018/04/21/%E6%9C%80%E9%95%BF%E4%B8%8D%E4%B8%8B%E9%99%8D%E5%AD%90%E5%BA%8F%E5%88%97/"/>
+    <id>http://www.echodemo.cc/2018/04/21/最长不下降子序列/</id>
+    <published>2018-04-21T01:35:56.000Z</published>
+    <updated>2018-04-21T02:03:39.927Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个数字序列中，找到一个最长的子序列(可以不连续)，使得这个子序列是不下降(非递减)的。</p><p>分析：此题如若采用暴力的方法来解答，即对于每个元素有取或是不取两种选择，时间复杂度可以达到O(2^n)。</p><p>令dp[i]表示以A[i]结尾的最长不下降子序列长度(和最大连续子序列和问题一样，以A[i]结尾是强制的要求)。此时会有两种情况：一种是存在A[i]之前的元素A<a href="j&lt;i">j</a>，使得A[j]&lt;=A[i]且dp[j]+1&gt;dp<a href="需要说明的是，这个dp[i]是边界条件或者是A[j]前面的元素在以A[i]结尾的LIS形成的dp[i]">i</a>,那么就把A[i]跟在以A[j]结尾的LIS后面，形成一条更长的不下降子序列(dp[i]=dp[j]+1)；另一种是A[i]之前的元素都比A[i]大，那么A[i]就只好自己形成一条LIS，此时的长度为1。则其状态转移方程为：dp[i]=max(1,dp[j]+1)(j=1,2,…,i-1&amp;&amp;A[j]&lt;A[i])，其边界条件就为：dp[i]=1(1&lt;=i&lt;=n)。其整体复杂度为O(n^2)。</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;stdlib.h&gt;using namespace std;const int N=100;int A[N],dp[N];int main(){    int n;    cin&gt;&gt;n;    for(int i=1;i&lt;=n;i++){        cin&gt;&gt;A[i];    }    int num=-1;    for(int i=1;i&lt;=n;i++){        dp[i]=1;//边界初始条件        for(int j=1;j&lt;i;j++){            if((A[i]&gt;=A[j])&amp;&amp;(dp[j]+1&gt;dp[i])){                dp[i]=dp[j]+1;            }        }        num=max(num,dp[i]);    }    cout&lt;&lt;num;    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在一个数字序列中，找到一个最长的子序列(可以不连续)，使得这个子序列是不下降(非递减)的。&lt;/p&gt;
+&lt;p&gt;分析：此题如若采用暴力的方法来解答，即对于每个元素有取或是不取两种选择，时间复杂度可以达到O(2^n)。&lt;/p&gt;
+&lt;p&gt;令dp[i]表示以A[i]结尾的最长不下降子序列
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最大连续子序列的和</title>
+    <link href="http://www.echodemo.cc/2018/04/20/%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%92%8C/"/>
+    <id>http://www.echodemo.cc/2018/04/20/最大连续子序列的和/</id>
+    <published>2018-04-20T14:59:34.000Z</published>
+    <updated>2018-04-20T15:33:51.949Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个数字序列A1，A2，…，An，求i,j(1&lt;=i&lt;=j&lt;=n)，使得Ai+…+Aj最大，输出这个最大的和。</p><p>分析：这个问题如若暴力来做，枚举i,j需要O(n^2)的复杂度，而计算A[i]+…+A[j]需要O(n)的复杂度，因此总的复杂度为O(n^3)。就算采用记录前缀和的方法(预处理S[i]=A[0]+A[1]+…+A[i],这样A[i]+…+A[j]=S[j]-S[i-1])使计算的时间变为O(1)，总的复杂度仍然有O(n^2)。</p><p>这里介绍动态规划的做法，复杂度为O(n)。令状态dp[i]表示以A[i]作为末尾的连续序列的最大和(这里的连续指的是从第一个元素开始)。其实所要求的最大和就是dp数组中的最大值。也就是说求dp[i]时，只要dp[i-1]小于零就舍弃前面的和，直接取A[i]的值作为dp[i]即可；而如果dp[i-1]大于零，dp[i]就等于dp[i-1]+A[i]。于是得到dp[i]=max(A[i],dp[i-1]+A[i])。而边界就是dp[0]=A[0]。</p><pre><code>#include&lt;iostream&gt;#include&lt;stdlib.h&gt;#include&lt;algorithm&gt;using namespace std;const int maxn = 10010;int A[maxn], dp[maxn];int main() {    int n;    cin &gt;&gt; n;    for (int i = 0;i &lt; n;i++) {        cin &gt;&gt; A[i];    }    dp[0] = A[0];//边界    for (int i = 0;i &lt; n;i++) {        dp[i] = max(A[i], dp[i - 1] + A[i]);//状态转移方程    }    int k = 0;    for (int i = 1;i &lt; n;i++) {        if (dp[i] &gt; dp[k])            k = i;    }    cout &lt;&lt; dp[k];    system(&quot;pause&quot;);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个数字序列A1，A2，…，An，求i,j(1&amp;lt;=i&amp;lt;=j&amp;lt;=n)，使得Ai+…+Aj最大，输出这个最大的和。&lt;/p&gt;
+&lt;p&gt;分析：这个问题如若暴力来做，枚举i,j需要O(n^2)的复杂度，而计算A[i]+…+A[j]需要O(n)的复杂度，因此总的复杂
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="算法" scheme="http://www.echodemo.cc/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>动态规划</title>
@@ -443,116 +557,6 @@
     
     
       <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>柴</title>
-    <link href="http://www.echodemo.cc/2018/03/31/%E6%9F%B4/"/>
-    <id>http://www.echodemo.cc/2018/03/31/柴/</id>
-    <published>2018-03-31T08:03:52.000Z</published>
-    <updated>2018-03-31T08:06:39.689Z</updated>
-    
-    <content type="html"><![CDATA[<p>你本是泥土里的种子</p><p>春雨下来，便破土而出，发芽又抽绿</p><p>阳光透过乔木和灌木的叶子漏下来</p><p>照耀着你微弱的身体</p><p><br><br>后来呀，雨露下来，寒风穿过</p><p>土壤也时而干燥</p><p>根在土里生长</p><p>叶在空气里徜徉</p><p>向着更广阔的空间里延伸</p><p>春夏秋冬地过去，轮回。</p><p><br><br>那一日，我手持柴刀独自上山</p><p>无意间来到你的身旁</p><p>此时的你已巍然成木</p><p>在多少次的手起刀落后</p><p>在洁白的木屑四散飞溅后</p><p>你轰然倒下</p><p>倒在你无比熟悉的地点</p><p>我残忍地脱去你的外衣，卸下你的臂膀</p><p>甚至头颅。</p><p><br><br>你已经死了</p><p>你的尸体跟随我下了山</p><p>你永远地离开了生生世世守护的这方土地</p><p>被我丢弃在陌生的沙土之上</p><p>无情的斧子借着外力将你的尸体大卸八块</p><p>陈列在清灰色瓦片盖的土坯房子里</p><p>静静等候与烈火的相遇</p><p>化为炊烟又化为尘土</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;你本是泥土里的种子&lt;/p&gt;
-&lt;p&gt;春雨下来，便破土而出，发芽又抽绿&lt;/p&gt;
-&lt;p&gt;阳光透过乔木和灌木的叶子漏下来&lt;/p&gt;
-&lt;p&gt;照耀着你微弱的身体&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;后来呀，雨露下来，寒风穿过&lt;/p&gt;
-&lt;p&gt;土壤也时而干燥&lt;/p&gt;
-&lt;p&gt;根在土里生长&lt;/p&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文字</title>
-    <link href="http://www.echodemo.cc/2018/03/31/%E6%96%87%E5%AD%97/"/>
-    <id>http://www.echodemo.cc/2018/03/31/文字/</id>
-    <published>2018-03-31T07:29:11.000Z</published>
-    <updated>2018-03-31T07:34:57.915Z</updated>
-    
-    <content type="html"><![CDATA[<p>庆山在书中写到：文字具备即刻的意义，记下的观点和细节，过后回望，已显得不再重要或已无关，但从记录中回溯，可看到自我构建和行进的一个过程。那么我想写博客的意义也大抵如此，文件夹中所有的文件前缀清晰地呈现出文件创建的日期，文件的标题可以一眼看出这其中包含了什么。那么点开“阅读全文”的扩展链接，你会知道自己在某天的某个时间段做了什么。可能是有关学习的知识点，可能是有关生活的感悟或自己的思考，又或者仅仅是记录了一件事情的发生。所有这些，过后回望的确会有及其深刻的意义。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;庆山在书中写到：文字具备即刻的意义，记下的观点和细节，过后回望，已显得不再重要或已无关，但从记录中回溯，可看到自我构建和行进的一个过程。那么我想写博客的意义也大抵如此，文件夹中所有的文件前缀清晰地呈现出文件创建的日期，文件的标题可以一眼看出这其中包含了什么。那么点开“阅读全
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《眠空》摘句(三)</title>
-    <link href="http://www.echodemo.cc/2018/03/31/%E3%80%8A%E7%9C%A0%E7%A9%BA%E3%80%8B%E6%91%98%E5%8F%A5(%E4%B8%89)/"/>
-    <id>http://www.echodemo.cc/2018/03/31/《眠空》摘句(三)/</id>
-    <published>2018-03-31T07:13:57.000Z</published>
-    <updated>2018-04-08T09:58:54.823Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、家里花园池塘，荷花已盛开。通常先有一朵最早绽放，一夜之间，其他次第开放。荷叶可煮米粥，白米汤染上微润绿汁，带有莲花清香，和上冰糖。荷叶在米粥煮熟即将熄火时放入覆盖。今年，一池塘红色荷花唯独长出一株白莲。不知它因何而起。</p><p>2、经过提纯的内心空间，不是不懂，不知，而是不问，不计较，不介意，不追究。愿意把别人想得好一些，不把人想得复杂，考虑到对方的立场。可说，可不说时，不如选择不说。</p><p>4、不存在无可救药的人、感情、生活。一切终究有变化。如果你认为它无可救药，不过是沉溺。我们可以选择完全的放下，或者完全的承担。唯独不能伪装成一个懒怠的理所当然的姿势。你尽可拖延和故作不知，企图获得其他妥协。命运静静等待一侧，旁观你辗转煎熬，最终会逼迫你把脚步移向注定的一格。实践一旦进行，错误和方式就会自动调整和归位。出发时首要的。</p><p>5、跪拜只是一个仪式，为了让心恭敬谦卑平和柔顺，在毫无杂念从事这一重复举动时训练和观照自己。调伏这颗充满傲慢我执的刚硬的心。这是一个修行的任务。</p><p>6、不应在原地等待，要一边前行一边等待。</p><p>7、看完一本书，即使觉得好，日后也常常想不起其中句子，也不会使用或摆弄。也许阅读它，如同喝下的一杯清水，不过是维持日常的生存。</p><p>8、如果曾经为别人做过什么，不要事后提醒对方记得你的付出。如果别人曾经出于信任对你分享过他的软弱，不要事后以此攻击对方以证明自身强大。这均是高贵举动。</p><p>9、时间最终会带来解脱，重要或者不重要的事物，在最后纷纷露出它们的本来面目。</p><p>10、我的心是一座浸泡在海水中的宫殿。多年之后，你会记得它，也许忘却它。最终，你会怀念它。这种悲哀与击伤。这种怜悯与温柔。这空无而充盈的力量。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、家里花园池塘，荷花已盛开。通常先有一朵最早绽放，一夜之间，其他次第开放。荷叶可煮米粥，白米汤染上微润绿汁，带有莲花清香，和上冰糖。荷叶在米粥煮熟即将熄火时放入覆盖。今年，一池塘红色荷花唯独长出一株白莲。不知它因何而起。&lt;/p&gt;
-&lt;p&gt;2、经过提纯的内心空间，不是不懂，不
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的抽象类和接口</title>
-    <link href="http://www.echodemo.cc/2018/03/31/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
-    <id>http://www.echodemo.cc/2018/03/31/Java中的抽象类和接口/</id>
-    <published>2018-03-31T07:01:20.000Z</published>
-    <updated>2018-03-31T07:02:41.750Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、抽象类和常规类很像，但是不能使用new操作符创建它的实例，但抽象类可以用作一种数据类型，因此：GeometricObject[] objects=new GeometricObject[10];objects[0]=new Circle();像上面这样创建一个元素是GeometricObject类型的数组，然后创建一个GeometricObject的实例，并将它的引用赋值给数组是可以的。虽然不能使用new操作符创建它的实例，但仍然可以定义它的构造方法，抽象类的构造方法定义为protected，因为它只被子类使用。抽象方法只有定义而没有实现。它的实现由子类提供。</p><p>2、抽象方法不能包含在非抽象类中，也就是说一个包含抽象方法的类必须声明为抽象类。但是，可以定义一个不包含抽象方法的抽象类(同样不能使用new操作符创建它的实例)，这种类是用来定义新子类的基类的。如果抽象父类的子类不能实现所有的抽象方法，那么这个子类也必须定义为抽象的。另外，抽象方法是非静态的。</p><p>3、即使子类的父类是具体的，这个子类也可以是抽象的。比如：object类是具体的，但继承于它的类却可以是抽象的。子类可以覆盖父类的方法并将它定义为abstract(这是很少见的)，但是它在当父类的方法实现在子类中变得不合法时是很有用的。在这种情况下，子类必须为abstract。</p><p>4、接口是一种与类相似的结构，只包含常量和抽象方法。它和抽象类相似，不能使用new操作创建接口的实例。由于接口中所有的数据域都是public final static而且所有的方法都是public abstract，所以java允许忽略这些修饰符。</p><p>5、Java只允许为类的扩展做单一继承，但是允许使用接口做多重继承。用关键字extends，接口可以继承其他接口，但是不可扩展类。一个类可以扩展它的父类同时实现多个接口。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、抽象类和常规类很像，但是不能使用new操作符创建它的实例，但抽象类可以用作一种数据类型，因此：GeometricObject[] objects=new GeometricObject[10];objects[0]=new Circle();像上面这样创建一个元素是Ge
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
     
   </entry>
   
