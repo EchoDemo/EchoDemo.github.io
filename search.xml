@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT B1005 继续(3n+1)猜想]]></title>
+    <url>%2F2018%2F04%2F26%2FPAT-B1005-%E7%BB%A7%E7%BB%AD(3n%2B1)%E7%8C%9C%E6%83%B3%2F</url>
+    <content type="text"><![CDATA[卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。 当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1，则当我们对n=5、8、4、2进行验证的时候，就可以直接判定卡拉兹猜想的真伪，而不需要重复计算，因为这4个数已经在验证3的时候遇到过了，我们称5、8、4、2是被3“覆盖”的数。我们称一个数列中的某个数n为“关键数”，如果n不能被数列中的其他数字所覆盖。 现在给定一系列待验证的数字，我们只需要验证其中的几个关键数，就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字，并按从大到小的顺序输出它们。 输入格式：每个测试输入包含1个测试用例，第1行给出一个正整数K(&lt;100)，第2行给出K个互不相同的待验证的正整数n(1&lt;n&lt;=100)的值，数字间用空格隔开。 输出格式：每个测试用例的输出占一行，按从大到小的顺序输出关键数字。数字间用1个空格隔开，但一行中最后一个数字后没有空格。 输入样例： 6 3 5 6 7 8 11 输出样例： 7 6 题目代码： #include&lt;iostream&gt; #include&lt;algorithm&gt; #include&lt;vector&gt; using namespace std; bool cmp(int a, int b) { return a &gt; b; } int arr[10000];//全局数组默认值为0 int main() { int k, n; cin &gt;&gt; k; vector&lt;int&gt; v(k); for (int i = 0;i &lt; k;i++) { cin &gt;&gt; n; v[i] = n;//初始化动态数组 while (n != 1) { if (n % 2 == 0) n /= 2; else n = (3 * n + 1) / 2; arr[n] = 1;//将所有元素会覆盖的值加入arr当中,1表示覆盖过 } } sort(v.begin(), v.end(), cmp);//将动态数组元素从大到小排序 //用于判定是否输出空格(此处由于无法预知未曾遍历的数组元素当中是否存在没有被覆盖的情况，只好将空格的输出判定放在已经确定的未被覆盖元素之前) int flag = 0; for (int i = 0;i &lt; v.size();i++) {//遍历整个数组 if (!arr[v[i]]) { if (flag == 1) cout &lt;&lt; &quot; &quot;; cout &lt;&lt; v[i]; flag = 1; } } return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT B</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[我喜欢夜是寂静的]]></title>
+    <url>%2F2018%2F04%2F25%2F%E6%88%91%E5%96%9C%E6%AC%A2%E5%A4%9C%E6%98%AF%E5%AF%82%E9%9D%99%E7%9A%84%2F</url>
+    <content type="text"><![CDATA[我喜欢夜是寂静的 那遥远的地方跑过来的黑夜 喃喃地呼唤我 将我揽入她的怀抱 她也叫来昏黄的路灯 挂在我的头上 头顶再遥远的地方 淡淡的星子在闪 四周里安静无声，那是因为 夜，也喜欢我是寂静着的]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>诗词</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LintCode 二进制中有多少个1]]></title>
+    <url>%2F2018%2F04%2F23%2FLintCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AA1%2F</url>
+    <content type="text"><![CDATA[计算在一个 32 位的整数的二进制表示中有多少个 1. 样例 给定 32 (100000)，返回 1 给定 5 (101)，返回 2 给定 1023 (1111111111)，返回 10 代码一：此题如果采用的是移位的方法，那么这里唯一需要注意的是当给定的测试用例是负数的时候要先计算位于负号位的1，然后转化为正整数之后再进行移位的操作和计数。 int countOnes(int num) { int count = 0; if (num &lt; 0) { count++; num = num ^ 0x80000000; } while (num &gt; 0) { if (num &amp; 1) { count++; } num = num &gt;&gt; 1; } return count; } 代码二：这种方法还是比较巧妙，这里的数字本身和减一之后的数相与让我想起了计算数是否为2的幂次的程序。 int countOnes(int num){ int count = 0; while(num){ num = num &amp; (num-1); count++; } return count; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PAT B1004 成绩排名]]></title>
+    <url>%2F2018%2F04%2F21%2FPAT-B1004-%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D%2F</url>
+    <content type="text"><![CDATA[读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。 输入格式：每个测试输入包含1个测试用例，格式为 第1行：正整数n 第2行：第1个学生的姓名 学号 成绩 第3行：第2个学生的姓名 学号 成绩 ... ... ... 第n+1行：第n个学生的姓名 学号 成绩 其中姓名和学号均为不超过10个字符的字符串，成绩为0到100之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。 输出格式：对每个测试用例输出2行，第1行是成绩最高学生的姓名和学号，第2行是成绩最低学生的姓名和学号，字符串间有1空格。 输入样例： 3 Joe Math990112 89 Mike CS991301 100 Mary EE990830 95 输出样例： Mike CS991301 Joe Math990112 题目代码： #include&lt;iostream&gt; #include&lt;string&gt; using namespace std; int main() { int n, score, maxscore = -1, minscore = 101; string name, number, maxname, minname, maxnumber, minnumber; cin &gt;&gt; n; for (int i = 0;i &lt; n;i++) { cin &gt;&gt; name &gt;&gt; number &gt;&gt; score; if (score &gt; maxscore) { maxscore = score; maxname = name; maxnumber = number; } if (score &lt; minscore) { minscore = score; minname = name; minnumber = number; } } cout &lt;&lt; maxname &lt;&lt; &quot; &quot; &lt;&lt; maxnumber &lt;&lt; endl; cout &lt;&lt; minname &lt;&lt; &quot; &quot; &lt;&lt; minnumber; return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT B</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PAT B1003 我要通过！]]></title>
+    <url>%2F2018%2F04%2F21%2FPAT-B1003-%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87%EF%BC%81%2F</url>
+    <content type="text"><![CDATA[“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于PAT的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。得到“答案正确”的条件是： 字符串中必须仅有P, A, T这三种字符，不可以包含其它字符； 任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串； 如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。 现在就请你为PAT写一个自动裁判程序，判定哪些字符串是可以获得“答案正确”的。 输入格式： 每个测试输入包含1个测试用例。第1行给出一个自然数n (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过100，且不包含空格。 输出格式：每个字符串的检测结果占一行，如果该字符串可以获得“答案正确”，则输出YES，否则输出NO。 输入样例： 8 PAT PAAT AAPATAA AAPAATAAAA xPATx PT Whatever APAAATAA 输出样例： YES YES YES YES NO NO NO NO 分析：这种题目切不可仓促下笔，需要根据题目给出的条件分析清楚其中潜藏的规律。最好的方法就是使用输入输出样例当中的正确样例进行代入当然也可以自行多加一些样例来让结果更直观。此题的条件一可以说是一目了然，就没有代入的必要了。重点在于条件二和条件三。 条件二：任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举出以下皆正确的样例： PAT APATA AAPATAA AAAPATAAA AAAAPATAAAA ... 从中可以得出：在字符’PAT’的前面和后面添加任意相等个数的字符’A’即可满足条件二。 条件三：如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举以下样例： PAT PAAT PAAAAAT APATA APAATAA APAAATAAA AAPATAA AAPAATAAAA AAPAAATAAAAAA 总结来说：只能有一个P一个T，中间末尾和开头可以随便插入A。但是必须满足开头的A的个数 * 中间的A的个数 = 结尾的A的个数。 #include &lt;iostream&gt; #include &lt;map&gt; using namespace std; int main() { int n, p = 0, t = 0; string s; cin &gt;&gt; n; for(int i = 0; i &lt; n; i++) { cin &gt;&gt; s; map&lt;char, int&gt; m; for(int j = 0; j &lt; s.size(); j++) { m[s[j]]++; if (s[j] == &apos;P&apos;) p = j; if (s[j] == &apos;T&apos;) t = j; } if(m[&apos;P&apos;] == 1 &amp;&amp; m[&apos;A&apos;] != 0 &amp;&amp; m[&apos;T&apos;] == 1 &amp;&amp; m.size() == 3 &amp;&amp; p * (t-p-1) == s.length()-t-1) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; } return 0; }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>PAT B</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT B1002 写出这个数]]></title>
     <url>%2F2018%2F04%2F21%2FPAT-B1002-%E5%86%99%E5%87%BA%E8%BF%99%E4%B8%AA%E6%95%B0%2F</url>
     <content type="text"><![CDATA[读入一个自然数n，计算其各位数字之和，用汉语拼音写出和的每一位数字。 输入格式：每个测试输入包含1个测试用例，即给出自然数n的值。这里保证n小于10^100。 输出格式：在一行内输出n的各位数字之和的每一位，拼音数字间有1 空格，但一行中最后一个拼音数字后没有空格。 输入样例： 1234567890987654321123456789 输出样例： yi san wu 题目代码： #include&lt;iostream&gt; #include&lt;string&gt; using namespace std; int main() { string s; cin &gt;&gt; s; string str[10] = { &quot;ling&quot;,&quot;yi&quot;,&quot;er&quot;,&quot;san&quot;,&quot;si&quot;,&quot;wu&quot;,&quot;liu&quot;,&quot;qi&quot;,&quot;ba&quot;,&quot;jiu&quot; }; int sum = 0; for (int i = 0;i &lt; s.length();i++) { sum += (s[i] - &apos;0&apos;); } string number = to_string(sum); for (int i = 0;i &lt; number.length();i++) { cout &lt;&lt; str[number[i] - &apos;0&apos;]; if (i &lt; (number.length()-1)) cout &lt;&lt; &quot; &quot;; } return 0; }]]></content>

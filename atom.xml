@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-21T03:12:13.025Z</updated>
+  <updated>2018-04-26T03:13:24.838Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,164 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT B1005 继续(3n+1)猜想</title>
+    <link href="http://www.echodemo.cc/2018/04/26/PAT-B1005-%E7%BB%A7%E7%BB%AD(3n+1)%E7%8C%9C%E6%83%B3/"/>
+    <id>http://www.echodemo.cc/2018/04/26/PAT-B1005-继续(3n+1)猜想/</id>
+    <published>2018-04-26T03:11:34.000Z</published>
+    <updated>2018-04-26T03:13:24.838Z</updated>
+    
+    <content type="html"><![CDATA[<p>卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。</p><p>当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1，则当我们对n=5、8、4、2进行验证的时候，就可以直接判定卡拉兹猜想的真伪，而不需要重复计算，因为这4个数已经在验证3的时候遇到过了，我们称5、8、4、2是被3“覆盖”的数。我们称一个数列中的某个数n为“关键数”，如果n不能被数列中的其他数字所覆盖。</p><p>现在给定一系列待验证的数字，我们只需要验证其中的几个关键数，就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字，并按从大到小的顺序输出它们。</p><p>输入格式：每个测试输入包含1个测试用例，第1行给出一个正整数K(&lt;100)，第2行给出K个互不相同的待验证的正整数n(1&lt;n&lt;=100)的值，数字间用空格隔开。</p><p>输出格式：每个测试用例的输出占一行，按从大到小的顺序输出关键数字。数字间用1个空格隔开，但一行中最后一个数字后没有空格。</p><pre><code>输入样例：63 5 6 7 8 11输出样例：7 6</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;using namespace std;bool cmp(int a, int b) {  return a &gt; b;}int arr[10000];//全局数组默认值为0int main() {  int k, n;  cin &gt;&gt; k;  vector&lt;int&gt; v(k);  for (int i = 0;i &lt; k;i++) {    cin &gt;&gt; n;    v[i] = n;//初始化动态数组    while (n != 1) {      if (n % 2 == 0)        n /= 2;      else        n = (3 * n + 1) / 2;      arr[n] = 1;//将所有元素会覆盖的值加入arr当中,1表示覆盖过    }  }  sort(v.begin(), v.end(), cmp);//将动态数组元素从大到小排序  //用于判定是否输出空格(此处由于无法预知未曾遍历的数组元素当中是否存在没有被覆盖的情况，只好将空格的输出判定放在已经确定的未被覆盖元素之前)  int flag = 0;  for (int i = 0;i &lt; v.size();i++) {//遍历整个数组    if (!arr[v[i]]) {      if (flag == 1) cout &lt;&lt; &quot; &quot;;      cout &lt;&lt; v[i];      flag = 1;    }      }  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。&lt;/p&gt;
+&lt;p&gt;当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1，则当我们对n=5、8、4
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我喜欢夜是寂静的</title>
+    <link href="http://www.echodemo.cc/2018/04/25/%E6%88%91%E5%96%9C%E6%AC%A2%E5%A4%9C%E6%98%AF%E5%AF%82%E9%9D%99%E7%9A%84/"/>
+    <id>http://www.echodemo.cc/2018/04/25/我喜欢夜是寂静的/</id>
+    <published>2018-04-25T14:11:09.000Z</published>
+    <updated>2018-04-25T14:18:24.864Z</updated>
+    
+    <content type="html"><![CDATA[<p>我喜欢夜是寂静的</p><p>那遥远的地方跑过来的黑夜</p><p>喃喃地呼唤我</p><p>将我揽入她的怀抱</p><p><br><br>她也叫来昏黄的路灯</p><p>挂在我的头上</p><p>头顶再遥远的地方</p><p>淡淡的星子在闪</p><p>四周里安静无声，那是因为</p><p>夜，也喜欢我是寂静着的</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我喜欢夜是寂静的&lt;/p&gt;
+&lt;p&gt;那遥远的地方跑过来的黑夜&lt;/p&gt;
+&lt;p&gt;喃喃地呼唤我&lt;/p&gt;
+&lt;p&gt;将我揽入她的怀抱&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;她也叫来昏黄的路灯&lt;/p&gt;
+&lt;p&gt;挂在我的头上&lt;/p&gt;
+&lt;p&gt;头顶再遥远的地方&lt;/p&gt;
+&lt;p&gt;淡淡的星子在闪&lt;/p&gt;
+&lt;p&gt;四
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LintCode 二进制中有多少个1</title>
+    <link href="http://www.echodemo.cc/2018/04/23/LintCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AA1/"/>
+    <id>http://www.echodemo.cc/2018/04/23/LintCode-二进制中有多少个1/</id>
+    <published>2018-04-23T08:59:23.000Z</published>
+    <updated>2018-04-23T09:13:06.117Z</updated>
+    
+    <content type="html"><![CDATA[<p>计算在一个 32 位的整数的二进制表示中有多少个 1.</p><p>样例</p><pre><code>给定 32 (100000)，返回 1给定 5 (101)，返回 2给定 1023 (1111111111)，返回 10</code></pre><p>代码一：此题如果采用的是移位的方法，那么这里唯一需要注意的是当给定的测试用例是负数的时候要先计算位于负号位的1，然后转化为正整数之后再进行移位的操作和计数。</p><pre><code>int countOnes(int num) {    int count = 0;    if (num &lt; 0) {        count++;        num = num ^ 0x80000000;    }    while (num &gt; 0) {        if (num &amp; 1) {            count++;          }        num = num &gt;&gt; 1;    }    return count;}</code></pre><p>代码二：这种方法还是比较巧妙，这里的数字本身和减一之后的数相与让我想起了计算数是否为2的幂次的程序。</p><pre><code>int countOnes(int num){    int count = 0;    while(num){        num = num &amp; (num-1);        count++;    }    return count;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;计算在一个 32 位的整数的二进制表示中有多少个 1.&lt;/p&gt;
+&lt;p&gt;样例&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;给定 32 (100000)，返回 1
+
+给定 5 (101)，返回 2
+
+给定 1023 (1111111111)，返回 10
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;代码一
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1004 成绩排名</title>
+    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1004-%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D/"/>
+    <id>http://www.echodemo.cc/2018/04/21/PAT-B1004-成绩排名/</id>
+    <published>2018-04-21T11:57:45.000Z</published>
+    <updated>2018-04-25T14:58:45.338Z</updated>
+    
+    <content type="html"><![CDATA[<p>读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p><p>输入格式：每个测试输入包含1个测试用例，格式为</p><pre><code>第1行：正整数n第2行：第1个学生的姓名 学号 成绩第3行：第2个学生的姓名 学号 成绩... ... ...第n+1行：第n个学生的姓名 学号 成绩</code></pre><p>其中姓名和学号均为不超过10个字符的字符串，成绩为0到100之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。</p><p>输出格式：对每个测试用例输出2行，第1行是成绩最高学生的姓名和学号，第2行是成绩最低学生的姓名和学号，字符串间有1空格。</p><pre><code>输入样例：3Joe Math990112 89Mike CS991301 100Mary EE990830 95输出样例：Mike CS991301Joe Math990112</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {    int n, score, maxscore = -1, minscore = 101;    string name, number, maxname, minname, maxnumber, minnumber;    cin &gt;&gt; n;    for (int i = 0;i &lt; n;i++) {        cin &gt;&gt; name &gt;&gt; number &gt;&gt; score;        if (score &gt; maxscore) {            maxscore = score;            maxname = name;            maxnumber = number;        }        if (score &lt; minscore) {            minscore = score;            minname = name;            minnumber = number;        }    }    cout &lt;&lt; maxname &lt;&lt; &quot; &quot; &lt;&lt; maxnumber &lt;&lt; endl;    cout &lt;&lt; minname &lt;&lt; &quot; &quot; &lt;&lt; minnumber;    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。&lt;/p&gt;
+&lt;p&gt;输入格式：每个测试输入包含1个测试用例，格式为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;第1行：正整数n
+第2行：第1个学生的姓名 学号 成绩
+第3行：第2个学生的姓名 学号 成绩
+... .
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1003 我要通过！</title>
+    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1003-%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87%EF%BC%81/"/>
+    <id>http://www.echodemo.cc/2018/04/21/PAT-B1003-我要通过！/</id>
+    <published>2018-04-21T07:32:58.000Z</published>
+    <updated>2018-04-25T14:58:10.593Z</updated>
+    
+    <content type="html"><![CDATA[<p>“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于PAT的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。得到“答案正确”的条件是：</p><ol><li><p>字符串中必须仅有P, A, T这三种字符，不可以包含其它字符；</p></li><li><p>任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串；</p></li><li><p>如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。</p></li></ol><p>现在就请你为PAT写一个自动裁判程序，判定哪些字符串是可以获得“答案正确”的。</p><p>输入格式： 每个测试输入包含1个测试用例。第1行给出一个自然数n (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过100，且不包含空格。</p><p>输出格式：每个字符串的检测结果占一行，如果该字符串可以获得“答案正确”，则输出YES，否则输出NO。</p><pre><code>输入样例：8PATPAATAAPATAAAAPAATAAAAxPATxPTWhateverAPAAATAA输出样例：YESYESYESYESNONONONO</code></pre><p>分析：这种题目切不可仓促下笔，需要根据题目给出的条件分析清楚其中潜藏的规律。最好的方法就是使用输入输出样例当中的正确样例进行代入当然也可以自行多加一些样例来让结果更直观。此题的条件一可以说是一目了然，就没有代入的必要了。重点在于条件二和条件三。</p><p>条件二：任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举出以下皆正确的样例：</p><pre><code>PATAPATAAAPATAAAAAPATAAAAAAAPATAAAA...</code></pre><p>从中可以得出：在字符’PAT’的前面和后面添加任意相等个数的字符’A’即可满足条件二。</p><p>条件三：如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举以下样例：</p><pre><code>PATPAATPAAAAATAPATAAPAATAAAPAAATAAAAAPATAAAAPAATAAAAAAPAAATAAAAAA</code></pre><p>总结来说：只能有一个P一个T，中间末尾和开头可以随便插入A。但是必须满足开头的A的个数 * 中间的A的个数 = 结尾的A的个数。</p><pre><code>#include &lt;iostream&gt;#include &lt;map&gt;using namespace std;int main() {    int n, p = 0, t = 0;    string s;    cin &gt;&gt; n;    for(int i = 0; i &lt; n; i++) {        cin &gt;&gt; s;        map&lt;char, int&gt; m;        for(int j = 0; j &lt; s.size(); j++) {            m[s[j]]++;            if (s[j] == &apos;P&apos;) p = j;            if (s[j] == &apos;T&apos;) t = j;        }        if(m[&apos;P&apos;] == 1 &amp;&amp; m[&apos;A&apos;] != 0 &amp;&amp; m[&apos;T&apos;] == 1 &amp;&amp; m.size() == 3 &amp;&amp; p * (t-p-1) == s.length()-t-1)            cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;        else            cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于PAT的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。得到“答案正确”的条件是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;字符串中必须仅有P, A, T这三种字符，不可
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT B1002 写出这个数</title>
@@ -420,135 +578,6 @@
     node* rchild;//指向右子树根节点的指针
 };
 &lt;/code&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="数据结构" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的问题整理(四)</title>
-    <link href="http://www.echodemo.cc/2018/04/07/C++%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86(%E5%9B%9B)/"/>
-    <id>http://www.echodemo.cc/2018/04/07/C++中的问题整理(四)/</id>
-    <published>2018-04-07T00:45:34.000Z</published>
-    <updated>2018-04-07T01:03:04.282Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1、C-中的BSS、数据段、代码段、堆、栈"><a href="#1、C-中的BSS、数据段、代码段、堆、栈" class="headerlink" title="1、C++中的BSS、数据段、代码段、堆、栈"></a>1、C++中的BSS、数据段、代码段、堆、栈</h2><p>(1)BSS(Block Started by Symbol)通常是指用来存放程序中未初始化的全局变量和静态变量的一块内存区域。特点是:可读写的，在程序执行之前BSS段会自动清0。所以，未初始的全局变量在程序执行之前已经成0了。</p><p>(2)数据段：数据段(data segment)通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。</p><p>(3)代码段：代码段(code segment/text segment)通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读,某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。</p><p>(4)堆(heap)：堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上(堆被扩张)；当利用free等函数释放内存时，被释放的内存从堆中被剔除(堆被缩减)</p><p>(5)栈(stack)：栈又称堆栈，是用户存放程序临时创建的局部变量，也就是说我们函数括弧“{}”中定义的变量(但不包括static声明的变量，static意味着在数据段中存放变量)。除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。由于栈的先进后出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</p><h2 id="2、C-中的左值和右值"><a href="#2、C-中的左值和右值" class="headerlink" title="2、C++中的左值和右值"></a>2、C++中的左值和右值</h2><p>在C中，左值指的是既能够出现在等号左边也能出现在等号右边的变量(或表达式)，右值指的则是只能出现在等号右边的变量(或表达式)。通常等号左边表示引用，实质上就是内存地址。等号右边表示数据，从内存取的数据，直接给的数据，或者计算出来的数据。内存地址本身也是数据，也可以放到内存中。相当于C++中说的指针。因为等号左边表示地址，变量映射成地址值，也就等号左边不能是常数。</p><h2 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h2><p>如果一个基本变量被volatile修饰，编译器将不会把它保存到寄存器中，而是每一次都去访问内存中实际保存该变量的位置上。这一点就避免了没有volatile修饰的变量在多线程的读写中所产生的由于编译器优化所导致的灾难性问题。所以多线程中必须要共享的基本变量一定要加上volatile修饰符。当然了，volatile还能让你在编译时期捕捉到非线程安全的代码。volatile的作用就是用来进行多线程编程。在单线程中那就是只能起到限制编译器优化的作用。以下是使用场景：</p><pre><code>(1)中断服务程序中修改的供其它程序检测的变量需要加volatile。(2)多任务环境下各任务间共享的标志应该加volatile。(3)存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能由不同意义。*可以把一个非volatile int赋给volatile int，但是不能把非volatile对象赋给一个volatile对象。*除了基本类型外，对用户定义类型也可以用volatile类型进行修饰。*volatile像const一样会从类传递到它的成员。</code></pre><h2 id="4、枚举类型"><a href="#4、枚举类型" class="headerlink" title="4、枚举类型"></a>4、枚举类型</h2><pre><code>(1)定义：enum Suit { Diamonds, Hearts, Clubs, Spades };或enum Suit { Diamonds, Hearts, Clubs, Spades }a,b,c;(2)对于枚举类型来说，只定义了赋值运算符，没有为枚举定义算术运算。(3)能够将枚举量赋给非枚举变量，因为枚举量是符号常量，赋值编译器会自动把枚举量转换为int类型。(4)在不进行强制转换的前提下，只能将定义的枚举量赋值给该种枚举的变量，也就是说可以通过强制转换将其他类型值赋给枚举变量。(5)可以显式的设置枚举量的值(指定的值必须是整数)，也可以只显式的定义一部分枚举量的值。(6)未被初始化的枚举量的值默认比其前面的枚举量的值大1。当然，枚举量的值可以相同。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;1、C-中的BSS、数据段、代码段、堆、栈&quot;&gt;&lt;a href=&quot;#1、C-中的BSS、数据段、代码段、堆、栈&quot; class=&quot;headerlink&quot; title=&quot;1、C++中的BSS、数据段、代码段、堆、栈&quot;&gt;&lt;/a&gt;1、C++中的BSS、数据段、代码段、堆、栈
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>诗词入门(二)</title>
-    <link href="http://www.echodemo.cc/2018/04/05/%E8%AF%97%E8%AF%8D%E5%85%A5%E9%97%A8(%E4%BA%8C)/"/>
-    <id>http://www.echodemo.cc/2018/04/05/诗词入门(二)/</id>
-    <published>2018-04-05T11:35:50.000Z</published>
-    <updated>2018-04-07T12:17:30.039Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1、拗救"><a href="#1、拗救" class="headerlink" title="1、拗救"></a>1、拗救</h2><p>(1)拗：不符合诗律的一般规律(出律了)</p><p>(2)救：在拗的前提下调节平仄使音感和谐。</p><h2 id="2、拗救的常见形式"><a href="#2、拗救的常见形式" class="headerlink" title="2、拗救的常见形式"></a>2、拗救的常见形式</h2><p>以下皆以五言作为例句进行说明，那么也就是说七言的后五字同样适用于这些情况。</p><p>(1)本句自救(准律句)：平平平仄仄=》平平仄平仄</p><p>例：</p><pre><code>凉风起天末，君子意如何。平平仄平仄，平仄仄平平。</code></pre><p>根据诗律的原则，这里的“凉风起天末”句明显出律了。那么是“风”字出律还是“天”字出律呢？我们可以通过“君子意如何”句的平仄来判断。在这一联当中，对句的二四字的平仄为仄、平，那么就可以推出出句的二四字的平仄就为平、仄。也就是说是“天”字出律了(当仄为平时)，那么为什么明明“天”字出律了还会认为是对的呢？这种情况就是属于拗救中的本句自救。我们先来看一下出句的正确的平仄：“平平平仄仄”。这里有这样的规定：如果在诗的创作过程中碰到了“平平平仄仄”这种情况，可以使用另外一种格式，即：把五言的第三四字的平仄位置互换(七言当中第五六字的平仄位置互换)，此时规定五言的第一字必须用平声(七言的第三字必须用平声)，不再是可平可仄的，也就变成了“平平仄平仄”。我们可以发现，这种形式只能出现在出句当中(因为对句必须是押韵的，而近体诗当中是不能压仄声韵的)，同时又由于诗律中的相对和相粘原则，出句之中也只有两句才能出现这种情况。</p><p>若首字为仄，则是特例，初学者不建议使用。如：昔闻洞庭水(仄平仄平仄)。虽然说首字为仄的情况也是存在的，但毕竟与首字为平相比还是及其少见的。老杜虽是及其注重格律之人，但他活在格律成形的那个年代，那个时候的格律还是处于可以推敲的阶段，当然也就不能说他是错的。(这里只是希望初学者不要钻牛角尖，只要记住这种拗救的形式就行)</p><p>又例：</p><pre><code>遥怜小儿女，未解忆长安。平平仄平仄，仄仄仄平平。何时倚虚晃，双照泪痕干。平平仄平仄，平仄仄平平。西望瑶池降王母(平仄平平仄平仄)</code></pre><p>(2)对句相救：出句第四字当平为仄时，对句第三字只能是平声。(但一定要保证出句是以仄声结尾)</p><p>例：</p><pre><code>向晚意不适，驱车登古原。仄仄仄仄仄，平平平仄平。*在诗词当中，“不”字几乎可以说是只能为仄声。但也不是绝对的，当“不”字通“否”字时且作为韵脚时，它是平声的。如果它位于句中就一定是仄声。</code></pre><p>同样，这里根据对句的平仄可以判断出，是出句当中的第四字“不”字出律了(当平为仄时)。此时，可以通过对句的第三字(此时必为平声)来救，也就是例句中的“登”字。按照“一三五不论”的原则，“登”字本是可平可仄的，但是在这种情况之下就只能为平声了。因为是出句由对句来救，所以这种情况只能发生在出句当中。</p><p>又例：</p><pre><code>野火烧不尽，春风吹又生。仄仄平仄仄，平平平仄平。*吹字是可平可仄的，作名词的时候为仄声(歌吹是扬州)，作动词的时候为平声。</code></pre><h2 id="3、“一三五不论”需要排除的三种情况"><a href="#3、“一三五不论”需要排除的三种情况" class="headerlink" title="3、“一三五不论”需要排除的三种情况"></a>3、“一三五不论”需要排除的三种情况</h2><pre><code>(1)三平尾：在已经确定倒数第一和倒数第二字为平声的情况之下，如果仍然令倒数第三字为平声的话，就会变成“平平平”。三平尾是写诗的大忌。(2)三仄尾：在已经确定倒数第一和倒数第二字为仄声的情况之下，如果仍然令倒数第三字为仄声的话，就会变成“仄仄仄”。三仄尾也是写诗的大忌。(3)孤平：就是“仄平仄仄平”。孤平同样是写诗的大忌。这里可以将第三字改为平声来补偿，以免犯孤平。</code></pre><h2 id="4、根据平仄判断律句，若非律句再判断是否可救的步骤"><a href="#4、根据平仄判断律句，若非律句再判断是否可救的步骤" class="headerlink" title="4、根据平仄判断律句，若非律句再判断是否可救的步骤"></a>4、根据平仄判断律句，若非律句再判断是否可救的步骤</h2><pre><code>(1)先判断二四六字是否是平仄交替的。如果是则说明暂时是一个律句，进行第二步；否则说明此句不是一个标准的律句，进行第三步。(2)是否出现了三平尾、三仄尾或者是孤平。如果出现了其中一种，则必定是错误的。若没有，则说明是可以用的。(3)判断是否符合拗救的两种基本形式。如果符合其中之一说明是可以用的；如果都不符合则说明是错误的。</code></pre><h2 id="5、作业"><a href="#5、作业" class="headerlink" title="5、作业"></a>5、作业</h2><p>如果是本句自救(准律句)，打半钩；如果是对句自救，则标记出其对句该如何。如果最终不符合格律则打叉，符合则打钩。若有学有余力，为正确的律句查找相应的诗句。</p><p><img src="/images/2018/4/1.jpg" alt="&quot;作业&quot;"></p><p><img src="/images/2018/4/2.jpg" alt="&quot;作业&quot;"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;1、拗救&quot;&gt;&lt;a href=&quot;#1、拗救&quot; class=&quot;headerlink&quot; title=&quot;1、拗救&quot;&gt;&lt;/a&gt;1、拗救&lt;/h2&gt;&lt;p&gt;(1)拗：不符合诗律的一般规律(出律了)&lt;/p&gt;
-&lt;p&gt;(2)救：在拗的前提下调节平仄使音感和谐。&lt;/p&gt;
-&lt;h2 id=&quot;
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL中的问题整理</title>
-    <link href="http://www.echodemo.cc/2018/04/05/MySQL%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/"/>
-    <id>http://www.echodemo.cc/2018/04/05/MySQL中的问题整理/</id>
-    <published>2018-04-05T01:45:49.000Z</published>
-    <updated>2018-04-05T02:33:56.808Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>1、mysql共享锁和排他锁</code></pre><p>(1)产生的原因：数据库上的操作可以归纳为两种：读和写。多个事务同时读取一个对象的时候，是不会有冲突的。同时读和写，或者同时写才会产生冲突。因此为了提高数据库的并发性能，通常会定义两种锁：共享锁和排它锁。</p><p>(2)共享锁也叫读锁，简称S锁，原理：一个事务获取了一个数据行的共享锁，其他事务能获得该行对应的共享锁，但不能获得排他锁，即一个事务在读取一个数据行的时候，其他事务也可以读，但不能对该数据行进行增删改。</p><p>(3)排他锁也叫写锁，简称x锁，原理：一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁(排他锁或者共享锁)，即一个事务在读取一个数据行的时候，其他事务不能对该数据行进行增删改。但是获取排他锁的事务是可以对数据进行读取和修改。</p><p>(4)设置共享锁：SELECT … LOCK IN SHARE MODE;设置排他锁：SELECT … FOR UPDATE;</p><p>(5)对于select 语句，innodb不会加任何锁，也就是可以多个并发去进行select的操作，不会有任何的锁冲突，因为根本没有锁。 对于insert，update，delete操作，innodb会自动给涉及到的数据加排他锁，只有查询select需要我们手动设置排他锁。</p><pre><code>2、MySQL几种备份方式</code></pre><p>(1)逻辑备份：使用mysql自带的mysqldump工具进行备份。备份成sql文件形式。</p><p>优点：最大好处是能够与正在运行的mysql自动协同工作，在运行期间可以确保备份是当时的点，它会自动将对应操作的表锁定，不允许其他用户修改(只能访问)。可能会阻止修改操作。sql文件通用方便移植。</p><p>缺点：备份的速度比较慢。如果是数据量很多的时候。就很耗时间。如果数据库服务器处在提供给用户服务状态，在这段长时间操作过程中，意味着要锁定表(一般是读锁定，只能读不能写入数据)。那么服务就会影响的。</p><p>(2)物理备份：直接拷贝mysql的数据目录。直接拷贝只适用于myisam类型的表。这种类型的表是与机器独立的。但实际情况是，你设计数据库的时候不可能全部使用myisam类型表。你也不可能因为myisam类型表与机器独立，方便移植，于是就选择这种表，这并不是选择它的理由。</p><p>缺点：你不能去操作正在运行的mysql服务器(在拷贝的过程中有用户通过应用程序访问更新数据，这样就无法备份当时的数据)可能无法移植到其他机器上去。</p><p>(3)双机热备份。mysql数据库没有增量备份的机制。当数据量太大的时候备份是一个很大的问题。还好mysql数据库提供了一种主从备份的机制(也就是双机热备)。</p><p>优点：适合数据量大的时候。现在明白了。大的互联网公司对于mysql数据备份，都是采用热机备份。搭建多台数据库服务器，进行主从复制。</p><pre><code>3、数据库范式：一张数据表的表结构所符合的某种设计标准的级别</code></pre><p>(1)第一范式(1NF)</p><p>在任何一个关系数据库中，第一范式(1NF)是对关系模式的基本要求，不满足第一范式(1NF)的数据库就不是关系数据库。<br>所谓第一范式(1NF)是指数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值，即实体中的某个属性不能有多个值或者不能有重复的属性。如果出现重复的属性，就可能需要定义一个新的实体，新的实体由重复的属性构成，新实体与原实体之间为一对多关系。在第一范式(1NF)中表的每一行只包含一个实例的信息。简而言之，第一范式就是无重复的列。</p><p>(2)第二范式(2NF)</p><p>第二范式(2NF)是在第一范式(1NF)的基础上建立起来的，即满足第二范式(2NF)必须先满足第一范式(1NF)。第二范式(2NF)要求数据库表中的每个实例或行必须可以被惟一地区分。为实现区分通常需要为表加上一个列，以存储各个实例的惟一标识。这个惟一属性列被称为主关键字或主键、主码。<br>第二范式(2NF)要求实体的属性完全依赖于主关键字。所谓完全依赖是指不能存在仅依赖主关键字一部分的属性，如果存在，那么这个属性和主关键字的这一部分应该分离出来形成一个新的实体，新实体与原实体之间是一对多的关系。为实现区分通常需要为表加上一个列，以存储各个实例的惟一标识。简而言之，第二范式就是消除了非主属性对于码的部分函数依赖。</p><p>(3)第三范式(3NF)</p><p>满足第三范式(3NF)必须先满足第二范式(2NF)。简而言之，第三范式(3NF)要求一个数据库表中不包含已在其它表中已包含的非主关键字信息。例如，存在一个部门信息表，其中每个部门有部门编号(dept_id)、部门名称、部门简介等信息。那么在员工信息表中列出部门编号后就不能再将部门名称、部门简介等与部门有关的信息再加入员工信息表中。如果不存在部门信息表，则根据第三范式(3NF)也应该构建它，否则就会有大量的数据冗余。简而言之，第三范式就是消除了非主属性对于码的传递函数依赖。</p><pre><code>4、SQL语句优化</code></pre><p>(1)应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。</p><p>(2)应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：</p><pre><code>select id from t where num is null可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：select id from t where num=0</code></pre><p>(3)很多时候用 exists 代替 in 是一个好的选择。</p><p>(4)用Where子句替换HAVING 子句 因为HAVING 只会在检索出所有记录之后才对结果集进行过。</p><pre><code>5、存储过程与触发器的区别</code></pre><p>(1)触发器与存储过程非常相似，它是一种特殊类型的存储过程。触发器也是SQL语句集，他们都像是数据库中运行的方法。两者唯一的区别是触发器不能用EXECUTE语句调用，而是在用户执行Transact-SQL语句时自动触发(激活)执行。</p><p>(2)触发器是在一个修改了指定表中的数据时执行的存储过程。通常通过创建触发器来强制实现不同表中的逻辑相关数据的引用完整性和一致性。由于用户不能绕过触发器，所以可以用它来强制实施复杂的业务规则，以确保数据的完整性。</p><p>(3)触发器主要是通过事件执行触发而被执行的，而存储过程可以通过存储过程名称名字而直接调用。当对某一表进行诸如UPDATE、INSERT、DELETE这些操作时，SQLSERVER就会自动执行触发器所定义的SQL语句，从而确保对数据的处理必须符合这些SQL语句所定义的规则。</p><pre><code>6、union 与union all的区别</code></pre><p>union 在进行表链接后会筛选掉重复的记录，所以在表链接后会对所产生的结果集进行排序运算，删除重复的记录再返回结果。union all 则会显示重复结果,只是简单的两个结果合并并返回.所以效率比union高,在保证没有重复数据的情况下用union all。</p><pre><code>7、MyISAM和InnoDB区别</code></pre><p>(1)InnoDB支持外键，而MyISAM不支持。</p><p>(2)InnoDB不支持全文索引，而MyISAM支持。</p><p>(3)InnoDB支持行级锁，而MyISAM支持表级锁。</p><p>(4)MyISAM不提供事务支持。InnoDB提供事务支持。</p><p>(5)MyISAM保存有表的总行数，如果select count(<em>) from table;会直接取出出该值。InnoDB：没有保存表的总行数，如果使用select count(</em>) from table；就会遍历整个表，消耗相当大，但是在加了wehre条件后，myisam和innodb处理的方式都一样。</p><p>(6)MyISAM可被压缩，存储空间较小。支持三种不同的存储格式：静态表(默认，但是注意数据末尾不能有空格，会被去掉)、动态表、压缩表。InnoDB需要更多的内存和存储，它会在主内存中建立其专用的缓冲池用于高速缓冲数据和索引。</p><p>(7)MyISAM可以和其他字段一起建立联合索引。引擎的自动增长列必须是索引，如果是组合索引，自动增长可以不是第一列，他可以根据前面几列进行排序后递增。InnoDB中必须包含只有该字段的索引。引擎的自动增长列必须是索引，如果是组合索引也必须是组合索引的第一列。</p><p>(8)如果执行大量的SELECT，MyISAM是更好的选择。如果你的数据执行大量的INSERT或UPDATE，出于性能方面的考虑，应该使用InnoDB表。DELETE 从性能上InnoDB更优，但DELETE FROM table时，InnoDB不会重新建立表，而是一行一行的删除，在innodb上如果要清空保存有大量数据的表，最好使用truncate table这个命令。</p><p>(9)每个MyISAM在磁盘上存储成三个文件。第一个文件的名字以表的名字开始，扩展名指出文件类型。.frm文件存储表定义。数据文件的扩展名为.MYD (MYData)。索引文件的扩展名是.MYI (MYIndex)。InnoDB所有的表都保存在同一个数据文件中（也可能是多个文件，或者是独立的表空间文件），InnoDB表的大小只受限于操作系统文件的大小，一般为2GB。</p><pre><code>8、MySQL的三级模式</code></pre><p>(1)模式(逻辑模式)：是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图。</p><p>(2)外模式(用户模式)：是数据库用户的数据视图，是局部数据的逻辑结构和特征的描述。</p><p>(3)内模式(存储模式)：一个数据库只有一个内模式，是数据物理结构和存储方式的描述，是数据在数据库内部的表示方式。</p><pre><code>9、mysql中视图和表的区别以及联系</code></pre><p>区别：</p><p>(1)视图是已经编译好的SQL语句，是基于SQL语句的结果集的可视化的表，而表不是。</p><p>(2)视图没有实际的物理记录，而表有。</p><p>(3)视图是窗口，表是内容。</p><p>(4)视图是逻辑概念的存在，不占用物理空间；而表占用物理空间。</p><p>(5)表可以及时对它进行修改；而视图只能用创建语句来修改。</p><p>(6)视图是查看数据表的一种方法，可以查询数据表中某些字段构成的数据，只是一些SQL语句的集合。</p><p>(7)从安全来说，视图可以防止用户直接接触表，因而用户不知道表结构。</p><p>(8)表属于全局模式中的表，是实表；视图属于局部模式的表，是虚表。</p><p>(9)视图的建立和删除只影响视图本身，不影响对应的表。</p><p>联系：</p><p>(1)视图是在表之上建立的虚表，它的结构(所定义的列)和内容(所有记录)都来自表，视图依据表存在而存在。一个视图可以对应多个表。视图是表的抽象和在逻辑意义上建立的新关系。</p><p>(2)删除视图中的数据,数据库中表的数据会一起被删除。</p><pre><code>10、存储过程(procedure)和函数(function)区别</code></pre><p>(1)本质上它们都是存储程序。函数只能通过return语句返回单个值或表对象；而存储过程不允许执行return语句，但是可以通过output参数返回多个值。</p><p>(2)函数限制比较多，不能用临时变量，只能用表变量，还有一些函数都不可用等等；而存储过程的限制相对就比较少。</p><p>(3)函数可以嵌入在SQL语句中使用，可以在select语句中作为查询语句的一个部分调用；而存储过程一般是作为一个独立的部分来执行。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;1、mysql共享锁和排他锁
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(1)产生的原因：数据库上的操作可以归纳为两种：读和写。多个事务同时读取一个对象的时候，是不会有冲突的。同时读和写，或者同时写才会产生冲突。因此为了提高数据库的并发性能，通常会定义两种锁：共享锁和
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL事务</title>
-    <link href="http://www.echodemo.cc/2018/04/04/MySQL%E4%BA%8B%E5%8A%A1/"/>
-    <id>http://www.echodemo.cc/2018/04/04/MySQL事务/</id>
-    <published>2018-04-04T15:46:14.000Z</published>
-    <updated>2018-04-05T02:34:05.226Z</updated>
-    
-    <content type="html"><![CDATA[<p>MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！</p><pre><code>(1)在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。(2)事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。(3)事务用来管理 insert,update,delete 语句</code></pre><p>一般来说，事务是必须满足4个条件（ACID）：：原子性（Atomicity，或称不可分割性）、一致性（Consistency）、隔离性（Isolation，又称独立性）、持久性（Durability）。</p><p>(1)原子性：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p><p>(2)一致性：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p><p>(3)隔离性：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</p><pre><code>a、未提交读（RU）：最弱的隔离级别，事务中的修改即使没有提交，对其他事务也都是可见的。（即脏读）b、不可重复读（RC）：大多数数据库系统的默认隔离级别。解决了脏读的问题，一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。一个事务两次执行同样的查询，可能会得到不一样的结果。c、可重复读（RR）：mysql默认隔离级别。解决了脏读的问题。该级别保证了在同一个事务中多次读取同样记录的结果是一致的。该级无法解决幻读的问题，幻读是当某个事务在读取某个范围内的记录时，一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻读。innodb和xtradb存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）解决了幻读的问题。d、可串行化：该级是最高的级别，通过强制事务串行执行，避免了幻读的问题，该级会在读取的每一行数据上都加锁，所以可能导致大量的超时和锁争用的问题，</code></pre><p>(4)持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p><p>在 MySQL 命令行的默认设置下，事务都是自动提交的，即执行 SQL 语句后就会马上执行 COMMIT 操作。因此要显式地开启一个事务务必使用命令 BEGIN 或 START TRANSACTION，或者执行命令 SET AUTOCOMMIT=0，用来禁止使用当前会话的自动提交。</p><p>事务控制语句：</p><pre><code>(1)BEGIN或START TRANSACTION；显式地开启一个事务；(2)COMMIT；也可以使用COMMIT WORK，不过二者是等价的。COMMIT会提交事务，并使已对数据库进行的所有修改称为永久性的；(3)ROLLBACK；有可以使用ROLLBACK WORK，不过二者是等价的。回滚会结束用户的事务，并撤销正在进行的所有未提交的修改；(4)SAVEPOINT identifier；SAVEPOINT允许在事务中创建一个保存点，一个事务中可以有多个SAVEPOINT；(5)RELEASE SAVEPOINT identifier；删除一个事务的保存点，当没有指定的保存点时，执行该语句会抛出一个异常；(6)ROLLBACK TO identifier；把事务回滚到标记点；(7)SET TRANSACTION；用来设置事务的隔离级别。InnoDB存储引擎提供事务的隔离级别有READ UNCOMMITTED、READ COMMITTED、REPEATABLE READ和SERIALIZABLE。</code></pre><p>MYSQL 事务处理主要有两种方法：</p><pre><code>1、用 BEGIN, ROLLBACK, COMMIT来实现(1)BEGIN 开始一个事务(2)ROLLBACK 事务回滚(3)COMMIT 事务确认2、直接用 SET 来改变 MySQL 的自动提交模式:(1)SET AUTOCOMMIT=0 禁止自动提交(2)SET AUTOCOMMIT=1 开启自动提交</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)在 MySQL 中只有使用
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>红黑树</title>
-    <link href="http://www.echodemo.cc/2018/04/04/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
-    <id>http://www.echodemo.cc/2018/04/04/红黑树/</id>
-    <published>2018-04-04T01:50:20.000Z</published>
-    <updated>2018-04-05T00:01:48.845Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、在学习红黑树之前有必要先来了解一下二叉查找树。二叉查找树是基于二分查找的思想，查找所需的次数为二叉查找树的高度；在插入节点时也是通过一层一层的比较来找到合适插入的位置。但它仍然存在缺陷，就是当插入的数据是依次递增时，它会不断地插在节点的右子树上(或者是当插入的数据是依次递减时，它会不断地插在节点的左子树)。此时的二叉查找树的查找性能几乎变成了线性。那么如何解决二叉查找树多次插入新节点而导致的不平衡呢？红黑树也就应运而生了。</p><pre><code>二叉查找树的性质：a、左子树上所有结点的值均小于或等于它的根结点的值。b、右子树上所有结点的值均大于或等于它的根结点的值。c、左、右子树也分别为二叉排序树。</code></pre><p>2、红黑树(Red Black Tree)是一种平衡的二叉查找树(但不是一个完美的平衡二叉树)。它的应用有很多，Java中的TreeSet和TreeMap数据结构，Java8中的HashMap也用到了红黑树；在C++ STL中，很多部分(包括set, multiset, map, multimap)应用了红黑树的变体(SGI STL中的红黑树有一些变化，这些修改提供了更好的性能，以及对set操作的支持)。</p><font color="#8A2BE2">(1)性质</font><pre><code>a、节点是红色或黑色。b、根节点是黑色。c、每个叶子节点都是黑色的空节点（NIL节点）。d、每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)e、从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。</code></pre><p>以上这些限制强化了红黑树的关键属性：从根节点到最远叶节点的路径不超过从根到最近叶节点的路径的两倍(最短的路径是:全部都是黑色节点，最长的路径是:在红色和黑色节点之间交替)。这也是红黑树和二叉查找树之间最大的不同。</p><font color="#8A2BE2">(2)左旋转和右旋转</font><p>a、左旋转：逆时针旋转红黑树的两个节点，使得父节点被自己的右子树取代，而父节点自己成为自己右子树(现在已经是父节点了)的左子树。现在已经是父节点的的左子树成为曾经的父节点的右子树。</p><p>b、右旋转：顺时针旋转红黑树的两个节点，使得父节点被自己的左子树取代，而父节点自己成为自己左子树(现在已经是父节点了)的右子树。现在已经是父节点的的右子树成为曾经的父节点的左子树。</p><font color="#8A2BE2">(3)插入节点</font><p>a、当前节点位于树的根部。为了满足（根节点是黑色），将其颜色变成黑色。由于这会向每条路径都添加一个黑色节点，所以（从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点）不会被违反。</p><p>b、当前节点的父节点是黑色的。所以（每个红色节点的两个子节点都是黑色）不会失效。（从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点）没有受到威胁，因为当前节点有两个黑色节点，但由于当前节点是红色，所以到达其每个叶子节点路径上的黑色节点的数量与它所替换的叶子节点路径上的黑色节点的数量是相同的。</p><p>c、如果父节点和父节点的兄弟节点都是红色的，那么可以将他们的颜色都变成黑色，并且将祖父母节点的颜色变成红色以维持（从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点）。由于通过父节点和父节点的兄弟节点的任何路径必须经过祖父母节点，所以这些路径上的黑色节点的数目并没有改变。然而，祖父母节点现在可能违反了（根节点是黑色），如果它是根或（每个红色节点的两个子节点都是黑色），如果它具有红色的父母节点。为了解决这个问题，树上的红黑修复程序在祖父母节点上重新运行。</p><p>d、父节点是红色的，但是父节点的兄弟节点是黑色的。最终目标是将当前节点旋转到祖父母节点的位置，但如果当前节点位于祖父母节点下子树的“内部” （即，如果当前节点是祖父母节点的右子节点的左子节点或者是祖父母节点的左子节点的右子节点）。在这种情况下，可以在父节点上执行左旋转以切换当前节点及其父节点的位置。由于父节点和当前的插入节点都是红色的，所以旋转这两个节点不会使（从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点）受到旋转的影响。这一步完成后（每个红色节点的两个子节点都是黑色）仍然被违反。此时，当前节点现在肯定位于祖父母节点的子树的外部（左子节点或右子节点）。在这种情况下，执行祖父母节点上的右旋转;其中前父母节点现在是当前节点和前祖父母节点的父母节点。此时前父母节点和前祖父母节点的颜色互换，结果树满足（每个红色节点的两个子节点都是黑色）。（从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点）也依然不满足，再将前祖父母节点和其右子节点的颜色互换即可。</p><p>*具体的红黑树中插入和删除出现的有关旋转和变色的情况，请自行跳转至维基百科查看：<a href="https://en.m.wikipedia.org/wiki/Red%E2%80%93black_tree" target="_blank" rel="noopener">维基百科红黑树</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、在学习红黑树之前有必要先来了解一下二叉查找树。二叉查找树是基于二分查找的思想，查找所需的次数为二叉查找树的高度；在插入节点时也是通过一层一层的比较来找到合适插入的位置。但它仍然存在缺陷，就是当插入的数据是依次递增时，它会不断地插在节点的右子树上(或者是当插入的数据是依次
       
     
     </summary>
