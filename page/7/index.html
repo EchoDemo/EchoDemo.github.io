@@ -329,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/28/Strcpy函数的实现/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/04/05/MySQL中的问题整理/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -354,8 +354,8 @@
             
               
                 
-                <a class="post-title-link" href="/2018/03/28/Strcpy函数的实现/" itemprop="url">
-                  Strcpy函数的实现
+                <a class="post-title-link" href="/2018/04/05/MySQL中的问题整理/" itemprop="url">
+                  MySQL中的问题整理
                 </a>
               
             
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T18:54:17+08:00">
-                2018-03-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T09:45:49+08:00">
+                2018-04-05
               </time>
             
 
@@ -413,8 +413,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/28/Strcpy函数的实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/28/Strcpy函数的实现/" itemprop="commentsCount"></span>
+                <a href="/2018/04/05/MySQL中的问题整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/05/MySQL中的问题整理/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  345
+                  3,375
                 </span>
               
 
@@ -454,7 +454,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  12
                 </span>
               
             </div>
@@ -478,13 +478,13 @@
       
         
           
-          (1)strcpy函数的代码实现
-char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防止修改源字符串。
-    assert(dst != NULL &amp;&amp; src != NULL);//检查指针的有效性，如果它的条件返回
+          1、mysql共享锁和排他锁
+(1)产生的原因：数据库上的操作可以归纳为两种：读和写。多个事务同时读取一个对象的时候，是不会有冲突的。同时读和写，或者同时写才会产生冲突。因此为了提高数据库的并发性能，通常会定义两种锁：共享锁和排它锁。
+(2)共享锁也叫读锁，简称S锁，原理：一个事务获取了一个数据行的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/28/Strcpy函数的实现/#more" rel="contents">
+            <a class="btn" href="/2018/04/05/MySQL中的问题整理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -529,7 +529,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/27/三月二十七号/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/04/04/MySQL事务/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -554,8 +554,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
             
               
                 
-                <a class="post-title-link" href="/2018/03/27/三月二十七号/" itemprop="url">
-                  三月二十七号
+                <a class="post-title-link" href="/2018/04/04/MySQL事务/" itemprop="url">
+                  MySQL事务
                 </a>
               
             
@@ -571,404 +571,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T19:51:27+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/27/三月二十七号/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/27/三月二十七号/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->  
-            
-          
-
-          
-
-          
-          
-
-          
-
-		  
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  142
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-		  
-          
- 
-        
-
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          奔走于图书馆和教学楼之间的小径，仲春时节。湖北海棠开得热烈，散发出浓厚的香气；迎春花点缀在桥的两头，静静躺卧；溪中的水生植被在被割去旧年的枝干之后，在流水中已生发出嫩绿的新叶；晨梦亭下有人读书；阳光的热度适合出游与赏玩。自身脚步匆匆，但春日里的生机能够感受得到，这是一种力量的传递与引导，人与自然需要
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/27/三月二十七号/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-  
-
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-         
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/27/《眠空》摘句(二)/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="EchoDemo">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="EchoDemo's Blogs">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/27/《眠空》摘句(二)/" itemprop="url">
-                  《眠空》摘句(二)
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T19:29:09+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/27/《眠空》摘句(二)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/27/《眠空》摘句(二)/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->  
-            
-          
-
-          
-
-          
-          
-
-          
-
-		  
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  763
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-		  
-          
- 
-        
-
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1、在这个苍茫的人世，还会有谁一直等着我，又会有谁这样忍着难过甘心让我远远走掉。我带着行囊在这视线中默默转身，不曾想过某一天有诀别。我不知道他去了哪里。我们是否会重逢。唯一确认的是，他以自己的方式爱过我，在我的血液里留下悲剧性的烙印。这些黑暗的质素缓慢流淌，一刻也不曾停息。仿佛一种强悍的无法屈服的意
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/27/《眠空》摘句(二)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-  
-
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-         
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/26/C++中的问题整理(三)/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="EchoDemo">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="EchoDemo's Blogs">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/26/C++中的问题整理(三)/" itemprop="url">
-                  C++中的问题整理(三)
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T18:10:23+08:00">
-                2018-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T23:46:14+08:00">
+                2018-04-04
               </time>
             
 
@@ -1009,8 +613,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/26/C++中的问题整理(三)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/26/C++中的问题整理(三)/" itemprop="commentsCount"></span>
+                <a href="/2018/04/04/MySQL事务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/04/MySQL事务/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -1034,7 +638,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,148
+                  1,212
                 </span>
               
 
@@ -1050,7 +654,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  8
+                  4
                 </span>
               
             </div>
@@ -1074,15 +678,14 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
       
         
           
-          1、define与const的区别
-(1)define在预处理阶段进行替换;const在编译时确定其值。
-(2)用define可以定义一些简单的函数，const是不可以定义函数的。
-(3)用define定义的常量是不可以用指针变量去指向的，用const定义的常量是可以用指针去指向该常量的地址的。
-(
+          MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！
+(1)在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。
+
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/C++中的问题整理(三)/#more" rel="contents">
+            <a class="btn" href="/2018/04/04/MySQL事务/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1127,7 +730,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/26/C++中的问题整理(二)/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/04/04/红黑树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -1152,8 +755,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
             
               
                 
-                <a class="post-title-link" href="/2018/03/26/C++中的问题整理(二)/" itemprop="url">
-                  C++中的问题整理(二)
+                <a class="post-title-link" href="/2018/04/04/红黑树/" itemprop="url">
+                  红黑树
                 </a>
               
             
@@ -1169,8 +772,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T15:12:01+08:00">
-                2018-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T09:50:20+08:00">
+                2018-04-04
               </time>
             
 
@@ -1211,8 +814,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/26/C++中的问题整理(二)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/26/C++中的问题整理(二)/" itemprop="commentsCount"></span>
+                <a href="/2018/04/04/红黑树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/04/红黑树/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -1236,7 +839,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,687
+                  1,644
                 </span>
               
 
@@ -1276,13 +879,11 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
       
         
           
-          1、成员方法又称为实例方法，静态方法又称为类方法。静态方法中没有this指针。
-2、this指针内容为const，是不允许更改的。如果对它进行了更改将会导致编译不成功，如果只有delete this;这一句存在于析构函数当中，则能通过编译，但是会导致栈的溢出。
-3、构造函数初始化时必须采用初始化列表
+          1、在学习红黑树之前有必要先来了解一下二叉查找树。二叉查找树是基于二分查找的思想，查找所需的次数为二叉查找树的高度；在插入节点时也是通过一层一层的比较来找到合适插入的位置。但它仍然存在缺陷，就是当插入的数据是依次递增时，它会不断地插在节点的右子树上(或者是当插入的数据是依次递减时，它会不断地插在节点
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/C++中的问题整理(二)/#more" rel="contents">
+            <a class="btn" href="/2018/04/04/红黑树/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1327,7 +928,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/26/Windows中个人常用快捷键/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/31/柴/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -1352,8 +953,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
             
               
                 
-                <a class="post-title-link" href="/2018/03/26/Windows中个人常用快捷键/" itemprop="url">
-                  Windows中个人常用快捷键
+                <a class="post-title-link" href="/2018/03/31/柴/" itemprop="url">
+                  柴
                 </a>
               
             
@@ -1369,8 +970,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T11:10:27+08:00">
-                2018-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T16:03:52+08:00">
+                2018-03-31
               </time>
             
 
@@ -1392,8 +993,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
                   </a>
                 </span>
 
@@ -1411,8 +1012,8 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/26/Windows中个人常用快捷键/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/26/Windows中个人常用快捷键/" itemprop="commentsCount"></span>
+                <a href="/2018/03/31/柴/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/31/柴/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -1436,7 +1037,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  258
+                  281
                 </span>
               
 
@@ -1476,28 +1077,421 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
       
         
           
-          1、Ctrl类
-(1)撤消操作：Ctrl+Z
-
-(2)复制选定文本：Ctrl+C
-
-(3)粘贴选定文本：Ctrl+V
-
-(4)剪切选定文本：Ctrl+X
-
-
-(5)打开新窗口：Ctrl+N
-
-(6)关闭当前所在窗口：Ctrl+W
-
-(7)恢复关闭的窗口：ctrl+shift+T
-
-
-(8)新建文件夹
+          你本是泥土里的种子
+春雨下来，便破土而出，发芽又抽绿
+阳光透过乔木和灌木的叶子漏下来
+照耀着你微弱的身体
+后来呀，雨露下来，寒风穿过
+土壤也时而干燥
+根在土里生长
+叶在空气里徜徉
+向着更广阔的空间里延伸
+春夏秋冬地过去，轮回。
+那一日，我手持柴刀独自上山
+无意间来到你的身旁
+此时的你已巍然成木
+在多
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/Windows中个人常用快捷键/#more" rel="contents">
+            <a class="btn" href="/2018/03/31/柴/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+  
+
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/31/文字/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/31/文字/" itemprop="url">
+                  文字
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T15:29:11+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/31/文字/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/31/文字/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  213
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          庆山在书中写到：文字具备即刻的意义，记下的观点和细节，过后回望，已显得不再重要或已无关，但从记录中回溯，可看到自我构建和行进的一个过程。那么我想写博客的意义也大抵如此，文件夹中所有的文件前缀清晰地呈现出文件创建的日期，文件的标题可以一眼看出这其中包含了什么。那么点开“阅读全文”的扩展链接，你会知道自
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/31/文字/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+  
+
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/03/31/《眠空》摘句(三)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/31/《眠空》摘句(三)/" itemprop="url">
+                  《眠空》摘句(三)
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T15:13:57+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/31/《眠空》摘句(三)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/31/《眠空》摘句(三)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  612
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1、家里花园池塘，荷花已盛开。通常先有一朵最早绽放，一夜之间，其他次第开放。荷叶可煮米粥，白米汤染上微润绿汁，带有莲花清香，和上冰糖。荷叶在米粥煮熟即将熄火时放入覆盖。今年，一池塘红色荷花唯独长出一株白莲。不知它因何而起。
+2、经过提纯的内心空间，不是不懂，不知，而是不问，不计较，不介意，不追究。愿
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/31/《眠空》摘句(三)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1537,7 +1531,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1580,7 +1574,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1717,7 +1711,7 @@ char *strcpy(char *dst,const char *src){//源字符串参数用const修饰，防
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共57.9k字</span>
+  <span class="post-count">博客全站共60.6k字</span>
 </div>
 
 
