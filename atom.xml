@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-04-30T05:56:04.927Z</updated>
+  <updated>2018-05-05T06:17:56.129Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,173 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>立夏</title>
+    <link href="http://www.echodemo.cc/2018/05/05/%E7%AB%8B%E5%A4%8F/"/>
+    <id>http://www.echodemo.cc/2018/05/05/立夏/</id>
+    <published>2018-05-05T02:40:20.000Z</published>
+    <updated>2018-05-05T06:17:56.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚刚结束了于自己而言的一段旅程。立夏时节，早起，奔赴图书馆。昨夜有雨，地面湿漉，焕发着生机与活力的植被上布满了晶莹的水珠。门还未开，来到湖边的石椅上独坐，背单词。空气清新，雾气弥漫，晨光柔和，适合摄影的光线和境地。清脆的鸟鸣不断，偶尔会有鱼儿跃出水面，打破水面的平静，想起杜甫的那句“细雨鱼儿出，微风燕子斜”。上午在图书馆自习，写毕业的论文。倦了就去长廊里休憩，在长廊里听程璧的《你们》，吹凉爽的风，看楼下的景。今日的风稍大很特别，吹得整个人都倍感放松和惬意，这或许是春夏之交的礼赠。楼下已经有人开始拍摄毕业照，穿着一致的服装，为大学四年的相遇和时光留下最后一点珍贵的记忆。长廊的另一头望见的是晨梦亭、荷塘、郁郁葱葱的树木之中的小道还有很难觉察到的的小溪。想必此时的荷叶已经开始酝酿它的繁华时期了，山坡上的那棵桑树还有桑葚挂在枝头吗？这一载睡莲的长势会不会向迅猛方向发展从而占领更多的领地？想着在离去之前是一定要再去见它们一面的，与它们作别也与自己作别。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;刚刚结束了于自己而言的一段旅程。立夏时节，早起，奔赴图书馆。昨夜有雨，地面湿漉，焕发着生机与活力的植被上布满了晶莹的水珠。门还未开，来到湖边的石椅上独坐，背单词。空气清新，雾气弥漫，晨光柔和，适合摄影的光线和境地。清脆的鸟鸣不断，偶尔会有鱼儿跃出水面，打破水面的平静，想起杜
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1022 D进制的A+B</title>
+    <link href="http://www.echodemo.cc/2018/05/01/PAT-B1022-D%E8%BF%9B%E5%88%B6%E7%9A%84A+B/"/>
+    <id>http://www.echodemo.cc/2018/05/01/PAT-B1022-D进制的A+B/</id>
+    <published>2018-05-01T09:02:03.000Z</published>
+    <updated>2018-05-01T09:03:51.378Z</updated>
+    
+    <content type="html"><![CDATA[<p>输入两个非负10进制整数A和B(&lt;=230-1)，输出A+B的D (1 &lt; D &lt;= 10)进制数。</p><p>输入格式：输入在一行中依次给出3个整数A、B和D。</p><p>输出格式：输出A+B的D进制数。</p><pre><code>输入样例：123 456 8输出样例：1103</code></pre><p>题目代码：</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。&lt;/p&gt;
+&lt;p&gt;输入格式：输入在一行中依次给出3个整数A、B和D。&lt;/p&gt;
+&lt;p&gt;输出格式：输出A+B的D进制数。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;输入样例：
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1021 个位数统计</title>
+    <link href="http://www.echodemo.cc/2018/05/01/PAT-B1021-%E4%B8%AA%E4%BD%8D%E6%95%B0%E7%BB%9F%E8%AE%A1/"/>
+    <id>http://www.echodemo.cc/2018/05/01/PAT-B1021-个位数统计/</id>
+    <published>2018-05-01T08:45:19.000Z</published>
+    <updated>2018-05-01T09:01:05.990Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个k位整数N = dk-1<em>10^k-1 + … + d1</em>10^1 + d0 (0&lt;=di&lt;=9, i=0,…,k-1, dk-1&gt;0)，请编写程序统计每种不同的个位数字出现的次数。例如：给定N = 100311，则有2个0，3个1，和1个3。</p><p>输入格式：每个输入包含1个测试用例，即一个不超过1000位的正整数N。</p><p>输出格式：对N中每一种不同的个位数字，以D:M的格式在一行中输出该位数字D及其在N中出现的次数M。要求按D的升序输出。</p><pre><code>输入样例：100311输出样例：0:21:33:1</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {  string s;  cin &gt;&gt; s;  int a[10] = { 0 };  for (int i = 0;i &lt; s.size();i++) {    int n = s[i] - &apos;0&apos;;    a[n]++;  }  for (int i = 0;i &lt; 10;i++) {    if (a[i] &gt; 0)      cout &lt;&lt; i &lt;&lt; &quot;:&quot; &lt;&lt; a[i] &lt;&lt; endl;  }  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个k位整数N = dk-1&lt;em&gt;10^k-1 + … + d1&lt;/em&gt;10^1 + d0 (0&amp;lt;=di&amp;lt;=9, i=0,…,k-1, dk-1&amp;gt;0)，请编写程序统计每种不同的个位数字出现的次数。例如：给定N = 100311，则有2个0，3个1，
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1020 月饼</title>
+    <link href="http://www.echodemo.cc/2018/04/30/PAT-B1020-%E6%9C%88%E9%A5%BC/"/>
+    <id>http://www.echodemo.cc/2018/04/30/PAT-B1020-月饼/</id>
+    <published>2018-04-30T12:31:21.000Z</published>
+    <updated>2018-04-30T14:18:47.523Z</updated>
+    
+    <content type="html"><![CDATA[<p>月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。</p><p>注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有3种月饼，其库存量分别为18、15、10万吨，总售价分别为75、72、45亿元。如果市场的最大需求量只有20万吨，那么我们最大收益策略应该是卖出全部15万吨第2种月饼、以及5万吨第3种月饼，获得 72 + 45/2 = 94.5（亿元）。</p><p>输入格式：每个输入包含1个测试用例。每个测试用例先给出一个不超过1000的正整数N表示月饼的种类数、以及不超过500（以万吨为单位）的正整数D表示市场最大需求量。随后一行给出N个正数表示每种月饼的库存量（以万吨为单位）；最后一行给出N个正数表示每种月饼的总售价（以亿元为单位）。数字间以空格分隔。</p><p>输出格式：对每组测试用例，在一行中输出最大收益，以亿元为单位并精确到小数点后2位。</p><pre><code>输入样例：3 2018 15 1075 72 45输出样例：94.50</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;using namespace std;struct mooncake {  int store;//库存量  int total;//总售价  double price;//单价};bool cmp(mooncake a, mooncake b) {  return a.price &gt; b.price;}int main() {  int N, D;  cin &gt;&gt; N &gt;&gt; D;  vector&lt;mooncake&gt; m(N);  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; m[i].store;  }  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; m[i].total;    m[i].price = (1.0*m[i].total) / m[i].store;  }  sort(m.begin(), m.end(), cmp);  double sum = 0;  for (int i = 0;i &lt; N;i++) {    if (D &lt; m[i].store) {      sum += ((D*1.0) / m[i].store)*m[i].total;      break;    }    else {      sum += m[i].total;      D -= m[i].store;    }  }  printf(&quot;%.2f&quot;, sum);  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。&lt;/p&gt;
+&lt;p&gt;注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有3种月饼，其库存量分别为18
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1019 数字黑洞</title>
+    <link href="http://www.echodemo.cc/2018/04/30/PAT-B1019-%E6%95%B0%E5%AD%97%E9%BB%91%E6%B4%9E/"/>
+    <id>http://www.echodemo.cc/2018/04/30/PAT-B1019-数字黑洞/</id>
+    <published>2018-04-30T10:17:27.000Z</published>
+    <updated>2018-04-30T12:28:24.785Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定任一个各位数字不完全相同的4位正整数，如果我们先把4个数字按非递增排序，再按非递减排序，然后用第1个数字减第2个数字，将得到一个新的数字。一直重复这样做，我们很快会停在有“数字黑洞”之称的6174，这个神奇的数字也叫Kaprekar常数。</p><p>例如，我们从6767开始，将得到</p><pre><code>7766 - 6677 = 10899810 - 0189 = 96219621 - 1269 = 83528532 - 2358 = 61747641 - 1467 = 6174... ...</code></pre><p>现给定任意4位正整数，请编写程序演示到达黑洞的过程。</p><p>输入格式：输入给出一个(0, 10000)区间内的正整数N。</p><p>输出格式：如果N的4位数字全相等，则在一行内输出“N - N = 0000”；否则将计算的每一步在一行内输出，直到6174作为差出现，输出格式见样例。注意每个数字按4位数格式输出。</p><pre><code>输入样例1：6767输出样例1：7766 - 6677 = 10899810 - 0189 = 96219621 - 1269 = 83528532 - 2358 = 6174输入样例2：2222输出样例2：2222 - 2222 = 0000</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;#include&lt;algorithm&gt;using namespace std;int transfer(string s) {  int sum = 0;  for (int i = 0;i &lt; 4;i++) {    sum = sum * 10 + s[i] - &apos;0&apos;;  }  return sum;}bool cmp(char a,char b) {  return a &gt; b;}int main() {  int M;  string N, X, Y;  cin &gt;&gt; M;  N = to_string(M);  N.insert(0, 4 - N.length(), &apos;0&apos;);  while (N != &quot;6174&quot;) {    sort(N.begin(), N.end());//递增排序    X = N;    sort(N.begin(), N.end(), cmp);//递减排序    Y = N;    if (X == Y) {      cout &lt;&lt; N &lt;&lt; &quot; - &quot; &lt;&lt; N &lt;&lt; &quot; = 0000&quot; &lt;&lt; endl;      N = &quot;6174&quot;;    }    else {      N = to_string(transfer(Y) - transfer(X));      N.insert(0, 4 - N.length(), &apos;0&apos;);      cout &lt;&lt; Y &lt;&lt; &quot; - &quot; &lt;&lt; X &lt;&lt; &quot; = &quot; &lt;&lt; N &lt;&lt; endl;    }  }  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定任一个各位数字不完全相同的4位正整数，如果我们先把4个数字按非递增排序，再按非递减排序，然后用第1个数字减第2个数字，将得到一个新的数字。一直重复这样做，我们很快会停在有“数字黑洞”之称的6174，这个神奇的数字也叫Kaprekar常数。&lt;/p&gt;
+&lt;p&gt;例如，我们从67
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT B1018 锤子剪刀布</title>
+    <link href="http://www.echodemo.cc/2018/04/30/PAT-B1018-%E9%94%A4%E5%AD%90%E5%89%AA%E5%88%80%E5%B8%83/"/>
+    <id>http://www.echodemo.cc/2018/04/30/PAT-B1018-锤子剪刀布/</id>
+    <published>2018-04-30T06:29:35.000Z</published>
+    <updated>2018-04-30T10:15:45.169Z</updated>
+    
+    <content type="html"><![CDATA[<p>大家应该都会玩“锤子剪刀布”的游戏：两人同时给出手势，胜负规则如图所示：</p><p><img src="/images/2018/4/3.jpg" alt="&quot;锤子剪刀布&quot;"></p><p>现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出双方分别出什么手势的胜算最大。</p><p>输入格式：输入第1行给出正整数N（&lt;=105），即双方交锋的次数。随后N行，每行给出一次交锋的信息，即甲、乙双方同时给出的的手势。C代表“锤子”、J代表“剪刀”、B代表“布”，第1个字母代表甲方，第2个代表乙方，中间有1个空格。</p><p>输出格式：输出第1、2行分别给出甲、乙的胜、平、负次数，数字间以1个空格分隔。第3行给出两个字母，分别代表甲、乙获胜次数最多的手势，中间有1个空格。如果解不唯一，则输出按字母序最小的解。</p><pre><code>输入样例：10C JJ BC BB BB CC CC BJ BB CJ J输出样例：5 3 22 3 5B B</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;using namespace std;int main() {  int N, x = 0, y = 0, z = 0, jia[3] = { 0 }, yi[3] = { 0 };  char a, b, c[4] = { &apos;B&apos;,&apos;C&apos;,&apos;J&apos; };  cin &gt;&gt; N;  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; a &gt;&gt; b;    if (a == &apos;B&apos;) {      if (b == &apos;B&apos;) y++;      else if (b == &apos;C&apos;) {        x++;        jia[0]++;      }      else {        z++;        yi[2]++;      }    }    else if (a == &apos;C&apos;) {      if (b == &apos;B&apos;) {        z++;        yi[0]++;      }      else if (b == &apos;C&apos;) y++;      else {        x++;        jia[1]++;      }    }    else {      if (b == &apos;B&apos;) {        x++;        jia[2]++;      }      else if (b == &apos;C&apos;) {        z++;        yi[1]++;      }      else y++;    }  }  cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; z &lt;&lt; endl;  cout &lt;&lt; z &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; x &lt;&lt; endl;  int max1 = jia[0], max2 = yi[0], m = 0, n = 0;  for (int i = 1;i &lt; 3;i++) {    if (jia[i] &gt; max1) {      max1 = jia[i];      m = i;    }    if (yi[i] &gt; max2) {      max2 = yi[i];      n = i;    }  }  cout &lt;&lt; c[m] &lt;&lt; &quot; &quot; &lt;&lt; c[n];  return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;大家应该都会玩“锤子剪刀布”的游戏：两人同时给出手势，胜负规则如图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018/4/3.jpg&quot; alt=&quot;&amp;quot;锤子剪刀布&amp;quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统问题整理</title>
@@ -396,192 +563,6 @@ A4
       
       
         &lt;p&gt;让我们定义 dn 为：dn = pn+1 - pn，其中 pi 是第i个素数。显然有 d1=1 且对于n&amp;gt;1有 dn 是偶数。“素数对猜想”认为“存在无穷多对相邻且差为2的素数”。现给定任意正整数N (&amp;lt; 105)，请计算不超过N的满足猜想的素数对的个数。&lt;/p
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1006 换个格式输出整数</title>
-    <link href="http://www.echodemo.cc/2018/04/26/PAT-B1006-%E6%8D%A2%E4%B8%AA%E6%A0%BC%E5%BC%8F%E8%BE%93%E5%87%BA%E6%95%B4%E6%95%B0/"/>
-    <id>http://www.echodemo.cc/2018/04/26/PAT-B1006-换个格式输出整数/</id>
-    <published>2018-04-26T03:39:02.000Z</published>
-    <updated>2018-04-26T03:43:20.267Z</updated>
-    
-    <content type="html"><![CDATA[<p>让我们用字母B来表示“百”、字母S表示“十”，用“12…n”来表示个位数字n（&lt;10），换个格式来输出任一个不超过3位的正整数。例如234应该被输出为BBSSS1234，因为它有2个“百”、3个“十”、以及个位的4。</p><p>输入格式：每个测试输入包含1个测试用例，给出正整数n（&lt;1000）。</p><p>输出格式：每个测试用例的输出占一行，用规定的格式输出n。</p><pre><code>输入样例1：234输出样例1：BBSSS1234输入样例2：23输出样例2：SS123</code></pre><p>题目代码：此题也可以直接输出没有必要创建一个string类型的数据。个十百位也可以使用数组来进行保存。</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {  int n, g, s = 0, b = 0;  cin &gt;&gt; n;  g = n % 10;//个位  n /= 10;  if (n) s = n % 10;//十位  n /= 10;  if (n) b = n % 10;//百位  string str;  while (b) {    str += &apos;B&apos;;    b--;  }  while (s) {    str += &apos;S&apos;;    s--;  }  for (int i = 1;i &lt;= g;i++) {    str +=(i+&apos;0&apos;);  }  cout &lt;&lt; str;  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;让我们用字母B来表示“百”、字母S表示“十”，用“12…n”来表示个位数字n（&amp;lt;10），换个格式来输出任一个不超过3位的正整数。例如234应该被输出为BBSSS1234，因为它有2个“百”、3个“十”、以及个位的4。&lt;/p&gt;
-&lt;p&gt;输入格式：每个测试输入包含1个测试用
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1005 继续(3n+1)猜想</title>
-    <link href="http://www.echodemo.cc/2018/04/26/PAT-B1005-%E7%BB%A7%E7%BB%AD(3n+1)%E7%8C%9C%E6%83%B3/"/>
-    <id>http://www.echodemo.cc/2018/04/26/PAT-B1005-继续(3n+1)猜想/</id>
-    <published>2018-04-26T03:11:34.000Z</published>
-    <updated>2018-04-26T03:13:24.838Z</updated>
-    
-    <content type="html"><![CDATA[<p>卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。</p><p>当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1，则当我们对n=5、8、4、2进行验证的时候，就可以直接判定卡拉兹猜想的真伪，而不需要重复计算，因为这4个数已经在验证3的时候遇到过了，我们称5、8、4、2是被3“覆盖”的数。我们称一个数列中的某个数n为“关键数”，如果n不能被数列中的其他数字所覆盖。</p><p>现在给定一系列待验证的数字，我们只需要验证其中的几个关键数，就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字，并按从大到小的顺序输出它们。</p><p>输入格式：每个测试输入包含1个测试用例，第1行给出一个正整数K(&lt;100)，第2行给出K个互不相同的待验证的正整数n(1&lt;n&lt;=100)的值，数字间用空格隔开。</p><p>输出格式：每个测试用例的输出占一行，按从大到小的顺序输出关键数字。数字间用1个空格隔开，但一行中最后一个数字后没有空格。</p><pre><code>输入样例：63 5 6 7 8 11输出样例：7 6</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;using namespace std;bool cmp(int a, int b) {  return a &gt; b;}int arr[10000];//全局数组默认值为0int main() {  int k, n;  cin &gt;&gt; k;  vector&lt;int&gt; v(k);  for (int i = 0;i &lt; k;i++) {    cin &gt;&gt; n;    v[i] = n;//初始化动态数组    while (n != 1) {      if (n % 2 == 0)        n /= 2;      else        n = (3 * n + 1) / 2;      arr[n] = 1;//将所有元素会覆盖的值加入arr当中,1表示覆盖过    }  }  sort(v.begin(), v.end(), cmp);//将动态数组元素从大到小排序  //用于判定是否输出空格(此处由于无法预知未曾遍历的数组元素当中是否存在没有被覆盖的情况，只好将空格的输出判定放在已经确定的未被覆盖元素之前)  int flag = 0;  for (int i = 0;i &lt; v.size();i++) {//遍历整个数组    if (!arr[v[i]]) {      if (flag == 1) cout &lt;&lt; &quot; &quot;;      cout &lt;&lt; v[i];      flag = 1;    }      }  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。&lt;/p&gt;
-&lt;p&gt;当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1，则当我们对n=5、8、4
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我喜欢夜是寂静的</title>
-    <link href="http://www.echodemo.cc/2018/04/25/%E6%88%91%E5%96%9C%E6%AC%A2%E5%A4%9C%E6%98%AF%E5%AF%82%E9%9D%99%E7%9A%84/"/>
-    <id>http://www.echodemo.cc/2018/04/25/我喜欢夜是寂静的/</id>
-    <published>2018-04-25T14:11:09.000Z</published>
-    <updated>2018-04-25T14:18:24.864Z</updated>
-    
-    <content type="html"><![CDATA[<p>我喜欢夜是寂静的</p><p>那遥远的地方跑过来的黑夜</p><p>喃喃地呼唤我</p><p>将我揽入她的怀抱</p><p><br><br>她也叫来昏黄的路灯</p><p>挂在我的头上</p><p>头顶再遥远的地方</p><p>淡淡的星子在闪</p><p>四周里安静无声，那是因为</p><p>夜，也喜欢我是寂静着的</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;我喜欢夜是寂静的&lt;/p&gt;
-&lt;p&gt;那遥远的地方跑过来的黑夜&lt;/p&gt;
-&lt;p&gt;喃喃地呼唤我&lt;/p&gt;
-&lt;p&gt;将我揽入她的怀抱&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;她也叫来昏黄的路灯&lt;/p&gt;
-&lt;p&gt;挂在我的头上&lt;/p&gt;
-&lt;p&gt;头顶再遥远的地方&lt;/p&gt;
-&lt;p&gt;淡淡的星子在闪&lt;/p&gt;
-&lt;p&gt;四
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode 二进制中有多少个1</title>
-    <link href="http://www.echodemo.cc/2018/04/23/LintCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AA1/"/>
-    <id>http://www.echodemo.cc/2018/04/23/LintCode-二进制中有多少个1/</id>
-    <published>2018-04-23T08:59:23.000Z</published>
-    <updated>2018-04-23T09:13:06.117Z</updated>
-    
-    <content type="html"><![CDATA[<p>计算在一个 32 位的整数的二进制表示中有多少个 1.</p><p>样例</p><pre><code>给定 32 (100000)，返回 1给定 5 (101)，返回 2给定 1023 (1111111111)，返回 10</code></pre><p>代码一：此题如果采用的是移位的方法，那么这里唯一需要注意的是当给定的测试用例是负数的时候要先计算位于负号位的1，然后转化为正整数之后再进行移位的操作和计数。</p><pre><code>int countOnes(int num) {    int count = 0;    if (num &lt; 0) {        count++;        num = num ^ 0x80000000;    }    while (num &gt; 0) {        if (num &amp; 1) {            count++;          }        num = num &gt;&gt; 1;    }    return count;}</code></pre><p>代码二：这种方法还是比较巧妙，这里的数字本身和减一之后的数相与让我想起了计算数是否为2的幂次的程序。</p><pre><code>int countOnes(int num){    int count = 0;    while(num){        num = num &amp; (num-1);        count++;    }    return count;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;计算在一个 32 位的整数的二进制表示中有多少个 1.&lt;/p&gt;
-&lt;p&gt;样例&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;给定 32 (100000)，返回 1
-
-给定 5 (101)，返回 2
-
-给定 1023 (1111111111)，返回 10
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;代码一
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1004 成绩排名</title>
-    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1004-%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D/"/>
-    <id>http://www.echodemo.cc/2018/04/21/PAT-B1004-成绩排名/</id>
-    <published>2018-04-21T11:57:45.000Z</published>
-    <updated>2018-04-25T14:58:45.338Z</updated>
-    
-    <content type="html"><![CDATA[<p>读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p><p>输入格式：每个测试输入包含1个测试用例，格式为</p><pre><code>第1行：正整数n第2行：第1个学生的姓名 学号 成绩第3行：第2个学生的姓名 学号 成绩... ... ...第n+1行：第n个学生的姓名 学号 成绩</code></pre><p>其中姓名和学号均为不超过10个字符的字符串，成绩为0到100之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。</p><p>输出格式：对每个测试用例输出2行，第1行是成绩最高学生的姓名和学号，第2行是成绩最低学生的姓名和学号，字符串间有1空格。</p><pre><code>输入样例：3Joe Math990112 89Mike CS991301 100Mary EE990830 95输出样例：Mike CS991301Joe Math990112</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {    int n, score, maxscore = -1, minscore = 101;    string name, number, maxname, minname, maxnumber, minnumber;    cin &gt;&gt; n;    for (int i = 0;i &lt; n;i++) {        cin &gt;&gt; name &gt;&gt; number &gt;&gt; score;        if (score &gt; maxscore) {            maxscore = score;            maxname = name;            maxnumber = number;        }        if (score &lt; minscore) {            minscore = score;            minname = name;            minnumber = number;        }    }    cout &lt;&lt; maxname &lt;&lt; &quot; &quot; &lt;&lt; maxnumber &lt;&lt; endl;    cout &lt;&lt; minname &lt;&lt; &quot; &quot; &lt;&lt; minnumber;    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。&lt;/p&gt;
-&lt;p&gt;输入格式：每个测试输入包含1个测试用例，格式为&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;第1行：正整数n
-第2行：第1个学生的姓名 学号 成绩
-第3行：第2个学生的姓名 学号 成绩
-... .
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1003 我要通过！</title>
-    <link href="http://www.echodemo.cc/2018/04/21/PAT-B1003-%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87%EF%BC%81/"/>
-    <id>http://www.echodemo.cc/2018/04/21/PAT-B1003-我要通过！/</id>
-    <published>2018-04-21T07:32:58.000Z</published>
-    <updated>2018-04-25T14:58:10.593Z</updated>
-    
-    <content type="html"><![CDATA[<p>“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于PAT的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。得到“答案正确”的条件是：</p><ol><li><p>字符串中必须仅有P, A, T这三种字符，不可以包含其它字符；</p></li><li><p>任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串；</p></li><li><p>如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。</p></li></ol><p>现在就请你为PAT写一个自动裁判程序，判定哪些字符串是可以获得“答案正确”的。</p><p>输入格式： 每个测试输入包含1个测试用例。第1行给出一个自然数n (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过100，且不包含空格。</p><p>输出格式：每个字符串的检测结果占一行，如果该字符串可以获得“答案正确”，则输出YES，否则输出NO。</p><pre><code>输入样例：8PATPAATAAPATAAAAPAATAAAAxPATxPTWhateverAPAAATAA输出样例：YESYESYESYESNONONONO</code></pre><p>分析：这种题目切不可仓促下笔，需要根据题目给出的条件分析清楚其中潜藏的规律。最好的方法就是使用输入输出样例当中的正确样例进行代入当然也可以自行多加一些样例来让结果更直观。此题的条件一可以说是一目了然，就没有代入的必要了。重点在于条件二和条件三。</p><p>条件二：任意形如 xPATx 的字符串都可以获得“答案正确”，其中 x 或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举出以下皆正确的样例：</p><pre><code>PATAPATAAAPATAAAAAPATAAAAAAAPATAAAA...</code></pre><p>从中可以得出：在字符’PAT’的前面和后面添加任意相等个数的字符’A’即可满足条件二。</p><p>条件三：如果 aPbTc 是正确的，那么 aPbATca 也是正确的，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。那么可以列举以下样例：</p><pre><code>PATPAATPAAAAATAPATAAPAATAAAPAAATAAAAAPATAAAAPAATAAAAAAPAAATAAAAAA</code></pre><p>总结来说：只能有一个P一个T，中间末尾和开头可以随便插入A。但是必须满足开头的A的个数 * 中间的A的个数 = 结尾的A的个数。</p><pre><code>#include &lt;iostream&gt;#include &lt;map&gt;using namespace std;int main() {    int n, p = 0, t = 0;    string s;    cin &gt;&gt; n;    for(int i = 0; i &lt; n; i++) {        cin &gt;&gt; s;        map&lt;char, int&gt; m;        for(int j = 0; j &lt; s.size(); j++) {            m[s[j]]++;            if (s[j] == &apos;P&apos;) p = j;            if (s[j] == &apos;T&apos;) t = j;        }        if(m[&apos;P&apos;] == 1 &amp;&amp; m[&apos;A&apos;] != 0 &amp;&amp; m[&apos;T&apos;] == 1 &amp;&amp; m.size() == 3 &amp;&amp; p * (t-p-1) == s.length()-t-1)            cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;        else            cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;    }    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于PAT的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。得到“答案正确”的条件是：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;字符串中必须仅有P, A, T这三种字符，不可
       
     
     </summary>
