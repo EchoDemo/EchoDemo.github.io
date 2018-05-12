@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-07T12:51:00.949Z</updated>
+  <updated>2018-05-12T01:00:19.174Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,21 +17,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>《声律启蒙.卷上.六鱼》(典故)</title>
-    <link href="http://www.echodemo.cc/2018/05/06/%E3%80%8A%E5%A3%B0%E5%BE%8B%E5%90%AF%E8%92%99.%E5%8D%B7%E4%B8%8A.%E5%85%AD%E9%B1%BC%E3%80%8B(%E5%85%B8%E6%95%85)/"/>
-    <id>http://www.echodemo.cc/2018/05/06/《声律启蒙.卷上.六鱼》(典故)/</id>
-    <published>2018-05-06T09:08:03.000Z</published>
-    <updated>2018-05-07T12:51:00.949Z</updated>
+    <title>LintCode A + B 问题</title>
+    <link href="http://www.echodemo.cc/2018/05/12/LintCode-(A%20+%20B%20%E9%97%AE%E9%A2%98)/"/>
+    <id>http://www.echodemo.cc/2018/05/12/LintCode-(A + B 问题)/</id>
+    <published>2018-05-12T00:30:29.000Z</published>
+    <updated>2018-05-12T01:00:19.174Z</updated>
     
-    <content type="html"><![CDATA[<p>(1)浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”</p><p>(2)分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。</p><p>(3)奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五城换赵璧。赵蔺相如奉璧使秦，见秦无诚意，以大智大勇与强秦对抗，终不辱使命，完璧归赵。</p><p>(4)掷地金声孙绰赋：晋人孙绰作《天台山赋》，他的友人范荣期赞美其赋，说：“你试把它掷地，当作金石声响。”</p><p>(5)回文锦字窦滔书：前秦苏蕙为秦州刺史窦滔妻，窦滔为安南将军，抛却苏蕙携宠妾而去。苏蕙悲恨，用彩锦织成《回文璇玑图诗》以赠滔。滔颇受感动，于是夫妻和好如初。</p><p>(6)未遇殷宗，胥靡困傅岩之筑：殷高宗梦得贤臣，后来按梦中人的相貌在傅岩找到了傅说(yue)。傅说未遇高宗时，仅是一个操杵筑土的奴隶。胥靡：奴隶。筑：筑土之杵。</p><p>(7)既逢周后，太公舍渭水之渔：殷末，姜太公只在渭水之滨垂钓闲居，遇周文王，得以重用。周后：指周文王。舍：离去。</p><p>(8)六朝：吴建都于建业(今南京城)，后历东晋、宋、齐、梁、陈，各朝均设都于此，号为“六朝”。</p><p>(9)天禄：</p>]]></content>
+    <content type="html"><![CDATA[<p>给出两个整数a和b, 求他们的和, 但不能使用 + 等数学运算符。</p><p>你不需要从输入流读入数据，只需要根据aplusb的两个参数a和b，计算他们的和并返回就行。</p><p>注意：a和b都是32位整数</p><pre><code>样例：如果 a=1 并且 b=2，返回3</code></pre><p>分析：对于这道题以我浅薄的知识真的是没想出来(发现这是一道简单题，瞬间受到一万点伤害)，这种接近于底层的东西，感觉自己在这方面太匮乏了。题目要求不能使用算术运算符号，基本上就能想到是通过二进制的位运算进行解答。但是想了半天也没什么头绪，只能默默地搜一下了。发现还是这篇文章讲得最靠谱了。<a href="https://blog.csdn.net/cjt5047/article/details/50686724" target="_blank">lintcode刷题A+B问题位运算</a></p><p>然后突然想起自己的左移和右移有点淡忘了，就复习一下。移位包括逻辑移位和算术移位。逻辑移位是指移出去的位丢弃，空缺位用0来填充；算术移位是指移出去的位丢弃，空缺位用符号位来填充。当然对于无符号数来说，不管是左移还是右移都是逻辑移位；而对于有符号数而言，如果是左移则仍然是逻辑移位，但如果是右移则属于算术移位。</p><p>题目代码：比起oj里面的lintcode答案，还是比较喜欢上条链接里大佬写的代码，嘻嘻！</p><pre><code>class Solution {public:    /**     * @param a: An integer     * @param b: An integer     * @return: The sum of a and b      */    int aplusb(int a, int b) {        // write your code here        if(a==0) return b;        if(b==0) return a;        int x1=(a&amp;b)&lt;&lt;1;        int x2=a^b;        return aplusb(x1,x2);    }};   </code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;(1)浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”&lt;/p&gt;
-&lt;p&gt;(2)分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。&lt;/p&gt;
-&lt;p&gt;(3)奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五
+        &lt;p&gt;给出两个整数a和b, 求他们的和, 但不能使用 + 等数学运算符。&lt;/p&gt;
+&lt;p&gt;你不需要从输入流读入数据，只需要根据aplusb的两个参数a和b，计算他们的和并返回就行。&lt;/p&gt;
+&lt;p&gt;注意：a和b都是32位整数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;样例：如果 a=1 并且 b
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《声律启蒙.卷上.六鱼》(典故)</title>
+    <link href="http://www.echodemo.cc/2018/05/06/%E3%80%8A%E5%A3%B0%E5%BE%8B%E5%90%AF%E8%92%99.%E5%8D%B7%E4%B8%8A.%E5%85%AD%E9%B1%BC%E3%80%8B(%E5%85%B8%E6%95%85)/"/>
+    <id>http://www.echodemo.cc/2018/05/06/《声律启蒙.卷上.六鱼》(典故)/</id>
+    <published>2018-05-06T09:08:03.000Z</published>
+    <updated>2018-05-09T08:35:55.909Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”</p><p>2、分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。</p><p>3、奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五城换赵璧。赵蔺相如奉璧使秦，见秦无诚意，以大智大勇与强秦对抗，终不辱使命，完璧归赵。</p><p>4、掷地金声孙绰赋：晋人孙绰作《天台山赋》，他的友人范荣期赞美其赋，说：“你试把它掷地，当作金石声响。”</p><p>5、回文锦字窦滔书：前秦苏蕙为秦州刺史窦滔妻，窦滔为安南将军，抛却苏蕙携宠妾而去。苏蕙悲恨，用彩锦织成《回文璇玑图诗》以赠滔。滔颇受感动，于是夫妻和好如初。</p><p>、6、未遇殷宗，胥靡困傅岩之筑：殷高宗梦得贤臣，后来按梦中人的相貌在傅岩找到了傅说(yue)。傅说未遇高宗时，仅是一个操杵筑土的奴隶。胥靡：奴隶。筑：筑土之杵。</p><p>7、既逢周后，太公舍渭水之渔：殷末，姜太公只在渭水之滨垂钓闲居，遇周文王，得以重用。周后：指周文王。舍：离去。</p><p>8、六朝：吴建都于建业(今南京城)，后历东晋、宋、齐、梁、陈，各朝均设都于此，号为“六朝”。</p><p>9、天禄：传说中的长角怪兽，汉代有阁名为“天禄阁”。刘向曾在此阁校书(整理书籍)。</p><p>10、石渠：据古史记载，汉初萧何曾建“石渠阁”收藏各国图书典籍，后来汉武帝以石渠作为国家收藏秘籍之处。</p><p>11、千字策：唐代科举考试重于诗赋，至宋代，开始侧重于“策试之制”，即要求考生就国家政治、军事大政发表议论，每篇文章以千字为限，称为“千字策”。</p><p>12、八行书：语见唐代诗人孟浩然诗：“家书寄八行。”此典原出马融寄窦尚书，内有两纸八行文字，故后人以“八行书”言其简赅。</p><p>13、有若对相如：有若：孔子的弟子。相如：战国时人蔺相如，另一解为指东汉时著名文学家司马相如。</p><p>14、爱见人长，共服宣尼休假盖：假盖：语见《孔子家语》。言某日孔子正待出门而天降阵雨，孔子的门人对孔子言，某人家里有雨伞，可以向此人借用。孔子回答说：此人为人，缺点就在于比较计较财物的得失。我听说与人交往，应当注意人家的长处，回避人家的短处，这样才能长久。我并不是不知道他家有伞，而怕的是他若不肯借，正暴露出他的短处呀！</p><p>15、恐彰已吝，谁知阮裕竟焚车：晋代人阮裕，字思旷，有一辆好车。凡是有人求借，他无不借给。有一次，有人葬其母亲，欲向阮裕借车而又不敢开口。阮裕闻后叹息道：“我有这么一辆好车，却让人家不敢来向我借，这车拿来还有什么用呢？”于是，便焚烧了此车。</p><p>16、</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”&lt;/p&gt;
+&lt;p&gt;2、分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。&lt;/p&gt;
+&lt;p&gt;3、奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五城换赵
       
     
     </summary>
@@ -529,37 +559,6 @@
         &lt;p&gt;令Pi表示第i个素数。现任给两个正整数M &amp;lt;= N &amp;lt;= 104，请输出PM到PN的所有素数。&lt;/p&gt;
 &lt;p&gt;输入格式：输入在一行中给出M和N，其间以空格分隔。&lt;/p&gt;
 &lt;p&gt;输出格式：输出从PM到PN的所有素数，每10个数字占1行，其间以空格分隔，但行末不得有
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1012 数字分类</title>
-    <link href="http://www.echodemo.cc/2018/04/28/PAT-B1012-%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/"/>
-    <id>http://www.echodemo.cc/2018/04/28/PAT-B1012-数字分类/</id>
-    <published>2018-04-28T07:59:10.000Z</published>
-    <updated>2018-04-29T00:47:03.990Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一系列正整数，请按要求对数字进行分类，并输出以下5个数字：</p><pre><code>A1 = 能被5整除的数字中所有偶数的和；A2 = 将被5除后余1的数字按给出顺序进行交错求和，即计算n1-n2+n3-n4...；A3 = 被5除后余2的数字的个数；A4 = 被5除后余3的数字的平均数，精确到小数点后1位；A5 = 被5除后余4的数字中最大数字。</code></pre><p>输入格式：每个输入包含1个测试用例。每个测试用例先给出一个不超过1000的正整数N，随后给出N个不超过1000的待分类的正整数。数字间以空格分隔。</p><p>输出格式：对给定的N个正整数，按题目要求计算A1~A5并在一行中顺序输出。数字间以空格分隔，但行末不得有多余空格。</p><p>若其中某一类数字不存在，则在相应位置输出“N”。</p><pre><code>输入样例1：13 1 2 3 4 5 6 7 8 9 10 20 16 18输出样例1：30 11 2 9.7 9输入样例2：8 1 2 4 5 6 7 9 16输出样例2：N 11 2 N 9</code></pre><p>题目代码：需要注意的是最好不要让cout和printf在同一个程序当中出现。</p><pre><code>#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;math.h&gt;using namespace std;int main() {  int n;  cin &gt;&gt; n;  vector&lt;int&gt; a(n);  for (int i = 0;i &lt; n;i++) {    cin &gt;&gt; a[i];  }  int A1 = 0, A2 = 0, A3 = 0, A5 = 0, flag2 = 0, j = 0 ;  double A4 = 0.0, flag4 = 0.0;  for (int i = 0;i &lt; n;i++) {    if (a[i] % 5 == 0 &amp;&amp; a[i] % 2 == 0) A1 += a[i];    if (a[i] % 5 == 1) { A2 += (int)(pow(-1, j++)*a[i]); flag2++; }    if (a[i] % 5 == 2) A3++;    if (a[i] % 5 == 3) { A4 += a[i]; flag4++; }    if (a[i] % 5 == 4) if (a[i] &gt; A5) A5 = a[i];  }  if (A1 &gt; 0) printf(&quot;%d &quot;, A1);  else printf(&quot;N &quot;);  if (flag2 &gt; 0) printf(&quot;%d &quot;, A2);  else printf(&quot;N &quot;);  if (A3 &gt; 0) printf(&quot;%d &quot;, A3);  else printf(&quot;N &quot;);  if (A4 &gt; 0) printf(&quot;%.1f &quot;, A4 / flag4);  else printf(&quot;N &quot;);  if (A5 &gt; 0) printf(&quot;%d&quot;, A5);  else printf(&quot;N&quot;);  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定一系列正整数，请按要求对数字进行分类，并输出以下5个数字：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;A1 = 能被5整除的数字中所有偶数的和；
-A2 = 将被5除后余1的数字按给出顺序进行交错求和，即计算n1-n2+n3-n4...；
-A3 = 被5除后余2的数字的个数；
-A4 
       
     
     </summary>
