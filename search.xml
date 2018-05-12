@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LintCode 尾部的零]]></title>
+    <url>%2F2018%2F05%2F12%2FLintCode-%E5%B0%BE%E9%83%A8%E7%9A%84%E9%9B%B6%2F</url>
+    <content type="text"><![CDATA[设计一个算法，计算出n阶乘中尾部零的个数 样例：11! = 39916800，因此应该返回 2 挑战：O(logN)的时间复杂度 分析：此题如果采用先求出数的阶乘，再来计算求出的结果的0的个数的话，一方面时间的复杂度太高，另一方面平时的数据类型难以存储如此大的数，需要使用大整数来进行存储。因此需要另辟蹊径，从数学的角度来看待此问题。0的个数即代表的是10的个数，而10=2*5。很明显的是：在阶乘当中5所存在的个数必定是多于2的个数的。因此，我们可以说找到了多少个5就找到了多少个10,。使用100作为例子，从1~100之间会有多少个能够被5整除的数呢？通过数学归纳法可以发现是(100/5=20)个，此时是不是就结束了呢？再来看一下1~100之中的25,50,75,100这4个数，当他们同时都除以5以后发现依次是5,10,15,20，也就是说在进行一次除以5的操作之后他们之间其实还存在着5，而此次需要求取5的个数的区间刚好是上次除以5操作后的数。由此可见，这其实是应该存在于一个循环当中的，跳出循环的条件是n非零即可。 题目代码： class Solution { public: /* * @param n: A long integer * @return: An integer, denote the number of trailing zeros in n! */ long long trailingZeros(long long n) { // write your code here, try to do it without arithmetic operators. long long sum=0; while(n){ sum+=n/5; n/=5; } return sum; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LintCode A + B 问题]]></title>
     <url>%2F2018%2F05%2F12%2FLintCode-(A%20%2B%20B%20%E9%97%AE%E9%A2%98)%2F</url>
     <content type="text"><![CDATA[给出两个整数a和b, 求他们的和, 但不能使用 + 等数学运算符。 你不需要从输入流读入数据，只需要根据aplusb的两个参数a和b，计算他们的和并返回就行。 注意：a和b都是32位整数 样例：如果 a=1 并且 b=2，返回3 分析：对于这道题以我浅薄的知识真的是没想出来(发现这是一道简单题，瞬间受到一万点伤害)，这种接近于底层的东西，感觉自己在这方面太匮乏了。题目要求不能使用算术运算符号，基本上就能想到是通过二进制的位运算进行解答。但是想了半天也没什么头绪，只能默默地搜一下了。发现还是这篇文章讲得最靠谱了。lintcode刷题A+B问题位运算 然后突然想起自己的左移和右移有点淡忘了，就复习一下。移位包括逻辑移位和算术移位。逻辑移位是指移出去的位丢弃，空缺位用0来填充；算术移位是指移出去的位丢弃，空缺位用符号位来填充。当然对于无符号数来说，不管是左移还是右移都是逻辑移位；而对于有符号数而言，如果是左移则仍然是逻辑移位，但如果是右移则属于算术移位。 题目代码：比起oj里面的lintcode答案，还是比较喜欢上条链接里大佬写的代码，嘻嘻！ class Solution { public: /** * @param a: An integer * @param b: An integer * @return: The sum of a and b */ int aplusb(int a, int b) { // write your code here if(a==0) return b; if(b==0) return a; int x1=(a&amp;b)&lt;&lt;1; int x2=a^b; return aplusb(x1,x2); } };]]></content>

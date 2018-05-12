@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-12T01:00:19.174Z</updated>
+  <updated>2018-05-12T15:52:19.475Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LintCode  尾部的零</title>
+    <link href="http://www.echodemo.cc/2018/05/12/LintCode-%E5%B0%BE%E9%83%A8%E7%9A%84%E9%9B%B6/"/>
+    <id>http://www.echodemo.cc/2018/05/12/LintCode-尾部的零/</id>
+    <published>2018-05-12T15:20:35.000Z</published>
+    <updated>2018-05-12T15:52:19.475Z</updated>
+    
+    <content type="html"><![CDATA[<p>设计一个算法，计算出n阶乘中尾部零的个数</p><pre><code>样例：11! = 39916800，因此应该返回 2</code></pre><p>挑战：O(logN)的时间复杂度</p><p>分析：此题如果采用先求出数的阶乘，再来计算求出的结果的0的个数的话，一方面时间的复杂度太高，另一方面平时的数据类型难以存储如此大的数，需要使用大整数来进行存储。因此需要另辟蹊径，从数学的角度来看待此问题。0的个数即代表的是10的个数，而10=2*5。很明显的是：在阶乘当中5所存在的个数必定是多于2的个数的。因此，我们可以说找到了多少个5就找到了多少个10,。使用100作为例子，从1~100之间会有多少个能够被5整除的数呢？通过数学归纳法可以发现是(100/5=20)个，此时是不是就结束了呢？再来看一下1~100之中的25,50,75,100这4个数，当他们同时都除以5以后发现依次是5,10,15,20，也就是说在进行一次除以5的操作之后他们之间其实还存在着5，而此次需要求取5的个数的区间刚好是上次除以5操作后的数。由此可见，这其实是应该存在于一个循环当中的，跳出循环的条件是n非零即可。</p><p>题目代码：</p><pre><code>class Solution {public:    /*     * @param n: A long integer     * @return: An integer, denote the number of trailing zeros in n!     */    long long trailingZeros(long long n) {        // write your code here, try to do it without arithmetic operators.        long long sum=0;        while(n){            sum+=n/5;            n/=5;        }        return sum;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;设计一个算法，计算出n阶乘中尾部零的个数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;样例：11! = 39916800，因此应该返回 2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;挑战：O(logN)的时间复杂度&lt;/p&gt;
+&lt;p&gt;分析：此题如果采用先求出数的阶乘，再来计算求出的结果的0的个数的话，
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LintCode A + B 问题</title>
@@ -530,35 +560,6 @@
         &lt;p&gt;大侦探福尔摩斯接到一张奇怪的字条：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;“我们约会吧！3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;amp;hgsfdk d&amp;amp;Hyscvnm”。
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大侦探很快就明白了，字条上奇怪的乱
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1013 数素数</title>
-    <link href="http://www.echodemo.cc/2018/04/29/PAT-B1013-%E6%95%B0%E7%B4%A0%E6%95%B0/"/>
-    <id>http://www.echodemo.cc/2018/04/29/PAT-B1013-数素数/</id>
-    <published>2018-04-29T00:51:26.000Z</published>
-    <updated>2018-04-29T02:02:36.281Z</updated>
-    
-    <content type="html"><![CDATA[<p>令Pi表示第i个素数。现任给两个正整数M &lt;= N &lt;= 104，请输出PM到PN的所有素数。</p><p>输入格式：输入在一行中给出M和N，其间以空格分隔。</p><p>输出格式：输出从PM到PN的所有素数，每10个数字占1行，其间以空格分隔，但行末不得有多余空格。</p><pre><code>输入样例：5 27输出样例：11 13 17 19 23 29 31 37 41 4347 53 59 61 67 71 73 79 83 8997 101 103</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;using namespace std;bool prime(int n) {//判定是否为素数  if (n &lt;= 1) return false;  for (int i = 2;i*i &lt;= n;i++) {    if (n%i == 0) return false;  }  return true;}int main() {  int M, N, i = 2, j = 0, k = 0;  cin &gt;&gt; M &gt;&gt; N;  while (k &lt; N) {    if (prime(i)) {      k++;//统计目前是第几个素数      if (k &gt;= M) {        cout &lt;&lt; i;        j++;        if (j % 10 == 0) cout &lt;&lt; endl;        else {          if (k &lt; N) cout &lt;&lt; &quot; &quot;;        }      }      }    i++;  }  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;令Pi表示第i个素数。现任给两个正整数M &amp;lt;= N &amp;lt;= 104，请输出PM到PN的所有素数。&lt;/p&gt;
-&lt;p&gt;输入格式：输入在一行中给出M和N，其间以空格分隔。&lt;/p&gt;
-&lt;p&gt;输出格式：输出从PM到PN的所有素数，每10个数字占1行，其间以空格分隔，但行末不得有
       
     
     </summary>
