@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-12T15:52:19.475Z</updated>
+  <updated>2018-05-15T02:49:19.449Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,11 +17,123 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LintCode  尾部的零</title>
+    <title>LintCode 丑数 II</title>
+    <link href="http://www.echodemo.cc/2018/05/15/LintCode-%E4%B8%91%E6%95%B0II/"/>
+    <id>http://www.echodemo.cc/2018/05/15/LintCode-丑数II/</id>
+    <published>2018-05-15T01:35:32.000Z</published>
+    <updated>2018-05-15T02:49:19.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>设计一个算法，找出只含素因子2，3，5 的第 n 小的数。</p><p>符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12…</p><p>我们可以认为1也是一个丑数</p><pre><code>样例：如果n = 9， 返回 10</code></pre><p>挑战：要求时间复杂度为O(nlogn)或者O(n)</p><p>方法一：如果采用遍历的方式，无法完全通过，会造成超时。</p><pre><code>class Solution {public:    /**     * @param n: An integer     * @return: the nth prime number as description.     */    long long nthUglyNumber(int n) {        // write your code here        int count = 0;          int i = 0;            while(count &lt; n)          {              m++;              int number = i;              while(number % 2 == 0)                  number = number / 2;              while(number % 3 == 0)                  number = number / 3;              while(number % 5 == 0)                  number = number / 5;              if(number == 1)              {                  count++;              }          }          return i;      }};</code></pre><p>方法二：是从1开始构造丑数，然后依次计数。</p><pre><code>class Solution {public:    /*     * @param n an integer     * @return the nth prime number as description.     */    int nthUglyNumber(int n) {        // write your code here        int count = 1;//统计丑数        vector&lt;int&gt; ugly(n,0);//保存丑数        ugly[0] = 1;//第一个丑数        vector&lt;int&gt; idx(3,0);        while(count &lt; n)        {            int a = 2 * ugly[idx[0]];            int b = 3 * ugly[idx[1]];            int c = 5 * ugly[idx[2]];            int temp = min(min(a, b), c);            if(temp == a)              ++idx[0];            if(temp == b)              ++idx[1];            if(temp == c)              ++idx[2];            ugly[count] = temp;            ++count;        }        return ugly[n-1];    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;设计一个算法，找出只含素因子2，3，5 的第 n 小的数。&lt;/p&gt;
+&lt;p&gt;符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12…&lt;/p&gt;
+&lt;p&gt;我们可以认为1也是一个丑数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;样例：如果n = 9， 返回 10
+&lt;/code
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>不孝有三，无后为大？</title>
+    <link href="http://www.echodemo.cc/2018/05/14/%E4%B8%8D%E5%AD%9D%E6%9C%89%E4%B8%89%EF%BC%8C%E6%97%A0%E5%90%8E%E4%B8%BA%E5%A4%A7%EF%BC%9F/"/>
+    <id>http://www.echodemo.cc/2018/05/14/不孝有三，无后为大？/</id>
+    <published>2018-05-14T02:21:06.000Z</published>
+    <updated>2018-05-16T01:28:51.964Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“不孝有三，无后为大”这八字言语基本上作为炎黄子孙的一员都曾有所耳闻。此语出自《孟子离娄上》：“不孝有三，无后为大。舜不告而娶，为无后也。君子以为犹告也。”</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传统的观点认为：无后就是指没有后代，更准确地来说是没有子嗣的意思。然而孟子在《离娄章句下》中说：“世俗所谓不孝者五：惰其四支，不顾父母之养，一不孝也；博弈好饮酒，不顾父母之养，二不孝也；好货财，私妻子，不顾父母之养，三不孝也；从耳目之欲，以为父母戮，四不孝也；好勇斗狠，以危父母，五不孝也。”如果说“无后”是指没有后代的话，那么这里的五不孝中肯定有一条是“无后”，但是五不孝中没有一条提及“没有后代”。另外，再来看“不孝有三，无后为大”的后文，说的是：舜不告而娶，为无后也。舜没有告知父母就擅自娶妻，为无后也。这里的“为”字可以表承接关系“就是”的意思，也可以表目的“为了”的意思。然而不管哪一种说法，都与传统的意思不符。第一，取了妻子怎么能说就是没有后代呢，恰恰相反，娶妻就是为了能够繁衍后代；第二，取了妻子又怎么能说是为了没有后代呢。这些都明显和上文“舜不告而娶”的意思不衔接，跨度未免太大些了。最后孟子还说到：君子认为应该把娶妻这件事情告诉父母，这和没有子嗣又有何关系呢？话说像亚圣这种高智慧生物，怎么会犯如此低级的逻辑错误呢？</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么如果采用第二种观点，“无后”指没有尽到后辈的责任也就都能够说的通了。首先，孟子的五不孝讲的都是后辈未尽之责，同时在古文当中使用具体的数字时常常是虚指而并非实指，用三来代五也完全说的过去。例如：飞流直下三千尺。三人行，必有我师焉。军书十二卷，卷卷有爷名。等都是虚指。其次，下文的舜不告而娶，就是没有尽到后辈的责任和君子认为应该把娶妻这件事情告诉父母的意思也都衔接得恰到好处。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;“不孝有三，无后为大”这八字言语基本上作为炎黄子孙的一员都曾有所耳闻。此语出自《孟子离娄上》：“不孝有三，无后为大。舜不告而娶，为无后也。君子以为犹告也。”&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nb
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《生活教会你》摘句</title>
+    <link href="http://www.echodemo.cc/2018/05/13/%E3%80%8A%E7%94%9F%E6%B4%BB%E6%95%99%E4%BC%9A%E4%BD%A0%E3%80%8B%E6%91%98%E5%8F%A5/"/>
+    <id>http://www.echodemo.cc/2018/05/13/《生活教会你》摘句/</id>
+    <published>2018-05-13T06:32:39.000Z</published>
+    <updated>2018-05-13T06:38:46.136Z</updated>
+    
+    <content type="html"><![CDATA[<p>在读完读完本书的第一章之后，我想：这真是一本好书，如此多的发人深省的话语，着实让人钦佩。这不是心灵鸡汤，而是自己内心也十分认可的观点。但随着章节的推移，内容虽然不像前面那么让我着迷，但丝毫没有影响我在豆瓣为它打上四星的评分。</p><p>1、对儿童教育而言，最重要的是让孩子拥有好奇心、兴趣、想象力以及对生活的探索精神。</p><p>2、我们在家和学校接受教育，最重要的是，我们从生活本身接受教育。学习应当贯穿我们的一生。生命总是在不断变动，要么前进，要么后退。只有当一个人在不断成长时，生活才会有趣；换句话说，只有当我们仍对生活怀有兴趣时，才能取得成长。</p><p>3、杜威的这种进步主义教育并不试图将孩子引向他不愿去的地方。孩子不会被逼着遵守什么准则，除非他自己乐意去做或认为值得去做。</p><p>4、从长远来看，有价值的并非是一个人读了什么书，而是独立思考并吸收了什么东西，是通过阅读激发的那些想法和感觉。正是你自己的想法，独立思考得出的那些想法，使你成为一个有意思的人。</p><p>5、通过别人来激发自己的兴趣—在我看来，这是效率最高、最有收获的教育方法之一。你要做的只是去寻找这个兴趣点。这会让每段经历都成为一种挑战，并使人永葆好奇—好奇心是一个人最宝贵的品质之一。</p><p>6、每个孩子的“为什么”都应得到尊重，得到用心的回答。如果你不知道问题的答案（实际情况通常如此），那就带着孩子一起寻找答案。</p><p>7、当我逐渐真正观察起周围的事物，试着去理解它们时，生活中的每件事情都变得更加有趣，也更有价值。这就像以三维视角去看一张二维的照片，看待问题有了更多的深度。</p><p>8、好在，每当我们与恐惧作战时，哪怕当时认为它不可战胜，哪怕在过程中受尽折磨，只要经受住痛苦，克服了恐惧，你会发现获得了更大的自由。一个人只要经受住一次这种考验，就可以经受住任何事情。每一次与恐惧的正面对决都会让我们收获力量、勇气与自信。</p><p>9、放下自我。如果你能放下自我，不去想是否给别人留下好印象，不去管人们怎么看你，反过来替别人着想，你就不会再感到胆怯和恐惧。恐惧在很大程度上是由于缺乏了解。我们不知道在新环境会发生什么，也不知道自己能否应对。越早知道会发生什么，就能越早从恐惧中解脱出来。</p><p>10、“我做不到。”这种话说来容易。实际上，你会发现其实自己做得到。尝试去做某件事情不仅能让自己摆脱恐惧的束缚，还能锻炼承受能力，并从成就感中获得自由。</p><p>11、我自己一般有三种办法：第一，保持内心平静，以使工作时不受周围环境影响；第二，专注在手头的事情上；第三，建立起生活规律，分配好时间，提前计划每件事情，同时又留有余地以备不患。除此之外，还有一点也很重要：那就是保持身体健康，保证有充沛的精力可用。</p><p>12、一个人只有愿意接受自身存在不足这一残酷事实，愿意做出调整去适应它，才算得上真正的成熟。成熟的一个重要部分，就是不仅接受自己的缺点，也接纳你所爱之人的缺点，并尽可能地帮助他们避免出错。</p><p>13、“对自己和身边的人诚实以待；在生活和工作中竭尽全力；拥有爱别人的能力。”实际上，获得快乐还有一个条件，当时我不知为何落了这条：那就是感到自己是一个有用的人。</p><p>14、对大部分人来说，渴望被他人需要的愿望比自己意识到的还要强烈。人们常说一个人需要表现自我，但是一般来说，表现自我带来的满足感不如满足他人带来的满足感多。</p><p>15、我们总以为每个人都想得到自由，但事实并非如此。对很多人来说，放弃自由，让别人指导自己，让别人给自己做决定，比为自己和自己的决定负责要快乐得多。他们不想自己动脑，也不想自己做主。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在读完读完本书的第一章之后，我想：这真是一本好书，如此多的发人深省的话语，着实让人钦佩。这不是心灵鸡汤，而是自己内心也十分认可的观点。但随着章节的推移，内容虽然不像前面那么让我着迷，但丝毫没有影响我在豆瓣为它打上四星的评分。&lt;/p&gt;
+&lt;p&gt;1、对儿童教育而言，最重要的是让孩
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LintCode 统计数字</title>
+    <link href="http://www.echodemo.cc/2018/05/13/LintCode-%E7%BB%9F%E8%AE%A1%E6%95%B0%E5%AD%97/"/>
+    <id>http://www.echodemo.cc/2018/05/13/LintCode-统计数字/</id>
+    <published>2018-05-13T00:54:21.000Z</published>
+    <updated>2018-05-13T01:01:30.721Z</updated>
+    
+    <content type="html"><![CDATA[<p>计算数字k在0到n中的出现的次数，k可能是0~9的一个值</p><p>样例：例如n=12，k=1，在 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]，我们发现1出现了5次 (1, 10, 11, 12)</p><p>分析：基本就是遍历了，不过要注意的就是0要特别处理。还有在遍历之后的数值处理需要交给临时变量，而不是用遍历数本身。</p><pre><code>class Solution {public:    /*     * @param : An integer     * @param : An integer     * @return: An integer denote the count of digit k in 1..n     */    int digitCounts(int k, int n) {        // write your code here        int count=0;        if(k==0) count++;        for(int i=k;i&lt;=n;i++){            int temp=i;            while(temp){                if(temp%10==k) count++;                temp/=10;            }        }        return count;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;计算数字k在0到n中的出现的次数，k可能是0~9的一个值&lt;/p&gt;
+&lt;p&gt;样例：例如n=12，k=1，在 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]，我们发现1出现了5次 (1, 10, 11, 12)&lt;/p&gt;
+&lt;p&gt;分析：基本就是遍
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LintCode 尾部的零</title>
     <link href="http://www.echodemo.cc/2018/05/12/LintCode-%E5%B0%BE%E9%83%A8%E7%9A%84%E9%9B%B6/"/>
     <id>http://www.echodemo.cc/2018/05/12/LintCode-尾部的零/</id>
     <published>2018-05-12T15:20:35.000Z</published>
-    <updated>2018-05-12T15:52:19.475Z</updated>
+    <updated>2018-05-13T00:55:35.051Z</updated>
     
     <content type="html"><![CDATA[<p>设计一个算法，计算出n阶乘中尾部零的个数</p><pre><code>样例：11! = 39916800，因此应该返回 2</code></pre><p>挑战：O(logN)的时间复杂度</p><p>分析：此题如果采用先求出数的阶乘，再来计算求出的结果的0的个数的话，一方面时间的复杂度太高，另一方面平时的数据类型难以存储如此大的数，需要使用大整数来进行存储。因此需要另辟蹊径，从数学的角度来看待此问题。0的个数即代表的是10的个数，而10=2*5。很明显的是：在阶乘当中5所存在的个数必定是多于2的个数的。因此，我们可以说找到了多少个5就找到了多少个10,。使用100作为例子，从1~100之间会有多少个能够被5整除的数呢？通过数学归纳法可以发现是(100/5=20)个，此时是不是就结束了呢？再来看一下1~100之中的25,50,75,100这4个数，当他们同时都除以5以后发现依次是5,10,15,20，也就是说在进行一次除以5的操作之后他们之间其实还存在着5，而此次需要求取5的个数的区间刚好是上次除以5操作后的数。由此可见，这其实是应该存在于一个循环当中的，跳出循环的条件是n非零即可。</p><p>题目代码：</p><pre><code>class Solution {public:    /*     * @param n: A long integer     * @return: An integer, denote the number of trailing zeros in n!     */    long long trailingZeros(long long n) {        // write your code here, try to do it without arithmetic operators.        long long sum=0;        while(n){            sum+=n/5;            n/=5;        }        return sum;    }};</code></pre>]]></content>
     
@@ -455,121 +567,6 @@
     
     
       <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1017 A除以B</title>
-    <link href="http://www.echodemo.cc/2018/04/29/PAT-B1017-A%E9%99%A4%E4%BB%A5B/"/>
-    <id>http://www.echodemo.cc/2018/04/29/PAT-B1017-A除以B/</id>
-    <published>2018-04-29T08:38:02.000Z</published>
-    <updated>2018-04-29T12:06:16.727Z</updated>
-    
-    <content type="html"><![CDATA[<p>本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。</p><p>输入格式：输入在1行中依次给出A和B，中间以1空格分隔。</p><p>输出格式：在1行中依次输出Q和R，中间以1空格分隔。</p><pre><code>输入样例：123456789050987654321 7输出样例：17636684150141093474 3</code></pre><p>题目代码：</p><pre><code>#include &lt;iostream&gt;#include &lt;string&gt;using namespace std;int main() {    string s;    cin &gt;&gt; s;    int a;    cin &gt;&gt; a;    int len = s.length();    int t = (s[0] - &apos;0&apos;) / a;    if ((t != 0 &amp;&amp; len &gt; 1) || len == 1) {        cout &lt;&lt; t;    }    int temp = (s[0] - &apos;0&apos;) % a;    for (int i = 1; i &lt; len; i++) {        t = (temp * 10 + s[i] - &apos;0&apos;) / a;        cout &lt;&lt; t;        temp = (temp * 10 + s[i] - &apos;0&apos;) % a;    }    cout &lt;&lt; &quot; &quot; &lt;&lt; temp;    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。&lt;/p&gt;
-&lt;p&gt;输入格式：输入在1行中依次给出A和B，中间以1空格分隔。&lt;/p&gt;
-&lt;p&gt;输出格式：在1行中依次输出Q和R，中间以1空格分隔。&lt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1016 部分A+B</title>
-    <link href="http://www.echodemo.cc/2018/04/29/PAT-B1016-%E9%83%A8%E5%88%86A+B/"/>
-    <id>http://www.echodemo.cc/2018/04/29/PAT-B1016-部分A+B/</id>
-    <published>2018-04-29T07:55:21.000Z</published>
-    <updated>2018-04-29T08:38:07.580Z</updated>
-    
-    <content type="html"><![CDATA[<p>正整数A的“DA（为1位整数）部分”定义为由A中所有DA组成的新整数PA。例如：给定A = 3862767，DA = 6，则A的“6部分”PA是66，因为A中有2个6。</p><p>现给定A、DA、B、DB，请编写程序计算PA + PB。</p><p>输入格式：输入在一行中依次给出A、DA、B、DB，中间以空格分隔，其中0 &lt; A, B &lt; 10^10。</p><p>输出格式：在一行中输出PA + PB的值。</p><pre><code>输入样例1：3862767 6 13530293 3输出样例1：399输入样例2：3862767 1 13530293 8输出样例2：0</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int PAB(string X, int Y) {  int n = 0, sum = 0;  for (int i = 0;i &lt; X.size();i++) {    if (X[i] - &apos;0&apos; == Y) n++;  }  for (int i = 0;i &lt; n;i++) {    sum = sum * 10 + Y;  }  return sum;}int main() {  int DA, DB;  string A, B;  cin &gt;&gt; A &gt;&gt; DA &gt;&gt; B &gt;&gt; DB;  cout &lt;&lt; PAB(A, DA)+ PAB(B, DB);  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;正整数A的“DA（为1位整数）部分”定义为由A中所有DA组成的新整数PA。例如：给定A = 3862767，DA = 6，则A的“6部分”PA是66，因为A中有2个6。&lt;/p&gt;
-&lt;p&gt;现给定A、DA、B、DB，请编写程序计算PA + PB。&lt;/p&gt;
-&lt;p&gt;输入格式：输入在一
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1015 德才论</title>
-    <link href="http://www.echodemo.cc/2018/04/29/PAT-B1015-%E5%BE%B7%E6%89%8D%E8%AE%BA/"/>
-    <id>http://www.echodemo.cc/2018/04/29/PAT-B1015-德才论/</id>
-    <published>2018-04-29T02:18:19.000Z</published>
-    <updated>2018-04-29T07:54:55.520Z</updated>
-    
-    <content type="html"><![CDATA[<p>宋代史学家司马光在《资治通鉴》中有一段著名的“德才论”：“是故才德全尽谓之圣人，才德兼亡谓之愚人，德胜才谓之君子，才胜德谓之小人。凡取人之术，苟不得圣人，君子而与之，与其得小人，不若得愚人。”</p><p>现给出一批考生的德才分数，请根据司马光的理论给出录取排名。</p><p>输入格式：输入第1行给出3个正整数，分别为：N（&lt;=10^5），即考生总数；L（&gt;=60），为录取最低分数线，即德分和才分均不低于L的考生才有资格被考虑录取；H（&lt;100），为优先录取线——德分和才分均不低于此线的被定义为“才德全尽”，此类考生按德才总分从高到低排序；才分不到但德分到线的一类考生属于“德胜才”，也按总分排序，但排在第一类考生之后；德才分均低于H，但是德分不低于才分的考生属于“才德兼亡”但尚有“德胜才”者，按总分排序，但排在第二类考生之后；其他达到最低线L的考生也按总分排序，但排在第三类考生之后。</p><p>随后N行，每行给出一位考生的信息，包括：准考证号、德分、才分，其中准考证号为8位整数，德才分为区间[0, 100]内的整数。数字间以空格分隔。</p><p>输出格式：输出第1行首先给出达到最低分数线的考生人数M，随后M行，每行按照输入格式输出一位考生的信息，考生按输入中说明的规则从高到低排序。当某类考生中有多人总分相同时，按其德分降序排列；若德分也并列，则按准考证号的升序输出。</p><pre><code>输入样例：14 60 8010000001 64 9010000002 90 6010000011 85 8010000003 85 8010000004 80 8510000005 82 7710000006 83 7610000007 90 7810000008 75 7910000009 59 9010000010 88 4510000012 80 10010000013 90 9910000014 66 60输出样例：1210000013 90 9910000012 80 10010000003 85 8010000011 85 8010000004 80 8510000007 90 7810000006 83 7610000005 82 7710000002 90 6010000014 66 6010000008 75 7910000001 64 90</code></pre><p>题目代码：</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;宋代史学家司马光在《资治通鉴》中有一段著名的“德才论”：“是故才德全尽谓之圣人，才德兼亡谓之愚人，德胜才谓之君子，才胜德谓之小人。凡取人之术，苟不得圣人，君子而与之，与其得小人，不若得愚人。”&lt;/p&gt;
-&lt;p&gt;现给出一批考生的德才分数，请根据司马光的理论给出录取排名。&lt;/p&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1014 福尔摩斯的约会</title>
-    <link href="http://www.echodemo.cc/2018/04/29/PAT-B1014-%E7%A6%8F%E5%B0%94%E6%91%A9%E6%96%AF%E7%9A%84%E7%BA%A6%E4%BC%9A/"/>
-    <id>http://www.echodemo.cc/2018/04/29/PAT-B1014-福尔摩斯的约会/</id>
-    <published>2018-04-29T01:23:28.000Z</published>
-    <updated>2018-04-29T07:13:49.221Z</updated>
-    
-    <content type="html"><![CDATA[<p>大侦探福尔摩斯接到一张奇怪的字条：</p><pre><code>“我们约会吧！3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;hgsfdk d&amp;Hyscvnm”。</code></pre><p>大侦探很快就明白了，字条上奇怪的乱码实际上就是约会的时间“星期四 14:04”，因为前面两字符串中第1对相同的大写英文字母（大小写有区分）是第4个字母’D’，代表星期四；第2对相同的字符是’E’，那是第5个英文字母，代表一天里的第14个钟头（于是一天的0点到23点由数字0到9、以及大写字母A到N表示）；后面两字符串第1对相同的英文字母’s’出现在第4个位置（从0开始计数）上，代表第4分钟。现给定两对字符串，请帮助福尔摩斯解码得到约会的时间。</p><p>输入格式：输入在4行中分别给出4个非空、不包含空格、且长度不超过60的字符串。</p><p>输出格式：在一行中输出约会的时间，格式为“DAY HH:MM”，其中“DAY”是某星期的3字符缩写，<br>即MON表示星期一，TUE表示星期二，WED表示星期三，THU表示星期四，FRI表示星期五，<br>SAT表示星期六，SUN表示星期日。题目输入保证每个测试存在唯一解。</p><pre><code>输入样例：3485djDkxh4hhGE2984akDfkkkkggEdsbs&amp;hgsfdkd&amp;Hyscvnm输出样例：THU 14:04</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {  string day[7] = { &quot;MON&quot;,&quot;TUE&quot;,&quot;WED&quot;,&quot;THU&quot;,&quot;FRI&quot;,&quot;SAT&quot;,&quot;SUN&quot; };  string str1, str2, str3, str4;  cin &gt;&gt; str1 &gt;&gt; str2 &gt;&gt; str3 &gt;&gt; str4;  int i = 0, j = 0, k = 0, n = 0;  while (i &lt; str1.size() &amp;&amp; i &lt; str2.size()) {    if ((str1[i] == str2[i]) &amp;&amp; (k == 1) &amp;&amp; ((str1[i] &gt;= &apos;A&apos;&amp;&amp;str1[i] &lt;= &apos;N&apos;) || (str1[i] &gt;= &apos;0&apos;&amp;&amp;str1[i] &lt;= &apos;9&apos;)))      break;    if (str1[i] == str2[i] &amp;&amp; str1[i] &gt;= &apos;A&apos;&amp;&amp;str1[i] &lt;= &apos;G&apos;) {      k++;      if (k == 1)        n = i;    }    i++;  }  cout &lt;&lt; day[str1[n] - &apos;A&apos;] &lt;&lt; &quot; &quot;;  if (str1[i] &gt;= &apos;0&apos;&amp;&amp;str1[i] &lt;= &apos;9&apos;) {//如果是数字    cout &lt;&lt; &quot;0&quot; &lt;&lt; str1[i] - &apos;0&apos;&lt;&lt;&quot;:&quot;;  }  else {//如果是字母    cout &lt;&lt; (9 + str1[i] - &apos;A&apos; + 1) &lt;&lt; &quot;:&quot;;  }  while (j &lt; str3.size() &amp;&amp; j &lt; str4.size()) {    if ((str3[j] == str4[j]) &amp;&amp; ((str3[j] &gt;= &apos;A&apos;&amp;&amp;str3[j] &lt;= &apos;Z&apos;) || (str3[j] &gt;= &apos;a&apos;&amp;&amp;str3[j] &lt;= &apos;z&apos;)))      break;    j++;  }  if (j &gt;= 0 &amp;&amp; j &lt;= 9)    cout &lt;&lt; &quot;0&quot; &lt;&lt; j;  else    cout &lt;&lt; j;  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;大侦探福尔摩斯接到一张奇怪的字条：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;“我们约会吧！3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;amp;hgsfdk d&amp;amp;Hyscvnm”。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大侦探很快就明白了，字条上奇怪的乱
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
     
   </entry>
   

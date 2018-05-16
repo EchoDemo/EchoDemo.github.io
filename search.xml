@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LintCode 丑数 II]]></title>
+    <url>%2F2018%2F05%2F15%2FLintCode-%E4%B8%91%E6%95%B0II%2F</url>
+    <content type="text"><![CDATA[设计一个算法，找出只含素因子2，3，5 的第 n 小的数。 符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12… 我们可以认为1也是一个丑数 样例：如果n = 9， 返回 10 挑战：要求时间复杂度为O(nlogn)或者O(n) 方法一：如果采用遍历的方式，无法完全通过，会造成超时。 class Solution { public: /** * @param n: An integer * @return: the nth prime number as description. */ long long nthUglyNumber(int n) { // write your code here int count = 0; int i = 0; while(count &lt; n) { m++; int number = i; while(number % 2 == 0) number = number / 2; while(number % 3 == 0) number = number / 3; while(number % 5 == 0) number = number / 5; if(number == 1) { count++; } } return i; } }; 方法二：是从1开始构造丑数，然后依次计数。 class Solution { public: /* * @param n an integer * @return the nth prime number as description. */ int nthUglyNumber(int n) { // write your code here int count = 1;//统计丑数 vector&lt;int&gt; ugly(n,0);//保存丑数 ugly[0] = 1;//第一个丑数 vector&lt;int&gt; idx(3,0); while(count &lt; n) { int a = 2 * ugly[idx[0]]; int b = 3 * ugly[idx[1]]; int c = 5 * ugly[idx[2]]; int temp = min(min(a, b), c); if(temp == a) ++idx[0]; if(temp == b) ++idx[1]; if(temp == c) ++idx[2]; ugly[count] = temp; ++count; } return ugly[n-1]; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[不孝有三，无后为大？]]></title>
+    <url>%2F2018%2F05%2F14%2F%E4%B8%8D%E5%AD%9D%E6%9C%89%E4%B8%89%EF%BC%8C%E6%97%A0%E5%90%8E%E4%B8%BA%E5%A4%A7%EF%BC%9F%2F</url>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“不孝有三，无后为大”这八字言语基本上作为炎黄子孙的一员都曾有所耳闻。此语出自《孟子离娄上》：“不孝有三，无后为大。舜不告而娶，为无后也。君子以为犹告也。” &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传统的观点认为：无后就是指没有后代，更准确地来说是没有子嗣的意思。然而孟子在《离娄章句下》中说：“世俗所谓不孝者五：惰其四支，不顾父母之养，一不孝也；博弈好饮酒，不顾父母之养，二不孝也；好货财，私妻子，不顾父母之养，三不孝也；从耳目之欲，以为父母戮，四不孝也；好勇斗狠，以危父母，五不孝也。”如果说“无后”是指没有后代的话，那么这里的五不孝中肯定有一条是“无后”，但是五不孝中没有一条提及“没有后代”。另外，再来看“不孝有三，无后为大”的后文，说的是：舜不告而娶，为无后也。舜没有告知父母就擅自娶妻，为无后也。这里的“为”字可以表承接关系“就是”的意思，也可以表目的“为了”的意思。然而不管哪一种说法，都与传统的意思不符。第一，取了妻子怎么能说就是没有后代呢，恰恰相反，娶妻就是为了能够繁衍后代；第二，取了妻子又怎么能说是为了没有后代呢。这些都明显和上文“舜不告而娶”的意思不衔接，跨度未免太大些了。最后孟子还说到：君子认为应该把娶妻这件事情告诉父母，这和没有子嗣又有何关系呢？话说像亚圣这种高智慧生物，怎么会犯如此低级的逻辑错误呢？ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么如果采用第二种观点，“无后”指没有尽到后辈的责任也就都能够说的通了。首先，孟子的五不孝讲的都是后辈未尽之责，同时在古文当中使用具体的数字时常常是虚指而并非实指，用三来代五也完全说的过去。例如：飞流直下三千尺。三人行，必有我师焉。军书十二卷，卷卷有爷名。等都是虚指。其次，下文的舜不告而娶，就是没有尽到后辈的责任和君子认为应该把娶妻这件事情告诉父母的意思也都衔接得恰到好处。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[《生活教会你》摘句]]></title>
+    <url>%2F2018%2F05%2F13%2F%E3%80%8A%E7%94%9F%E6%B4%BB%E6%95%99%E4%BC%9A%E4%BD%A0%E3%80%8B%E6%91%98%E5%8F%A5%2F</url>
+    <content type="text"><![CDATA[在读完读完本书的第一章之后，我想：这真是一本好书，如此多的发人深省的话语，着实让人钦佩。这不是心灵鸡汤，而是自己内心也十分认可的观点。但随着章节的推移，内容虽然不像前面那么让我着迷，但丝毫没有影响我在豆瓣为它打上四星的评分。 1、对儿童教育而言，最重要的是让孩子拥有好奇心、兴趣、想象力以及对生活的探索精神。 2、我们在家和学校接受教育，最重要的是，我们从生活本身接受教育。学习应当贯穿我们的一生。生命总是在不断变动，要么前进，要么后退。只有当一个人在不断成长时，生活才会有趣；换句话说，只有当我们仍对生活怀有兴趣时，才能取得成长。 3、杜威的这种进步主义教育并不试图将孩子引向他不愿去的地方。孩子不会被逼着遵守什么准则，除非他自己乐意去做或认为值得去做。 4、从长远来看，有价值的并非是一个人读了什么书，而是独立思考并吸收了什么东西，是通过阅读激发的那些想法和感觉。正是你自己的想法，独立思考得出的那些想法，使你成为一个有意思的人。 5、通过别人来激发自己的兴趣—在我看来，这是效率最高、最有收获的教育方法之一。你要做的只是去寻找这个兴趣点。这会让每段经历都成为一种挑战，并使人永葆好奇—好奇心是一个人最宝贵的品质之一。 6、每个孩子的“为什么”都应得到尊重，得到用心的回答。如果你不知道问题的答案（实际情况通常如此），那就带着孩子一起寻找答案。 7、当我逐渐真正观察起周围的事物，试着去理解它们时，生活中的每件事情都变得更加有趣，也更有价值。这就像以三维视角去看一张二维的照片，看待问题有了更多的深度。 8、好在，每当我们与恐惧作战时，哪怕当时认为它不可战胜，哪怕在过程中受尽折磨，只要经受住痛苦，克服了恐惧，你会发现获得了更大的自由。一个人只要经受住一次这种考验，就可以经受住任何事情。每一次与恐惧的正面对决都会让我们收获力量、勇气与自信。 9、放下自我。如果你能放下自我，不去想是否给别人留下好印象，不去管人们怎么看你，反过来替别人着想，你就不会再感到胆怯和恐惧。恐惧在很大程度上是由于缺乏了解。我们不知道在新环境会发生什么，也不知道自己能否应对。越早知道会发生什么，就能越早从恐惧中解脱出来。 10、“我做不到。”这种话说来容易。实际上，你会发现其实自己做得到。尝试去做某件事情不仅能让自己摆脱恐惧的束缚，还能锻炼承受能力，并从成就感中获得自由。 11、我自己一般有三种办法：第一，保持内心平静，以使工作时不受周围环境影响；第二，专注在手头的事情上；第三，建立起生活规律，分配好时间，提前计划每件事情，同时又留有余地以备不患。除此之外，还有一点也很重要：那就是保持身体健康，保证有充沛的精力可用。 12、一个人只有愿意接受自身存在不足这一残酷事实，愿意做出调整去适应它，才算得上真正的成熟。成熟的一个重要部分，就是不仅接受自己的缺点，也接纳你所爱之人的缺点，并尽可能地帮助他们避免出错。 13、“对自己和身边的人诚实以待；在生活和工作中竭尽全力；拥有爱别人的能力。”实际上，获得快乐还有一个条件，当时我不知为何落了这条：那就是感到自己是一个有用的人。 14、对大部分人来说，渴望被他人需要的愿望比自己意识到的还要强烈。人们常说一个人需要表现自我，但是一般来说，表现自我带来的满足感不如满足他人带来的满足感多。 15、我们总以为每个人都想得到自由，但事实并非如此。对很多人来说，放弃自由，让别人指导自己，让别人给自己做决定，比为自己和自己的决定负责要快乐得多。他们不想自己动脑，也不想自己做主。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LintCode 统计数字]]></title>
+    <url>%2F2018%2F05%2F13%2FLintCode-%E7%BB%9F%E8%AE%A1%E6%95%B0%E5%AD%97%2F</url>
+    <content type="text"><![CDATA[计算数字k在0到n中的出现的次数，k可能是0~9的一个值 样例：例如n=12，k=1，在 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]，我们发现1出现了5次 (1, 10, 11, 12) 分析：基本就是遍历了，不过要注意的就是0要特别处理。还有在遍历之后的数值处理需要交给临时变量，而不是用遍历数本身。 class Solution { public: /* * @param : An integer * @param : An integer * @return: An integer denote the count of digit k in 1..n */ int digitCounts(int k, int n) { // write your code here int count=0; if(k==0) count++; for(int i=k;i&lt;=n;i++){ int temp=i; while(temp){ if(temp%10==k) count++; temp/=10; } } return count; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LintCode 尾部的零]]></title>
     <url>%2F2018%2F05%2F12%2FLintCode-%E5%B0%BE%E9%83%A8%E7%9A%84%E9%9B%B6%2F</url>
     <content type="text"><![CDATA[设计一个算法，计算出n阶乘中尾部零的个数 样例：11! = 39916800，因此应该返回 2 挑战：O(logN)的时间复杂度 分析：此题如果采用先求出数的阶乘，再来计算求出的结果的0的个数的话，一方面时间的复杂度太高，另一方面平时的数据类型难以存储如此大的数，需要使用大整数来进行存储。因此需要另辟蹊径，从数学的角度来看待此问题。0的个数即代表的是10的个数，而10=2*5。很明显的是：在阶乘当中5所存在的个数必定是多于2的个数的。因此，我们可以说找到了多少个5就找到了多少个10,。使用100作为例子，从1~100之间会有多少个能够被5整除的数呢？通过数学归纳法可以发现是(100/5=20)个，此时是不是就结束了呢？再来看一下1~100之中的25,50,75,100这4个数，当他们同时都除以5以后发现依次是5,10,15,20，也就是说在进行一次除以5的操作之后他们之间其实还存在着5，而此次需要求取5的个数的区间刚好是上次除以5操作后的数。由此可见，这其实是应该存在于一个循环当中的，跳出循环的条件是n非零即可。 题目代码： class Solution { public: /* * @param n: A long integer * @return: An integer, denote the number of trailing zeros in n! */ long long trailingZeros(long long n) { // write your code here, try to do it without arithmetic operators. long long sum=0; while(n){ sum+=n/5; n/=5; } return sum; } };]]></content>
