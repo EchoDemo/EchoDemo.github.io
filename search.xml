@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[博客]]></title>
+    <url>%2F2018%2F05%2F18%2F%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那些无形的似水流年就在与键盘的敲击中悄悄地溜走，犹如匆匆而去的大学时光，此刻也即将消耗殆尽。怀着对诗词、书卷和生活的热爱，还有一入程序员之路深似海的决心（但写字不能成为路人）。日志当然也是要继续写下去的！记录时间的流逝，也记录自己来时的路。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[买包子]]></title>
+    <url>%2F2018%2F05%2F18%2F%E4%B9%B0%E5%8C%85%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[早上去九食堂买包子。 我：“一个梅菜和一个扣肉。” 对方：“梅菜和扣肉是同一种，同学。” 等到付款的时候，点开支付宝。 对方：“你这是收钱，不是付款，同学。” 心里想：“是不是起早了，人也变傻了？”]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LintCode 合并排序数组 II]]></title>
+    <url>%2F2018%2F05%2F17%2FLintCode-%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84II%2F</url>
+    <content type="text"><![CDATA[合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LintCode 第k大元素]]></title>
+    <url>%2F2018%2F05%2F17%2FLintCode-%E7%AC%ACk%E5%A4%A7%E5%85%83%E7%B4%A0%2F</url>
+    <content type="text"><![CDATA[在数组中找到第k大的元素，你可以交换数组中的元素的位置。 样例：给出数组 [9,3,2,4,8]，第三大的元素是 4 给出数组 [1,2,3,4,5]，第一大的元素是 5，第二大的元素是 4，第三大的元素是 3，以此类推 挑战：要求时间复杂度为O(n)，空间复杂度为O(1) 题目代码： class Solution { public: /* * @param n: An integer * @param nums: An array * @return: the Kth largest element */ int kthLargestElement(int n, vector&lt;int&gt; &amp;nums) { // write your code here int i=nums.size(); sort(nums.begin(),nums.end()); return nums[i-n]; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LintCode 丑数 II]]></title>
     <url>%2F2018%2F05%2F15%2FLintCode-%E4%B8%91%E6%95%B0II%2F</url>
     <content type="text"><![CDATA[设计一个算法，找出只含素因子2，3，5 的第 n 小的数。 符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12… 我们可以认为1也是一个丑数 样例：如果n = 9， 返回 10 挑战：要求时间复杂度为O(nlogn)或者O(n) 方法一：如果采用遍历的方式，无法完全通过，会造成超时。 class Solution { public: /** * @param n: An integer * @return: the nth prime number as description. */ long long nthUglyNumber(int n) { // write your code here int count = 0; int i = 0; while(count &lt; n) { m++; int number = i; while(number % 2 == 0) number = number / 2; while(number % 3 == 0) number = number / 3; while(number % 5 == 0) number = number / 5; if(number == 1) { count++; } } return i; } }; 方法二：是从1开始构造丑数，然后依次计数。 class Solution { public: /* * @param n an integer * @return the nth prime number as description. */ int nthUglyNumber(int n) { // write your code here int count = 1;//统计丑数 vector&lt;int&gt; ugly(n,0);//保存丑数 ugly[0] = 1;//第一个丑数 vector&lt;int&gt; idx(3,0); while(count &lt; n) { int a = 2 * ugly[idx[0]]; int b = 3 * ugly[idx[1]]; int c = 5 * ugly[idx[2]]; int temp = min(min(a, b), c); if(temp == a) ++idx[0]; if(temp == b) ++idx[1]; if(temp == c) ++idx[2]; ugly[count] = temp; ++count; } return ugly[n-1]; } };]]></content>
