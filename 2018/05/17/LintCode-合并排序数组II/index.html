@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？">
+<meta name="description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？ 题目代码： class Solution { public:     /**      * @param A: sorted integer array A      * @param">
 <meta name="keywords" content="CPP,LintCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LintCode 合并排序数组 II">
 <meta property="og:url" content="http://www.echodemo.cc/2018/05/17/LintCode-合并排序数组II/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？">
+<meta property="og:description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？ 题目代码： class Solution { public:     /**      * @param A: sorted integer array A      * @param">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T14:55:52.019Z">
+<meta property="og:updated_time" content="2018-05-18T05:17:36.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LintCode 合并排序数组 II">
-<meta name="twitter:description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？">
+<meta name="twitter:description" content="合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？ 题目代码： class Solution { public:     /**      * @param A: sorted integer array A      * @param">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  74
+                  170
                 </span>
               
 
@@ -476,7 +476,34 @@
         <p>合并两个排序的整数数组A和B变成一个新的数组。</p>
 <pre><code>样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6]
 </code></pre><p>挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？</p>
-
+<p>题目代码：</p>
+<pre><code>class Solution {
+public:
+    /**
+     * @param A: sorted integer array A
+     * @param B: sorted integer array B
+     * @return: A new sorted integer array
+     */
+    vector&lt;int&gt; mergeSortedArray(vector&lt;int&gt; &amp;A, vector&lt;int&gt; &amp;B) {
+        // write your code here
+        int a=A.size();
+        int b=B.size();
+        int c=a+b;
+        vector&lt;int&gt; C(c);
+        int i=0,j=0,k=0;
+        while(i&lt;a&amp;&amp;j&lt;b){
+            if(A[i]&lt;=B[j]){
+                C[k++]=A[i++];
+            }else{
+                C[k++]=B[j++];
+            }
+        }
+        while(i&lt;a) C[k++]=A[i++];
+        while(j&lt;b) C[k++]=B[j++];
+        return C;
+    }
+};
+</code></pre>
       
     </div>
 
@@ -616,7 +643,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">108</span>
+                <span class="site-state-item-count">109</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -753,7 +780,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共72.7k字</span>
+  <span class="post-count">博客全站共72.9k字</span>
 </div>
 
 

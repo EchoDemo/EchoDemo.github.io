@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-17T23:01:25.820Z</updated>
+  <updated>2018-05-18T05:50:05.772Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LintCode 旋转字符串</title>
+    <link href="http://www.echodemo.cc/2018/05/18/LintCode-%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    <id>http://www.echodemo.cc/2018/05/18/LintCode-旋转字符串/</id>
+    <published>2018-05-18T05:18:04.000Z</published>
+    <updated>2018-05-18T05:50:05.772Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个字符串和一个偏移量，根据偏移量旋转字符串(从左向右旋转)</p><pre><code>样例：对于字符串 &quot;abcdefg&quot;.offset=0 =&gt; &quot;abcdefg&quot;offset=1 =&gt; &quot;gabcdef&quot;offset=2 =&gt; &quot;fgabcde&quot;offset=3 =&gt; &quot;efgabcd&quot;</code></pre><p>挑战：在数组上原地旋转，使用O(1)的额外空间</p><p>分析：注意offset为0和str长度为0的情况，还有offset大于str的长度的情况。</p><p>题目代码：</p><pre><code>class Solution {public:    /**     * @param str: An array of char     * @param offset: An integer     * @return: nothing     */    void rotateString(string &amp;str, int offset) {        // write your code here        if(str.size()==0) return;        if(offset==0) return;        int offs=offset%str.size();        reverse(str.begin(),str.end());        reverse(str.begin(),str.begin()+offs);        reverse(str.begin()+offs,str.end());    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个字符串和一个偏移量，根据偏移量旋转字符串(从左向右旋转)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;样例：对于字符串 &amp;quot;abcdefg&amp;quot;.
+
+offset=0 =&amp;gt; &amp;quot;abcdefg&amp;quot;
+offset=1 =&amp;gt; &amp;quot;ga
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
+    
+  </entry>
   
   <entry>
     <title>博客</title>
@@ -76,9 +107,9 @@
     <link href="http://www.echodemo.cc/2018/05/17/LintCode-%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84II/"/>
     <id>http://www.echodemo.cc/2018/05/17/LintCode-合并排序数组II/</id>
     <published>2018-05-17T14:53:47.000Z</published>
-    <updated>2018-05-17T14:55:52.019Z</updated>
+    <updated>2018-05-18T05:17:36.062Z</updated>
     
-    <content type="html"><![CDATA[<p>合并两个排序的整数数组A和B变成一个新的数组。</p><pre><code>样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6]</code></pre><p>挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？</p>]]></content>
+    <content type="html"><![CDATA[<p>合并两个排序的整数数组A和B变成一个新的数组。</p><pre><code>样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6]</code></pre><p>挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？</p><p>题目代码：</p><pre><code>class Solution {public:    /**     * @param A: sorted integer array A     * @param B: sorted integer array B     * @return: A new sorted integer array     */    vector&lt;int&gt; mergeSortedArray(vector&lt;int&gt; &amp;A, vector&lt;int&gt; &amp;B) {        // write your code here        int a=A.size();        int b=B.size();        int c=a+b;        vector&lt;int&gt; C(c);        int i=0,j=0,k=0;        while(i&lt;a&amp;&amp;j&lt;b){            if(A[i]&lt;=B[j]){                C[k++]=A[i++];            }else{                C[k++]=B[j++];            }        }        while(i&lt;a) C[k++]=A[i++];        while(j&lt;b) C[k++]=B[j++];        return C;    }};</code></pre>]]></content>
     
     <summary type="html">
     
@@ -532,35 +563,6 @@
       
         &lt;p&gt;给定任一个各位数字不完全相同的4位正整数，如果我们先把4个数字按非递增排序，再按非递减排序，然后用第1个数字减第2个数字，将得到一个新的数字。一直重复这样做，我们很快会停在有“数字黑洞”之称的6174，这个神奇的数字也叫Kaprekar常数。&lt;/p&gt;
 &lt;p&gt;例如，我们从67
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1018 锤子剪刀布</title>
-    <link href="http://www.echodemo.cc/2018/04/30/PAT-B1018-%E9%94%A4%E5%AD%90%E5%89%AA%E5%88%80%E5%B8%83/"/>
-    <id>http://www.echodemo.cc/2018/04/30/PAT-B1018-锤子剪刀布/</id>
-    <published>2018-04-30T06:29:35.000Z</published>
-    <updated>2018-04-30T10:15:45.169Z</updated>
-    
-    <content type="html"><![CDATA[<p>大家应该都会玩“锤子剪刀布”的游戏：两人同时给出手势，胜负规则如图所示：</p><p><img src="/images/2018/4/3.jpg" alt="&quot;锤子剪刀布&quot;"></p><p>现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出双方分别出什么手势的胜算最大。</p><p>输入格式：输入第1行给出正整数N（&lt;=105），即双方交锋的次数。随后N行，每行给出一次交锋的信息，即甲、乙双方同时给出的的手势。C代表“锤子”、J代表“剪刀”、B代表“布”，第1个字母代表甲方，第2个代表乙方，中间有1个空格。</p><p>输出格式：输出第1、2行分别给出甲、乙的胜、平、负次数，数字间以1个空格分隔。第3行给出两个字母，分别代表甲、乙获胜次数最多的手势，中间有1个空格。如果解不唯一，则输出按字母序最小的解。</p><pre><code>输入样例：10C JJ BC BB BB CC CC BJ BB CJ J输出样例：5 3 22 3 5B B</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;using namespace std;int main() {  int N, x = 0, y = 0, z = 0, jia[3] = { 0 }, yi[3] = { 0 };  char a, b, c[4] = { &apos;B&apos;,&apos;C&apos;,&apos;J&apos; };  cin &gt;&gt; N;  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; a &gt;&gt; b;    if (a == &apos;B&apos;) {      if (b == &apos;B&apos;) y++;      else if (b == &apos;C&apos;) {        x++;        jia[0]++;      }      else {        z++;        yi[2]++;      }    }    else if (a == &apos;C&apos;) {      if (b == &apos;B&apos;) {        z++;        yi[0]++;      }      else if (b == &apos;C&apos;) y++;      else {        x++;        jia[1]++;      }    }    else {      if (b == &apos;B&apos;) {        x++;        jia[2]++;      }      else if (b == &apos;C&apos;) {        z++;        yi[1]++;      }      else y++;    }  }  cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; z &lt;&lt; endl;  cout &lt;&lt; z &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; x &lt;&lt; endl;  int max1 = jia[0], max2 = yi[0], m = 0, n = 0;  for (int i = 1;i &lt; 3;i++) {    if (jia[i] &gt; max1) {      max1 = jia[i];      m = i;    }    if (yi[i] &gt; max2) {      max2 = yi[i];      n = i;    }  }  cout &lt;&lt; c[m] &lt;&lt; &quot; &quot; &lt;&lt; c[n];  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;大家应该都会玩“锤子剪刀布”的游戏：两人同时给出手势，胜负规则如图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2018/4/3.jpg&quot; alt=&quot;&amp;quot;锤子剪刀布&amp;quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出
       
     
     </summary>

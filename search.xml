@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LintCode 旋转字符串]]></title>
+    <url>%2F2018%2F05%2F18%2FLintCode-%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[给定一个字符串和一个偏移量，根据偏移量旋转字符串(从左向右旋转) 样例：对于字符串 &quot;abcdefg&quot;. offset=0 =&gt; &quot;abcdefg&quot; offset=1 =&gt; &quot;gabcdef&quot; offset=2 =&gt; &quot;fgabcde&quot; offset=3 =&gt; &quot;efgabcd&quot; 挑战：在数组上原地旋转，使用O(1)的额外空间 分析：注意offset为0和str长度为0的情况，还有offset大于str的长度的情况。 题目代码： class Solution { public: /** * @param str: An array of char * @param offset: An integer * @return: nothing */ void rotateString(string &amp;str, int offset) { // write your code here if(str.size()==0) return; if(offset==0) return; int offs=offset%str.size(); reverse(str.begin(),str.end()); reverse(str.begin(),str.begin()+offs); reverse(str.begin()+offs,str.end()); } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LintCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[博客]]></title>
     <url>%2F2018%2F05%2F18%2F%E5%8D%9A%E5%AE%A2%2F</url>
     <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那些无形的似水流年就在与键盘的敲击中悄悄地溜走，犹如匆匆而去的大学时光，此刻也即将消耗殆尽。怀着对诗词、书卷和生活的热爱，还有一入程序员之路深似海的决心（但写字不能成为路人）。日志当然也是要继续写下去的！记录时间的流逝，也记录自己来时的路。]]></content>
@@ -25,7 +37,7 @@
   <entry>
     <title><![CDATA[LintCode 合并排序数组 II]]></title>
     <url>%2F2018%2F05%2F17%2FLintCode-%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84II%2F</url>
-    <content type="text"><![CDATA[合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？]]></content>
+    <content type="text"><![CDATA[合并两个排序的整数数组A和B变成一个新的数组。 样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6] 挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？ 题目代码： class Solution { public: /** * @param A: sorted integer array A * @param B: sorted integer array B * @return: A new sorted integer array */ vector&lt;int&gt; mergeSortedArray(vector&lt;int&gt; &amp;A, vector&lt;int&gt; &amp;B) { // write your code here int a=A.size(); int b=B.size(); int c=a+b; vector&lt;int&gt; C(c); int i=0,j=0,k=0; while(i&lt;a&amp;&amp;j&lt;b){ if(A[i]&lt;=B[j]){ C[k++]=A[i++]; }else{ C[k++]=B[j++]; } } while(i&lt;a) C[k++]=A[i++]; while(j&lt;b) C[k++]=B[j++]; return C; } };]]></content>
       <categories>
         <category>技术</category>
       </categories>
