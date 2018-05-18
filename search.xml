@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode 从排序数组中删除重复项]]></title>
+    <url>%2F2018%2F05%2F18%2FLeetCode-%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9%2F</url>
+    <content type="text"><![CDATA[给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); } 题目代码： class Solution { public: int removeDuplicates(vector&lt;int&gt;&amp; nums) { if(nums.size()==0) return 0; else if(nums.size()==1) return 1; int i=1,k=1; int len=nums.size(); while(k&lt;len){ if(nums[k-1]!=nums[k]){ nums[i++]=nums[k]; } k++; } nums.erase(nums.begin()+i,nums.end()); return i; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LintCode 旋转字符串]]></title>
     <url>%2F2018%2F05%2F18%2FLintCode-%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[给定一个字符串和一个偏移量，根据偏移量旋转字符串(从左向右旋转) 样例：对于字符串 &quot;abcdefg&quot;. offset=0 =&gt; &quot;abcdefg&quot; offset=1 =&gt; &quot;gabcdef&quot; offset=2 =&gt; &quot;fgabcde&quot; offset=3 =&gt; &quot;efgabcd&quot; 挑战：在数组上原地旋转，使用O(1)的额外空间 分析：注意offset为0和str长度为0的情况，还有offset大于str的长度的情况。 题目代码： class Solution { public: /** * @param str: An array of char * @param offset: An integer * @return: nothing */ void rotateString(string &amp;str, int offset) { // write your code here if(str.size()==0) return; if(offset==0) return; int offs=offset%str.size(); reverse(str.begin(),str.end()); reverse(str.begin(),str.begin()+offs); reverse(str.begin()+offs,str.end()); } };]]></content>
