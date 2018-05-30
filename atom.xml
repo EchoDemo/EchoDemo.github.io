@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-18T07:28:46.071Z</updated>
+  <updated>2018-05-30T11:08:59.636Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PS基础知识(杂)</title>
+    <link href="http://www.echodemo.cc/2018/05/30/PS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(%E6%9D%82)/"/>
+    <id>http://www.echodemo.cc/2018/05/30/PS基础知识(杂)/</id>
+    <published>2018-05-30T10:55:38.000Z</published>
+    <updated>2018-05-30T11:08:59.636Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、分辨率和图片的用途是相关的。常用分辨率设置：洗印照片：300或以上；杂志、名片等印刷物：300；海报高清写真：96~200；网络图片、网页界面：72；大型喷绘：25~50。总像素值=像素宽度X像素高度=文档宽度X文档高度X分辨率的平方</p><p>2、常用快捷键：</p><pre><code>(1)打开首选项：Ctrl+K(2)缩放图片：Alt+鼠标滚轮(3)新建时复位：按住Alt不松(4)打开文件：双击工作区(5)新建图层：Alt+创建图层(6)创建图层副本：Alt+拖拽至指定位置或者Ctrl+J(7)抓手工具：按住空格键不松(8)放大工具：空格+Ctrl(9)缩小工具：空格+Alt(10)快速填充前景色:Alt+delete(11)快速填充背景色:Ctrl+delete</code></pre><p>3、移动图层位置不变：在拖拽至另一个文件时，先按住Shift再松鼠标(前提是两个图像大小一样)。如果两个图像大小不一样的话，按上面操作会跑到正中央；如果图像中有选区，则跑到选区的正中央。在移动工具状态下，按住Ctrl键就可以自动选择图层。在非移动工具状态下，按住Ctrl键可以切换到移动工具状态。Shift键加方向键可以微调。</p><p>4、选区时按住Shift键，选框变成正方形。按住Alt键从中心点建立选区。Ctrl+D取消选区，Ctrl+Shift+D恢复之前的选区</p><p>5、套索工具按住Alt键可以在套索工具和多边形套索工具之间切换。磁性套索工具按住Alt键可以在磁性套索工具和多边形套索工具之间切换。delete键可以用于取消套索的上一个锚点。</p><p>6、按住Alt键，点击鼠标右键左右移动，改变画笔大小。上下移动改变画笔硬度。</p><p>7、虽然修复画笔工具和仿制图章工具共享仿制源，但是修复画笔工具不同于仿制图章工具。修复画笔工具更智能，它能够尽可能地和周围的环境进行融合。</p><p>8、通道的概念类似于图层的概念，只不过通道是从另一个角度(图像的色彩或透明度)来诠释图像的构成。 Alpha通道就是记录透明度信息的特殊层，在Alpha通道当中，黑色代表着透明，白色代表拥有颜色信息，不透明。说白了，通道当中的颜色代表的是当前通道的颜色强度(黑白灰)，而不是颜色本身。Alpha通道是一个选区加工厂。不管是通道还是图层，都可以通过按住Ctrl键，点击相应的通道或者是图层来建立相应的选区。</p><p>9、图层蒙版可以隐藏和显示图层上的部分区域，按住Alt键点击添加图层蒙版，隐藏的是选区的部分。按住Alt键点击建立好的图层蒙版，图层蒙版此时处于编辑状态之下，对应的是一个临时的Alpha通道。快速蒙版方便查看。</p><p>10、锁定透明像素：禁止对透明区域进行操作。快速建组：Ctrl+G。一个组合一个图层同时选中，Ctrl+G也可以再建组。取消分组：Ctrl+Shift+G。Ctrl+E向下合并图层，Ctrl+Alt+E向下合并并且保留向下合并的图层。创建图层剪贴蒙版，图层只能在下方图层内显示。</p><p>11、色相：颜色的品相。通过改变色相环上色彩的角度(一共360度)可以进行变色。从红色到蓝色需要逆时针旋转120度，就把色相的值变换为-120。从红色到绿色需要顺时针旋转120，就把色相的值变换为120。</p><p>饱和度：是指色彩的鲜艳程度，其实就是加入中性灰的程度。当饱和度降到最低的时候，图像显示的是灰色，灰色是没有色相的。灰色的红绿蓝RGB值是相等的，只要RGB值是相等的，那么只可能是黑、白、灰三种颜色。</p><p>明度：就是发光量，加入额外的白光。</p><p>RGB模式：光的三基色，它是发光色。</p><p>CMYK模式：印刷色彩模式。青色(Cyan)，品红色(Magenta)，黄色(Yellow)，黑色(Black)。代表印刷用的四种油墨，它是反光色。CMYK通道里面，黑色代表100%浓度的油墨。</p><p>12、色阶：是表示图像亮度强弱的指数标准，表现了一副图的明暗关系，它和颜色无关。通过色阶编辑框可以看出图片整体的明暗分布。移动X轴上的最左边的黑色滑块，如果从0移动到70，黑场的数值变大，画面变暗(仅是黑场部分发生了变化，而灰场和白场没有)，它是把亮度级别为70以下的像素，都合并为最低的0。调节黑场，就是合并暗部的颜色，对亮部暂无影响。如果是移动X轴最右边的白色滑块，从255移动到180的话，和黑色滑块的原理是一样的，再180到255这个亮度级别的像素，都合并成为255级别。</p><p>13、曲线命令：Ctrl+M。曲线直方图的X轴上的黑色滑块和白色滑块的功能和色阶上的对应滑块功能相似。所不同的是，它们是对整个图片的明暗度进行整体的变暗和变亮。而不仅仅是对移动滑块区域的像素进行调整。但对于复杂的图片来说，色阶、曲线等最好都去使用调整图层，这样可以针对图片的某个图层进行调整。</p><p>14、色彩平衡不同于色相的改变。保持明度，可以保证调整后的颜色发光总量不变。</p><p>15、使用钢笔工具时按住Shift键，可以根据角度来创建水平，垂直和45度的线段。在相应的路径点击回车，图像上的路径会被隐藏。黑色的路径选择工具是选择整体的，而白色的路径选择工具是选择单个的锚点的，按住Ctrl键可以在两者之间进行转换。按住Alt键，可以调节单个的控杆。Ctrl+enter将路径变成选区。文字可以依附路径的形状输入。</p><p>16、调节行距，字距。Alt+上下左右箭头就可以。在视图的显示当中有网格。视图当中的标尺可以在标尺的区域通过单击右键来修改单位，也可以从左上角的方块拉出十字交叉线来改变原点的位置，双击方块可以恢复到原状态。视图中可以新建参考线，也可以从标尺当中拖拽出参考线，按住Alt键来单击左键可以将水平和垂直的参考线进行转换，将参考线拉回标尺区域即可删除参考线。视图中的显示额外内容(Ctrl+H)，可以将隐藏参考线，网格以及选区。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、分辨率和图片的用途是相关的。常用分辨率设置：洗印照片：300或以上；杂志、名片等印刷物：300；海报高清写真：96~200；网络图片、网页界面：72；大型喷绘：25~50。总像素值=像素宽度X像素高度=文档宽度X文档高度X分辨率的平方&lt;/p&gt;
+&lt;p&gt;2、常用快捷键：&lt;/
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 从排序数组中删除重复项</title>
@@ -79,36 +105,11 @@ offset=1 =&amp;gt; &amp;quot;ga
   </entry>
   
   <entry>
-    <title>博客</title>
-    <link href="http://www.echodemo.cc/2018/05/18/%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://www.echodemo.cc/2018/05/18/博客/</id>
-    <published>2018-05-17T22:25:28.000Z</published>
-    <updated>2018-05-17T23:01:25.820Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那些无形的似水流年就在与键盘的敲击中悄悄地溜走，犹如匆匆而去的大学时光，此刻也即将消耗殆尽。怀着对诗词、书卷和生活的热爱，还有一入程序员之路深似海的决心（但写字不能成为路人）。日志当然也是要继续写下去的！记录时间的流逝，也记录自己来时的路。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>买包子</title>
     <link href="http://www.echodemo.cc/2018/05/18/%E4%B9%B0%E5%8C%85%E5%AD%90/"/>
     <id>http://www.echodemo.cc/2018/05/18/买包子/</id>
-    <published>2018-05-17T22:23:19.000Z</published>
-    <updated>2018-05-17T23:01:51.083Z</updated>
+    <published>2018-05-17T22:30:19.000Z</published>
+    <updated>2018-05-30T11:11:53.344Z</updated>
     
     <content type="html"><![CDATA[<p>早上去九食堂买包子。</p><pre><code>我：“一个梅菜和一个扣肉。”对方：“梅菜和扣肉是同一种，同学。”</code></pre><p>等到付款的时候，点开支付宝。</p><pre><code>对方：“你这是收钱，不是付款，同学。”心里想：“是不是起早了，人也变傻了？”</code></pre>]]></content>
     
@@ -122,6 +123,31 @@ offset=1 =&amp;gt; &amp;quot;ga
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;等到付款的时候，点开支付宝。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;对方：“你这是收钱，不是付款，同学。”
 心里想：“是不是起早了
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客</title>
+    <link href="http://www.echodemo.cc/2018/05/18/%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://www.echodemo.cc/2018/05/18/博客/</id>
+    <published>2018-05-17T22:25:28.000Z</published>
+    <updated>2018-05-17T23:01:25.820Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那些无形的似水流年就在与键盘的敲击中悄悄地溜走，犹如匆匆而去的大学时光，此刻也即将消耗殆尽。怀着对诗词、书卷和生活的热爱，还有一入程序员之路深似海的决心（但写字不能成为路人）。日志当然也是要继续写下去的！记录时间的流逝，也记录自己来时的路。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那
       
     
     </summary>
@@ -538,34 +564,6 @@ offset=1 =&amp;gt; &amp;quot;ga
       
       
         &lt;p&gt;给定一个k位整数N = dk-1&lt;em&gt;10^k-1 + … + d1&lt;/em&gt;10^1 + d0 (0&amp;lt;=di&amp;lt;=9, i=0,…,k-1, dk-1&amp;gt;0)，请编写程序统计每种不同的个位数字出现的次数。例如：给定N = 100311，则有2个0，3个1，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1020 月饼</title>
-    <link href="http://www.echodemo.cc/2018/04/30/PAT-B1020-%E6%9C%88%E9%A5%BC/"/>
-    <id>http://www.echodemo.cc/2018/04/30/PAT-B1020-月饼/</id>
-    <published>2018-04-30T12:31:21.000Z</published>
-    <updated>2018-04-30T14:18:47.523Z</updated>
-    
-    <content type="html"><![CDATA[<p>月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。</p><p>注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有3种月饼，其库存量分别为18、15、10万吨，总售价分别为75、72、45亿元。如果市场的最大需求量只有20万吨，那么我们最大收益策略应该是卖出全部15万吨第2种月饼、以及5万吨第3种月饼，获得 72 + 45/2 = 94.5（亿元）。</p><p>输入格式：每个输入包含1个测试用例。每个测试用例先给出一个不超过1000的正整数N表示月饼的种类数、以及不超过500（以万吨为单位）的正整数D表示市场最大需求量。随后一行给出N个正数表示每种月饼的库存量（以万吨为单位）；最后一行给出N个正数表示每种月饼的总售价（以亿元为单位）。数字间以空格分隔。</p><p>输出格式：对每组测试用例，在一行中输出最大收益，以亿元为单位并精确到小数点后2位。</p><pre><code>输入样例：3 2018 15 1075 72 45输出样例：94.50</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;using namespace std;struct mooncake {  int store;//库存量  int total;//总售价  double price;//单价};bool cmp(mooncake a, mooncake b) {  return a.price &gt; b.price;}int main() {  int N, D;  cin &gt;&gt; N &gt;&gt; D;  vector&lt;mooncake&gt; m(N);  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; m[i].store;  }  for (int i = 0;i &lt; N;i++) {    cin &gt;&gt; m[i].total;    m[i].price = (1.0*m[i].total) / m[i].store;  }  sort(m.begin(), m.end(), cmp);  double sum = 0;  for (int i = 0;i &lt; N;i++) {    if (D &lt; m[i].store) {      sum += ((D*1.0) / m[i].store)*m[i].total;      break;    }    else {      sum += m[i].total;      D -= m[i].store;    }  }  printf(&quot;%.2f&quot;, sum);  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。&lt;/p&gt;
-&lt;p&gt;注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有3种月饼，其库存量分别为18
       
     
     </summary>
