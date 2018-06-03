@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-05-30T11:08:59.636Z</updated>
+  <updated>2018-06-03T12:25:44.580Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PS制图</title>
+    <link href="http://www.echodemo.cc/2018/06/03/PS%E5%88%B6%E5%9B%BE/"/>
+    <id>http://www.echodemo.cc/2018/06/03/PS制图/</id>
+    <published>2018-06-03T12:24:31.000Z</published>
+    <updated>2018-06-03T12:25:44.580Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、一寸照的尺寸为：宽度2.5厘米，高度3.5厘米，分辨率设为300，选择CMYK颜色。将图片拖入新建的空白图片当中，快捷键Ctrl+T进行自由变换(如果此时看不到控点，可以通过Ctrl+减号快捷键来进行缩小)。如果需要变换背景色，则使用快速选择工具选择空白区域。然后按住Alt键来添加图层蒙版。此时可以删除背景图层，选中蒙版来对图层蒙版进行调节。接下来新建一个图层，下拉到带有蒙版的图层的下方，再进行颜色填充即可。如果此时还需要对服装进行变换，那么就将做好选区的衣服图片拖入图中进行变换。之后还可以建立矩形选区，通过Ctrl+T快捷键，然后通过移动来消除譬如T恤这种色块。最后保存为jpg格式。</p><p>如果需要将一寸照片打印多张在一张国际标准纸张上面。那么可以新建一个文件，选择国际标准纸张，选择CMYK模式，然后将刚才的jpg文件移动到新建的纸张里面。可以通过Ctrl+R快捷键调出标尺，然后拖出两条分别距离左顶点一厘米的参考线，回车之后。双击图层，打开图层样式，勾选描边，像素设置为5像素，位置选择内部，颜色选择白色，点击确定。然后在移动工具下按住Alt键来拖拽图片进行复制。当复制出两个之后，在图层工作区上选择两个图层继续按住Alt键来复制，这样以此类推，就可以不需要一张一张复制，而是以2的幂次方递增了。在复制出一整行图片之后，可以在图层的缩览图当中选择最小的样式，之后选择所有的图层，使用Ctrl+E将他们全部合并为一个图层。此时用之前的复制方法就可以很快地对图片进行复制，直到基本铺满整个国际标准纸张。</p><p>2、制作全景图片：在文件菜单中选择脚本，将脚本载入堆栈，然后选择文件夹，打开。选择所有的图层，选择移动工具，在移动工具菜单栏的最右边选择自动对齐图层，常规情况下选择自动即可，点击确定。接下来继续选中这些图层，在编辑菜单中选择自动混合图层，选择全景图，点击确定。然后再对图片进行裁剪。自动回合图层还可以用于堆叠混合。</p><p>3、服装操控变形：打开图像，在编辑菜单栏中选择操控变形选项。在图片中打上图钉之后即可进行变形，图钉深度可以将图钉在前面和后面进行切换。</p><p>4、内容识别比例：打开图片，使用套索工具对需要进行放大或者是缩小的部分进行大致地选取，然后右击鼠标进行存储选区，接下来Ctrl+D取消选区。在编辑菜单当中，选择内容识别比例，在保护项当中选取刚才存储的选区。如果选取的是人物，还可以勾选，保护项后面的保护肤色选项。</p><p>5、图层复制：按住Alt键直接拖拽来复制图层。在图层面板中将图层移动到新建图层按钮上。也可以通过快捷键Ctrl+J来复制图层。</p><p>选区复制：按住Alt键来对选区进行拖拽即可，这样复制出来的是在同一个图层。如果是通过快捷键Ctrl+J来复制选区的话，就是新建出了一个只包含选区内容的图层。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、一寸照的尺寸为：宽度2.5厘米，高度3.5厘米，分辨率设为300，选择CMYK颜色。将图片拖入新建的空白图片当中，快捷键Ctrl+T进行自由变换(如果此时看不到控点，可以通过Ctrl+减号快捷键来进行缩小)。如果需要变换背景色，则使用快速选择工具选择空白区域。然后按住A
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PS抠图</title>
+    <link href="http://www.echodemo.cc/2018/05/31/PS%E6%8A%A0%E5%9B%BE/"/>
+    <id>http://www.echodemo.cc/2018/05/31/PS抠图/</id>
+    <published>2018-05-31T01:47:29.000Z</published>
+    <updated>2018-05-31T01:49:37.137Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、调整边缘抠图：先使用快速选择工具做出选区，然后通过调整边缘(选择并遮住)来调整。先选择黑底，然后根据需要来调整半径，平滑，羽化(对比度)，移动边缘等命令。之后新建带有图层蒙版的图层。</p><p>2、当打开一张已经抠好的图片，并且此时没有设置蒙版，那么为了节省时间可以使用图层下拉菜单中的修边选项中的各个命令来处理图片的边缘。</p><p>3、钢笔工具抠图：选择钢笔工具，选择路径选项，建立锚点直到闭合选区。添加矢量蒙版，选择减去顶层形状来，通过新建锚点来再建一条路径(此时需要选中蒙版来操作)，直到闭合路径。新建图层，添加背景。之后可以对图片中局部镂空的地方，继续选择减去顶层形状来做精细的路径抠图(依然需要选中蒙版才能进行操作)。在这之后，我们还可以选择路径选择工具和直接选择工具对路径进行再调整。</p><p>4、蒙版抠图：通过蒙版来进行粗抠图，可以产生不一样的效果，使用椭圆选区大致地选出需要抠取的部分，在选择下拉菜单当中选择修改中的羽化，建立蒙版。将其拖入其他的图片当中进行变换即可。</p><p>融合两张图片：可以先将一张图片拖入另一张图片，然后对拖入的图片创建蒙版。选中蒙版，使用黑白渐变工具(这里注意前景色和背景色)，然后进行渐变调节，即可将两张图片融合在一起。如果是有倒影的情况，可以选中图层，然后进行复制，右击进行垂直翻转，同时选择正片叠底，再降低它的不透明度即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、调整边缘抠图：先使用快速选择工具做出选区，然后通过调整边缘(选择并遮住)来调整。先选择黑底，然后根据需要来调整半径，平滑，羽化(对比度)，移动边缘等命令。之后新建带有图层蒙版的图层。&lt;/p&gt;
+&lt;p&gt;2、当打开一张已经抠好的图片，并且此时没有设置蒙版，那么为了节省时间可以
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
+    
+  </entry>
   
   <entry>
     <title>PS基础知识(杂)</title>
@@ -517,63 +568,6 @@ offset=1 =&amp;gt; &amp;quot;ga
     
     
       <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1022 D进制的A+B</title>
-    <link href="http://www.echodemo.cc/2018/05/01/PAT-B1022-D%E8%BF%9B%E5%88%B6%E7%9A%84A+B/"/>
-    <id>http://www.echodemo.cc/2018/05/01/PAT-B1022-D进制的A+B/</id>
-    <published>2018-05-01T09:02:03.000Z</published>
-    <updated>2018-05-01T09:03:51.378Z</updated>
-    
-    <content type="html"><![CDATA[<p>输入两个非负10进制整数A和B(&lt;=230-1)，输出A+B的D (1 &lt; D &lt;= 10)进制数。</p><p>输入格式：输入在一行中依次给出3个整数A、B和D。</p><p>输出格式：输出A+B的D进制数。</p><pre><code>输入样例：123 456 8输出样例：1103</code></pre><p>题目代码：</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。&lt;/p&gt;
-&lt;p&gt;输入格式：输入在一行中依次给出3个整数A、B和D。&lt;/p&gt;
-&lt;p&gt;输出格式：输出A+B的D进制数。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;输入样例：
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT B1021 个位数统计</title>
-    <link href="http://www.echodemo.cc/2018/05/01/PAT-B1021-%E4%B8%AA%E4%BD%8D%E6%95%B0%E7%BB%9F%E8%AE%A1/"/>
-    <id>http://www.echodemo.cc/2018/05/01/PAT-B1021-个位数统计/</id>
-    <published>2018-05-01T08:45:19.000Z</published>
-    <updated>2018-05-01T09:01:05.990Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个k位整数N = dk-1<em>10^k-1 + … + d1</em>10^1 + d0 (0&lt;=di&lt;=9, i=0,…,k-1, dk-1&gt;0)，请编写程序统计每种不同的个位数字出现的次数。例如：给定N = 100311，则有2个0，3个1，和1个3。</p><p>输入格式：每个输入包含1个测试用例，即一个不超过1000位的正整数N。</p><p>输出格式：对N中每一种不同的个位数字，以D:M的格式在一行中输出该位数字D及其在N中出现的次数M。要求按D的升序输出。</p><pre><code>输入样例：100311输出样例：0:21:33:1</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;int main() {  string s;  cin &gt;&gt; s;  int a[10] = { 0 };  for (int i = 0;i &lt; s.size();i++) {    int n = s[i] - &apos;0&apos;;    a[n]++;  }  for (int i = 0;i &lt; 10;i++) {    if (a[i] &gt; 0)      cout &lt;&lt; i &lt;&lt; &quot;:&quot; &lt;&lt; a[i] &lt;&lt; endl;  }  return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定一个k位整数N = dk-1&lt;em&gt;10^k-1 + … + d1&lt;/em&gt;10^1 + d0 (0&amp;lt;=di&amp;lt;=9, i=0,…,k-1, dk-1&amp;gt;0)，请编写程序统计每种不同的个位数字出现的次数。例如：给定N = 100311，则有2个0，3个1，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
     
   </entry>
   
