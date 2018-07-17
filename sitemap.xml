@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.echodemo.cc/about/index.html</loc>
+    
+    <lastmod>2018-07-17T09:52:54.386Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.echodemo.cc/2018/06/14/%E8%B1%86%E7%93%A3%E5%85%A5%E9%97%A8%E5%8D%95%E5%8F%8D%E8%B4%AD%E4%B9%B0%E6%96%87%E7%AB%A0%E6%8E%A8%E8%8D%90/</loc>
     
     <lastmod>2018-06-14T13:06:09.927Z</lastmod>
@@ -803,13 +810,6 @@
     <loc>http://www.echodemo.cc/2018/03/09/Add-tags-and-categories-to-Blogs/</loc>
     
     <lastmod>2018-03-10T14:10:15.486Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.echodemo.cc/about/index.html</loc>
-    
-    <lastmod>2018-03-08T14:58:28.496Z</lastmod>
     
   </url>
   
