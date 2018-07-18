@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java中的集合]]></title>
+    <url>%2F2018%2F07%2F18%2FJava%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%2F</url>
+    <content type="text"><![CDATA[1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。 2、集合框架中不同的集合类有各自不同的数据结构，所以在使用中要根据应用的性能要求来选择不同的集合类。 3、集合类存放在java.util包中，今后进行程序编程时将大量使用集合类和相关接口。其中包括Iterable:迭代器接口；Collection：类集接口；List：列表接口；Set：数据集接口；Queue：队列；Map：键值对组合映射表。 (1)Iterable接口 实现该接口允许对象成为“foreach”语句的目标，即该集合对象允许迭代。类集接口Collection是Iterable的子接口，所以所有类集对象可以迭代访问，而映射Map不行。(Map并没有实现Iterable接口) Iteratoriterator():功能：返回一个在一组T类型的元素上进行迭代的迭代器对象。迭代器是实现了Iterator/ListIterator接口的类的对象，可以通过遍历类集，访问操作其中的每个元素。ListIterator继承了父接口Iterator，允许双向遍历集合，并可以修改和删除元素。 (2)Collection接口 int size();boolean isEmpty();boolean contains(Object o);Iterator iterator;Object[] toArray();boolean add(E e);boolean remove(Object o);void clear()。等等 (3)List、Set、Map接口 List接口扩展了Collection，有序且可重复；Set接口扩展了Collection，无序且不可重复；Map是一个存储关键字/值对的对象。映射不是Collection的子接口，所以它本身不能使用迭代器来进行遍历。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[成为职场人]]></title>
+    <url>%2F2018%2F07%2F17%2F%E6%88%90%E4%B8%BA%E8%81%8C%E5%9C%BA%E4%BA%BA%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[礼仪培训笔记]]></title>
     <url>%2F2018%2F07%2F17%2F%E7%A4%BC%E4%BB%AA%E5%9F%B9%E8%AE%AD%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[一、什么是礼仪？礼仪=礼节+原则=心理+形式 二、简析服务礼仪1、顾客永远是对的（把面子留给客人，放弃自我，自主揽错） 2、永远不要辩解，服务中禁止使用推卸责任的语言。 3、注重首因效应、末轮效应。比如：缩短客人的等待时间。 4、在职场当中得体比漂亮更重要。包括面部，发型，举止，服饰，谈吐。如：不能穿短衬打领带，衬衣只买领围的大小。 三、学会用眼睛说话1、目光注视方式（PAC规律） 2、目光注视区域（三角定律） 3、目光注视时间规律（3~5秒） 4、目光注视的距离 四、人际沟通“六到”1、脑到：先三思，后言行。 2、眼到：专注，诚恳，体现尊重。 3、耳到：诚心聆听，不打岔。 4、口到：不吝啬鼓励、善意、赞美的语言。 5、心到：从他人角度理解，换位思考。 6、脚到：主动接近，距离合适。 五、其他1、服务距离：0.5~1.5米；展示距离：1~3米；引导距离：在客户左前方1~1.5米；待命距离：3米以外。 2、鞠躬距离控制：脚前方2米是15度；脚前方1.5米是30度；脚前方1.0米是45度。 3、在职场以职称论高低，在社交场合以女士为尊者，在家庭以年龄为长。 4、握手需要把握力度，距离。在不同的场合都是尊者先伸手握手。自我介绍在握手之前，且尊者后进行自我介绍。尊者有优先了解别人的权利。 5、名片：先客后主，先低后高，尊者优先收名片。尊者有优先了解别人的权利。 6、先肯定全部，再否认局部。注：上班提前半小时，开会提前10分钟，由你来准备会议提前半小时。]]></content>

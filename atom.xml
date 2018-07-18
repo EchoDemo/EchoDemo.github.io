@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-17T10:50:41.212Z</updated>
+  <updated>2018-07-18T11:30:47.859Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的集合</title>
+    <link href="http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/"/>
+    <id>http://www.echodemo.cc/2018/07/18/Java中的集合/</id>
+    <published>2018-07-18T11:29:49.000Z</published>
+    <updated>2018-07-18T11:30:47.859Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。</p><p>2、集合框架中不同的集合类有各自不同的数据结构，所以在使用中要根据应用的性能要求来选择不同的集合类。</p><p>3、集合类存放在java.util包中，今后进行程序编程时将大量使用集合类和相关接口。其中包括Iterable:迭代器接口；Collection：类集接口；List：列表接口；Set：数据集接口；Queue：队列；Map：键值对组合映射表。</p><p>(1)Iterable接口</p><p>实现该接口允许对象成为“foreach”语句的目标，即该集合对象允许迭代。类集接口Collection是Iterable的子接口，所以所有类集对象可以迭代访问，而映射Map不行。(Map并没有实现Iterable接口)</p><p>Iterator<t>iterator():功能：返回一个在一组T类型的元素上进行迭代的迭代器对象。迭代器是实现了Iterator/ListIterator接口的类的对象，可以通过遍历类集，访问操作其中的每个元素。ListIterator继承了父接口Iterator，允许双向遍历集合，并可以修改和删除元素。</t></p><p>(2)Collection接口</p><p>int size();boolean isEmpty();boolean contains(Object o);Iterator<e> iterator;Object[] toArray();boolean add(E e);boolean remove(Object o);void clear()。等等</e></p><p>(3)List、Set、Map接口</p><p>List接口扩展了Collection，有序且可重复；Set接口扩展了Collection，无序且不可重复；Map是一个存储关键字/值对的对象。映射不是Collection的子接口，所以它本身不能使用迭代器来进行遍历。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。&lt;/p&gt;
+&lt;p&gt;2、集合框架中不同的集合类有各自不同的数据结构，所以在使用
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>成为职场人</title>
+    <link href="http://www.echodemo.cc/2018/07/17/%E6%88%90%E4%B8%BA%E8%81%8C%E5%9C%BA%E4%BA%BA/"/>
+    <id>http://www.echodemo.cc/2018/07/17/成为职场人/</id>
+    <published>2018-07-17T10:58:27.000Z</published>
+    <updated>2018-07-17T10:59:09.813Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>礼仪培训笔记</title>
@@ -511,63 +555,6 @@ offset=1 =&amp;gt; &amp;quot;ga
       <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
     
       <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode A + B 问题</title>
-    <link href="http://www.echodemo.cc/2018/05/12/LintCode-(A%20+%20B%20%E9%97%AE%E9%A2%98)/"/>
-    <id>http://www.echodemo.cc/2018/05/12/LintCode-(A + B 问题)/</id>
-    <published>2018-05-12T00:30:29.000Z</published>
-    <updated>2018-05-12T01:00:19.174Z</updated>
-    
-    <content type="html"><![CDATA[<p>给出两个整数a和b, 求他们的和, 但不能使用 + 等数学运算符。</p><p>你不需要从输入流读入数据，只需要根据aplusb的两个参数a和b，计算他们的和并返回就行。</p><p>注意：a和b都是32位整数</p><pre><code>样例：如果 a=1 并且 b=2，返回3</code></pre><p>分析：对于这道题以我浅薄的知识真的是没想出来(发现这是一道简单题，瞬间受到一万点伤害)，这种接近于底层的东西，感觉自己在这方面太匮乏了。题目要求不能使用算术运算符号，基本上就能想到是通过二进制的位运算进行解答。但是想了半天也没什么头绪，只能默默地搜一下了。发现还是这篇文章讲得最靠谱了。<a href="https://blog.csdn.net/cjt5047/article/details/50686724" target="_blank">lintcode刷题A+B问题位运算</a></p><p>然后突然想起自己的左移和右移有点淡忘了，就复习一下。移位包括逻辑移位和算术移位。逻辑移位是指移出去的位丢弃，空缺位用0来填充；算术移位是指移出去的位丢弃，空缺位用符号位来填充。当然对于无符号数来说，不管是左移还是右移都是逻辑移位；而对于有符号数而言，如果是左移则仍然是逻辑移位，但如果是右移则属于算术移位。</p><p>题目代码：比起oj里面的lintcode答案，还是比较喜欢上条链接里大佬写的代码，嘻嘻！</p><pre><code>class Solution {public:    /**     * @param a: An integer     * @param b: An integer     * @return: The sum of a and b      */    int aplusb(int a, int b) {        // write your code here        if(a==0) return b;        if(b==0) return a;        int x1=(a&amp;b)&lt;&lt;1;        int x2=a^b;        return aplusb(x1,x2);    }};   </code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给出两个整数a和b, 求他们的和, 但不能使用 + 等数学运算符。&lt;/p&gt;
-&lt;p&gt;你不需要从输入流读入数据，只需要根据aplusb的两个参数a和b，计算他们的和并返回就行。&lt;/p&gt;
-&lt;p&gt;注意：a和b都是32位整数&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;样例：如果 a=1 并且 b
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《声律启蒙.卷上.六鱼》(典故)</title>
-    <link href="http://www.echodemo.cc/2018/05/06/%E3%80%8A%E5%A3%B0%E5%BE%8B%E5%90%AF%E8%92%99.%E5%8D%B7%E4%B8%8A.%E5%85%AD%E9%B1%BC%E3%80%8B(%E5%85%B8%E6%95%85)/"/>
-    <id>http://www.echodemo.cc/2018/05/06/《声律启蒙.卷上.六鱼》(典故)/</id>
-    <published>2018-05-06T09:08:03.000Z</published>
-    <updated>2018-05-09T08:35:55.909Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”</p><p>2、分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。</p><p>3、奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五城换赵璧。赵蔺相如奉璧使秦，见秦无诚意，以大智大勇与强秦对抗，终不辱使命，完璧归赵。</p><p>4、掷地金声孙绰赋：晋人孙绰作《天台山赋》，他的友人范荣期赞美其赋，说：“你试把它掷地，当作金石声响。”</p><p>5、回文锦字窦滔书：前秦苏蕙为秦州刺史窦滔妻，窦滔为安南将军，抛却苏蕙携宠妾而去。苏蕙悲恨，用彩锦织成《回文璇玑图诗》以赠滔。滔颇受感动，于是夫妻和好如初。</p><p>、6、未遇殷宗，胥靡困傅岩之筑：殷高宗梦得贤臣，后来按梦中人的相貌在傅岩找到了傅说(yue)。傅说未遇高宗时，仅是一个操杵筑土的奴隶。胥靡：奴隶。筑：筑土之杵。</p><p>7、既逢周后，太公舍渭水之渔：殷末，姜太公只在渭水之滨垂钓闲居，遇周文王，得以重用。周后：指周文王。舍：离去。</p><p>8、六朝：吴建都于建业(今南京城)，后历东晋、宋、齐、梁、陈，各朝均设都于此，号为“六朝”。</p><p>9、天禄：传说中的长角怪兽，汉代有阁名为“天禄阁”。刘向曾在此阁校书(整理书籍)。</p><p>10、石渠：据古史记载，汉初萧何曾建“石渠阁”收藏各国图书典籍，后来汉武帝以石渠作为国家收藏秘籍之处。</p><p>11、千字策：唐代科举考试重于诗赋，至宋代，开始侧重于“策试之制”，即要求考生就国家政治、军事大政发表议论，每篇文章以千字为限，称为“千字策”。</p><p>12、八行书：语见唐代诗人孟浩然诗：“家书寄八行。”此典原出马融寄窦尚书，内有两纸八行文字，故后人以“八行书”言其简赅。</p><p>13、有若对相如：有若：孔子的弟子。相如：战国时人蔺相如，另一解为指东汉时著名文学家司马相如。</p><p>14、爱见人长，共服宣尼休假盖：假盖：语见《孔子家语》。言某日孔子正待出门而天降阵雨，孔子的门人对孔子言，某人家里有雨伞，可以向此人借用。孔子回答说：此人为人，缺点就在于比较计较财物的得失。我听说与人交往，应当注意人家的长处，回避人家的短处，这样才能长久。我并不是不知道他家有伞，而怕的是他若不肯借，正暴露出他的短处呀！</p><p>15、恐彰已吝，谁知阮裕竟焚车：晋代人阮裕，字思旷，有一辆好车。凡是有人求借，他无不借给。有一次，有人葬其母亲，欲向阮裕借车而又不敢开口。阮裕闻后叹息道：“我有这么一辆好车，却让人家不敢来向我借，这车拿来还有什么用呢？”于是，便焚烧了此车。</p><p>16、</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、浩然驴：唐孟浩然曾在灞水之滨踏雪寻梅，并说：“我的诗思在风雪中、驴背上。”&lt;/p&gt;
-&lt;p&gt;2、分金齐鲍叔：齐管仲穷困时与鲍叔共做生意，分利时总给自己分得多。鲍叔也不认为管仲贪，知道这是他贫穷的缘故。&lt;/p&gt;
-&lt;p&gt;3、奉璧蔺相如：战国时，赵国得和氏璧，秦国要以十五城换赵
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
