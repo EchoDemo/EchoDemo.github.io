@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-18T16:02:40.570Z</updated>
+  <updated>2018-07-19T12:49:53.348Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的迭代模式举例</title>
+    <link href="http://www.echodemo.cc/2018/07/19/Java%E4%B8%AD%E7%9A%84%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F%E4%B8%BE%E4%BE%8B/"/>
+    <id>http://www.echodemo.cc/2018/07/19/Java中的迭代模式举例/</id>
+    <published>2018-07-19T12:47:20.000Z</published>
+    <updated>2018-07-19T12:49:53.348Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、案例介绍"><a href="#1、案例介绍" class="headerlink" title="1、案例介绍"></a>1、案例介绍</h3><p>提供一种方法访问一个容器对象中各个元素，而又不需要暴露该对象的内部细节。自定义容器和迭代器。</p><h3 id="2、案例设计"><a href="#2、案例设计" class="headerlink" title="2、案例设计"></a>2、案例设计</h3><p>迭代器角色(Iterator)、具体迭代器角色(Concrete Iterator)、容器角色(Container)、具体容器角色(Concrete Container)。</p><p>定义具体的迭代器角色(我们可以取名为MyIterator)用来实现迭代器角色接口(如Iterator接口，在使用当中，其主要包含hasNext()方法和next()方法)。对于容器角色和具体的容器角色，可以比较直观地把List看作是容器角色，而把ArrayList看作是具体容器角色。</p><h3 id="3、具体实现"><a href="#3、具体实现" class="headerlink" title="3、具体实现"></a>3、具体实现</h3><p>(1)迭代器角色</p><pre><code>package com.iotech.myiterator;public interface Iterator&lt;T&gt; {    public boolean hasNext();//判断是否有下一个元素    public T next();//获取下一个元素的内容}</code></pre><p>(2)容器角色</p><pre><code>package com.iotech.myiterator;public interface List&lt;T&gt; {    public void add(T obj);//给具体的容器添加元素    public T get(int index);//获取指定位置上的元素    public int size();//获得容器中的元素个数    public Iterator&lt;T&gt; iterator();//得到具体的迭代器对象}</code></pre><p>(3)具体的迭代器角色</p><pre><code>package com.iotech.myiterator;public class MyIterator&lt;T&gt; implements Iterator&lt;T&gt; {    private List list=null;    private int index=0;//访问到容器中元素的当前下标    //创建一个迭代器对象的时候接收要被迭代的具体的容器对象    public MyIterator(List&lt;T&gt; list){        this.list=list;    }    //判断是否有下一个元素    @Override    public boolean hasNext() {        return index&lt;list.size();    }    //取出下一个元素    @SuppressWarnings(&quot;unchecked&quot;)    @Override    public T next() {        return (T) list.get(index++);    }}</code></pre><p>(4)具体的容器角色</p><pre><code>package com.iotech.myiterator;public class ArrayList&lt;T&gt; implements List&lt;T&gt; {    private Object[] obj=null;//声明一个Object类型的数组(泛型是不能声明泛型数组的)    private int index;//数组的下标    private int size;//记录数组中元素的个数    public ArrayList(){        obj=new Object[10];        index=0;        size=0;    }    @Override    public void add(T obj) {        this.obj[index++]=obj;//把数据存放到数组中        size++;//元素个数加1    }    @SuppressWarnings(&quot;unchecked&quot;)    @Override    public T get(int index) {        return (T) this.obj[index];    }    @Override    public int size() {        return size;    }    @Override    public Iterator&lt;T&gt; iterator() {        return new MyIterator&lt;T&gt;(this);    }}</code></pre><p>(5)测试类</p><pre><code>package com.iotech.myiterator;public class Test {    public static void main(String[] args) {        List&lt;String&gt; nameList=new ArrayList&lt;String&gt;();        nameList.add(&quot;zhangsan&quot;);        nameList.add(&quot;lisi&quot;);        nameList.add(&quot;wangwu&quot;);        nameList.add(&quot;chenhao&quot;);        Iterator&lt;String&gt; iterator=nameList.iterator();        while(iterator.hasNext()){            System.out.println(iterator.next());        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、案例介绍&quot;&gt;&lt;a href=&quot;#1、案例介绍&quot; class=&quot;headerlink&quot; title=&quot;1、案例介绍&quot;&gt;&lt;/a&gt;1、案例介绍&lt;/h3&gt;&lt;p&gt;提供一种方法访问一个容器对象中各个元素，而又不需要暴露该对象的内部细节。自定义容器和迭代器。&lt;/p&gt;
+&lt;h3
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的List</title>
@@ -521,35 +547,6 @@ offset=1 =&amp;gt; &amp;quot;ga
     
     
       <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode 统计数字</title>
-    <link href="http://www.echodemo.cc/2018/05/13/LintCode-%E7%BB%9F%E8%AE%A1%E6%95%B0%E5%AD%97/"/>
-    <id>http://www.echodemo.cc/2018/05/13/LintCode-统计数字/</id>
-    <published>2018-05-13T00:54:21.000Z</published>
-    <updated>2018-05-13T01:01:30.721Z</updated>
-    
-    <content type="html"><![CDATA[<p>计算数字k在0到n中的出现的次数，k可能是0~9的一个值</p><p>样例：例如n=12，k=1，在 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]，我们发现1出现了5次 (1, 10, 11, 12)</p><p>分析：基本就是遍历了，不过要注意的就是0要特别处理。还有在遍历之后的数值处理需要交给临时变量，而不是用遍历数本身。</p><pre><code>class Solution {public:    /*     * @param : An integer     * @param : An integer     * @return: An integer denote the count of digit k in 1..n     */    int digitCounts(int k, int n) {        // write your code here        int count=0;        if(k==0) count++;        for(int i=k;i&lt;=n;i++){            int temp=i;            while(temp){                if(temp%10==k) count++;                temp/=10;            }        }        return count;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;计算数字k在0到n中的出现的次数，k可能是0~9的一个值&lt;/p&gt;
-&lt;p&gt;样例：例如n=12，k=1，在 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]，我们发现1出现了5次 (1, 10, 11, 12)&lt;/p&gt;
-&lt;p&gt;分析：基本就是遍
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
     
   </entry>
   
