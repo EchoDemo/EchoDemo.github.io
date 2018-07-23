@@ -1,0 +1,1352 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="EchoDemo's Blogs" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1、Map接口详解(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。 (2)键必须是唯一的，值可以重复。 (3)有些映射可以接收null键和null值，而有的不能。 (4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的Map">
+<meta property="og:url" content="http://www.echodemo.cc/2018/07/20/Java中的Map/index.html">
+<meta property="og:site_name" content="EchoDemo&#39;s Blogs">
+<meta property="og:description" content="1、Map接口详解(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。 (2)键必须是唯一的，值可以重复。 (3)有些映射可以接收null键和null值，而有的不能。 (4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-20T13:18:23.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中的Map">
+<meta name="twitter:description" content="1、Map接口详解(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。 (2)键必须是唯一的，值可以重复。 (3)有些映射可以接收null键和null值，而有的不能。 (4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.echodemo.cc/2018/07/20/Java中的Map/"/>
+
+
+
+
+
+  <title> Java中的Map | EchoDemo's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?340874ba9357cbe81570aa4ac1185941";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EchoDemo's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description">自我管理，知识管理，时间管理，阅读。</h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/07/20/Java中的Map/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java中的Map
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T21:17:34+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/20/Java中的Map/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/07/20/Java中的Map/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,931
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、Map接口详解"><a href="#1、Map接口详解" class="headerlink" title="1、Map接口详解"></a>1、Map接口详解</h3><p>(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。</p>
+<p>(2)键必须是唯一的，值可以重复。</p>
+<p>(3)有些映射可以接收null键和null值，而有的不能。</p>
+<p>(4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue(Object value);V get(Object key);V put(K key,V value);V remove(Object key);Collection<v> values();Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet();返回包含的映射关系的Set视图，Map接口定义的entrySet()方法返回包含映射项Entry的集合(Set)，集合中元素是Map.Entry类型。</v></p>
+<p>(5)Map.Entry接口代表映射项(键-值对)类型，是Map的嵌套类型(是Map的内部类)。</p>
+<p>(6)Map.Entry接口定义的方法：K getKey();V getValue();V setValue(V value)。</p>
+<h3 id="2、HashMap及常用API"><a href="#2、HashMap及常用API" class="headerlink" title="2、HashMap及常用API"></a>2、HashMap及常用API</h3><p>(1)HashMap类是基于哈希表的map接口的实现，并允许使用null键和null值。</p>
+<p>(2)构造方法：HashMap();HashMap(Map m);HashMap(int capacity);HashMap(int capacity,float fillRatio)。</p>
+<p>(3)HashMap实现并扩展AbstractMap，本身并没有增加任何新的方法。</p>
+<p>(4)散列映射不保证它的元素的顺序，元素加入散列映射的顺序并不一定是它们被迭代读出的顺序。</p>
+<p>(5)HashMap常用方法举例</p>
+<pre><code>package com.iotech.map;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class HashMapDemo1 {
+
+    public static void main(String[] args) {
+        HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;();
+        hashmap.put(&quot;jay&quot;, &quot;张三&quot;);
+        hashmap.put(&quot;jay&quot;, &quot;李四&quot;);
+        hashmap.put(&quot;rose&quot;, &quot;玫瑰&quot;);
+        hashmap.put(&quot;Mary&quot;, &quot;小红&quot;);
+        System.out.println(hashmap);
+
+        //获取map中的所有键
+        /*Set&lt;String&gt; keysSet=hashmap.keySet(); 
+        for(String name:keysSet){
+            System.out.println(name);
+        }*/
+
+        //获取map中的所有值
+        Collection&lt;String&gt; values=hashmap.values();
+        for(String value:values){
+            System.out.println(value);
+        }
+
+        //得到key的同时得到key所对应的值
+        Set&lt;String&gt; keysSet=hashmap.keySet(); 
+        for(String name:keysSet){
+            System.out.println(name+&quot;--&gt;&quot;+hashmap.get(name));
+        }
+
+        System.out.println(hashmap.size());
+        System.out.println(hashmap.isEmpty());
+
+        //当我们调用put(key,value)方法的时候，首先会把key和value封装到Entry这个静态内部类对象中。
+        //把Entry对象再添加到数组中，所以我们想获取map中的所有键值对，我们只要获取数组中的所有Entry对象，
+        //接下来调用Entry对象中的getkey()和getvalue()方法就能获取键值对。
+        Set&lt;Entry&lt;String,String&gt;&gt; entrySet=hashmap.entrySet();
+        for(Entry&lt;String, String&gt; entry:entrySet){
+            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());
+        }
+
+        /*
+         * hashmap调用默认构造方法会产生一个底层长度为16的Entry数组 
+         * int hash=hash(key.hashCode());
+         * 首先调用key的hashCode方法来得到一个整数(哈希码)，把哈希码作为参数传到hash函数中来进行运算(散列运算)
+         * 得到一个整型(散列值)。hashCode()方法能够提高哈希表的性能。
+         * int i=indexFor(hash,table.length);
+         * 把散列值和数组的长度来进行运算，最终得到entry对象存放到数组的位置(下标)。
+         * 
+         * hashmap内部的结构是一个数组链表结构。因为不同的key有可能算出来是相同的散列值，根据散列值计算出存放数组
+         * 的下标会冲突。
+         */
+    }
+}
+</code></pre><h3 id="3、哈希码的产生和使用"><a href="#3、哈希码的产生和使用" class="headerlink" title="3、哈希码的产生和使用"></a>3、哈希码的产生和使用</h3><p>(1)hashCode的常规协定：在Java应用程序执行期间，在对同一对象多次调用hashCode方法时，必须一致地返回相同的整数，前提是将对象进行equals比较时所用的信息没有被修改。从某一应用程序的一次执行到同一应用程序的另一次执行，该整数无需保持一致。</p>
+<p>(2)如果根据equals(Object)方法，两个对象是相等的那么这两个对象中的每个对象调用hashCode方法都必须生成相同的整数结果。(这里的equals方法是指Object类中没有被子类重写过的equals方法)。</p>
+<p>(3)如果根据equals(java.lang.Object)方法，两个对象不相等，那么对这两个对象中的任一对象上调用hashCode方法不要求一定生成不同的整数结果。但是，程序员应该意识到，为不相等的对象生成不同整数结果可以提高哈希表的性能。</p>
+<p>(4)举例</p>
+<pre><code>package com.iotech.map;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashCodeDemo2 {
+
+    public static void main(String[] args) {
+        Map&lt;Student, String&gt; map=new HashMap&lt;Student, String&gt;();
+        map.put(new Student(&quot;jay&quot;, 20), &quot;张三&quot;);
+        map.put(new Student(&quot;lisi&quot;, 30), &quot;李四&quot;);
+        map.put(new Student(&quot;rose&quot;, 20), &quot;玫瑰&quot;);
+        map.put(new Student(&quot;lisi&quot;, 30), &quot;陈豪&quot;);
+
+        /*要满足student键值相等，首先需要hashCode相等，另外还需要key的equals方法相等。所以需要重写
+        hashCode()和equals()方法。*/
+        System.out.println(map);
+        System.out.println(map.size());
+
+    }
+
+}
+
+class Student{
+    private String name;
+    private int age;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public Student(String name, int age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + age;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Student other = (Student) obj;
+        if (age != other.age)
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        return true;
+    }
+}
+</code></pre><h3 id="4、TreeMap及常用API"><a href="#4、TreeMap及常用API" class="headerlink" title="4、TreeMap及常用API"></a>4、TreeMap及常用API</h3><p>(1)TreeMap类通过使用红黑树实现Map接口。</p>
+<p>(2)TreeMap提供按排序顺序存储键/值对的有效手段，同时允许快速检索。</p>
+<p>(3)TreeMap不像散列映射，树映射保证它的元素按关键字升序排序。</p>
+<p>(4)TreeMap的构造方法：TreeMap();TreeMap(Comparator comp);TreeMap(Map m);TreeMap(SortedMap sm)。</p>
+<p>(5)TreeMap实现SortedMap并且扩展AbstractMap，它本身没有定义其他的方法。</p>
+<p>(6)举例一</p>
+<pre><code>package com.iotech.map;
+
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class TreeMapDemo1 {
+
+    public static void main(String[] args) {
+        TreeMap&lt;String,String&gt; treeMap=new TreeMap&lt;String, String&gt;();
+        treeMap.put(&quot;jack&quot;, &quot;zhangsan&quot;);
+        treeMap.put(&quot;mary&quot;, &quot;xiaohong&quot;);
+        treeMap.put(&quot;rose&quot;, &quot;xiaozhang&quot;);
+        treeMap.put(&quot;free&quot;, &quot;xiaoming&quot;);
+        treeMap.put(&quot;rose&quot;, &quot;chenhao&quot;);
+
+        //TreeMap是按照键来进行排序的，而String实现了comparable接口，所以是没有问题的。
+        System.out.println(treeMap);
+
+        Set&lt;Entry&lt;String, String&gt;&gt; entrySet=treeMap.entrySet();
+        for(Entry&lt;String, String&gt; entry:entrySet){
+            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());
+        }
+    }
+}
+</code></pre><p>(7)举例二</p>
+<pre><code>package com.iotech.map;
+
+import java.util.Comparator;
+import java.util.TreeMap;
+
+public class TreeMapDemo2 {
+
+    public static void main(String[] args) {
+        TreeMap&lt;Person,String&gt; treeMap=new TreeMap&lt;Person,String&gt;(new Comparator&lt;Person&gt;() {
+
+            @Override
+            public int compare(Person o1, Person o2) {
+                int x=o1.getAge()-o2.getAge();
+                if(x&gt;0) return 1;
+                else if(x&lt;0) return -1;
+                return 0;
+            }
+        });
+        treeMap.put(new Person(&quot;zhangsan&quot;, 30), &quot;张三&quot;);
+        treeMap.put(new Person(&quot;lisi&quot;, 31), &quot;李四&quot;);
+        treeMap.put(new Person(&quot;rose&quot;, 32), &quot;玫瑰&quot;);
+        treeMap.put(new Person(&quot;zhangsan&quot;, 33), &quot;张三&quot;);
+
+        //这里的Person作为TreeMap中的键，也是需要进行排序的，所以Person类也需要继承Comparable接口，
+        //因此也需要重写CompareTo()方法。
+        System.out.println(treeMap);
+
+    }
+
+}
+
+class Person/* implements Comparable&lt;Person&gt;*/{
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /*@Override
+    public int compareTo(Person o) {
+        int x=this.age-o.getAge();
+        if(x&gt;0){
+            return 1;
+        }else if(x&lt;0){
+            return -1;
+        }
+        return 0;
+    }*/
+}
+</code></pre><h3 id="5、Comparator和Comparable接口"><a href="#5、Comparator和Comparable接口" class="headerlink" title="5、Comparator和Comparable接口"></a>5、Comparator和Comparable接口</h3><p>TreeMap的key存储引用数据类型，需要满足一定条件，要么引用类型实现Comparable接口，要么为该TreeMap容器提供实现Comparator接口的比较器对象。对应上面例二的两种实现方式。</p>
+<h3 id="6、案例讲解"><a href="#6、案例讲解" class="headerlink" title="6、案例讲解"></a>6、案例讲解</h3><p>(1)给定一个字符数组，数组中内容有重复，现要求打印输出各个字符串出现的次数。</p>
+<p>(2)使用HashMap来设计，HashMap的key可以用来保存字符串，value用来保存字符串所对应的次数，从HashMap中获取不存在的key所对应的值为null。</p>
+<p>(3)代码实现</p>
+<pre><code>package com.iotech.map;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class HashMapTest {
+
+    public static void main(String[] args) {
+        String[] string={&quot;zhangsan&quot;,&quot;lisi&quot;,&quot;wangwu&quot;,&quot;jack&quot;,&quot;zhangsan&quot;,&quot;zhangsan&quot;,&quot;wangwu&quot;};
+        HashMap&lt;String,Integer&gt; hashMap=new HashMap&lt;String,Integer&gt;();
+        for(int i=0;i&lt;string.length;i++){
+            if(null==hashMap.get(string[i])){
+                hashMap.put(string[i], 1);
+            }else{
+                hashMap.put(string[i], hashMap.get(string[i])+1);
+            }
+        }
+        Set&lt;Entry&lt;String,Integer&gt;&gt; entrySet=hashMap.entrySet();
+        for(Entry&lt;String,Integer&gt; entry:entrySet){
+            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());
+        }
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/19/Java中的迭代模式举例/" rel="next" title="Java中的迭代模式举例">
+                <i class="fa fa-chevron-left"></i> Java中的迭代模式举例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/20/Java中的Set/" rel="prev" title="Java中的Set">
+                Java中的Set <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="EchoDemo" />
+          <p class="site-author-name" itemprop="name">EchoDemo</p>
+          <p class="site-description motion-element" itemprop="description">Less interests,more interest。</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/EchoDemo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/149464811/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/5496500419/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.liuchuo.net/" title="柳女神" target="_blank">柳女神</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lvxiong7zg.com" title="吕雄" target="_blank">吕雄</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.ezlippi.com" title="EZLippi-浮生志" target="_blank">EZLippi-浮生志</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Map接口详解"><span class="nav-number">1.</span> <span class="nav-text">1、Map接口详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、HashMap及常用API"><span class="nav-number">2.</span> <span class="nav-text">2、HashMap及常用API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、哈希码的产生和使用"><span class="nav-number">3.</span> <span class="nav-text">3、哈希码的产生和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、TreeMap及常用API"><span class="nav-number">4.</span> <span class="nav-text">4、TreeMap及常用API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Comparator和Comparable接口"><span class="nav-number">5.</span> <span class="nav-text">5、Comparator和Comparable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、案例讲解"><span class="nav-number">6.</span> <span class="nav-text">6、案例讲解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoDemo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共88.4k字</span>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+  <script type="text/javascript" color="0,0,0" opacity='0.3' zIndex="-2" count="30" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

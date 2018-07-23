@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-19T12:49:53.348Z</updated>
+  <updated>2018-07-22T15:05:46.887Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,157 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的AWT事件处理</title>
+    <link href="http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84AWT%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    <id>http://www.echodemo.cc/2018/07/22/Java中的AWT事件处理/</id>
+    <published>2018-07-22T14:57:37.000Z</published>
+    <updated>2018-07-22T15:05:46.887Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、AWT事件处理基本概念"><a href="#1、AWT事件处理基本概念" class="headerlink" title="1、AWT事件处理基本概念"></a>1、AWT事件处理基本概念</h3><p>AWT事件的处理过程中，主要涉及三类对象。</p><p>(1)Event(事件)：用户对组件的一个操作，称之为一个事件，以类的形式出现，例如，键盘操作对应的事件类是KeyEvent。其实例在该事件发生时由系统自动产生。每一种事件都对应专门的监听者。</p><p>(2)Event Source(事件源)：事件发生的场所，通常就是各个组件，例如按钮Button。事件源自己不处理事件，而是把在其自身所有可能发生的事件委托给事件监听器来处理。</p><p>(3)Event Monitor(事件监听器)：接收事件对象并对其进行处理的类的对象，通常其中某个成员方法对事件进行相应的处理。</p><h3 id="2、事件"><a href="#2、事件" class="headerlink" title="2、事件"></a>2、事件</h3><p>AWT的相关事件继承于java.awt.AWTEvent类，这些事件分为两大类：低级事件和高级事件。</p><p>(1)低级事件是指基于<strong>组件和容器</strong>的事件，当一个组件发生事件，如鼠标进入、点击、拖放或组件的窗口开关等时，触发了组件事件。如：组件事件、容器事件、窗口事件、焦点事件、键盘事件、鼠标事件。</p><p>(2)高级事件是基于<strong>语义</strong>的事件，它可以不和特定的动作相关联，而依赖于触发此事件的类。比如，按下按钮和在TextField中按Enter键会触发ActionEvent事件，滑动滚动条会触发AdjustmentEvent事件，选中项目列表的某一条会触发ItemEvent事件。</p><h3 id="3、事件监听器"><a href="#3、事件监听器" class="headerlink" title="3、事件监听器"></a>3、事件监听器</h3><p>事件监听器通常是一个类，该类必须实现与该事件类型相对应的接口。对应的接口被称之为事件监听器接口。事件监听器接口类的名称与事件类的名称相对应，例如：MouseEvent事件类的监听器接口名为MouseListener。</p><h3 id="4、事件适配器类"><a href="#4、事件适配器类" class="headerlink" title="4、事件适配器类"></a>4、事件适配器类</h3><p>Java语言为一些事件监听提供了适配器(Adapter)。我们可以通过继承事件对应的Adapter类，重写所需要的方法，无关的方法则不用实现。事件适配器为我们提供了一种简单的实现监听器的手段，可以缩短程序代码。java.awt.event包中定义的事件适配器类包括以下7个：MouseAdapter(鼠标适配器)、MouseMotionAdapter(鼠标运动适配器)、KeyAdapter(键盘适配器)、WindowAdapter(窗口适配器)、ComponentAdapter(组件适配器)、ComtainerAdapter(容器适配器)、FocusAdapter(焦点适配器)。</p><h3 id="5、示例"><a href="#5、示例" class="headerlink" title="5、示例"></a>5、示例</h3><pre><code>package com.iotek.awt;import java.awt.BorderLayout;import java.awt.Button;import java.awt.CardLayout;import java.awt.FlowLayout;import java.awt.Frame;import java.awt.Label;import java.awt.Panel;import java.awt.TextField;import java.awt.event.ActionEvent;import java.awt.event.ActionListener;import java.awt.event.KeyAdapter;import java.awt.event.KeyEvent;import java.awt.event.MouseAdapter;import java.awt.event.MouseEvent;import java.awt.event.MouseMotionAdapter;import java.awt.event.WindowAdapter;import java.awt.event.WindowEvent;public class ListenerDemo {    public static void main(String[] args) {        MyFrame7 frame7=new MyFrame7(&quot;Listener&quot;);    }}class MyFrame7 extends Frame{    private Panel card_panel=null;    private Panel ctrol_panel=null;    private CardLayout cardLayout=null;    private FlowLayout flowLayout=null;    private Label lb_1,lb_2,lb_3,lb_4;    private TextField tf_contentField;    private Button btn_1,btn_2,btn_3,btn_4;    public MyFrame7(String title){        super(title);        init();        registerListener();    }    /*     * 在一个窗口当中设置两个面板，上面的面板设置成CardLayout布局管理器，下面的面板设置成FlowLayout布局管理器。     * 由于Frame默认是BorderLayout布局管理器，将上面的面板放进窗体的Center位置，下面的面板放在South位置。     */    public void init(){        //创建两个面板容器        card_panel=new Panel();        ctrol_panel=new Panel();        //创建两个布局管理器        cardLayout=new CardLayout();        flowLayout=new FlowLayout();        //给面板容器设定指定的布局管理器        card_panel.setLayout(cardLayout);        ctrol_panel.setLayout(flowLayout);        //声明创建四个标签控件和一个文本框控件。        lb_1=new Label(&quot;First Page&quot;,Label.CENTER);        lb_2=new Label(&quot;Second Page&quot;,Label.CENTER);        tf_contentField=new TextField();//编辑文本框        lb_3=new Label(&quot;Third Page&quot;,Label.CENTER);        lb_4=new Label(&quot;Forth Page&quot;,Label.CENTER);        //构建四个按钮对象        btn_1=new Button(&quot;First&quot;);        btn_2=new Button(&quot;Second&quot;);        btn_3=new Button(&quot;Third&quot;);        btn_4=new Button(&quot;Forth&quot;);        //把按钮添加到控制面板        ctrol_panel.add(btn_1);        ctrol_panel.add(btn_2);        ctrol_panel.add(btn_3);        ctrol_panel.add(btn_4);        //把四个标签控件和一个文本框控件添加到card_panel容器中。        card_panel.add(lb_1);        card_panel.add(lb_2);        card_panel.add(tf_contentField);        card_panel.add(lb_3);        card_panel.add(lb_4);        this.add(card_panel,BorderLayout.CENTER);        this.add(ctrol_panel,BorderLayout.SOUTH);        this.setSize(400, 300);        this.setVisible(true);    }    private void registerListener(){        /*         * 产生一个事件监听器对象，给四个按钮注册同一个事件监听器。         */        BtnListener btnListener=new BtnListener();        btn_1.addActionListener(btnListener);        btn_2.addActionListener(btnListener);        btn_3.addActionListener(btnListener);        btn_4.addActionListener(btnListener);        lb_1.addMouseMotionListener(new MouseMotionAdapter() {            @Override            public void mouseMoved(MouseEvent e) {                lb_1.setText(e.getX()+&quot;:&quot;+e.getY());            }        });        lb_2.addMouseListener(new MouseAdapter() {            @Override            public void mouseExited(MouseEvent e) {                System.out.println(&quot;鼠标移出&quot;);            }            @Override            public void mouseEntered(MouseEvent e) {                System.out.println(&quot;鼠标移入&quot;);            }        });        tf_contentField.addKeyListener(new KeyAdapter() {            @Override            public void keyPressed(KeyEvent e) {                System.out.println(e.getKeyChar());            }        });        this.addWindowListener(new WindowAdapter() {            @Override            public void windowClosing(WindowEvent e) {                System.exit(0);            }        });    }    class BtnListener implements ActionListener{        @Override        public void actionPerformed(ActionEvent e) {            /*System.out.println(e.getActionCommand());            System.out.println(e.getSource());*/            Object object=e.getSource();//获得当前点击的事件源            if(object==btn_1){                cardLayout.first(card_panel);//获得第一张            }else if(object==btn_2){                cardLayout.previous(card_panel);//获得前一张            }else if(object==btn_3){                cardLayout.next(card_panel);//获得下一张            }else{                cardLayout.last(card_panel);//获得最后一张            }        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、AWT事件处理基本概念&quot;&gt;&lt;a href=&quot;#1、AWT事件处理基本概念&quot; class=&quot;headerlink&quot; title=&quot;1、AWT事件处理基本概念&quot;&gt;&lt;/a&gt;1、AWT事件处理基本概念&lt;/h3&gt;&lt;p&gt;AWT事件的处理过程中，主要涉及三类对象。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的布局管理器</title>
+    <link href="http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    <id>http://www.echodemo.cc/2018/07/22/Java中的布局管理器/</id>
+    <published>2018-07-22T05:30:27.000Z</published>
+    <updated>2018-07-22T06:26:27.868Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、容器内可以存放各种组件，而组件的位置和大小是由容器内的布局管理器来决定的。在AWT中为我们提供了以下五种布局管理器。FlowLayout布局管理器、BorderLayout边界布局管理器、GridLayout网格布局管理器、CardLayout卡片布局管理器、<br>GridBagLayout网格包布局管理器。</p><p>2、容器中组件的布局通常由布局管理器控制。每个Container(比如一个Panel或一个Frame)都有一个与它相关的缺省布局管理器，Panel容器默认是FlowLayout，Frame容器默认是BorderLayout，我们可以通过调用setLayout()来改变布局管理器。</p><p>3、我们可以通过设置空布局管理器，来控制组件的大小和位置。可以调用setLayout(null)。在设置空布局管理器之后，必须对所有的组件调用setLocation()，setSize()或者setBounds()，将它们定位在容器中。</p><p>4、FlowLayout布局管理器：流程布局通常用于布置面板中的按钮。 它可以水平排列按钮，直到不再有按钮在同一行上。 线对齐由align属性确定。 可能的值是：LEFT、RIGHT、CENTER、LEADING、TRAILING。</p><pre><code>package com.iotek.awt;import java.awt.Button;import java.awt.Color;import java.awt.FlowLayout;import java.awt.Frame;public class FlowLayoutDemo {    public static void main(String[] args) {        MyFrame3 frame3=new MyFrame3(&quot;FlowLayout&quot;);        frame3.init();    }}class MyFrame3 extends Frame{    public MyFrame3(String title){        super(title);    }    public void init(){        //FlowLayout layout=new FlowLayout();//构造一个新的 FlowLayout中心对齐和默认的5单位水平和垂直间隙。         //FlowLayout layout=new FlowLayout(FlowLayout.LEFT);//构造一个新的 FlowLayout左对齐和默认的5单位水平和垂直间隙。         FlowLayout layout=new FlowLayout(FlowLayout.RIGHT,50,50);//构造一个新的 FlowLayout右对齐和默认的5单位水平和垂直间隙均为50。         this.setLayout(layout);        this.setBackground(Color.cyan);        this.add(new Button(&quot;btn1&quot;));//添加按钮        this.add(new Button(&quot;btn2&quot;));        this.add(new Button(&quot;btn3&quot;));        this.add(new Button(&quot;btn4&quot;));        this.add(new Button(&quot;btn5&quot;));        this.add(new Button(&quot;btn6&quot;));        this.add(new Button(&quot;btn7&quot;));        this.add(new Button(&quot;btn8&quot;));        this.setSize(300, 200);        this.setVisible(true);    }}</code></pre><p>5、BorderLayout布局管理器：边界布局设置了一个容器，安排和调整其组件，以适应五个区域：北，南，东，西和中心。 每个区域可以含有不超过一个部件，并且通过相应的常数确定： NORTH ， SOUTH ， EAST ， WEST和CENTER 。 </p><pre><code>package com.iotek.awt;import java.awt.BorderLayout;import java.awt.Button;import java.awt.Color;import java.awt.FlowLayout;import java.awt.Frame;public class BorderLayoutDemo {    public static void main(String[] args) {        MyFrame4 frame4=new MyFrame4(&quot;BorderLayout&quot;);        frame4.init();    }}class MyFrame4 extends Frame{    public MyFrame4(String title){        super(title);    }    public void init(){        this.setBackground(Color.cyan);        this.add(new Button(&quot;btn1&quot;),BorderLayout.EAST);//添加按钮在东边        this.add(new Button(&quot;btn2&quot;),BorderLayout.WEST);        this.add(new Button(&quot;btn3&quot;),BorderLayout.NORTH);        this.add(new Button(&quot;btn4&quot;),BorderLayout.SOUTH);        this.add(new Button(&quot;btn5&quot;),BorderLayout.CENTER);        this.setSize(300, 200);        this.setVisible(true);    }}</code></pre><p>6、GridLayout布局管理器：它将一个容器的组件放在矩形网格中。 容器被分成等大小的矩形，并且每个矩形中放置一个组件。当行数和列数都被设置为非零值时，无论是通过构造函数还是setRows和setColumns方法，都会忽略指定的列数。而是从指定的行数和布局中的组件总数确定列的数量。因此，例如，如果已经指定了三行和两列，并且将九个组件添加到布局，则它们将显示为三列三列。仅当行数设置为零时，才指定列数影响布局。 </p><pre><code>package com.iotek.awt;import java.awt.Button;import java.awt.Color;import java.awt.Frame;import java.awt.GridLayout;public class GridLayoutDemo {    public static void main(String[] args) {        MyFrame5 frame5=new MyFrame5(&quot;GridLayout&quot;);        frame5.init();    }}class MyFrame5 extends Frame{    public MyFrame5(String title){        super(title);    }    public void init(){        //GridLayout gridLayout=new GridLayout();//在单个行中创建一个每个组件的默认值为一列的网格布局。         //GridLayout gridLayout=new GridLayout(3,2);//创建具有指定行数和列数的网格布局。        GridLayout gridLayout=new GridLayout(3,2,10,10);//创建具有指定行数和列数的网格布局，且指定水平和垂直间隔。        this.setLayout(gridLayout);        this.setBackground(Color.cyan);        this.add(new Button(&quot;btn1&quot;));        this.add(new Button(&quot;btn2&quot;));        this.add(new Button(&quot;btn3&quot;));        this.add(new Button(&quot;btn4&quot;));        this.add(new Button(&quot;btn5&quot;));        this.add(new Button(&quot;btn6&quot;));        this.add(new Button(&quot;btn7&quot;));        this.setSize(300, 200);        this.setVisible(true);    }}</code></pre><p>7、 CardLayout布局管理器：它将容器中的每个组件视为一张卡。 一次只能看到一张卡片，容器就是一堆卡片。添加到CardLayout对象的第一个组件是首次显示容器时的可见组件。卡片的顺序由容器自己的组件对象的内部顺序决定。CardLayout定义了一组允许应用程序顺序翻转这些卡片或显示指定卡片的方法。 addLayoutComponent(java.awt.Component, java.lang.Object)方法可用于将字符串标识符与给定卡相关联，以便快速随机访问。 </p><pre><code>package com.iotek.awt;import java.awt.BorderLayout;import java.awt.Button;import java.awt.CardLayout;import java.awt.FlowLayout;import java.awt.Frame;import java.awt.Label;import java.awt.Panel;import java.awt.TextField;public class CardLayoutDemo {    public static void main(String[] args) {        MyFrame6 frame6=new MyFrame6(&quot;CardLayout&quot;);        frame6.init();    }}class MyFrame6 extends Frame{    private Panel card_panel=null;    private Panel ctrol_panel=null;    private CardLayout cardLayout=null;    private FlowLayout flowLayout=null;    private Label lb_1,lb_2,lb_3,lb_4;    private TextField tf_contentField;    private Button btn_1,btn_2,btn_3,btn_4;    public MyFrame6(String title){        super(title);    }    /*     * 在一个窗口当中设置两个面板，上面的面板设置成CardLayout布局管理器，下面的面板设置成FlowLayout布局管理器。     * 由于Frame默认是BorderLayout布局管理器，将上面的面板放进窗体的Center位置，下面的面板放在South位置。     */    public void init(){        //创建两个面板容器        card_panel=new Panel();        ctrol_panel=new Panel();        //创建两个布局管理器        cardLayout=new CardLayout();        flowLayout=new FlowLayout();        //给面板容器设定指定的布局管理器        card_panel.setLayout(cardLayout);        ctrol_panel.setLayout(flowLayout);        //声明创建四个标签控件和一个文本框控件。        lb_1=new Label(&quot;First Page&quot;,Label.CENTER);        lb_2=new Label(&quot;Second Page&quot;,Label.CENTER);        tf_contentField=new TextField();//编辑文本框        lb_3=new Label(&quot;Third Page&quot;,Label.CENTER);        lb_4=new Label(&quot;Forth Page&quot;,Label.CENTER);        //构建四个按钮对象        btn_1=new Button(&quot;First&quot;);        btn_2=new Button(&quot;Second&quot;);        btn_3=new Button(&quot;Third&quot;);        btn_4=new Button(&quot;Forth&quot;);        //把按钮添加到控制面板        ctrol_panel.add(btn_1);        ctrol_panel.add(btn_2);        ctrol_panel.add(btn_3);        ctrol_panel.add(btn_4);        //把四个标签控件和一个文本框控件添加到card_panel容器中。        card_panel.add(lb_1);        card_panel.add(lb_2);        card_panel.add(tf_contentField);        card_panel.add(lb_3);        card_panel.add(lb_4);        this.add(card_panel,BorderLayout.CENTER);        this.add(ctrol_panel,BorderLayout.SOUTH);        this.setSize(400, 300);        this.setVisible(true);    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、容器内可以存放各种组件，而组件的位置和大小是由容器内的布局管理器来决定的。在AWT中为我们提供了以下五种布局管理器。FlowLayout布局管理器、BorderLayout边界布局管理器、GridLayout网格布局管理器、CardLayout卡片布局管理器、&lt;br&gt;G
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的AWT框架和容器</title>
+    <link href="http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84AWT%E6%A1%86%E6%9E%B6%E5%92%8C%E5%AE%B9%E5%99%A8/"/>
+    <id>http://www.echodemo.cc/2018/07/22/Java中的AWT框架和容器/</id>
+    <published>2018-07-22T03:47:02.000Z</published>
+    <updated>2018-07-23T00:27:14.941Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、GUI概述"><a href="#1、GUI概述" class="headerlink" title="1、GUI概述"></a>1、GUI概述</h3><p>(1)GUI(Graphical User Interface)图形化用户界面。用户和程序之间可以通过GUI能方便友好地进行交互。在Java语言中，JFC(Java Foundation Classed)是开发GUI的API集，它主要包括以下几个部分：</p><pre><code>a、AWT(抽象窗口工具包)：Java开发用户界面最初的工具包，是建立JFC的主要基础。b、Swing组件：建立在AWT之上，新的，功能更强大的图形组件包。c、JAVA2D：实现高质量的二维图形。......</code></pre><h3 id="2、AWT框架"><a href="#2、AWT框架" class="headerlink" title="2、AWT框架"></a>2、AWT框架</h3><p>(1)在java.awt包中包含了一个完整的类集以支持GUI程序的设计。awt所提供的控件一般称之为重量级控件，因为awt主要依靠本地方法(操作系统所提供的图形库)来实现其功能，基于此Java为了实现一次编译到处运行的概念，awt就不得不通过牺牲功能来实现(取各个操作系统的交集)。其中的类及相互关系可以用下图来描述。</p><p><img src="/images/2018/7/2.jpg" alt="&quot;类的相互关系&quot;"></p><p>(2)Component类是最核心的类，它是构成Java图形用户界面的基础，大部分组件都是有该类派生出来的。Component类主要由基本组件和容器(Container)组件组成。容器组件组要分为Window容器和Panel容器。</p><p>(3)Frame容器</p><p>a、Window是能独立存在的容器，它有一个子类Frame，它是一个带有标题和缩放角的窗口。</p><p>b、Frame有一个构造方法Frame(String title)。</p><p>c、你可以通过add()方法，在Frame容器中加入其它的组件。</p><p>d、Frame容器有默认的布局管理器。</p><p>e、Frame被创建后，是不可见的。</p><p>f、示例</p><pre><code>package com.iotek.awt;import java.awt.Color;import java.awt.Frame;public class FrameDemo1 {    public static void main(String[] args) {        MyFrame1 myFrame1=new MyFrame1(&quot;标题&quot;);        myFrame1.init();    }}class MyFrame1 extends Frame{    public MyFrame1(String title){        super(title);    }    public void init(){        //this.setSize(300,300);//设置窗体的宽和高        this.setBounds(100, 100, 300, 300);//移动并调整此组件的大小。         this.setBackground(Color.GREEN);//给窗体设置背景颜色        this.setVisible(true);//设置窗体可见    }}</code></pre><p>(4)Panel容器</p><p>a、Panel只能存在于其它的容器(Window或者其子类)中才能显示出来。</p><p>b、通过Panel的默认构造方法Panel()可以创建一个Panel。</p><p>c、示例</p><pre><code>package com.iotek.awt;import java.awt.Button;import java.awt.Color;import java.awt.Frame;import java.awt.Panel;public class FrameDemo2 {    public static void main(String[] args) {        MyFrame2 myFrame2=new MyFrame2(&quot;我的窗体&quot;);        myFrame2.init();    }}class MyFrame2 extends Frame{    public MyFrame2(String title){        super(title);    }    public void init(){        this.setSize(300, 300);        this.setBackground(Color.GREEN);        this.setLayout(null);//去掉窗体的默认布局管理器        Panel panel=new Panel();        panel.setLayout(null);//去掉panel容器的默认布局管理器        panel.setBackground(Color.blue);        panel.setBounds(0, 0, 200, 200);//移动并调整此组件的大小。         Button btn1=new Button(&quot;clickMe&quot;);        btn1.setBounds(0, 0, 100, 100);        btn1.setBackground(Color.red);        panel.add(btn1);//添加按钮到面板中        this.add(panel);//把panel加到窗体中        this.setVisible(true);//让窗体显示    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、GUI概述&quot;&gt;&lt;a href=&quot;#1、GUI概述&quot; class=&quot;headerlink&quot; title=&quot;1、GUI概述&quot;&gt;&lt;/a&gt;1、GUI概述&lt;/h3&gt;&lt;p&gt;(1)GUI(Graphical User Interface)图形化用户界面。用户和程序之间可以通
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的Collections</title>
+    <link href="http://www.echodemo.cc/2018/07/21/Java%E4%B8%AD%E7%9A%84Collections/"/>
+    <id>http://www.echodemo.cc/2018/07/21/Java中的Collections/</id>
+    <published>2018-07-21T11:33:19.000Z</published>
+    <updated>2018-07-21T11:34:33.599Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Collections类及常用API"><a href="#1、Collections类及常用API" class="headerlink" title="1、Collections类及常用API"></a>1、Collections类及常用API</h3><p>(1)Collections类集工具类，定义了若干用于类集和映射(Map)的算法，这些算法被定义为静态方法。</p><p>(2)常用方法：public static void sort(List<t> list);public static int binarySearch(List<t> list,T key);public static void reverse(List&lt;?&gt; list);public static void shuffle(List&lt;?&gt; list);public static vodi swap(List&lt;?&gt; list,int i,int j);public static <t> void fill(List&lt;? super T&gt; list,T obj);</t></t></t></p><p>(3)举例</p><pre><code>package com.iotech.set;import java.util.ArrayList;import java.util.Collections;import java.util.List;public class CollectionsDemo1 {    public static void main(String[] args) {        List&lt;String&gt; nList=new ArrayList&lt;String&gt;();        nList.add(&quot;chenhao&quot;);        nList.add(&quot;zhangsan&quot;);        nList.add(&quot;lisi&quot;);        nList.add(&quot;wangwu&quot;);        nList.add(&quot;rose&quot;);        nList.add(&quot;mary&quot;);        System.out.println(&quot;操作前&quot;);        for(String s:nList){            System.out.print(s+&quot; &quot;);        }        System.out.println();        System.out.println(&quot;交换顺序后&quot;);        Collections.swap(nList, 1, 2);        for(String s:nList){            System.out.print(s+&quot; &quot;);        }        System.out.println();        System.out.println(&quot;自然排序后&quot;);        Collections.sort(nList);        for(String s:nList){            System.out.print(s+&quot; &quot;);        }        System.out.println();        System.out.println(&quot;打乱顺序后&quot;);        Collections.shuffle(nList);        for(String s:nList){            System.out.print(s+&quot; &quot;);        }        System.out.println();        System.out.println(&quot;填充后&quot;);        Collections.fill(nList, &quot;chenhao&quot;);        for(String s:nList){            System.out.print(s+&quot; &quot;);        }    }}</code></pre><h3 id="2、对ArrayList容器中的内容进行排序"><a href="#2、对ArrayList容器中的内容进行排序" class="headerlink" title="2、对ArrayList容器中的内容进行排序"></a>2、对ArrayList容器中的内容进行排序</h3><p>(1)案例介绍</p><p>ArrayList中存储了多个person对象，(此对象包含，名字，年龄，ID)要求按年龄从小到大排序，年龄相等的话再按名字的大小来排序输出。</p><p>(2)案例设计</p><p>使用ArrayList来存储Person对象，使用Collections类所提供的静态sort方法来按要求对ArrayList进行排序，最终输出排好序的结果信息。(这里需要重写Comparator方法。)</p><p>(3)代码实现</p><pre><code>package com.iotech.set;import java.util.ArrayList;import java.util.Collections;import java.util.Comparator;public class CollectionsDemo2 {    public static void main(String[] args) {        ArrayList&lt;Person&gt; nList=new ArrayList&lt;Person&gt;();        nList.add(new Person(&quot;zhangsan&quot;, 17, 0));        nList.add(new Person(&quot;lisi&quot;, 18, 1));        nList.add(new Person(&quot;xiaohong&quot;, 19, 2));        nList.add(new Person(&quot;chenhao&quot;, 20, 3));        nList.add(new Person(&quot;mary&quot;, 17, 4));        Collections.sort(nList,new Comparator&lt;Person&gt;(){//匿名内部类            @Override            public int compare(Person o1, Person o2) {                int x=o1.getAge()-o2.getAge();                if(x&gt;0) return 1;                else if(x&lt;0) return -1;                else{                    return o1.getNameString().compareTo(o2.getNameString());                }            }        });        for(Person person:nList){            System.out.println(person.toString());        }    }}class Person{     private String nameString;     private int age;     private int id;    public Person(String nameString, int age, int id) {        super();        this.nameString = nameString;        this.age = age;        this.id = id;    }    public String getNameString() {        return nameString;    }    public void setNameString(String nameString) {        this.nameString = nameString;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    public int getId() {        return id;    }    public void setId(int id) {        this.id = id;    }    @Override    public String toString() {        return &quot;Person [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;, id=&quot; + id + &quot;]&quot;;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Collections类及常用API&quot;&gt;&lt;a href=&quot;#1、Collections类及常用API&quot; class=&quot;headerlink&quot; title=&quot;1、Collections类及常用API&quot;&gt;&lt;/a&gt;1、Collections类及常用API&lt;/h3&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的Set</title>
+    <link href="http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Set/"/>
+    <id>http://www.echodemo.cc/2018/07/20/Java中的Set/</id>
+    <published>2018-07-20T15:50:08.000Z</published>
+    <updated>2018-07-20T15:51:07.617Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Set容器的特点"><a href="#1、Set容器的特点" class="headerlink" title="1、Set容器的特点"></a>1、Set容器的特点</h3><p>Set容器是一个不包含重复元素的Collection，并且最多包含一个null元素，它和List容器相反，Set容器不能保证其元素的顺序。最常用的两个Set接口的实现类是HashSet和TreeSet。</p><h3 id="2、HashSet及常用API"><a href="#2、HashSet及常用API" class="headerlink" title="2、HashSet及常用API"></a>2、HashSet及常用API</h3><p>(1)HashSet扩展AbstractSet并实现Set接口，HashSet使用散列表(又称之为哈希表)进行存储。<strong>(HashSet底层实际上维护了一个HashMap，只是我们操作的是HashMap的key，而HashMap底层维护了哈希表)</strong></p><p>(2)构造方法：HashSet();HashSet(Collection c);HashSet(int capacity);HashSet(int capacity,float fillRatio)。</p><p>(3)HashSet没有定义任何超过它的父类和接口提供的其他方法，散列集合没有确保其元素的顺序，因为散列处理通常不参与排序。</p><p>(4)举例</p><pre><code>package com.iotech.set;import java.util.HashSet;public class HashSetDemo1 {    public static void main(String[] args) {        /*HashSet&lt;String&gt; hashSet=new HashSet&lt;String&gt;();        hashSet.add(&quot;zhangsan&quot;);        hashSet.add(&quot;lisi&quot;);        hashSet.add(&quot;jay&quot;);        hashSet.add(&quot;jack&quot;);        System.out.println(hashSet.add(&quot;jay&quot;));        System.out.println(hashSet);*/        HashSet&lt;Student&gt; hashSet=new HashSet&lt;Student&gt;();         System.out.println(hashSet.add(new Student(&quot;张三&quot;, 20)));        System.out.println(hashSet.add(new Student(&quot;李四&quot;, 30)));        System.out.println(hashSet.add(new Student(&quot;张三&quot;, 20)));        System.out.println(hashSet.size());    }}class Student{    private String name;    private int age;    public Student(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int hashCode() {        final int prime = 31;        int result = 1;        result = prime * result + age;        result = prime * result + ((name == null) ? 0 : name.hashCode());        return result;    }    @Override    public boolean equals(Object obj) {        if (this == obj)            return true;        if (obj == null)            return false;        if (getClass() != obj.getClass())            return false;        Student other = (Student) obj;        if (age != other.age)            return false;        if (name == null) {            if (other.name != null)                return false;        } else if (!name.equals(other.name))            return false;        return true;    }}</code></pre><h3 id="3、TreeSet及常用API"><a href="#3、TreeSet及常用API" class="headerlink" title="3、TreeSet及常用API"></a>3、TreeSet及常用API</h3><p>(1)TreeSet为使用树来进行存储的Set接口提供了一个工具，对象按升序存储，访问和检索很快。在存储了大量的需要进行快速检索的排序信息的情况下，TreeSet是一个很好的选择。<strong>(事实上，TreeSet的底层就是TreeMap实现的，只是我们操作的是TreeMap的Key)</strong></p><p>(2)构造方法：TreeSet();TreeSet(Collection c);TreeSet(Comparator comp);TreeSet(SortedSet ss)。</p><p>(3)举例</p><pre><code>package com.iotech.set;import java.util.Iterator;import java.util.TreeSet;public class TreeSetDemo1 {    public static void main(String[] args) {        TreeSet&lt;Person&gt; treeSet=new TreeSet&lt;Person&gt;();        treeSet.add(new Person(&quot;chenhao&quot;, 30));        treeSet.add(new Person(&quot;lisi&quot;, 20));        treeSet.add(new Person(&quot;wangwu&quot;, 10));        treeSet.add(new Person(&quot;rose&quot;, 40));        Iterator&lt;Person&gt; iterator=treeSet.iterator();        while(iterator.hasNext()){            Person person=iterator.next();            System.out.println(person.getName()+&quot;--&gt;&quot;+person.getAge());        }    }}class Person implements Comparable&lt;Person&gt;{    private String name;    private int age;    public Person(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int compareTo(Person o) {        int x=this.age-o.age;        if(x&gt;0) return 1;        else if(x&lt;0) return -1;        return 0;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Set容器的特点&quot;&gt;&lt;a href=&quot;#1、Set容器的特点&quot; class=&quot;headerlink&quot; title=&quot;1、Set容器的特点&quot;&gt;&lt;/a&gt;1、Set容器的特点&lt;/h3&gt;&lt;p&gt;Set容器是一个不包含重复元素的Collection，并且最多包含一个nul
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的Map</title>
+    <link href="http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Map/"/>
+    <id>http://www.echodemo.cc/2018/07/20/Java中的Map/</id>
+    <published>2018-07-20T13:17:34.000Z</published>
+    <updated>2018-07-20T13:18:23.731Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Map接口详解"><a href="#1、Map接口详解" class="headerlink" title="1、Map接口详解"></a>1、Map接口详解</h3><p>(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。</p><p>(2)键必须是唯一的，值可以重复。</p><p>(3)有些映射可以接收null键和null值，而有的不能。</p><p>(4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue(Object value);V get(Object key);V put(K key,V value);V remove(Object key);Collection<v> values();Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet();返回包含的映射关系的Set视图，Map接口定义的entrySet()方法返回包含映射项Entry的集合(Set)，集合中元素是Map.Entry类型。</v></p><p>(5)Map.Entry接口代表映射项(键-值对)类型，是Map的嵌套类型(是Map的内部类)。</p><p>(6)Map.Entry接口定义的方法：K getKey();V getValue();V setValue(V value)。</p><h3 id="2、HashMap及常用API"><a href="#2、HashMap及常用API" class="headerlink" title="2、HashMap及常用API"></a>2、HashMap及常用API</h3><p>(1)HashMap类是基于哈希表的map接口的实现，并允许使用null键和null值。</p><p>(2)构造方法：HashMap();HashMap(Map m);HashMap(int capacity);HashMap(int capacity,float fillRatio)。</p><p>(3)HashMap实现并扩展AbstractMap，本身并没有增加任何新的方法。</p><p>(4)散列映射不保证它的元素的顺序，元素加入散列映射的顺序并不一定是它们被迭代读出的顺序。</p><p>(5)HashMap常用方法举例</p><pre><code>package com.iotech.map;import java.util.Collection;import java.util.HashMap;import java.util.Map.Entry;import java.util.Set;public class HashMapDemo1 {    public static void main(String[] args) {        HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;();        hashmap.put(&quot;jay&quot;, &quot;张三&quot;);        hashmap.put(&quot;jay&quot;, &quot;李四&quot;);        hashmap.put(&quot;rose&quot;, &quot;玫瑰&quot;);        hashmap.put(&quot;Mary&quot;, &quot;小红&quot;);        System.out.println(hashmap);        //获取map中的所有键        /*Set&lt;String&gt; keysSet=hashmap.keySet();         for(String name:keysSet){            System.out.println(name);        }*/        //获取map中的所有值        Collection&lt;String&gt; values=hashmap.values();        for(String value:values){            System.out.println(value);        }        //得到key的同时得到key所对应的值        Set&lt;String&gt; keysSet=hashmap.keySet();         for(String name:keysSet){            System.out.println(name+&quot;--&gt;&quot;+hashmap.get(name));        }        System.out.println(hashmap.size());        System.out.println(hashmap.isEmpty());        //当我们调用put(key,value)方法的时候，首先会把key和value封装到Entry这个静态内部类对象中。        //把Entry对象再添加到数组中，所以我们想获取map中的所有键值对，我们只要获取数组中的所有Entry对象，        //接下来调用Entry对象中的getkey()和getvalue()方法就能获取键值对。        Set&lt;Entry&lt;String,String&gt;&gt; entrySet=hashmap.entrySet();        for(Entry&lt;String, String&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }        /*         * hashmap调用默认构造方法会产生一个底层长度为16的Entry数组          * int hash=hash(key.hashCode());         * 首先调用key的hashCode方法来得到一个整数(哈希码)，把哈希码作为参数传到hash函数中来进行运算(散列运算)         * 得到一个整型(散列值)。hashCode()方法能够提高哈希表的性能。         * int i=indexFor(hash,table.length);         * 把散列值和数组的长度来进行运算，最终得到entry对象存放到数组的位置(下标)。         *          * hashmap内部的结构是一个数组链表结构。因为不同的key有可能算出来是相同的散列值，根据散列值计算出存放数组         * 的下标会冲突。         */    }}</code></pre><h3 id="3、哈希码的产生和使用"><a href="#3、哈希码的产生和使用" class="headerlink" title="3、哈希码的产生和使用"></a>3、哈希码的产生和使用</h3><p>(1)hashCode的常规协定：在Java应用程序执行期间，在对同一对象多次调用hashCode方法时，必须一致地返回相同的整数，前提是将对象进行equals比较时所用的信息没有被修改。从某一应用程序的一次执行到同一应用程序的另一次执行，该整数无需保持一致。</p><p>(2)如果根据equals(Object)方法，两个对象是相等的那么这两个对象中的每个对象调用hashCode方法都必须生成相同的整数结果。(这里的equals方法是指Object类中没有被子类重写过的equals方法)。</p><p>(3)如果根据equals(java.lang.Object)方法，两个对象不相等，那么对这两个对象中的任一对象上调用hashCode方法不要求一定生成不同的整数结果。但是，程序员应该意识到，为不相等的对象生成不同整数结果可以提高哈希表的性能。</p><p>(4)举例</p><pre><code>package com.iotech.map;import java.util.HashMap;import java.util.Map;public class HashCodeDemo2 {    public static void main(String[] args) {        Map&lt;Student, String&gt; map=new HashMap&lt;Student, String&gt;();        map.put(new Student(&quot;jay&quot;, 20), &quot;张三&quot;);        map.put(new Student(&quot;lisi&quot;, 30), &quot;李四&quot;);        map.put(new Student(&quot;rose&quot;, 20), &quot;玫瑰&quot;);        map.put(new Student(&quot;lisi&quot;, 30), &quot;陈豪&quot;);        /*要满足student键值相等，首先需要hashCode相等，另外还需要key的equals方法相等。所以需要重写        hashCode()和equals()方法。*/        System.out.println(map);        System.out.println(map.size());    }}class Student{    private String name;    private int age;    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public Student(String name, int age) {        super();        this.name = name;        this.age = age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int hashCode() {        final int prime = 31;        int result = 1;        result = prime * result + age;        result = prime * result + ((name == null) ? 0 : name.hashCode());        return result;    }    @Override    public boolean equals(Object obj) {        if (this == obj)            return true;        if (obj == null)            return false;        if (getClass() != obj.getClass())            return false;        Student other = (Student) obj;        if (age != other.age)            return false;        if (name == null) {            if (other.name != null)                return false;        } else if (!name.equals(other.name))            return false;        return true;    }}</code></pre><h3 id="4、TreeMap及常用API"><a href="#4、TreeMap及常用API" class="headerlink" title="4、TreeMap及常用API"></a>4、TreeMap及常用API</h3><p>(1)TreeMap类通过使用红黑树实现Map接口。</p><p>(2)TreeMap提供按排序顺序存储键/值对的有效手段，同时允许快速检索。</p><p>(3)TreeMap不像散列映射，树映射保证它的元素按关键字升序排序。</p><p>(4)TreeMap的构造方法：TreeMap();TreeMap(Comparator comp);TreeMap(Map m);TreeMap(SortedMap sm)。</p><p>(5)TreeMap实现SortedMap并且扩展AbstractMap，它本身没有定义其他的方法。</p><p>(6)举例一</p><pre><code>package com.iotech.map;import java.util.Set;import java.util.TreeMap;import java.util.Map.Entry;public class TreeMapDemo1 {    public static void main(String[] args) {        TreeMap&lt;String,String&gt; treeMap=new TreeMap&lt;String, String&gt;();        treeMap.put(&quot;jack&quot;, &quot;zhangsan&quot;);        treeMap.put(&quot;mary&quot;, &quot;xiaohong&quot;);        treeMap.put(&quot;rose&quot;, &quot;xiaozhang&quot;);        treeMap.put(&quot;free&quot;, &quot;xiaoming&quot;);        treeMap.put(&quot;rose&quot;, &quot;chenhao&quot;);        //TreeMap是按照键来进行排序的，而String实现了comparable接口，所以是没有问题的。        System.out.println(treeMap);        Set&lt;Entry&lt;String, String&gt;&gt; entrySet=treeMap.entrySet();        for(Entry&lt;String, String&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }    }}</code></pre><p>(7)举例二</p><pre><code>package com.iotech.map;import java.util.Comparator;import java.util.TreeMap;public class TreeMapDemo2 {    public static void main(String[] args) {        TreeMap&lt;Person,String&gt; treeMap=new TreeMap&lt;Person,String&gt;(new Comparator&lt;Person&gt;() {            @Override            public int compare(Person o1, Person o2) {                int x=o1.getAge()-o2.getAge();                if(x&gt;0) return 1;                else if(x&lt;0) return -1;                return 0;            }        });        treeMap.put(new Person(&quot;zhangsan&quot;, 30), &quot;张三&quot;);        treeMap.put(new Person(&quot;lisi&quot;, 31), &quot;李四&quot;);        treeMap.put(new Person(&quot;rose&quot;, 32), &quot;玫瑰&quot;);        treeMap.put(new Person(&quot;zhangsan&quot;, 33), &quot;张三&quot;);        //这里的Person作为TreeMap中的键，也是需要进行排序的，所以Person类也需要继承Comparable接口，        //因此也需要重写CompareTo()方法。        System.out.println(treeMap);    }}class Person/* implements Comparable&lt;Person&gt;*/{    private String name;    private int age;    public Person(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    /*@Override    public int compareTo(Person o) {        int x=this.age-o.getAge();        if(x&gt;0){            return 1;        }else if(x&lt;0){            return -1;        }        return 0;    }*/}</code></pre><h3 id="5、Comparator和Comparable接口"><a href="#5、Comparator和Comparable接口" class="headerlink" title="5、Comparator和Comparable接口"></a>5、Comparator和Comparable接口</h3><p>TreeMap的key存储引用数据类型，需要满足一定条件，要么引用类型实现Comparable接口，要么为该TreeMap容器提供实现Comparator接口的比较器对象。对应上面例二的两种实现方式。</p><h3 id="6、案例讲解"><a href="#6、案例讲解" class="headerlink" title="6、案例讲解"></a>6、案例讲解</h3><p>(1)给定一个字符数组，数组中内容有重复，现要求打印输出各个字符串出现的次数。</p><p>(2)使用HashMap来设计，HashMap的key可以用来保存字符串，value用来保存字符串所对应的次数，从HashMap中获取不存在的key所对应的值为null。</p><p>(3)代码实现</p><pre><code>package com.iotech.map;import java.util.HashMap;import java.util.Map.Entry;import java.util.Set;public class HashMapTest {    public static void main(String[] args) {        String[] string={&quot;zhangsan&quot;,&quot;lisi&quot;,&quot;wangwu&quot;,&quot;jack&quot;,&quot;zhangsan&quot;,&quot;zhangsan&quot;,&quot;wangwu&quot;};        HashMap&lt;String,Integer&gt; hashMap=new HashMap&lt;String,Integer&gt;();        for(int i=0;i&lt;string.length;i++){            if(null==hashMap.get(string[i])){                hashMap.put(string[i], 1);            }else{                hashMap.put(string[i], hashMap.get(string[i])+1);            }        }        Set&lt;Entry&lt;String,Integer&gt;&gt; entrySet=hashMap.entrySet();        for(Entry&lt;String,Integer&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Map接口详解&quot;&gt;&lt;a href=&quot;#1、Map接口详解&quot; class=&quot;headerlink&quot; title=&quot;1、Map接口详解&quot;&gt;&lt;/a&gt;1、Map接口详解&lt;/h3&gt;&lt;p&gt;(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的迭代模式举例</title>
@@ -72,9 +223,9 @@
     <link href="http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/"/>
     <id>http://www.echodemo.cc/2018/07/18/Java中的集合/</id>
     <published>2018-07-18T11:29:49.000Z</published>
-    <updated>2018-07-18T11:30:47.859Z</updated>
+    <updated>2018-07-23T00:26:36.842Z</updated>
     
-    <content type="html"><![CDATA[<p>1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。</p><p>2、集合框架中不同的集合类有各自不同的数据结构，所以在使用中要根据应用的性能要求来选择不同的集合类。</p><p>3、集合类存放在java.util包中，今后进行程序编程时将大量使用集合类和相关接口。其中包括Iterable:迭代器接口；Collection：类集接口；List：列表接口；Set：数据集接口；Queue：队列；Map：键值对组合映射表。</p><p>(1)Iterable接口</p><p>实现该接口允许对象成为“foreach”语句的目标，即该集合对象允许迭代。类集接口Collection是Iterable的子接口，所以所有类集对象可以迭代访问，而映射Map不行。(Map并没有实现Iterable接口)</p><p>Iterator<t>iterator():功能：返回一个在一组T类型的元素上进行迭代的迭代器对象。迭代器是实现了Iterator/ListIterator接口的类的对象，可以通过遍历类集，访问操作其中的每个元素。ListIterator继承了父接口Iterator，允许双向遍历集合，并可以修改和删除元素。</t></p><p>(2)Collection接口</p><p>int size();boolean isEmpty();boolean contains(Object o);Iterator<e> iterator;Object[] toArray();boolean add(E e);boolean remove(Object o);void clear()。等等</e></p><p>(3)List、Set、Map接口</p><p>List接口扩展了Collection，有序且可重复；Set接口扩展了Collection，无序且不可重复；Map是一个存储关键字/值对的对象。映射不是Collection的子接口，所以它本身不能使用迭代器来进行遍历。</p>]]></content>
+    <content type="html"><![CDATA[<p>1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。</p><p>2、集合框架中不同的集合类有各自不同的数据结构，所以在使用中要根据应用的性能要求来选择不同的集合类。</p><p>3、集合类存放在java.util包中，今后进行程序编程时将大量使用集合类和相关接口。其中包括Iterable:迭代器接口；Collection：类集接口；List：列表接口；Set：数据集接口；Queue：队列；Map：键值对组合映射表。</p><p><img src="/images/2018/7/1.jpg" alt="&quot;集合框架&quot;"></p><p>(1)Iterable接口</p><p>实现该接口允许对象成为“foreach”语句的目标，即该集合对象允许迭代。类集接口Collection是Iterable的子接口，所以所有类集对象可以迭代访问，而映射Map不行。(Map并没有实现Iterable接口)</p><p>Iterator<t>iterator():功能：返回一个在一组T类型的元素上进行迭代的迭代器对象。迭代器是实现了Iterator/ListIterator接口的类的对象，可以通过遍历类集，访问操作其中的每个元素。ListIterator继承了父接口Iterator，允许双向遍历集合，并可以修改和删除元素。</t></p><p>(2)Collection接口</p><p>int size();boolean isEmpty();boolean contains(Object o);Iterator<e> iterator;Object[] toArray();boolean add(E e);boolean remove(Object o);void clear()。等等</e></p><p>(3)List、Set、Map接口</p><p>List接口扩展了Collection，有序且可重复；Set接口扩展了Collection，无序且不可重复；Map是一个存储关键字/值对的对象。映射不是Collection的子接口，所以它本身不能使用迭代器来进行遍历。</p>]]></content>
     
     <summary type="html">
     
@@ -381,172 +532,6 @@ offset=1 =&amp;gt; &amp;quot;ga
     
     
       <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客</title>
-    <link href="http://www.echodemo.cc/2018/05/18/%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://www.echodemo.cc/2018/05/18/博客/</id>
-    <published>2018-05-17T22:25:28.000Z</published>
-    <updated>2018-05-17T23:01:25.820Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那些无形的似水流年就在与键盘的敲击中悄悄地溜走，犹如匆匆而去的大学时光，此刻也即将消耗殆尽。怀着对诗词、书卷和生活的热爱，还有一入程序员之路深似海的决心（但写字不能成为路人）。日志当然也是要继续写下去的！记录时间的流逝，也记录自己来时的路。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在清晨的光里，校园中的枣树，梨树，桃树，柚子树，桔子树，杨梅树，紫叶李，还有枇杷树的果实均已挂满枝头，一派夏季欣欣向荣的景象。从莺飞草长的三月搭建博客至今，日志的数量在不知不觉间已经破百。那
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode 合并排序数组 II</title>
-    <link href="http://www.echodemo.cc/2018/05/17/LintCode-%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84II/"/>
-    <id>http://www.echodemo.cc/2018/05/17/LintCode-合并排序数组II/</id>
-    <published>2018-05-17T14:53:47.000Z</published>
-    <updated>2018-05-18T05:17:36.062Z</updated>
-    
-    <content type="html"><![CDATA[<p>合并两个排序的整数数组A和B变成一个新的数组。</p><pre><code>样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6]</code></pre><p>挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？</p><p>题目代码：</p><pre><code>class Solution {public:    /**     * @param A: sorted integer array A     * @param B: sorted integer array B     * @return: A new sorted integer array     */    vector&lt;int&gt; mergeSortedArray(vector&lt;int&gt; &amp;A, vector&lt;int&gt; &amp;B) {        // write your code here        int a=A.size();        int b=B.size();        int c=a+b;        vector&lt;int&gt; C(c);        int i=0,j=0,k=0;        while(i&lt;a&amp;&amp;j&lt;b){            if(A[i]&lt;=B[j]){                C[k++]=A[i++];            }else{                C[k++]=B[j++];            }        }        while(i&lt;a) C[k++]=A[i++];        while(j&lt;b) C[k++]=B[j++];        return C;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;合并两个排序的整数数组A和B变成一个新的数组。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;样例：给出A=[1,2,3,4]，B=[2,4,5,6]，返回 [1,2,2,3,4,4,5,6]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;挑战：你能否优化你的算法，如果其中一个数组很大而另一个数组很小？
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode 第k大元素</title>
-    <link href="http://www.echodemo.cc/2018/05/17/LintCode-%E7%AC%ACk%E5%A4%A7%E5%85%83%E7%B4%A0/"/>
-    <id>http://www.echodemo.cc/2018/05/17/LintCode-第k大元素/</id>
-    <published>2018-05-17T14:21:02.000Z</published>
-    <updated>2018-05-17T14:52:36.212Z</updated>
-    
-    <content type="html"><![CDATA[<p>在数组中找到第k大的元素，你可以交换数组中的元素的位置。</p><pre><code>样例：给出数组 [9,3,2,4,8]，第三大的元素是 4</code></pre><p>给出数组 [1,2,3,4,5]，第一大的元素是 5，第二大的元素是 4，第三大的元素是 3，以此类推</p><pre><code>挑战：要求时间复杂度为O(n)，空间复杂度为O(1)</code></pre><p>题目代码：</p><pre><code>class Solution {public:    /*     * @param n: An integer     * @param nums: An array     * @return: the Kth largest element     */    int kthLargestElement(int n, vector&lt;int&gt; &amp;nums) {        // write your code here        int i=nums.size();        sort(nums.begin(),nums.end());        return nums[i-n];    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在数组中找到第k大的元素，你可以交换数组中的元素的位置。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;样例：给出数组 [9,3,2,4,8]，第三大的元素是 4
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;给出数组 [1,2,3,4,5]，第一大的元素是 5，第二大的元素是 4，第三大的元素是 3，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LintCode 丑数 II</title>
-    <link href="http://www.echodemo.cc/2018/05/15/LintCode-%E4%B8%91%E6%95%B0II/"/>
-    <id>http://www.echodemo.cc/2018/05/15/LintCode-丑数II/</id>
-    <published>2018-05-15T01:35:32.000Z</published>
-    <updated>2018-05-15T02:49:19.449Z</updated>
-    
-    <content type="html"><![CDATA[<p>设计一个算法，找出只含素因子2，3，5 的第 n 小的数。</p><p>符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12…</p><p>我们可以认为1也是一个丑数</p><pre><code>样例：如果n = 9， 返回 10</code></pre><p>挑战：要求时间复杂度为O(nlogn)或者O(n)</p><p>方法一：如果采用遍历的方式，无法完全通过，会造成超时。</p><pre><code>class Solution {public:    /**     * @param n: An integer     * @return: the nth prime number as description.     */    long long nthUglyNumber(int n) {        // write your code here        int count = 0;          int i = 0;            while(count &lt; n)          {              m++;              int number = i;              while(number % 2 == 0)                  number = number / 2;              while(number % 3 == 0)                  number = number / 3;              while(number % 5 == 0)                  number = number / 5;              if(number == 1)              {                  count++;              }          }          return i;      }};</code></pre><p>方法二：是从1开始构造丑数，然后依次计数。</p><pre><code>class Solution {public:    /*     * @param n an integer     * @return the nth prime number as description.     */    int nthUglyNumber(int n) {        // write your code here        int count = 1;//统计丑数        vector&lt;int&gt; ugly(n,0);//保存丑数        ugly[0] = 1;//第一个丑数        vector&lt;int&gt; idx(3,0);        while(count &lt; n)        {            int a = 2 * ugly[idx[0]];            int b = 3 * ugly[idx[1]];            int c = 5 * ugly[idx[2]];            int temp = min(min(a, b), c);            if(temp == a)              ++idx[0];            if(temp == b)              ++idx[1];            if(temp == c)              ++idx[2];            ugly[count] = temp;            ++count;        }        return ugly[n-1];    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;设计一个算法，找出只含素因子2，3，5 的第 n 小的数。&lt;/p&gt;
-&lt;p&gt;符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12…&lt;/p&gt;
-&lt;p&gt;我们可以认为1也是一个丑数&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;样例：如果n = 9， 返回 10
-&lt;/code
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LintCode" scheme="http://www.echodemo.cc/tags/LintCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>不孝有三，无后为大？</title>
-    <link href="http://www.echodemo.cc/2018/05/14/%E4%B8%8D%E5%AD%9D%E6%9C%89%E4%B8%89%EF%BC%8C%E6%97%A0%E5%90%8E%E4%B8%BA%E5%A4%A7%EF%BC%9F/"/>
-    <id>http://www.echodemo.cc/2018/05/14/不孝有三，无后为大？/</id>
-    <published>2018-05-14T02:21:06.000Z</published>
-    <updated>2018-05-16T01:28:51.964Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“不孝有三，无后为大”这八字言语基本上作为炎黄子孙的一员都曾有所耳闻。此语出自《孟子离娄上》：“不孝有三，无后为大。舜不告而娶，为无后也。君子以为犹告也。”</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传统的观点认为：无后就是指没有后代，更准确地来说是没有子嗣的意思。然而孟子在《离娄章句下》中说：“世俗所谓不孝者五：惰其四支，不顾父母之养，一不孝也；博弈好饮酒，不顾父母之养，二不孝也；好货财，私妻子，不顾父母之养，三不孝也；从耳目之欲，以为父母戮，四不孝也；好勇斗狠，以危父母，五不孝也。”如果说“无后”是指没有后代的话，那么这里的五不孝中肯定有一条是“无后”，但是五不孝中没有一条提及“没有后代”。另外，再来看“不孝有三，无后为大”的后文，说的是：舜不告而娶，为无后也。舜没有告知父母就擅自娶妻，为无后也。这里的“为”字可以表承接关系“就是”的意思，也可以表目的“为了”的意思。然而不管哪一种说法，都与传统的意思不符。第一，取了妻子怎么能说就是没有后代呢，恰恰相反，娶妻就是为了能够繁衍后代；第二，取了妻子又怎么能说是为了没有后代呢。这些都明显和上文“舜不告而娶”的意思不衔接，跨度未免太大些了。最后孟子还说到：君子认为应该把娶妻这件事情告诉父母，这和没有子嗣又有何关系呢？话说像亚圣这种高智慧生物，怎么会犯如此低级的逻辑错误呢？</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么如果采用第二种观点，“无后”指没有尽到后辈的责任也就都能够说的通了。首先，孟子的五不孝讲的都是后辈未尽之责，同时在古文当中使用具体的数字时常常是虚指而并非实指，用三来代五也完全说的过去。例如：飞流直下三千尺。三人行，必有我师焉。军书十二卷，卷卷有爷名。等都是虚指。其次，下文的舜不告而娶，就是没有尽到后辈的责任和君子认为应该把娶妻这件事情告诉父母的意思也都衔接得恰到好处。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;“不孝有三，无后为大”这八字言语基本上作为炎黄子孙的一员都曾有所耳闻。此语出自《孟子离娄上》：“不孝有三，无后为大。舜不告而娶，为无后也。君子以为犹告也。”&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nb
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《生活教会你》摘句</title>
-    <link href="http://www.echodemo.cc/2018/05/13/%E3%80%8A%E7%94%9F%E6%B4%BB%E6%95%99%E4%BC%9A%E4%BD%A0%E3%80%8B%E6%91%98%E5%8F%A5/"/>
-    <id>http://www.echodemo.cc/2018/05/13/《生活教会你》摘句/</id>
-    <published>2018-05-13T06:32:39.000Z</published>
-    <updated>2018-05-13T06:38:46.136Z</updated>
-    
-    <content type="html"><![CDATA[<p>在读完读完本书的第一章之后，我想：这真是一本好书，如此多的发人深省的话语，着实让人钦佩。这不是心灵鸡汤，而是自己内心也十分认可的观点。但随着章节的推移，内容虽然不像前面那么让我着迷，但丝毫没有影响我在豆瓣为它打上四星的评分。</p><p>1、对儿童教育而言，最重要的是让孩子拥有好奇心、兴趣、想象力以及对生活的探索精神。</p><p>2、我们在家和学校接受教育，最重要的是，我们从生活本身接受教育。学习应当贯穿我们的一生。生命总是在不断变动，要么前进，要么后退。只有当一个人在不断成长时，生活才会有趣；换句话说，只有当我们仍对生活怀有兴趣时，才能取得成长。</p><p>3、杜威的这种进步主义教育并不试图将孩子引向他不愿去的地方。孩子不会被逼着遵守什么准则，除非他自己乐意去做或认为值得去做。</p><p>4、从长远来看，有价值的并非是一个人读了什么书，而是独立思考并吸收了什么东西，是通过阅读激发的那些想法和感觉。正是你自己的想法，独立思考得出的那些想法，使你成为一个有意思的人。</p><p>5、通过别人来激发自己的兴趣—在我看来，这是效率最高、最有收获的教育方法之一。你要做的只是去寻找这个兴趣点。这会让每段经历都成为一种挑战，并使人永葆好奇—好奇心是一个人最宝贵的品质之一。</p><p>6、每个孩子的“为什么”都应得到尊重，得到用心的回答。如果你不知道问题的答案（实际情况通常如此），那就带着孩子一起寻找答案。</p><p>7、当我逐渐真正观察起周围的事物，试着去理解它们时，生活中的每件事情都变得更加有趣，也更有价值。这就像以三维视角去看一张二维的照片，看待问题有了更多的深度。</p><p>8、好在，每当我们与恐惧作战时，哪怕当时认为它不可战胜，哪怕在过程中受尽折磨，只要经受住痛苦，克服了恐惧，你会发现获得了更大的自由。一个人只要经受住一次这种考验，就可以经受住任何事情。每一次与恐惧的正面对决都会让我们收获力量、勇气与自信。</p><p>9、放下自我。如果你能放下自我，不去想是否给别人留下好印象，不去管人们怎么看你，反过来替别人着想，你就不会再感到胆怯和恐惧。恐惧在很大程度上是由于缺乏了解。我们不知道在新环境会发生什么，也不知道自己能否应对。越早知道会发生什么，就能越早从恐惧中解脱出来。</p><p>10、“我做不到。”这种话说来容易。实际上，你会发现其实自己做得到。尝试去做某件事情不仅能让自己摆脱恐惧的束缚，还能锻炼承受能力，并从成就感中获得自由。</p><p>11、我自己一般有三种办法：第一，保持内心平静，以使工作时不受周围环境影响；第二，专注在手头的事情上；第三，建立起生活规律，分配好时间，提前计划每件事情，同时又留有余地以备不患。除此之外，还有一点也很重要：那就是保持身体健康，保证有充沛的精力可用。</p><p>12、一个人只有愿意接受自身存在不足这一残酷事实，愿意做出调整去适应它，才算得上真正的成熟。成熟的一个重要部分，就是不仅接受自己的缺点，也接纳你所爱之人的缺点，并尽可能地帮助他们避免出错。</p><p>13、“对自己和身边的人诚实以待；在生活和工作中竭尽全力；拥有爱别人的能力。”实际上，获得快乐还有一个条件，当时我不知为何落了这条：那就是感到自己是一个有用的人。</p><p>14、对大部分人来说，渴望被他人需要的愿望比自己意识到的还要强烈。人们常说一个人需要表现自我，但是一般来说，表现自我带来的满足感不如满足他人带来的满足感多。</p><p>15、我们总以为每个人都想得到自由，但事实并非如此。对很多人来说，放弃自由，让别人指导自己，让别人给自己做决定，比为自己和自己的决定负责要快乐得多。他们不想自己动脑，也不想自己做主。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在读完读完本书的第一章之后，我想：这真是一本好书，如此多的发人深省的话语，着实让人钦佩。这不是心灵鸡汤，而是自己内心也十分认可的观点。但随着章节的推移，内容虽然不像前面那么让我着迷，但丝毫没有影响我在豆瓣为它打上四星的评分。&lt;/p&gt;
-&lt;p&gt;1、对儿童教育而言，最重要的是让孩
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   

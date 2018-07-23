@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84AWT%E6%A1%86%E6%9E%B6%E5%92%8C%E5%AE%B9%E5%99%A8/</loc>
+    
+    <lastmod>2018-07-23T00:27:14.941Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</loc>
+    
+    <lastmod>2018-07-23T00:26:36.842Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84AWT%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</loc>
+    
+    <lastmod>2018-07-22T15:05:46.887Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8/</loc>
+    
+    <lastmod>2018-07-22T06:26:27.868Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/21/Java%E4%B8%AD%E7%9A%84Collections/</loc>
+    
+    <lastmod>2018-07-21T11:34:33.599Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Set/</loc>
+    
+    <lastmod>2018-07-20T15:51:07.617Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Map/</loc>
+    
+    <lastmod>2018-07-20T13:18:23.731Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.echodemo.cc/2018/07/19/Java%E4%B8%AD%E7%9A%84%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F%E4%B8%BE%E4%BE%8B/</loc>
     
     <lastmod>2018-07-19T12:49:53.348Z</lastmod>
@@ -12,13 +61,6 @@
     <loc>http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84List/</loc>
     
     <lastmod>2018-07-18T16:02:40.570Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</loc>
-    
-    <lastmod>2018-07-18T11:30:47.859Z</lastmod>
     
   </url>
   
