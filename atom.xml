@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-23T13:24:10.603Z</updated>
+  <updated>2018-07-24T10:21:05.537Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java反射API(一)</title>
+    <link href="http://www.echodemo.cc/2018/07/24/Java%E5%8F%8D%E5%B0%84API(%E4%B8%80)/"/>
+    <id>http://www.echodemo.cc/2018/07/24/Java反射API(一)/</id>
+    <published>2018-07-24T10:18:29.000Z</published>
+    <updated>2018-07-24T10:21:05.537Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Java-lang-reflect库"><a href="#1、Java-lang-reflect库" class="headerlink" title="1、Java.lang.reflect库"></a>1、Java.lang.reflect库</h3><p>Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class<t>:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法；Array类：提供动态创建数组，以及访问数组的元素的静态方法。</t></p><h3 id="2、通过反射实例化对象"><a href="#2、通过反射实例化对象" class="headerlink" title="2、通过反射实例化对象"></a>2、通过反射实例化对象</h3><p>(1)平常情况我们通过new Object来生成一个类的实例，但有时候我们没法直接new，只能通过反射动态生成。</p><p>(2)实例化无参构造函数的对象，两种方式：</p><pre><code>Class.newInstace();Class.getConstructor(new Class[]{}).newInstance(new Object[]{});</code></pre><p>(3)实例化带参构造函数的对象</p><pre><code>Class.getConstructor(Class&lt;?&gt;...parameterTypes).newInstance(Object...initargs);</code></pre><h3 id="3、通过反射获取并调用方法"><a href="#3、通过反射获取并调用方法" class="headerlink" title="3、通过反射获取并调用方法"></a>3、通过反射获取并调用方法</h3><p>(1)获得当前类以及超类的public Method</p><pre><code>Method[] arrMethods=classType.getMethods();</code></pre><p>(2)获得当前类申明的所有Method</p><pre><code>Method arrMethods=classTyep.getDeclaredMethods();</code></pre><p>(3)获得当前类以及超类指定的public Method</p><pre><code>Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(4)获得当前类申明的指定的Method</p><pre><code>Method method=classType.getDeclaredMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(5)通过反射动态运行指定Method</p><pre><code>Object  obj=method.invoke(Object obj,Object...args);</code></pre><h3 id="4、通过反射获取并调用属性"><a href="#4、通过反射获取并调用属性" class="headerlink" title="4、通过反射获取并调用属性"></a>4、通过反射获取并调用属性</h3><p>(1)获得当前类以及超类的public Field</p><pre><code>Field[] arrFields=classType.getFields();</code></pre><p>(2)获得当前类申明的所有Field</p><pre><code>Field[] arrFields=classFields=classType.getDeclaredFields();</code></pre><p>(3)获得当前类以及超类指定的public Field</p><pre><code>Field field=classType.getField(String name);</code></pre><p>(4)获得当前类申明的指定的Field</p><pre><code>Field field=classType.getDeclaredField(String name);</code></pre><p>(5)通过反射动态设定Field的值</p><pre><code>field.set(Object obj,Object value);</code></pre><p>(6)通过反射动态获取Field的值</p><pre><code>Object obj=field.get(Object obj);</code></pre><h3 id="5、举例"><a href="#5、举例" class="headerlink" title="5、举例"></a>5、举例</h3><pre><code>package com.iotek.reflect;import java.lang.reflect.Constructor;public class ReflectionAPIDemo {    public static void main(String[] args) throws Exception{        //获取Emploee这个类所关联的class对象        Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;);        //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法)        Emploee emploee=(Emploee)classType.newInstance();        //调用指定的构造方法来实例化对象        Constructor&lt;?&gt; constructor=classType.getConstructor(new Class[]{});        Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{});        System.out.println(emploee);        System.out.println(emploee2);    }}class Emploee{    private String nameString;    private int age;    public Emploee(){        System.out.println(&quot;无参构造法方法&quot;);    }    public Emploee(String nameString, int age) {        super();        this.nameString = nameString;        this.age = age;    }    public String getNameString() {        return nameString;    }    public void setNameString(String nameString) {        this.nameString = nameString;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public String toString() {        return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Java-lang-reflect库&quot;&gt;&lt;a href=&quot;#1、Java-lang-reflect库&quot; class=&quot;headerlink&quot; title=&quot;1、Java.lang.reflect库&quot;&gt;&lt;/a&gt;1、Java.lang.reflect库&lt;/h3&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的反射</title>
@@ -490,37 +515,6 @@
     
     
       <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 从排序数组中删除重复项</title>
-    <link href="http://www.echodemo.cc/2018/05/18/LeetCode-%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/"/>
-    <id>http://www.echodemo.cc/2018/05/18/LeetCode-从排序数组中删除重复项/</id>
-    <published>2018-05-18T07:25:45.000Z</published>
-    <updated>2018-05-18T07:28:46.071Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p><p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p><pre><code>示例 1:给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。示例 2:给定 nums = [0,0,1,1,1,2,2,3,3,4],函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。你不需要考虑数组中超出新长度后面的元素。</code></pre><p>说明:</p><p>为什么返回数值是整数，但输出的答案是数组呢?</p><p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p><p>你可以想象内部操作如下:</p><pre><code>// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝int len = removeDuplicates(nums);// 在函数里修改输入数组对于调用者是可见的。// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。for (int i = 0; i &lt; len; i++) {    print(nums[i]);}</code></pre><p>题目代码：</p><pre><code>class Solution {public:    int removeDuplicates(vector&lt;int&gt;&amp; nums) {        if(nums.size()==0) return 0;        else if(nums.size()==1) return 1;        int i=1,k=1;        int len=nums.size();        while(k&lt;len){            if(nums[k-1]!=nums[k]){                nums[i++]=nums[k];            }            k++;        }        nums.erase(nums.begin()+i,nums.end());        return i;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。&lt;/p&gt;
-&lt;p&gt;不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;示例 1:
-
-给定数组 nums = 
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
     
   </entry>
   
