@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、Map接口详解(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。 (2)键必须是唯一的，值可以重复。 (3)有些映射可以接收null键和null值，而有的不能。 (4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-20T13:18:23.731Z">
+<meta property="og:updated_time" content="2018-07-23T02:22:49.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的Map">
 <meta name="twitter:description" content="1、Map接口详解(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。 (2)键必须是唯一的，值可以重复。 (3)有些映射可以接收null键和null值，而有的不能。 (4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,931
+                  1,988
                 </span>
               
 
@@ -494,7 +494,8 @@ import java.util.Set;
 public class HashMapDemo1 {
 
     public static void main(String[] args) {
-        HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;();
+        //HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;();//构造一个空的 HashMap ，默认初始容量（16）和默认负载系数（0.75）。 
+        HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;(1);//构造一个空的 HashMap具有指定的初始容量和默认负载因子（0.75）。 
         hashmap.put(&quot;jay&quot;, &quot;张三&quot;);
         hashmap.put(&quot;jay&quot;, &quot;李四&quot;);
         hashmap.put(&quot;rose&quot;, &quot;玫瑰&quot;);
@@ -889,7 +890,7 @@ public class HashMapTest {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">127</span>
+                <span class="site-state-item-count">129</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1042,7 +1043,7 @@ public class HashMapTest {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共88.4k字</span>
+  <span class="post-count">博客全站共90.5k字</span>
 </div>
 
 
