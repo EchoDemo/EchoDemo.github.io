@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-24T10:21:05.537Z</updated>
+  <updated>2018-07-26T14:31:44.729Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,13 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java反射API(二)</title>
+    <link href="http://www.echodemo.cc/2018/07/26/Java%E5%8F%8D%E5%B0%84API(%E4%BA%8C)/"/>
+    <id>http://www.echodemo.cc/2018/07/26/Java反射API(二)/</id>
+    <published>2018-07-26T09:59:35.000Z</published>
+    <updated>2018-07-26T14:31:44.729Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、案例介绍"><a href="#1、案例介绍" class="headerlink" title="1、案例介绍"></a>1、案例介绍</h3><p>Student类，有属性id，name，age，对应的get、set方法和构造方法，现产生一个Student对象。通过反射复制此Student对象。</p><h3 id="2、案例设计"><a href="#2、案例设计" class="headerlink" title="2、案例设计"></a>2、案例设计</h3><p>通过反射机制来获取类的属性和方法。通过反射来生成对象，并通过反射来调用其set方法来对属性进行赋值以达到复制对象的目的。最后对复制成功的对象信息进行打印。</p><h3 id="3、方案实施"><a href="#3、方案实施" class="headerlink" title="3、方案实施"></a>3、方案实施</h3><pre><code>(1)创建以Student类。(2)创建一个Student对象。(3)获取Student对象所属类型的Class对象。(4)通过调用class.newInstance方法来构建一个目标对象。(5)获取class对象中的get和set方法。(6)调用源对象的get方法获取属性值。(7)调用目标对象的set方法来设置属性值。(8)打印目标对象的数据。</code></pre><h3 id="4、案例实现"><a href="#4、案例实现" class="headerlink" title="4、案例实现"></a>4、案例实现</h3><pre><code>package com.iotek.reflect;import java.lang.reflect.Field;import java.lang.reflect.InvocationTargetException;import java.lang.reflect.Method;import javax.activation.FileDataSource;import org.omg.CORBA.portable.ValueBase;public class ReflectionExampleDemo {    public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{        Student student = new Student(1, &quot;EchoDemo&quot;, 22);        Student student2 = (Student) ObjectCopyUtil.copyObj(student);        System.out.println(&quot;复制对象成功&quot;);        System.out.println(student2.toString());    }}/** * 这是一个拷贝对象的工具类，内部提供了一个拷贝对象的方法，接收源对象。 * @author 紫苏半夏 * */class ObjectCopyUtil{    public static Object copyObj(Object obj) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{        //获取student对象所对应类型的Class对象(也就是Student类所对应的对象)        Class&lt;?&gt; classType = obj.getClass();        //通过class对象的newInstance方法来构建一个目标对象        Object objCopy = classType.newInstance();        //获取Class对象的get和set方法        for(Field field : classType.getDeclaredFields()){            /*//得到属性所对应的get和set方法            String getMethodName = &quot;get&quot;+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);            String setMethodName = &quot;set&quot;+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1);            //调用源对象的get方法获取属性值            Method getMethod = classType.getDeclaredMethod(getMethodName, new Class[]{});            Object value = getMethod.invoke(obj, new Object[]{});            //调用源对象的set方法给属性赋值            Method setMethod = classType.getDeclaredMethod(setMethodName, new Class[]{field.getType()});            setMethod.invoke(obj, new Object[]{value});*/            //直接获取源对象的值            field.setAccessible(true);            Object value = field.get(obj);            field.set(objCopy, value);        }        return objCopy;    }}//声明一个学生类class Student{    private int id;    private String name;    private int age;    public Student(){    }    public Student(int id, String name, int age) {        super();        this.id = id;        this.name = name;        this.age = age;    }    public int getId() {        return id;    }    public void setId(int id) {        this.id = id;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、案例介绍&quot;&gt;&lt;a href=&quot;#1、案例介绍&quot; class=&quot;headerlink&quot; title=&quot;1、案例介绍&quot;&gt;&lt;/a&gt;1、案例介绍&lt;/h3&gt;&lt;p&gt;Student类，有属性id，name，age，对应的get、set方法和构造方法，现产生一个Student
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java反射API(一)</title>
     <link href="http://www.echodemo.cc/2018/07/24/Java%E5%8F%8D%E5%B0%84API(%E4%B8%80)/"/>
     <id>http://www.echodemo.cc/2018/07/24/Java反射API(一)/</id>
     <published>2018-07-24T10:18:29.000Z</published>
-    <updated>2018-07-24T10:21:05.537Z</updated>
+    <updated>2018-07-26T10:04:53.584Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1、Java-lang-reflect库"><a href="#1、Java-lang-reflect库" class="headerlink" title="1、Java.lang.reflect库"></a>1、Java.lang.reflect库</h3><p>Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class<t>:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法；Array类：提供动态创建数组，以及访问数组的元素的静态方法。</t></p><h3 id="2、通过反射实例化对象"><a href="#2、通过反射实例化对象" class="headerlink" title="2、通过反射实例化对象"></a>2、通过反射实例化对象</h3><p>(1)平常情况我们通过new Object来生成一个类的实例，但有时候我们没法直接new，只能通过反射动态生成。</p><p>(2)实例化无参构造函数的对象，两种方式：</p><pre><code>Class.newInstace();Class.getConstructor(new Class[]{}).newInstance(new Object[]{});</code></pre><p>(3)实例化带参构造函数的对象</p><pre><code>Class.getConstructor(Class&lt;?&gt;...parameterTypes).newInstance(Object...initargs);</code></pre><h3 id="3、通过反射获取并调用方法"><a href="#3、通过反射获取并调用方法" class="headerlink" title="3、通过反射获取并调用方法"></a>3、通过反射获取并调用方法</h3><p>(1)获得当前类以及超类的public Method</p><pre><code>Method[] arrMethods=classType.getMethods();</code></pre><p>(2)获得当前类申明的所有Method</p><pre><code>Method arrMethods=classTyep.getDeclaredMethods();</code></pre><p>(3)获得当前类以及超类指定的public Method</p><pre><code>Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(4)获得当前类申明的指定的Method</p><pre><code>Method method=classType.getDeclaredMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(5)通过反射动态运行指定Method</p><pre><code>Object  obj=method.invoke(Object obj,Object...args);</code></pre><h3 id="4、通过反射获取并调用属性"><a href="#4、通过反射获取并调用属性" class="headerlink" title="4、通过反射获取并调用属性"></a>4、通过反射获取并调用属性</h3><p>(1)获得当前类以及超类的public Field</p><pre><code>Field[] arrFields=classType.getFields();</code></pre><p>(2)获得当前类申明的所有Field</p><pre><code>Field[] arrFields=classFields=classType.getDeclaredFields();</code></pre><p>(3)获得当前类以及超类指定的public Field</p><pre><code>Field field=classType.getField(String name);</code></pre><p>(4)获得当前类申明的指定的Field</p><pre><code>Field field=classType.getDeclaredField(String name);</code></pre><p>(5)通过反射动态设定Field的值</p><pre><code>field.set(Object obj,Object value);</code></pre><p>(6)通过反射动态获取Field的值</p><pre><code>Object obj=field.get(Object obj);</code></pre><h3 id="5、举例"><a href="#5、举例" class="headerlink" title="5、举例"></a>5、举例</h3><pre><code>package com.iotek.reflect;import java.lang.reflect.Constructor;public class ReflectionAPIDemo {    public static void main(String[] args) throws Exception{        //获取Emploee这个类所关联的class对象        Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;);        //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法)        Emploee emploee=(Emploee)classType.newInstance();        //调用指定的构造方法来实例化对象        Constructor&lt;?&gt; constructor=classType.getConstructor(new Class[]{});        Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{});        System.out.println(emploee);        System.out.println(emploee2);    }}class Emploee{    private String nameString;    private int age;    public Emploee(){        System.out.println(&quot;无参构造法方法&quot;);    }    public Emploee(String nameString, int age) {        super();        this.nameString = nameString;        this.age = age;    }    public String getNameString() {        return nameString;    }    public void setNameString(String nameString) {        this.nameString = nameString;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public String toString() {        return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;;    }}</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="1、Java-lang-reflect库"><a href="#1、Java-lang-reflect库" class="headerlink" title="1、Java.lang.reflect库"></a>1、Java.lang.reflect库</h3><p>Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class<t>:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法；Array类：提供动态创建数组，以及访问数组的元素的静态方法。</t></p><h3 id="2、通过反射实例化对象"><a href="#2、通过反射实例化对象" class="headerlink" title="2、通过反射实例化对象"></a>2、通过反射实例化对象</h3><p>(1)平常情况我们通过new Object来生成一个类的实例，但有时候我们没法直接new，只能通过反射动态生成。</p><p>(2)实例化无参构造函数的对象，两种方式：</p><pre><code>Class.newInstace();Class.getConstructor(new Class[]{}).newInstance(new Object[]{});</code></pre><p>(3)实例化带参构造函数的对象</p><pre><code>Class.getConstructor(Class&lt;?&gt;...parameterTypes).newInstance(Object...initargs);</code></pre><h3 id="3、通过反射获取并调用方法"><a href="#3、通过反射获取并调用方法" class="headerlink" title="3、通过反射获取并调用方法"></a>3、通过反射获取并调用方法</h3><p>(1)获得当前类以及超类的public Method</p><pre><code>Method[] arrMethods=classType.getMethods();</code></pre><p>(2)获得当前类申明的所有Method</p><pre><code>Method[] arrMethods=classTyep.getDeclaredMethods();</code></pre><p>(3)获得当前类以及超类指定的public Method</p><pre><code>Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(4)获得当前类申明的指定的Method</p><pre><code>Method method=classType.getDeclaredMethod(String name,Class&lt;?&gt;...parameterTypes);</code></pre><p>(5)通过反射动态运行指定Method</p><pre><code>Object  obj=method.invoke(Object obj,Object...args);</code></pre><h3 id="4、通过反射获取并调用属性"><a href="#4、通过反射获取并调用属性" class="headerlink" title="4、通过反射获取并调用属性"></a>4、通过反射获取并调用属性</h3><p>(1)获得当前类以及超类的public Field</p><pre><code>Field[] arrFields=classType.getFields();</code></pre><p>(2)获得当前类申明的所有Field</p><pre><code>Field[] arrFields=classFields=classType.getDeclaredFields();</code></pre><p>(3)获得当前类以及超类指定的public Field</p><pre><code>Field field=classType.getField(String name);</code></pre><p>(4)获得当前类申明的指定的Field</p><pre><code>Field field=classType.getDeclaredField(String name);</code></pre><p>(5)通过反射动态设定Field的值</p><pre><code>field.set(Object obj,Object value);</code></pre><p>(6)通过反射动态获取Field的值</p><pre><code>Object obj=field.get(Object obj);</code></pre><h3 id="5、举例"><a href="#5、举例" class="headerlink" title="5、举例"></a>5、举例</h3><pre><code>package com.iotek.reflect;import java.lang.reflect.Constructor;import java.lang.reflect.Field;import java.lang.reflect.Method;public class ReflectionAPIDemo {    public static void main(String[] args) throws Exception{        /**         * 只要用到反射，先获得Class对象。没有方法能够获得当前类的超类的private方法和属性，         * 你必须通过getSuperclass()找到超类以后再去尝试获得。通常情况下，即使是当前类，         * private属性或者方法也是不能访问的，你需要设置压制权限setAccessible(true)来         * 取得private的访问权。但这样的话，就破坏了面向对象的规则，所以除非万不得已，尽量少用。         */        //获取Emploee这个类所关联的class对象        Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;);        //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法)        Emploee emploee=(Emploee)classType.newInstance();        //调用指定的构造方法来实例化对象        Constructor&lt;?&gt; constructor=classType.getConstructor(new Class[]{});        Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{});        System.out.println(emploee);        System.out.println(emploee2);        //调用指定的构造方法来实例化对象(调用带参数的构造方法)        Constructor&lt;?&gt; constructor1=classType.getConstructor(new Class[]{String.class,int.class});        Emploee emploee3=(Emploee)constructor1.newInstance(new Object[]{&quot;zhangsan&quot;,30});        System.out.println(emploee3);        //获取class对象指定的方法，包括私有的        Method method=classType.getDeclaredMethod(&quot;toString&quot;, new Class[]{});        System.out.println(method.getName());        //方法的调用        String desc=(String) method.invoke(emploee, new Object[]{});        System.out.println(desc);        //获取class对象指定的所有方法，包括私有的(私有的是默认不能被访问的)        Method[] methods = classType.getDeclaredMethods();        for(Method method2 : methods){            method2.setAccessible(true);//私有的可以访问了            System.out.println(method2.getName()+&quot;--&gt;&quot;+method2.getModifiers());        }        //获取Class对象所指定的属性，包括私有的(私有的默认是不能被访问的)        Field field = classType.getDeclaredField(&quot;nameString&quot;);        field.setAccessible(true);//可访问了        field.set(emploee, &quot;李四&quot;);        System.out.println(field.get(emploee));    }}class Emploee{    private String nameString;    private int age;    public Emploee(){        System.out.println(&quot;无参构造法方法&quot;);    }    public Emploee(String nameString, int age) {        super();        this.nameString = nameString;        this.age = age;    }    public String getNameString() {        return nameString;    }    public void setNameString(String nameString) {        this.nameString = nameString;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public String toString() {        return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;;    }}</code></pre><h3 id="6、使用反射机制来创建一维数组和二维数组"><a href="#6、使用反射机制来创建一维数组和二维数组" class="headerlink" title="6、使用反射机制来创建一维数组和二维数组"></a>6、使用反射机制来创建一维数组和二维数组</h3><pre><code>package com.iotek.reflect;import java.lang.reflect.Array;public class ReflectionArrayDemo {    public static void main(String[] args) throws ClassNotFoundException {        //创建一个一维数组(String)        Class&lt;?&gt; classType = Class.forName(&quot;java.lang.String&quot;);        Object obj = Array.newInstance(classType,5);        Array.set(obj, 3, &quot;abc&quot;);        System.out.println(Array.get(obj, 3));        //创建二维数组(3行3列)        int[] dimens={3,3};        Object obj1 = Array.newInstance(int.class, dimens);        Object obj2 = Array.get(obj1, 2);//获取第三行(它是一个一维数组)        Array.setInt(obj2, 2, 5);//给指定位置赋值        int[][] obj3 = (int[][])obj1;        System.out.println(obj3[2][2]);    }}</code></pre>]]></content>
     
     <summary type="html">
     
@@ -164,6 +189,31 @@
     
     
       <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>雨中漫步</title>
+    <link href="http://www.echodemo.cc/2018/07/22/%E9%9B%A8%E4%B8%AD%E6%BC%AB%E6%AD%A5/"/>
+    <id>http://www.echodemo.cc/2018/07/22/雨中漫步/</id>
+    <published>2018-07-22T01:42:05.000Z</published>
+    <updated>2018-07-24T10:51:59.826Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下着小雨的清晨，去楼下吃一碗汤粉，和着鲜红的辣酱，调至自己喜欢的口味，把汤都喝完。在幽深的小巷子里面一个人缓慢地走着，两旁是高大的法国梧桐。想起当年的蒋中正因为宋美龄的一句话，便在六朝古都的金陵广种法国梧桐。或许这是政治手段的表现手法，亦或许这只是传言、是虚假的。但此刻的我宁愿相信他对她的渴慕是真实的，是带着恋人之间的浪漫的。树叶上汇聚的雨点滴落在伞上，发出清脆的轻响，日光暗淡幽然，小巷仍然向前延伸。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;下着小雨的清晨，去楼下吃一碗汤粉，和着鲜红的辣酱，调至自己喜欢的口味，把汤都喝完。在幽深的小巷子里面一个人缓慢地走着，两旁是高大的法国梧桐。想起当年的蒋中正因为宋美龄的一句话，便在六朝古都的
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
@@ -364,6 +414,84 @@
   </entry>
   
   <entry>
+    <title>廊下听雨</title>
+    <link href="http://www.echodemo.cc/2018/07/07/%E5%BB%8A%E4%B8%8B%E5%90%AC%E9%9B%A8/"/>
+    <id>http://www.echodemo.cc/2018/07/07/廊下听雨/</id>
+    <published>2018-07-07T00:39:48.000Z</published>
+    <updated>2018-07-24T10:50:17.803Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小暑时节，雨一直下，且大，完全没有减弱的痕迹。坐在廊下听雨，淅淅沥沥的。树叶上浸润着雨水，轻轻地晃动着。天空一片灰濛，背后是望不到尽头的远方。仿佛时间于此刻定格，又好像自己回到了久远的过去，似曾相识里神情甚是淡然。起身取来《平凡的世界》，自己明日即将远行。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;小暑时节，雨一直下，且大，完全没有减弱的痕迹。坐在廊下听雨，淅淅沥沥的。树叶上浸润着雨水，轻轻地晃动着。天空一片灰濛，背后是望不到尽头的远方。仿佛时间于此刻定格，又好像自己回到了久远的过去，
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>童年的暑假</title>
+    <link href="http://www.echodemo.cc/2018/07/05/%E7%AB%A5%E5%B9%B4%E7%9A%84%E6%9A%91%E5%81%87/"/>
+    <id>http://www.echodemo.cc/2018/07/05/童年的暑假/</id>
+    <published>2018-07-05T02:40:32.000Z</published>
+    <updated>2018-07-24T10:48:28.612Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坐在夏天的院子里，吹着独属于清晨凉爽的风，高大的板栗树的叶子随风舞动着，新生的狗崽们自由地玩闹着，不远处也时而传来清脆悦耳的鸟鸣。此刻正在阅读的我，不由得想起童年的暑假。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相信对于每一位拥有暑假的孩子来说，那都是一段令我们魂牵梦萦的时光。因为年少的我们还没能意识到知识的重要性，对于“求知”一词也就无从谈起。但我们拥有对世界的好奇心，对于某些物质的渴求。而我在那个时期的暑假是伴随着辛劳、收获与懵懂无知的。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暑假刚至，便是西瓜的盛世。那时村里几乎每家每户都种西瓜（现在也一如既往，就算是没有种瓜的人家也总有瓜纷至沓来），人们在下午太阳的热辣褪去之后，拉着双轮车就往瓜地里走去。在大片的瓜地里寻找最大的西瓜，学着大人的模样在瓜的身上轻轻敲打来辨别是否可以采摘，还有搬着一个个又大又圆的西瓜走在田埂上是我的乐趣。第二天一大早，在天还未亮的时候，人们就拉着满车的西瓜往集市上赶。而我就在家中用菜刀切开自己早就精挑细选好的西瓜的头部，用调羹挖开又红又甜的瓜瓤，享受夏天清爽而又甜蜜的味道。当然也不能忘却杏子和李子给过的酸甜可口。寻觅，爬树，摇晃，然后找一泓清泉，于阴凉之地，蝉鸣的聒噪声中大饱口福是在所难免的。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等到享乐的时节一过，就迎来了第一季的农忙。趁着昨夜的凉气还未完全消散，趁着火热的太阳还未升起，家家户户收拾好工具就早早地去往金黄的稻田，开始一天的劳作。早上是一天当中最佳的劳作时间，人们往往会在两至三个小时之后才会回到家中，由妇女准备饭食，其他人则负责将收割回来的稻谷搬运到楼顶或者院子里摊开晾晒。短暂而又简短的早餐过后，一天中的重要时段上午便接踵而至，这时的太阳已经普照大地。左手握稻秆，右手持镰刀，挥汗如雨下，人们顶着烈日在田地里弯腰劳作着，将一捧又一捧连着稻秆的稻穗，搭成稻谷架（以便打谷这一工序）。偶尔吹来一阵凉爽的风（有时就连风也是热的），抬起头，田野里各处响起脚踏打谷机的运作声，天上是澄澈的蓝天和白云。中场休息是我的最爱，不仅有家中甘甜的井水，还有从来都不缺的可口的西瓜，以此来解渴和补充糖分。忙到中午时分，回到家，午餐过后，小睡，便又开始了下午的忙碌。在睡意昏沉中走进烈日的暴晒里，整个人顿时就清醒了。动作重复，直至夕阳西下，此时需要派人先行回家收好早上和上午晾晒的稻谷。说到收稻谷这件事，农忙期间作为小孩子的我既渴望天空下雨又不愿天空下雨，真真是让心里纠结又矛盾。当然，除了收割稻子之外，还需要为晚稻做准备。一般是收割完一块地之后，便要犁地抛秧。抛秧这件事比割稻子有趣，自从有了育秧盘，抛秧就比插秧轻松多了。当大人们在认认真真地有间隔和规律地抛秧时，我手中的秧苗呢，可以从天而降，也可以在水田里组成各式各样的形状（此情此景，总是想起王维的“漠漠水田飞白鹭”），甚至用抛出的秧苗将他们给围起来。农忙时节一般需要持续将近一个月左右，这个月是人类与大地深切交流的日子。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;农忙过后的我就要与家中的黄牛常伴左右了。这是农耕文明里必不可少的物种，也是世世代代的农民不可缺少的战友。同样是早起，和小伙伴们赶着牛群有时往山里走，有时走向荒废的田野。清晨只是个插曲，下午才是重点。虽然烈日当头照，但我们躲在树的阴凉里，玩着各种属于我们的游戏，享受属于我们的快乐时光。童年的暑假便是在这样的日子里慢慢度过，直至开学第一课。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如今的故乡，农耕的机械化时代早已如约而至，曾经面朝黄土背朝天的农人们依然即将步入收获的季节。暑假只是我童年的一个缩影，于我而言，童年是一个物质相对匮乏的时期，更谈不上阅读这一有着一定条件的事物了。或许这是现在的我对阅读和文字饱有热爱之心的缘由。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;坐在夏天的院子里，吹着独属于清晨凉爽的风，高大的板栗树的叶子随风舞动着，新生的狗崽们自由地玩闹着，不远处也时而传来清脆悦耳的鸟鸣。此刻正在阅读的我，不由得想起童年的暑假。&lt;/p&gt;
+&lt;p&gt;&amp;n
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自由与人生</title>
+    <link href="http://www.echodemo.cc/2018/07/01/%E8%87%AA%E7%94%B1%E4%B8%8E%E4%BA%BA%E7%94%9F/"/>
+    <id>http://www.echodemo.cc/2018/07/01/自由与人生/</id>
+    <published>2018-07-01T13:49:02.000Z</published>
+    <updated>2018-07-24T10:57:29.610Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>那些以自由为人生终极目的的人是不会真正拥有自由的，因为他们时常为自由所奴役。相反，我认为人生才是自由的目的。换言之，我们是要“自由的人生”，而不是“人生的自由”。――熊培云</code></pre><p>当我看到这句话的时候，才恍然意识到在这之前，自己的思想里追求的就是“人生的自由”，而非“自由的人生”。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;那些以自由为人生终极目的的人是不会真正拥有自由的，因为他们时常为自由所奴役。相反，我认为人生才是自由的目的。换言之，我们是
+要“自由的人生”，而不是“人生的自由”。――熊培云
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当我看到这句话的时候，才恍然意识到在这之前，自己的
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>豆瓣入门单反购买文章推荐</title>
     <link href="http://www.echodemo.cc/2018/06/14/%E8%B1%86%E7%93%A3%E5%85%A5%E9%97%A8%E5%8D%95%E5%8F%8D%E8%B4%AD%E4%B9%B0%E6%96%87%E7%AB%A0%E6%8E%A8%E8%8D%90/"/>
     <id>http://www.echodemo.cc/2018/06/14/豆瓣入门单反购买文章推荐/</id>
@@ -378,135 +506,6 @@
       
         &lt;p&gt;1、&lt;a href=&quot;https://www.douban.com/note/662799586/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;单反购机指南&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&quot;https://www.douban.com/not
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>昨夜同门云集推杯又换盏</title>
-    <link href="http://www.echodemo.cc/2018/06/10/%E6%98%A8%E5%A4%9C%E5%90%8C%E9%97%A8%E4%BA%91%E9%9B%86%E6%8E%A8%E6%9D%AF%E5%8F%88%E6%8D%A2%E7%9B%8F/"/>
-    <id>http://www.echodemo.cc/2018/06/10/昨夜同门云集推杯又换盏/</id>
-    <published>2018-06-09T16:25:30.000Z</published>
-    <updated>2018-06-13T11:26:08.566Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果有一些文字需要留给渐行渐远的昨日，那我想此时写下应是恰如其分的。从时光的长河里回溯，逆流而上，我将在哪个渡口停留呢？想了很多，试着写下，但却觉得文字的表述在此刻显得如此地苍白无力。貌似无法承载情感的洪流，犹如昨日的暴雨落地，地面的流水浩浩汤汤，奔涌而去，却仍然没有停止的迹象。或许过后回望，会像雨过天晴之后晨梦亭里的独坐、鸟儿与青蛙的鸣唱、不远处飘来的荷香还有洗净的天空那样云淡而风轻。但最为珍贵的仍是属于当下的自己，当下的我们。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;如果有一些文字需要留给渐行渐远的昨日，那我想此时写下应是恰如其分的。从时光的长河里回溯，逆流而上，我将在哪个渡口停留呢？想了很多，试着写下，但却觉得文字的表述在此刻显得如此地苍白无力。貌似无
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《非暴力沟通》摘句</title>
-    <link href="http://www.echodemo.cc/2018/06/04/%E3%80%8A%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A%E3%80%8B%E6%91%98%E5%8F%A5/"/>
-    <id>http://www.echodemo.cc/2018/06/04/《非暴力沟通》摘句/</id>
-    <published>2018-06-04T11:30:43.000Z</published>
-    <updated>2018-06-13T12:01:37.964Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、非暴力生活的一个关键就是：感激生活的赐予，而不贪心。</p><p>2、非暴力沟通提醒我们专注于彼此的观察、感受、需要和请求。它鼓励倾听，培育尊重与爱，使我们情意相通，乐于互助。</p><p>3、非暴力沟通四要素。首先：留意发生的事情，说出人们所做的事情，清楚地表达观察结果，而不判断或评估。其次：表达感受。然后：说出哪些需要导致那样的感受，诚实地表达自己。最后：提出具体的请求。</p><p>4、暴力的根源在于人们忽视彼此的感受与需要，而将冲突归咎于对方。</p><p>5、我这样做，因为我想……陈述观察……我（感到）……因为我……</p><p>6、我们大多数的人使用的语言倾向于评判、比较、命令和指责，而不是鼓励我们倾听彼此的感受和需要。</p><p>7、道德评判就是其中的一种，它将不符合我们价值观的人看作是不道德的或邪恶的。进行比较也是一种评判，它会蒙蔽对人对己的爱意。异化的沟通方式还淡化了我们对自己的思想、情感和行为的责任意识。此外，强人所难也会造成心灵的隔阂。</p><p>8、如果我们通过批评来提出主张，人们的反应常常是申辩或反击。反之，如果我们直接说出需要，其他人就较有可能作出积极的回应。</p><p>9、真诚待人比委曲求全更为可贵。如果别人感到不安，我们可以认真地倾听，但无须责备自己。</p><p>10、我们提出的请求越具体越好。如果我们的意思含糊不清，别人就难以了解我们到底想要什么。使用抽象的语言还会使我们无法深入了解自己。请求他人采取具体的行动将揭示我们的动机。</p><p>11、如果我们只是表达自己的感受，别人可能就不清楚我们想要什么。</p><p>12、由于我们所要表达的意思与别人的理解有可能不一致，有时，我们需要请求他人的反馈。特别是在集体讨论中发言时，我们需要清楚地表明自己的期待。否则，讨论可能只是在浪费大家的时间。</p><p>13、在我们的文化中，直接谈论一个人的感受是很少见的。重要的是，我已经不再把他的话看作是对我的攻击，而注意体会他的感受和需要。</p><p>14、为了倾听他人，我们需要先放下已有的想法和判断，全心全意地体会对方。倾听他人有助于对他人的理解和接纳。</p><p>15、听到不中听的话时，我们有四种选择：1.责备自己；2.指责他人；3.体会自己的感受和需要；4.体会他人的感受和需要。</p><p>16、如果你希望自己在生气的时候也能运用非暴力沟通，我建议你做以下的练习。在前面，我们已经提到，我们生气是因为我们的想法——我们认为人们“应该”或“不应该”做什么，我们还给人贴上各种标签，并说长论短。请留意我们头脑中“我不喜欢抽烟的人……”之类的想法。然后，问自己：“我不喜欢他们……，是因为我什么样的需要没有得到满足？”通过这样的方式，我们就把注意力放在了尚未得到满足的需要，而不是考虑他人有什么过错。</p><p>17、在生气时，批评和指责他人都无法真正传达我们的心声。如果想充分表达愤怒，我们就不能归咎于他人，而把注意力放在自己的感受和需要上。与批评和指责他人相比，直接说出我们的需要更有可能使我们的愿望得到满足。表达愤怒的四个步骤是：（1）停下来，除了呼吸，什么都别做；（2）想一想是什么想法使我们生气了；（3）体会自己的需要；（4）表达感受和尚未满足的需要。有时，在第3步和第4步之间，我们需要先倾听他人。在得到倾听和理解之后，他们也就可以静下心来体会我们的感受和需要。</p><p>18、在使用惩罚性的强制力时，我们认为某些人是邪恶的，为了让他们悔改，必须给他们一点颜色看看。此时，我们希望痛苦能让他们：（1）意识到自己的过错；（2）感到懊悔；（3）改变行为。然而，在实际生活中，惩罚往往加强了对方的敌意和抵触心理，使双方的关系更加疏远。</p><p>19、个人的成长是通过与他人的坦诚交流来实现的——在交流中，彼此能够自由地表达内心的软弱。</p><p>20、非暴力沟通表达感激的方式包含三个部分：1.对方做了什么事情使我们的生活得到了改善；2.我们有哪些需要得到了满足；3.我们的心情怎么样？</p><p>21、诚实地表达自己，而不批评、指责（1）观察我所观察（看、听、回忆、想）到的有助于（或无助于）我的福祉的具体行为：“当我（看、听、想到我看到的/听到的） ……”（2）感受对于这些行为，我有什么样的感受（情感而非思想）：“我感到……”（3）需要什么样的需要或价值（而非偏好或某种具体的行为）导致我那样的感受：“因为我需要／看重……”（4）请求清楚地请求（而非命令）那些能丰富我生命的具体行为：“你是否愿意……？”</p><p>22、关切地倾听他人，而不解读为批评或指责（1）观察你所观察（看、听、回忆、想）到的有助于（或无助于）你的福祉的具体行为：“当你（看、听、想到你看到的/听到的） ……”（2）感受对于这些行为，你有什么样的感受（是情感而非思想）：“你感到……吗？”（3）需要什么样的需要或价值（而非偏好或某种具体的行为）导致你那样的感受：“因为你需要／看重……”（4）请求关切地倾听那些能丰富你生命的具体请求，而不解读为命令：“所以，你想……”</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、非暴力生活的一个关键就是：感激生活的赐予，而不贪心。&lt;/p&gt;
-&lt;p&gt;2、非暴力沟通提醒我们专注于彼此的观察、感受、需要和请求。它鼓励倾听，培育尊重与爱，使我们情意相通，乐于互助。&lt;/p&gt;
-&lt;p&gt;3、非暴力沟通四要素。首先：留意发生的事情，说出人们所做的事情，清楚地表达观
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PS制图</title>
-    <link href="http://www.echodemo.cc/2018/06/03/PS%E5%88%B6%E5%9B%BE/"/>
-    <id>http://www.echodemo.cc/2018/06/03/PS制图/</id>
-    <published>2018-06-03T12:24:31.000Z</published>
-    <updated>2018-06-03T12:25:44.580Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、一寸照的尺寸为：宽度2.5厘米，高度3.5厘米，分辨率设为300，选择CMYK颜色。将图片拖入新建的空白图片当中，快捷键Ctrl+T进行自由变换(如果此时看不到控点，可以通过Ctrl+减号快捷键来进行缩小)。如果需要变换背景色，则使用快速选择工具选择空白区域。然后按住Alt键来添加图层蒙版。此时可以删除背景图层，选中蒙版来对图层蒙版进行调节。接下来新建一个图层，下拉到带有蒙版的图层的下方，再进行颜色填充即可。如果此时还需要对服装进行变换，那么就将做好选区的衣服图片拖入图中进行变换。之后还可以建立矩形选区，通过Ctrl+T快捷键，然后通过移动来消除譬如T恤这种色块。最后保存为jpg格式。</p><p>如果需要将一寸照片打印多张在一张国际标准纸张上面。那么可以新建一个文件，选择国际标准纸张，选择CMYK模式，然后将刚才的jpg文件移动到新建的纸张里面。可以通过Ctrl+R快捷键调出标尺，然后拖出两条分别距离左顶点一厘米的参考线，回车之后。双击图层，打开图层样式，勾选描边，像素设置为5像素，位置选择内部，颜色选择白色，点击确定。然后在移动工具下按住Alt键来拖拽图片进行复制。当复制出两个之后，在图层工作区上选择两个图层继续按住Alt键来复制，这样以此类推，就可以不需要一张一张复制，而是以2的幂次方递增了。在复制出一整行图片之后，可以在图层的缩览图当中选择最小的样式，之后选择所有的图层，使用Ctrl+E将他们全部合并为一个图层。此时用之前的复制方法就可以很快地对图片进行复制，直到基本铺满整个国际标准纸张。</p><p>2、制作全景图片：在文件菜单中选择脚本，将脚本载入堆栈，然后选择文件夹，打开。选择所有的图层，选择移动工具，在移动工具菜单栏的最右边选择自动对齐图层，常规情况下选择自动即可，点击确定。接下来继续选中这些图层，在编辑菜单中选择自动混合图层，选择全景图，点击确定。然后再对图片进行裁剪。自动回合图层还可以用于堆叠混合。</p><p>3、服装操控变形：打开图像，在编辑菜单栏中选择操控变形选项。在图片中打上图钉之后即可进行变形，图钉深度可以将图钉在前面和后面进行切换。</p><p>4、内容识别比例：打开图片，使用套索工具对需要进行放大或者是缩小的部分进行大致地选取，然后右击鼠标进行存储选区，接下来Ctrl+D取消选区。在编辑菜单当中，选择内容识别比例，在保护项当中选取刚才存储的选区。如果选取的是人物，还可以勾选，保护项后面的保护肤色选项。</p><p>5、图层复制：按住Alt键直接拖拽来复制图层。在图层面板中将图层移动到新建图层按钮上。也可以通过快捷键Ctrl+J来复制图层。</p><p>选区复制：按住Alt键来对选区进行拖拽即可，这样复制出来的是在同一个图层。如果是通过快捷键Ctrl+J来复制选区的话，就是新建出了一个只包含选区内容的图层。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、一寸照的尺寸为：宽度2.5厘米，高度3.5厘米，分辨率设为300，选择CMYK颜色。将图片拖入新建的空白图片当中，快捷键Ctrl+T进行自由变换(如果此时看不到控点，可以通过Ctrl+减号快捷键来进行缩小)。如果需要变换背景色，则使用快速选择工具选择空白区域。然后按住A
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PS抠图</title>
-    <link href="http://www.echodemo.cc/2018/05/31/PS%E6%8A%A0%E5%9B%BE/"/>
-    <id>http://www.echodemo.cc/2018/05/31/PS抠图/</id>
-    <published>2018-05-31T01:47:29.000Z</published>
-    <updated>2018-05-31T01:49:37.137Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、调整边缘抠图：先使用快速选择工具做出选区，然后通过调整边缘(选择并遮住)来调整。先选择黑底，然后根据需要来调整半径，平滑，羽化(对比度)，移动边缘等命令。之后新建带有图层蒙版的图层。</p><p>2、当打开一张已经抠好的图片，并且此时没有设置蒙版，那么为了节省时间可以使用图层下拉菜单中的修边选项中的各个命令来处理图片的边缘。</p><p>3、钢笔工具抠图：选择钢笔工具，选择路径选项，建立锚点直到闭合选区。添加矢量蒙版，选择减去顶层形状来，通过新建锚点来再建一条路径(此时需要选中蒙版来操作)，直到闭合路径。新建图层，添加背景。之后可以对图片中局部镂空的地方，继续选择减去顶层形状来做精细的路径抠图(依然需要选中蒙版才能进行操作)。在这之后，我们还可以选择路径选择工具和直接选择工具对路径进行再调整。</p><p>4、蒙版抠图：通过蒙版来进行粗抠图，可以产生不一样的效果，使用椭圆选区大致地选出需要抠取的部分，在选择下拉菜单当中选择修改中的羽化，建立蒙版。将其拖入其他的图片当中进行变换即可。</p><p>融合两张图片：可以先将一张图片拖入另一张图片，然后对拖入的图片创建蒙版。选中蒙版，使用黑白渐变工具(这里注意前景色和背景色)，然后进行渐变调节，即可将两张图片融合在一起。如果是有倒影的情况，可以选中图层，然后进行复制，右击进行垂直翻转，同时选择正片叠底，再降低它的不透明度即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、调整边缘抠图：先使用快速选择工具做出选区，然后通过调整边缘(选择并遮住)来调整。先选择黑底，然后根据需要来调整半径，平滑，羽化(对比度)，移动边缘等命令。之后新建带有图层蒙版的图层。&lt;/p&gt;
-&lt;p&gt;2、当打开一张已经抠好的图片，并且此时没有设置蒙版，那么为了节省时间可以
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="PS" scheme="http://www.echodemo.cc/tags/PS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PS基础知识(杂)</title>
-    <link href="http://www.echodemo.cc/2018/05/30/PS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86(%E6%9D%82)/"/>
-    <id>http://www.echodemo.cc/2018/05/30/PS基础知识(杂)/</id>
-    <published>2018-05-30T10:55:38.000Z</published>
-    <updated>2018-05-30T11:08:59.636Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、分辨率和图片的用途是相关的。常用分辨率设置：洗印照片：300或以上；杂志、名片等印刷物：300；海报高清写真：96~200；网络图片、网页界面：72；大型喷绘：25~50。总像素值=像素宽度X像素高度=文档宽度X文档高度X分辨率的平方</p><p>2、常用快捷键：</p><pre><code>(1)打开首选项：Ctrl+K(2)缩放图片：Alt+鼠标滚轮(3)新建时复位：按住Alt不松(4)打开文件：双击工作区(5)新建图层：Alt+创建图层(6)创建图层副本：Alt+拖拽至指定位置或者Ctrl+J(7)抓手工具：按住空格键不松(8)放大工具：空格+Ctrl(9)缩小工具：空格+Alt(10)快速填充前景色:Alt+delete(11)快速填充背景色:Ctrl+delete</code></pre><p>3、移动图层位置不变：在拖拽至另一个文件时，先按住Shift再松鼠标(前提是两个图像大小一样)。如果两个图像大小不一样的话，按上面操作会跑到正中央；如果图像中有选区，则跑到选区的正中央。在移动工具状态下，按住Ctrl键就可以自动选择图层。在非移动工具状态下，按住Ctrl键可以切换到移动工具状态。Shift键加方向键可以微调。</p><p>4、选区时按住Shift键，选框变成正方形。按住Alt键从中心点建立选区。Ctrl+D取消选区，Ctrl+Shift+D恢复之前的选区</p><p>5、套索工具按住Alt键可以在套索工具和多边形套索工具之间切换。磁性套索工具按住Alt键可以在磁性套索工具和多边形套索工具之间切换。delete键可以用于取消套索的上一个锚点。</p><p>6、按住Alt键，点击鼠标右键左右移动，改变画笔大小。上下移动改变画笔硬度。</p><p>7、虽然修复画笔工具和仿制图章工具共享仿制源，但是修复画笔工具不同于仿制图章工具。修复画笔工具更智能，它能够尽可能地和周围的环境进行融合。</p><p>8、通道的概念类似于图层的概念，只不过通道是从另一个角度(图像的色彩或透明度)来诠释图像的构成。 Alpha通道就是记录透明度信息的特殊层，在Alpha通道当中，黑色代表着透明，白色代表拥有颜色信息，不透明。说白了，通道当中的颜色代表的是当前通道的颜色强度(黑白灰)，而不是颜色本身。Alpha通道是一个选区加工厂。不管是通道还是图层，都可以通过按住Ctrl键，点击相应的通道或者是图层来建立相应的选区。</p><p>9、图层蒙版可以隐藏和显示图层上的部分区域，按住Alt键点击添加图层蒙版，隐藏的是选区的部分。按住Alt键点击建立好的图层蒙版，图层蒙版此时处于编辑状态之下，对应的是一个临时的Alpha通道。快速蒙版方便查看。</p><p>10、锁定透明像素：禁止对透明区域进行操作。快速建组：Ctrl+G。一个组合一个图层同时选中，Ctrl+G也可以再建组。取消分组：Ctrl+Shift+G。Ctrl+E向下合并图层，Ctrl+Alt+E向下合并并且保留向下合并的图层。创建图层剪贴蒙版，图层只能在下方图层内显示。</p><p>11、色相：颜色的品相。通过改变色相环上色彩的角度(一共360度)可以进行变色。从红色到蓝色需要逆时针旋转120度，就把色相的值变换为-120。从红色到绿色需要顺时针旋转120，就把色相的值变换为120。</p><p>饱和度：是指色彩的鲜艳程度，其实就是加入中性灰的程度。当饱和度降到最低的时候，图像显示的是灰色，灰色是没有色相的。灰色的红绿蓝RGB值是相等的，只要RGB值是相等的，那么只可能是黑、白、灰三种颜色。</p><p>明度：就是发光量，加入额外的白光。</p><p>RGB模式：光的三基色，它是发光色。</p><p>CMYK模式：印刷色彩模式。青色(Cyan)，品红色(Magenta)，黄色(Yellow)，黑色(Black)。代表印刷用的四种油墨，它是反光色。CMYK通道里面，黑色代表100%浓度的油墨。</p><p>12、色阶：是表示图像亮度强弱的指数标准，表现了一副图的明暗关系，它和颜色无关。通过色阶编辑框可以看出图片整体的明暗分布。移动X轴上的最左边的黑色滑块，如果从0移动到70，黑场的数值变大，画面变暗(仅是黑场部分发生了变化，而灰场和白场没有)，它是把亮度级别为70以下的像素，都合并为最低的0。调节黑场，就是合并暗部的颜色，对亮部暂无影响。如果是移动X轴最右边的白色滑块，从255移动到180的话，和黑色滑块的原理是一样的，再180到255这个亮度级别的像素，都合并成为255级别。</p><p>13、曲线命令：Ctrl+M。曲线直方图的X轴上的黑色滑块和白色滑块的功能和色阶上的对应滑块功能相似。所不同的是，它们是对整个图片的明暗度进行整体的变暗和变亮。而不仅仅是对移动滑块区域的像素进行调整。但对于复杂的图片来说，色阶、曲线等最好都去使用调整图层，这样可以针对图片的某个图层进行调整。</p><p>14、色彩平衡不同于色相的改变。保持明度，可以保证调整后的颜色发光总量不变。</p><p>15、使用钢笔工具时按住Shift键，可以根据角度来创建水平，垂直和45度的线段。在相应的路径点击回车，图像上的路径会被隐藏。黑色的路径选择工具是选择整体的，而白色的路径选择工具是选择单个的锚点的，按住Ctrl键可以在两者之间进行转换。按住Alt键，可以调节单个的控杆。Ctrl+enter将路径变成选区。文字可以依附路径的形状输入。</p><p>16、调节行距，字距。Alt+上下左右箭头就可以。在视图的显示当中有网格。视图当中的标尺可以在标尺的区域通过单击右键来修改单位，也可以从左上角的方块拉出十字交叉线来改变原点的位置，双击方块可以恢复到原状态。视图中可以新建参考线，也可以从标尺当中拖拽出参考线，按住Alt键来单击左键可以将水平和垂直的参考线进行转换，将参考线拉回标尺区域即可删除参考线。视图中的显示额外内容(Ctrl+H)，可以将隐藏参考线，网格以及选区。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、分辨率和图片的用途是相关的。常用分辨率设置：洗印照片：300或以上；杂志、名片等印刷物：300；海报高清写真：96~200；网络图片、网页界面：72；大型喷绘：25~50。总像素值=像素宽度X像素高度=文档宽度X文档高度X分辨率的平方&lt;/p&gt;
-&lt;p&gt;2、常用快捷键：&lt;/
       
     
     </summary>

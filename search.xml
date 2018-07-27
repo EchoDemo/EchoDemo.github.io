@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java反射API(二)]]></title>
+    <url>%2F2018%2F07%2F26%2FJava%E5%8F%8D%E5%B0%84API(%E4%BA%8C)%2F</url>
+    <content type="text"><![CDATA[1、案例介绍Student类，有属性id，name，age，对应的get、set方法和构造方法，现产生一个Student对象。通过反射复制此Student对象。 2、案例设计通过反射机制来获取类的属性和方法。通过反射来生成对象，并通过反射来调用其set方法来对属性进行赋值以达到复制对象的目的。最后对复制成功的对象信息进行打印。 3、方案实施(1)创建以Student类。 (2)创建一个Student对象。 (3)获取Student对象所属类型的Class对象。 (4)通过调用class.newInstance方法来构建一个目标对象。 (5)获取class对象中的get和set方法。 (6)调用源对象的get方法获取属性值。 (7)调用目标对象的set方法来设置属性值。 (8)打印目标对象的数据。 4、案例实现package com.iotek.reflect; import java.lang.reflect.Field; import java.lang.reflect.InvocationTargetException; import java.lang.reflect.Method; import javax.activation.FileDataSource; import org.omg.CORBA.portable.ValueBase; public class ReflectionExampleDemo { public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{ Student student = new Student(1, &quot;EchoDemo&quot;, 22); Student student2 = (Student) ObjectCopyUtil.copyObj(student); System.out.println(&quot;复制对象成功&quot;); System.out.println(student2.toString()); } } /** * 这是一个拷贝对象的工具类，内部提供了一个拷贝对象的方法，接收源对象。 * @author 紫苏半夏 * */ class ObjectCopyUtil{ public static Object copyObj(Object obj) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{ //获取student对象所对应类型的Class对象(也就是Student类所对应的对象) Class&lt;?&gt; classType = obj.getClass(); //通过class对象的newInstance方法来构建一个目标对象 Object objCopy = classType.newInstance(); //获取Class对象的get和set方法 for(Field field : classType.getDeclaredFields()){ /*//得到属性所对应的get和set方法 String getMethodName = &quot;get&quot;+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1); String setMethodName = &quot;set&quot;+field.getName().substring(0,1).toUpperCase()+field.getName().substring(1); //调用源对象的get方法获取属性值 Method getMethod = classType.getDeclaredMethod(getMethodName, new Class[]{}); Object value = getMethod.invoke(obj, new Object[]{}); //调用源对象的set方法给属性赋值 Method setMethod = classType.getDeclaredMethod(setMethodName, new Class[]{field.getType()}); setMethod.invoke(obj, new Object[]{value});*/ //直接获取源对象的值 field.setAccessible(true); Object value = field.get(obj); field.set(objCopy, value); } return objCopy; } } //声明一个学生类 class Student{ private int id; private String name; private int age; public Student(){ } public Student(int id, String name, int age) { super(); this.id = id; this.name = name; this.age = age; } public int getId() { return id; } public void setId(int id) { this.id = id; } public String getName() { return name; } public void setName(String name) { this.name = name; } public int getAge() { return age; } public void setAge(int age) { this.age = age; } }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java反射API(一)]]></title>
     <url>%2F2018%2F07%2F24%2FJava%E5%8F%8D%E5%B0%84API(%E4%B8%80)%2F</url>
-    <content type="text"><![CDATA[1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法；Array类：提供动态创建数组，以及访问数组的元素的静态方法。 2、通过反射实例化对象(1)平常情况我们通过new Object来生成一个类的实例，但有时候我们没法直接new，只能通过反射动态生成。 (2)实例化无参构造函数的对象，两种方式： Class.newInstace(); Class.getConstructor(new Class[]{}).newInstance(new Object[]{}); (3)实例化带参构造函数的对象 Class.getConstructor(Class&lt;?&gt;...parameterTypes).newInstance(Object...initargs); 3、通过反射获取并调用方法(1)获得当前类以及超类的public Method Method[] arrMethods=classType.getMethods(); (2)获得当前类申明的所有Method Method arrMethods=classTyep.getDeclaredMethods(); (3)获得当前类以及超类指定的public Method Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes); (4)获得当前类申明的指定的Method Method method=classType.getDeclaredMethod(String name,Class&lt;?&gt;...parameterTypes); (5)通过反射动态运行指定Method Object obj=method.invoke(Object obj,Object...args); 4、通过反射获取并调用属性(1)获得当前类以及超类的public Field Field[] arrFields=classType.getFields(); (2)获得当前类申明的所有Field Field[] arrFields=classFields=classType.getDeclaredFields(); (3)获得当前类以及超类指定的public Field Field field=classType.getField(String name); (4)获得当前类申明的指定的Field Field field=classType.getDeclaredField(String name); (5)通过反射动态设定Field的值 field.set(Object obj,Object value); (6)通过反射动态获取Field的值 Object obj=field.get(Object obj); 5、举例package com.iotek.reflect; import java.lang.reflect.Constructor; public class ReflectionAPIDemo { public static void main(String[] args) throws Exception{ //获取Emploee这个类所关联的class对象 Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;); //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法) Emploee emploee=(Emploee)classType.newInstance(); //调用指定的构造方法来实例化对象 Constructor&lt;?&gt; constructor=classType.getConstructor(new Class[]{}); Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{}); System.out.println(emploee); System.out.println(emploee2); } } class Emploee{ private String nameString; private int age; public Emploee(){ System.out.println(&quot;无参构造法方法&quot;); } public Emploee(String nameString, int age) { super(); this.nameString = nameString; this.age = age; } public String getNameString() { return nameString; } public void setNameString(String nameString) { this.nameString = nameString; } public int getAge() { return age; } public void setAge(int age) { this.age = age; } @Override public String toString() { return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;; } }]]></content>
+    <content type="text"><![CDATA[1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法；Array类：提供动态创建数组，以及访问数组的元素的静态方法。 2、通过反射实例化对象(1)平常情况我们通过new Object来生成一个类的实例，但有时候我们没法直接new，只能通过反射动态生成。 (2)实例化无参构造函数的对象，两种方式： Class.newInstace(); Class.getConstructor(new Class[]{}).newInstance(new Object[]{}); (3)实例化带参构造函数的对象 Class.getConstructor(Class&lt;?&gt;...parameterTypes).newInstance(Object...initargs); 3、通过反射获取并调用方法(1)获得当前类以及超类的public Method Method[] arrMethods=classType.getMethods(); (2)获得当前类申明的所有Method Method[] arrMethods=classTyep.getDeclaredMethods(); (3)获得当前类以及超类指定的public Method Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes); (4)获得当前类申明的指定的Method Method method=classType.getDeclaredMethod(String name,Class&lt;?&gt;...parameterTypes); (5)通过反射动态运行指定Method Object obj=method.invoke(Object obj,Object...args); 4、通过反射获取并调用属性(1)获得当前类以及超类的public Field Field[] arrFields=classType.getFields(); (2)获得当前类申明的所有Field Field[] arrFields=classFields=classType.getDeclaredFields(); (3)获得当前类以及超类指定的public Field Field field=classType.getField(String name); (4)获得当前类申明的指定的Field Field field=classType.getDeclaredField(String name); (5)通过反射动态设定Field的值 field.set(Object obj,Object value); (6)通过反射动态获取Field的值 Object obj=field.get(Object obj); 5、举例package com.iotek.reflect; import java.lang.reflect.Constructor; import java.lang.reflect.Field; import java.lang.reflect.Method; public class ReflectionAPIDemo { public static void main(String[] args) throws Exception{ /** * 只要用到反射，先获得Class对象。没有方法能够获得当前类的超类的private方法和属性， * 你必须通过getSuperclass()找到超类以后再去尝试获得。通常情况下，即使是当前类， * private属性或者方法也是不能访问的，你需要设置压制权限setAccessible(true)来 * 取得private的访问权。但这样的话，就破坏了面向对象的规则，所以除非万不得已，尽量少用。 */ //获取Emploee这个类所关联的class对象 Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;); //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法) Emploee emploee=(Emploee)classType.newInstance(); //调用指定的构造方法来实例化对象 Constructor&lt;?&gt; constructor=classType.getConstructor(new Class[]{}); Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{}); System.out.println(emploee); System.out.println(emploee2); //调用指定的构造方法来实例化对象(调用带参数的构造方法) Constructor&lt;?&gt; constructor1=classType.getConstructor(new Class[]{String.class,int.class}); Emploee emploee3=(Emploee)constructor1.newInstance(new Object[]{&quot;zhangsan&quot;,30}); System.out.println(emploee3); //获取class对象指定的方法，包括私有的 Method method=classType.getDeclaredMethod(&quot;toString&quot;, new Class[]{}); System.out.println(method.getName()); //方法的调用 String desc=(String) method.invoke(emploee, new Object[]{}); System.out.println(desc); //获取class对象指定的所有方法，包括私有的(私有的是默认不能被访问的) Method[] methods = classType.getDeclaredMethods(); for(Method method2 : methods){ method2.setAccessible(true);//私有的可以访问了 System.out.println(method2.getName()+&quot;--&gt;&quot;+method2.getModifiers()); } //获取Class对象所指定的属性，包括私有的(私有的默认是不能被访问的) Field field = classType.getDeclaredField(&quot;nameString&quot;); field.setAccessible(true);//可访问了 field.set(emploee, &quot;李四&quot;); System.out.println(field.get(emploee)); } } class Emploee{ private String nameString; private int age; public Emploee(){ System.out.println(&quot;无参构造法方法&quot;); } public Emploee(String nameString, int age) { super(); this.nameString = nameString; this.age = age; } public String getNameString() { return nameString; } public void setNameString(String nameString) { this.nameString = nameString; } public int getAge() { return age; } public void setAge(int age) { this.age = age; } @Override public String toString() { return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;; } } 6、使用反射机制来创建一维数组和二维数组package com.iotek.reflect; import java.lang.reflect.Array; public class ReflectionArrayDemo { public static void main(String[] args) throws ClassNotFoundException { //创建一个一维数组(String) Class&lt;?&gt; classType = Class.forName(&quot;java.lang.String&quot;); Object obj = Array.newInstance(classType,5); Array.set(obj, 3, &quot;abc&quot;); System.out.println(Array.get(obj, 3)); //创建二维数组(3行3列) int[] dimens={3,3}; Object obj1 = Array.newInstance(int.class, dimens); Object obj2 = Array.get(obj1, 2);//获取第三行(它是一个一维数组) Array.setInt(obj2, 2, 5);//给指定位置赋值 int[][] obj3 = (int[][])obj1; System.out.println(obj3[2][2]); } }]]></content>
       <categories>
         <category>技术</category>
       </categories>
@@ -64,6 +75,17 @@
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[雨中漫步]]></title>
+    <url>%2F2018%2F07%2F22%2F%E9%9B%A8%E4%B8%AD%E6%BC%AB%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下着小雨的清晨，去楼下吃一碗汤粉，和着鲜红的辣酱，调至自己喜欢的口味，把汤都喝完。在幽深的小巷子里面一个人缓慢地走着，两旁是高大的法国梧桐。想起当年的蒋中正因为宋美龄的一句话，便在六朝古都的金陵广种法国梧桐。或许这是政治手段的表现手法，亦或许这只是传言、是虚假的。但此刻的我宁愿相信他对她的渴慕是真实的，是带着恋人之间的浪漫的。树叶上汇聚的雨点滴落在伞上，发出清脆的轻响，日光暗淡幽然，小巷仍然向前延伸。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -152,6 +174,39 @@
       </categories>
       <tags>
         <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[廊下听雨]]></title>
+    <url>%2F2018%2F07%2F07%2F%E5%BB%8A%E4%B8%8B%E5%90%AC%E9%9B%A8%2F</url>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小暑时节，雨一直下，且大，完全没有减弱的痕迹。坐在廊下听雨，淅淅沥沥的。树叶上浸润着雨水，轻轻地晃动着。天空一片灰濛，背后是望不到尽头的远方。仿佛时间于此刻定格，又好像自己回到了久远的过去，似曾相识里神情甚是淡然。起身取来《平凡的世界》，自己明日即将远行。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[童年的暑假]]></title>
+    <url>%2F2018%2F07%2F05%2F%E7%AB%A5%E5%B9%B4%E7%9A%84%E6%9A%91%E5%81%87%2F</url>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坐在夏天的院子里，吹着独属于清晨凉爽的风，高大的板栗树的叶子随风舞动着，新生的狗崽们自由地玩闹着，不远处也时而传来清脆悦耳的鸟鸣。此刻正在阅读的我，不由得想起童年的暑假。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相信对于每一位拥有暑假的孩子来说，那都是一段令我们魂牵梦萦的时光。因为年少的我们还没能意识到知识的重要性，对于“求知”一词也就无从谈起。但我们拥有对世界的好奇心，对于某些物质的渴求。而我在那个时期的暑假是伴随着辛劳、收获与懵懂无知的。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暑假刚至，便是西瓜的盛世。那时村里几乎每家每户都种西瓜（现在也一如既往，就算是没有种瓜的人家也总有瓜纷至沓来），人们在下午太阳的热辣褪去之后，拉着双轮车就往瓜地里走去。在大片的瓜地里寻找最大的西瓜，学着大人的模样在瓜的身上轻轻敲打来辨别是否可以采摘，还有搬着一个个又大又圆的西瓜走在田埂上是我的乐趣。第二天一大早，在天还未亮的时候，人们就拉着满车的西瓜往集市上赶。而我就在家中用菜刀切开自己早就精挑细选好的西瓜的头部，用调羹挖开又红又甜的瓜瓤，享受夏天清爽而又甜蜜的味道。当然也不能忘却杏子和李子给过的酸甜可口。寻觅，爬树，摇晃，然后找一泓清泉，于阴凉之地，蝉鸣的聒噪声中大饱口福是在所难免的。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等到享乐的时节一过，就迎来了第一季的农忙。趁着昨夜的凉气还未完全消散，趁着火热的太阳还未升起，家家户户收拾好工具就早早地去往金黄的稻田，开始一天的劳作。早上是一天当中最佳的劳作时间，人们往往会在两至三个小时之后才会回到家中，由妇女准备饭食，其他人则负责将收割回来的稻谷搬运到楼顶或者院子里摊开晾晒。短暂而又简短的早餐过后，一天中的重要时段上午便接踵而至，这时的太阳已经普照大地。左手握稻秆，右手持镰刀，挥汗如雨下，人们顶着烈日在田地里弯腰劳作着，将一捧又一捧连着稻秆的稻穗，搭成稻谷架（以便打谷这一工序）。偶尔吹来一阵凉爽的风（有时就连风也是热的），抬起头，田野里各处响起脚踏打谷机的运作声，天上是澄澈的蓝天和白云。中场休息是我的最爱，不仅有家中甘甜的井水，还有从来都不缺的可口的西瓜，以此来解渴和补充糖分。忙到中午时分，回到家，午餐过后，小睡，便又开始了下午的忙碌。在睡意昏沉中走进烈日的暴晒里，整个人顿时就清醒了。动作重复，直至夕阳西下，此时需要派人先行回家收好早上和上午晾晒的稻谷。说到收稻谷这件事，农忙期间作为小孩子的我既渴望天空下雨又不愿天空下雨，真真是让心里纠结又矛盾。当然，除了收割稻子之外，还需要为晚稻做准备。一般是收割完一块地之后，便要犁地抛秧。抛秧这件事比割稻子有趣，自从有了育秧盘，抛秧就比插秧轻松多了。当大人们在认认真真地有间隔和规律地抛秧时，我手中的秧苗呢，可以从天而降，也可以在水田里组成各式各样的形状（此情此景，总是想起王维的“漠漠水田飞白鹭”），甚至用抛出的秧苗将他们给围起来。农忙时节一般需要持续将近一个月左右，这个月是人类与大地深切交流的日子。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;农忙过后的我就要与家中的黄牛常伴左右了。这是农耕文明里必不可少的物种，也是世世代代的农民不可缺少的战友。同样是早起，和小伙伴们赶着牛群有时往山里走，有时走向荒废的田野。清晨只是个插曲，下午才是重点。虽然烈日当头照，但我们躲在树的阴凉里，玩着各种属于我们的游戏，享受属于我们的快乐时光。童年的暑假便是在这样的日子里慢慢度过，直至开学第一课。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如今的故乡，农耕的机械化时代早已如约而至，曾经面朝黄土背朝天的农人们依然即将步入收获的季节。暑假只是我童年的一个缩影，于我而言，童年是一个物质相对匮乏的时期，更谈不上阅读这一有着一定条件的事物了。或许这是现在的我对阅读和文字饱有热爱之心的缘由。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[自由与人生]]></title>
+    <url>%2F2018%2F07%2F01%2F%E8%87%AA%E7%94%B1%E4%B8%8E%E4%BA%BA%E7%94%9F%2F</url>
+    <content type="text"><![CDATA[那些以自由为人生终极目的的人是不会真正拥有自由的，因为他们时常为自由所奴役。相反，我认为人生才是自由的目的。换言之，我们是 要“自由的人生”，而不是“人生的自由”。――熊培云 当我看到这句话的时候，才恍然意识到在这之前，自己的思想里追求的就是“人生的自由”，而非“自由的人生”。]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
       </tags>
   </entry>
   <entry>

@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T10:21:05.537Z">
+<meta property="og:updated_time" content="2018-07-26T10:04:53.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java反射API(一)">
 <meta name="twitter:description" content="1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  630
+                  1,095
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  5
                 </span>
               
             </div>
@@ -484,7 +484,7 @@ Class.getConstructor(new Class[]{}).newInstance(new Object[]{});
 </code></pre><h3 id="3、通过反射获取并调用方法"><a href="#3、通过反射获取并调用方法" class="headerlink" title="3、通过反射获取并调用方法"></a>3、通过反射获取并调用方法</h3><p>(1)获得当前类以及超类的public Method</p>
 <pre><code>Method[] arrMethods=classType.getMethods();
 </code></pre><p>(2)获得当前类申明的所有Method</p>
-<pre><code>Method arrMethods=classTyep.getDeclaredMethods();
+<pre><code>Method[] arrMethods=classTyep.getDeclaredMethods();
 </code></pre><p>(3)获得当前类以及超类指定的public Method</p>
 <pre><code>Method method=classType.getMethod(String name,Class&lt;?&gt;...parameterTypes);
 </code></pre><p>(4)获得当前类申明的指定的Method</p>
@@ -506,10 +506,19 @@ Class.getConstructor(new Class[]{}).newInstance(new Object[]{});
 </code></pre><h3 id="5、举例"><a href="#5、举例" class="headerlink" title="5、举例"></a>5、举例</h3><pre><code>package com.iotek.reflect;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class ReflectionAPIDemo {
 
     public static void main(String[] args) throws Exception{
+        /**
+         * 只要用到反射，先获得Class对象。没有方法能够获得当前类的超类的private方法和属性，
+         * 你必须通过getSuperclass()找到超类以后再去尝试获得。通常情况下，即使是当前类，
+         * private属性或者方法也是不能访问的，你需要设置压制权限setAccessible(true)来
+         * 取得private的访问权。但这样的话，就破坏了面向对象的规则，所以除非万不得已，尽量少用。
+         */
+
         //获取Emploee这个类所关联的class对象
         Class&lt;?&gt; classType=Class.forName(&quot;com.iotek.reflect.Emploee&quot;);
         //通过反射机制来构造一个Emploee的实例对象(默认调用无参的构造方法)
@@ -519,6 +528,30 @@ public class ReflectionAPIDemo {
         Emploee emploee2=(Emploee)constructor.newInstance(new Object[]{});
         System.out.println(emploee);
         System.out.println(emploee2);
+        //调用指定的构造方法来实例化对象(调用带参数的构造方法)
+        Constructor&lt;?&gt; constructor1=classType.getConstructor(new Class[]{String.class,int.class});
+        Emploee emploee3=(Emploee)constructor1.newInstance(new Object[]{&quot;zhangsan&quot;,30});
+        System.out.println(emploee3);
+
+        //获取class对象指定的方法，包括私有的
+        Method method=classType.getDeclaredMethod(&quot;toString&quot;, new Class[]{});
+        System.out.println(method.getName());
+        //方法的调用
+        String desc=(String) method.invoke(emploee, new Object[]{});
+        System.out.println(desc);
+
+        //获取class对象指定的所有方法，包括私有的(私有的是默认不能被访问的)
+        Method[] methods = classType.getDeclaredMethods();
+        for(Method method2 : methods){
+            method2.setAccessible(true);//私有的可以访问了
+            System.out.println(method2.getName()+&quot;--&gt;&quot;+method2.getModifiers());
+        }
+
+        //获取Class对象所指定的属性，包括私有的(私有的默认是不能被访问的)
+        Field field = classType.getDeclaredField(&quot;nameString&quot;);
+        field.setAccessible(true);//可访问了
+        field.set(emploee, &quot;李四&quot;);
+        System.out.println(field.get(emploee));
     }
 }
 
@@ -549,6 +582,28 @@ class Emploee{
     @Override
     public String toString() {
         return &quot;Emploee [nameString=&quot; + nameString + &quot;, age=&quot; + age + &quot;]&quot;;
+    }
+}
+</code></pre><h3 id="6、使用反射机制来创建一维数组和二维数组"><a href="#6、使用反射机制来创建一维数组和二维数组" class="headerlink" title="6、使用反射机制来创建一维数组和二维数组"></a>6、使用反射机制来创建一维数组和二维数组</h3><pre><code>package com.iotek.reflect;
+
+import java.lang.reflect.Array;
+
+public class ReflectionArrayDemo {
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        //创建一个一维数组(String)
+        Class&lt;?&gt; classType = Class.forName(&quot;java.lang.String&quot;);
+        Object obj = Array.newInstance(classType,5);
+        Array.set(obj, 3, &quot;abc&quot;);
+        System.out.println(Array.get(obj, 3));
+
+        //创建二维数组(3行3列)
+        int[] dimens={3,3};
+        Object obj1 = Array.newInstance(int.class, dimens);
+        Object obj2 = Array.get(obj1, 2);//获取第三行(它是一个一维数组)
+        Array.setInt(obj2, 2, 5);//给指定位置赋值
+        int[][] obj3 = (int[][])obj1;
+        System.out.println(obj3[2][2]);
     }
 }
 </code></pre>
@@ -624,6 +679,10 @@ class Emploee{
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/07/26/Java反射API(二)/" rel="prev" title="Java反射API(二)">
+                Java反射API(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -694,7 +753,7 @@ class Emploee{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">130</span>
+                <span class="site-state-item-count">135</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -805,7 +864,7 @@ class Emploee{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Java-lang-reflect库"><span class="nav-number">1.</span> <span class="nav-text">1、Java.lang.reflect库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、通过反射实例化对象"><span class="nav-number">2.</span> <span class="nav-text">2、通过反射实例化对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、通过反射获取并调用方法"><span class="nav-number">3.</span> <span class="nav-text">3、通过反射获取并调用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、通过反射获取并调用属性"><span class="nav-number">4.</span> <span class="nav-text">4、通过反射获取并调用属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、举例"><span class="nav-number">5.</span> <span class="nav-text">5、举例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Java-lang-reflect库"><span class="nav-number">1.</span> <span class="nav-text">1、Java.lang.reflect库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、通过反射实例化对象"><span class="nav-number">2.</span> <span class="nav-text">2、通过反射实例化对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、通过反射获取并调用方法"><span class="nav-number">3.</span> <span class="nav-text">3、通过反射获取并调用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、通过反射获取并调用属性"><span class="nav-number">4.</span> <span class="nav-text">4、通过反射获取并调用属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、举例"><span class="nav-number">5.</span> <span class="nav-text">5、举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、使用反射机制来创建一维数组和二维数组"><span class="nav-number">6.</span> <span class="nav-text">6、使用反射机制来创建一维数组和二维数组</span></a></li></ol></div>
             
 
           </div>
@@ -847,7 +906,7 @@ class Emploee{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共91.1k字</span>
+  <span class="post-count">博客全站共94.0k字</span>
 </div>
 
 
