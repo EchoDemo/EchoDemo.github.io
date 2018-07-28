@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="EchoDemo" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -108,16 +108,18 @@
 
 
 
-<meta name="description" content="Less interests,more interest。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="EchoDemo&#39;s Blogs">
-<meta property="og:url" content="http://www.echodemo.cc/archives/2018/page/9/index.html">
+<meta name="description" content="1、概念了解(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。 (2)进程是运行中的程序，是动态的概念。每个进程有独立的资源空间。 (3)线程是轻量级的进程，是程序执行流的最小单位，是程序中一个单一的顺序控制流程。线程是进程中的一个实体，是被系统独立调度和分派的基本单位。 (4)多线程是在单个程序中可以同时运行多个不同的线程执行不同的任务。一个进程可以包含一个或者多个线程。一个程序实现多个代">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的线程模型">
+<meta property="og:url" content="http://www.echodemo.cc/2018/07/28/Java中的线程模型/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="Less interests,more interest。">
+<meta property="og:description" content="1、概念了解(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。 (2)进程是运行中的程序，是动态的概念。每个进程有独立的资源空间。 (3)线程是轻量级的进程，是程序执行流的最小单位，是程序中一个单一的顺序控制流程。线程是进程中的一个实体，是被系统独立调度和分派的基本单位。 (4)多线程是在单个程序中可以同时运行多个不同的线程执行不同的任务。一个进程可以包含一个或者多个线程。一个程序实现多个代">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-27T16:17:45.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EchoDemo&#39;s Blogs">
-<meta name="twitter:description" content="Less interests,more interest。">
+<meta name="twitter:title" content="Java中的线程模型">
+<meta name="twitter:description" content="1、概念了解(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。 (2)进程是运行中的程序，是动态的概念。每个进程有独立的资源空间。 (3)线程是轻量级的进程，是程序执行流的最小单位，是程序中一个单一的顺序控制流程。线程是进程中的一个实体，是被系统独立调度和分派的基本单位。 (4)多线程是在单个程序中可以同时运行多个不同的线程执行不同的任务。一个进程可以包含一个或者多个线程。一个程序实现多个代">
 
 
 
@@ -145,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/archives/2018/page/9/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/07/28/Java中的线程模型/"/>
 
 
 
 
 
-  <title> 归档 | EchoDemo's Blogs </title>
+  <title> Java中的线程模型 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,402 +319,357 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      非常好! 目前共计 136 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/07/28/Java中的线程模型/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java中的线程模型
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-28T00:04:49+08:00">
+                2018-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/28/Java中的线程模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/07/28/Java中的线程模型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  963
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <h3 id="1、概念了解"><a href="#1、概念了解" class="headerlink" title="1、概念了解"></a>1、概念了解</h3><p>(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。</p>
+<p>(2)进程是运行中的程序，是动态的概念。每个进程有独立的资源空间。</p>
+<p>(3)线程是轻量级的进程，是程序执行流的最小单位，是程序中一个单一的顺序控制流程。线程是进程中的一个实体，是被系统独立调度和分派的基本单位。</p>
+<p>(4)多线程是在单个程序中可以同时运行多个不同的线程执行不同的任务。一个进程可以包含一个或者多个线程。一个程序实现多个代码同时交替运行就需要产生多个线程。线程本身不拥有系统资源，与同属一个进程的其他线程共享所在进程所拥有的资源。同一进程中的多个线程之间可以并发执行。CPU会随机抽出时间，让我们的程序一会做这件事，一会做另外一件事情。多线程的目的在于，最大限度地利用CPU资源，当某一线程的处理不需要占用CPU而只和I/O等资源打交道时，让需要占用CPU资源的其他线程有机会获得CPU资源。从根本上说，这就是多线程编程的最终目的。</p>
+<p>(5)Java运行系统在很多方面依赖于线程，所有的类库设计都考虑到多线程。Java是纯面向对象语言，Java的线程模型也是面向对象的。</p>
+<p>(6)创建线程的方式有两种：第一，通过继承Thread类创建线程，普通Java类如继承自Thread类，就成为一个线程类，并可通过该类的start方法来启动线程，执行线程代码。Thread子类可直接实例化，但在子类中必须覆盖run方法才能真正运行线程的代码。第二，通过实现Runnable接口创建线程，实现Runnable接口的类必须借助Thread类才能创建线程(本质上还是通过继承Thread来实现)。通过Runnable接口创建线程分为两步：创建实现Runnable接口的类的实例；创建一个Thread类对象，将第一步实例化得到的Runnable对象作为参数传入Thread类的构造方法。最后通过Thread类的start方法启动线程。</p>
+<h3 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h3><p>(1)举例一：通过继承Thread类创建线程</p>
+<pre><code>package com.iotek.threadtest;
+
+public class HelloThreadDemo {
+
+    public static void main(String[] args) {
+        HelloThread h1HelloThread = new HelloThread(&quot;A&quot;);
+        //h1HelloThread.setName(&quot;线程1&quot;);//自定义线程名字
+        h1HelloThread.start();//启动线程就会调用run方法
+        HelloThread h2HelloThread = new HelloThread(&quot;B&quot;);
+        //h1HelloThread.setName(&quot;线程2&quot;);
+        h2HelloThread.start();
+    }
+}
+
+class HelloThread extends Thread{
+    public HelloThread(String name) {
+        super(name);
+    }
+    @Override
+    public void run(){
+        for(int i = 0 ;i &lt; 5 ;i++){
+            System.out.println(this.getName() + &quot;:&quot; + i);
+        }
+    }
+}
+</code></pre><p>(2)举例二：通过实现Runnable接口创建线程</p>
+<pre><code>package com.iotek.threadtest;
+
+public class HelloRunnableDemo {
+
+    public static void main(String[] args) {
+        HelloRunnable helloRunnable = new HelloRunnable();
+        Thread thread = new Thread(helloRunnable,&quot;A&quot;);
+        thread.start();
+        Thread thread2 = new Thread(helloRunnable,&quot;B&quot;);
+        thread2.start();
+    }
+}
+
+/**
+ * Runnable接口优于Thread的地方
+ * 1、避免单继承的局限，一个类可以实现多个接口，但只能继承一个类。
+ * 2、适合资源的共享。
+ * @author 紫苏半夏
+ *
+ */
+class HelloRunnable implements Runnable{
+
+    @Override
+    public void run() {
+        for(int i = 0 ;i &lt; 5 ;i++){
+            System.out.println(Thread.currentThread().getName() + &quot;:&quot; + i);
+        }
+    }
+}
+</code></pre><p>(3)举例三：Runnable接口适合资源的共享</p>
+<pre><code>package com.iotek.threadtest;
+
+public class SharedDataThreadDemo {
+
+    public static void main(String[] args) {
+        /*TicketThread ticketThread1 = new TicketThread(&quot;一号窗口&quot;);
+        ticketThread1.start();
+        TicketThread ticketThread2 = new TicketThread(&quot;二号窗口&quot;);
+        ticketThread2.start();*/
+
+        TicketRunnable ticketRunnable = new TicketRunnable();
+        Thread thread = new Thread(ticketRunnable, &quot;一号窗口&quot;);
+        thread.start();
+        Thread thread1 = new Thread(ticketRunnable, &quot;一号窗口&quot;);
+        thread1.start();
+    }
+}
+
+/*class TicketThread extends Thread{
+    private int ticket = 5;
+    public TicketThread(String name){
+        super(name);
+    }
+    @Override
+    public void run(){
+        while (true) {
+            System.out.println(this.getName() + &quot;:&quot; + (ticket--));
+            if(ticket &lt; 1){
+                break;
+            }
+        }
+    }
+}*/
+
+class TicketRunnable implements Runnable{
+    private int ticket = 5;
+    @Override
+    public void run(){
+        while (true) {
+            System.out.println(Thread.currentThread().getName() + &quot;:&quot; + (ticket--));
+            if(ticket &lt; 1){
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/08/树的静态写法和遍历/" itemprop="url">
-              
-                <span itemprop="name">树的静态写法和遍历</span>
-              
-            </a>
-        
-      </h2>
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/26/Java反射API(二)/" rel="next" title="Java反射API(二)">
+                <i class="fa fa-chevron-left"></i> Java反射API(二)
+              </a>
+            
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-08T10:01:52+08:00"
-              content="2018-04-08" >
-          04-08
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/平水韵(入声)/" itemprop="url">
-              
-                <span itemprop="name">平水韵(入声)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T21:41:30+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/PAT-A1020-Tree-Traversals/" itemprop="url">
-              
-                <span itemprop="name">PAT A1020 Tree Traversals</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T16:14:39+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/由中序和后序序列输出先序序列/" itemprop="url">
-              
-                <span itemprop="name">由中序和后序序列输出先序序列</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T15:55:20+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/由先序和中序序列输出后序序列/" itemprop="url">
-              
-                <span itemprop="name">由先序和中序序列输出后序序列</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T14:58:11+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/二叉树的基本操作/" itemprop="url">
-              
-                <span itemprop="name">二叉树的基本操作</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T12:01:09+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/C++中的问题整理(四)/" itemprop="url">
-              
-                <span itemprop="name">C++中的问题整理(四)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T08:45:34+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/05/诗词入门(二)/" itemprop="url">
-              
-                <span itemprop="name">诗词入门(二)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-05T19:35:50+08:00"
-              content="2018-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/05/MySQL中的问题整理/" itemprop="url">
-              
-                <span itemprop="name">MySQL中的问题整理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-05T09:45:49+08:00"
-              content="2018-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/04/MySQL事务/" itemprop="url">
-              
-                <span itemprop="name">MySQL事务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-04T23:46:14+08:00"
-              content="2018-04-04" >
-          04-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/2018/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/14/">14</a><a class="extend next" rel="next" href="/archives/2018/page/10/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
           
           </div>
@@ -720,6 +677,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -739,8 +702,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -854,6 +826,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、概念了解"><span class="nav-number">1.</span> <span class="nav-text">1、概念了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、举例说明"><span class="nav-number">2.</span> <span class="nav-text">2、举例说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -982,11 +970,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
@@ -1019,6 +1005,10 @@
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 
