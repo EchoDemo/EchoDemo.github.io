@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-27T16:17:45.709Z</updated>
+  <updated>2018-07-28T09:07:15.245Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的线程通信</title>
+    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1/"/>
+    <id>http://www.echodemo.cc/2018/07/28/Java中的线程通信/</id>
+    <published>2018-07-28T09:06:29.000Z</published>
+    <updated>2018-07-28T09:07:15.245Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、线程通信相关方法"><a href="#1、线程通信相关方法" class="headerlink" title="1、线程通信相关方法"></a>1、线程通信相关方法</h3><p>Java提供了三个重要的方法巧妙地解决线程间的通信问题。这三个方法分别是：wait()、notify()和notifyAll()。</p><p>(1)调用wait()方法可以使调用该方法的线程释放共享资源的锁，然后从运行态退出，进入等待队列，直到被再次唤醒。</p><p>(2)调用notify()方法可以唤醒等待队列中第一个等待同一共享资源的进程，并使该线程退出等待队列，进入可运行态。</p><p>(3)调用notifyAll()方法可以使所有正在等待队列中共享同一资源的线程从等待状态退出，进入可运行状态，此时，优先级最高的那个线程最先执行。</p><h3 id="2、举例"><a href="#2、举例" class="headerlink" title="2、举例"></a>2、举例</h3><pre><code>package com.iotek.synchronize;import java.util.LinkedList;public class ProductorConsumerDemo {    public static void main(String[] args) {        Basket basket = new Basket();        Productor productor = new Productor(basket);        Consumer consumer = new Consumer(basket);        productor.start();        consumer .start();    }}class Apple{//苹果类    private int id;    public Apple(int id){        this.id = id;    }    @Override    public String toString() {        return &quot;Apple:&quot; + (id+1);    }}class Basket{//篮子类    private LinkedList&lt;Apple&gt; basket = new LinkedList&lt;Apple&gt;();    public synchronized void pushApple(){//放四轮苹果        for(int i=0;i&lt;20;i++){            Apple apple = new Apple(i);            push(apple);        }    }    public synchronized void popApple(){//取四轮苹果        for(int i=0;i&lt;20;i++){            pop();        }    }    private void push(Apple apple){//向篮子放苹果，当存放了五个苹果就等待并通知消费者来取苹果。        if(basket.size()==5){            try {                wait();            } catch (InterruptedException e) {                e.printStackTrace();            }//等待并释放当前对象的锁        }        try {            Thread.sleep(500);        } catch (InterruptedException e) {            e.printStackTrace();        }        basket.addFirst(apple);//每隔500毫秒放一个苹果进篮子里面        System.out.println(&quot;存放&quot;+apple.toString());        notify();//通知消费者来消费    }    private void pop(){//向篮子取苹果，当篮子当中苹果数为零的时候，就等待并通知生产者来生产。        if(basket.size()==0){            try {                wait();            } catch (InterruptedException e) {                e.printStackTrace();            }//等待并释放当前对象的锁        }        try {            Thread.sleep(500);        } catch (InterruptedException e) {            e.printStackTrace();        }        Apple apple = basket.removeFirst();//每隔500毫秒从篮子里面取一个苹果        System.out.println(&quot;吃掉&quot;+apple.toString());        notify();//通知生产者来生产    }}class Productor extends Thread{//生产者    private Basket basket = null;    public Productor(Basket basket) {        super();        this.basket = basket;    }    @Override    public void run(){        basket.pushApple();    }}class Consumer extends Thread{//消费者    private Basket basket = null;    public Consumer(Basket basket) {        super();        this.basket = basket;    }    @Override    public void run(){        basket.popApple();    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、线程通信相关方法&quot;&gt;&lt;a href=&quot;#1、线程通信相关方法&quot; class=&quot;headerlink&quot; title=&quot;1、线程通信相关方法&quot;&gt;&lt;/a&gt;1、线程通信相关方法&lt;/h3&gt;&lt;p&gt;Java提供了三个重要的方法巧妙地解决线程间的通信问题。这三个方法分别是：w
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的多线程编程</title>
+    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
+    <id>http://www.echodemo.cc/2018/07/28/Java中的多线程编程/</id>
+    <published>2018-07-28T03:41:33.000Z</published>
+    <updated>2018-07-28T08:32:26.909Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、线程同步"><a href="#1、线程同步" class="headerlink" title="1、线程同步"></a>1、线程同步</h3><p>线程同步是为了防止多个线程访问一个数据对象时，对数据造成破坏。它是保证多线程安全访问竞争资源的一种手段。</p><p>(1)同步和锁：Java中的每个对象都有一个内置锁。当程序运行到非静态的synchronized同步方法上时，自动获得与正在执行代码类的当前实例(this实例)有关的锁；当程序运行到synchronized同步代码块时，自动获得锁定对象的锁。一个对象只有一个锁。所以，如果一个线程获得该锁，就没有其他线程可以获得锁，直到第一个线程释放锁。这也意味着任何其他线程都不能进入synchronized方法或者代码块，直到该锁被释放。释放锁是指持锁线程退出了synchronized同步方法或者代码块。</p><p>(2)对于同步，一般而言在Java中需要完成两个操作：把竞争访问的资源表示为private；同步那些访问资源的代码，使用synchronized关键字修饰方法或者代码块。当synchronized方法执行完或者发生异常时会自动释放锁。</p><h3 id="2、举例"><a href="#2、举例" class="headerlink" title="2、举例"></a>2、举例</h3><p>(1)案例介绍</p><p>某银行账号上有500元存款，一个人拿着存折去取钱，同时另一个人拿着银行卡去ATM机上取钱，各自取钱400元。要求取钱的过程中不能出现资源竞争：比如400元被取出两次、银行卡的账目不能小于0等。</p><p>(2)案例实现</p><pre><code>package com.iotek.synchronize;public class BankDemo {    public static void main(String[] args) {        Bank bank1 = new Bank();        BankThread bankThread = new BankThread(bank1);        bankThread.start();//柜台取钱        BankThread bankThread2 = new BankThread(bank1);        bankThread2.start();//ATM机取钱    }}class Bank{    private int money = 500;    private Object object = new Object();//锁这个对象也可以实现，因为任何对象都只有一个锁。    /*取钱的方法，返回取钱的数目    当一个线程去调用同步方法的时候，这个线程就调用了当前对象的锁。其他线程则等待*/    public int getMoney(int number) throws InterruptedException{        synchronized(this){            if(number &lt; 0)                return -1;            else if(money &lt; 0)                return -2;            else if(number - money &gt;0)                return -3;            else{                Thread.sleep(1000);                money-=number;                System.out.println(&quot;账户余额：&quot; + money);            }            return number;        }    }}class BankThread extends Thread{    private Bank bank = null;    public BankThread(Bank bank){        this.bank = bank;    }    @Override    public void run(){        try {            System.out.println(&quot;取钱：&quot;+bank.getMoney(400));        } catch (InterruptedException e) {            e.printStackTrace();        }    }}</code></pre><h3 id="3、同步产生死锁"><a href="#3、同步产生死锁" class="headerlink" title="3、同步产生死锁"></a>3、同步产生死锁</h3><p>(1)同步产生死锁的原因：当一个线程已经获取了对象1的锁，同时又想获取对象二的锁。而此时另一个线程当前已经持有了对象二的锁，而又想获取对象一的锁。这中相互等待对方释放锁的过程，会导致“死锁”。</p><p>(2)死锁举例</p><pre><code>package com.iotek.synchronize;public class DieThreadDemo {    public static void main(String[] args) throws InterruptedException {        Example example = new Example();        DieThread thread1 = new DieThread(example);        thread1.start();        DieThread1 thread2 = new DieThread1(example);        thread2.start();    }}class Example{    private Object obj1 = new Object();    private Object obj2 = new Object();    public void method1() throws InterruptedException{//先占用对象1，再请求对象2.        synchronized (obj1) {            Thread.sleep(1000);            synchronized (obj2) {                System.out.println(&quot;method1&quot;);            }        }    }    public void method2() throws InterruptedException{//先占用对象2，再请求对象1.        synchronized (obj2) {            Thread.sleep(1000);            synchronized (obj1) {                System.out.println(&quot;method2&quot;);            }        }    }}class DieThread extends Thread{//死亡进程1    private Example example = null;    public DieThread(Example example) {        super();        this.example = example;    }    @Override    public void run(){        try {            example.method1();        } catch (InterruptedException e) {            // TODO Auto-generated catch block            e.printStackTrace();        }    }}class DieThread1 extends Thread{//死亡进程2    private Example example = null;    public DieThread1(Example example) {        super();        this.example = example;    }    @Override    public void run(){        try {            example.method2();        } catch (InterruptedException e) {            // TODO Auto-generated catch block            e.printStackTrace();        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、线程同步&quot;&gt;&lt;a href=&quot;#1、线程同步&quot; class=&quot;headerlink&quot; title=&quot;1、线程同步&quot;&gt;&lt;/a&gt;1、线程同步&lt;/h3&gt;&lt;p&gt;线程同步是为了防止多个线程访问一个数据对象时，对数据造成破坏。它是保证多线程安全访问竞争资源的一种手段。&lt;/
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中线程的生命周期</title>
+    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://www.echodemo.cc/2018/07/28/Java中线程的生命周期/</id>
+    <published>2018-07-28T01:01:21.000Z</published>
+    <updated>2018-07-28T01:02:48.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>与人的生老病死一样，线程也同样要经历新建、就绪、运行、阻塞和死亡五种不同的状态。这五种状态都可以通过Thread类中的方法进行控制。</p><p>(1)新建状态(New Thread)：在Java语言中使用new操作符创建一个线程后，该线程仅仅是一个空对象，它具备类线程的一些特征，但此时系统没有为其分配资源，这时的线程处于创建状态。线程处于创建状态时，可通过Thread类的方法来设置线程各种属性，如线程的优先级(setPriority)、线程名(setName)和线程的类型(setDaemon)等。</p><p>(2)就绪状态(Runnable)：使用start()方法启动一个线程后，系统为该线程分配除CPU外的所需资源，使该线程处于就绪状态。此外，如果某个线程执行了yield()方法，那么该线程会被暂时剥夺CPU资源，重新进入就绪状态。</p><p>(3)运行状态(Running)：Java运行系统通过调度选中一个处于就绪状态的线程，使其占用CPU并转为运行状态。此时，系统真正执行线程的run()方法。可以通过Thread类的isAlive()方法来判断线程是否处于就绪状态：当线程处于就绪/运行状态时，isAlive()方法返回true；否则的话，线程可能处于阻塞状态也可能是处于停止状态。</p><p>(4)阻塞状态(Blocked)：一个正在运行的线程因某些原因不能继续运行时，就进入阻塞状态。包括以下原因：</p><pre><code>a、当执行了某个线程对象的sleep()等阻塞类型的方法时，该线程对象会被置入一个阻塞集(Blocked Pool)内，等待超时而自动苏醒。b、当多个线程试图进入某个同步区域(synchronized)时，没能进入该同步区域的线程会被置入锁定集(Lock Pool)，直到获得该同步区域的锁，进入就绪状态。c、当线程执行了某个对象的wait()方法时，线程会被置入该对象的等待集(Wait Pool)中，直到执行了该对象的notify()方法，wait()/notify()方法的执行要求线程首先获取到该对象的锁。</code></pre><p>(5)死亡状态(Dead)：线程在run()方法执行结束后进入死亡状态。此外，如果线程执行了interrupt()或stop()方法，那么它也会以异常退出的方式进入死亡状态。</p><p>(6)终止线程的三种方法</p><pre><code>a、使用退出标志，使线程正常退出，也就是run()方法完成后线程终止，推荐使用。b、使用stop()方法强行终止线程(这个方法不推荐使用，因为stop()和suspend()、resume()一样，也可能发生不可预料的后果)。c、使用interrupt()方法中断线程。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;与人的生老病死一样，线程也同样要经历新建、就绪、运行、阻塞和死亡五种不同的状态。这五种状态都可以通过Thread类中的方法进行控制。&lt;/p&gt;
+&lt;p&gt;(1)新建状态(New Thread)：在Java语言中使用new操作符创建一个线程后，该线程仅仅是一个空对象，它具备类线程的
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的线程模型</title>
@@ -436,84 +512,6 @@
     
     
       <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>廊下听雨</title>
-    <link href="http://www.echodemo.cc/2018/07/07/%E5%BB%8A%E4%B8%8B%E5%90%AC%E9%9B%A8/"/>
-    <id>http://www.echodemo.cc/2018/07/07/廊下听雨/</id>
-    <published>2018-07-07T00:39:48.000Z</published>
-    <updated>2018-07-24T10:50:17.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小暑时节，雨一直下，且大，完全没有减弱的痕迹。坐在廊下听雨，淅淅沥沥的。树叶上浸润着雨水，轻轻地晃动着。天空一片灰濛，背后是望不到尽头的远方。仿佛时间于此刻定格，又好像自己回到了久远的过去，似曾相识里神情甚是淡然。起身取来《平凡的世界》，自己明日即将远行。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;小暑时节，雨一直下，且大，完全没有减弱的痕迹。坐在廊下听雨，淅淅沥沥的。树叶上浸润着雨水，轻轻地晃动着。天空一片灰濛，背后是望不到尽头的远方。仿佛时间于此刻定格，又好像自己回到了久远的过去，
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>童年的暑假</title>
-    <link href="http://www.echodemo.cc/2018/07/05/%E7%AB%A5%E5%B9%B4%E7%9A%84%E6%9A%91%E5%81%87/"/>
-    <id>http://www.echodemo.cc/2018/07/05/童年的暑假/</id>
-    <published>2018-07-05T02:40:32.000Z</published>
-    <updated>2018-07-24T10:48:28.612Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坐在夏天的院子里，吹着独属于清晨凉爽的风，高大的板栗树的叶子随风舞动着，新生的狗崽们自由地玩闹着，不远处也时而传来清脆悦耳的鸟鸣。此刻正在阅读的我，不由得想起童年的暑假。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相信对于每一位拥有暑假的孩子来说，那都是一段令我们魂牵梦萦的时光。因为年少的我们还没能意识到知识的重要性，对于“求知”一词也就无从谈起。但我们拥有对世界的好奇心，对于某些物质的渴求。而我在那个时期的暑假是伴随着辛劳、收获与懵懂无知的。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暑假刚至，便是西瓜的盛世。那时村里几乎每家每户都种西瓜（现在也一如既往，就算是没有种瓜的人家也总有瓜纷至沓来），人们在下午太阳的热辣褪去之后，拉着双轮车就往瓜地里走去。在大片的瓜地里寻找最大的西瓜，学着大人的模样在瓜的身上轻轻敲打来辨别是否可以采摘，还有搬着一个个又大又圆的西瓜走在田埂上是我的乐趣。第二天一大早，在天还未亮的时候，人们就拉着满车的西瓜往集市上赶。而我就在家中用菜刀切开自己早就精挑细选好的西瓜的头部，用调羹挖开又红又甜的瓜瓤，享受夏天清爽而又甜蜜的味道。当然也不能忘却杏子和李子给过的酸甜可口。寻觅，爬树，摇晃，然后找一泓清泉，于阴凉之地，蝉鸣的聒噪声中大饱口福是在所难免的。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等到享乐的时节一过，就迎来了第一季的农忙。趁着昨夜的凉气还未完全消散，趁着火热的太阳还未升起，家家户户收拾好工具就早早地去往金黄的稻田，开始一天的劳作。早上是一天当中最佳的劳作时间，人们往往会在两至三个小时之后才会回到家中，由妇女准备饭食，其他人则负责将收割回来的稻谷搬运到楼顶或者院子里摊开晾晒。短暂而又简短的早餐过后，一天中的重要时段上午便接踵而至，这时的太阳已经普照大地。左手握稻秆，右手持镰刀，挥汗如雨下，人们顶着烈日在田地里弯腰劳作着，将一捧又一捧连着稻秆的稻穗，搭成稻谷架（以便打谷这一工序）。偶尔吹来一阵凉爽的风（有时就连风也是热的），抬起头，田野里各处响起脚踏打谷机的运作声，天上是澄澈的蓝天和白云。中场休息是我的最爱，不仅有家中甘甜的井水，还有从来都不缺的可口的西瓜，以此来解渴和补充糖分。忙到中午时分，回到家，午餐过后，小睡，便又开始了下午的忙碌。在睡意昏沉中走进烈日的暴晒里，整个人顿时就清醒了。动作重复，直至夕阳西下，此时需要派人先行回家收好早上和上午晾晒的稻谷。说到收稻谷这件事，农忙期间作为小孩子的我既渴望天空下雨又不愿天空下雨，真真是让心里纠结又矛盾。当然，除了收割稻子之外，还需要为晚稻做准备。一般是收割完一块地之后，便要犁地抛秧。抛秧这件事比割稻子有趣，自从有了育秧盘，抛秧就比插秧轻松多了。当大人们在认认真真地有间隔和规律地抛秧时，我手中的秧苗呢，可以从天而降，也可以在水田里组成各式各样的形状（此情此景，总是想起王维的“漠漠水田飞白鹭”），甚至用抛出的秧苗将他们给围起来。农忙时节一般需要持续将近一个月左右，这个月是人类与大地深切交流的日子。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;农忙过后的我就要与家中的黄牛常伴左右了。这是农耕文明里必不可少的物种，也是世世代代的农民不可缺少的战友。同样是早起，和小伙伴们赶着牛群有时往山里走，有时走向荒废的田野。清晨只是个插曲，下午才是重点。虽然烈日当头照，但我们躲在树的阴凉里，玩着各种属于我们的游戏，享受属于我们的快乐时光。童年的暑假便是在这样的日子里慢慢度过，直至开学第一课。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如今的故乡，农耕的机械化时代早已如约而至，曾经面朝黄土背朝天的农人们依然即将步入收获的季节。暑假只是我童年的一个缩影，于我而言，童年是一个物质相对匮乏的时期，更谈不上阅读这一有着一定条件的事物了。或许这是现在的我对阅读和文字饱有热爱之心的缘由。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;坐在夏天的院子里，吹着独属于清晨凉爽的风，高大的板栗树的叶子随风舞动着，新生的狗崽们自由地玩闹着，不远处也时而传来清脆悦耳的鸟鸣。此刻正在阅读的我，不由得想起童年的暑假。&lt;/p&gt;
-&lt;p&gt;&amp;n
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自由与人生</title>
-    <link href="http://www.echodemo.cc/2018/07/01/%E8%87%AA%E7%94%B1%E4%B8%8E%E4%BA%BA%E7%94%9F/"/>
-    <id>http://www.echodemo.cc/2018/07/01/自由与人生/</id>
-    <published>2018-07-01T13:49:02.000Z</published>
-    <updated>2018-07-24T10:57:29.610Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>那些以自由为人生终极目的的人是不会真正拥有自由的，因为他们时常为自由所奴役。相反，我认为人生才是自由的目的。换言之，我们是要“自由的人生”，而不是“人生的自由”。――熊培云</code></pre><p>当我看到这句话的时候，才恍然意识到在这之前，自己的思想里追求的就是“人生的自由”，而非“自由的人生”。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;那些以自由为人生终极目的的人是不会真正拥有自由的，因为他们时常为自由所奴役。相反，我认为人生才是自由的目的。换言之，我们是
-要“自由的人生”，而不是“人生的自由”。――熊培云
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当我看到这句话的时候，才恍然意识到在这之前，自己的
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
