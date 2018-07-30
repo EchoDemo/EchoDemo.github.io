@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-28T09:07:15.245Z</updated>
+  <updated>2018-07-30T00:24:47.983Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中线程的单例模式</title>
+    <link href="http://www.echodemo.cc/2018/07/30/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://www.echodemo.cc/2018/07/30/Java中线程的单例模式/</id>
+    <published>2018-07-29T23:31:12.000Z</published>
+    <updated>2018-07-30T00:24:47.983Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、案例介绍"><a href="#1、案例介绍" class="headerlink" title="1、案例介绍"></a>1、案例介绍</h3><p>单例模式有饿汉式和懒汉式之分，懒汉式即延迟初始化单例。在多线程环境下，简单的懒汉式会有线程安全的困扰。</p><h3 id="2、案例设计"><a href="#2、案例设计" class="headerlink" title="2、案例设计"></a>2、案例设计</h3><p>使用双重检查加锁机制解决线程安全问题。单例模式还有更好的解决方案，即使用静态类方式。</p><h3 id="3、案例实现"><a href="#3、案例实现" class="headerlink" title="3、案例实现"></a>3、案例实现</h3><pre><code>package com.iotek.synchronize;public class SingleTonDemo {    public static void main(String[] args) {        /*SingleTon.getInstance();        SingleTon.getInstance();//单例模式只产生一个对象*/            SThread sThread = new SThread();        Thread t1 = new Thread(sThread);        t1.start();        Thread t2 = new Thread(sThread);        t2.start();    }}class SThread implements Runnable{    @Override    public void run(){        SingleTon.getInstance();    }}class SingleTon{    private static SingleTon singleTon = null;    private SingleTon(){        System.out.println(&quot;单例模式&quot;);    }    public static SingleTon getInstance(){        if(singleTon == null){            synchronized (SingleTon.class) {                if(singleTon == null){                    //第一个线程进来                    //第二个线程也进来了                    singleTon = new SingleTon();                }            }        }        return singleTon;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、案例介绍&quot;&gt;&lt;a href=&quot;#1、案例介绍&quot; class=&quot;headerlink&quot; title=&quot;1、案例介绍&quot;&gt;&lt;/a&gt;1、案例介绍&lt;/h3&gt;&lt;p&gt;单例模式有饿汉式和懒汉式之分，懒汉式即延迟初始化单例。在多线程环境下，简单的懒汉式会有线程安全的困扰。&lt;/p
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的线程通信</title>
@@ -479,32 +504,6 @@
     <updated>2018-07-17T10:59:09.813Z</updated>
     
     <summary type="html">
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>礼仪培训笔记</title>
-    <link href="http://www.echodemo.cc/2018/07/17/%E7%A4%BC%E4%BB%AA%E5%9F%B9%E8%AE%AD%E7%AC%94%E8%AE%B0/"/>
-    <id>http://www.echodemo.cc/2018/07/17/礼仪培训笔记/</id>
-    <published>2018-07-17T10:15:32.000Z</published>
-    <updated>2018-07-17T10:50:41.212Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="一、什么是礼仪？"><a href="#一、什么是礼仪？" class="headerlink" title="一、什么是礼仪？"></a>一、什么是礼仪？</h3><p>礼仪=礼节+原则=心理+形式</p><h3 id="二、简析服务礼仪"><a href="#二、简析服务礼仪" class="headerlink" title="二、简析服务礼仪"></a>二、简析服务礼仪</h3><p>1、顾客永远是对的（把面子留给客人，放弃自我，自主揽错）</p><p>2、永远不要辩解，服务中禁止使用推卸责任的语言。</p><p>3、注重首因效应、末轮效应。比如：缩短客人的等待时间。</p><p>4、在职场当中得体比漂亮更重要。包括面部，发型，举止，服饰，谈吐。如：不能穿短衬打领带，衬衣只买领围的大小。</p><h3 id="三、学会用眼睛说话"><a href="#三、学会用眼睛说话" class="headerlink" title="三、学会用眼睛说话"></a>三、学会用眼睛说话</h3><p>1、目光注视方式（PAC规律）</p><p>2、目光注视区域（三角定律）</p><p>3、目光注视时间规律（3~5秒）</p><p>4、目光注视的距离</p><h3 id="四、人际沟通“六到”"><a href="#四、人际沟通“六到”" class="headerlink" title="四、人际沟通“六到”"></a>四、人际沟通“六到”</h3><p>1、脑到：先三思，后言行。</p><p>2、眼到：专注，诚恳，体现尊重。</p><p>3、耳到：诚心聆听，不打岔。</p><p>4、口到：不吝啬鼓励、善意、赞美的语言。</p><p>5、心到：从他人角度理解，换位思考。</p><p>6、脚到：主动接近，距离合适。</p><h3 id="五、其他"><a href="#五、其他" class="headerlink" title="五、其他"></a>五、其他</h3><p>1、服务距离：0.5~1.5米；展示距离：1~3米；引导距离：在客户左前方1~1.5米；待命距离：3米以外。</p><p>2、鞠躬距离控制：脚前方2米是15度；脚前方1.5米是30度；脚前方1.0米是45度。</p><p>3、在职场以职称论高低，在社交场合以女士为尊者，在家庭以年龄为长。</p><p>4、握手需要把握力度，距离。在不同的场合都是尊者先伸手握手。自我介绍在握手之前，且尊者后进行自我介绍。尊者有优先了解别人的权利。</p><p>5、名片：先客后主，先低后高，尊者优先收名片。尊者有优先了解别人的权利。</p><h5 id="6、先肯定全部，再否认局部。"><a href="#6、先肯定全部，再否认局部。" class="headerlink" title="6、先肯定全部，再否认局部。"></a>6、先肯定全部，再否认局部。</h5><h2 id="注：上班提前半小时，开会提前10分钟，由你来准备会议提前半小时。"><a href="#注：上班提前半小时，开会提前10分钟，由你来准备会议提前半小时。" class="headerlink" title="注：上班提前半小时，开会提前10分钟，由你来准备会议提前半小时。"></a>注：上班提前半小时，开会提前10分钟，由你来准备会议提前半小时。</h2>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;一、什么是礼仪？&quot;&gt;&lt;a href=&quot;#一、什么是礼仪？&quot; class=&quot;headerlink&quot; title=&quot;一、什么是礼仪？&quot;&gt;&lt;/a&gt;一、什么是礼仪？&lt;/h3&gt;&lt;p&gt;礼仪=礼节+原则=心理+形式&lt;/p&gt;
-&lt;h3 id=&quot;二、简析服务礼仪&quot;&gt;&lt;a href=&quot;
-      
     
     </summary>
     

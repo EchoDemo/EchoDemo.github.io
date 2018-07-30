@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java中线程的单例模式]]></title>
+    <url>%2F2018%2F07%2F30%2FJava%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[1、案例介绍单例模式有饿汉式和懒汉式之分，懒汉式即延迟初始化单例。在多线程环境下，简单的懒汉式会有线程安全的困扰。 2、案例设计使用双重检查加锁机制解决线程安全问题。单例模式还有更好的解决方案，即使用静态类方式。 3、案例实现package com.iotek.synchronize; public class SingleTonDemo { public static void main(String[] args) { /*SingleTon.getInstance(); SingleTon.getInstance();//单例模式只产生一个对象*/ SThread sThread = new SThread(); Thread t1 = new Thread(sThread); t1.start(); Thread t2 = new Thread(sThread); t2.start(); } } class SThread implements Runnable{ @Override public void run(){ SingleTon.getInstance(); } } class SingleTon{ private static SingleTon singleTon = null; private SingleTon(){ System.out.println(&quot;单例模式&quot;); } public static SingleTon getInstance(){ if(singleTon == null){ synchronized (SingleTon.class) { if(singleTon == null){ //第一个线程进来 //第二个线程也进来了 singleTon = new SingleTon(); } } } return singleTon; } }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java中的线程通信]]></title>
     <url>%2F2018%2F07%2F28%2FJava%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%2F</url>
     <content type="text"><![CDATA[1、线程通信相关方法Java提供了三个重要的方法巧妙地解决线程间的通信问题。这三个方法分别是：wait()、notify()和notifyAll()。 (1)调用wait()方法可以使调用该方法的线程释放共享资源的锁，然后从运行态退出，进入等待队列，直到被再次唤醒。 (2)调用notify()方法可以唤醒等待队列中第一个等待同一共享资源的进程，并使该线程退出等待队列，进入可运行态。 (3)调用notifyAll()方法可以使所有正在等待队列中共享同一资源的线程从等待状态退出，进入可运行状态，此时，优先级最高的那个线程最先执行。 2、举例package com.iotek.synchronize; import java.util.LinkedList; public class ProductorConsumerDemo { public static void main(String[] args) { Basket basket = new Basket(); Productor productor = new Productor(basket); Consumer consumer = new Consumer(basket); productor.start(); consumer .start(); } } class Apple{//苹果类 private int id; public Apple(int id){ this.id = id; } @Override public String toString() { return &quot;Apple:&quot; + (id+1); } } class Basket{//篮子类 private LinkedList&lt;Apple&gt; basket = new LinkedList&lt;Apple&gt;(); public synchronized void pushApple(){//放四轮苹果 for(int i=0;i&lt;20;i++){ Apple apple = new Apple(i); push(apple); } } public synchronized void popApple(){//取四轮苹果 for(int i=0;i&lt;20;i++){ pop(); } } private void push(Apple apple){//向篮子放苹果，当存放了五个苹果就等待并通知消费者来取苹果。 if(basket.size()==5){ try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }//等待并释放当前对象的锁 } try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); } basket.addFirst(apple);//每隔500毫秒放一个苹果进篮子里面 System.out.println(&quot;存放&quot;+apple.toString()); notify();//通知消费者来消费 } private void pop(){//向篮子取苹果，当篮子当中苹果数为零的时候，就等待并通知生产者来生产。 if(basket.size()==0){ try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }//等待并释放当前对象的锁 } try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); } Apple apple = basket.removeFirst();//每隔500毫秒从篮子里面取一个苹果 System.out.println(&quot;吃掉&quot;+apple.toString()); notify();//通知生产者来生产 } } class Productor extends Thread{//生产者 private Basket basket = null; public Productor(Basket basket) { super(); this.basket = basket; } @Override public void run(){ basket.pushApple(); } } class Consumer extends Thread{//消费者 private Basket basket = null; public Consumer(Basket basket) { super(); this.basket = basket; } @Override public void run(){ basket.popApple(); } }]]></content>
