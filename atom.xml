@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-07-31T04:38:35.906Z</updated>
+  <updated>2018-07-31T08:40:27.683Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vim入门</title>
+    <link href="http://www.echodemo.cc/2018/07/31/Vim%E5%85%A5%E9%97%A8/"/>
+    <id>http://www.echodemo.cc/2018/07/31/Vim入门/</id>
+    <published>2018-07-31T08:39:27.000Z</published>
+    <updated>2018-07-31T08:40:27.683Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Vim的模式介绍"><a href="#1、Vim的模式介绍" class="headerlink" title="1、Vim的模式介绍"></a>1、Vim的模式介绍</h3><p>(1)普通模式(Normal mode):在普通模式中，用的编辑器命令，比如移动光标，删除文本等等。这也是Vim启动后的默认模式。这正好和许多新用户期待的操作方式相反（大多数编辑器默认模式为插入模式）。Vim强大的编辑能来自于其普通模式命令。普通模式命令往往需要一个操作符结尾。例如普通模式命令dd删除当前行，但是第一个”d”的后面可以跟另外的移动命令来代替第二个d，比如用移动到下一行的”j”键就可以删除当前行和下一行。另外还可以指定命令重复次数，2dd（重复dd两次），和dj的效果是一样的。用户学习了各种各样的文本间移动／跳转的命令和其他的普通模式的编辑命令，并且能够灵活组合使用的话，能够比那些没有模式的编辑器更加高效地进行文本编辑。在普通模式中，有很多方法可以进入插入模式。比较普通的方式是按a（append／追加）键或者i（insert／插入）键。</p><p>(2)插入模式(Insert mode):在这个模式中，大多数按键都会向文本缓冲中插入文本。大多数新用户希望文本编辑器编辑过程中一直保持这个模式。在插入模式中，可以按ESC键回到普通模式。</p><p>(3)可视模式(Visual mode):这个模式与普通模式比较相似。但是移动命令会扩大高亮的文本区域。高亮区域可以是字符、行或者是一块文本。当执行一个非移动命令时，命令会被执行到这块高亮的区域上。Vim的”文本对象”也能和移动命令一样用在这个模式中。</p><p>(4)选择模式(Select mode):这个模式和无模式编辑器的行为比较相似（Windows标准文本控件的方式）。这个模式中，可以用鼠标或者光标键高亮选择文本，不过输入任何字符的话，Vim会用这个字符替换选择的高亮文本块，并且自动进入插入模式。</p><p>(5)命令行模式(Command line mode):在命令行模式中可以输入会被解释成并执行的文本。例如执行命令（:键），搜索（/和?键）或者过滤命令（!键）。在命令执行之后，Vim返回到命令行模式之前的模式，通常是普通模式。</p><p>(6)Ex模式(Ex mode):这和命令行模式比较相似，在使用:visual命令离开Ex模式前，可以一次执行多条命令。这其中我们常用到就是普通模式、插入模式和命令行模式。</p><p>vim启动进入普通模式，处于插入模式或命令行模式时只需要按Esc或者Ctrl+[(这在vim课程环境中不管用)即可进入普通模式。普通模式中按i（插入）或a（附加）键都可以进入插入模式，普通模式中按:进入命令行模式。命令行模式中输入wq回车后保存并退出vim。</p><h3 id="2、Vim常用命令"><a href="#2、Vim常用命令" class="headerlink" title="2、Vim常用命令"></a>2、Vim常用命令</h3><p>(1)移动</p><pre><code>1)h 左移一个字符；2)l 右移一个字符；3)j 下移一行；4)k 上移一行；5)w 移动到下一个单词；6)b 移动到上一个单词；</code></pre><p>(2)插入</p><pre><code>1)i 在当前光标处进行编辑；2)I 在当前行首插入；3)a 在光标后插入；4)A 在当前行末插入；5)o 在下面新建一行插入；6)O 在上面新建一行插入；</code></pre><p>(3)保存</p><pre><code>1):wq 保存并退出；2):w 保存修改；3):q 退出；4):saveas newfilename 另存为；5):q! 强制退出，不保存；6):wq! 强制保存并退出；</code></pre><p>(4)删除</p><pre><code>1)x    删除游标所在的字符2)X    删除游标所在前一个字符3)dd 删除整行4)dw 删除一个单词（不适用中文）5)d$或D    删除至行尾6)d^ 删除至行首7)dG 删除到文档结尾处8)d1G 删至文档首部</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Vim的模式介绍&quot;&gt;&lt;a href=&quot;#1、Vim的模式介绍&quot; class=&quot;headerlink&quot; title=&quot;1、Vim的模式介绍&quot;&gt;&lt;/a&gt;1、Vim的模式介绍&lt;/h3&gt;&lt;p&gt;(1)普通模式(Normal mode):在普通模式中，用的编辑器命令，比如
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Linux" scheme="http://www.echodemo.cc/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中IO框架之File</title>
@@ -484,32 +509,6 @@
       
       
         &lt;h3 id=&quot;1、List容器特点&quot;&gt;&lt;a href=&quot;#1、List容器特点&quot; class=&quot;headerlink&quot; title=&quot;1、List容器特点&quot;&gt;&lt;/a&gt;1、List容器特点&lt;/h3&gt;&lt;p&gt;List容器是有序的collection(也称之为序列)，此接口的用户可以对
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的集合</title>
-    <link href="http://www.echodemo.cc/2018/07/18/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/"/>
-    <id>http://www.echodemo.cc/2018/07/18/Java中的集合/</id>
-    <published>2018-07-18T11:29:49.000Z</published>
-    <updated>2018-07-23T00:26:36.842Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。</p><p>2、集合框架中不同的集合类有各自不同的数据结构，所以在使用中要根据应用的性能要求来选择不同的集合类。</p><p>3、集合类存放在java.util包中，今后进行程序编程时将大量使用集合类和相关接口。其中包括Iterable:迭代器接口；Collection：类集接口；List：列表接口；Set：数据集接口；Queue：队列；Map：键值对组合映射表。</p><p><img src="/images/2018/7/1.jpg" alt="&quot;集合框架&quot;"></p><p>(1)Iterable接口</p><p>实现该接口允许对象成为“foreach”语句的目标，即该集合对象允许迭代。类集接口Collection是Iterable的子接口，所以所有类集对象可以迭代访问，而映射Map不行。(Map并没有实现Iterable接口)</p><p>Iterator<t>iterator():功能：返回一个在一组T类型的元素上进行迭代的迭代器对象。迭代器是实现了Iterator/ListIterator接口的类的对象，可以通过遍历类集，访问操作其中的每个元素。ListIterator继承了父接口Iterator，允许双向遍历集合，并可以修改和删除元素。</t></p><p>(2)Collection接口</p><p>int size();boolean isEmpty();boolean contains(Object o);Iterator<e> iterator;Object[] toArray();boolean add(E e);boolean remove(Object o);void clear()。等等</e></p><p>(3)List、Set、Map接口</p><p>List接口扩展了Collection，有序且可重复；Set接口扩展了Collection，无序且不可重复；Map是一个存储关键字/值对的对象。映射不是Collection的子接口，所以它本身不能使用迭代器来进行遍历。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、集合框架：它是一个类库的集合。集合框架就是一个用来表示和操作集合的统一架构，它包含了实现集合的接口与类。集合框架包含了各种各样的容器，每一种容器都可以存放数据并且提供了操作容器当中数据的相关方法。&lt;/p&gt;
-&lt;p&gt;2、集合框架中不同的集合类有各自不同的数据结构，所以在使用
       
     
     </summary>
