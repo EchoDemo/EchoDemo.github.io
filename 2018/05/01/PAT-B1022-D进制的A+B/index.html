@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码：">
+<meta name="description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码： #include&amp;lt;iostream&amp;gt; using namespace std;  int main(){">
 <meta name="keywords" content="CPP,PAT B">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT B1022 D进制的A+B">
 <meta property="og:url" content="http://www.echodemo.cc/2018/05/01/PAT-B1022-D进制的A+B/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码：">
+<meta property="og:description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码： #include&amp;lt;iostream&amp;gt; using namespace std;  int main(){">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-01T09:03:51.378Z">
+<meta property="og:updated_time" content="2018-08-01T06:29:16.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT B1022 D进制的A+B">
-<meta name="twitter:description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码：">
+<meta name="twitter:description" content="输入两个非负10进制整数A和B(&amp;lt;=230-1)，输出A+B的D (1 &amp;lt; D &amp;lt;= 10)进制数。 输入格式：输入在一行中依次给出3个整数A、B和D。 输出格式：输出A+B的D进制数。 输入样例： 123 456 8  输出样例： 1103 题目代码： #include&amp;lt;iostream&amp;gt; using namespace std;  int main(){">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  73
+                  121
                 </span>
               
 
@@ -482,7 +482,24 @@
 输出样例：
 1103
 </code></pre><p>题目代码：</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
 
+int main(){
+    int A,B,D,i=0,c[30];
+    long sum;
+    cin&gt;&gt;A&gt;&gt;B&gt;&gt;D;
+    sum=A+B;
+    do{
+        c[i++]=sum%D;
+        sum=sum/D;
+    }while(sum!=0);
+    for(int j=i-1;j&gt;=0;j--){
+        cout&lt;&lt;c[j];
+    }
+    return 0;
+}
+</code></pre>
       
     </div>
 
@@ -622,7 +639,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">144</span>
+                <span class="site-state-item-count">145</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -759,7 +776,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共101.2k字</span>
+  <span class="post-count">博客全站共103.0k字</span>
 </div>
 
 

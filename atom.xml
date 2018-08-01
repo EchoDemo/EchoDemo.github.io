@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-01T00:19:53.452Z</updated>
+  <updated>2018-08-01T09:27:10.387Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT B1023 组个最小数</title>
+    <link href="http://www.echodemo.cc/2018/08/01/PAT-B1023-%E7%BB%84%E4%B8%AA%E6%9C%80%E5%B0%8F%E6%95%B0/"/>
+    <id>http://www.echodemo.cc/2018/08/01/PAT-B1023-组个最小数/</id>
+    <published>2018-08-01T09:21:29.000Z</published>
+    <updated>2018-08-01T09:27:10.387Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定数字0-9各若干个。你可以以任意顺序排列这些数字，但必须全部使用。目标是使得最后得到的数尽可能小（注意0不能做首位）。例如：给定两个0，两个1，三个5，一个8，我们得到的最小的数就是10015558。现给定数字，请编写程序输出能够组成的最小的数。</p><p>输入格式：每个输入包含1个测试用例。每个测试用例在一行中给出10个非负整数，顺序表示我们拥有数字0、数字1、……数字9的个数。整数间用一个空格分隔。10个数字的总个数不超过50，且至少拥有1个非0的数字。</p><p>输出格式：在一行中输出能够组成的最小的数。</p><pre><code>输入样例：2 2 0 0 0 3 0 0 1 0输出样例：10015558</code></pre><p>题目代码：</p><pre><code>#include&lt;iostream&gt;using namespace std;int main(){    int a[10];    int t = 0;    for (int i = 0;i &lt; 10;i++) {        cin &gt;&gt; a[i];    }    for (int i = 1;i &lt; 10;i++) {//查找第一个不包括零在内的个数不为零的数并输出一个        if (a[i] != 0) {            cout &lt;&lt; i;            t = i;            break;        }    }    for (int i = 0;i &lt; a[0];i++) {        cout &lt;&lt; 0;    }    for (int i = 0;i &lt; a[t] - 1;i++) {        cout &lt;&lt; t;    }    for (int i = t + 1;i &lt; 10;i++) {        for (int j = 0;j &lt; a[i];j++) {            cout &lt;&lt; i;        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定数字0-9各若干个。你可以以任意顺序排列这些数字，但必须全部使用。目标是使得最后得到的数尽可能小（注意0不能做首位）。例如：给定两个0，两个1，三个5，一个8，我们得到的最小的数就是10015558。现给定数字，请编写程序输出能够组成的最小的数。&lt;/p&gt;
+&lt;p&gt;输入格式
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
+    
+      <category term="PAT B" scheme="http://www.echodemo.cc/tags/PAT-B/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的过滤流</title>
@@ -484,31 +512,6 @@
       
       
         &lt;h3 id=&quot;1、Set容器的特点&quot;&gt;&lt;a href=&quot;#1、Set容器的特点&quot; class=&quot;headerlink&quot; title=&quot;1、Set容器的特点&quot;&gt;&lt;/a&gt;1、Set容器的特点&lt;/h3&gt;&lt;p&gt;Set容器是一个不包含重复元素的Collection，并且最多包含一个nul
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的Map</title>
-    <link href="http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Map/"/>
-    <id>http://www.echodemo.cc/2018/07/20/Java中的Map/</id>
-    <published>2018-07-20T13:17:34.000Z</published>
-    <updated>2018-07-23T02:22:49.540Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、Map接口详解"><a href="#1、Map接口详解" class="headerlink" title="1、Map接口详解"></a>1、Map接口详解</h3><p>(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都是对象。</p><p>(2)键必须是唯一的，值可以重复。</p><p>(3)有些映射可以接收null键和null值，而有的不能。</p><p>(4)Map接口定义的方法：int size();boolean isEmpty();boolean containsKey(Object key);boolean containsValue(Object value);V get(Object key);V put(K key,V value);V remove(Object key);Collection<v> values();Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet();返回包含的映射关系的Set视图，Map接口定义的entrySet()方法返回包含映射项Entry的集合(Set)，集合中元素是Map.Entry类型。</v></p><p>(5)Map.Entry接口代表映射项(键-值对)类型，是Map的嵌套类型(是Map的内部类)。</p><p>(6)Map.Entry接口定义的方法：K getKey();V getValue();V setValue(V value)。</p><h3 id="2、HashMap及常用API"><a href="#2、HashMap及常用API" class="headerlink" title="2、HashMap及常用API"></a>2、HashMap及常用API</h3><p>(1)HashMap类是基于哈希表的map接口的实现，并允许使用null键和null值。</p><p>(2)构造方法：HashMap();HashMap(Map m);HashMap(int capacity);HashMap(int capacity,float fillRatio)。</p><p>(3)HashMap实现并扩展AbstractMap，本身并没有增加任何新的方法。</p><p>(4)散列映射不保证它的元素的顺序，元素加入散列映射的顺序并不一定是它们被迭代读出的顺序。</p><p>(5)HashMap常用方法举例</p><pre><code>package com.iotech.map;import java.util.Collection;import java.util.HashMap;import java.util.Map.Entry;import java.util.Set;public class HashMapDemo1 {    public static void main(String[] args) {        //HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;();//构造一个空的 HashMap ，默认初始容量（16）和默认负载系数（0.75）。         HashMap&lt;String,String&gt; hashmap=new HashMap&lt;String, String&gt;(1);//构造一个空的 HashMap具有指定的初始容量和默认负载因子（0.75）。         hashmap.put(&quot;jay&quot;, &quot;张三&quot;);        hashmap.put(&quot;jay&quot;, &quot;李四&quot;);        hashmap.put(&quot;rose&quot;, &quot;玫瑰&quot;);        hashmap.put(&quot;Mary&quot;, &quot;小红&quot;);        System.out.println(hashmap);        //获取map中的所有键        /*Set&lt;String&gt; keysSet=hashmap.keySet();         for(String name:keysSet){            System.out.println(name);        }*/        //获取map中的所有值        Collection&lt;String&gt; values=hashmap.values();        for(String value:values){            System.out.println(value);        }        //得到key的同时得到key所对应的值        Set&lt;String&gt; keysSet=hashmap.keySet();         for(String name:keysSet){            System.out.println(name+&quot;--&gt;&quot;+hashmap.get(name));        }        System.out.println(hashmap.size());        System.out.println(hashmap.isEmpty());        //当我们调用put(key,value)方法的时候，首先会把key和value封装到Entry这个静态内部类对象中。        //把Entry对象再添加到数组中，所以我们想获取map中的所有键值对，我们只要获取数组中的所有Entry对象，        //接下来调用Entry对象中的getkey()和getvalue()方法就能获取键值对。        Set&lt;Entry&lt;String,String&gt;&gt; entrySet=hashmap.entrySet();        for(Entry&lt;String, String&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }        /*         * hashmap调用默认构造方法会产生一个底层长度为16的Entry数组          * int hash=hash(key.hashCode());         * 首先调用key的hashCode方法来得到一个整数(哈希码)，把哈希码作为参数传到hash函数中来进行运算(散列运算)         * 得到一个整型(散列值)。hashCode()方法能够提高哈希表的性能。         * int i=indexFor(hash,table.length);         * 把散列值和数组的长度来进行运算，最终得到entry对象存放到数组的位置(下标)。         *          * hashmap内部的结构是一个数组链表结构。因为不同的key有可能算出来是相同的散列值，根据散列值计算出存放数组         * 的下标会冲突。         */    }}</code></pre><h3 id="3、哈希码的产生和使用"><a href="#3、哈希码的产生和使用" class="headerlink" title="3、哈希码的产生和使用"></a>3、哈希码的产生和使用</h3><p>(1)hashCode的常规协定：在Java应用程序执行期间，在对同一对象多次调用hashCode方法时，必须一致地返回相同的整数，前提是将对象进行equals比较时所用的信息没有被修改。从某一应用程序的一次执行到同一应用程序的另一次执行，该整数无需保持一致。</p><p>(2)如果根据equals(Object)方法，两个对象是相等的那么这两个对象中的每个对象调用hashCode方法都必须生成相同的整数结果。(这里的equals方法是指Object类中没有被子类重写过的equals方法)。</p><p>(3)如果根据equals(java.lang.Object)方法，两个对象不相等，那么对这两个对象中的任一对象上调用hashCode方法不要求一定生成不同的整数结果。但是，程序员应该意识到，为不相等的对象生成不同整数结果可以提高哈希表的性能。</p><p>(4)举例</p><pre><code>package com.iotech.map;import java.util.HashMap;import java.util.Map;public class HashCodeDemo2 {    public static void main(String[] args) {        Map&lt;Student, String&gt; map=new HashMap&lt;Student, String&gt;();        map.put(new Student(&quot;jay&quot;, 20), &quot;张三&quot;);        map.put(new Student(&quot;lisi&quot;, 30), &quot;李四&quot;);        map.put(new Student(&quot;rose&quot;, 20), &quot;玫瑰&quot;);        map.put(new Student(&quot;lisi&quot;, 30), &quot;陈豪&quot;);        /*要满足student键值相等，首先需要hashCode相等，另外还需要key的equals方法相等。所以需要重写        hashCode()和equals()方法。*/        System.out.println(map);        System.out.println(map.size());    }}class Student{    private String name;    private int age;    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public Student(String name, int age) {        super();        this.name = name;        this.age = age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int hashCode() {        final int prime = 31;        int result = 1;        result = prime * result + age;        result = prime * result + ((name == null) ? 0 : name.hashCode());        return result;    }    @Override    public boolean equals(Object obj) {        if (this == obj)            return true;        if (obj == null)            return false;        if (getClass() != obj.getClass())            return false;        Student other = (Student) obj;        if (age != other.age)            return false;        if (name == null) {            if (other.name != null)                return false;        } else if (!name.equals(other.name))            return false;        return true;    }}</code></pre><h3 id="4、TreeMap及常用API"><a href="#4、TreeMap及常用API" class="headerlink" title="4、TreeMap及常用API"></a>4、TreeMap及常用API</h3><p>(1)TreeMap类通过使用红黑树实现Map接口。</p><p>(2)TreeMap提供按排序顺序存储键/值对的有效手段，同时允许快速检索。</p><p>(3)TreeMap不像散列映射，树映射保证它的元素按关键字升序排序。</p><p>(4)TreeMap的构造方法：TreeMap();TreeMap(Comparator comp);TreeMap(Map m);TreeMap(SortedMap sm)。</p><p>(5)TreeMap实现SortedMap并且扩展AbstractMap，它本身没有定义其他的方法。</p><p>(6)举例一</p><pre><code>package com.iotech.map;import java.util.Set;import java.util.TreeMap;import java.util.Map.Entry;public class TreeMapDemo1 {    public static void main(String[] args) {        TreeMap&lt;String,String&gt; treeMap=new TreeMap&lt;String, String&gt;();        treeMap.put(&quot;jack&quot;, &quot;zhangsan&quot;);        treeMap.put(&quot;mary&quot;, &quot;xiaohong&quot;);        treeMap.put(&quot;rose&quot;, &quot;xiaozhang&quot;);        treeMap.put(&quot;free&quot;, &quot;xiaoming&quot;);        treeMap.put(&quot;rose&quot;, &quot;chenhao&quot;);        //TreeMap是按照键来进行排序的，而String实现了comparable接口，所以是没有问题的。        System.out.println(treeMap);        Set&lt;Entry&lt;String, String&gt;&gt; entrySet=treeMap.entrySet();        for(Entry&lt;String, String&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }    }}</code></pre><p>(7)举例二</p><pre><code>package com.iotech.map;import java.util.Comparator;import java.util.TreeMap;public class TreeMapDemo2 {    public static void main(String[] args) {        TreeMap&lt;Person,String&gt; treeMap=new TreeMap&lt;Person,String&gt;(new Comparator&lt;Person&gt;() {            @Override            public int compare(Person o1, Person o2) {                int x=o1.getAge()-o2.getAge();                if(x&gt;0) return 1;                else if(x&lt;0) return -1;                return 0;            }        });        treeMap.put(new Person(&quot;zhangsan&quot;, 30), &quot;张三&quot;);        treeMap.put(new Person(&quot;lisi&quot;, 31), &quot;李四&quot;);        treeMap.put(new Person(&quot;rose&quot;, 32), &quot;玫瑰&quot;);        treeMap.put(new Person(&quot;zhangsan&quot;, 33), &quot;张三&quot;);        //这里的Person作为TreeMap中的键，也是需要进行排序的，所以Person类也需要继承Comparable接口，        //因此也需要重写CompareTo()方法。        System.out.println(treeMap);    }}class Person/* implements Comparable&lt;Person&gt;*/{    private String name;    private int age;    public Person(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    /*@Override    public int compareTo(Person o) {        int x=this.age-o.getAge();        if(x&gt;0){            return 1;        }else if(x&lt;0){            return -1;        }        return 0;    }*/}</code></pre><h3 id="5、Comparator和Comparable接口"><a href="#5、Comparator和Comparable接口" class="headerlink" title="5、Comparator和Comparable接口"></a>5、Comparator和Comparable接口</h3><p>TreeMap的key存储引用数据类型，需要满足一定条件，要么引用类型实现Comparable接口，要么为该TreeMap容器提供实现Comparator接口的比较器对象。对应上面例二的两种实现方式。</p><h3 id="6、案例讲解"><a href="#6、案例讲解" class="headerlink" title="6、案例讲解"></a>6、案例讲解</h3><p>(1)给定一个字符数组，数组中内容有重复，现要求打印输出各个字符串出现的次数。</p><p>(2)使用HashMap来设计，HashMap的key可以用来保存字符串，value用来保存字符串所对应的次数，从HashMap中获取不存在的key所对应的值为null。</p><p>(3)代码实现</p><pre><code>package com.iotech.map;import java.util.HashMap;import java.util.Map.Entry;import java.util.Set;public class HashMapTest {    public static void main(String[] args) {        String[] string={&quot;zhangsan&quot;,&quot;lisi&quot;,&quot;wangwu&quot;,&quot;jack&quot;,&quot;zhangsan&quot;,&quot;zhangsan&quot;,&quot;wangwu&quot;};        HashMap&lt;String,Integer&gt; hashMap=new HashMap&lt;String,Integer&gt;();        for(int i=0;i&lt;string.length;i++){            if(null==hashMap.get(string[i])){                hashMap.put(string[i], 1);            }else{                hashMap.put(string[i], hashMap.get(string[i])+1);            }        }        Set&lt;Entry&lt;String,Integer&gt;&gt; entrySet=hashMap.entrySet();        for(Entry&lt;String,Integer&gt; entry:entrySet){            System.out.println(entry.getKey()+&quot;--&gt;&quot;+entry.getValue());        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、Map接口详解&quot;&gt;&lt;a href=&quot;#1、Map接口详解&quot; class=&quot;headerlink&quot; title=&quot;1、Map接口详解&quot;&gt;&lt;/a&gt;1、Map接口详解&lt;/h3&gt;&lt;p&gt;(1)映射(map)是一个存储键/值对的对象。给定一个键，可以查询到它的值，键和值都
       
     
     </summary>
