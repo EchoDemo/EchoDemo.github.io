@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、过滤流介绍(1)过滤流(Filtered Stream)仅仅是为底层透明地提供扩展功能的输入流(输出流)的包装。这些流一般由普通类的方法(即过滤流的一个父类)访问。 (2)过滤字节流FilterInputStream和FilterOutputStream，它们不是抽象类，它们提供的方法和InputStream和OutputStream类的方法相同。构造方法有： FilterOutputStre">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-01T00:19:53.452Z">
+<meta property="og:updated_time" content="2018-08-01T10:07:01.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的过滤流">
 <meta name="twitter:description" content="1、过滤流介绍(1)过滤流(Filtered Stream)仅仅是为底层透明地提供扩展功能的输入流(输出流)的包装。这些流一般由普通类的方法(即过滤流的一个父类)访问。 (2)过滤字节流FilterInputStream和FilterOutputStream，它们不是抽象类，它们提供的方法和InputStream和OutputStream类的方法相同。构造方法有： FilterOutputStre">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  470
+                  576
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -478,7 +478,7 @@
 <pre><code>FilterOutputStream(OutputStream os);
 
 FilterInputstream(InputStream is);
-</code></pre><p>常用的过滤流有BufferedInputStream和BufferedOutputStream(带缓冲区)，DataInputStream和DataOutputStream(对基本数据类型进行读写操作)。</p>
+</code></pre><p>常用的过滤流有BufferedInputStream和BufferedOutputStream(带缓冲区)，需要使用已经存在的节点流(直接操作设备的流)来构造，FileInputStream就是节点流，而BufferedInputStream包装了FileInputStream。提供带缓冲的读写，提高了读写的效率。DataInputStream和DataOutputStream(对基本数据类型进行读写操作)。数据输入输出流允许应用程序读写基本Java数据类型。应用程序可以使用数据输出流写入稍后由数据输入流读取。读写顺序要保持一致。</p>
 <h3 id="2、过滤流举例说明"><a href="#2、过滤流举例说明" class="headerlink" title="2、过滤流举例说明"></a>2、过滤流举例说明</h3><p>(1)BufferedInputStream和BufferedOutputStream</p>
 <pre><code>package com.iotek.inputoutputstream;
 
@@ -700,7 +700,7 @@ public class DataInputOutputStream {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">146</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -853,7 +853,7 @@ public class DataInputOutputStream {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共103.0k字</span>
+  <span class="post-count">博客全站共103.6k字</span>
 </div>
 
 

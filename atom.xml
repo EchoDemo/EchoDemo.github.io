@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-01T09:27:10.387Z</updated>
+  <updated>2018-08-01T10:52:29.174Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的装饰模式</title>
+    <link href="http://www.echodemo.cc/2018/08/01/Java%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://www.echodemo.cc/2018/08/01/Java中的装饰模式/</id>
+    <published>2018-08-01T10:51:22.000Z</published>
+    <updated>2018-08-01T10:52:29.174Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、装饰模式的概念"><a href="#1、装饰模式的概念" class="headerlink" title="1、装饰模式的概念"></a>1、装饰模式的概念</h3><p>装饰模式以对客户透明地方式动态地给一个对象附加上更多的责任。换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰模式可以在不创造更多子类的情况下，将对象的功能加以扩展。</p><h3 id="2、装饰模式中的角色"><a href="#2、装饰模式中的角色" class="headerlink" title="2、装饰模式中的角色"></a>2、装饰模式中的角色</h3><p>(1)抽象构建(Component)角色：给出一个抽象接口，以规范准备接收附加责任的对象。如：InputStream。</p><p>(2)具体构件(Concrete Component)角色：定义一个将要接收附加责任的类。如：FileInputStream。</p><p>(3)装饰(Decorator)角色：持有一个构件对象的实例，并定义一个与抽象构建接口一致的接口。如：FilterInputStream。</p><p>(4)具体装饰(Concrete Decorator)角色：负责给构件对象“贴上”附加的责任。如：BufferedInputStream、DataInputStream。</p><h3 id="3、举例说明"><a href="#3、举例说明" class="headerlink" title="3、举例说明"></a>3、举例说明</h3><p>(1)抽象构建角色</p><pre><code>package com.iotek.decorator;public interface Component {    void doThingA();}</code></pre><p>(2)具体构件角色</p><pre><code>package com.iotek.decorator;public class ConcreteComponent implements Component {    @Override    public void doThingA() {        System.out.println(&quot;do A thing.&quot;);    }}</code></pre><p>(3)装饰角色</p><pre><code>package com.iotek.decorator;public class Decorator implements Component {    private Component component = null;    public Decorator(Component component) {        this.component = component;    }    @Override    public void doThingA() {        component.doThingA();//调用被装饰对象的方法    }}</code></pre><p>(4)具体装饰角色1</p><pre><code>package com.iotek.decorator;public class ConcreteDecorator1 extends Decorator {    public ConcreteDecorator1(Component component) {        super(component);    }    public void doThingA(){//调用被包装类的方法        super.doThingA();        doThingB();    }    //扩展的方法    private void doThingB(){        System.out.println(&quot;do B thing.&quot;);    }}</code></pre><p>(5)具体装饰角色2</p><pre><code>package com.iotek.decorator;public class ConcreteDecorator2 extends Decorator {    public ConcreteDecorator2(Component component) {        super(component);    }    public void doThingA(){//调用被包装类的方法        super.doThingA();        doThingC();    }    //扩展的方法    private void doThingC(){        System.out.println(&quot;do C thing.&quot;);    }}</code></pre><p>(6)测试类</p><pre><code>package com.iotek.decorator;public class Test {    public static void main(String[] args) {        ConcreteComponent concreteComponent = new ConcreteComponent();        //concreteComponent.doThingA();        ConcreteDecorator1 cd1 = new ConcreteDecorator1(concreteComponent);        //cd1.doThingA();        ConcreteDecorator2 cd2 = new ConcreteDecorator2(cd1);        cd2.doThingA();    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、装饰模式的概念&quot;&gt;&lt;a href=&quot;#1、装饰模式的概念&quot; class=&quot;headerlink&quot; title=&quot;1、装饰模式的概念&quot;&gt;&lt;/a&gt;1、装饰模式的概念&lt;/h3&gt;&lt;p&gt;装饰模式以对客户透明地方式动态地给一个对象附加上更多的责任。换言之，客户端并不会觉得
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT B1023 组个最小数</title>
@@ -49,9 +74,9 @@
     <link href="http://www.echodemo.cc/2018/08/01/Java%E4%B8%AD%E7%9A%84%E8%BF%87%E6%BB%A4%E6%B5%81/"/>
     <id>http://www.echodemo.cc/2018/08/01/Java中的过滤流/</id>
     <published>2018-08-01T00:18:39.000Z</published>
-    <updated>2018-08-01T00:19:53.452Z</updated>
+    <updated>2018-08-01T10:07:01.416Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1、过滤流介绍"><a href="#1、过滤流介绍" class="headerlink" title="1、过滤流介绍"></a>1、过滤流介绍</h3><p>(1)过滤流(Filtered Stream)仅仅是为底层透明地提供扩展功能的输入流(输出流)的包装。这些流一般由普通类的方法(即过滤流的一个父类)访问。</p><p>(2)过滤字节流FilterInputStream和FilterOutputStream，它们不是抽象类，它们提供的方法和InputStream和OutputStream类的方法相同。构造方法有：</p><pre><code>FilterOutputStream(OutputStream os);FilterInputstream(InputStream is);</code></pre><p>常用的过滤流有BufferedInputStream和BufferedOutputStream(带缓冲区)，DataInputStream和DataOutputStream(对基本数据类型进行读写操作)。</p><h3 id="2、过滤流举例说明"><a href="#2、过滤流举例说明" class="headerlink" title="2、过滤流举例说明"></a>2、过滤流举例说明</h3><p>(1)BufferedInputStream和BufferedOutputStream</p><pre><code>package com.iotek.inputoutputstream;import java.io.BufferedInputStream;import java.io.BufferedOutputStream;import java.io.File;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;public class BufferedInputOutputStreamDemo {    public static void main(String[] args) {        try {//这里不管是读取文件，还是写入文件，都应该是文件，而不是文件夹。            FileUtil.copyFile(new File(&quot;G:\\bookmarks_5_8_18.html&quot;), new File(&quot;F:\\test\\test.html&quot;));        } catch (IOException e) {            e.printStackTrace();        }    }}class FileUtil{    public static void copyFile(File src,File dst) throws IOException{            FileInputStream fileInputStream = new FileInputStream(src);        FileOutputStream fileOutputStream = new FileOutputStream(dst);        BufferedInputStream bis = new BufferedInputStream(fileInputStream);        BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);        long time1 = System.currentTimeMillis();        int data = 0;        while((data = bis.read())!=-1){//从缓冲区里面读，而不是直接从输入流里面读。            bos.write(data);//先写到缓冲区，当缓冲区满的时候再一次性写到输出流里面去。        }        bis.close();        bos.close();        long time2 = System.currentTimeMillis();        System.out.println(&quot;复制完成，一共花费：&quot; + (time2-time1) + &quot;毫秒&quot;);    }}</code></pre><p>(2)DataInputStream和DataOutputStream</p><pre><code>package com.iotek.inputoutputstream;import java.io.DataInputStream;import java.io.DataOutputStream;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;public class DataInputOutputStream {    public static void main(String[] args) throws IOException {        /*String name = &quot;zhangsan&quot;;        int age = 10;        boolean flag = true;        char set = &apos;男&apos;;        double money = 100.56;        DataOutputStream dos = new DataOutputStream(new FileOutputStream(&quot;f:\\test\\b.txt&quot;));        dos.writeUTF(name);        dos.writeInt(age);        dos.writeBoolean(flag);        dos.writeChar(set);        dos.writeDouble(money);        dos.close();*/        DataInputStream dis = new DataInputStream(new FileInputStream(&quot;f:\\test\\b.txt&quot;));        //读的顺序必须和写的顺序一致        System.out.println(dis.readUTF());        System.out.println(dis.readInt());        System.out.println(dis.readBoolean());        System.out.println(dis.readChar());        System.out.println(dis.readDouble());        dis.close();    }}</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="1、过滤流介绍"><a href="#1、过滤流介绍" class="headerlink" title="1、过滤流介绍"></a>1、过滤流介绍</h3><p>(1)过滤流(Filtered Stream)仅仅是为底层透明地提供扩展功能的输入流(输出流)的包装。这些流一般由普通类的方法(即过滤流的一个父类)访问。</p><p>(2)过滤字节流FilterInputStream和FilterOutputStream，它们不是抽象类，它们提供的方法和InputStream和OutputStream类的方法相同。构造方法有：</p><pre><code>FilterOutputStream(OutputStream os);FilterInputstream(InputStream is);</code></pre><p>常用的过滤流有BufferedInputStream和BufferedOutputStream(带缓冲区)，需要使用已经存在的节点流(直接操作设备的流)来构造，FileInputStream就是节点流，而BufferedInputStream包装了FileInputStream。提供带缓冲的读写，提高了读写的效率。DataInputStream和DataOutputStream(对基本数据类型进行读写操作)。数据输入输出流允许应用程序读写基本Java数据类型。应用程序可以使用数据输出流写入稍后由数据输入流读取。读写顺序要保持一致。</p><h3 id="2、过滤流举例说明"><a href="#2、过滤流举例说明" class="headerlink" title="2、过滤流举例说明"></a>2、过滤流举例说明</h3><p>(1)BufferedInputStream和BufferedOutputStream</p><pre><code>package com.iotek.inputoutputstream;import java.io.BufferedInputStream;import java.io.BufferedOutputStream;import java.io.File;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;public class BufferedInputOutputStreamDemo {    public static void main(String[] args) {        try {//这里不管是读取文件，还是写入文件，都应该是文件，而不是文件夹。            FileUtil.copyFile(new File(&quot;G:\\bookmarks_5_8_18.html&quot;), new File(&quot;F:\\test\\test.html&quot;));        } catch (IOException e) {            e.printStackTrace();        }    }}class FileUtil{    public static void copyFile(File src,File dst) throws IOException{            FileInputStream fileInputStream = new FileInputStream(src);        FileOutputStream fileOutputStream = new FileOutputStream(dst);        BufferedInputStream bis = new BufferedInputStream(fileInputStream);        BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);        long time1 = System.currentTimeMillis();        int data = 0;        while((data = bis.read())!=-1){//从缓冲区里面读，而不是直接从输入流里面读。            bos.write(data);//先写到缓冲区，当缓冲区满的时候再一次性写到输出流里面去。        }        bis.close();        bos.close();        long time2 = System.currentTimeMillis();        System.out.println(&quot;复制完成，一共花费：&quot; + (time2-time1) + &quot;毫秒&quot;);    }}</code></pre><p>(2)DataInputStream和DataOutputStream</p><pre><code>package com.iotek.inputoutputstream;import java.io.DataInputStream;import java.io.DataOutputStream;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;public class DataInputOutputStream {    public static void main(String[] args) throws IOException {        /*String name = &quot;zhangsan&quot;;        int age = 10;        boolean flag = true;        char set = &apos;男&apos;;        double money = 100.56;        DataOutputStream dos = new DataOutputStream(new FileOutputStream(&quot;f:\\test\\b.txt&quot;));        dos.writeUTF(name);        dos.writeInt(age);        dos.writeBoolean(flag);        dos.writeChar(set);        dos.writeDouble(money);        dos.close();*/        DataInputStream dis = new DataInputStream(new FileInputStream(&quot;f:\\test\\b.txt&quot;));        //读的顺序必须和写的顺序一致        System.out.println(dis.readUTF());        System.out.println(dis.readInt());        System.out.println(dis.readBoolean());        System.out.println(dis.readChar());        System.out.println(dis.readDouble());        dis.close();    }}</code></pre>]]></content>
     
     <summary type="html">
     
@@ -487,31 +512,6 @@
       
       
         &lt;h3 id=&quot;1、Collections类及常用API&quot;&gt;&lt;a href=&quot;#1、Collections类及常用API&quot; class=&quot;headerlink&quot; title=&quot;1、Collections类及常用API&quot;&gt;&lt;/a&gt;1、Collections类及常用API&lt;/h3&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的Set</title>
-    <link href="http://www.echodemo.cc/2018/07/20/Java%E4%B8%AD%E7%9A%84Set/"/>
-    <id>http://www.echodemo.cc/2018/07/20/Java中的Set/</id>
-    <published>2018-07-20T15:50:08.000Z</published>
-    <updated>2018-07-20T15:51:07.617Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、Set容器的特点"><a href="#1、Set容器的特点" class="headerlink" title="1、Set容器的特点"></a>1、Set容器的特点</h3><p>Set容器是一个不包含重复元素的Collection，并且最多包含一个null元素，它和List容器相反，Set容器不能保证其元素的顺序。最常用的两个Set接口的实现类是HashSet和TreeSet。</p><h3 id="2、HashSet及常用API"><a href="#2、HashSet及常用API" class="headerlink" title="2、HashSet及常用API"></a>2、HashSet及常用API</h3><p>(1)HashSet扩展AbstractSet并实现Set接口，HashSet使用散列表(又称之为哈希表)进行存储。<strong>(HashSet底层实际上维护了一个HashMap，只是我们操作的是HashMap的key，而HashMap底层维护了哈希表)</strong></p><p>(2)构造方法：HashSet();HashSet(Collection c);HashSet(int capacity);HashSet(int capacity,float fillRatio)。</p><p>(3)HashSet没有定义任何超过它的父类和接口提供的其他方法，散列集合没有确保其元素的顺序，因为散列处理通常不参与排序。</p><p>(4)举例</p><pre><code>package com.iotech.set;import java.util.HashSet;public class HashSetDemo1 {    public static void main(String[] args) {        /*HashSet&lt;String&gt; hashSet=new HashSet&lt;String&gt;();        hashSet.add(&quot;zhangsan&quot;);        hashSet.add(&quot;lisi&quot;);        hashSet.add(&quot;jay&quot;);        hashSet.add(&quot;jack&quot;);        System.out.println(hashSet.add(&quot;jay&quot;));        System.out.println(hashSet);*/        HashSet&lt;Student&gt; hashSet=new HashSet&lt;Student&gt;();         System.out.println(hashSet.add(new Student(&quot;张三&quot;, 20)));        System.out.println(hashSet.add(new Student(&quot;李四&quot;, 30)));        System.out.println(hashSet.add(new Student(&quot;张三&quot;, 20)));        System.out.println(hashSet.size());    }}class Student{    private String name;    private int age;    public Student(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int hashCode() {        final int prime = 31;        int result = 1;        result = prime * result + age;        result = prime * result + ((name == null) ? 0 : name.hashCode());        return result;    }    @Override    public boolean equals(Object obj) {        if (this == obj)            return true;        if (obj == null)            return false;        if (getClass() != obj.getClass())            return false;        Student other = (Student) obj;        if (age != other.age)            return false;        if (name == null) {            if (other.name != null)                return false;        } else if (!name.equals(other.name))            return false;        return true;    }}</code></pre><h3 id="3、TreeSet及常用API"><a href="#3、TreeSet及常用API" class="headerlink" title="3、TreeSet及常用API"></a>3、TreeSet及常用API</h3><p>(1)TreeSet为使用树来进行存储的Set接口提供了一个工具，对象按升序存储，访问和检索很快。在存储了大量的需要进行快速检索的排序信息的情况下，TreeSet是一个很好的选择。<strong>(事实上，TreeSet的底层就是TreeMap实现的，只是我们操作的是TreeMap的Key)</strong></p><p>(2)构造方法：TreeSet();TreeSet(Collection c);TreeSet(Comparator comp);TreeSet(SortedSet ss)。</p><p>(3)举例</p><pre><code>package com.iotech.set;import java.util.Iterator;import java.util.TreeSet;public class TreeSetDemo1 {    public static void main(String[] args) {        TreeSet&lt;Person&gt; treeSet=new TreeSet&lt;Person&gt;();        treeSet.add(new Person(&quot;chenhao&quot;, 30));        treeSet.add(new Person(&quot;lisi&quot;, 20));        treeSet.add(new Person(&quot;wangwu&quot;, 10));        treeSet.add(new Person(&quot;rose&quot;, 40));        Iterator&lt;Person&gt; iterator=treeSet.iterator();        while(iterator.hasNext()){            Person person=iterator.next();            System.out.println(person.getName()+&quot;--&gt;&quot;+person.getAge());        }    }}class Person implements Comparable&lt;Person&gt;{    private String name;    private int age;    public Person(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public int compareTo(Person o) {        int x=this.age-o.age;        if(x&gt;0) return 1;        else if(x&lt;0) return -1;        return 0;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、Set容器的特点&quot;&gt;&lt;a href=&quot;#1、Set容器的特点&quot; class=&quot;headerlink&quot; title=&quot;1、Set容器的特点&quot;&gt;&lt;/a&gt;1、Set容器的特点&lt;/h3&gt;&lt;p&gt;Set容器是一个不包含重复元素的Collection，并且最多包含一个nul
       
     
     </summary>
