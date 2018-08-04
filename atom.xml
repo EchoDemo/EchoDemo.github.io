@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-04T07:46:30.419Z</updated>
+  <updated>2018-08-04T08:47:37.658Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的RandomAccessFile</title>
+    <link href="http://www.echodemo.cc/2018/08/04/Java%E4%B8%AD%E7%9A%84RandomAccessFile/"/>
+    <id>http://www.echodemo.cc/2018/08/04/Java中的RandomAccessFile/</id>
+    <published>2018-08-04T08:47:03.000Z</published>
+    <updated>2018-08-04T08:47:37.658Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、RandomAccessFile(随机访问文件)支持对随机访问文件的读取和写入。随机访问文件的行为类似存储在文件系统中的一个大型byte数组。存在指向该隐含数组的光标或索引，称为文件指针。</p><p>2、输入操作从文件指针开始读取字节，随着对字节的读取而前移此文件指针。如果随机访问文件以读取/写入模式创建，则输出操作也可用；输出操作从文件指针开始写入字节，随着对字节的写入而前移此文件指针。</p><p>3、写入该隐含数组末尾之后的输出操作导致该数组扩展。该文件指针可以通过getFilePointer方法读取，通过seek方法设置该文件指针的位置。</p><p>4、RandomAccessFile举例</p><pre><code>package com.iotek.otherio;import java.io.IOException;import java.io.RandomAccessFile;import java.util.Scanner;public class RandomAccessFileDemo {    public static void main(String[] args) throws IOException {        Person[] persons = {new Person(&quot;chenhao&quot;,90),                new Person(&quot;justin&quot;,30),new Person(&quot;bush&quot;,80),                new Person(&quot;lisi&quot;,20)};        RandomAccessFile randomAccessFile = new RandomAccessFile(&quot;f:\\test\\3.txt&quot;, &quot;rw&quot;);        /*for(int i=0;i&lt;persons.length;i++){//写入数据到RandomAccessFile这个对象中            randomAccessFile.writeChars(persons[i].getName());            randomAccessFile.writeInt(persons[i].getAge());        }*/        //读取指定位置上的Person对象        Scanner scanner = new Scanner(System.in);        System.out.println(&quot;读取第几个Person对象数据&quot;);        int num = scanner.nextInt();        //使用seek方法来操作存取位置        randomAccessFile.seek((num-1)*Person.size());        Person person = new Person();        person.setName(readName(randomAccessFile));        person.setAge(randomAccessFile.readInt());        System.out.println(&quot;姓名:&quot;+person.getName());        System.out.println(&quot;年龄:&quot;+person.getAge());        randomAccessFile.close();    }    private static String readName(RandomAccessFile randomAccessFile) throws IOException{        char[] name = new char[15];        for(int i=0;i&lt;name.length;i++){            name[i] = randomAccessFile.readChar();         }        return new String(name).replace(&apos;\u0000&apos;, &apos; &apos;);    }}class Person{    private String name;    private int age;    public Person(){    }    public Person(String name, int age) {        StringBuilder builder = null;        if(name!=null){            builder = new StringBuilder(name);        }else{            builder = new StringBuilder(15);        }        builder.setLength(15);//固定长度为15个，占了30个字节大小，不足时会自动补&apos;\u0000&apos;        this.name = builder.toString();        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        StringBuilder builder = null;        if(name!=null){            builder = new StringBuilder(name);        }else{            builder = new StringBuilder(15);        }        builder.setLength(15);//固定长度为15个，占了30个字节大小，不足时会自动补&apos;\u0000&apos;        this.name = builder.toString();    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    //每个对象所占的字节数    public static int size(){        return 34;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、RandomAccessFile(随机访问文件)支持对随机访问文件的读取和写入。随机访问文件的行为类似存储在文件系统中的一个大型byte数组。存在指向该隐含数组的光标或索引，称为文件指针。&lt;/p&gt;
+&lt;p&gt;2、输入操作从文件指针开始读取字节，随着对字节的读取而前移此文件指
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中其他的IO流</title>
@@ -491,32 +517,6 @@ $ git diff master test
       
       
         &lt;h3 id=&quot;1、观察者模式定义&quot;&gt;&lt;a href=&quot;#1、观察者模式定义&quot; class=&quot;headerlink&quot; title=&quot;1、观察者模式定义&quot;&gt;&lt;/a&gt;1、观察者模式定义&lt;/h3&gt;&lt;p&gt;对象间的一种一对多的依赖关系。当一方的对象改变状态时，所有的依赖者都会得到通知并被自
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的AWT事件处理</title>
-    <link href="http://www.echodemo.cc/2018/07/22/Java%E4%B8%AD%E7%9A%84AWT%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
-    <id>http://www.echodemo.cc/2018/07/22/Java中的AWT事件处理/</id>
-    <published>2018-07-22T14:57:37.000Z</published>
-    <updated>2018-07-22T15:05:46.887Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、AWT事件处理基本概念"><a href="#1、AWT事件处理基本概念" class="headerlink" title="1、AWT事件处理基本概念"></a>1、AWT事件处理基本概念</h3><p>AWT事件的处理过程中，主要涉及三类对象。</p><p>(1)Event(事件)：用户对组件的一个操作，称之为一个事件，以类的形式出现，例如，键盘操作对应的事件类是KeyEvent。其实例在该事件发生时由系统自动产生。每一种事件都对应专门的监听者。</p><p>(2)Event Source(事件源)：事件发生的场所，通常就是各个组件，例如按钮Button。事件源自己不处理事件，而是把在其自身所有可能发生的事件委托给事件监听器来处理。</p><p>(3)Event Monitor(事件监听器)：接收事件对象并对其进行处理的类的对象，通常其中某个成员方法对事件进行相应的处理。</p><h3 id="2、事件"><a href="#2、事件" class="headerlink" title="2、事件"></a>2、事件</h3><p>AWT的相关事件继承于java.awt.AWTEvent类，这些事件分为两大类：低级事件和高级事件。</p><p>(1)低级事件是指基于<strong>组件和容器</strong>的事件，当一个组件发生事件，如鼠标进入、点击、拖放或组件的窗口开关等时，触发了组件事件。如：组件事件、容器事件、窗口事件、焦点事件、键盘事件、鼠标事件。</p><p>(2)高级事件是基于<strong>语义</strong>的事件，它可以不和特定的动作相关联，而依赖于触发此事件的类。比如，按下按钮和在TextField中按Enter键会触发ActionEvent事件，滑动滚动条会触发AdjustmentEvent事件，选中项目列表的某一条会触发ItemEvent事件。</p><h3 id="3、事件监听器"><a href="#3、事件监听器" class="headerlink" title="3、事件监听器"></a>3、事件监听器</h3><p>事件监听器通常是一个类，该类必须实现与该事件类型相对应的接口。对应的接口被称之为事件监听器接口。事件监听器接口类的名称与事件类的名称相对应，例如：MouseEvent事件类的监听器接口名为MouseListener。</p><h3 id="4、事件适配器类"><a href="#4、事件适配器类" class="headerlink" title="4、事件适配器类"></a>4、事件适配器类</h3><p>Java语言为一些事件监听提供了适配器(Adapter)。我们可以通过继承事件对应的Adapter类，重写所需要的方法，无关的方法则不用实现。事件适配器为我们提供了一种简单的实现监听器的手段，可以缩短程序代码。java.awt.event包中定义的事件适配器类包括以下7个：MouseAdapter(鼠标适配器)、MouseMotionAdapter(鼠标运动适配器)、KeyAdapter(键盘适配器)、WindowAdapter(窗口适配器)、ComponentAdapter(组件适配器)、ComtainerAdapter(容器适配器)、FocusAdapter(焦点适配器)。</p><h3 id="5、示例"><a href="#5、示例" class="headerlink" title="5、示例"></a>5、示例</h3><pre><code>package com.iotek.awt;import java.awt.BorderLayout;import java.awt.Button;import java.awt.CardLayout;import java.awt.FlowLayout;import java.awt.Frame;import java.awt.Label;import java.awt.Panel;import java.awt.TextField;import java.awt.event.ActionEvent;import java.awt.event.ActionListener;import java.awt.event.KeyAdapter;import java.awt.event.KeyEvent;import java.awt.event.MouseAdapter;import java.awt.event.MouseEvent;import java.awt.event.MouseMotionAdapter;import java.awt.event.WindowAdapter;import java.awt.event.WindowEvent;public class ListenerDemo {    public static void main(String[] args) {        MyFrame7 frame7=new MyFrame7(&quot;Listener&quot;);    }}class MyFrame7 extends Frame{    private Panel card_panel=null;    private Panel ctrol_panel=null;    private CardLayout cardLayout=null;    private FlowLayout flowLayout=null;    private Label lb_1,lb_2,lb_3,lb_4;    private TextField tf_contentField;    private Button btn_1,btn_2,btn_3,btn_4;    public MyFrame7(String title){        super(title);        init();        registerListener();    }    /*     * 在一个窗口当中设置两个面板，上面的面板设置成CardLayout布局管理器，下面的面板设置成FlowLayout布局管理器。     * 由于Frame默认是BorderLayout布局管理器，将上面的面板放进窗体的Center位置，下面的面板放在South位置。     */    public void init(){        //创建两个面板容器        card_panel=new Panel();        ctrol_panel=new Panel();        //创建两个布局管理器        cardLayout=new CardLayout();        flowLayout=new FlowLayout();        //给面板容器设定指定的布局管理器        card_panel.setLayout(cardLayout);        ctrol_panel.setLayout(flowLayout);        //声明创建四个标签控件和一个文本框控件。        lb_1=new Label(&quot;First Page&quot;,Label.CENTER);        lb_2=new Label(&quot;Second Page&quot;,Label.CENTER);        tf_contentField=new TextField();//编辑文本框        lb_3=new Label(&quot;Third Page&quot;,Label.CENTER);        lb_4=new Label(&quot;Forth Page&quot;,Label.CENTER);        //构建四个按钮对象        btn_1=new Button(&quot;First&quot;);        btn_2=new Button(&quot;Second&quot;);        btn_3=new Button(&quot;Third&quot;);        btn_4=new Button(&quot;Forth&quot;);        //把按钮添加到控制面板        ctrol_panel.add(btn_1);        ctrol_panel.add(btn_2);        ctrol_panel.add(btn_3);        ctrol_panel.add(btn_4);        //把四个标签控件和一个文本框控件添加到card_panel容器中。        card_panel.add(lb_1);        card_panel.add(lb_2);        card_panel.add(tf_contentField);        card_panel.add(lb_3);        card_panel.add(lb_4);        this.add(card_panel,BorderLayout.CENTER);        this.add(ctrol_panel,BorderLayout.SOUTH);        this.setSize(400, 300);        this.setVisible(true);    }    private void registerListener(){        /*         * 产生一个事件监听器对象，给四个按钮注册同一个事件监听器。         */        BtnListener btnListener=new BtnListener();        btn_1.addActionListener(btnListener);        btn_2.addActionListener(btnListener);        btn_3.addActionListener(btnListener);        btn_4.addActionListener(btnListener);        lb_1.addMouseMotionListener(new MouseMotionAdapter() {            @Override            public void mouseMoved(MouseEvent e) {                lb_1.setText(e.getX()+&quot;:&quot;+e.getY());            }        });        lb_2.addMouseListener(new MouseAdapter() {            @Override            public void mouseExited(MouseEvent e) {                System.out.println(&quot;鼠标移出&quot;);            }            @Override            public void mouseEntered(MouseEvent e) {                System.out.println(&quot;鼠标移入&quot;);            }        });        tf_contentField.addKeyListener(new KeyAdapter() {            @Override            public void keyPressed(KeyEvent e) {                System.out.println(e.getKeyChar());            }        });        this.addWindowListener(new WindowAdapter() {            @Override            public void windowClosing(WindowEvent e) {                System.exit(0);            }        });    }    class BtnListener implements ActionListener{        @Override        public void actionPerformed(ActionEvent e) {            /*System.out.println(e.getActionCommand());            System.out.println(e.getSource());*/            Object object=e.getSource();//获得当前点击的事件源            if(object==btn_1){                cardLayout.first(card_panel);//获得第一张            }else if(object==btn_2){                cardLayout.previous(card_panel);//获得前一张            }else if(object==btn_3){                cardLayout.next(card_panel);//获得下一张            }else{                cardLayout.last(card_panel);//获得最后一张            }        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、AWT事件处理基本概念&quot;&gt;&lt;a href=&quot;#1、AWT事件处理基本概念&quot; class=&quot;headerlink&quot; title=&quot;1、AWT事件处理基本概念&quot;&gt;&lt;/a&gt;1、AWT事件处理基本概念&lt;/h3&gt;&lt;p&gt;AWT事件的处理过程中，主要涉及三类对象。&lt;/p&gt;
-
       
     
     </summary>
