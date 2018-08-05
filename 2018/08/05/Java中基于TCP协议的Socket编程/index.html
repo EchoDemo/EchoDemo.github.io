@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1、服务器程序将">
+<meta name="description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1)服务器程序将">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中基于TCP协议的Socket编程">
 <meta property="og:url" content="http://www.echodemo.cc/2018/08/05/Java中基于TCP协议的Socket编程/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1、服务器程序将">
+<meta property="og:description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1)服务器程序将">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T03:39:40.152Z">
+<meta property="og:updated_time" content="2018-08-05T08:53:09.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中基于TCP协议的Socket编程">
-<meta name="twitter:description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1、服务器程序将">
+<meta name="twitter:description" content="1、Socket概述(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。 (2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。 (3)使用socket进行网络通信的过程 1)服务器程序将">
 
 
 
@@ -476,13 +476,13 @@
         <h3 id="1、Socket概述"><a href="#1、Socket概述" class="headerlink" title="1、Socket概述"></a>1、Socket概述</h3><p>(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过“套接字”向网络发出请求或者应答网络请求。它是连接运行在网络上的两个程序间的双向通讯的端点。</p>
 <p>(2)网络通讯其实指的就是socket间的通讯。通讯的两端都有socket，数据在两个socket之间通过IO来进行传输。</p>
 <p>(3)使用socket进行网络通信的过程</p>
-<pre><code>1、服务器程序将一个套接字绑定到一个特定的端口，并通过此套接字等待和监听客户的连接请求。
+<pre><code>1)服务器程序将一个套接字绑定到一个特定的端口，并通过此套接字等待和监听客户的连接请求。
 
-2、客户程序根据服务器程序所在的主机名和端口号发出连接请求。
+2)客户程序根据服务器程序所在的主机名和端口号发出连接请求。
 
-3、如果一切正常，服务器接受连接请求。并获得一个新的绑定到不同端口地址的套接字。
+3)如果一切正常，服务器接受连接请求。并获得一个新的绑定到不同端口地址的套接字。
 
-4、客户和服务器通过读、写套接字进行通讯。
+4)客户和服务器通过读、写套接字进行通讯。
 </code></pre><h3 id="2、基于TCP协议的socket编程"><a href="#2、基于TCP协议的socket编程" class="headerlink" title="2、基于TCP协议的socket编程"></a>2、基于TCP协议的socket编程</h3><p>(1)创建TCP服务端步骤：</p>
 <pre><code>1)创建一个ServerSocket对象
 
@@ -662,6 +662,10 @@ java com.iotek.tcpsocket.TCPClient
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/05/Java中基于UDP协议的Socket编程/" rel="prev" title="Java中基于UDP协议的Socket编程">
+                Java中基于UDP协议的Socket编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -732,7 +736,7 @@ java com.iotek.tcpsocket.TCPClient
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">153</span>
+                <span class="site-state-item-count">155</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -885,7 +889,7 @@ java com.iotek.tcpsocket.TCPClient
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共108.5k字</span>
+  <span class="post-count">博客全站共109.5k字</span>
 </div>
 
 
