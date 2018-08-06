@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-05T08:48:25.168Z</updated>
+  <updated>2018-08-06T11:42:10.493Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中反射与Annotation</title>
+    <link href="http://www.echodemo.cc/2018/08/06/Java%E4%B8%AD%E5%8F%8D%E5%B0%84%E4%B8%8EAnnotation/"/>
+    <id>http://www.echodemo.cc/2018/08/06/Java中反射与Annotation/</id>
+    <published>2018-08-06T11:41:30.000Z</published>
+    <updated>2018-08-06T11:42:10.493Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、MetaAnnotation概念"><a href="#1、MetaAnnotation概念" class="headerlink" title="1、MetaAnnotation概念"></a>1、MetaAnnotation概念</h3><p>(1)MetaAnnotation也称为元Annotation，也是一种Annotation，可以对其他的Annotation进行注释。</p><p>(2)Java5.0提供了一些标准的MetaAnnotation：</p><pre><code>1)@Retention2)@Target3)@Documented4)@Inherited</code></pre><p>(3)@Retention:控制被Retention注释的Annotation信息的保留时间长短。</p><pre><code>@Retention(SOURCE/CLASS/RUNTIME)public/default @interface Annotation名称{...}a、SOURCE:Annotation信息在编译阶段被丢弃，仅保留在java源文件中。b、CLASS(默认):Annotation信息在编译阶段被保留，保留到class文件中，但是运行阶段不存在。c、RUNTIME:Annotation信息一直保存到运行阶段，直到退出虚拟机才被丢弃。以上三个值是java.lang.annotation.RetentionPolicy这个类所提供的枚举值。</code></pre><p>(4)@Target:表示一个Annotation的使用范围。</p><pre><code>@Target({ElementType.FIELD, ElementType.METHOD, ElementType.FIELD,...})public/defalut @interface Annotation名字{...}a、TYPE:只能在类或接口或枚举上使用。b、METHOD:在方法中使用。c、FIELD:在成员变量使用。d、PARAMETER:在参数上使用。e、CONSTRUCTOR:在构造中使用。f、LOCAL_VARIABLE:在局部变量上使用。g、ANNOTATION_TYPE:只能在Annotation中使用。h、PACKAGE:只能在包中使用。</code></pre><p>(5)@Documented:想要在使用者制作JavaDoc文件的同时，也一并将Annotation的讯息加入至API文件中。</p><pre><code>@Documentedpublic/default @interface Annotation名称{...}</code></pre><p>(4)@Inherited:表示一个Annotation是否允许被其子类继承下来。</p><pre><code>@Inheritedpublic/default @inherited Annotation名称{...}</code></pre><h3 id="2、反射与Annotation"><a href="#2、反射与Annotation" class="headerlink" title="2、反射与Annotation"></a>2、反射与Annotation</h3><p>(1)一个Annotation真正起作用，必须结合反射机制，在java.lang.reflect反射包中提供AccessibleObject类来对Annotation进行操作，最常用的方法如下：</p><pre><code>public boolean isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass);//判断是否使用时指定的Annotation。public Annotation[] getAnnotation();//得到全部的Annotation。注：无反射，不注解。</code></pre><h3 id="3、举例说明"><a href="#3、举例说明" class="headerlink" title="3、举例说明"></a>3、举例说明</h3><pre><code>package com.iotek.annotation;import java.lang.annotation.Documented;import java.lang.annotation.ElementType;import java.lang.annotation.Retention;import java.lang.annotation.RetentionPolicy;import java.lang.annotation.Target;import java.lang.reflect.Method;public class ReflectAnnotationDemo {    public static void main(String[] args) throws Exception {        Class&lt;?&gt; classType = Class.forName(&quot;com.iotek.annotation.AnnotationTest&quot;);        boolean flag = classType.isAnnotationPresent(Description.class);        if(flag){            Description description = classType.getAnnotation(Description.class);            System.out.println(&quot;AnnotationTest&apos;s description--&gt;&quot; + description.value());            Method[] methods = classType.getDeclaredMethods();            for(Method method:methods){                if(method.isAnnotationPresent(Author.class)){                    Author author = method.getAnnotation(Author.class);                    System.out.println(&quot;AnnotationTest&apos;s author--&gt;&quot; + author.name() + &quot; from &quot;+author.group());                }            }        }    }}@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.METHOD)@Documented@interface Author{    String name();    String group();}@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.TYPE)@Documented@interface Description{    String value();}@Description(&quot;这是一个用于测试的类&quot;)class AnnotationTest{    @Author(name=&quot;EchoDemo&quot;,group=&quot;com.iotek&quot;)    public void test(){        System.out.println(&quot;test over!&quot;);    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、MetaAnnotation概念&quot;&gt;&lt;a href=&quot;#1、MetaAnnotation概念&quot; class=&quot;headerlink&quot; title=&quot;1、MetaAnnotation概念&quot;&gt;&lt;/a&gt;1、MetaAnnotation概念&lt;/h3&gt;&lt;p&gt;(1)Met
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中Annotation</title>
+    <link href="http://www.echodemo.cc/2018/08/06/Java%E4%B8%ADAnnotation/"/>
+    <id>http://www.echodemo.cc/2018/08/06/Java中Annotation/</id>
+    <published>2018-08-06T10:25:49.000Z</published>
+    <updated>2018-08-06T10:26:23.402Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、Annotation简介"><a href="#1、Annotation简介" class="headerlink" title="1、Annotation简介"></a>1、Annotation简介</h3><p>(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、构造方法、方法、成员变量、参数及本地变量的声明语句中。</p><p>(2)Annotation的原理</p><p>1)Annotation其实是一种接口。通过Java反射机制中的相关API来访问annotation信息。相关类(框架或工具的类)根据这些信息来决定如何使用该程序元素或者改变他们的行为。Annotation是不会影响程序代码的执行的，无论Annotation怎么变化，代码都始终如一地执行。</p><p>2)Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。Annotation的工具统称APT(Annotation Processing Tool)。</p><h3 id="2、常见的标准Annotation"><a href="#2、常见的标准Annotation" class="headerlink" title="2、常见的标准Annotation"></a>2、常见的标准Annotation</h3><p>(1)@Override:@Override就是用来指定方法重写的，他可以强调一个子类必须要覆盖父类的方法。</p><p>(2)@Deprecated:@deprecated用于表示某个程序元素(类、方法等)已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</p><p>(3)@SuppressWarning：@SuppressWarning指示被Annotation标识的程序元素(以及在该程序元素中的所有子元素)取消显示指定的编译器警告。</p><p>(4)举例说明</p><p>1)@Override:可以防止方法名写错。</p><pre><code>package com.iotek.annotation;public class OVerrideDemo {    public static void main(String[] args) {        Apple apple = new Apple();        apple.info();    }}class Fruit{    public void info(){        System.out.println(&quot;描述水果的信息！&quot;);    }}class Apple extends Fruit{    @Override    public void info() {        System.out.println(&quot;我是苹果！&quot;);    }}</code></pre><p>2)@Deprecated:提示程序员不推荐使用</p><pre><code>package com.iotek.annotation;public class DeprecatedDemo {    public static void main(String[] args) {        Person person = new Person();        person.showInfo();    }}class Person{    @Deprecated    public void showInfo(){        System.out.println(&quot;hello person!&quot;);    }}</code></pre><p>3)@Suppresswarning:去除警告信息</p><pre><code>package com.iotek.annotation;public class SuppresswarningDemo {    public static void main(String[] args) {    }}class Container&lt;T&gt;{    private Object[] obj = null;    public Container(){        obj = new Object[10];    }    @SuppressWarnings(&quot;unchecked&quot;)    public T[] toArray(){        return (T[])obj;    }}</code></pre><h3 id="3、自定义Annotation"><a href="#3、自定义Annotation" class="headerlink" title="3、自定义Annotation"></a>3、自定义Annotation</h3><p>(1)语法</p><pre><code>访问修饰符 @interface Annotation名称{    返回类型 method() [默认值];}</code></pre><p>1)Annotation类型的方法必须声明为无参数、无异常抛出的。这些方法定义了Annotation的成员：方法名成为了成员名，而方法返回值成为了成员的类型。方法的返回类型必须要为基本数据类型、String类型、Class类型、枚举类型、Annotation类型或者由前面类型之一作为元素的一维数组。</p><p>2)方法的后面可以使用default和一个默认数值来声明成员的默认值来声明成员的默认值，null不能作为成员的默认值。在定义Annotation型态时，不能继承其他的Annotation型态或是接口。</p><p>(2)举例说明</p><pre><code>package com.iotek.annotation;//可以修饰类@MyAnnotation1public class MyAnnotation {    //可以修饰方法    @MyAnnotation1    @MyAnnotation3    public static void main(String[] args) {        //可以修饰成员变量，可以有多个注解        @MyAnnotation1        @MyAnnotation2(name=&quot;zhangsan&quot;)        @MyAnnotation3(&quot;haha&quot;)        @MyAnnotation4(sex=&quot;男&quot;,age=10)        @MyAnnotation5({&quot;haah&quot;,&quot;hehe&quot;,&quot;ee&quot;})        @MyAnnotation6(color=Color.RED)        int number = 10;    }}@interface MyAnnotation1{}@interface MyAnnotation2{    String name();}@interface MyAnnotation3{//value和默认值    String value() default &quot;lisi&quot;;//只有为value时才可以省略&quot;value=&quot;，有默认值时可以不给值。}@interface MyAnnotation4{//两个元素    String sex();    int age();}@interface MyAnnotation5{//数组    String[] value();}enum Color{    RED,BLUE,YELLOW;}@interface MyAnnotation6{//枚举类型    Color color();}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、Annotation简介&quot;&gt;&lt;a href=&quot;#1、Annotation简介&quot; class=&quot;headerlink&quot; title=&quot;1、Annotation简介&quot;&gt;&lt;/a&gt;1、Annotation简介&lt;/h3&gt;&lt;p&gt;(1)Annotation是Java5开始引
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中URL类的使用</title>
@@ -466,58 +516,6 @@ $ git diff master test
       
       
         &lt;h3 id=&quot;1、线程同步&quot;&gt;&lt;a href=&quot;#1、线程同步&quot; class=&quot;headerlink&quot; title=&quot;1、线程同步&quot;&gt;&lt;/a&gt;1、线程同步&lt;/h3&gt;&lt;p&gt;线程同步是为了防止多个线程访问一个数据对象时，对数据造成破坏。它是保证多线程安全访问竞争资源的一种手段。&lt;/
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中线程的生命周期</title>
-    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://www.echodemo.cc/2018/07/28/Java中线程的生命周期/</id>
-    <published>2018-07-28T01:01:21.000Z</published>
-    <updated>2018-07-28T01:02:48.356Z</updated>
-    
-    <content type="html"><![CDATA[<p>与人的生老病死一样，线程也同样要经历新建、就绪、运行、阻塞和死亡五种不同的状态。这五种状态都可以通过Thread类中的方法进行控制。</p><p>(1)新建状态(New Thread)：在Java语言中使用new操作符创建一个线程后，该线程仅仅是一个空对象，它具备类线程的一些特征，但此时系统没有为其分配资源，这时的线程处于创建状态。线程处于创建状态时，可通过Thread类的方法来设置线程各种属性，如线程的优先级(setPriority)、线程名(setName)和线程的类型(setDaemon)等。</p><p>(2)就绪状态(Runnable)：使用start()方法启动一个线程后，系统为该线程分配除CPU外的所需资源，使该线程处于就绪状态。此外，如果某个线程执行了yield()方法，那么该线程会被暂时剥夺CPU资源，重新进入就绪状态。</p><p>(3)运行状态(Running)：Java运行系统通过调度选中一个处于就绪状态的线程，使其占用CPU并转为运行状态。此时，系统真正执行线程的run()方法。可以通过Thread类的isAlive()方法来判断线程是否处于就绪状态：当线程处于就绪/运行状态时，isAlive()方法返回true；否则的话，线程可能处于阻塞状态也可能是处于停止状态。</p><p>(4)阻塞状态(Blocked)：一个正在运行的线程因某些原因不能继续运行时，就进入阻塞状态。包括以下原因：</p><pre><code>a、当执行了某个线程对象的sleep()等阻塞类型的方法时，该线程对象会被置入一个阻塞集(Blocked Pool)内，等待超时而自动苏醒。b、当多个线程试图进入某个同步区域(synchronized)时，没能进入该同步区域的线程会被置入锁定集(Lock Pool)，直到获得该同步区域的锁，进入就绪状态。c、当线程执行了某个对象的wait()方法时，线程会被置入该对象的等待集(Wait Pool)中，直到执行了该对象的notify()方法，wait()/notify()方法的执行要求线程首先获取到该对象的锁。</code></pre><p>(5)死亡状态(Dead)：线程在run()方法执行结束后进入死亡状态。此外，如果线程执行了interrupt()或stop()方法，那么它也会以异常退出的方式进入死亡状态。</p><p>(6)终止线程的三种方法</p><pre><code>a、使用退出标志，使线程正常退出，也就是run()方法完成后线程终止，推荐使用。b、使用stop()方法强行终止线程(这个方法不推荐使用，因为stop()和suspend()、resume()一样，也可能发生不可预料的后果)。c、使用interrupt()方法中断线程。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;与人的生老病死一样，线程也同样要经历新建、就绪、运行、阻塞和死亡五种不同的状态。这五种状态都可以通过Thread类中的方法进行控制。&lt;/p&gt;
-&lt;p&gt;(1)新建状态(New Thread)：在Java语言中使用new操作符创建一个线程后，该线程仅仅是一个空对象，它具备类线程的
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的线程模型</title>
-    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://www.echodemo.cc/2018/07/28/Java中的线程模型/</id>
-    <published>2018-07-27T16:04:49.000Z</published>
-    <updated>2018-07-27T16:17:45.709Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、概念了解"><a href="#1、概念了解" class="headerlink" title="1、概念了解"></a>1、概念了解</h3><p>(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。</p><p>(2)进程是运行中的程序，是动态的概念。每个进程有独立的资源空间。</p><p>(3)线程是轻量级的进程，是程序执行流的最小单位，是程序中一个单一的顺序控制流程。线程是进程中的一个实体，是被系统独立调度和分派的基本单位。</p><p>(4)多线程是在单个程序中可以同时运行多个不同的线程执行不同的任务。一个进程可以包含一个或者多个线程。一个程序实现多个代码同时交替运行就需要产生多个线程。线程本身不拥有系统资源，与同属一个进程的其他线程共享所在进程所拥有的资源。同一进程中的多个线程之间可以并发执行。CPU会随机抽出时间，让我们的程序一会做这件事，一会做另外一件事情。多线程的目的在于，最大限度地利用CPU资源，当某一线程的处理不需要占用CPU而只和I/O等资源打交道时，让需要占用CPU资源的其他线程有机会获得CPU资源。从根本上说，这就是多线程编程的最终目的。</p><p>(5)Java运行系统在很多方面依赖于线程，所有的类库设计都考虑到多线程。Java是纯面向对象语言，Java的线程模型也是面向对象的。</p><p>(6)创建线程的方式有两种：第一，通过继承Thread类创建线程，普通Java类如继承自Thread类，就成为一个线程类，并可通过该类的start方法来启动线程，执行线程代码。Thread子类可直接实例化，但在子类中必须覆盖run方法才能真正运行线程的代码。第二，通过实现Runnable接口创建线程，实现Runnable接口的类必须借助Thread类才能创建线程(本质上还是通过继承Thread来实现)。通过Runnable接口创建线程分为两步：创建实现Runnable接口的类的实例；创建一个Thread类对象，将第一步实例化得到的Runnable对象作为参数传入Thread类的构造方法。最后通过Thread类的start方法启动线程。</p><h3 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h3><p>(1)举例一：通过继承Thread类创建线程</p><pre><code>package com.iotek.threadtest;public class HelloThreadDemo {    public static void main(String[] args) {        HelloThread h1HelloThread = new HelloThread(&quot;A&quot;);        //h1HelloThread.setName(&quot;线程1&quot;);//自定义线程名字        h1HelloThread.start();//启动线程就会调用run方法        HelloThread h2HelloThread = new HelloThread(&quot;B&quot;);        //h1HelloThread.setName(&quot;线程2&quot;);        h2HelloThread.start();    }}class HelloThread extends Thread{    public HelloThread(String name) {        super(name);    }    @Override    public void run(){        for(int i = 0 ;i &lt; 5 ;i++){            System.out.println(this.getName() + &quot;:&quot; + i);        }    }}</code></pre><p>(2)举例二：通过实现Runnable接口创建线程</p><pre><code>package com.iotek.threadtest;public class HelloRunnableDemo {    public static void main(String[] args) {        HelloRunnable helloRunnable = new HelloRunnable();        Thread thread = new Thread(helloRunnable,&quot;A&quot;);        thread.start();        Thread thread2 = new Thread(helloRunnable,&quot;B&quot;);        thread2.start();    }}/** * Runnable接口优于Thread的地方 * 1、避免单继承的局限，一个类可以实现多个接口，但只能继承一个类。 * 2、适合资源的共享。 * @author 紫苏半夏 * */class HelloRunnable implements Runnable{    @Override    public void run() {        for(int i = 0 ;i &lt; 5 ;i++){            System.out.println(Thread.currentThread().getName() + &quot;:&quot; + i);        }    }}</code></pre><p>(3)举例三：Runnable接口适合资源的共享</p><pre><code>package com.iotek.threadtest;public class SharedDataThreadDemo {    public static void main(String[] args) {        /*TicketThread ticketThread1 = new TicketThread(&quot;一号窗口&quot;);        ticketThread1.start();        TicketThread ticketThread2 = new TicketThread(&quot;二号窗口&quot;);        ticketThread2.start();*/        TicketRunnable ticketRunnable = new TicketRunnable();        Thread thread = new Thread(ticketRunnable, &quot;一号窗口&quot;);        thread.start();        Thread thread1 = new Thread(ticketRunnable, &quot;一号窗口&quot;);        thread1.start();    }}/*class TicketThread extends Thread{    private int ticket = 5;    public TicketThread(String name){        super(name);    }    @Override    public void run(){        while (true) {            System.out.println(this.getName() + &quot;:&quot; + (ticket--));            if(ticket &lt; 1){                break;            }        }    }}*/class TicketRunnable implements Runnable{    private int ticket = 5;    @Override    public void run(){        while (true) {            System.out.println(Thread.currentThread().getName() + &quot;:&quot; + (ticket--));            if(ticket &lt; 1){                break;            }        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、概念了解&quot;&gt;&lt;a href=&quot;#1、概念了解&quot; class=&quot;headerlink&quot; title=&quot;1、概念了解&quot;&gt;&lt;/a&gt;1、概念了解&lt;/h3&gt;&lt;p&gt;(1)程序是安装在磁盘上的一段指令集合，它是静态的概念。&lt;/p&gt;
-&lt;p&gt;(2)进程是运行中的程序，是动态的概
       
     
     </summary>
