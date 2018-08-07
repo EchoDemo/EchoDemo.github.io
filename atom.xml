@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-06T11:42:10.493Z</updated>
+  <updated>2018-08-07T08:51:40.759Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的XML</title>
+    <link href="http://www.echodemo.cc/2018/08/07/Java%E4%B8%AD%E7%9A%84XML/"/>
+    <id>http://www.echodemo.cc/2018/08/07/Java中的XML/</id>
+    <published>2018-08-07T08:50:21.000Z</published>
+    <updated>2018-08-07T08:51:40.759Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、XML定义"><a href="#1、XML定义" class="headerlink" title="1、XML定义"></a>1、XML定义</h3><p>(1)XML指可扩展标记语言(Extensible Markup Language)，适合Web传输，类似HTML，不同的是它的设计宗旨是传输数据，而非显示数据。</p><p>(2)XML提供统一的方法来描述和交换独立于应用程序或供应商的结构化数据。XML标签没有被预定义，开发者根据需要自行定义标签。XML被设计为具有自我描述性，是W3C的推荐标准。</p><h3 id="2、XML文档结构"><a href="#2、XML文档结构" class="headerlink" title="2、XML文档结构"></a>2、XML文档结构</h3><p>(1)XML声明：&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p><p>(2)XML根元素定义：XML文档的树形结构要求必须有一个根元素。根元素的起始标记要放在所有其他元素起始标记之前，根元素的结束标记放在其他元素的结束标记之后。</p><p>(3)XML元素：元素的基本结构由开始标记，数据内容，结束标记组成。</p><h3 id="3、XML语法规则"><a href="#3、XML语法规则" class="headerlink" title="3、XML语法规则"></a>3、XML语法规则</h3><pre><code>(1)所有XML元素都须有关闭标签。(2)XML标签对大小写敏感。(3)XML必须正确地嵌套。(4)XML文档必须有根元素。(5)XML的属性以名值对方式组成，值须加引号。(6)XML可编写注释。(7)在XML中，空格会被保留，文档中的空格不会被删节。</code></pre><h3 id="4、举例说明"><a href="#4、举例说明" class="headerlink" title="4、举例说明"></a>4、举例说明</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;bookstore&gt;    &lt;book bookno=&quot;001&quot;&gt;        &lt;title&gt;Java语言编程&lt;/title&gt;        &lt;author&gt;张三&lt;/author&gt;        &lt;price&gt;80&lt;/price&gt;    &lt;/book&gt;    .    .    .&lt;/bookstore&gt;</code></pre><h3 id="5、XML-SAX解析器"><a href="#5、XML-SAX解析器" class="headerlink" title="5、XML SAX解析器"></a>5、XML SAX解析器</h3><p>(1)SAX(Simple API For XML)是一个公共的基于事件的XML文档解析标准，能够通过一个简单的、快速的方法来对XML文档进行处理，和DOM相比它所占用的系统资源更少。</p><p>(2)SAX既是一个接口，也是一个软件包。作为接口，SAX是事件驱动型XML解析的一个标准接口，对文档进行顺序扫描，当扫描到文档(document)开始、元素(element)开始与结束、文档(document)结束等地方时通知事件处理函数，由事件处理函数做相应动作，然后继续同样的扫描，直至文档结束。</p><h3 id="6、SAX解析器API"><a href="#6、SAX解析器API" class="headerlink" title="6、SAX解析器API"></a>6、SAX解析器API</h3><p>(1)事件类型，大多数的SAX会产生以下类型的事件：</p><pre><code>1)在文档的开始时和结束时触发文档处理事件。2)在文档内每一XML元素接受解析的前后触发元素事件。3)任何的元数据通常由单独的事件处理。</code></pre><p>(2)举例说明</p><pre><code>&lt;doc&gt;    &lt;para&gt;Hello,iotek!&lt;/para&gt;&lt;doc&gt;其解析过程为：1)start document;2)start element:doc;3)start element.para;4)characters:Hello,iotek!;5)end element:para;6)end element:doc;7)end document;</code></pre><p>(3)解析步骤</p><pre><code>1)创建事件处理程序(即编写ContentHandler的实现类，一般继承自DefaultHandler类，采用adapter模式)2)创建SAX解析器3)将事件处理程序分配到解析器。4)对文档进行解析，将每个事件发送至事件处理程序。</code></pre><p>(4)常用接口：ContentHandler接口</p><p>1)ContentHandler是Java类包中一个特殊的SAX接口。该接口封装了一些对事件处理的方法，当XML解析器开始解析XML输入文档时，他会遇到某些特殊的事件，比如文档的开头和结束、元素开头和结束、以及元素中的字符数据等事件。当遇到这些事件时，XML解析器会调用ContentHandler接口中相应的方法(回调方法)来响应该事件。</p><p>2)ContentHandler接口常用方法：</p><pre><code>void startDocument();//文档解析开始的处理。void endDocument();//文档解析结束的处理。void startElement(String uri,String localName,String qName,Attributes atts);//ElementNode开始的处理。void endElement(String uri,String localName,String qName);//ElementNode结束的处理。void character(char[] ch,int start,int length);//具体在某一节点中的处理。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、XML定义&quot;&gt;&lt;a href=&quot;#1、XML定义&quot; class=&quot;headerlink&quot; title=&quot;1、XML定义&quot;&gt;&lt;/a&gt;1、XML定义&lt;/h3&gt;&lt;p&gt;(1)XML指可扩展标记语言(Extensible Markup Language)，适合Web传输
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中反射与Annotation</title>
@@ -491,31 +516,6 @@ $ git diff master test
       
       
         &lt;h3 id=&quot;1、线程通信相关方法&quot;&gt;&lt;a href=&quot;#1、线程通信相关方法&quot; class=&quot;headerlink&quot; title=&quot;1、线程通信相关方法&quot;&gt;&lt;/a&gt;1、线程通信相关方法&lt;/h3&gt;&lt;p&gt;Java提供了三个重要的方法巧妙地解决线程间的通信问题。这三个方法分别是：w
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的多线程编程</title>
-    <link href="http://www.echodemo.cc/2018/07/28/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/"/>
-    <id>http://www.echodemo.cc/2018/07/28/Java中的多线程编程/</id>
-    <published>2018-07-28T03:41:33.000Z</published>
-    <updated>2018-07-28T08:32:26.909Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、线程同步"><a href="#1、线程同步" class="headerlink" title="1、线程同步"></a>1、线程同步</h3><p>线程同步是为了防止多个线程访问一个数据对象时，对数据造成破坏。它是保证多线程安全访问竞争资源的一种手段。</p><p>(1)同步和锁：Java中的每个对象都有一个内置锁。当程序运行到非静态的synchronized同步方法上时，自动获得与正在执行代码类的当前实例(this实例)有关的锁；当程序运行到synchronized同步代码块时，自动获得锁定对象的锁。一个对象只有一个锁。所以，如果一个线程获得该锁，就没有其他线程可以获得锁，直到第一个线程释放锁。这也意味着任何其他线程都不能进入synchronized方法或者代码块，直到该锁被释放。释放锁是指持锁线程退出了synchronized同步方法或者代码块。</p><p>(2)对于同步，一般而言在Java中需要完成两个操作：把竞争访问的资源表示为private；同步那些访问资源的代码，使用synchronized关键字修饰方法或者代码块。当synchronized方法执行完或者发生异常时会自动释放锁。</p><h3 id="2、举例"><a href="#2、举例" class="headerlink" title="2、举例"></a>2、举例</h3><p>(1)案例介绍</p><p>某银行账号上有500元存款，一个人拿着存折去取钱，同时另一个人拿着银行卡去ATM机上取钱，各自取钱400元。要求取钱的过程中不能出现资源竞争：比如400元被取出两次、银行卡的账目不能小于0等。</p><p>(2)案例实现</p><pre><code>package com.iotek.synchronize;public class BankDemo {    public static void main(String[] args) {        Bank bank1 = new Bank();        BankThread bankThread = new BankThread(bank1);        bankThread.start();//柜台取钱        BankThread bankThread2 = new BankThread(bank1);        bankThread2.start();//ATM机取钱    }}class Bank{    private int money = 500;    private Object object = new Object();//锁这个对象也可以实现，因为任何对象都只有一个锁。    /*取钱的方法，返回取钱的数目    当一个线程去调用同步方法的时候，这个线程就调用了当前对象的锁。其他线程则等待*/    public int getMoney(int number) throws InterruptedException{        synchronized(this){            if(number &lt; 0)                return -1;            else if(money &lt; 0)                return -2;            else if(number - money &gt;0)                return -3;            else{                Thread.sleep(1000);                money-=number;                System.out.println(&quot;账户余额：&quot; + money);            }            return number;        }    }}class BankThread extends Thread{    private Bank bank = null;    public BankThread(Bank bank){        this.bank = bank;    }    @Override    public void run(){        try {            System.out.println(&quot;取钱：&quot;+bank.getMoney(400));        } catch (InterruptedException e) {            e.printStackTrace();        }    }}</code></pre><h3 id="3、同步产生死锁"><a href="#3、同步产生死锁" class="headerlink" title="3、同步产生死锁"></a>3、同步产生死锁</h3><p>(1)同步产生死锁的原因：当一个线程已经获取了对象1的锁，同时又想获取对象二的锁。而此时另一个线程当前已经持有了对象二的锁，而又想获取对象一的锁。这中相互等待对方释放锁的过程，会导致“死锁”。</p><p>(2)死锁举例</p><pre><code>package com.iotek.synchronize;public class DieThreadDemo {    public static void main(String[] args) throws InterruptedException {        Example example = new Example();        DieThread thread1 = new DieThread(example);        thread1.start();        DieThread1 thread2 = new DieThread1(example);        thread2.start();    }}class Example{    private Object obj1 = new Object();    private Object obj2 = new Object();    public void method1() throws InterruptedException{//先占用对象1，再请求对象2.        synchronized (obj1) {            Thread.sleep(1000);            synchronized (obj2) {                System.out.println(&quot;method1&quot;);            }        }    }    public void method2() throws InterruptedException{//先占用对象2，再请求对象1.        synchronized (obj2) {            Thread.sleep(1000);            synchronized (obj1) {                System.out.println(&quot;method2&quot;);            }        }    }}class DieThread extends Thread{//死亡进程1    private Example example = null;    public DieThread(Example example) {        super();        this.example = example;    }    @Override    public void run(){        try {            example.method1();        } catch (InterruptedException e) {            // TODO Auto-generated catch block            e.printStackTrace();        }    }}class DieThread1 extends Thread{//死亡进程2    private Example example = null;    public DieThread1(Example example) {        super();        this.example = example;    }    @Override    public void run(){        try {            example.method2();        } catch (InterruptedException e) {            // TODO Auto-generated catch block            e.printStackTrace();        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、线程同步&quot;&gt;&lt;a href=&quot;#1、线程同步&quot; class=&quot;headerlink&quot; title=&quot;1、线程同步&quot;&gt;&lt;/a&gt;1、线程同步&lt;/h3&gt;&lt;p&gt;线程同步是为了防止多个线程访问一个数据对象时，对数据造成破坏。它是保证多线程安全访问竞争资源的一种手段。&lt;/
       
     
     </summary>
