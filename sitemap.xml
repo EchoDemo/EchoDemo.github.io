@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.echodemo.cc/about/index.html</loc>
+    
+    <lastmod>2018-08-07T03:21:11.920Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.echodemo.cc/2018/08/06/Java%E4%B8%AD%E5%8F%8D%E5%B0%84%E4%B8%8EAnnotation/</loc>
     
     <lastmod>2018-08-06T11:42:10.493Z</lastmod>
@@ -299,13 +306,6 @@
     <loc>http://www.echodemo.cc/2018/07/17/%E7%A4%BC%E4%BB%AA%E5%9F%B9%E8%AE%AD%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2018-07-17T10:50:41.212Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.echodemo.cc/about/index.html</loc>
-    
-    <lastmod>2018-07-17T09:52:54.386Z</lastmod>
     
   </url>
   
