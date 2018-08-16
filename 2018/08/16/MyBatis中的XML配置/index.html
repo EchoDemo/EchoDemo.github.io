@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="EchoDemo" />
+  <meta name="keywords" content="Java,MyBatis," />
 
 
 
@@ -108,16 +108,18 @@
 
 
 
-<meta name="description" content="Less interests,more interest。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="EchoDemo&#39;s Blogs">
-<meta property="og:url" content="http://www.echodemo.cc/archives/2018/page/16/index.html">
+<meta name="description" content="1、properties这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。首先在同级目录下新建一个db.properties文件。 &amp;lt;!-- db.properties文件 --&amp;gt; driver=com.mysql.jdbc.Driver url=jdbc:mysql://localhost:3306/m">
+<meta name="keywords" content="Java,MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis中的XML配置">
+<meta property="og:url" content="http://www.echodemo.cc/2018/08/16/MyBatis中的XML配置/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="Less interests,more interest。">
+<meta property="og:description" content="1、properties这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。首先在同级目录下新建一个db.properties文件。 &amp;lt;!-- db.properties文件 --&amp;gt; driver=com.mysql.jdbc.Driver url=jdbc:mysql://localhost:3306/m">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-16T08:05:20.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EchoDemo&#39;s Blogs">
-<meta name="twitter:description" content="Less interests,more interest。">
+<meta name="twitter:title" content="MyBatis中的XML配置">
+<meta name="twitter:description" content="1、properties这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。首先在同级目录下新建一个db.properties文件。 &amp;lt;!-- db.properties文件 --&amp;gt; driver=com.mysql.jdbc.Driver url=jdbc:mysql://localhost:3306/m">
 
 
 
@@ -145,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/archives/2018/page/16/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/08/16/MyBatis中的XML配置/"/>
 
 
 
 
 
-  <title> 归档 | EchoDemo's Blogs </title>
+  <title> MyBatis中的XML配置 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -317,402 +319,338 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      非常好! 目前共计 160 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/08/16/MyBatis中的XML配置/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                MyBatis中的XML配置
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-16T15:11:29+08:00">
+                2018-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/16/MyBatis中的XML配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/08/16/MyBatis中的XML配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,025
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <h3 id="1、properties"><a href="#1、properties" class="headerlink" title="1、properties"></a>1、properties</h3><p>这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。首先在同级目录下新建一个db.properties文件。</p>
+<pre><code>&lt;!-- db.properties文件 --&gt;
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8
+username=root
+password=root
+
+&lt;!-- properties配置 --&gt;
+&lt;properties resource=&quot;db.properties&quot;&gt;
+    &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+      &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;    
+&lt;/properties&gt;
+
+&lt;!-- 然后其中的属性就可以在整个配置文件中被用来替换需要动态配置的属性值，如下所示： --&gt;
+&lt;dataSource type=&quot;POOLED&quot;&gt;
+  &lt;property name=&quot;driver&quot; value=&quot;${driver}&quot;/&gt;
+  &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+  &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+&lt;/dataSource&gt;
+
+&lt;!-- 
+    1、在properties元素体内指定的属性首先被读取。
+    2、然后根据properties元素中的resource属性读取类路径下属性文件或根据url属性指定的路径读取属性文件，并覆盖已读取的同名属性。
+    3、最后读取作为方法参数(parameterType)传递的属性，并覆盖已读取的同名属性。
+    4、通过方法参数传递的属性具有最高优先级，resource/url属性中指定的配置文件次之，最低优先级的是properties属性中指定的属性。
+--&gt;
+</code></pre><h3 id="2、Setting"><a href="#2、Setting" class="headerlink" title="2、Setting"></a>2、Setting</h3><p>它们会修改MyBatis在运行时的行为方式，ibatis的全局配置参数，包括很多的性能参数(最大线程数、最大等待时间等)，通过调用这些性能参数使用ibatis达到高性能的运行。MyBatis运行时调整全局参数，相当于软件运行时的参数。(需要小心配置，配置参数会影响MyBatis的执行)</p>
+<h3 id="3、typeAlias"><a href="#3、typeAlias" class="headerlink" title="3、typeAlias"></a>3、typeAlias</h3><pre><code>&lt;!--
+    1、类型别名是为Java类型设置一个短的名字。它只和XML配置有关，存在的意义仅在于用来减少类完全限定名的冗余。 
+    2、自定义别名:alias别名；type类型。如果指定包中所有类都有别名，使用类名作为别名(大小写不敏感)。
+--&gt;
+
+&lt;typeAliases&gt;
+    &lt;typeAlias alias=&quot;user&quot; type=&quot;com.entity.User&quot;/&gt;
+    &lt;package name=&quot;com.entity&quot;/&gt;
+&lt;/typeAliases&gt;
+</code></pre><h3 id="4、environments"><a href="#4、environments" class="headerlink" title="4、environments"></a>4、environments</h3><p>MyBatis可以配置成适应多种环境，这种机制有助于将SQL映射应用于多种数据库之中。尽管可以配置多个环境，每个SqlSessionFactory实例只能选择其一。所以，如果你想连接两个数据库，就需要创建两个SqlSessionFactory实例，每个数据库对应一个。为了指定创建哪种环境，只要将它作为可选的参数传递给SqlSessionFactoryBuilder即可。</p>
+<pre><code>&lt;!-- 可以接受环境配置的两个方法签名 --&gt;
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, environment);
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, environment, properties);
+
+&lt;!-- 如果忽略了环境参数，那么默认环境将会被加载 --&gt;
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
+SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, properties);
+
+&lt;environments default=&quot;development&quot;&gt;
+  &lt;environment id=&quot;development&quot;&gt;
+    &lt;transactionManager type=&quot;JDBC&quot;&gt;
+    &lt;/transactionManager&gt;
+    &lt;dataSource type=&quot;POOLED&quot;&gt;
+      &lt;property name=&quot;driver&quot; value=&quot;${driver}&quot;/&gt;
+      &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+      &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+      &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+    &lt;/dataSource&gt;
+  &lt;/environment&gt;
+&lt;/environments&gt;
+
+&lt;!-- 
+在MyBatis中有两种类型的事务管理器：
+1、JDBC：这个配置就是直接使用了JDBC的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域。
+2、MANAGED这个配置几乎没做什么。它从来不提交或回滚一个连接，而是让容器来管理事务的整个生命周期（比如JEE应用服务器的上下文）。 默认情况下它会关闭连接，然而一些容器并不希望这样，因此需要将closeConnection属性设置为false来阻止它默认的关闭行为。
+ --&gt;
+
+&lt;transactionManager type=&quot;MANAGED&quot;&gt;
+      &lt;property name=&quot;closeConnection&quot; value=&quot;false&quot;/&gt;
+&lt;/transactionManager&gt;
+</code></pre><h3 id="5、mappers"><a href="#5、mappers" class="headerlink" title="5、mappers"></a>5、mappers</h3><p>这些配置会告诉了 MyBatis 去哪里找映射文件，剩下的细节就应该是每个 SQL 映射文件了</p>
+<pre><code>&lt;!-- 使用相对于类路径的资源引用 --&gt;
+&lt;mappers&gt;
+  &lt;mapper resource=&quot;org/mybatis/builder/AuthorMapper.xml&quot;/&gt;
+&lt;/mappers&gt;
+
+&lt;!-- 使用完全限定资源定位符（URL） --&gt;
+&lt;mappers&gt;
+  &lt;mapper url=&quot;file:///var/mappers/AuthorMapper.xml&quot;/&gt;
+&lt;/mappers&gt;
+
+&lt;!-- 使用映射器接口实现类的完全限定类名 --&gt;
+&lt;mappers&gt;
+  &lt;mapper class=&quot;org.mybatis.builder.AuthorMapper&quot;/&gt;
+&lt;/mappers&gt;
+
+&lt;!-- 将包内的映射器接口实现全部注册为映射器 --&gt;
+&lt;mappers&gt;
+  &lt;package name=&quot;org.mybatis.builder&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/大整数与int型数据的乘法/" itemprop="url">
-              
-                <span itemprop="name">大整数与int型数据的乘法</span>
-              
-            </a>
-        
-      </h2>
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/MyBatis第一个入门程序/" rel="next" title="MyBatis第一个入门程序">
+                <i class="fa fa-chevron-left"></i> MyBatis第一个入门程序
+              </a>
+            
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T22:56:12+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/大整数减法/" itemprop="url">
-              
-                <span itemprop="name">大整数减法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T19:53:41+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/大整数加法/" itemprop="url">
-              
-                <span itemprop="name">大整数加法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T16:51:34+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/Java中的String/" itemprop="url">
-              
-                <span itemprop="name">Java中的String</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T14:56:23+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/早/" itemprop="url">
-              
-                <span itemprop="name">早</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T14:19:32+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/为hexo的next主题添加点击出现桃心效果的功能/" itemprop="url">
-              
-                <span itemprop="name">为hexo的next主题添加点击出现桃心效果的功能</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T18:54:30+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/Java中需要注意的Points/" itemprop="url">
-              
-                <span itemprop="name">Java中需要注意的Points</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T18:43:44+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/09/Add-tags-and-categories-to-Blogs/" itemprop="url">
-              
-                <span itemprop="name">为博客添加标签和分类页面</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T20:50:20+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Git入门(一)/" itemprop="url">
-              
-                <span itemprop="name">Git入门(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T16:05:11+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/终于等到你/" itemprop="url">
-              
-                <span itemprop="name">终于等到你</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T11:46:44+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/15/">15</a><span class="page-number current">16</span>
-  </nav>
-
-
+    </div>
+  </div>
 
           
           </div>
@@ -720,6 +658,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -739,8 +683,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -850,6 +803,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、properties"><span class="nav-number">1.</span> <span class="nav-text">1、properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Setting"><span class="nav-number">2.</span> <span class="nav-text">2、Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、typeAlias"><span class="nav-number">3.</span> <span class="nav-text">3、typeAlias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、environments"><span class="nav-number">4.</span> <span class="nav-text">4、environments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、mappers"><span class="nav-number">5.</span> <span class="nav-text">5、mappers</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -978,11 +947,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
@@ -1015,6 +982,10 @@
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 
