@@ -117,7 +117,7 @@
 <meta property="og:description" content="1、MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 2、写一个mybatis的入门程序 (">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2018/8/1.jpg">
-<meta property="og:updated_time" content="2018-08-15T07:41:14.041Z">
+<meta property="og:updated_time" content="2018-08-16T06:25:42.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis第一个入门程序">
 <meta name="twitter:description" content="1、MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 2、写一个mybatis的入门程序 (">
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,439
+                  1,720
                 </span>
               
 
@@ -453,7 +453,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -486,6 +486,7 @@
   &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
 &lt;!-- 全局配置文件 --&gt;
 &lt;configuration&gt;
+    &lt;!-- 环境变量 --&gt;
     &lt;environments default=&quot;mysql&quot;&gt;
         &lt;environment id=&quot;mysql&quot;&gt;
             &lt;!-- 事务管理 --&gt;
@@ -514,9 +515,9 @@
 
 &lt;!--
  namespace命名空间，为了对SQL语句进行隔离，方便管理
- mapper开发dao方式，有特殊的作用。命名是自定义的。
+ mapper开发dao方式，有特殊的作用。
  --&gt;
-&lt;mapper namespace=&quot;mapperTest&quot;&gt;
+&lt;mapper namespace=&quot;mappertest&quot;&gt;
     &lt;!-- 
     mapper.xml文件配置的SQL语句，执行每一个SQL，都将封装为mapperStatement对象。
     mapper.xml以statement为单位管理SQL语句 。
@@ -524,9 +525,42 @@
     &lt;!-- ID唯一标识Statement --&gt;
     &lt;!-- parameterType：输入参数类型，通过#{}，#{}中名称任意 --&gt;
     &lt;!-- resultType：输出结果的类型，返回单条或者多条记录，指明类型 --&gt;
+    &lt;!-- #{}表示占位符，如果参数给出String，自动添加&apos;&apos;；${value}表示SQL语句拼接，不会自动添加&apos;&apos;。 --&gt;
     &lt;select id=&quot;findUserById&quot; parameterType=&quot;int&quot; resultType=&quot;com.entity.User&quot;&gt;
         select * from users where id=#{id}
     &lt;/select&gt;
+
+    &lt;select id=&quot;findUserByName&quot; parameterType=&quot;string&quot; resultType=&quot;com.entity.User&quot;&gt;
+        select * from users where username=#{username}
+    &lt;/select&gt;
+
+    &lt;select id=&quot;findUserByName1&quot; parameterType=&quot;string&quot; resultType=&quot;com.entity.User&quot;&gt;
+        select * from users where username like &apos;%${value}%&apos;
+    &lt;/select&gt;
+
+    &lt;!-- 添加用户,传参时将大括号中填写的是属性名 --&gt;
+    &lt;insert id=&quot;addUser&quot; parameterType=&quot;com.entity.User&quot;&gt;
+        &lt;!-- 
+        order设置是取SQL语句执行之前还是之后的值 。
+        resultType：返回类型。
+        keyProperty：将主键设置到属性。
+        last_insert_id()：或得刚插入的记录自动编号的值。
+        --&gt;
+        &lt;selectKey order=&quot;AFTER&quot; resultType=&quot;int&quot; keyProperty=&quot;id&quot;&gt;
+            select last_insert_id()
+        &lt;/selectKey&gt;
+        insert into users(username,age) values(#{username},#{age})
+    &lt;/insert&gt;
+
+    &lt;!-- 删除用户 --&gt;
+    &lt;delete id=&quot;deleteUser&quot; parameterType=&quot;int&quot;&gt;
+        delete from users where id=#{id}
+    &lt;/delete&gt;
+
+    &lt;!-- 修改用户 ，用户的ID一定需要有值--&gt;
+    &lt;update id=&quot;updateUser&quot; parameterType=&quot;com.entity.User&quot;&gt;
+        update users set username=#{username},age=#{age} where id=#{id}
+    &lt;/update&gt;
 &lt;/mapper&gt;
 </code></pre><p>(3)创建一个com.entity包，在此包下新建User.java文件。</p>
 <pre><code>package com.entity;
@@ -578,6 +612,7 @@ public class User {
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -589,19 +624,53 @@ import com.entity.User;
 public class AppTest {
     SqlSessionFactory sqlSessionFactory = null;
     @Before
-    public void Init() throws IOException{//构建SqlSessionFactory的实例
+    public void Init() throws IOException{
         InputStream inputStream = Resources.getResourceAsStream(&quot;SqlMapConfig.xml&quot;);
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     }
-    //通过ID得到用户信息
+
     @Test
-    public void test() {
-        //从SqlSessionFactory中获取SqlSession，SqlSession 完全包含了面向数据库执行SQL命令所需的所有方法
+    public void testSelectUser() {//查找数据
         SqlSession sqlSession = sqlSessionFactory.openSession();
         //第一个参数是Statement的id,第二个参数是SQL语句中所需要的值。
-        User user = (User)sqlSession.selectOne(&quot;findUserById&quot;, 1);
+        /*User user = (User)sqlSession.selectOne(&quot;findUserById&quot;, 2);
+        System.out.println(user.toString());*/
+
+        //List&lt;User&gt; list = sqlSession.selectList(&quot;findUserByName&quot;, &quot;EchoDemo&quot;);
+
+        List&lt;User&gt; list = sqlSession.selectList(&quot;findUserByName1&quot;, &quot;Echo&quot;);
+        for(User user:list){
+            System.out.println(user.toString());
+        }
         sqlSession.close();
-        System.out.println(user.toString());
+    }
+
+    @Test
+    public void testInsertUser(){//插入数据
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        User user = new User(&quot;落叶物语&quot;,24);
+        sqlSession.insert(&quot;addUser&quot;, user);
+        sqlSession.commit();//提交
+        sqlSession.close();
+
+        System.out.println(&quot;当前插入用户的ID:&quot; + user.getId());
+    }
+
+    @Test
+    public void testDeleteUser(){//删除数据
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        sqlSession.delete(&quot;deleteUser&quot;,2);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testUpdateUser(){//更新数据
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        User user = new User(3,&quot;紫苏半夏&quot;,22);
+        sqlSession.update(&quot;updateUser&quot;, user);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
 </code></pre><p>1)每个基于MyBatis的应用都是以一个SqlSessionFactory的实例为中心的。SqlSessionFactory的实例可以通过SqlSessionFactoryBuilder获得。而SqlSessionFactoryBuilder则可以从XML配置文件或一个预先定制的Configuration的实例构建出SqlSessionFactory的实例。</p>
@@ -875,7 +944,7 @@ public class AppTest {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共113.4k字</span>
+  <span class="post-count">博客全站共113.7k字</span>
 </div>
 
 
