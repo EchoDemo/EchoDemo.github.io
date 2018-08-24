@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-08-16T08:05:20.193Z</updated>
+  <updated>2018-08-24T06:46:35.641Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《沈从文的前半生》摘录</title>
+    <link href="http://www.echodemo.cc/2018/08/24/%E7%A4%BA%E4%BE%8B/"/>
+    <id>http://www.echodemo.cc/2018/08/24/示例/</id>
+    <published>2018-08-24T07:05:11.000Z</published>
+    <updated>2018-08-24T06:46:35.641Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，"><a href="#今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，" class="headerlink" title="今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，"></a>今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，</h3><h2 id="最值得玩味的，还是一个人坐在洋车上颠颠簸簸，头上淋着雨，心中想着‘诗’。"><a href="#最值得玩味的，还是一个人坐在洋车上颠颠簸簸，头上淋着雨，心中想着‘诗’。" class="headerlink" title="最值得玩味的，还是一个人坐在洋车上颠颠簸簸，头上淋着雨，心中想着‘诗’。"></a>最值得玩味的，还是一个人坐在洋车上颠颠簸簸，头上淋着雨，心中想着‘诗’。</h2><h1 id="你从前做的诗不行了，因为你今天的生活是一首超越一切的好诗。"><a href="#你从前做的诗不行了，因为你今天的生活是一首超越一切的好诗。" class="headerlink" title="你从前做的诗不行了，因为你今天的生活是一首超越一切的好诗。"></a>你从前做的诗不行了，因为你今天的生活是一首超越一切的好诗。</h1><pre><code>我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当最好年龄的人。我应当为自己庆幸。</code></pre><p>望到北平高空明蓝的天，人只想下跪，<code>你给我的影响恰如这天空，距离得那么远</code>，我日里望着，晚上做梦，总梦到生着翅膀，向上飞举。</p><p style="color: #AD5D0F;font-size: 30px; font-family: '宋体';">向上飞去，便看到许多星子，都成为你的眼睛了。</p><p></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，&quot;&gt;&lt;a href=&quot;#今天真美，因为那么好天气，是我平生少见的，雨后的虹同雨后的雷还不出奇，&quot; class=&quot;headerlink&quot; title=&quot;今天真美，因为那么好天气，是我平生少见的，雨
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>MyBatis中的XML配置</title>
@@ -503,31 +528,6 @@ $ git diff master test
     
     
       <category term="Linux" scheme="http://www.echodemo.cc/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中IO框架之File</title>
-    <link href="http://www.echodemo.cc/2018/07/30/Java%E4%B8%ADIO%E6%A1%86%E6%9E%B6%E4%B9%8BFile/"/>
-    <id>http://www.echodemo.cc/2018/07/30/Java中IO框架之File/</id>
-    <published>2018-07-30T12:26:33.000Z</published>
-    <updated>2018-07-31T04:38:35.906Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、I-O框架介绍"><a href="#1、I-O框架介绍" class="headerlink" title="1、I/O框架介绍"></a>1、I/O框架介绍</h3><p>I/O(Input/Output)是计算机输入/输出的接口。Java的核心库java.io提供了全方面的I/O接口，包括：文件系统的操作，文件读写，标准设备输出等等。</p><h3 id="2、File类及使用"><a href="#2、File类及使用" class="headerlink" title="2、File类及使用"></a>2、File类及使用</h3><p>(1)一个File类的对象，表示了磁盘上的文件或者目录。File类提供了与平台无关的方法来对磁盘上的文件或者目录进行操作。File类直接处理文件和文件系统。比如删除文件，获取文件长度大小等信息。File类没有提供方法从文件读取或者向文件存储信息。其构造方法有：File(String directoryPath);File(String directoryPath,String filename);File(File dirObj,String filename);</p><p>(2)File定义了获取File对象标准属性的方法：</p><pre><code>public String getName();获取文件或目录的名字public String getParent();获取父目录的路径字符串public File getParentFile();获取父目录的File对象public String getAbsolutePath();获取文件或目录的绝对路径public boolean exists();判断文件或目录是否存在public String[] list();获得目录里面的文件名和目录名。public boolean isDirectory();判断是否是目录public boolean isFile();判断是否是文件public long length();获取文件的大小public boolean delete();删除目录或者文件夹public boolean mkdir();创建文件夹......</code></pre><h3 id="3、IO方法举例"><a href="#3、IO方法举例" class="headerlink" title="3、IO方法举例"></a>3、IO方法举例</h3><pre><code>package com.iotek.file;import java.io.File;import java.io.FileFilter;import java.io.FilenameFilter;import java.io.IOException;public class FileDemo {    public static void main(String[] args) {        File file = new File(&quot;f:\\hehe&quot;);        System.out.println(file.getAbsolutePath());//获得绝对路径        System.out.println(file.getParent());//获得父目录的路径字符串        System.out.println(file.isDirectory());//判断是否为目录        System.out.println(file.isFile());//判断是否为文件        System.out.println(file.exists());//判断是否存在        System.out.println(file.length());//获取长度        File myFile = new File(&quot;f:\\hehe&quot;);        System.out.println(myFile.mkdir());//新建一个目录        File myFile1 = new File(&quot;f:/hehe/hehe.txt&quot;);        try {            System.out.println(myFile1.createNewFile());//新建一个文件        } catch (IOException e) {            e.printStackTrace();        }        /*String[] filesStrings = file.list();//获取当前目录下的所有文件名和目录名        for(String f:filesStrings){            System.out.println(f);        }*/        /*String[] filesString = myFile.list(new FilenameFilter() {            @Override            public boolean accept(File dir, String name) {                return name.endsWith(&quot;.gif&quot;);//查找gif后缀的文件，打印文件名            }        });        for(String f:filesString){            System.out.println(f);        }*/            /*File[] files = myFile.listFiles();        for(File f:files){            System.out.println(f.getName() + &quot;--&quot; + f.length());//打印文件或目录的名字和大小        }*/        /*File[] filesString = myFile.listFiles(new FilenameFilter() {            @Override            public boolean accept(File dir, String name) {                return name.endsWith(&quot;.gif&quot;);//查找gif后缀的文件，打印文件名            }        });        for(File f:filesString){            System.out.println(f.getName() + &quot;--&quot; + f.length());        }*/        File[] files = myFile.listFiles(new FileFilter() {            @Override            public boolean accept(File pathname) {                return pathname.getName().endsWith(&quot;.gif&quot;);            }        });        for(File f:files){            System.out.println(f.getName() + &quot;--&quot; + f.length());        }    }}</code></pre><h3 id="4、案例"><a href="#4、案例" class="headerlink" title="4、案例"></a>4、案例</h3><p>(1)案例说明：给定一个目录要求按层次显示目录结构信息，文件名后面加上*或者\来表示文件夹。</p><p>(2)案例分析：使用递归算法，使用File类中的ListFile方法来遍历文件夹，使用List集合。</p><p>(3)案例实现</p><pre><code>package com.iotek.file;import java.io.File;import java.util.ArrayList;import java.util.List;public class IteratorDirDemo {    public static void main(String[] args) {        IteratorUtil.IteratorDir(new File(&quot;f:/git&quot;));    }}class IteratorUtil{    private static int level = 0;    public static void IteratorDir(File file){        if(null!=file){            /*             * 找到递归的出口，如果是文件或者是空文件夹就触碰到边界             */            if(file.isFile()||file.listFiles().length==0){                return;            }else{                File[] files = file.listFiles();                 files = sortFiles(files);                for(File f:files){                    StringBuilder sBuilder = new StringBuilder();                    sBuilder.append(getTab(level));                    sBuilder.append(f.getName());                    if(!f.isFile()){                        sBuilder.append(&quot;\\&quot;);                    }                    System.out.println(sBuilder.toString());                    if(f.isDirectory()){//如果是文件夹，进入目录遍历，层级自增1                        level++;                        IteratorDir(f);                        level--;//目录自减1，返回上一级目录                    }                }            }        }    }    private static File[] sortFiles(File[] files) {//对File类型的数组进行先目录后文件的排列        List&lt;File&gt; fList = new ArrayList&lt;File&gt;();        for(File f:files){//先存放文件夹            if(f.isDirectory()){                fList.add(f);            }        }        for(File f:files){//再存放文件            if(f.isFile()){                fList.add(f);            }        }        return fList.toArray(new File[fList.size()]);//把集合中的元素转化成指定大小的和指定类型的数组    }    private static String getTab(int level) {//根据层级数来得到制表符的个数        StringBuilder stringBuilder = new StringBuilder();        for(int i=0;i&lt;level;i++){            stringBuilder.append(&quot;\t&quot;);        }        return stringBuilder.toString();    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、I-O框架介绍&quot;&gt;&lt;a href=&quot;#1、I-O框架介绍&quot; class=&quot;headerlink&quot; title=&quot;1、I/O框架介绍&quot;&gt;&lt;/a&gt;1、I/O框架介绍&lt;/h3&gt;&lt;p&gt;I/O(Input/Output)是计算机输入/输出的接口。Java的核心库java
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
     
   </entry>
   
