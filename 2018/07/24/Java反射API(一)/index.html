@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-26T10:04:53.584Z">
+<meta property="og:updated_time" content="2018-08-27T15:48:35.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java反射API(一)">
 <meta name="twitter:description" content="1、Java.lang.reflect库Class类和java.lang.reflect类库一起对反射的概念进行支持。在java.lang包下：Class:表示一个正在运行的Java应用程序中的类和接口，是Reflection的起源。在java.lang.reflect包下：Field类：代表类的成员变量(也称之为类的属性)；Method类：代表类的方法；Constructor类：代表类的构造方法">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,095
+                  1,094
                 </span>
               
 
@@ -494,7 +494,7 @@ Class.getConstructor(new Class[]{}).newInstance(new Object[]{});
 </code></pre><h3 id="4、通过反射获取并调用属性"><a href="#4、通过反射获取并调用属性" class="headerlink" title="4、通过反射获取并调用属性"></a>4、通过反射获取并调用属性</h3><p>(1)获得当前类以及超类的public Field</p>
 <pre><code>Field[] arrFields=classType.getFields();
 </code></pre><p>(2)获得当前类申明的所有Field</p>
-<pre><code>Field[] arrFields=classFields=classType.getDeclaredFields();
+<pre><code>Field[] arrFields=classType.getDeclaredFields();
 </code></pre><p>(3)获得当前类以及超类指定的public Field</p>
 <pre><code>Field field=classType.getField(String name);
 </code></pre><p>(4)获得当前类申明的指定的Field</p>
@@ -902,7 +902,7 @@ public class ReflectionArrayDemo {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共115.9k字</span>
+  <span class="post-count">博客全站共117.6k字</span>
 </div>
 
 
