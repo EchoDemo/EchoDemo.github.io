@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SpringBoot项目属性配置]]></title>
+    <url>%2F2018%2F11%2F05%2FSpringBoot%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SpringBoot的第一个入门程序]]></title>
     <url>%2F2018%2F11%2F05%2FSpringBoot%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[1、在intellij idea2018上创建一个maven项目(在这里我使用的是apache-maven-3.3.9以及1.8版本的JDK) 2、打开main里面的GirlApplication文件，在同一个包下面新建一个HelloController.java文件并创建一个方法。 3、在GirlApplication.java文件中启动该项目。成功之后在浏览器当中输入127.0.0.1:8080/hello。]]></content>

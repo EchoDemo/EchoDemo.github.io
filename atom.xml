@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-05T12:55:06.870Z</updated>
+  <updated>2018-11-05T13:02:18.915Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot项目属性配置</title>
+    <link href="http://www.echodemo.cc/2018/11/05/SpringBoot%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE/"/>
+    <id>http://www.echodemo.cc/2018/11/05/SpringBoot项目属性配置/</id>
+    <published>2018-11-05T13:02:28.000Z</published>
+    <updated>2018-11-05T13:02:18.915Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot的第一个入门程序</title>
@@ -489,32 +507,6 @@
       
       
         &lt;h3 id=&quot;1、Reader和Writer抽象类&quot;&gt;&lt;a href=&quot;#1、Reader和Writer抽象类&quot; class=&quot;headerlink&quot; title=&quot;1、Reader和Writer抽象类&quot;&gt;&lt;/a&gt;1、Reader和Writer抽象类&lt;/h3&gt;&lt;p&gt;字节流提供处
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中使用字节流复制一个文件夹</title>
-    <link href="http://www.echodemo.cc/2018/08/04/Java%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%AD%97%E8%8A%82%E6%B5%81%E5%A4%8D%E5%88%B6%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
-    <id>http://www.echodemo.cc/2018/08/04/Java中使用字节流复制一个文件夹/</id>
-    <published>2018-08-04T01:21:32.000Z</published>
-    <updated>2018-08-04T01:22:53.274Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、案例介绍"><a href="#1、案例介绍" class="headerlink" title="1、案例介绍"></a>1、案例介绍</h3><p>使用字节流复制一个文件夹中的所有内容到指定的文件夹中。</p><h3 id="2、案例设计"><a href="#2、案例设计" class="headerlink" title="2、案例设计"></a>2、案例设计</h3><p>使用递归算法，使用字节缓冲区来提高程序效率。</p><h3 id="3、案例实现："><a href="#3、案例实现：" class="headerlink" title="3、案例实现："></a>3、案例实现：</h3><pre><code>package com.iotek.file;import java.io.File;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;public class CopyFileDemo {    public static void main(String[] args) throws IOException {        CopyUtil.copyDir(new File(&quot;f:\\haha&quot;), new File(&quot;f:\\ee&quot;));    }}class CopyUtil{    public static void copyDir(File src,File dst) throws IOException{        dst.mkdirs();//相比于mkdir()会创建路径中本不存在的文件夹        if(src!=null){            File[] files = src.listFiles();//遍历原文件夹中的文件或目录            if(files!=null){                for(File f:files){                    if(f.isFile()){//复制文件                        FileInputStream fis = new FileInputStream(f);                        FileOutputStream fos = new FileOutputStream(dst.getAbsolutePath() + &quot;\\&quot; + f.getName());                        byte[] buffer = new byte[1024*1024];                        int len = 0;//保存读到的字节个数                        while((len = fis.read(buffer))!=-1){                            fos.write(buffer,0,len);                        }                        fis.close();                        fos.close();                    }else {                        copyDir(f, new File(dst.getAbsolutePath()+&quot;\\&quot;+dst.getName()));                    }                }            }        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、案例介绍&quot;&gt;&lt;a href=&quot;#1、案例介绍&quot; class=&quot;headerlink&quot; title=&quot;1、案例介绍&quot;&gt;&lt;/a&gt;1、案例介绍&lt;/h3&gt;&lt;p&gt;使用字节流复制一个文件夹中的所有内容到指定的文件夹中。&lt;/p&gt;
-&lt;h3 id=&quot;2、案例设计&quot;&gt;&lt;a hre
       
     
     </summary>
