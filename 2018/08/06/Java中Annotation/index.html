@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、Annotation简介(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-06T10:26:23.402Z">
+<meta property="og:updated_time" content="2018-10-09T14:19:49.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中Annotation">
 <meta name="twitter:description" content="1、Annotation简介(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  938
+                  1,004
                 </span>
               
 
@@ -473,11 +473,11 @@
       
 
       
-        <h3 id="1、Annotation简介"><a href="#1、Annotation简介" class="headerlink" title="1、Annotation简介"></a>1、Annotation简介</h3><p>(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、构造方法、方法、成员变量、参数及本地变量的声明语句中。</p>
+        <h3 id="1、Annotation简介"><a href="#1、Annotation简介" class="headerlink" title="1、Annotation简介"></a>1、Annotation简介</h3><p>(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、构造方法、方法、成员变量、参数及本地变量的声明语句中。按照运行机制划分包括源码注解、编译时注解和运行时注解；按照来源来划分的话包括JDK注解、第三方注解和自定义注解。</p>
 <p>(2)Annotation的原理</p>
 <p>1)Annotation其实是一种接口。通过Java反射机制中的相关API来访问annotation信息。相关类(框架或工具的类)根据这些信息来决定如何使用该程序元素或者改变他们的行为。Annotation是不会影响程序代码的执行的，无论Annotation怎么变化，代码都始终如一地执行。</p>
 <p>2)Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。Annotation的工具统称APT(Annotation Processing Tool)。</p>
-<h3 id="2、常见的标准Annotation"><a href="#2、常见的标准Annotation" class="headerlink" title="2、常见的标准Annotation"></a>2、常见的标准Annotation</h3><p>(1)@Override:@Override就是用来指定方法重写的，他可以强调一个子类必须要覆盖父类的方法。</p>
+<h3 id="2、常见的标准Annotation-也称之为JDK注解，它们属于编译时注解"><a href="#2、常见的标准Annotation-也称之为JDK注解，它们属于编译时注解" class="headerlink" title="2、常见的标准Annotation(也称之为JDK注解，它们属于编译时注解)"></a>2、常见的标准Annotation(也称之为JDK注解，它们属于编译时注解)</h3><p>(1)@Override:@Override就是用来指定方法重写的，他可以强调一个子类必须要覆盖父类的方法。</p>
 <p>(2)@Deprecated:@deprecated用于表示某个程序元素(类、方法等)已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</p>
 <p>(3)@SuppressWarning：@SuppressWarning指示被Annotation标识的程序元素(以及在该程序元素中的所有子元素)取消显示指定的编译器警告。</p>
 <p>(4)举例说明</p>
@@ -743,7 +743,7 @@ enum Color{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">165</span>
+                <span class="site-state-item-count">166</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -761,7 +761,7 @@ enum Color{
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -850,7 +850,7 @@ enum Color{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Annotation简介"><span class="nav-number">1.</span> <span class="nav-text">1、Annotation简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、常见的标准Annotation"><span class="nav-number">2.</span> <span class="nav-text">2、常见的标准Annotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、自定义Annotation"><span class="nav-number">3.</span> <span class="nav-text">3、自定义Annotation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Annotation简介"><span class="nav-number">1.</span> <span class="nav-text">1、Annotation简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、常见的标准Annotation-也称之为JDK注解，它们属于编译时注解"><span class="nav-number">2.</span> <span class="nav-text">2、常见的标准Annotation(也称之为JDK注解，它们属于编译时注解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、自定义Annotation"><span class="nav-number">3.</span> <span class="nav-text">3、自定义Annotation</span></a></li></ol></div>
             
 
           </div>
@@ -892,7 +892,7 @@ enum Color{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共120.8k字</span>
+  <span class="post-count">博客全站共121.0k字</span>
 </div>
 
 

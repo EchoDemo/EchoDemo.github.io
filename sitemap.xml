@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.echodemo.cc/2018/11/05/SpringBoot%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2018-11-05T12:55:06.870Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.echodemo.cc/2018/08/06/Java%E4%B8%ADAnnotation/</loc>
+    
+    <lastmod>2018-10-09T14:19:49.924Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.echodemo.cc/2018/10/06/%E3%80%8A%E5%81%87%E6%80%A7%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB%E3%80%8B%E6%91%98%E5%8F%A5(%E4%BA%8C)/</loc>
     
     <lastmod>2018-10-06T15:18:23.483Z</lastmod>
@@ -89,13 +103,6 @@
     <loc>http://www.echodemo.cc/2018/08/06/Java%E4%B8%AD%E5%8F%8D%E5%B0%84%E4%B8%8EAnnotation/</loc>
     
     <lastmod>2018-08-06T11:42:10.493Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.echodemo.cc/2018/08/06/Java%E4%B8%ADAnnotation/</loc>
-    
-    <lastmod>2018-08-06T10:26:23.402Z</lastmod>
     
   </url>
   

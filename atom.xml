@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-10-06T15:18:23.483Z</updated>
+  <updated>2018-11-05T12:55:06.870Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot的第一个入门程序</title>
+    <link href="http://www.echodemo.cc/2018/11/05/SpringBoot%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://www.echodemo.cc/2018/11/05/SpringBoot的第一个入门程序/</id>
+    <published>2018-11-05T12:34:41.000Z</published>
+    <updated>2018-11-05T12:55:06.870Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、在intellij-idea2018上创建一个maven项目-在这里我使用的是apache-maven-3-3-9以及1-8版本的JDK"><a href="#1、在intellij-idea2018上创建一个maven项目-在这里我使用的是apache-maven-3-3-9以及1-8版本的JDK" class="headerlink" title="1、在intellij idea2018上创建一个maven项目(在这里我使用的是apache-maven-3.3.9以及1.8版本的JDK)"></a>1、在intellij idea2018上创建一个maven项目(在这里我使用的是apache-maven-3.3.9以及1.8版本的JDK)</h3><p><img src="/images/2018/11/1.png" alt="&quot;1&quot;"></p><p><img src="/images/2018/11/2.png" alt="&quot;2&quot;"></p><p><img src="/images/2018/11/3.png" alt="&quot;3&quot;"></p><p><img src="/images/2018/11/4.png" alt="&quot;4&quot;"></p><h3 id="2、打开main里面的GirlApplication文件，在同一个包下面新建一个HelloController-java文件并创建一个方法。"><a href="#2、打开main里面的GirlApplication文件，在同一个包下面新建一个HelloController-java文件并创建一个方法。" class="headerlink" title="2、打开main里面的GirlApplication文件，在同一个包下面新建一个HelloController.java文件并创建一个方法。"></a>2、打开main里面的GirlApplication文件，在同一个包下面新建一个HelloController.java文件并创建一个方法。</h3><p><img src="/images/2018/11/5.png" alt="&quot;打开GirlApplication.java文件&quot;"></p><p><img src="/images/2018/11/6.png" alt="&quot;创建HelloController.java文件&quot;"></p><h3 id="3、在GirlApplication-java文件中启动该项目。成功之后在浏览器当中输入127-0-0-1-8080-hello。"><a href="#3、在GirlApplication-java文件中启动该项目。成功之后在浏览器当中输入127-0-0-1-8080-hello。" class="headerlink" title="3、在GirlApplication.java文件中启动该项目。成功之后在浏览器当中输入127.0.0.1:8080/hello。"></a>3、在GirlApplication.java文件中启动该项目。成功之后在浏览器当中输入127.0.0.1:8080/hello。</h3><p><img src="/images/2018/11/7.png" alt="&quot;在浏览器查看&quot;"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、在intellij-idea2018上创建一个maven项目-在这里我使用的是apache-maven-3-3-9以及1-8版本的JDK&quot;&gt;&lt;a href=&quot;#1、在intellij-idea2018上创建一个maven项目-在这里我使用的是apache-ma
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>《假性亲密关系》摘句(二)</title>
@@ -278,9 +303,9 @@
     <link href="http://www.echodemo.cc/2018/08/06/Java%E4%B8%ADAnnotation/"/>
     <id>http://www.echodemo.cc/2018/08/06/Java中Annotation/</id>
     <published>2018-08-06T10:25:49.000Z</published>
-    <updated>2018-08-06T10:26:23.402Z</updated>
+    <updated>2018-10-09T14:19:49.924Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1、Annotation简介"><a href="#1、Annotation简介" class="headerlink" title="1、Annotation简介"></a>1、Annotation简介</h3><p>(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、构造方法、方法、成员变量、参数及本地变量的声明语句中。</p><p>(2)Annotation的原理</p><p>1)Annotation其实是一种接口。通过Java反射机制中的相关API来访问annotation信息。相关类(框架或工具的类)根据这些信息来决定如何使用该程序元素或者改变他们的行为。Annotation是不会影响程序代码的执行的，无论Annotation怎么变化，代码都始终如一地执行。</p><p>2)Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。Annotation的工具统称APT(Annotation Processing Tool)。</p><h3 id="2、常见的标准Annotation"><a href="#2、常见的标准Annotation" class="headerlink" title="2、常见的标准Annotation"></a>2、常见的标准Annotation</h3><p>(1)@Override:@Override就是用来指定方法重写的，他可以强调一个子类必须要覆盖父类的方法。</p><p>(2)@Deprecated:@deprecated用于表示某个程序元素(类、方法等)已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</p><p>(3)@SuppressWarning：@SuppressWarning指示被Annotation标识的程序元素(以及在该程序元素中的所有子元素)取消显示指定的编译器警告。</p><p>(4)举例说明</p><p>1)@Override:可以防止方法名写错。</p><pre><code>package com.iotek.annotation;public class OVerrideDemo {    public static void main(String[] args) {        Apple apple = new Apple();        apple.info();    }}class Fruit{    public void info(){        System.out.println(&quot;描述水果的信息！&quot;);    }}class Apple extends Fruit{    @Override    public void info() {        System.out.println(&quot;我是苹果！&quot;);    }}</code></pre><p>2)@Deprecated:提示程序员不推荐使用</p><pre><code>package com.iotek.annotation;public class DeprecatedDemo {    public static void main(String[] args) {        Person person = new Person();        person.showInfo();    }}class Person{    @Deprecated    public void showInfo(){        System.out.println(&quot;hello person!&quot;);    }}</code></pre><p>3)@Suppresswarning:去除警告信息</p><pre><code>package com.iotek.annotation;public class SuppresswarningDemo {    public static void main(String[] args) {    }}class Container&lt;T&gt;{    private Object[] obj = null;    public Container(){        obj = new Object[10];    }    @SuppressWarnings(&quot;unchecked&quot;)    public T[] toArray(){        return (T[])obj;    }}</code></pre><h3 id="3、自定义Annotation"><a href="#3、自定义Annotation" class="headerlink" title="3、自定义Annotation"></a>3、自定义Annotation</h3><p>(1)语法</p><pre><code>访问修饰符 @interface Annotation名称{    返回类型 method() [默认值];}</code></pre><p>1)Annotation类型的方法必须声明为无参数、无异常抛出的。这些方法定义了Annotation的成员：方法名成为了成员名，而方法返回值成为了成员的类型。方法的返回类型必须要为基本数据类型、String类型、Class类型、枚举类型、Annotation类型或者由前面类型之一作为元素的一维数组。</p><p>2)方法的后面可以使用default和一个默认数值来声明成员的默认值来声明成员的默认值，null不能作为成员的默认值。在定义Annotation型态时，不能继承其他的Annotation型态或是接口。</p><p>(2)举例说明</p><pre><code>package com.iotek.annotation;//可以修饰类@MyAnnotation1public class MyAnnotation {    //可以修饰方法    @MyAnnotation1    @MyAnnotation3    public static void main(String[] args) {        //可以修饰成员变量，可以有多个注解        @MyAnnotation1        @MyAnnotation2(name=&quot;zhangsan&quot;)        @MyAnnotation3(&quot;haha&quot;)        @MyAnnotation4(sex=&quot;男&quot;,age=10)        @MyAnnotation5({&quot;haah&quot;,&quot;hehe&quot;,&quot;ee&quot;})        @MyAnnotation6(color=Color.RED)        int number = 10;    }}@interface MyAnnotation1{}@interface MyAnnotation2{    String name();}@interface MyAnnotation3{//value和默认值    String value() default &quot;lisi&quot;;//只有为value时才可以省略&quot;value=&quot;，有默认值时可以不给值。}@interface MyAnnotation4{//两个元素    String sex();    int age();}@interface MyAnnotation5{//数组    String[] value();}enum Color{    RED,BLUE,YELLOW;}@interface MyAnnotation6{//枚举类型    Color color();}</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="1、Annotation简介"><a href="#1、Annotation简介" class="headerlink" title="1、Annotation简介"></a>1、Annotation简介</h3><p>(1)Annotation是Java5开始引入的新特性。中文名称一般叫注解。它提供了一种安全的类似注释的机制，用来将任何的信息或元数据与程序元素(类、方法、成员变量等)进行关联。更通俗的意思就是为程序的元素(类、方法、成员变量)加上更直观更明了的说明，这些说明信息是与程序的业务逻辑无关，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类、构造方法、方法、成员变量、参数及本地变量的声明语句中。按照运行机制划分包括源码注解、编译时注解和运行时注解；按照来源来划分的话包括JDK注解、第三方注解和自定义注解。</p><p>(2)Annotation的原理</p><p>1)Annotation其实是一种接口。通过Java反射机制中的相关API来访问annotation信息。相关类(框架或工具的类)根据这些信息来决定如何使用该程序元素或者改变他们的行为。Annotation是不会影响程序代码的执行的，无论Annotation怎么变化，代码都始终如一地执行。</p><p>2)Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。Annotation的工具统称APT(Annotation Processing Tool)。</p><h3 id="2、常见的标准Annotation-也称之为JDK注解，它们属于编译时注解"><a href="#2、常见的标准Annotation-也称之为JDK注解，它们属于编译时注解" class="headerlink" title="2、常见的标准Annotation(也称之为JDK注解，它们属于编译时注解)"></a>2、常见的标准Annotation(也称之为JDK注解，它们属于编译时注解)</h3><p>(1)@Override:@Override就是用来指定方法重写的，他可以强调一个子类必须要覆盖父类的方法。</p><p>(2)@Deprecated:@deprecated用于表示某个程序元素(类、方法等)已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</p><p>(3)@SuppressWarning：@SuppressWarning指示被Annotation标识的程序元素(以及在该程序元素中的所有子元素)取消显示指定的编译器警告。</p><p>(4)举例说明</p><p>1)@Override:可以防止方法名写错。</p><pre><code>package com.iotek.annotation;public class OVerrideDemo {    public static void main(String[] args) {        Apple apple = new Apple();        apple.info();    }}class Fruit{    public void info(){        System.out.println(&quot;描述水果的信息！&quot;);    }}class Apple extends Fruit{    @Override    public void info() {        System.out.println(&quot;我是苹果！&quot;);    }}</code></pre><p>2)@Deprecated:提示程序员不推荐使用</p><pre><code>package com.iotek.annotation;public class DeprecatedDemo {    public static void main(String[] args) {        Person person = new Person();        person.showInfo();    }}class Person{    @Deprecated    public void showInfo(){        System.out.println(&quot;hello person!&quot;);    }}</code></pre><p>3)@Suppresswarning:去除警告信息</p><pre><code>package com.iotek.annotation;public class SuppresswarningDemo {    public static void main(String[] args) {    }}class Container&lt;T&gt;{    private Object[] obj = null;    public Container(){        obj = new Object[10];    }    @SuppressWarnings(&quot;unchecked&quot;)    public T[] toArray(){        return (T[])obj;    }}</code></pre><h3 id="3、自定义Annotation"><a href="#3、自定义Annotation" class="headerlink" title="3、自定义Annotation"></a>3、自定义Annotation</h3><p>(1)语法</p><pre><code>访问修饰符 @interface Annotation名称{    返回类型 method() [默认值];}</code></pre><p>1)Annotation类型的方法必须声明为无参数、无异常抛出的。这些方法定义了Annotation的成员：方法名成为了成员名，而方法返回值成为了成员的类型。方法的返回类型必须要为基本数据类型、String类型、Class类型、枚举类型、Annotation类型或者由前面类型之一作为元素的一维数组。</p><p>2)方法的后面可以使用default和一个默认数值来声明成员的默认值来声明成员的默认值，null不能作为成员的默认值。在定义Annotation型态时，不能继承其他的Annotation型态或是接口。</p><p>(2)举例说明</p><pre><code>package com.iotek.annotation;//可以修饰类@MyAnnotation1public class MyAnnotation {    //可以修饰方法    @MyAnnotation1    @MyAnnotation3    public static void main(String[] args) {        //可以修饰成员变量，可以有多个注解        @MyAnnotation1        @MyAnnotation2(name=&quot;zhangsan&quot;)        @MyAnnotation3(&quot;haha&quot;)        @MyAnnotation4(sex=&quot;男&quot;,age=10)        @MyAnnotation5({&quot;haah&quot;,&quot;hehe&quot;,&quot;ee&quot;})        @MyAnnotation6(color=Color.RED)        int number = 10;    }}@interface MyAnnotation1{}@interface MyAnnotation2{    String name();}@interface MyAnnotation3{//value和默认值    String value() default &quot;lisi&quot;;//只有为value时才可以省略&quot;value=&quot;，有默认值时可以不给值。}@interface MyAnnotation4{//两个元素    String sex();    int age();}@interface MyAnnotation5{//数组    String[] value();}enum Color{    RED,BLUE,YELLOW;}@interface MyAnnotation6{//枚举类型    Color color();}</code></pre>]]></content>
     
     <summary type="html">
     
@@ -498,35 +523,6 @@
     
     
       <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git入门(二)</title>
-    <link href="http://www.echodemo.cc/2018/08/02/Git%E5%85%A5%E9%97%A8(%E4%BA%8C)/"/>
-    <id>http://www.echodemo.cc/2018/08/02/Git入门(二)/</id>
-    <published>2018-08-02T02:38:07.000Z</published>
-    <updated>2018-08-02T02:39:34.403Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、比较分支"><a href="#1、比较分支" class="headerlink" title="1、比较分支"></a>1、比较分支</h3><pre><code>//查看test分支和master之间的差别$ git diff master test//查看当前的工作目录与另外一个分支的差别，查看与test分支的区别$ git diff test//你也以加上路径限定符，来只比较某一个文件或目录$ git diff test file1//--stat 参数可以统计一下有哪些文件被改动，有多少行被改动$ git diff test --stat</code></pre><h3 id="2、分布式的工作流程"><a href="#2、分布式的工作流程" class="headerlink" title="2、分布式的工作流程"></a>2、分布式的工作流程</h3><p>(1)分布式的工作流程</p><p>你目前的项目在gitproject目录下，这是我们的git仓库(repository)，假设另一个用户也想与你协作开发。他的工作目录也在这台机器上。首先，我们假设另一个用户也用相同的用户登录，只是工作在不同的目录下开发代码，实际工作中不太可能发生，大部分情况都是多个用户，这个假设只是为了让实验简化。</p><pre><code>//克隆git仓库，建了一个新的叫&quot;myrepo&quot;的目录，这个目录里包含了一份gitproject仓库的克隆$ git clone gitproject myrepo//查看$ ls -l myrepo</code></pre><p>在 myrepo 做了一些修改并且提交：</p><pre><code>$ cd myrepo//添加新的文件newfile$ echo &quot;newcontent&quot; &gt; newfile//提交修改$ git add newfile$ git commit -m &quot;add newfile&quot;</code></pre><p>myrepo修改完成后，可以在仓库gitproject中把myrepo的修改给拉(pull)下来，合并这份修改到gitproject的git仓库。git pull命令执行两个操作: 它从远程分支(remote branch)抓取修改git fetch的内容，然后把它合并git merge进当前的分支。如果gitproject在myrepo修改文件内容的同时也做了修改的话，可能需要手工去修复冲突。</p><pre><code>$ cd gitproject$ git pull myrepo master$ ls   </code></pre><p>gitproject里可以用git fetch 来执行git pull前半部分的工作，但是这条命令并不会把抓下来的修改合并到当前分支里：</p><pre><code>$ git fetch myrepo</code></pre><p>获取后，我们可以通过git log查看远程分支做的所有修改，由于我们已经合并了所有修改，所以不会有任何输出：</p><pre><code>$ git log -p master..myrepo/master</code></pre><p>当检查完修改后，gitproject可以把修改合并到它的主分支中：</p><pre><code>$ git merge myrepo/master</code></pre><p>如果我们在myrepo目录下执行git pull。myrepo会从克隆的位置拉取代码并更新本地仓库，就是把gitproject上的修改同步到本地:</p><pre><code>//进入到gitproject$ cd gitproject//添加一行内容到newfile$ echo &quot;gitproject: new line&quot; &gt;&gt; newfile//提交修改$ git commit -a -m &apos;add newline to newfile&apos;//进入myrepo目录$ cd myrepo//同步gitproject的所有修改$ git pull</code></pre><p>因为myrepo是从gitproject仓库克隆的，那么他就不需要指定gitproject仓库的地址。因为Git把gitproject仓库的地址存储到myrepo的配置文件中，这个地址就是在git pull时默认使用的远程仓库:</p><pre><code>$ git config --get remote.origin.url</code></pre><p>(2)公共git仓库</p><p>开发过程中，通常大家都会使用一个公共的仓库，并clone到自己的开发环境中，完成一个阶段的代码后可以告诉目标仓库的维护者来pull自己的代码。如果你和维护者都在同一台机器上有帐号，那么你们可以互相从对方的仓库目录里直接拉所作的修改，git命令里的仓库地址也可以是本地的某个目录名：</p><pre><code>$ git clone /path/to/repository$ git pull /path/to/other/repository//也可以是一个ssh地址：$ git clone ssh://yourhost/~you/repository</code></pre><p>(3)将修改推到一个公共仓库</p><p>通过http或是git协议，其它维护者可以通过远程访问的方式抓取(fetch)你最近的修改，但是他们 没有写权限。如何将本地私有仓库的最近修改主动上传到公共仓库中呢？最简单的办法就是用git push命令，推送本地的修改到远程Git仓库，执行下面的命令:</p><pre><code>$ git push ssh://yourserver.com/~you/proj.git master:master或者:$ git push ssh://yourserver.com/~you/proj.git master</code></pre><p>如果推送(push)结果不是快速向前fast forward，可能会报像错。常是因为没有使用git pull获取远端仓库的最新更新，在本地修改的同时，远端仓库已经变化了（其他协作者提交了代码），此时应该先使用git pull合并最新的修改后再执行git push：</p><pre><code>$ git pull$ git push ssh://yourserver.com/~you/proj.git master</code></pre><h3 id="3、git标签"><a href="#3、git标签" class="headerlink" title="3、git标签"></a>3、git标签</h3><p>(1)轻量级标签</p><p>我们可以用 git tag不带任何参数创建一个标签(tag)指定某个提交(commit):</p><pre><code>//进入到gitproject目录$ cd gitproject//查看git提交记录$ git log//选择其中一个记录标志位stable-1的标签，注意需要将后面的8c315325替换成仓库下的真实提交内，commit的名称很长，通常我们只需要写前面8位即可$ git tag stable-1 8c315325//查看当前所有tag$ git tag</code></pre><p>这样，我们可以用stable-1作为提交8c315325的代称。前面这样创建的是一个“轻量级标签”。如果你想为一个tag添加注释，或是为它添加一个签名, 那么我们就需要创建一个 “标签对象”。git tag中使用-a， -s 或是 -u三个参数中任意一个，都会创建一个标签对象，并且需要一个标签消息(tag message)来为tag添加注释。 如果没有-m 或是 -F这些参数，命令执行时会启动一个编辑器来让用户输入标签消息。当这样的一条命令执行后，一个新的对象被添加到Git对象库中，并且标签引用就指向了一个标签对象，而不是指向一个提交，这就是与轻量级标签的区别。</p><p>下面是一个创建标签对象的例子:</p><pre><code>$ git tag -a stable-2 8c315325 -m &quot;stable 2&quot;</code></pre><p>(2)签名的标签</p><p>签名标签可以让提交和标签更加完整可信。如果你配有GPG key，那么你就很容易创建签名的标签。首先你要在你的 .git/config 或 ~/.gitconfig 里配好key。</p><p>下面是示例:</p><pre><code>[user]    signingkey = &lt;gpg-key-id&gt;</code></pre><p>你也可以用命令行来配置:</p><pre><code>$ git config (--global) user.signingkey &lt;gpg-key-id&gt;</code></pre><p>现在你可以在创建标签的时候使用-s 参数来创建“签名的标签”：</p><pre><code>$ git tag -s stable-1 1b2e1d63ff</code></pre><p>如果没有在配置文件中配GPG key,你可以用-u参数直接指定。</p><pre><code>$ git tag -u &lt;gpg-key-id&gt; stable-1 1b2e1d63ff</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、比较分支&quot;&gt;&lt;a href=&quot;#1、比较分支&quot; class=&quot;headerlink&quot; title=&quot;1、比较分支&quot;&gt;&lt;/a&gt;1、比较分支&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;//查看test分支和master之间的差别
-$ git diff master test
-
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="git" scheme="http://www.echodemo.cc/tags/git/"/>
-    
-      <category term="github" scheme="http://www.echodemo.cc/tags/github/"/>
     
   </entry>
   
