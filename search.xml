@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[SpringBoot的Controller的使用]]></title>
-    <url>%2F2018%2F11%2F05%2FSpringBoot%E7%9A%84Controller%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[SpringBoot中Controller的使用]]></title>
+    <url>%2F2018%2F11%2F05%2FSpringBoot%E4%B8%ADController%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[1、Controller方法和类的注解 其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问： @RequestMapping(value = {&quot;hello&quot;, &quot;hi&quot;}, method = RequestMethod.GET) public String say(){ return &quot;Hello SpringBoot!&quot;; } 当然为了让代码更加得简洁，可以使用@GetMapping(value = “/hello”)和@PostMapping(value = “/hello”)来替代@RequestMapping(value = “/hello”, method = RequestMethod.GET)和@RequestMapping(value = “/hello”, method = RequestMethod.POST)的。 2、Controller当中的参数传递 （1）@PathVariable @RequestMapping(value = &quot;/hello/{id}&quot;,method = RequestMethod.GET) public String say(@PathVariable(&quot;id&quot;) Integer id){ return &quot;id: &quot; + id; } （2）@RequestParam(可以设置默认值) @RequestMapping(value = &quot;/hello&quot;,method = RequestMethod.GET) public String say(@RequestParam(value = &quot;id&quot;, required = false, defaultValue = &quot;0&quot;) Integer id){ return &quot;id: &quot; + id; }]]></content>
       <categories>
         <category>技术</category>
       </categories>

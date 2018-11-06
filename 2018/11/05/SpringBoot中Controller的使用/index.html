@@ -108,18 +108,26 @@
 
 
 
-<meta name="description" content="Less interests,more interest。">
+<meta name="description" content="1、Controller方法和类的注解  其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问： @RequestMapping(value = {&amp;quot;hello&amp;quot;, &amp;quot;hi&amp;quot;}, method = RequestMethod.GET) public String say(){     re">
 <meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot的Controller的使用">
-<meta property="og:url" content="http://www.echodemo.cc/2018/11/05/SpringBoot的Controller的使用/index.html">
+<meta property="og:title" content="SpringBoot中Controller的使用">
+<meta property="og:url" content="http://www.echodemo.cc/2018/11/05/SpringBoot中Controller的使用/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="Less interests,more interest。">
+<meta property="og:description" content="1、Controller方法和类的注解  其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问： @RequestMapping(value = {&amp;quot;hello&amp;quot;, &amp;quot;hi&amp;quot;}, method = RequestMethod.GET) public String say(){     re">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T15:11:22.670Z">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/9.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/10.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/11.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/12.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/13.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/14.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2018/11/15.png">
+<meta property="og:updated_time" content="2018-11-06T12:58:39.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot的Controller的使用">
-<meta name="twitter:description" content="Less interests,more interest。">
+<meta name="twitter:title" content="SpringBoot中Controller的使用">
+<meta name="twitter:description" content="1、Controller方法和类的注解  其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问： @RequestMapping(value = {&amp;quot;hello&amp;quot;, &amp;quot;hi&amp;quot;}, method = RequestMethod.GET) public String say(){     re">
+<meta name="twitter:image" content="http://www.echodemo.cc/images/2018/11/9.png">
 
 
 
@@ -147,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="http://www.echodemo.cc/2018/11/05/SpringBoot的Controller的使用/"/>
+  <link rel="canonical" href="http://www.echodemo.cc/2018/11/05/SpringBoot中Controller的使用/"/>
 
 
 
 
 
-  <title> SpringBoot的Controller的使用 | EchoDemo's Blogs </title>
+  <title> SpringBoot中Controller的使用 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -329,7 +337,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/11/05/SpringBoot的Controller的使用/">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2018/11/05/SpringBoot中Controller的使用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="EchoDemo">
@@ -353,7 +361,7 @@
             
             
               
-                SpringBoot的Controller的使用
+                SpringBoot中Controller的使用
               
             
           </h2>
@@ -410,8 +418,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/05/SpringBoot的Controller的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/11/05/SpringBoot的Controller的使用/" itemprop="commentsCount"></span>
+                <a href="/2018/11/05/SpringBoot中Controller的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/11/05/SpringBoot中Controller的使用/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->  
@@ -435,7 +443,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  0
+                  156
                 </span>
               
 
@@ -473,7 +481,30 @@
       
 
       
-        
+        <p>1、Controller方法和类的注解</p>
+<p><img src="/images/2018/11/9.png" alt="&quot;1&quot;"></p>
+<p>其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问：</p>
+<pre><code>@RequestMapping(value = {&quot;hello&quot;, &quot;hi&quot;}, method = RequestMethod.GET)
+public String say(){
+    return &quot;Hello SpringBoot!&quot;;
+}
+</code></pre><p><img src="/images/2018/11/10.png" alt="&quot;2&quot;"><br><img src="/images/2018/11/11.png" alt="&quot;3&quot;"></p>
+<p>当然为了让代码更加得简洁，可以使用@GetMapping(value = “/hello”)和@PostMapping(value = “/hello”)来替代@RequestMapping(value = “/hello”, method = RequestMethod.GET)和@RequestMapping(value = “/hello”, method = RequestMethod.POST)的。</p>
+<p>2、Controller当中的参数传递</p>
+<p><img src="/images/2018/11/12.png" alt="&quot;4&quot;"></p>
+<p>（1）@PathVariable</p>
+<pre><code>@RequestMapping(value = &quot;/hello/{id}&quot;,method = RequestMethod.GET)
+public String say(@PathVariable(&quot;id&quot;) Integer id){
+    return &quot;id: &quot; + id;
+}
+</code></pre><p><img src="/images/2018/11/13.png" alt="&quot;5&quot;"></p>
+<p>（2）@RequestParam(可以设置默认值)</p>
+<pre><code>@RequestMapping(value = &quot;/hello&quot;,method = RequestMethod.GET)
+public String say(@RequestParam(value = &quot;id&quot;, required = false, defaultValue = &quot;0&quot;) Integer id){
+    return &quot;id: &quot; + id;
+}
+</code></pre><p><img src="/images/2018/11/14.png" alt="&quot;6&quot;"><br><img src="/images/2018/11/15.png" alt="&quot;7&quot;"></p>
+
       
     </div>
 
@@ -740,7 +771,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共121.3k字</span>
+  <span class="post-count">博客全站共121.4k字</span>
 </div>
 
 

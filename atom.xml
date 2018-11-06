@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-05T15:11:22.670Z</updated>
+  <updated>2018-11-06T12:58:39.483Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,13 +17,22 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>SpringBoot的Controller的使用</title>
-    <link href="http://www.echodemo.cc/2018/11/05/SpringBoot%E7%9A%84Controller%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://www.echodemo.cc/2018/11/05/SpringBoot的Controller的使用/</id>
+    <title>SpringBoot中Controller的使用</title>
+    <link href="http://www.echodemo.cc/2018/11/05/SpringBoot%E4%B8%ADController%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://www.echodemo.cc/2018/11/05/SpringBoot中Controller的使用/</id>
     <published>2018-11-05T13:02:28.000Z</published>
-    <updated>2018-11-05T15:11:22.670Z</updated>
+    <updated>2018-11-06T12:58:39.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、Controller方法和类的注解</p><p><img src="/images/2018/11/9.png" alt="&quot;1&quot;"></p><p>其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让不同的链接参数来进行访问：</p><pre><code>@RequestMapping(value = {&quot;hello&quot;, &quot;hi&quot;}, method = RequestMethod.GET)public String say(){    return &quot;Hello SpringBoot!&quot;;}</code></pre><p><img src="/images/2018/11/10.png" alt="&quot;2&quot;"><br><img src="/images/2018/11/11.png" alt="&quot;3&quot;"></p><p>当然为了让代码更加得简洁，可以使用@GetMapping(value = “/hello”)和@PostMapping(value = “/hello”)来替代@RequestMapping(value = “/hello”, method = RequestMethod.GET)和@RequestMapping(value = “/hello”, method = RequestMethod.POST)的。</p><p>2、Controller当中的参数传递</p><p><img src="/images/2018/11/12.png" alt="&quot;4&quot;"></p><p>（1）@PathVariable</p><pre><code>@RequestMapping(value = &quot;/hello/{id}&quot;,method = RequestMethod.GET)public String say(@PathVariable(&quot;id&quot;) Integer id){    return &quot;id: &quot; + id;}</code></pre><p><img src="/images/2018/11/13.png" alt="&quot;5&quot;"></p><p>（2）@RequestParam(可以设置默认值)</p><pre><code>@RequestMapping(value = &quot;/hello&quot;,method = RequestMethod.GET)public String say(@RequestParam(value = &quot;id&quot;, required = false, defaultValue = &quot;0&quot;) Integer id){    return &quot;id: &quot; + id;}</code></pre><p><img src="/images/2018/11/14.png" alt="&quot;6&quot;"><br><img src="/images/2018/11/15.png" alt="&quot;7&quot;"></p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、Controller方法和类的注解&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018/11/9.png&quot; alt=&quot;&amp;quot;1&amp;quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;其中@RequestMapping可以给整个Controller类设置注解。还可以通过如下的设置让
+      
     
     </summary>
     
