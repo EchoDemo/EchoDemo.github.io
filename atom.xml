@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-06T12:58:39.483Z</updated>
+  <updated>2018-11-14T04:53:54.629Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot整合JdbcTemplate</title>
+    <link href="http://www.echodemo.cc/2018/11/14/SpringBoot%E6%95%B4%E5%90%88JdbcTemplate/"/>
+    <id>http://www.echodemo.cc/2018/11/14/SpringBoot整合JdbcTemplate/</id>
+    <published>2018-11-14T04:24:48.000Z</published>
+    <updated>2018-11-14T04:53:54.629Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/saytime/article/details/74783294" target="_blank" rel="noopener">CSDN学习链接</a></p><p>下面是这篇博客当中一些需要注意的问题：</p><pre><code>1、在yml文件当中，注意空格问题。2、在UserDaoImpl.java文件当中，类需要加上@Repository注解。3、在UserServiceimpl.java文件当中，类需要加上@Service注解。4、在UserController.java文件当中，类需要加上@RestController注解。5、JsonResult实体类需要生成get和set方法。*另外，自己的项目里面的controller路径有所改变。</code></pre><p><a href="https://github.com/EchoDemo/SpringBoot/tree/master/JdbcTemplate-src" target="_blank" rel="noopener">自己敲的GitHub代码链接</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/saytime/article/details/74783294&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CSDN学习链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下面是这篇博客当中一些需要注意的问题：&lt;/
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot中Controller的使用</title>
@@ -491,31 +517,6 @@
       
       
         &lt;h3 id=&quot;1、ObjectInputStream和ObjectOutputStream&quot;&gt;&lt;a href=&quot;#1、ObjectInputStream和ObjectOutputStream&quot; class=&quot;headerlink&quot; title=&quot;1、ObjectInputStr
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的字符流</title>
-    <link href="http://www.echodemo.cc/2018/08/04/Java%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E6%B5%81/"/>
-    <id>http://www.echodemo.cc/2018/08/04/Java中的字符流/</id>
-    <published>2018-08-04T06:03:29.000Z</published>
-    <updated>2018-08-04T06:32:10.880Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、Reader和Writer抽象类"><a href="#1、Reader和Writer抽象类" class="headerlink" title="1、Reader和Writer抽象类"></a>1、Reader和Writer抽象类</h3><p>字节流提供处理任何类型输入输出操作的足够功能，但不能直接操作Unicode字符，因而需要字符流。字符流层次结构的顶层是Reader和Writer抽象类，它们的顶层仍然是字节流。Reader是定义Java的流式字符输入模式的抽象类。Reader抽象类中的方法和InputStream类似。Writer是定义Java的流式字符输出模式的抽象类。该类的方法都返回void值并在出错条件下抛IOException异常。Writer抽象类中的方法和OutputStream类似。</p><h3 id="2、FileReader和FileWriter"><a href="#2、FileReader和FileWriter" class="headerlink" title="2、FileReader和FileWriter"></a>2、FileReader和FileWriter</h3><p>FileReader类表示可以读取文件内容的Reader类，构造方法有：</p><pre><code>FileReader(String filePath)FileReader(File fileObj)</code></pre><p>FileWriter表示可以写文件的Writer类，构造方法有：</p><pre><code>FileWriter(String filePath)FileWriter(String filePath,boolean append)FileWriter(File fileObj)</code></pre><h3 id="3、FileReader和FileWriter举例"><a href="#3、FileReader和FileWriter举例" class="headerlink" title="3、FileReader和FileWriter举例"></a>3、FileReader和FileWriter举例</h3><pre><code>package com.iotek.readerwriter;import java.io.FileReader;import java.io.FileWriter;import java.io.IOException;public class FileReaderWriterDemo {    public static void main(String[] args) throws IOException {        FileReader fr = new FileReader(&quot;f:\\hehe\\hehe.txt&quot;);        char[] buffer = new char[100];        FileWriter fWriter = new FileWriter(&quot;f:\\test\\hh.txt&quot;);        int len = 0;//实际读到的字符个数        while((len = fr.read(buffer))!=-1){            fWriter.write(buffer,0,len);        }        fr.close();        fWriter.close();    }}</code></pre><h3 id="4、BufferedReader和BufferedWriter"><a href="#4、BufferedReader和BufferedWriter" class="headerlink" title="4、BufferedReader和BufferedWriter"></a>4、BufferedReader和BufferedWriter</h3><p>BufferedReader通过缓冲区提高输入性能。BufferedWriter则通过缓冲区提高输出性能。类似于BufferedInputStream和BufferedOutputStream。分别都具有两个构造方法：</p><pre><code>BufferedReader(Reader inputStream)BufferedReader(Reader inputStream,int bufSize)BufferedWriter(Writer ouputStream)BufferedWriter(Writer outputStream,int bufSize)</code></pre><h3 id="5、BufferedReader和BufferedWriter举例"><a href="#5、BufferedReader和BufferedWriter举例" class="headerlink" title="5、BufferedReader和BufferedWriter举例"></a>5、BufferedReader和BufferedWriter举例</h3><pre><code>package com.iotek.readerwriter;import java.io.BufferedReader;import java.io.BufferedWriter;import java.io.FileReader;import java.io.FileWriter;import java.io.IOException;public class BufferedReaderWriterDemo {    public static void main(String[] args) throws IOException {        FileReader fr = new FileReader(&quot;f:\\hehe\\hehe.txt&quot;);        FileWriter fw = new FileWriter(&quot;f:\\test\\hh.txt&quot;);        BufferedReader bReader = new BufferedReader(fr);        BufferedWriter bWriter = new BufferedWriter(fw);        String line = null;        while((line=bReader.readLine())!=null){            System.out.println(line);            bWriter.write(line);//写入一行            bWriter.newLine();//换行            //bWriter.flush();//不使用close()方法时需要使用此方法        }        bReader.close();        bWriter.close();    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、Reader和Writer抽象类&quot;&gt;&lt;a href=&quot;#1、Reader和Writer抽象类&quot; class=&quot;headerlink&quot; title=&quot;1、Reader和Writer抽象类&quot;&gt;&lt;/a&gt;1、Reader和Writer抽象类&lt;/h3&gt;&lt;p&gt;字节流提供处
       
     
     </summary>
