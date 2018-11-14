@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[洪水猛兽]]></title>
+    <url>%2F2018%2F11%2F14%2F%E6%B4%AA%E6%B0%B4%E7%8C%9B%E5%85%BD%2F</url>
+    <content type="text"><![CDATA[我已经老了 在那汹涌的时光之河中逆流而上的 是我焦急的等待和对幸福的憧憬 那些孤独、失眠并痛苦着的夜晚 我是多么渴望 有一天能够在某个幽静的花园里 在黄色的落叶铺满整个季节的时候 坐在一棵干枯杏树下的长凳上 再为你读一首浪漫动情的诗篇 因为只有这样 才能缓解我无法避免地从思念的村庄路过时的情绪 而你并不知道我始终身陷囹圄、画地为牢 在无穷无尽的深渊里甘为囚徒、难以自拔 染上了名为爱情的霍乱 此诗因读《霍乱时期的爱情》有感而写]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>诗词</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SpringBoot整合JdbcTemplate]]></title>
     <url>%2F2018%2F11%2F14%2FSpringBoot%E6%95%B4%E5%90%88JdbcTemplate%2F</url>
     <content type="text"><![CDATA[CSDN学习链接 下面是这篇博客当中一些需要注意的问题： 1、在yml文件当中，注意空格问题。 2、在UserDaoImpl.java文件当中，类需要加上@Repository注解。 3、在UserServiceimpl.java文件当中，类需要加上@Service注解。 4、在UserController.java文件当中，类需要加上@RestController注解。 5、JsonResult实体类需要生成get和set方法。 *另外，自己的项目里面的controller路径有所改变。 自己敲的GitHub代码链接]]></content>

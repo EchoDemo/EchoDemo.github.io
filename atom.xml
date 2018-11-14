@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-14T04:53:54.629Z</updated>
+  <updated>2018-11-14T05:03:20.170Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>洪水猛兽</title>
+    <link href="http://www.echodemo.cc/2018/11/14/%E6%B4%AA%E6%B0%B4%E7%8C%9B%E5%85%BD/"/>
+    <id>http://www.echodemo.cc/2018/11/14/洪水猛兽/</id>
+    <published>2018-11-14T04:59:52.000Z</published>
+    <updated>2018-11-14T05:03:20.170Z</updated>
+    
+    <content type="html"><![CDATA[<p>我已经老了</p><p>在那汹涌的时光之河中逆流而上的</p><p>是我焦急的等待和对幸福的憧憬</p><p>那些孤独、失眠并痛苦着的夜晚</p><p>我是多么渴望</p><p>有一天能够在某个幽静的花园里</p><p>在黄色的落叶铺满整个季节的时候</p><p>坐在一棵干枯杏树下的长凳上</p><p>再为你读一首浪漫动情的诗篇</p><p>因为只有这样</p><p>才能缓解我无法避免地从思念的村庄路过时的情绪</p><p>而你并不知道我始终身陷囹圄、画地为牢</p><p>在无穷无尽的深渊里甘为囚徒、难以自拔</p><p>染上了名为爱情的霍乱</p><p>此诗因读《霍乱时期的爱情》有感而写</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我已经老了&lt;/p&gt;
+&lt;p&gt;在那汹涌的时光之河中逆流而上的&lt;/p&gt;
+&lt;p&gt;是我焦急的等待和对幸福的憧憬&lt;/p&gt;
+&lt;p&gt;那些孤独、失眠并痛苦着的夜晚&lt;/p&gt;
+&lt;p&gt;我是多么渴望&lt;/p&gt;
+&lt;p&gt;有一天能够在某个幽静的花园里&lt;/p&gt;
+&lt;p&gt;在黄色的落叶铺满整个季节的时候&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot整合JdbcTemplate</title>
@@ -492,31 +526,6 @@
       
         &lt;p&gt;1、RandomAccessFile(随机访问文件)支持对随机访问文件的读取和写入。随机访问文件的行为类似存储在文件系统中的一个大型byte数组。存在指向该隐含数组的光标或索引，称为文件指针。&lt;/p&gt;
 &lt;p&gt;2、输入操作从文件指针开始读取字节，随着对字节的读取而前移此文件指
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中其他的IO流</title>
-    <link href="http://www.echodemo.cc/2018/08/04/Java%E4%B8%AD%E5%85%B6%E4%BB%96%E7%9A%84IO%E6%B5%81/"/>
-    <id>http://www.echodemo.cc/2018/08/04/Java中其他的IO流/</id>
-    <published>2018-08-04T07:45:54.000Z</published>
-    <updated>2018-08-04T07:46:30.419Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、ObjectInputStream和ObjectOutputStream"><a href="#1、ObjectInputStream和ObjectOutputStream" class="headerlink" title="1、ObjectInputStream和ObjectOutputStream"></a>1、ObjectInputStream和ObjectOutputStream</h3><p>ObjectInputStream和ObjectOutputStream分别与FileInputStream和FileOutputStream一起使用时，可以为应用程序提供对对象的持久存储。我们把对象以某种特定的编码格式写入称之为“序列化”。把写入的编码格式内容还原成对象称之为“反序列化”。被序列化的对象必须实现Serializable接口。</p><pre><code>package com.iotek.otherio;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.IOException;import java.io.ObjectInputStream;import java.io.ObjectOutputStream;import java.io.Serializable;public class ObjectInputOutputDemo {    public static void main(String[] args) throws IOException {        /*Student student = new Student(&quot;zhangsan&quot;, 30);        FileOutputStream fos = new FileOutputStream(&quot;f:\\test\\1.txt&quot;);        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fos);        objectOutputStream.writeObject(student);//把对象序列化到指定的文件输出流中        objectOutputStream.close();//释放资源*/            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(&quot;f:\\test\\1.txt&quot;));        try {            Student student = (Student)objectInputStream.readObject();            System.out.println(student);        } catch (ClassNotFoundException e) {            e.printStackTrace();        }    }}class Student implements Serializable{//需要实现Serializable接口    private static final long serialVersionUID = 1L;    private String name;    private int age;    public Student(String name, int age) {        super();        this.name = name;        this.age = age;    }    public String getName() {        return name;    }    public void setName(String name) {        this.name = name;    }    public int getAge() {        return age;    }    public void setAge(int age) {        this.age = age;    }    @Override    public String toString() {        return &quot;Student [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;    }}</code></pre><h3 id="2、InputStreamReader和OutputStreamWriter"><a href="#2、InputStreamReader和OutputStreamWriter" class="headerlink" title="2、InputStreamReader和OutputStreamWriter"></a>2、InputStreamReader和OutputStreamWriter</h3><p>转换流是指将字节流与字符流之间进行转换。转换流的出现方便了对文件的读写，它在字符流与字节流之间架起了一座桥梁，使原本毫无关联的两种操作能够进行转化，提高了程序的灵活性。字节流中的数据都是字符时，转化成字符流操作更高效。如果使用非默认编码保存文件或者读取文件时，需要用到转换流，因为字节流的重载构造方法中有指定编码格式的参数，而FileReader与FileWriter是默认编码的文本文件。</p><pre><code>package com.iotek.otherio;import java.io.BufferedReader;import java.io.BufferedWriter;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.FileReader;import java.io.IOException;import java.io.InputStreamReader;import java.io.OutputStreamWriter;public class InputStreamWriterReaderDemo {    public static void main(String[] args) throws IOException {        /*OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(&quot;f:\\test\\2.txt&quot;), &quot;utf-8&quot;);        BufferedWriter bw = new BufferedWriter(osw);        bw.write(&quot;您好&quot;);        bw.close();*/        /*BufferedReader br = new BufferedReader(new FileReader(&quot;f:\\test\\2.txt&quot;));        String line = null;        while((line = br.readLine())!=null){            System.out.println(line);        }        br.close();*/        BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(&quot;f:\\test\\2.txt&quot;),&quot;utf-8&quot;));        String line = null;        while((line = bReader.readLine())!=null){            System.out.println(line);        }        bReader.close();    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、ObjectInputStream和ObjectOutputStream&quot;&gt;&lt;a href=&quot;#1、ObjectInputStream和ObjectOutputStream&quot; class=&quot;headerlink&quot; title=&quot;1、ObjectInputStr
       
     
     </summary>
