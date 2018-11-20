@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SpringBoot整合MyBatis]]></title>
+    <url>%2F2018%2F11%2F20%2FSpringBoot%E6%95%B4%E5%90%88MyBatis%2F</url>
+    <content type="text"><![CDATA[CSDN学习链接 1、无配置文件注解版 (1)@MapperScan(“com.echodemo.girl.mapper”)这里是包名。 (2)注意到以下两个SQL语句，insert当中没有user.username是因为当它只有一个对象作为参数传递时本身进行了处理，而update当中，有两个参数传递进来，此时需要@Param的协助，并且需要以user.username的形式把值传给SQL语句当中。而单个的id则直接传递。 @Insert(&quot;INSERT INTO tb_user(username, age, ctm) VALUES(#{username}, #{age}, now())&quot;) int add(User user); @Update(&quot;UPDATE tb_user SET username = #{user.username}, age = #{user.age} WHERE id = #{id}&quot;) int update(@Param(&quot;id&quot;) Integer id, @Param(&quot;user&quot;) User user); 自己敲的GitHub代码链接 2、配置文件注解版 (1)在userMapper.xml文件当中，resultMap部分，里面的jdbcType类型都需要大写，当时INTEGER只有首字母大写了，然后找bug找了好久。 (2)在UserMapper当中要加上@Repository注解，不然在UserServiceImpl.java文件中会提示bean不存在。 自己敲的GitHub代码链接]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[《了不起的盖茨比》]]></title>
     <url>%2F2018%2F11%2F17%2F%E3%80%8A%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84%E7%9B%96%E8%8C%A8%E6%AF%94%E3%80%8B%2F</url>
     <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“我其实觉得，盖茨比本人并不相信会有电话来，他也已经不在乎了。如果真是如此，他一定是觉得已经失去了往日那个温暖的世界，为一个梦想空守了太久，付出了太高的代价；他一定是透过可怕的树叶仰望到一片陌生的天空；他一定感到毛骨悚然，当他发现玫瑰是多么丑恶，而阳光照在刚刚露头的小草上又是多么残忍。这是一个新世界，物质的世界，没有真实可言，可怜的鬼魂呼吸着空气一般的梦想，四处飘荡……就像那个灰蒙蒙的怪人穿过杂乱的树林悄悄向他走来一样。”可以这样说：盖茨比梦想、希望和肉体的覆灭是黛西和汤姆两个人共同的杰作，当然也因为他的纯真和勇敢。但归根究底他是被残酷的社会现实活生生地扼杀的，过去是这样，现在在依然是这样。]]></content>

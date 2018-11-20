@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-17T14:57:37.478Z</updated>
+  <updated>2018-11-20T14:11:18.179Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot整合MyBatis</title>
+    <link href="http://www.echodemo.cc/2018/11/20/SpringBoot%E6%95%B4%E5%90%88MyBatis/"/>
+    <id>http://www.echodemo.cc/2018/11/20/SpringBoot整合MyBatis/</id>
+    <published>2018-11-20T13:51:36.000Z</published>
+    <updated>2018-11-20T14:11:18.179Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/saytime/article/details/74783296" target="_blank" rel="noopener">CSDN学习链接</a></p><p>1、无配置文件注解版</p><p>(1)@MapperScan(“com.echodemo.girl.mapper”)这里是包名。</p><p>(2)注意到以下两个SQL语句，insert当中没有user.username是因为当它只有一个对象作为参数传递时本身进行了处理，而update当中，有两个参数传递进来，此时需要@Param的协助，并且需要以user.username的形式把值传给SQL语句当中。而单个的id则直接传递。</p><pre><code>@Insert(&quot;INSERT INTO tb_user(username, age, ctm) VALUES(#{username}, #{age}, now())&quot;)int add(User user);@Update(&quot;UPDATE tb_user SET username = #{user.username}, age = #{user.age} WHERE id = #{id}&quot;)int update(@Param(&quot;id&quot;) Integer id, @Param(&quot;user&quot;) User user);</code></pre><p><a href="https://github.com/EchoDemo/SpringBoot/tree/master/MybatisAnnotation-src" target="_blank" rel="noopener">自己敲的GitHub代码链接</a></p><p>2、配置文件注解版</p><p>(1)在userMapper.xml文件当中，resultMap部分，里面的jdbcType类型都需要大写，当时INTEGER只有首字母大写了，然后找bug找了好久。</p><p>(2)在UserMapper当中要加上@Repository注解，不然在UserServiceImpl.java文件中会提示bean不存在。</p><p><a href="https://github.com/EchoDemo/SpringBoot/tree/master/MybatisConfigAnnotation-src" target="_blank" rel="noopener">自己敲的GitHub代码链接</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/saytime/article/details/74783296&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CSDN学习链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1、无配置文件注解版&lt;/p&gt;
+&lt;p&gt;(1)
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>《了不起的盖茨比》</title>
@@ -499,32 +526,6 @@
       
       
         &lt;h3 id=&quot;1、Socket概述&quot;&gt;&lt;a href=&quot;#1、Socket概述&quot; class=&quot;headerlink&quot; title=&quot;1、Socket概述&quot;&gt;&lt;/a&gt;1、Socket概述&lt;/h3&gt;&lt;p&gt;(1)所谓socket通常也称作“套接字”，用于描述IP地址和端口，是一个通
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中网络编程基础知识和通讯要素</title>
-    <link href="http://www.echodemo.cc/2018/08/05/Java%E4%B8%AD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E9%80%9A%E8%AE%AF%E8%A6%81%E7%B4%A0/"/>
-    <id>http://www.echodemo.cc/2018/08/05/Java中网络编程基础知识和通讯要素/</id>
-    <published>2018-08-05T02:25:36.000Z</published>
-    <updated>2018-08-05T03:41:58.933Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、网络基础知识"><a href="#1、网络基础知识" class="headerlink" title="1、网络基础知识"></a>1、网络基础知识</h3><p>(1)计算机网络</p><p>计算机网络，就是把分布在不同地理区域的计算机与专门的外部设备用通信线路互联成一个规模大、功能性强的网络系统，从而使众多的计算机可以方便地互相传递信息，共享硬件、软件、数据信息等资源。</p><p>(2)网络体系结构</p><p>网络体系结构定义计算机设备和其他设备如何连接在一起以形成一个允许用户共享信息和资源的通信系统。国际标准化组织ISO于1978年提出“开放系统互连参考模型”，即著名的OSI(Open System Interconnection)模型。OSI模型保证了各类设备生产厂家的产品兼容性。该模型把计算机网络分成物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。</p><p>(3)TCP/IP协议</p><p>TCP/IP协议是一组用于实现网络互连的通信协议。Internet网络体系结构以TCP/IP为核心。基于TCP/IP的参考模型将协议分成四个层次，它们分别是：网络接口层、网络层、传输层和应用层。</p><h3 id="2、网络通信要素"><a href="#2、网络通信要素" class="headerlink" title="2、网络通信要素"></a>2、网络通信要素</h3><p>(1)网络编程的目的</p><p>网络编程的目的就是指直接或者间接地通过网络协议与其他计算机进行通讯。网络编程中有两个主要问题，一个是如何准确的定位网络上一台或者多台主机，另一个就是找到主机后如何可靠高效的进行数据传输。</p><p>(2)IP地址</p><p>网络中每台主机都必须有一个唯一的IP地址，因特网上的IP地址具有全球唯一性。对应的类-InetAddress。</p><p>(3)端口号</p><p>端口号用来表示该计算机上的应用程序，代表此应用程序逻辑地址。端口号使用一个16位的数字来表示，它的范围是0~65535,1024以下的端口号保留给预定义的服务。例如：http使用80端口。</p><p>(4)协议</p><p>为计算机网络中进行数据交互而建立的规则、标准或约定的集合。</p><pre><code>TCP是一种面向连接的保证可靠传输的协议。UDP是一种无连接的且不可靠的传输协议。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、网络基础知识&quot;&gt;&lt;a href=&quot;#1、网络基础知识&quot; class=&quot;headerlink&quot; title=&quot;1、网络基础知识&quot;&gt;&lt;/a&gt;1、网络基础知识&lt;/h3&gt;&lt;p&gt;(1)计算机网络&lt;/p&gt;
-&lt;p&gt;计算机网络，就是把分布在不同地理区域的计算机与专门的外部设备
       
     
     </summary>
