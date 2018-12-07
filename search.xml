@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SpringBoot开发中遇到的几个问题]]></title>
+    <url>%2F2018%2F11%2F30%2FSpringBoot%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[1、java.net.MalformedURLException: no protocol 异常 在通过 IP 地址及端口号调用远程方法，进行测试的时候，报出如上的异常。原因是没有指定 http 协议，在 URL 前面加上http://即可解决此异常。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SpringBoot中的FastJson]]></title>
+    <url>%2F2018%2F11%2F29%2FSpringBoot%E4%B8%AD%E7%9A%84FastJson%2F</url>
+    <content type="text"><![CDATA[1、依赖&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;fastjson&lt;/artifactId&gt; &lt;version&gt;1.2.37&lt;/version&gt; &lt;/dependency&gt; 2、导入包和主要的方法1、导入包 import com.alibaba.fastjson.JSON; 2、将JSONObject转化为String String jsonStr = JSONObject.toJsonString(jsonObject); 3、将String转化为JSONObject JSONObject jsonObject = JSONObject.parseObject(jsonStr); 4、将String转化为JSONArray JSONArray jsonArray = JSONArray.parseArray(jsonStr); 5、将JSONArray转化为JSONObject JSONObject jsonObject = new JOSNObject(); for (int i; i &lt; jsonArray.length(); i++) { jsonObject = jsonArray.getJSONObject[i]; } 6、将JSONObject转化为JOSNArray JSONArray jsonObject = JSONObject.get(&quot;key&quot;); 7、将List转JSONArray JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(list))； 8、将JSONArray转化为List List&lt;EventColAttr&gt; list = JSONObject.parseArray(jsonArray.toJSONString(), EventColAttr.class);]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SpringBoot整合Log4j]]></title>
     <url>%2F2018%2F11%2F20%2FSpringBoot%E6%95%B4%E5%90%88Log4j%2F</url>
     <content type="text"><![CDATA[1、依赖&lt;!-- spring boot start --&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt; &lt;exclusions&gt; &lt;!-- 排除自带的logback依赖 --&gt; &lt;exclusion&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt; &lt;/exclusion&gt; &lt;/exclusions&gt; &lt;/dependency&gt; &lt;!-- springboot-log4j --&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-log4j&lt;/artifactId&gt; &lt;version&gt;1.3.8.RELEASE&lt;/version&gt; &lt;/dependency&gt; 2、Log4j配置文件(建立在和application文件同级的目录下)# Log4j配置 log4j.rootCategory=INFO,stdout #控制台输出 log4j.appender.stdout=org.apache.log4j.ConsoleAppender log4j.appender.stdout.layout=org.apache.log4j.PatternLayout log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd-HH-mm} [%t] [%c] [%p] - %m%n 注：该文件里的stdout全部替换成CONSOLE也是没有问题的。当然你也可以在文件中配置file,error,debug等其他的日志信息。 3、使用Log4jimport org.slf4j.Logger; import org.slf4j.LoggerFactory; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController; /** * @author EchoDemo * @ClassName cn.aduu.web.HelloController * @Description */ @RestController public class HelloController{ private static final Logger logger = LoggerFactory.getLogger(HelloController.class); @RequestMapping(&quot;hello&quot;) public String hello() throws JsonProcessingException { logger.info(&quot;Hello World！&quot;); return &quot;hello world&quot;; } } 注：启动之后在浏览器访问就好了。 4、日志打印效果十一月 20, 2018 10:42:10 下午 org.apache.catalina.core.ApplicationContext log 2018-11-20-22-42 [http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] [INFO] - FrameworkServlet &apos;dispatcherServlet&apos;: initialization started 信息: Initializing Spring FrameworkServlet &apos;dispatcherServlet&apos; 2018-11-20-22-42 [http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] [INFO] - FrameworkServlet &apos;dispatcherServlet&apos;: initialization completed in 23 ms 2018-11-20-22-42 [http-nio-8080-exec-1] [com.echodemo.girl.web.UserController] [INFO] - Hello World!]]></content>

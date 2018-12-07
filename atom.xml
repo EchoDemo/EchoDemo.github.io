@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2018-11-20T14:54:15.370Z</updated>
+  <updated>2018-11-30T06:51:48.235Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot开发中遇到的几个问题</title>
+    <link href="http://www.echodemo.cc/2018/11/30/SpringBoot%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.echodemo.cc/2018/11/30/SpringBoot开发中遇到的几个问题/</id>
+    <published>2018-11-30T04:42:21.000Z</published>
+    <updated>2018-11-30T06:51:48.235Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、java.net.MalformedURLException: no protocol 异常</p><p>在通过 IP 地址及端口号调用远程方法，进行测试的时候，报出如上的异常。原因是没有指定 http 协议，在 URL 前面加上http://即可解决此异常。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、java.net.MalformedURLException: no protocol 异常&lt;/p&gt;
+&lt;p&gt;在通过 IP 地址及端口号调用远程方法，进行测试的时候，报出如上的异常。原因是没有指定 http 协议，在 URL 前面加上http://即可解决此异常。&lt;/p&gt;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot中的FastJson</title>
+    <link href="http://www.echodemo.cc/2018/11/29/SpringBoot%E4%B8%AD%E7%9A%84FastJson/"/>
+    <id>http://www.echodemo.cc/2018/11/29/SpringBoot中的FastJson/</id>
+    <published>2018-11-29T12:59:47.000Z</published>
+    <updated>2018-11-29T13:54:29.299Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、依赖"><a href="#1、依赖" class="headerlink" title="1、依赖"></a>1、依赖</h3><pre><code>&lt;dependency&gt;  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;  &lt;artifactId&gt;fastjson&lt;/artifactId&gt;  &lt;version&gt;1.2.37&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="2、导入包和主要的方法"><a href="#2、导入包和主要的方法" class="headerlink" title="2、导入包和主要的方法"></a>2、导入包和主要的方法</h3><p>1、导入包</p><pre><code>import com.alibaba.fastjson.JSON;</code></pre><p>2、将JSONObject转化为String</p><pre><code>String jsonStr = JSONObject.toJsonString(jsonObject);</code></pre><p>3、将String转化为JSONObject</p><pre><code>JSONObject jsonObject = JSONObject.parseObject(jsonStr);</code></pre><p>4、将String转化为JSONArray</p><pre><code>JSONArray jsonArray = JSONArray.parseArray(jsonStr);</code></pre><p>5、将JSONArray转化为JSONObject</p><pre><code>JSONObject jsonObject = new JOSNObject();for (int i; i &lt; jsonArray.length(); i++) {    jsonObject = jsonArray.getJSONObject[i];}</code></pre><p>6、将JSONObject转化为JOSNArray</p><pre><code>JSONArray jsonObject = JSONObject.get(&quot;key&quot;);</code></pre><p>7、将List转JSONArray</p><pre><code>JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(list))；</code></pre><p>8、将JSONArray转化为List</p><pre><code>List&lt;EventColAttr&gt; list = JSONObject.parseArray(jsonArray.toJSONString(), EventColAttr.class);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、依赖&quot;&gt;&lt;a href=&quot;#1、依赖&quot; class=&quot;headerlink&quot; title=&quot;1、依赖&quot;&gt;&lt;/a&gt;1、依赖&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/gr
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot整合Log4j</title>
@@ -478,56 +530,6 @@
       
       
         &lt;h3 id=&quot;1、Annotation简介&quot;&gt;&lt;a href=&quot;#1、Annotation简介&quot; class=&quot;headerlink&quot; title=&quot;1、Annotation简介&quot;&gt;&lt;/a&gt;1、Annotation简介&lt;/h3&gt;&lt;p&gt;(1)Annotation是Java5开始引
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中URL类的使用</title>
-    <link href="http://www.echodemo.cc/2018/08/05/Java%E4%B8%ADURL%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://www.echodemo.cc/2018/08/05/Java中URL类的使用/</id>
-    <published>2018-08-05T08:43:08.000Z</published>
-    <updated>2018-08-05T08:48:25.168Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、URL概念"><a href="#1、URL概念" class="headerlink" title="1、URL概念"></a>1、URL概念</h3><p>URL(Uniform Resource Locator)统一资源定位符，它表示Internet上某一资源的地址。通过URL我们可以访问Internet上的各种网络资源，浏览器通过解析给定的URL可以在网络上查找相应的文件或其他资源。它由五个部分组成：</p><pre><code>&lt;传输协议&gt;://&lt;主机名&gt;:&lt;端口号&gt;/&lt;文件名&gt;#&lt;引用&gt;</code></pre><h3 id="2、URL编程"><a href="#2、URL编程" class="headerlink" title="2、URL编程"></a>2、URL编程</h3><p>(1)为了表示URL，java.net包中实现了类URL。我们可以通过下面的构造方法来初始化一个URL对象：</p><pre><code>URL(String url);//URL代表了一个绝对地址，URL对象直接指向这个资源。URL(URL baseURL,String relativeURL);//其中baseURL代表绝对地址，realtiveURL代表相对地址。URL(String protocol,String host,String file);//protocol代表通信协议，host代表主机名，file代表文件名。URL(String protocol,String host,int port,String file);</code></pre><p>(2)获取URL对象的属性：</p><pre><code>getFile();//获得URL指定资源的完整文件名。getHost();//返回主机名。getPath();//返回指定资源的文件目录和文件名。getPort();//返回端口号。getProtocol();//返回表示URL中协议的字符串对象。getRef();//返回URL的HTML文档标记，即#号标记。getUserInfo();//返回用户信息。</code></pre><p>(3)URL有两种方法可以用来访问Internet上的资源：</p><p>1)使用URL的openConnection()方法创建一个URLConnection类对象。再通过URLConnection对象获取相应的输入流和输出流。</p><p>2)利用URL类的openStream()方法。openStream()方法与指定的URL建立连接并返回InputStream类的对象。</p><h3 id="3、举例说明"><a href="#3、举例说明" class="headerlink" title="3、举例说明"></a>3、举例说明</h3><pre><code>package com.iotek.url;import java.io.File;import java.io.FileOutputStream;import java.io.IOException;import java.io.InputStream;import java.io.OutputStream;import java.net.URL;import java.net.URLConnection;public class URLDemo {    public static void main(String[] args) throws IOException {        DownloadUtil.download(&quot;https://www.baidu.com/img/bd_logo1.png?where=super&quot;, &quot;baidu.jpg&quot;, &quot;f:\\test&quot;);        System.out.println(&quot;下载结束！&quot;);    }}class DownloadUtil{    public static void download(String urlString,String fileName,String savePath) throws IOException{        URL url = new URL(urlString);        /*URLConnection conn = url.openConnection();        InputStream inputStream = conn.getInputStream();*/        InputStream inputStream = url.openStream();        byte[] buff = new byte[1024*1024];        int len = 0;        File file = new File(savePath);        if(!file.exists()){            file.mkdirs();        }        OutputStream outputStream = new FileOutputStream(file.getAbsolutePath()+&quot;\\&quot;+fileName);        while((len = inputStream.read(buff))!=-1){            outputStream.write(buff, 0, len);        }        inputStream.close();        outputStream.close();    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、URL概念&quot;&gt;&lt;a href=&quot;#1、URL概念&quot; class=&quot;headerlink&quot; title=&quot;1、URL概念&quot;&gt;&lt;/a&gt;1、URL概念&lt;/h3&gt;&lt;p&gt;URL(Uniform Resource Locator)统一资源定位符，它表示Internet上某
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中基于UDP协议的Socket编程</title>
-    <link href="http://www.echodemo.cc/2018/08/05/Java%E4%B8%AD%E5%9F%BA%E4%BA%8EUDP%E5%8D%8F%E8%AE%AE%E7%9A%84Socket%E7%BC%96%E7%A8%8B/"/>
-    <id>http://www.echodemo.cc/2018/08/05/Java中基于UDP协议的Socket编程/</id>
-    <published>2018-08-05T07:25:21.000Z</published>
-    <updated>2018-08-05T08:47:04.896Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、创建发送端"><a href="#1、创建发送端" class="headerlink" title="1、创建发送端"></a>1、创建发送端</h3><p>(1)建立DatagramSocket对象。该端点建立，系统会随机分配一个端口。如果不想随机配置，可以手动指定。</p><p>(2)将数据进行packet包的封装，必须要指定目的地地址和端口。</p><p>(3)通过socket服务的send()方法将该包发出。</p><p>(4)将socket关闭。</p><h3 id="2、创建接收端"><a href="#2、创建接收端" class="headerlink" title="2、创建接收端"></a>2、创建接收端</h3><p>(1)建立DatagramSocket对象。要监听一个端口。</p><p>(2)通过socket的receive方法将数据存入数据包中。</p><p>(3)通过数据包dp的方法getData()、getAddress()、getPort()等方法获取包中的指定信息。</p><p>(4)将socket关闭。</p><h3 id="3、举例说明"><a href="#3、举例说明" class="headerlink" title="3、举例说明"></a>3、举例说明</h3><p>(1)接收端：</p><pre><code>package com.iotek.tcpsocket;import java.io.IOException;import java.net.DatagramPacket;import java.net.DatagramSocket;public class UDPDemo2 {    public static void main(String[] args) throws IOException {        DatagramSocket socket = new DatagramSocket(8000);        byte[] buff = new byte[100];        DatagramPacket packet = new DatagramPacket(buff, 100);        socket.receive(packet);//接收传来的数据包        System.out.println(new String(buff,0,packet.getLength()));        String string = &quot;Me too!&quot;;        DatagramPacket packet2 = new DatagramPacket(string.getBytes(), string.length(),packet.getAddress(),packet.getPort());        socket.send(packet2);        socket.close();    }}</code></pre><p>(2)发送端：</p><pre><code>package com.iotek.tcpsocket;import java.io.IOException;import java.net.DatagramPacket;import java.net.DatagramSocket;import java.net.InetAddress;public class UDPDemo1 {    public static void main(String[] args) throws IOException {        DatagramSocket socket = new DatagramSocket();        String string = &quot;I Love You!&quot;;        //将数据进行封装，封装到数据包当中        DatagramPacket packet = new DatagramPacket(string.getBytes(), string.length(),InetAddress.getByName(&quot;localhost&quot;),8000);        socket.send(packet);//发送        byte[] buff = new byte[100];        DatagramPacket packet2 = new DatagramPacket(buff, 100);        socket.receive(packet2);        System.out.println(new String(buff,0,packet2.getLength()));        socket.close();    }}</code></pre><p>(3)为了更直观地理解服务器端和客户端的交互过程，我们将两个文件拷贝到f盘当中。使用下列命令进行编译和执行。</p><pre><code>//编译javac -d . UDP*.java//开启接收端java com.iotek.tcpsocket.UDPDemo2//开启发送端，这里另外开启一个窗口java com.iotek.tcpsocket.UDPDemo1</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、创建发送端&quot;&gt;&lt;a href=&quot;#1、创建发送端&quot; class=&quot;headerlink&quot; title=&quot;1、创建发送端&quot;&gt;&lt;/a&gt;1、创建发送端&lt;/h3&gt;&lt;p&gt;(1)建立DatagramSocket对象。该端点建立，系统会随机分配一个端口。如果不想随机配置，可
       
     
     </summary>
