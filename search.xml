@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Docker常用命令]]></title>
+    <url>%2F2019%2F01%2F20%2FDocker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[1、查看所有的容器 [root@jaja docker]# docker ps -a 2、查看正在运行的容器 [root@jaja docker]# docker ps 3、启动已终止的容器 [root@jaja docker]# docker start (container id) 4、终止已启动的容器 [root@jaja docker]# docker stop (container id) 5、重启容器 [root@jaja docker]# docker restart (container id) 6、进入容器交互式环境 [root@jaja docker]# docker exec -it (container id) /bin/bash 7、退出容器交互式环境 [root@jaja docker]# exit 或者使用快捷键 Ctrl + D 8、导出容器 [root@jaja docker]# docker export (container id) &gt; (filename).tar 9、导入容器 [root@jaja docker]# cat (filename).tar | docker import - (image name):(tag) 10、查看当前宿主机上的镜像列表 [root@jaja docker]# docker image ls 或者 docker images 11、删除处于终止状态的容器 (1)直接终止容器：[root@jaja docker]# docker rm (container id) (2)如果正在运行则要先终止：[root@jaja docker]# docker stop (container id) 12、删除所有处于终止状态的容器 [root@jaja docker]# docker container prune 13、打印容器的标准输出 [root@jaja docker]# docker logs]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[醒来]]></title>
+    <url>%2F2019%2F01%2F20%2F%E9%86%92%E6%9D%A5%2F</url>
+    <content type="text"><![CDATA[来呀，将我从一场忧伤的梦中惊醒 把我的沉睡赶走 这该死的虚无 昨夜的大雨 无尽的黑夜 喧嚣的逼仄]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>诗词</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode 买卖股票的最佳时机 II]]></title>
+    <url>%2F2019%2F01%2F19%2FLeetCode-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-II%2F</url>
+    <content type="text"><![CDATA[给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。 题目代码：]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>CPP</tag>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[装配Bean之通过XML装配Bean]]></title>
+    <url>%2F2019%2F01%2F12%2F%E8%A3%85%E9%85%8DBean%E4%B9%8B%E9%80%9A%E8%BF%87XML%E8%A3%85%E9%85%8DBean%2F</url>
+    <content type="text"><![CDATA[1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以元素为根。 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt; &lt;!-- ... --&gt; &lt;/beans&gt; 2、声明一个简单的bean要在基于XML的Spring配置中声明一个bean，我们要使用spring-beans模式中的另外一个元素：。元素类似于JavaConfig中的@Bean注解。我们可以按照如下的方式声明CompactDisc bean： &lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.SgtPeppers&quot; /&gt; 当Spring发现这个元素时，它将会调用SgtPeppers的默认构造器来创建bean。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[装配Bean之通过Java代码装配Bean]]></title>
     <url>%2F2019%2F01%2F12%2F%E8%A3%85%E9%85%8DBean%E4%B9%8B%E9%80%9A%E8%BF%87Java%E4%BB%A3%E7%A0%81%E8%A3%85%E9%85%8DBean%2F</url>
-    <content type="text"><![CDATA[尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java和XML。下面主要是学习如何使用Java来进行配置。在读这篇文章之前，建议先阅读我的上一篇文章装配Bean之自动化装配Bean 1、创建配置类@Configuration public class CDPlayerConfig{ ... } 创建 JavaConfig 的关键在于为其添加@Configuration注解，此外，该类应该包含在Spring应用上下文中创建bean的细节。 2、声明简单的bean(1)要在JavaConfig中声明bean，我们需要编写一个方法，这个方法会创建所需类型的实例，然后给这个方法添加@Bean注解，下面的代码声明了CompactDisc bean: @Bean public CompactDisc sgtPeppers(){ return new SgtPeppers(); } @Bean注解会告诉Spring这个方法会返回一个对象，该对象需要注册为Spring应用上下文中的bean，方法体中包含了最终产生bean实例的逻辑。 (2)默认情况下，bean的ID与带有@Bean注解的方法名是一样的。如果你想为其设置一个不同的名字的话，你可以重命名该方法，或者通过name属性指定一个不同的名字。如下： @Bean(name=&quot;lonelyHeartsClubBand&quot;) public CompactDisc sgtPeppers(){ return new SgtPeppers(); } 3、借助JavaConfig注入(1)我们前面所声明的CompactDisc bean是非常简单的，其自身没有其他的依赖。现在，我们需要声明CDPlayer bean，它依赖于CompactDisc，在JavaConfig中要像下面那样将它们装配到一起： @Bean public CDPlayer cdPlayer(){ return new CDPlayer(sgtPeppers()); } 看起来，CompactDisc是通过调用sgtPeppers()得到的，但情况并非完全如此，在默认情况下，Spring中的bean都是单例的，因为sgtPeppers()方法上添加了@Bean注解，Spring将会拦截所有对它的调用，并确保直接返回该方法所创建的bean，而不是每次都对其进行实际的调用。即对sgtPeppers()方法的调用返回的是Spring本身在调用sgtPeppers()时所创建的CompactDisc bean。 (2)可以看到，通过方法来引用bean的方式有点令人困惑。其实还有一种理解起来更为简单的方式： @Bean public CDPlyer cdPlayer(CompactDisc compactDisc) { return new CDPlayer(compactDisc); } 通过这种方式引用其他的bean通常是最佳的选择，因为它不会要求将CompactDisc声明到同一个配置类之中。在这里甚至没有要求CompactDisc必须要在JavaConfig中声明，实际上它可以通过组件扫描功能自动发现或者通过XML来进行配置。]]></content>
+    <content type="text"><![CDATA[尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java和XML。下面主要是学习如何使用Java来进行配置。在读这篇文章之前，建议先阅读我的上一篇文章装配bean之自动化装配Bean 1、创建配置类@Configuration public class CDPlayerConfig{ ... } 创建 JavaConfig 的关键在于为其添加@Configuration注解，此外，该类应该包含在Spring应用上下文中创建bean的细节。 2、声明简单的bean(1)要在JavaConfig中声明bean，我们需要编写一个方法，这个方法会创建所需类型的实例，然后给这个方法添加@Bean注解，下面的代码声明了CompactDisc bean: @Bean public CompactDisc sgtPeppers(){ return new SgtPeppers(); } @Bean注解会告诉Spring这个方法会返回一个对象，该对象需要注册为Spring应用上下文中的bean，方法体中包含了最终产生bean实例的逻辑。 (2)默认情况下，bean的ID与带有@Bean注解的方法名是一样的。如果你想为其设置一个不同的名字的话，你可以重命名该方法，或者通过name属性指定一个不同的名字。如下： @Bean(name=&quot;lonelyHeartsClubBand&quot;) public CompactDisc sgtPeppers(){ return new SgtPeppers(); } 3、借助JavaConfig注入(1)我们前面所声明的CompactDisc bean是非常简单的，其自身没有其他的依赖。现在，我们需要声明CDPlayer bean，它依赖于CompactDisc，在JavaConfig中要像下面那样将它们装配到一起： @Bean public CDPlayer cdPlayer(){ return new CDPlayer(sgtPeppers()); } 看起来，CompactDisc是通过调用sgtPeppers()得到的，但情况并非完全如此，在默认情况下，Spring中的bean都是单例的，因为sgtPeppers()方法上添加了@Bean注解，Spring将会拦截所有对它的调用，并确保直接返回该方法所创建的bean，而不是每次都对其进行实际的调用。即对sgtPeppers()方法的调用返回的是Spring本身在调用sgtPeppers()时所创建的CompactDisc bean。 (2)可以看到，通过方法来引用bean的方式有点令人困惑。其实还有一种理解起来更为简单的方式： @Bean public CDPlyer cdPlayer(CompactDisc compactDisc) { return new CDPlayer(compactDisc); } 通过这种方式引用其他的bean通常是最佳的选择，因为它不会要求将CompactDisc声明到同一个配置类之中。在这里甚至没有要求CompactDisc必须要在JavaConfig中声明，实际上它可以通过组件扫描功能自动发现或者通过XML来进行配置。]]></content>
       <categories>
         <category>技术</category>
       </categories>

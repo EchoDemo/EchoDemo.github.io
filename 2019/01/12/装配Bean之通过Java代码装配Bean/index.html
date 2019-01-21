@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-12T08:20:13.690Z">
+<meta property="og:updated_time" content="2019-01-12T08:29:53.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="装配Bean之通过Java代码装配Bean">
 <meta name="twitter:description" content="尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java">
@@ -473,7 +473,7 @@
       
 
       
-        <p>尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java和XML。下面主要是学习如何使用Java来进行配置。在读这篇文章之前，建议先阅读我的上一篇文章<strong><big><a href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8Dbean%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A3%85%E9%85%8DBean/">装配Bean之自动化装配Bean</a><big></big></big></strong></p>
+        <p>尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java和XML。下面主要是学习如何使用Java来进行配置。在读这篇文章之前，建议先阅读我的上一篇文章<strong><big><a href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8Dbean%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A3%85%E9%85%8DBean/">装配bean之自动化装配Bean</a><big></big></big></strong></p>
 <h3 id="1、创建配置类"><a href="#1、创建配置类" class="headerlink" title="1、创建配置类"></a>1、创建配置类</h3><pre><code>@Configuration
 public class CDPlayerConfig{
     ...
@@ -577,6 +577,10 @@ public CDPlyer cdPlayer(CompactDisc compactDisc) {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/01/12/装配Bean之通过XML装配Bean/" rel="prev" title="装配Bean之通过XML装配Bean">
+                装配Bean之通过XML装配Bean <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -647,7 +651,7 @@ public CDPlyer cdPlayer(CompactDisc compactDisc) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-count">180</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -665,7 +669,7 @@ public CDPlyer cdPlayer(CompactDisc compactDisc) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -796,7 +800,7 @@ public CDPlyer cdPlayer(CompactDisc compactDisc) {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共125.2k字</span>
+  <span class="post-count">博客全站共126.1k字</span>
 </div>
 
 
