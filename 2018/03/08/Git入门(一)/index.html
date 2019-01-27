@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="1、git配置//配置你的名字 $ git config --global user.name &amp;quot;Your Name&amp;quot;  //配置你的email     $ git config --global user.email &amp;quot;email@example.com&amp;quot; 2、获得一个git仓库(1)clone一个仓库 //下面的URL填写你在GitHub上的仓库链接 $">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-02T01:19:01.889Z">
+<meta property="og:updated_time" content="2019-01-24T02:16:09.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git入门(一)">
 <meta name="twitter:description" content="1、git配置//配置你的名字 $ git config --global user.name &amp;quot;Your Name&amp;quot;  //配置你的email     $ git config --global user.email &amp;quot;email@example.com&amp;quot; 2、获得一个git仓库(1)clone一个仓库 //下面的URL填写你在GitHub上的仓库链接 $">
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,997
+                  2,066
                 </span>
               
 
@@ -481,7 +481,7 @@ $ git config --global user.email &quot;email@example.com&quot;
 </code></pre><h3 id="2、获得一个git仓库"><a href="#2、获得一个git仓库" class="headerlink" title="2、获得一个git仓库"></a>2、获得一个git仓库</h3><p>(1)clone一个仓库</p>
 <pre><code>//下面的URL填写你在GitHub上的仓库链接
 $ git clone https://github.com/shiyanlou/gitproject
-</code></pre><p>(2)初始化一个新的仓库</p>
+</code></pre><p>(2)或者初始化一个新的仓库</p>
 <pre><code>//新建一个目录
 $ mkdir project
 
@@ -638,6 +638,8 @@ $ git log --stat
 </code></pre><p>(4)日志排序</p>
 <p>按默认情况，提交会按逆时间顺序显示，可以指定–topo-order参数，让提交按拓扑顺序来显示(就是子提交在它们的父提交前显示)。你也可以用 –reverse参数来逆向显示所有提交日志。</p>
 <pre><code>$ git log --pretty=format:&apos;%h : %s&apos; --topo-order --graph
+</code></pre><h4 id="注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）"><a href="#注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）" class="headerlink" title="注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）"></a>注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）</h4><pre><code>git config --global credential.helper store
+git push origin master
 </code></pre>
       
     </div>
@@ -894,7 +896,7 @@ $ git log --stat
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、git配置"><span class="nav-number">1.</span> <span class="nav-text">1、git配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、获得一个git仓库"><span class="nav-number">2.</span> <span class="nav-text">2、获得一个git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、git的基本流程"><span class="nav-number">3.</span> <span class="nav-text">3、git的基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、git的分支与合并"><span class="nav-number">4.</span> <span class="nav-text">4、git的分支与合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、git日志"><span class="nav-number">5.</span> <span class="nav-text">5、git日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、git配置"><span class="nav-number">1.</span> <span class="nav-text">1、git配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、获得一个git仓库"><span class="nav-number">2.</span> <span class="nav-text">2、获得一个git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、git的基本流程"><span class="nav-number">3.</span> <span class="nav-text">3、git的基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、git的分支与合并"><span class="nav-number">4.</span> <span class="nav-text">4、git的分支与合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、git日志"><span class="nav-number">5.</span> <span class="nav-text">5、git日志</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）"><span class="nav-number">5.1.</span> <span class="nav-text">注：执行一遍如下命令之后可以省去每次push都需输入账号和密码的烦恼哦！（当然，这一次的账号还是要输入的，此后便可以一劳永逸了，哈哈！）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -936,7 +938,7 @@ $ git log --stat
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.1k字</span>
+  <span class="post-count">博客全站共127.1k字</span>
 </div>
 
 

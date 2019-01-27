@@ -108,18 +108,18 @@
 
 
 
-<meta name="description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;bean">
+<meta name="description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以beans元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="装配Bean之通过XML装配Bean">
 <meta property="og:url" content="http://www.echodemo.cc/2019/01/12/装配Bean之通过XML装配Bean/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;bean">
+<meta property="og:description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以beans元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-12T08:51:12.012Z">
+<meta property="og:updated_time" content="2019-01-27T06:44:14.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="装配Bean之通过XML装配Bean">
-<meta name="twitter:description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;bean">
+<meta name="twitter:description" content="1、创建XML配置规范在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以beans元素为根。 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt">
 
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  238
+                  1,139
                 </span>
               
 
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -473,7 +473,7 @@
       
 
       
-        <h3 id="1、创建XML配置规范"><a href="#1、创建XML配置规范" class="headerlink" title="1、创建XML配置规范"></a>1、创建XML配置规范</h3><p>在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以<beans>元素为根。</beans></p>
+        <h3 id="1、创建XML配置规范"><a href="#1、创建XML配置规范" class="headerlink" title="1、创建XML配置规范"></a>1、创建XML配置规范</h3><p>在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以beans元素为根。</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -486,10 +486,171 @@
     &lt;!-- ... --&gt;
 
 &lt;/beans&gt;
-</code></pre><h3 id="2、声明一个简单的bean"><a href="#2、声明一个简单的bean" class="headerlink" title="2、声明一个简单的bean"></a>2、声明一个简单的bean</h3><p>要在基于XML的Spring配置中声明一个bean，我们要使用spring-beans模式中的另外一个元素：<bean>。<bean>元素类似于JavaConfig中的@Bean注解。我们可以按照如下的方式声明CompactDisc bean：</bean></bean></p>
+</code></pre><h3 id="2、声明一个简单的bean"><a href="#2、声明一个简单的bean" class="headerlink" title="2、声明一个简单的bean"></a>2、声明一个简单的bean</h3><p>要在基于XML的Spring配置中声明一个bean，我们要使用spring-beans模式中的另外一个元素：bean。bean元素类似于JavaConfig中的@Bean注解。我们可以按照如下的方式声明CompactDisc bean：</p>
 <pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.SgtPeppers&quot; /&gt;
-</code></pre><p>当Spring发现这个<bean>元素时，它将会调用SgtPeppers的默认构造器来创建bean。</bean></p>
+</code></pre><p>当Spring发现这个bean元素时，它将会调用SgtPeppers的默认构造器来创建bean。</p>
+<h3 id="3、借助构造器注入初始化的bean"><a href="#3、借助构造器注入初始化的bean" class="headerlink" title="3、借助构造器注入初始化的bean"></a>3、借助构造器注入初始化的bean</h3><h4 id="1-构造器注入bean的引用"><a href="#1-构造器注入bean的引用" class="headerlink" title="(1)构造器注入bean的引用"></a>(1)构造器注入bean的引用</h4><p>1)使用constructor-arg元素：</p>
+<pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;&gt;
+    &lt;constructor-arg ref=&quot;compactDisc&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>2)使用Spring3.0所引入的c-命名空间：</p>
+<pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot; 
+    c:cd-ref=&quot;compactDisc&quot;/&gt;
+</code></pre><p>属性名以c:开头，也就是命名空间的前缀。接下来就是要装配的构造器参数名，在此之后”-ref”，告诉Spring正在装配的是一个bean的引用。</p>
+<p>在这里它直接引用构造器参数的名称即上面的”cd”，如果参数的名称修改了，此处的配置也要进行修改，因此可以使用参数在整个参数列表中的位置来替代：</p>
+<pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;
+      c:_0-ref=&quot;compactDisc&quot;/&gt;
+</code></pre><p>如果只有一个构造器参数则可以使用下面的方案：</p>
+<pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;
+      c:_-ref=&quot;compactDisc&quot;/&gt;
+</code></pre><h5 id="注：使用c-命名空间需要先在XML的顶部声明其模式："><a href="#注：使用c-命名空间需要先在XML的顶部声明其模式：" class="headerlink" title="注：使用c-命名空间需要先在XML的顶部声明其模式："></a>注：使用c-命名空间需要先在XML的顶部声明其模式：</h5><pre><code>xmlns:c=&quot;http://www.springframework.org/schema/c&quot;
+</code></pre><h4 id="2-将字面量注入到构造器中"><a href="#2-将字面量注入到构造器中" class="headerlink" title="(2)将字面量注入到构造器中"></a>(2)将字面量注入到构造器中</h4><pre><code>package soundsystem;
 
+public class BlankDisc implements CompactDisc {
+
+    private String title;
+    private String artist;
+
+    public BlankDisc(String title, String artist) {
+        this.title = title;
+        this.artist = artist;
+    }
+}
+</code></pre><p>1) 使用constructor-arg元素：</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;
+    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;
+    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>2)使用c-命名空间：</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;
+      c:_title=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;
+      c:_artist=&quot;The Beatles&quot;/&gt;
+</code></pre><p>或</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;
+      c:_0=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;
+      c:_1=&quot;The Beatles&quot;/&gt;
+</code></pre><p>如果只有一个构造器参数：</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;
+      c:_=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;
+</code></pre><h4 id="3-装配集合"><a href="#3-装配集合" class="headerlink" title="(3)装配集合"></a>(3)装配集合</h4><pre><code>package soundsystem;
+
+import java.util.List;
+import soundsystem.CompactDisc;
+
+public class BlankDisc implements CompactDisc {
+
+    private String title;
+    private String artist;
+    private List&lt;String&gt; tracks;
+
+    public BlankDisc(String title, String artist, List&lt;String&gt; tracks) {
+        this.title = title;
+        this.artist = artist;
+        this.tracks = tracks;
+    }
+}
+</code></pre><p>1)使用list元素将其声明为一个列表(目前，使用c-命名空间的属性无法实现装配集合的功能)。</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;
+    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;
+    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;
+    &lt;constructor-arg&gt;
+        &lt;list&gt;
+            &lt;value&gt;one&lt;/value&gt;
+            &lt;value&gt;two&lt;/value&gt;
+            &lt;value&gt;three&lt;/value&gt;
+            ...
+            &lt;value&gt;n&lt;/value&gt;
+        &lt;/list&gt;
+    &lt;constructor-arg/&gt;
+&lt;/bean&gt;
+</code></pre><p>或</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;
+    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;
+    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;
+    &lt;constructor-arg&gt;
+        &lt;set&gt;
+            &lt;value&gt;one&lt;/value&gt;
+            &lt;value&gt;two&lt;/value&gt;
+            &lt;value&gt;three&lt;/value&gt;
+            ...
+            &lt;value&gt;n&lt;/value&gt;
+        &lt;/set&gt;
+    &lt;constructor-arg/&gt;
+&lt;/bean&gt;
+</code></pre><p>2)使用ref元素替代value,从而实现bean引用列表的装配。</p>
+<p>假设现在有一个Discography类,它的构造器如下：</p>
+<pre><code>public Discography(String artist, List&lt;CompactDisc cds) { ... }
+</code></pre><p>那么可以以如下的方式配置它的bean：</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;
+    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;
+    &lt;constructor-arg&gt;
+        &lt;list&gt;
+            &lt;ref bean=&quot;sgtPeppers&quot;/&gt;
+            &lt;ref bean=&quot;whiteAlbum&quot;/&gt;
+            ...
+            &lt;ref bean=&quot;revolver&quot;/&gt;
+        &lt;/list&gt;
+    &lt;constructor-arg/&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="4-设置属性"><a href="#4-设置属性" class="headerlink" title="(4)设置属性"></a>(4)设置属性</h4><p>(1)setter方法注入bean的引用：</p>
+<pre><code>package soundsystem;
+
+import soundsystem.CompactDisc;
+import soundsystem.MediaPalyer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class CDPlayer implements MediaPalyer {
+
+    private CompactDisc compactDisc;
+
+    @Autowired
+    public void setCompactDisc(CompactDisc compactDisc) {
+        this.compactDisc = compactDisc;
+    }
+}
+</code></pre><p>在这之前都是通过构造器来进行注入的，没有使用属性的setter方法，现在我们来看一下如何使用spring XML实现属性的注入。property元素为属性的setter方法所提供的功能与constructor-arg元素为构造器所提供的功能是一样的。</p>
+<pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;&gt;
+    &lt;property name=&quot;compactDisc&quot; ref=&quot;compaceDisc&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>(2)setter方法将字面量注入到属性中：</p>
+<pre><code>package soundsystem;
+
+import java.util.List;
+import soundsystem.CompactDisc;
+
+public class BlankDisc implements CompactDisc {
+
+    private String title;
+    private String artist;
+    private List&lt;String&gt; tracks;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void setTracks(List&lt;String&gt; tracks) {
+        this.tracks = tracks;
+    }
+}
+</code></pre><p>这里和先前的constructor-arg装配tracks是完全一样的：</p>
+<pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;
+    &lt;property name=&quot;title&quot; value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot; /&gt;
+    &lt;property name=&quot;artist&quot; value=&quot;The Beatles&quot; /&gt;
+    &lt;property name=&quot;tracks&quot;&gt;
+        &lt;list&gt;
+            &lt;value&gt;one&lt;/value&gt;
+            &lt;value&gt;two&lt;/value&gt;
+            &lt;value&gt;three&lt;/value&gt;
+            ...
+            &lt;value&gt;n&lt;/value&gt;
+        &lt;/list&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
       
     </div>
 
@@ -745,7 +906,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建XML配置规范"><span class="nav-number">1.</span> <span class="nav-text">1、创建XML配置规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、声明一个简单的bean"><span class="nav-number">2.</span> <span class="nav-text">2、声明一个简单的bean</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建XML配置规范"><span class="nav-number">1.</span> <span class="nav-text">1、创建XML配置规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、声明一个简单的bean"><span class="nav-number">2.</span> <span class="nav-text">2、声明一个简单的bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、借助构造器注入初始化的bean"><span class="nav-number">3.</span> <span class="nav-text">3、借助构造器注入初始化的bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-构造器注入bean的引用"><span class="nav-number">3.1.</span> <span class="nav-text">(1)构造器注入bean的引用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注：使用c-命名空间需要先在XML的顶部声明其模式："><span class="nav-number">3.1.1.</span> <span class="nav-text">注：使用c-命名空间需要先在XML的顶部声明其模式：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-将字面量注入到构造器中"><span class="nav-number">3.2.</span> <span class="nav-text">(2)将字面量注入到构造器中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-装配集合"><span class="nav-number">3.3.</span> <span class="nav-text">(3)装配集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置属性"><span class="nav-number">3.4.</span> <span class="nav-text">(4)设置属性</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -787,7 +948,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.1k字</span>
+  <span class="post-count">博客全站共127.1k字</span>
 </div>
 
 
