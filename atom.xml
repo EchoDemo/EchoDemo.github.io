@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-01-20T04:21:12.681Z</updated>
+  <updated>2019-01-30T09:29:08.805Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,13 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux常用命令</title>
+    <link href="http://www.echodemo.cc/2019/01/30/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://www.echodemo.cc/2019/01/30/Linux常用命令/</id>
+    <published>2019-01-30T09:26:32.000Z</published>
+    <updated>2019-01-30T09:29:08.805Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、查看当前在线用户</p><pre><code>[root@jaja ~]# w</code></pre><p>2、查看Linux版本</p><pre><code>[root@jaja ~]# lsb_release -a</code></pre><p>3、查看进程树</p><pre><code>[root@jaja docker]# pstree -p</code></pre><p>4、使用ZMODEM进行文件传输</p><pre><code>从Windows上传至Linux：[root@jaja docker]# rz从Linux下载至Windows：[root@jaja docker]# sz</code></pre><p>5、查看内存使用情况</p><pre><code>[root@jaja docker]# free -m</code></pre><p>6、查看磁盘剩余空间</p><pre><code>[root@jaja docker]# df -h</code></pre><p>7、查看Linux内核版本</p><pre><code>[root@jaja docker]# uname -r </code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、查看当前在线用户&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@jaja ~]# w
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、查看Linux版本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[root@jaja ~]# lsb_release -a
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3、查看进
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Linux" scheme="http://www.echodemo.cc/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Docker常用命令</title>
     <link href="http://www.echodemo.cc/2019/01/20/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://www.echodemo.cc/2019/01/20/Docker常用命令/</id>
-    <published>2019-01-20T04:16:04.000Z</published>
-    <updated>2019-01-20T04:21:12.681Z</updated>
+    <published>2019-01-20T04:16:40.000Z</published>
+    <updated>2019-01-30T09:26:43.577Z</updated>
     
-    <content type="html"><![CDATA[<p>1、查看所有的容器</p><pre><code>[root@jaja docker]# docker ps -a</code></pre><p>2、查看正在运行的容器</p><pre><code>[root@jaja docker]# docker ps</code></pre><p>3、启动已终止的容器</p><pre><code>[root@jaja docker]# docker start (container id)</code></pre><p>4、终止已启动的容器</p><pre><code>[root@jaja docker]# docker stop (container id)</code></pre><p>5、重启容器</p><pre><code>[root@jaja docker]# docker restart (container id)</code></pre><p>6、进入容器交互式环境</p><pre><code>[root@jaja docker]# docker exec -it (container id) /bin/bash</code></pre><p>7、退出容器交互式环境</p><pre><code>[root@jaja docker]# exit 或者使用快捷键 Ctrl + D</code></pre><p>8、导出容器</p><pre><code>[root@jaja docker]# docker export (container id) &gt; (filename).tar</code></pre><p>9、导入容器</p><pre><code>[root@jaja docker]# cat (filename).tar | docker import - (image name):(tag)</code></pre><p>10、查看当前宿主机上的镜像列表</p><pre><code>[root@jaja docker]# docker image ls 或者 docker images</code></pre><p>11、删除处于终止状态的容器</p><pre><code>(1)直接终止容器：[root@jaja docker]# docker rm (container id)(2)如果正在运行则要先终止：[root@jaja docker]# docker stop (container id)</code></pre><p>12、删除所有处于终止状态的容器</p><pre><code>[root@jaja docker]# docker container prune</code></pre><p>13、打印容器的标准输出</p><pre><code>[root@jaja docker]# docker logs</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>1、查看所有的容器</p><pre><code>[root@jaja docker]# docker ps -a</code></pre><p>2、查看正在运行的容器</p><pre><code>[root@jaja docker]# docker ps</code></pre><p>3、启动已终止的容器</p><pre><code>[root@jaja docker]# docker start (container id)</code></pre><p>4、终止已启动的容器</p><pre><code>[root@jaja docker]# docker stop (container id)</code></pre><p>5、重启容器</p><pre><code>[root@jaja docker]# docker restart (container id)</code></pre><p>6、进入容器交互式环境</p><pre><code>[root@jaja docker]# docker exec -it (container id) /bin/bash</code></pre><p>7、退出容器交互式环境</p><pre><code>[root@jaja docker]# exit 或者使用快捷键 Ctrl + D</code></pre><p>8、导出容器</p><pre><code>[root@jaja docker]# docker export (container id) &gt; (filename).tar</code></pre><p>9、导入容器</p><pre><code>[root@jaja docker]# cat (filename).tar | docker import - (image name):(tag)</code></pre><p>10、查看当前宿主机上的镜像列表</p><pre><code>[root@jaja docker]# docker image ls 或者 docker images</code></pre><p>11、删除处于终止状态的容器</p><pre><code>(1)直接终止容器：[root@jaja docker]# docker rm (container id)(2)如果正在运行则要先终止：[root@jaja docker]# docker stop (container id)</code></pre><p>12、删除所有处于终止状态的容器</p><pre><code>[root@jaja docker]# docker container prune</code></pre><p>13、打印容器的标准输出</p><pre><code>[root@jaja docker]# docker logs</code></pre><p>14、删除镜像(在删除镜像之前需要先停止容器，再删除容器)</p><pre><code>[root@jaja docker]# docker rmi (image id)</code></pre>]]></content>
     
     <summary type="html">
     
@@ -527,31 +556,6 @@
       
       
         &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;看完最新一期的《朗读者》，在黑暗的楼道里一步一步往下走，思绪仍然还在节目里，满怀的惆怅与沉默。到底什么是故乡？白岩松的故乡是呼伦贝尔大草原上傍晚的落日和马头琴声；贾樟柯的故乡是同学和朋友的专
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="日志" scheme="http://www.echodemo.cc/tags/%E6%97%A5%E5%BF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>音乐诗人</title>
-    <link href="http://www.echodemo.cc/2018/08/19/%E9%9F%B3%E4%B9%90%E8%AF%97%E4%BA%BA/"/>
-    <id>http://www.echodemo.cc/2018/08/19/音乐诗人/</id>
-    <published>2018-08-19T02:46:32.000Z</published>
-    <updated>2018-08-27T10:53:03.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昨晚心血来潮，熬夜看完最近一期的《中国好声音》。以前这个节目对自己而言哪里有这么大的魔性，仅仅是因为有他的存在。李健对待生活的态度和方式，一直都是自己所仰慕和追寻的。在他的音乐里，诗意的词，动听的曲，美的无与伦比。台上的他，于言谈举止之间无时无刻不透露着温文儒雅的气质。近来知晓他与其妻子的爱情，从两小无猜的年纪到同是清华的学子，彼此之间缘深缘浅，自是懂得，这一切都是最好的安排。据说在李健的每一张专辑里都有一首歌是写给孟小蓓的，他对她说：和你在一起的日子才叫时光。他爱咖啡，也爱清茶，更爱读书，这也是他随口而出的词句里文化深厚的原因。他的音乐如诗，爱情如诗，更是把生活过成了一首诗。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;昨晚心血来潮，熬夜看完最近一期的《中国好声音》。以前这个节目对自己而言哪里有这么大的魔性，仅仅是因为有他的存在。李健对待生活的态度和方式，一直都是自己所仰慕和追寻的。在他的音乐里，诗意的词，
       
     
     </summary>
