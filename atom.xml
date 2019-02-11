@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-02-11T12:52:18.034Z</updated>
+  <updated>2019-02-11T13:52:27.982Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RequestBody注解</title>
+    <link href="http://www.echodemo.cc/2019/02/11/RequestBody%E6%B3%A8%E8%A7%A3/"/>
+    <id>http://www.echodemo.cc/2019/02/11/RequestBody注解/</id>
+    <published>2019-02-11T12:53:31.000Z</published>
+    <updated>2019-02-11T13:52:27.982Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、@RequestBody主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)。</p><p>2、GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。</p><p>3、在后端的同一个接收方法里，@RequestBody 与@RequestParam()可以同时使用，@RequestBody最多只能有一个，而@RequestParam()可以有多个。</p><p>4、当同时使用@RequestParam（）和@RequestBody时，@RequestParam（）指定的参数可以是普通元素、数组、集合、对象等等(即:当@RequestBody 与@RequestParam()可以同时使用时，原SpringMVC接收参数的机制不变，只不过RequestBody 接收的是请求体里面的数据；而RequestParam接收的是key-value里面的参数，所以它会被切面进行处理从而可以用普通元素、数组、集合、对象等接收)。</p><p>5、如果参数前写了@RequestParam(xxx)，那么前端必须有对应的xxx名字才行(不管其是否有值)，如果没有xxx名的话，那么请求会出错，报400。如果参数前不写@RequestParam(xxx)的话，那么前端可以有也可以没有对应的xxx名字，如果有xxx名的话，那么就会自动匹配；没有的话，请求也能正确发送。</p><p>6、如果后端参数是一个对象，且该参数前是以@RequestBody修饰的，那么前端传递json参数时，必须满足以下要求:</p><p>(1)后端@RequestBody注解对应的类在将HTTP的输入流(含请求体)装配到目标类(即:@RequestBody后面的类)时,会根据json字符串中的key来匹配对应实体类的属性,如果匹配一致且json中的该key对应的值符合(或可转换为)实体类的对应属性的类型要求时,会调用实体类的setter方法将值赋给该属性,这一条会在本节末尾详细分析。</p><p>(2)json字符串中，如果value为””的话，后端对应属性如果是String类型的，那么接受到的就是””,如果是后端属性的类型是Integer、Double等类型，那么接收到的就是null。json字符串中，如果value为null的话，后端对应收到的就是null。</p><p>(3)如果某个参数没有value的话，在传json字符串给后端时，要么干脆就不把该字段写到json字符串中;要么写value时，必须有值，null  或””都行。千万不能有类似”stature”:,这样的写法。</p><p>7、举例说明</p><p>(1)创建User类：</p><pre><code>package com.aspire.entity;/** * 用户实体类模型 * * @author JustryDeng * @date 2018年7月6日 上午1:55:59 */@Datapublic class User {    private String name;    private Integer age;    private String gender;    private String motto;    @Override    public String toString() {        return age + &quot;岁&quot; + gender + &quot;人[&quot; + name + &quot;]的座右铭居然是: &quot; + motto + &quot;!!!&quot;;    }}</code></pre><h4 id="注：-Data注解请见Lombok"><a href="#注：-Data注解请见Lombok" class="headerlink" title="注：@Data注解请见Lombok"></a>注：@Data注解请见<a href="http://www.echodemo.cc/2019/02/01/Lombok/">Lombok</a></h4><p>(2)创建Team类：</p><pre><code>package com.aspire.entity;import java.util.List;/** * 小组测试实体类模型 * * @author JustryDeng * @date 2018年7月8日 下午11:23:51 */@Datapublic class Team {    private Integer id;    private String teamName;    private List&lt;String&gt; honors;    private List&lt;User&gt; teamMembers;    /**     * 重写toString     *      * @see java.lang.Object#toString()     */    @Override    public String toString() {        // 遍历出小组所获荣耀        StringBuffer sbHonors = new StringBuffer(&quot;荣耀start----\n&quot;);        for (String honor : honors) {            sbHonors.append(honor);            sbHonors.append(&quot;\n&quot;);        }        sbHonors.append(&quot;荣耀end----\n&quot;);        // 遍历出小组成员        StringBuffer sbMembers = new StringBuffer(&quot;成员start----\n&quot;);        for (User user : teamMembers) {            sbMembers.append(user.toString());            sbMembers.append(&quot;\n&quot;);        }        sbMembers.append(&quot;成员end----\n&quot;);        return &quot;小组id:&quot; + id + &quot;\n&quot; + &quot;小组名字:&quot; + teamName + &quot;\n&quot; + &quot;小组所获荣誉:&quot;                    + sbHonors + &quot;\n&quot; + &quot;小组成员:&quot; + sbMembers;    }}</code></pre><p>(3)@RequestBody直接以String接收前端传过来的json数据:</p><pre><code>@RequestMapping(&quot;mytest0&quot;)public String myTestController0(@RequestBody String jsonString) {    System.out.println(jsonString);    return jsonString;}</code></pre><p>(4)@RequestBody以简单对象接收前端传过来的json数据(SpringMVC会智能的将符合要求的数据装配进该User对象中):</p><pre><code>@RequestMapping(&quot;mytest1&quot;)public String myTestController1(@RequestBody User user) {    System.out.println(user.toString());    return user.toString();}</code></pre><p>(5)以较复杂的Team对象接收前端传过来的json数据 (SpringMVC会智能的将符合要求的数据装配进该Teamr对象中):</p><pre><code>@RequestMapping(&quot;mytest2&quot;)public String myTestController2(@RequestBody Team team) {    System.out.println(team.toString());    return team.toString();}</code></pre><p>(6)@RequestBody与简单的@RequestParam()同时使用:</p><pre><code>@RequestMapping(&quot;mytest3&quot;)public String myTestController3(@RequestBody User user, @RequestParam(&quot;token&quot;) String token) {    System.out.println(user.toString());    System.out.println(token);    return token + &quot;&gt;&gt;&gt;&quot; + user.toString();}</code></pre><p>(7)@RequestBody与复杂的@RequestParam()同时使用:</p><pre><code>@RequestMapping(&quot;mytest5&quot;)public String myTestController5(@RequestBody User user, @RequestParam(&quot;arrays&quot;) List&lt;String&gt; arrays) {    System.out.println(user.toString());    StringBuffer sb = new StringBuffer();    for (String array : arrays) {        sb.append(array);        sb.append(&quot;  &quot;);        System.out.println(array);    }    return sb.toString() + user.toString();}</code></pre><p>(8)@RequestBody接收请求体中的json数据;不加注解接收URL中的数据并组装为对象:</p><pre><code>@RequestMapping(&quot;mytest4&quot;)public String myTestController4(@RequestBody User user1,  User user2) {    System.out.println(user1.toString());    System.out.println(user2.toString());    return user2.toString() + &quot;\n&quot; + user1.toString();}</code></pre><h4 id="注：该文章转载自-RequestBody的使用"><a href="#注：该文章转载自-RequestBody的使用" class="headerlink" title="注：该文章转载自@RequestBody的使用"></a>注：该文章转载自<a href="https://blog.csdn.net/justry_deng/article/details/80972817" target="_blank" rel="noopener">@RequestBody的使用</a></h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、@RequestBody主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)。&lt;/p&gt;
+&lt;p&gt;2、GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。&lt;/p&gt;
+&lt;p&gt;3、在后端的
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>System进程占用80端口</title>
@@ -531,31 +558,6 @@
       
       
         &lt;p&gt;1、我应该找我喜欢的还是喜欢我的？应该找有感觉的还是条件好的？在感情中我们很容易把注意力放在对外寻找上，却忽略了困惑往往来源于自我。如果你不了解自己的情感需要，便很难在感情中得到满足。了解自己的情感需要，从更长远的角度来说也是了解自己的成长需要，知道自己为什么活着，这一生想
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.echodemo.cc/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《假性亲密关系》摘句(一)</title>
-    <link href="http://www.echodemo.cc/2018/10/06/%E3%80%8A%E5%81%87%E6%80%A7%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB%E3%80%8B%E6%91%98%E5%8F%A5(%E4%B8%80)/"/>
-    <id>http://www.echodemo.cc/2018/10/06/《假性亲密关系》摘句(一)/</id>
-    <published>2018-10-06T15:07:21.000Z</published>
-    <updated>2018-10-06T15:10:51.268Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、在亲密关系中，很多人往往会在尚未完全理解对方时就开始批判或反驳。这种方式看似能够说服伴侣，让对方在压力之下顺从你的意愿，可是却会让对方害怕在你面前畅所欲言。结果就是你以为你很了解对方，其实他内心还有许多保留的秘密。专注的聆听和不带批判性的回应，信任感会得到加强。</p><p>2、在深入了解双方的想法时，例如聊到和前任的关系或者异性朋友这类比较敏感的话题时，建议你平和而又诚恳地邀请对方表达，让对方感到安全：“我知道这个话题对你来说可能比较敏感，或许你可以试着说说看，我很想了解你，也向你保证，我不会在没有完全理解你的时候给你贴标签或者批判你。”</p><p>3、矛盾冲突永远存在，但是高质量的关系可以保障亲密关系中的满意度更持久。很多人在亲密关系中所犯的错误就是为了争论对错、分出输赢、掌握控制权，宁可牺牲亲密关系，因为我们往往习惯了以强制的方式使对方接受。</p><p>4、你可能习惯了不说话，在人群里永远保持沉默，有着很强的戒备心理，对异性充满恐惧。你可能有很多情结、障碍、缺点，但你必须要走出自己熟悉的舒适区，做以前没做过的事情。浪漫的事情，都多少带些不寻常甚至是冒险。在恐惧、焦虑、不确定的时候，你习惯了逃避，那么，多半也会错过那些美好奇妙的邂逅。</p><p>5、许多人总要求对方要与自己有精神共鸣、有生活情趣、要浪漫、要体贴入微。要求别人之前先看看自己，你是个爱读书、爱思考的人吗？你的生活是不是充满了各种趣味？你是否有自己独特的手艺和爱好可以用来营造浪漫？你是否习惯于帮助他人和奉献自我？长久积累的品质才能产生魅力，而平庸和平淡的你，拿什么吸引心仪的人，拿什么让亲密关系保鲜？</p><p>6、我极力推荐大家去看看《摩登家庭》，此剧一个重要的看点就是学习剧中人物在处理家庭关系时如何用积极的、有建设性的语言沟通彼此的感受。</p><p>7、我希望用文字鼓励那些心有所向的人，不要因为可能被拒绝就患得患失，不要因为希望渺茫就放弃。感情不能用得失、成败来衡量，因为感情中的失败其实是一种提示，是在告诉你且行且珍惜，你完全没必要和失败过不去。</p><p>8、我真心希望每一个恋爱中的人，都不要只顾着享受对方带给你的感动和温暖，要多想想自己可以为他做些什么。在你感到最幸福、最满足的时候，记得问问自己：他是否和我一样幸福？</p><p>9、任何形式的失败，其实都是生活在提示我们：你的方法不对，需要调整。拒绝分手或者离婚，找各种理由说服自己死扛，本质就是拒绝承认错误。当你忽视生活给你的提示时，获得的只能是更多更激烈和强硬的提示，直到你被彻底打垮。</p><p>10、每当你和伴侣之间出现矛盾的时候，你需要先思考以下两个问题：对方怎么改变能够让你感到满意？如果有人要让你做出这样的改变，激励你的最好方式是什么？</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、在亲密关系中，很多人往往会在尚未完全理解对方时就开始批判或反驳。这种方式看似能够说服伴侣，让对方在压力之下顺从你的意愿，可是却会让对方害怕在你面前畅所欲言。结果就是你以为你很了解对方，其实他内心还有许多保留的秘密。专注的聆听和不带批判性的回应，信任感会得到加强。&lt;/p&gt;
       
     
     </summary>
