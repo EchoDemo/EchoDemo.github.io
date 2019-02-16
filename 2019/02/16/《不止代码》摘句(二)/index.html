@@ -1,0 +1,1091 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="读书笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="EchoDemo's Blogs" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="什么是架构？在我看来软件架构就是将人员、技术等资源组织起来以解决业务问题，支撑业务增长的一种活动。可能比较抽象，我想我们可以从架构师的一些具体工作任务来理解这句话含义： 1、组织业务：架构师通过探索和研究业务领域的知识，构建自身看待业务的”世界观”。他会基于这种认识拆分业务生命周期，确立业务边界，构建出了一套解决特定业务问题的领域模型，并且确认模型之间、领域之间的关系与协作方式，完成了对业务领域内">
+<meta name="keywords" content="读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《不止代码》摘句(二)">
+<meta property="og:url" content="http://www.echodemo.cc/2019/02/16/《不止代码》摘句(二)/index.html">
+<meta property="og:site_name" content="EchoDemo&#39;s Blogs">
+<meta property="og:description" content="什么是架构？在我看来软件架构就是将人员、技术等资源组织起来以解决业务问题，支撑业务增长的一种活动。可能比较抽象，我想我们可以从架构师的一些具体工作任务来理解这句话含义： 1、组织业务：架构师通过探索和研究业务领域的知识，构建自身看待业务的”世界观”。他会基于这种认识拆分业务生命周期，确立业务边界，构建出了一套解决特定业务问题的领域模型，并且确认模型之间、领域之间的关系与协作方式，完成了对业务领域内">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-16T06:11:04.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《不止代码》摘句(二)">
+<meta name="twitter:description" content="什么是架构？在我看来软件架构就是将人员、技术等资源组织起来以解决业务问题，支撑业务增长的一种活动。可能比较抽象，我想我们可以从架构师的一些具体工作任务来理解这句话含义： 1、组织业务：架构师通过探索和研究业务领域的知识，构建自身看待业务的”世界观”。他会基于这种认识拆分业务生命周期，确立业务边界，构建出了一套解决特定业务问题的领域模型，并且确认模型之间、领域之间的关系与协作方式，完成了对业务领域内">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.echodemo.cc/2019/02/16/《不止代码》摘句(二)/"/>
+
+
+
+
+
+  <title> 《不止代码》摘句(二) | EchoDemo's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?340874ba9357cbe81570aa4ac1185941";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EchoDemo's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description">自我管理，知识管理，时间管理，阅读。</h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.echodemo.cc/2019/02/16/《不止代码》摘句(二)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EchoDemo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EchoDemo's Blogs">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EchoDemo's Blogs" src="/images/avatar.gif">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                《不止代码》摘句(二)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-16T14:04:31+08:00">
+                2019-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/16/《不止代码》摘句(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/02/16/《不止代码》摘句(二)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->  
+            
+          
+
+          
+
+          
+          
+
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,568
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是架构？"><a href="#什么是架构？" class="headerlink" title="什么是架构？"></a>什么是架构？</h3><p>在我看来软件架构就是将人员、技术等资源组织起来以解决业务问题，支撑业务增长的一种活动。可能比较抽象，我想我们可以从架构师的一些具体工作任务来理解这句话含义：</p>
+<p>1、组织业务：架构师通过探索和研究业务领域的知识，构建自身看待业务的”世界观”。他会基于这种认识拆分业务生命周期，确立业务边界，构建出了一套解决特定业务问题的领域模型，并且确认模型之间、领域之间的关系与协作方式，完成了对业务领域内的要素的组织工作。</p>
+<p>2、组织技术：为了能在计算机世界中运作人类社会的业务模型，架构师需要选用计算机世界中合适的框架、中间件、编程语言、网络协议等技术工具依据之前设计方案组织起来形成一套软件系统方案，在我看来软件系统就像是一种技术组织，即技术组件、技术手段依据某种逻辑被组织起来了，这些技术工具被确定了职责，有了明确分工，并以实现业务功能为目标集合在了一起。比如 RPC 框架或消息队列被用于内部系统之间的通信服务就如同信使一般，而数据库则负责记录结果，它更像是一名书记员。</p>
+<p>3、组织人员：为了能够实现利用软件系统解决业务问题的目标，架构师还需要关注软件系统的构建过程，他以实现软件系统为号召，从公司组织中聚集一批软件工程师，并将这些人员按不同工种、不同职责、不同系统进行组织，确定这些人员之间的协作方式，并关注这个组织系统是否运作良好比如沟通是否顺畅、产出是否达到要求、能否按时间完成等。</p>
+<p>4、组织全局，对外输出：架构师的首要目标是解决业务问题，推动业务增长。所以他非常关心软件的运行状况。因为只有在软件系统运行起来后，才能对外提供服务，才能在用户访问的过程中，解决业务问题。架构师需要关注运行过程中产生的数据比如业务成功率，系统运行资源占用数据、用户反馈信息、业务增长情况等，这些信息将会帮助架构师制定下一步架构目标和方向。所以软件架构不仅仅只是选用什么框架、选用什么技术组件这么简单。它贯穿了对人的组织、对技术的组织、对业务的组织，并将这三种组织以解决业务问题这一目标有机的结合在了一起。</p>
+<p>很多面试的候选人在被问及他所开发的系统采用什么架构的问题时，只会罗列出一些技术组件、技术框架等技术要素，这样看来其根本没有理清架构的深层含义。也有一些架构师只专注对底层技术的研究，以为打造一个卓越的系统是非常牛逼的事情，可是他忽略了软件系统的价值是以解决业务问题的能力、支撑业务增长的能力为衡量标准，所以最后生产出了很多对组织，对业务没有帮助的系统。</p>
+<h3 id="架构目标需要适应业务的发展"><a href="#架构目标需要适应业务的发展" class="headerlink" title="架构目标需要适应业务的发展"></a>架构目标需要适应业务的发展</h3><p>架构的目标就是为了支撑业务增长，就是提升软件系统的服务能力。可是话虽说如此，但真实却要做很多取舍。比如对初创团队而言，其产品是否解决业务问题这一设想还没得到确认，就立即去构造一个高性能、高可用的分布式系统，这样的架构目标远超出业务发展的需求，最后的结果就是浪费大量人力物力，却得不到任何起色。架构师需要审时度势，仔细衡量正确性、大规模、可用性三者的关系，比如今年业务蓬勃发展日均订单 300 万，基于对未来的可能预测，明年可能有 3000 万的订单，那么架构师应该要着重考虑大规模和可用性。而且每一点提升的程度，也需要架构师衡量把握，比如可用性要达到 2 个 9 还是 3 个 9。回顾自己以往的工作很多时候就是因为没有确立架构目标导致浪费了组织很多资源，比如在之前的创业团队中，由于本人有一定的代码洁癖，经常会花费很多时间和同事计较代码质量，这样本可以更快上线的功能却需要被延迟，当时过度追求正确性的行为是与创业团队快速验证想法的业务需求不匹配的。</p>
+<p>另外一点比较深刻的案例则是在本人担任一个技术团队负责人的时候，在一次述职报告的时候，leader 问我对接下来团队工作有什么计划？我当时说了一堆什么改进代码质量，每天晨会，任务透明化，建立迭代机制等等，然后就被各种批驳一通。当时团队基本以外包人员为主，人员水平较差，开发出来的金融系统也是千疮百孔而这条业务线最重要的业务价值则是按计划实现潜在投资方的需求，争取拉到投资。所以<br>不久 leader 就召集测试架构的相关人员与我这边一同梳理对核心功能的测试工作，将研发、测试、上线的流程自动化。</p>
+<p>当时并不理解这样做核心价值是什么。但回过头来看这样的工作方式恰好符合了业务发展的需求，即确保系统是符合设计需求的，保证系统达到可接受的正确性，为后续能过快速前进打下基础，最重要的是为企业降低了构建成本。所以程序员想要工作出业绩，必须认清楚系统背后的业务价值，按价值去梳理工作优先级，而不是像我一般过度纠结细节，追求技术理想化。</p>
+<h3 id="从价值出发－找寻学习与工作的新思路"><a href="#从价值出发－找寻学习与工作的新思路" class="headerlink" title="从价值出发－找寻学习与工作的新思路"></a>从价值出发－找寻学习与工作的新思路</h3><p>迷茫能引发思考，架构则塑造了视野，而价值则是我们之所以存活，之所以工作的逻辑起点。基于这样一种价值思维，对我们的学习和工作又可以有哪些改启示呢？明确自身的业务相关主体：找出你工作的协作关系网内的业务方和客户方，这样你就可以从客户方中找到离你最近的业务价值点，从你的业务方中挖掘更多的资源。甚至你可以按这个思路顺着网络向上或向下挖掘价值链条，整合更多的上下游资源以实现更大的价值。</p>
+<p>向前一步，为更大的价值负责：不要因为自己是开发人员就不去关注软件运维，不要因为只是测试就不关注软件开发，因为你关注的越多你越能看清全局的价值目标。如果只关注一亩三分地，那么注定这辈子只能困守在这一亩三分地里，成为一名流水线上焦虑至死的码农。试着转变思维，从架构师的角度思考价值问题，看看能否将技术贯穿到业务、到用户、到最终的价值去。之前我的朋友说过要把产品经理踢到运营位置去，把程序员踢到产品经理位置去，这样才是正确做事方式。这句话也是类似的意思，向前一步才能懂得怎么做的更好。</p>
+<p>像架构师一样思考，用价值找寻重心：人的迷茫是因为找不到重心，而价值的意义在于引导我们思考做哪些事情才能实现价值，先做哪些事情会比后做哪些事情更能创造收益。像架构师那样全局性思考，把遇到问题进行拆分，把学习到的事物串联起来，努力构成完整的价值链条。学会连接，构建体系：前几天看到一篇文章对今日头条的产品形态极尽批判之词，指责它的智能算法将人类封死在自己的喜好之中，将人类社会进一步碎片化。这似乎很有道理，有趣的是互联网将我们连接至广袤的世界，却也把我们封闭在独属于自己的小世界里。依旧是我的那位朋友，他说他的最大价值在于连接，将不同的人连接在一起，有趣的事情可能就会即将发生。或许算法的天性就是顺从与迎合，但人最终想理解这个世界还是需要依靠自身的行动与不同人之间建立联系，这也是一种摆脱流水线限制的有效方式。另外，我们自身也是某种事物连接的产物，比如架构师，他是业务、技术、管理连接在一起的一种产物。所以我们应当树立自身的知识体系以吸收融合新知识，将孤立的概念连接起来，形成自身的价值链条。比如这篇文章将我从事技术开发经验、与对架构的理解以及自身过往经历结合起来，这也是一种内在的体系梳理。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EchoDemo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EchoDemo Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/16/《不止代码》摘句(一)/" rel="next" title="《不止代码》摘句(一)">
+                <i class="fa fa-chevron-left"></i> 《不止代码》摘句(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/16/《房思琪的初恋乐园》摘句/" rel="prev" title="《房思琪的初恋乐园》摘句">
+                《房思琪的初恋乐园》摘句 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="EchoDemo" />
+          <p class="site-author-name" itemprop="name">EchoDemo</p>
+          <p class="site-description motion-element" itemprop="description">Less interests,more interest。</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">187</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/EchoDemo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/149464811/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/5496500419/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.liuchuo.net/" title="柳女神" target="_blank">柳女神</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lvxiong7zg.com" title="吕雄" target="_blank">吕雄</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是架构？"><span class="nav-number">1.</span> <span class="nav-text">什么是架构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构目标需要适应业务的发展"><span class="nav-number">2.</span> <span class="nav-text">架构目标需要适应业务的发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从价值出发－找寻学习与工作的新思路"><span class="nav-number">3.</span> <span class="nav-text">从价值出发－找寻学习与工作的新思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EchoDemo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共137.5k字</span>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+  <script type="text/javascript" color="0,0,0" opacity='0.3' zIndex="-2" count="30" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
