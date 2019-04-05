@@ -111,16 +111,16 @@
 <meta name="description" content="Redis服务器是一个事件驱动程序，服务器需要处理以下两类事件： 文件事件（file event）：Redis服务器通过套接字与客户端（或者其他Redis服务器）进行连接，而文件事件就是服务器对套接字（Socket）操作的抽象。服务器与客户端（或者其他服务器）的通信会产生相应的文件事件，而服务器则通过监听并处理这些事件来完成一系列网络通信操作。 时间事件（time event）：Redis服务器中">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis中事件处理">
+<meta property="og:title" content="Redis中的事件处理">
 <meta property="og:url" content="http://www.echodemo.cc/2019/04/05/Redis中事件处理/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="Redis服务器是一个事件驱动程序，服务器需要处理以下两类事件： 文件事件（file event）：Redis服务器通过套接字与客户端（或者其他Redis服务器）进行连接，而文件事件就是服务器对套接字（Socket）操作的抽象。服务器与客户端（或者其他服务器）的通信会产生相应的文件事件，而服务器则通过监听并处理这些事件来完成一系列网络通信操作。 时间事件（time event）：Redis服务器中">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/IO.png">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/socket.png">
-<meta property="og:updated_time" content="2019-04-05T03:14:22.795Z">
+<meta property="og:updated_time" content="2019-04-05T03:21:24.943Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis中事件处理">
+<meta name="twitter:title" content="Redis中的事件处理">
 <meta name="twitter:description" content="Redis服务器是一个事件驱动程序，服务器需要处理以下两类事件： 文件事件（file event）：Redis服务器通过套接字与客户端（或者其他Redis服务器）进行连接，而文件事件就是服务器对套接字（Socket）操作的抽象。服务器与客户端（或者其他服务器）的通信会产生相应的文件事件，而服务器则通过监听并处理这些事件来完成一系列网络通信操作。 时间事件（time event）：Redis服务器中">
 <meta name="twitter:image" content="http://www.echodemo.cc/images/2019/4/IO.png">
 
@@ -156,7 +156,7 @@
 
 
 
-  <title> Redis中事件处理 | EchoDemo's Blogs </title>
+  <title> Redis中的事件处理 | EchoDemo's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -356,7 +356,7 @@
             
             
               
-                Redis中事件处理
+                Redis中的事件处理
               
             
           </h2>
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,167
+                  1,198
                 </span>
               
 
@@ -484,7 +484,7 @@
 <p><img src="/images/2019/4/IO.png" alt="&quot;redis线程模型&quot;"></p>
 <p>文件事件处理器的四个组成部分，它们分别是套接字、I/O多路复用程序、文件事件分派器（dispatcher），以及事件处理器。</p>
 <p>（1）文件事件是对套接字操作的抽象，每当一个套接字准备好执行连接应答（accept）、写入、读取、关闭等操作时，就会产生一个文件事件。因为一个服务器通常会连接多个套接字，所以多个文件事件有可能会并发地出现。</p>
-<p>（2）I/O多路复用程序负责监听多个套接字，并向文件事件分派器传送那些产生了事件的套接字。尽管多个文件事件可能会并发地出现，但I/O多路复用程序总是会将所有产生事件的套接字都放到一个队列里面，然后通过这个队列，以有序（sequentially）、同步（synchronously）、每次一个套接字的方式向文件事件分派器传送套接字。</p>
+<p>（2）I/O多路复用程序负责监听多个套接字，并向文件事件分派器传送那些产生了事件的套接字。尽管多个文件事件可能会并发地出现，但I/O多路复用程序总是会将所有产生事件的套接字都放到一个队列里面，然后通过这个队列，以有序（sequentially）、同步（synchronously）、每次一个套接字的方式向文件事件分派器传送套接字。如果你不太清楚IO多路复用程序可以阅读我的这篇博客：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E7%9A%84IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">Redis中的IO多路复用</a></p>
 <p><img src="/images/2019/4/socket.png" alt="&quot;socket&quot;"></p>
 <p>（3）文件事件分派器接收I/O多路复用程序传来的套接字，并根据套接字产生的事件的类型，调用相应的事件处理器。</p>
 <p>（4）事件处理器是一个个函数，它们定义了某个事件发生时，服务器应该执行的动作。</p>
