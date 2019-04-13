@@ -118,20 +118,20 @@
 
 
 
-<meta name="description" content="在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状">
+<meta name="description" content="人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》   在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis中的I&#x2F;O多路复用">
 <meta property="og:url" content="http://www.echodemo.cc/2019/04/05/Redis中的IO多路复用/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状">
+<meta property="og:description" content="人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》   在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/selector.png">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/IO.png">
-<meta property="og:updated_time" content="2019-04-05T03:20:05.703Z">
+<meta property="og:updated_time" content="2019-04-13T02:38:14.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中的I&#x2F;O多路复用">
-<meta name="twitter:description" content="在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状">
+<meta name="twitter:description" content="人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》   在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。 1、阻塞I/O我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返">
 <meta name="twitter:image" content="http://www.echodemo.cc/images/2019/4/selector.png">
 
 
@@ -462,7 +462,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  878
+                  924
                 </span>
               
 
@@ -500,7 +500,10 @@
       
 
       
-        <p>在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。</p>
+        <center>人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》</center>
+
+<hr>
+<p>在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。</p>
 <h3 id="1、阻塞I-O"><a href="#1、阻塞I-O" class="headerlink" title="1、阻塞I/O"></a>1、阻塞I/O</h3><p>我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状态，我们就称之为阻塞I/O。</p>
 <h3 id="2、非阻塞I-O"><a href="#2、非阻塞I-O" class="headerlink" title="2、非阻塞I/O"></a>2、非阻塞I/O</h3><p>非阻塞IO是通过fcntl（POSIX）或ioctl（Unix）设为非阻塞模式。此时，当你调用read时，如果有数据收到，就返回数据；如果没有数据收到，就立刻返回一个错误。这样的话就不存在线程的阻塞了，但是你还是要不断的轮询来读取或写入。相当于你去查看有没有数据，告诉你没有，过一会再来吧！应用过一会再来问，有没有数据？没有数据，会有一个返回。但是依旧很不好。应用必须得过一会来一下，问问内核有木有数据啊。</p>
 <h3 id="3、I-O多路复用"><a href="#3、I-O多路复用" class="headerlink" title="3、I/O多路复用"></a>3、I/O多路复用</h3><p>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。多路复用是指使用一个线程来检查多个Socket的就绪状态，比如调用select和poll函数，传入多个文件描述符（FileDescription，简称FD），如果有一个文件描述符就绪，则返回，否则阻塞直到超时。得到就绪状态后进行真正的操作可以在同一个线程里执行，也可以启动线程执行（比如使用线程池）。什么意思呢？就是派一个代表，同时监听多个文件描述符是否有数据到来。等着等着，如果有数据，就告诉某某你的数据来啦！赶紧来处理吧。</p>
@@ -650,7 +653,7 @@
                src="/images/avatar.gif"
                alt="EchoDemo" />
           <p class="site-author-name" itemprop="name">EchoDemo</p>
-          <p class="site-description motion-element" itemprop="description">Less interests,more interest。</p>
+          <p class="site-description motion-element" itemprop="description">山有木兮木有枝，心悦君兮君不知。</p>
         </div>
 
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=525907803&auto=1&height=66"></iframe>
@@ -660,7 +663,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">192</span>
+                <span class="site-state-item-count">200</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -678,7 +681,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -813,7 +816,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.8k字</span>
+  <span class="post-count">博客全站共152.9k字</span>
 </div>
 
 

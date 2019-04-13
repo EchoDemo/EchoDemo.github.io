@@ -118,19 +118,19 @@
 
 
 
-<meta name="description" content="1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。 Redis是一种基于键值对（key-value）的NoSQL数据库。N">
+<meta name="description" content="你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》   1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识Redis">
 <meta property="og:url" content="http://www.echodemo.cc/2019/04/05/初识Redis/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。 Redis是一种基于键值对（key-value）的NoSQL数据库。N">
+<meta property="og:description" content="你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》   1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/nosql.png">
-<meta property="og:updated_time" content="2019-04-05T02:12:15.025Z">
+<meta property="og:updated_time" content="2019-04-13T02:29:37.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Redis">
-<meta name="twitter:description" content="1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。 Redis是一种基于键值对（key-value）的NoSQL数据库。N">
+<meta name="twitter:description" content="你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》   1，盛赞RedisRedis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用">
 <meta name="twitter:image" content="http://www.echodemo.cc/images/2019/4/nosql.png">
 
 
@@ -461,7 +461,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,387
+                  2,473
                 </span>
               
 
@@ -499,7 +499,10 @@
       
 
       
-        <h3 id="1，盛赞Redis"><a href="#1，盛赞Redis" class="headerlink" title="1，盛赞Redis"></a>1，盛赞Redis</h3><p>Redis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。</p>
+        <center>你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》</center>
+
+<hr>
+<h3 id="1，盛赞Redis"><a href="#1，盛赞Redis" class="headerlink" title="1，盛赞Redis"></a>1，盛赞Redis</h3><p>Redis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。</p>
 <p>Redis是一种基于键值对（key-value）的NoSQL数据库。NoSQL(NoSQL = Not Only SQL )。是对不同于传统的关系型数据库的数据库管理系统的统称。高可扩展性，分布式计算，低成本，架构的灵活性等特性。</p>
 <p><img src="/images/2019/4/nosql.png" alt="&quot;NoSQL数据库分类&quot;"></p>
 <p>国外的Twitter、 Instagram、Stack Overflow、GitHub，国内像新浪微博、阿里巴巴、腾讯、百度、搜狐、优酷土豆、美团、小米、唯品会等公司都是 Redis的使用者。</p>
@@ -730,7 +733,7 @@ $ &quot;world&quot;
                src="/images/avatar.gif"
                alt="EchoDemo" />
           <p class="site-author-name" itemprop="name">EchoDemo</p>
-          <p class="site-description motion-element" itemprop="description">Less interests,more interest。</p>
+          <p class="site-description motion-element" itemprop="description">山有木兮木有枝，心悦君兮君不知。</p>
         </div>
 
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=525907803&auto=1&height=66"></iframe>
@@ -740,7 +743,7 @@ $ &quot;world&quot;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">192</span>
+                <span class="site-state-item-count">200</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -758,7 +761,7 @@ $ &quot;world&quot;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -893,7 +896,7 @@ $ &quot;world&quot;
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.8k字</span>
+  <span class="post-count">博客全站共152.9k字</span>
 </div>
 
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-04-12T13:54:32.169Z</updated>
+  <updated>2019-04-13T10:01:14.168Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,11 +17,245 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JVM内存结构、Java内存模型和Java对象模型</title>
+    <link href="http://www.echodemo.cc/2019/04/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E3%80%81Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8CJava%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://www.echodemo.cc/2019/04/13/JVM内存结构、Java内存模型和Java对象模型/</id>
+    <published>2019-04-13T07:40:51.000Z</published>
+    <updated>2019-04-13T10:01:14.168Z</updated>
+    
+    <content type="html"><![CDATA[<center>休对故人思故国，且将新火试新茶，诗酒趁年华。—-苏轼《望江南》</center><hr><h3 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h3><p>我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：</p><p><img src="/images/2019/4/jvmstructure.png" alt="&quot;java内存结构&quot;"></p><p>以上是JVM规范，不同的虚拟机实现会各有不同，但是一般会遵守规范。根据JVM规范，JVM把内存划分成了这几个区域<strong>（其中，方法区和堆是所有线程共享的）：</strong></p><pre><code>1.方法区（Method Area）2.堆区（Heap）3.虚拟机栈（JVM Stack）4.本地方法栈（Native Method Stack）5.PC寄存器（The PC Register）</code></pre><hr><h4 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h4><p>方法区存放了要加载的类的信息（如类名、修饰符等）、静态变量、构造函数、final定义的常量、类中的字段和方法等信息。方法区是全局共享的，在一定条件下也会被GC（Garbage Collection）。当方法区超过它允许的大小时，就会抛出OutOfMemory：PermGen Space异常。</p><p>在Hotspot虚拟机中，这块区域对应持久代（Permanent Generation），一般来说，方法区上执行GC的情况很少，因此方法区被称为持久代的原因之一，但这并不代表方法区上完全没有GC，其上的GC主要针对常量池的回收和已加载类的卸载。在方法区上进行GC，条件相当苛刻而且困难。</p><p>如图中所示，运行时常量池（Runtime Constant Pool）是方法区的一部分，用于存储编译器生成的常量和引用。一般来说，常量的分配在编译时就能确定，但也不全是，也可以存储在运行时期产生的常量。比如String类的intern（）方法，作用是String类维护了一个常量池，如果调用的字符”hello”已经在常量池中，则直接返回常量池中的地址，否则新建一个常量加入池中，并返回地址。</p><h4 id="堆区（Heap）"><a href="#堆区（Heap）" class="headerlink" title="堆区（Heap）"></a>堆区（Heap）</h4><p>堆区是GC最频繁的，也是理解GC机制最重要的区域。<strong>堆区由所有线程共享，在虚拟机启动时创建。</strong>堆区主要用于存放对象实例及数组，所有new出来的对象都存储在该区域。</p><h4 id="Java虚拟机栈（JVM-Stack）"><a href="#Java虚拟机栈（JVM-Stack）" class="headerlink" title="Java虚拟机栈（JVM Stack）"></a>Java虚拟机栈（JVM Stack）</h4><p>虚拟机栈占用的是操作系统内存，每个线程对应一个虚拟机栈，它是线程私有的，生命周期和线程一样，每个方法被执行时产生一个栈帧（Statck Frame），栈帧用于存储局部变量表、动态链接、操作数和方法出口等信息，当方法被调用时，栈帧入栈，当方法调用结束时，栈帧出栈。</p><p>局部变量表中存储着和方法相关的局部变量，包括各种基本数据类型及对象的引用地址等，因此他有个特点：<strong>内存空间可以在编译期间就确定，运行时不再改变。</strong></p><p>虚拟机栈定义了两种异常类型：StackOverFlowError(栈溢出)和OutOfMemoryError（内存溢出）。如果线程调用的栈深度大于虚拟机允许的最大深度，则抛出StackOverFlowError；不过大多数虚拟机都允许动态扩展虚拟机栈的大小，所以线程可以一直申请栈，直到内存不足时，抛出OutOfMemoryError。</p><h4 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h4><p>本地方法栈用于支持native方法的执行，存储了每个native方法的执行状态。本地方法栈和虚拟机栈他们的运行机制一致，唯一的区别是，<strong>虚拟机栈执行Java方法，本地方法栈执行native方法。</strong>在很多虚拟机中（如Sun的JDK默认的HotSpot虚拟机），会将虚拟机栈和本地方法栈一起使用。</p><h4 id="PC寄存器（The-PC-Register）"><a href="#PC寄存器（The-PC-Register）" class="headerlink" title="PC寄存器（The PC Register）"></a>PC寄存器（The PC Register）</h4><p>PC寄存器（The PC Register）是一个很小的内存区域，不在RAM上，而是直接划分在CPU上，程序猿无法操作它，它的作用是：JVM在解释字节码（.class）文件时，存储当前线程执行的字节码行号，只是一种概念模型，各种JVM所采用的方式不一样。字节码解释器工作时，就是通过改变PC寄存器（程序计数器）的值来取下一条要执行的指令，分支、循环、跳转等基础功能都是依赖此技术区完成的。</p><p>每个PC寄存器只能记录一个线程的行号，因此它是线程私有的。如果程序当前正在执行的是一个java方法，则PC寄存器记录的是正在执行的虚拟机字节码指令地址，如果执行的是native方法，则寄存器的值为空，此内存区是唯一不会抛出OutOfMemoryError的区域。</p><hr><h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><p>Java内存模型看上去和Java内存结构（JVM内存结构）差不多，很多人会误以为两者是一回事儿。在前面的关于JVM的内存结构的图中，我们可以看到，其中Java堆和方法区的区域是多个线程共享的数据区域。也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java的线程间通过共享内存进行通信”。</p><p>Java内存模型（Java Memory Model）简称JMM。其实JMM并不像JVM内存结构一样是真实存在的。他只是一个抽象的概念。JSR-133: Java Memory Model and Thread Specification中描述了，JMM是和多线程相关的，它描述了一组规则或规范，这个规范定义了一个线程在对共享变量进行写入时对另一个线程是可见的。</p><p>简单总结下，Java的多线程之间是通过共享内存进行通信的，而由于采用共享内存进行通信，在通信过程中会存在一系列如可见性、原子性、顺序性等问题，而JMM就是围绕着多线程通信以及与其相关的一系列特性而建立的模型。JMM定义了一些语法集，这些语法集映射到Java语言中就是volatile、synchronized等关键字。在Java中，JMM是一个非常重要的概念，正是由于有了JMM，Java的并发编程才能避免很多问题。下面是JMM抽象示意图：</p><p><img src="/images/2019/4/jmm.png" alt="&quot;java内存模型&quot;"></p><hr><h3 id="Java对象模型"><a href="#Java对象模型" class="headerlink" title="Java对象模型"></a>Java对象模型</h3><p>我们都知道Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的。这个关于Java对象自身的存储模型称之为Java对象模型。</p><p>在HotSpot虚拟机中，设计了一个OOP-Klass Model。OOP（Ordinary Object Pointer）指的是普通对象指针，而Klass用来描述对象实例的具体类型。</p><p>每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。下面是一个简单的Java对象的OOP-Klass模型，即Java对象模型。</p><p><img src="/images/2019/4/OOPKlass.jpg" alt="&quot;java对象模型&quot;"></p><p>从上图中可以看到，在方法区的instantKlass中有一个int a=1的数据存储。在堆内存中的两个对象的oop中，分别维护着int b=3,int b=2的实例数据。和oopDesc一样，instantKlass也维护着一些fields，用来保存类中定义的类数据，比如int a=1。</p><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>最后，我们再来区分下JVM内存结构、 Java内存模型 以及Java对象模型这三个概念：JVM内存结构，和Java虚拟机的运行时区域有关。 Java内存模型，和Java的并发编程有关。Java对象模型和Java对象在虚拟机中的表现形式有关。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;休对故人思故国，且将新火试新茶，诗酒趁年华。—-苏轼《望江南》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;JVM内存结构&quot;&gt;&lt;a href=&quot;#JVM内存结构&quot; class=&quot;headerlink&quot; title=&quot;JVM内存结构&quot;&gt;&lt;/a&gt;JVM内存结构&lt;/h
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="内存模型" scheme="http://www.echodemo.cc/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL中碰到的问题</title>
+    <link href="http://www.echodemo.cc/2019/04/13/MySQL%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.echodemo.cc/2019/04/13/MySQL中碰到的问题/</id>
+    <published>2019-04-13T07:05:47.000Z</published>
+    <updated>2019-04-13T06:29:55.472Z</updated>
+    
+    <content type="html"><![CDATA[<center>我把天空和大地打扫地干干净净，归还一个陌不相识的人。—-海子《黎明》</center><hr><h3 id="在使用group-by时碰到的问题"><a href="#在使用group-by时碰到的问题" class="headerlink" title="在使用group by时碰到的问题"></a>在使用group by时碰到的问题</h3><p>(1)选择列表中的列无效，因为该列没有包含在聚合函数或者group by子句中。</p><pre><code>select id,name,count(0) as cx from student group by id order by cx desc</code></pre><p>其中name会无效，因为该列没有包含在聚合函数或者group by子句当中。也就是说：在select需要查询语句中选中的字段，必须出现在group by子句中。我们还需注意的是：group by和order by一起使用时，order by要在group by的后面。</p><p>(2)每个 group by 表达式必须至少包含一个不是外部引用的列。</p><pre><code>select  count(0)，nothing  from student group by nothing having name=&apos;echodemo&apos;</code></pre><p>出错的原因是因为group by语句所跟的内容一般是数据表中的字段或者数据表的表达式，因为上边的句子中在group by后边使用的是数据表中不存在的字段且也不是数据表的表达式，为外部实例，所以才会报上变得错误。</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;我把天空和大地打扫地干干净净，归还一个陌不相识的人。—-海子《黎明》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;在使用group-by时碰到的问题&quot;&gt;&lt;a href=&quot;#在使用group-by时碰到的问题&quot; class=&quot;headerlink&quot; title=&quot;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>乐观锁与悲观锁</title>
+    <link href="http://www.echodemo.cc/2019/04/13/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/"/>
+    <id>http://www.echodemo.cc/2019/04/13/乐观锁与悲观锁/</id>
+    <published>2019-04-13T06:30:39.000Z</published>
+    <updated>2019-04-13T06:26:00.617Z</updated>
+    
+    <content type="html"><![CDATA[<center>死亡不是真的逝去，遗忘才是永恒的消亡。—-李·昂克里奇《寻梦环游记》</center><hr><p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。而乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p><p>其实无论是悲观锁还是乐观锁，都是人们定义出来的概念，可以认为是一种思想。乐观锁和悲观锁的概念不仅仅是关系型数据库系统所具有的，像memcache、hibernate、tair等都有类似的概念。</p><p>针对于不同的业务场景，应该选用不同的并发控制方式。所以，不要把乐观并发控制和悲观并发控制狭义的理解为DBMS中的概念，更不要把他们和数据中提供的锁机制（行锁、表锁、排他锁、共享锁）混为一谈。其实，在DBMS中，悲观锁正是利用数据库本身提供的锁机制来实现的。</p><hr><h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>在关系数据库管理系统里，悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。</p><p>悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p><p>悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度(悲观)，因此，在整个数据处理过程中，将数据处于锁定状态。 悲观锁的实现，往往依靠数据库提供的锁机制 （也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）</p><h4 id="在数据库中，悲观锁的流程如下："><a href="#在数据库中，悲观锁的流程如下：" class="headerlink" title="在数据库中，悲观锁的流程如下："></a>在数据库中，悲观锁的流程如下：</h4><p>在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。如果加锁失败，说明该记录正在被修改，那么当前查询可能要等待或者抛出异常。 具体响应方式由开发者根据实际需要决定。<br>如果成功加锁，那么就可以对记录做修改，事务完成后就会解锁了。其间如果有其他对该记录做修改或加排他锁的操作，都会等待我们解锁或直接抛出异常。</p><h4 id="MySQL-InnoDB中使用悲观锁"><a href="#MySQL-InnoDB中使用悲观锁" class="headerlink" title="MySQL InnoDB中使用悲观锁"></a>MySQL InnoDB中使用悲观锁</h4><p>要使用悲观锁，我们必须关闭MySQL数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是说，当你执行一个更新操作后，MySQL会立刻将结果进行提交。set autocommit=0。</p><pre><code>//0.开始事务begin;/begin work;/start transaction; (三者选一就可以)//1.查询出商品信息select status from t_goods where id=1 for update;//2.根据商品信息生成订单insert into t_orders (id,goods_id) values (null,1);//3.修改商品status为2update t_goods set status=2;//4.提交事务commit;/commit work;</code></pre><p>上面的查询语句中，我们使用了select…for update的方式，这样就通过开启排他锁的方式实现了悲观锁。此时在t_goods表中，id为1的 那条数据就被我们锁定了，其它的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改。</p><p>上面我们提到，使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住，这点需要注意。</p><h4 id="优点与不足"><a href="#优点与不足" class="headerlink" title="优点与不足"></a>优点与不足</h4><p>悲观并发控制实际上是“先取锁再访问”的保守策略，为数据处理的安全提供了保证。但是在效率方面，处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会；另外，在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数。</p><hr><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>在关系数据库管理系统里，乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。乐观事务控制最早是由孔祥重（H.T.Kung）教授提出。</p><p>乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。相对于悲观锁，在对数据库进行处理的时候，乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</p><p>数据版本,为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则认为是过期数据。实现数据版本有两种方式，第一种是使用版本号，第二种是使用时间戳。</p><h4 id="使用版本号实现乐观锁"><a href="#使用版本号实现乐观锁" class="headerlink" title="使用版本号实现乐观锁"></a>使用版本号实现乐观锁</h4><p>使用版本号时，可以在数据初始化时指定一个版本号，每次对数据的更新操作都对版本号执行+1操作。并判断当前版本号是不是该数据的最新的版本号。</p><pre><code>//1.查询出商品信息select (status,status,version) from t_goods where id=#{id}//2.根据商品信息生成订单insert into t_orders (id,goods_id) values (null,1);//3.修改商品status为2update t_goods set status=2,version=version+1 where id=#{id} and version=#{version};</code></pre><h4 id="优点与不足-1"><a href="#优点与不足-1" class="headerlink" title="优点与不足"></a>优点与不足</h4><p>乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;死亡不是真的逝去，遗忘才是永恒的消亡。—-李·昂克里奇《寻梦环游记》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。而乐观并发控制(乐观锁)和
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+      <category term="数据库" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL中的读锁和写锁</title>
+    <link href="http://www.echodemo.cc/2019/04/13/MySQL%E4%B8%AD%E7%9A%84%E8%AF%BB%E9%94%81%E5%92%8C%E5%86%99%E9%94%81/"/>
+    <id>http://www.echodemo.cc/2019/04/13/MySQL中的读锁和写锁/</id>
+    <published>2019-04-13T05:50:17.000Z</published>
+    <updated>2019-04-13T05:52:41.530Z</updated>
+    
+    <content type="html"><![CDATA[<center>即使明天早上，枪口和血淋淋的太阳，让我交出自由、青春和笔，我也绝不会交出这个夜晚。—-北岛《履历》</center><hr><p>本文提到的读锁和写锁都是MySQL数据库的MyISAM引擎支持的表级锁。而对于行级锁的共享读锁和互斥写锁请阅读MySQL中的共享锁与排他锁。其实共享锁指的就是读锁！互斥锁、排他锁、独占锁值得都是写锁。</p><hr><h3 id="重点知识回顾"><a href="#重点知识回顾" class="headerlink" title="重点知识回顾"></a>重点知识回顾</h3><p>MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM和MEMORY存储引擎采用的是表级锁(table-level locking);BDB存储引擎采用的是页面锁(page-level locking)，但也支持表级锁;InnoDB存储引擎既支持行级锁(row-level locking)，也支持表级锁，但默认情况下是采用行级锁。</p><pre><code>表级锁:开销小，加锁快;不会出现死锁;锁定粒度大，发生锁冲突的概率最高，并发度最低。行级锁:开销大，加锁慢;会出现死锁;锁定粒度最小,发生锁冲突的概率最低，并发度也最高。页面锁:开销和加锁时间界于表锁和行锁之间;会出现死锁;锁定粒度界于表锁和行锁之间，并发度一般。</code></pre><hr><h3 id="MyISAM表锁"><a href="#MyISAM表锁" class="headerlink" title="MyISAM表锁"></a>MyISAM表锁</h3><p>MyISAM 存储引擎只支持表锁，MySQL 的表级锁有两种模式:表共享读锁(Table Read Lock)和表独占写锁(Table Write Lock)。</p><p>对于读操作，可以增加读锁，一旦数据表被加上读锁，其他请求可以对该表再次增加读锁，但是不能增加写锁。（当一个请求在读数据时，其他请求也可以读，但是不能写，因为一旦另外一个线程写了数据，就会导致当前线程读取到的数据不是最新的了。这就是不可重复读现象）</p><p>对于写操作，可以增加写锁，一旦数据表被加上写锁，其他请求无法在对该表增加读锁和写锁。（当一个请求在写数据时，其他请求不能执行任何操作，因为在当前事务提交之前，其他的请求无法看到本次修改的内容。这有可能产生脏读、不可重复读和幻读）</p><h4 id="读锁和写锁都是阻塞锁。"><a href="#读锁和写锁都是阻塞锁。" class="headerlink" title="读锁和写锁都是阻塞锁。"></a>读锁和写锁都是阻塞锁。</h4><p>如果t1对数据表增加了写锁，这时t2请求对数据表增加写锁，t2并不会直接返回，而是会一直处于阻塞状态，直到t1释放了对表的锁，这时t2便有可能加锁成功，获取到结果。</p><h4 id="表锁的加锁-解锁方式"><a href="#表锁的加锁-解锁方式" class="headerlink" title="表锁的加锁/解锁方式"></a>表锁的加锁/解锁方式</h4><p>MyISAM 在执行查询语句(SELECT)前,会自动给涉及的所有表加读锁,在执行更新操作 (UPDATE、DELETE、INSERT 等)前，会自动给涉及的表加写锁，这个过程并不需要用户干预，因此，用户一般不需要直接用LOCK TABLE命令给MyISAM表显式加锁。如果用户想要显示的加锁可以使用以下命令：</p><pre><code>锁定表：LOCK TABLES tbl_name {READ | WRITE},[ tbl_name {READ | WRITE},…]解锁表：UNLOCK TABLES </code></pre><p>在用 LOCK TABLES 给表显式加表锁时,必须同时取得所有涉及到表的锁。在执行 LOCK TABLES 后，只能访问显式加锁的这些表，不能访问未加锁的表;如果加的是读锁，那么只能执行查询操作，而不能执行更新操作。在自动加锁的情况下也基本如此，MyISAM 总是一次获得 SQL 语句所需要的全部锁。这也正是 MyISAM 表不会出现死锁(Deadlock Free)的原因。</p><pre><code>//对表test_table增加读锁：LOCK TABLES test_table READUNLOCK test_table//对表test_table增加写锁：LOCK TABLES test_table WRITEUNLOCK test_table</code></pre><p>当使用 LOCK TABLES 时,不仅需要一次锁定用到的所有表,而且,同一个表在 SQL 语句中出现多少次,就要通过与 SQL 语句中相同的别名锁定多少次,否则也会出错!</p><p>比如如下SQL语句：</p><pre><code>select a.first_name,b.first_name, from actor a,actor b where a.first_name = b.first_name;</code></pre><p>该Sql语句中，actor表以别名的方式出现了两次，分别是a,b，这时如果要在该Sql执行之前加锁就要使用以下Sql:</p><pre><code>lock table actor as a read,actor as b read;</code></pre><hr><h4 id="并发插入"><a href="#并发插入" class="headerlink" title="并发插入"></a>并发插入</h4><p>上文提到过 MyISAM 表的读和写是串行的,但这是就总体而言的。在一定条件下,MyISAM表也支持查询和插入操作的并发进行。 MyISAM存储引擎有一个系统变量concurrent_insert,专门用以控制其并发插入的行为,其值分别可以为0、1或2。</p><p>1、当concurrent_insert设置为0时,不允许并发插入。</p><p>2、当concurrent_insert设置为1时,如果MyISAM表中没有空洞(即表的中间没有被删除的行),MyISAM允许在一个进程读表的同时,另一个进程从表尾插入记录。这也是MySQL的默认设置。</p><p>3、当concurrent_insert设置为2时,无论MyISAM表中有没有空洞,都允许在表尾并发插入记录。可以利用MyISAM存储引擎的并发插入特性,来解决应用中对同一表查询和插入的锁争用。</p><hr><h4 id="MyISAM的锁调度"><a href="#MyISAM的锁调度" class="headerlink" title="MyISAM的锁调度"></a>MyISAM的锁调度</h4><p>前面讲过,MyISAM 存储引擎的读锁和写锁是互斥的,读写操作是串行的。那么,一个进程请求某个MyISAM 表的读锁,同时另一个进程也请求同一表的写锁,MySQL 如何处理呢? 答案是写进程先获得锁。</p><p>不仅如此,即使读请求先到锁等待队列,写请求后到,写锁也会插到读锁请求之前!这是因为 MySQL 认为写请求一般比读请求要重要。这也正是 MyISAM 表不太适合于有大量更新操作和查询操作应用的原因,因为,大量的更新操作会造成查询操作很难获得读锁,从而可能永远阻塞。这种情况有时可能会变得非常糟糕!不过幸好我们可以通过 一些设置来调节 MyISAM 的调度行为。</p><pre><code>1、通过指定启动参数low-priority-updates,使MyISAM引擎默认给予读请求以优先的权利。 2、通过执行命令SET LOWPRIORITYUPDATES=1,使该连接发出的更新请求优先级降低。 3、通过指定INSERT、UPDATE、DELETE语句的LOW_PRIORITY属性,降低该语句的优先级。</code></pre><p>另外,MySQL也提供了一种折中的办法来调节读写冲突,即给系统参数max_write_lock_count 设置一个合适的值,当一个表的读锁达到这个值后,MySQL就暂时将写请求的优先级降低, 给读进程一定获得锁的机会。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;即使明天早上，枪口和血淋淋的太阳，让我交出自由、青春和笔，我也绝不会交出这个夜晚。—-北岛《履历》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;本文提到的读锁和写锁都是MySQL数据库的MyISAM引擎支持的表级锁。而对于行级锁的共享读锁和互斥写锁请阅读MySQL中的共享
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL中的共享锁与排他锁</title>
+    <link href="http://www.echodemo.cc/2019/04/13/MySQL%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E9%94%81%E4%B8%8E%E6%8E%92%E4%BB%96%E9%94%81/"/>
+    <id>http://www.echodemo.cc/2019/04/13/MySQL中的共享锁与排他锁/</id>
+    <published>2019-04-13T05:17:06.000Z</published>
+    <updated>2019-04-13T05:26:38.066Z</updated>
+    
+    <content type="html"><![CDATA[<center>从别后，忆相逢，几回魂梦与君同。—-晏几道《鹧鸪天》</center><hr><p>在MySQL中的行级锁,表级锁,页级锁中介绍过，行级锁是Mysql中锁定粒度最细的一种锁，行级锁能大大减少数据库操作的冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。</p><h3 id="共享锁-Share-Lock"><a href="#共享锁-Share-Lock" class="headerlink" title="共享锁(Share Lock)"></a>共享锁(Share Lock)</h3><p>共享锁又称读锁，是读取操作创建的锁。其他用户可以并发读取数据，但任何事务都不能对数据进行修改（获取数据上的排他锁），直到已释放所有共享锁。如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获得共享锁的事务只能读数据，不能修改数据。</p><pre><code>SELECT ... LOCK IN SHARE MODE;</code></pre><p>在查询语句后面增加LOCK IN SHARE MODE，Mysql会对查询结果中的每行都加共享锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请共享锁，否则会被阻塞。其他线程也可以读取使用了共享锁的表，而且这些线程读取的是同一个版本的数据。</p><h3 id="排他锁（eXclusive-Lock）"><a href="#排他锁（eXclusive-Lock）" class="headerlink" title="排他锁（eXclusive Lock）"></a>排他锁（eXclusive Lock）</h3><p>排他锁又称写锁，如果事务T对数据A加上排他锁后，则其他事务不能再对A加任任何类型的封锁。获得排他锁的事务既能读数据，又能修改数据。</p><pre><code>SELECT ... FOR UPDATE;</code></pre><p>在查询语句后面增加FOR UPDATE，Mysql会对查询结果中的每行都加排他锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请排他锁，否则会被阻塞。</p><h3 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h3><p>InnoDB还有两个表锁：</p><p>意向共享锁（IS）：表示事务准备给数据行加入共享锁，也就是说一个数据行加共享锁前必须先取得该表的IS锁。</p><p>意向排他锁（IX）：类似上面，表示事务准备给数据行加入排他锁，说明事务在一个数据行加排他锁前必须先取得该表的IX锁。</p><pre><code>注：意向锁是InnoDB自动加的，不需要用户干预。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;从别后，忆相逢，几回魂梦与君同。—-晏几道《鹧鸪天》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;在MySQL中的行级锁,表级锁,页级锁中介绍过，行级锁是Mysql中锁定粒度最细的一种锁，行级锁能大大减少数据库操作的冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql中的行级锁、表级锁、页级锁</title>
+    <link href="http://www.echodemo.cc/2019/04/13/Mysql%E4%B8%AD%E7%9A%84%E8%A1%8C%E7%BA%A7%E9%94%81%E3%80%81%E8%A1%A8%E7%BA%A7%E9%94%81%E3%80%81%E9%A1%B5%E7%BA%A7%E9%94%81/"/>
+    <id>http://www.echodemo.cc/2019/04/13/Mysql中的行级锁、表级锁、页级锁/</id>
+    <published>2019-04-13T03:07:56.000Z</published>
+    <updated>2019-04-13T05:27:41.090Z</updated>
+    
+    <content type="html"><![CDATA[<center>我的建议是：出发吧。给你的宇宙套上马鞍，看它会变成什么样？—-《瑞克和莫蒂》</center><hr><p>在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。在DBMS中，可以按照锁的粒度把数据库锁分为行级锁(INNODB引擎)、表级锁(MYISAM引擎)和页级锁(BDB引擎 )。</p><hr><h3 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h3><p>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为共享锁 和 排他锁。</p><pre><code>特点:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</code></pre><h3 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h3><p>表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。</p><pre><code>特点:开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。</code></pre><h3 id="页级锁"><a href="#页级锁" class="headerlink" title="页级锁"></a>页级锁</h3><p>表级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁.表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。BDB支持页级锁。</p><pre><code>特点：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</code></pre><hr><h3 id="MySQL常用存储引擎的锁机制"><a href="#MySQL常用存储引擎的锁机制" class="headerlink" title="MySQL常用存储引擎的锁机制"></a>MySQL常用存储引擎的锁机制</h3><pre><code>MyISAM和MEMORY采用表级锁(table-level locking)。BDB采用页面锁(page-level locking)或表级锁，默认为页面锁。InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁。</code></pre><h4 id="Innodb中的行锁与表锁"><a href="#Innodb中的行锁与表锁" class="headerlink" title="Innodb中的行锁与表锁"></a>Innodb中的行锁与表锁</h4><p>前面提到过，在Innodb引擎中既支持行锁也支持表锁，那么什么时候会锁住整张表，什么时候或只锁住一行呢？</p><p>InnoDB行锁是通过给索引上的索引项加锁来实现的，这一点MySQL与Oracle不同，后者是通过在数据块中对相应数据行加锁来实现的。InnoDB这种行锁实现特点意味着：<strong>只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！</strong></p><p>在实际应用中，要特别注意InnoDB行锁的这一特性，不然的话，可能导致大量的锁冲突，从而影响并发性能。</p><p>行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁。行级锁的缺点是：由于需要请求大量的锁资源，所以速度慢，内存消耗大。</p><h4 id="行级锁与死锁"><a href="#行级锁与死锁" class="headerlink" title="行级锁与死锁"></a>行级锁与死锁</h4><p>MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。</p><p>在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。</p><p>当两个事务同时执行，一个锁住了主键索引在等待其他相关索引，一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。</p><p>有多种方法可以避免死锁，这里只介绍常见的三种:</p><pre><code>1、如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会。2、在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率；3、对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率；</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;我的建议是：出发吧。给你的宇宙套上马鞍，看它会变成什么样？—-《瑞克和莫蒂》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。在DBMS中，可以按照锁的粒度把数据库锁分为
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+      <category term="数据库" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库的读现象浅析</title>
+    <link href="http://www.echodemo.cc/2019/04/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AF%BB%E7%8E%B0%E8%B1%A1%E6%B5%85%E6%9E%90/"/>
+    <id>http://www.echodemo.cc/2019/04/13/数据库的读现象浅析/</id>
+    <published>2019-04-13T02:18:27.000Z</published>
+    <updated>2019-04-13T02:31:43.220Z</updated>
+    
+    <content type="html"><![CDATA[<center>别怕美好的一切会消失，咱们先来让它存在。—-王小波《爱你就像爱生命》</center><hr><p>“读现象”是多个事务并发执行时，在读取数据方面可能碰到的状况。先了解它们有助于理解各隔离级别的含义。其中包括脏读、不可重复读和幻读。</p><h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>脏读又称无效数据的读出，是指在数据库访问中，事务T1将某一值修改，然后事务T2读取该值，此后T1因为某种原因撤销对该值的修改，这就导致了T2所读取到的数据是无效的。</p><p>脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交(commit)到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据,那么另外一个事务读到的这个数据是脏数据，依据脏数据所做的操作可能是不正确的。</p><h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读，是指在数据库访问中，一个事务范围内两个相同的查询却返回了不同数据。这是由于查询时系统中其他事务修改的提交而引起的。比如事务T1读取某一数据，事务T2读取并修改了该数据，T1为了对读取值进行检验而再次读取该数据，便得到了不同的结果。</p><p>一种更易理解的说法是：在一个事务内，多次读同一个数据。在这个事务还没有结束时，另一个事务也访问该同一数据。那么，在第一个事务的两次读数据之间。由于第二个事务的修改，那么第一个事务读到的数据可能不一样，这样就发生了在一个事务内两次读到的数据是不一样的，因此称为不可重复读，即原始读取不可重复。</p><h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>幻读是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的“全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入“一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样.一般解决幻读的方法是增加范围锁RangeS，锁定检锁范围为只读，这样就避免了幻读。<br>　　<br>幻读(phantom read)”是不可重复读(Non-repeatable reads)的一种特殊场景：当事务没有获取范围锁的情况下执行SELECT … WHERE操作可能会发生“幻影读(phantom read)”。</p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>要想解决脏读、不可重复读、幻读等读现象，那么就需要提高事务的隔离级别。但与此同时，事务的隔离级别越高，并发能力也就越低。所以，还需要读者根据业务需要进行权衡。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;别怕美好的一切会消失，咱们先来让它存在。—-王小波《爱你就像爱生命》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;“读现象”是多个事务并发执行时，在读取数据方面可能碰到的状况。先了解它们有助于理解各隔离级别的含义。其中包括脏读、不可重复读和幻读。&lt;/p&gt;
+&lt;h3 id=&quot;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+      <category term="数据库" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Limit的用法</title>
+    <link href="http://www.echodemo.cc/2019/04/13/Limit%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+    <id>http://www.echodemo.cc/2019/04/13/Limit的用法/</id>
+    <published>2019-04-13T02:08:26.000Z</published>
+    <updated>2019-04-13T02:14:22.412Z</updated>
+    
+    <content type="html"><![CDATA[<center>春天来得很慢，春天才有浪漫。 —-deca joins《夜间独白》</center><hr><pre><code>SELECT * FROM table LIMIT [offset,] rows | rows OFFSET offset</code></pre><p>LIMIT 子句可以被用于强制 SELECT 语句返回指定的记录数。LIMIT 接受一个或两个数字参数。参数必须是一个整数常量。如果给定两个参数，第一个参数指定第一个返回记录行的偏移量，第二个参数指定返回记录行的最大数目。初始记录行的偏移量是 0(而不是 1)： 为了与 PostgreSQL 兼容，MySQL 也支持句法： LIMIT # OFFSET #。</p><pre><code>SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15//为了检索从某一个偏移量到记录集的结束所有的记录行，可以指定第二个参数为 -1： SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last.//如果只给定一个参数，它表示返回最大的记录行数目： SELECT * FROM table LIMIT 5; //检索前 5 个记录行</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;春天来得很慢，春天才有浪漫。 —-deca joins《夜间独白》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table LIMIT [offset,] rows | rows OFFSET offset
+&lt;/code&gt;&lt;/p
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Redis中的事件处理</title>
     <link href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
     <id>http://www.echodemo.cc/2019/04/05/Redis中事件处理/</id>
     <published>2019-04-05T02:20:00.000Z</published>
-    <updated>2019-04-12T13:54:32.169Z</updated>
+    <updated>2019-04-13T02:34:36.602Z</updated>
     
     <content type="html"><![CDATA[<p>Redis服务器是一个事件驱动程序，服务器需要处理以下两类事件：</p><p>文件事件（file event）：Redis服务器通过套接字与客户端（或者其他Redis服务器）进行连接，而文件事件就是服务器对套接字（Socket）操作的抽象。服务器与客户端（或者其他服务器）的通信会产生相应的文件事件，而服务器则通过监听并处理这些事件来完成一系列网络通信操作。</p><p>时间事件（time event）：Redis服务器中的一些操作（比如serverCron函数）需要在给定的时间点执行，而时间事件就是服务器对这类定时操作的抽象。</p><pre><code>注：TCP用主机的IP地址加上主机上的端口号作为TCP连接的端点，这种端点就叫做套接字（socket）。</code></pre><h3 id="文件事件"><a href="#文件事件" class="headerlink" title="文件事件"></a>文件事件</h3><h4 id="文件事件处理器"><a href="#文件事件处理器" class="headerlink" title="文件事件处理器"></a>文件事件处理器</h4><p>文件事件处理器使用I/O多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器；当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。下图是Redis线程模型：</p><p><img src="/images/2019/4/IO.png" alt="&quot;redis线程模型&quot;"></p><p>文件事件处理器的四个组成部分，它们分别是套接字、I/O多路复用程序、文件事件分派器（dispatcher），以及事件处理器。</p><p>（1）文件事件是对套接字操作的抽象，每当一个套接字准备好执行连接应答（accept）、写入、读取、关闭等操作时，就会产生一个文件事件。因为一个服务器通常会连接多个套接字，所以多个文件事件有可能会并发地出现。</p><p>（2）I/O多路复用程序负责监听多个套接字，并向文件事件分派器传送那些产生了事件的套接字。尽管多个文件事件可能会并发地出现，但I/O多路复用程序总是会将所有产生事件的套接字都放到一个队列里面，然后通过这个队列，以有序（sequentially）、同步（synchronously）、每次一个套接字的方式向文件事件分派器传送套接字。如果你不太清楚IO多路复用程序可以阅读我的这篇博客：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E7%9A%84IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">Redis中的IO多路复用</a></p><p><img src="/images/2019/4/socket.png" alt="&quot;socket&quot;"></p><p>（3）文件事件分派器接收I/O多路复用程序传来的套接字，并根据套接字产生的事件的类型，调用相应的事件处理器。</p><p>（4）事件处理器是一个个函数，它们定义了某个事件发生时，服务器应该执行的动作。</p><h3 id="时间事件"><a href="#时间事件" class="headerlink" title="时间事件"></a>时间事件</h3><p>时间事件分为以下两类：</p><pre><code>定时事件：让一段程序在指定的时间之后执行一次。比如说，让程序X在当前时间的30毫秒之后执行一次;周期性事件：让一段程序每隔指定时间就执行一次。比如说，让程序Y每隔30毫秒就执行一次。</code></pre><p>时间事件主要由以下三个属性组成：</p><pre><code>id：服务器为时间事件创建的全局唯一ID（标识号）。ID号按从小到大的顺序递增，新事件的ID号比旧事件的ID号要大;when：毫秒精度的UNIX时间戳，记录了时间事件的到达（arrive）时间;timeProc：时间事件处理器，一个函数。当时间事件到达时，服务器就会调用相应的处理器来处理事件。</code></pre><p>一个时间事件是定时事件还是周期性事件取决于时间事件处理器的返回值：</p><p>如果事件处理器返回ae.h/AE_NOMORE，那么这个事件为定时事件：该事件在达到一次之后就会被删除，之后不再到达;</p><p>如果事件处理器返回一个非AE_NOMORE的整数值，那么这个事件为周期性时间：当一个时间事件到达之后，服务器会根据事件处理器返回的值，对时间事件的when属性进行更新，让这个事件在一段时间之后再次到达，并以这种方式一直更新并运行下去。比如说，如果一个时间事件的处理器返回整数值30，那么服务器应该对这个时间事件进行更新，让这个事件在30毫秒之后再次到达。(现在的Redis主要使用这个)</p>]]></content>
     
@@ -47,15 +281,18 @@
     <link href="http://www.echodemo.cc/2019/04/05/%E5%88%9D%E8%AF%86Redis/"/>
     <id>http://www.echodemo.cc/2019/04/05/初识Redis/</id>
     <published>2019-04-05T01:49:17.000Z</published>
-    <updated>2019-04-05T02:12:15.025Z</updated>
+    <updated>2019-04-13T02:29:37.637Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1，盛赞Redis"><a href="#1，盛赞Redis" class="headerlink" title="1，盛赞Redis"></a>1，盛赞Redis</h3><p>Redis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。</p><p>Redis是一种基于键值对（key-value）的NoSQL数据库。NoSQL(NoSQL = Not Only SQL )。是对不同于传统的关系型数据库的数据库管理系统的统称。高可扩展性，分布式计算，低成本，架构的灵活性等特性。</p><p><img src="/images/2019/4/nosql.png" alt="&quot;NoSQL数据库分类&quot;"></p><p>国外的Twitter、 Instagram、Stack Overflow、GitHub，国内像新浪微博、阿里巴巴、腾讯、百度、搜狐、优酷土豆、美团、小米、唯品会等公司都是 Redis的使用者。</p><h3 id="2-Redis特性"><a href="#2-Redis特性" class="headerlink" title="2,Redis特性"></a>2,Redis特性</h3><pre><code>1、速度快2、基于键值对的数据结构服务器3、丰富的功能4、简单稳定5、客户端语言多6、持久化7、主从复制8、高可用和分布式</code></pre><p>（1）速度快</p><p>Redis的所有数据都是存放在内存当中。它是完全基于内存，其绝大部分请求是纯粹的内存操作。</p><p>Redis使用了单线程架构。避免了不必要的上下文切换和竞争条件，从而不存在多进程或者多线程切换导致的CPU消耗问题，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。</p><p>采用了非阻塞I/O多路复用机制。这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，此时程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流。阻塞式I/O如果要接收更多的连接，就必须创建更多的线程。在I/O复用模式下大量的连接统统都可以过来直接注册到Selector复用器上面，同时只要单个或者少量的线程来循环处理这些连接事件就可以了，一旦达到“就绪”的条件，就可以立即执行真正的I/O操作。这就是I/O复用与传统的阻塞式I/O最大的不同。也正是I/O复用的精髓所在。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗）。具体的关于I/O多路复用可以查看我的这篇文章：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E7%9A%84IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">I/O多路复用</a></p><p>Redis是用C语言实现的。一般来说C语言实现的程序“距离”操作系统更近，执行速度相对会更快。</p><p>（2）基于键值对的数据结构服务器</p><p>与很多键值对数据库不同的是，Redis中的值不仅可以是字符串，而且还可以是具体的数据结构，Redis它主要提供了5种数据结构：字符串（String）、哈希（Hash)、列表（List）、集合（Set）、有序集合（Sorted Set），同时在字符串的基础之上演变出了位图（Bitmaps）和HyperLogLog两种神奇的“数据结构”，并且随着 LBS（Location Based Service，基于位置服务）的不断发展，Redis3.2版本中加入有关GEO（地理信息定位）的功能，在这些数据结构的帮助下，不仅提高了开发的效率，而且适用于更多的应用场景。</p><p>（3）丰富的功能</p><pre><code>1、提供了键过期功能，可以用来实现缓存。2、提供了发布订阅功能，可以用来实现消息系统。3、支持Lua脚本功能，可以利用Lua创造出新的Redis命令。4、提供了简单的事务功能，能在一定程度上保证事务特性。5、提供了流水线（Pipeline）功能，这样客户端能将一批命令一次性传到 Redis，减少了网络的开销。</code></pre><p>（4）简单稳定</p><p>Redis的源码很少，早期版本的代码只有2万行左右，3.0版本以后由于添加了集群特性，代码增至5万行左右，也就意味着普通的开发和运维人员完全可以“吃透”它。</p><p>Redis使用单线程模型，这样不仅使得Redis服务端处理模型变得简单，而且也使得客户端开发变得简单。</p><p>Redis不需要依赖于操作系统中的类库（例如Memcache需要依赖 libevent这样的系统类库），Redis自己实现了事件处理的相关功能。</p><p>（5）客户端语言多</p><p>Redis提供了简单的TCP通信协议，很多编程语言可以很方便地接入到 Redis，几乎涵盖了主流的编程语言，例如Java、PHP、 Python、C、C++、Nodejs等。</p><p>（6）持久化</p><p>我们都知道的是：将数据放在内存中是不安全的，一旦发生断电或者机器故障，重要的数据可能就会丢失。Redis提供了两种持久化方式用来将内存的数据保存到硬盘：RDB和 AOF。</p><p>RDB(Redis DataBase)是在某个时间点将数据（Database中的key-value的二进制形式数据）写入一个临时的rdb文件，持久化结束后，用这个临时文件替换上次持久化的文件，达到数据恢复。它是通过配置Redis在n秒内如果超过m个key被修改就执行一次RDB操作，这中持久化的方式也叫做snapshots。RDB是间隔一段时间进行持久化，如果在持久化之间发生故障，会发生数据的丢失，所以这种方式更适合数据要求不严谨的时候。</p><p>AOF(Append Only File)把数据的每一条修改命令都追加到aof文件。该“日志文件”保存了历史所有的操作过程，虽然可以保证数据的不易丢失，但是这样也造成了其文件势必会比rdb文件大很多，且aof文件中存储的是命令，导致其恢复的速度变慢。</p><p>（7）主从复制</p><p>Redis提供了复制功能，实现了多个相同数据的Redis副本，复制功能是分布式Redis的基础。</p><p>（8）高可用和分布式</p><p>Redis从2.8版本正式提供了高可用实现Redis Sentinel，它能够保证Redis 节点的故障发现和故障自动转移。Redis从3.0版本正式提供了分布式实现 Redis Cluster，它是Redis真正的分布式实现，提供了高可用、读写和容量的扩展性。</p><p>3，Redis使用场景</p><p>（1）缓存</p><p>Redis提供了键值过期时间设置，也提供了灵活控制最大内存和内存溢出后的淘汰策略。</p><p>（2）排行榜系统</p><p>Redis提供了列表和有序集合数据结构。</p><p>（3）计数器应用</p><p>传统关系型数据库如果并发量很大，为了保证数据的实时性，对其性能是一种很大的挑战。Redis天然支持计数功能而且计数的性能也非常好。</p><p>（4）社交网络</p><p>由于社交网站访问量通常比较大，而且传统的关系型数据不太适合保存点赞，推送，下拉刷新等类型的数据，而Redis提供的数据结构可以相对比较容易地实现这些功能。</p><p>（5）消息队列系统</p><p>Redis提供了发布订阅功能和阻塞队列的功能。</p><p>（6）Redis不适合的场景</p><p>不适合存储大规模的数据和冷数据。</p><p>4，安装Redis</p><p>（1）在Linux上安装Redis</p><pre><code>$ wget http://download.redis.io/releases/redis-3.0.7.tar.gz $ tar xzf redis-3.0.7.tar.gz $ ln -s redis-3.0.7 redis $ cd redis $ make $ make install1、下载Redis指定版本的源码压缩包到当前目录。2、解压缩Redis源码压缩包。3、建立一个redis目录的软连接，指向redis-3.0.7。这是为了不把redis目录固定在指定版本上，有利于Redis未来版本升级， 是安装软件的一种好习惯。4、进入redis目录。5、编译（编译之前确保操作系统已经安装gcc）。6、安装。将Redis的相关运行文 件放到/usr/local/bin/下，这样就可以在任意目录下执行Redis的命令。</code></pre><p>（2）在Windows上安装Redis</p><p>5，启动、操作、关闭Redis</p><p>启动Redis服务</p><p>（1）默认配置</p><pre><code>$ redis-server</code></pre><p>（2）运行启动</p><pre><code>$ redis-server --configKey1 configValue1 --configKey2 configValue2</code></pre><p>（3）配置文件启动</p><pre><code>$ redis-server /opt/redis/redis.conf</code></pre><p>Redis命令行客户端</p><p>（1）交互式方式</p><pre><code>$ redis-cli -h 127.0.0.1 -p 6379 $ 127.0.0.1:6379&gt; set hello world$ OK$ 127.0.0.1:6379&gt; get hello$ &quot;world&quot;</code></pre><p>（2）命令方式</p><pre><code>$ redis-cli -h 127.0.0.1 -p 6379 get hello$ &quot;world&quot;</code></pre><p>注：如果没有-h参数，那么默认连接127.0.0.1；如 果没有-p，那么默认6379端口，也就是说如果-h和-p都没写就是连接 127.0.0.1：6379这个Redis实例。</p><p>停止Redis服务</p><p>Redis提供了shutdown命令来停止Redis服务，如果要停掉127.0.0.1上 6379端口上的Redis服务：</p><pre><code>$ redis-cli shutdown</code></pre>]]></content>
+    <content type="html"><![CDATA[<center>你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》</center><hr><h3 id="1，盛赞Redis"><a href="#1，盛赞Redis" class="headerlink" title="1，盛赞Redis"></a>1，盛赞Redis</h3><p>Redis（REmote Dictionary Server）的前身是一个叫做LLOOGG的网站，在2008年，Redis的作者在开发该网站时，需要实现一个高性能的队列功能，最开始是使用MySQL来实现的， 但后来发现无论如何优化SQL语句都无法使网站的性能提高上去，他决定做一个专属于LLOOGG的数据库 。</p><p>Redis是一种基于键值对（key-value）的NoSQL数据库。NoSQL(NoSQL = Not Only SQL )。是对不同于传统的关系型数据库的数据库管理系统的统称。高可扩展性，分布式计算，低成本，架构的灵活性等特性。</p><p><img src="/images/2019/4/nosql.png" alt="&quot;NoSQL数据库分类&quot;"></p><p>国外的Twitter、 Instagram、Stack Overflow、GitHub，国内像新浪微博、阿里巴巴、腾讯、百度、搜狐、优酷土豆、美团、小米、唯品会等公司都是 Redis的使用者。</p><h3 id="2-Redis特性"><a href="#2-Redis特性" class="headerlink" title="2,Redis特性"></a>2,Redis特性</h3><pre><code>1、速度快2、基于键值对的数据结构服务器3、丰富的功能4、简单稳定5、客户端语言多6、持久化7、主从复制8、高可用和分布式</code></pre><p>（1）速度快</p><p>Redis的所有数据都是存放在内存当中。它是完全基于内存，其绝大部分请求是纯粹的内存操作。</p><p>Redis使用了单线程架构。避免了不必要的上下文切换和竞争条件，从而不存在多进程或者多线程切换导致的CPU消耗问题，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。</p><p>采用了非阻塞I/O多路复用机制。这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，此时程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流。阻塞式I/O如果要接收更多的连接，就必须创建更多的线程。在I/O复用模式下大量的连接统统都可以过来直接注册到Selector复用器上面，同时只要单个或者少量的线程来循环处理这些连接事件就可以了，一旦达到“就绪”的条件，就可以立即执行真正的I/O操作。这就是I/O复用与传统的阻塞式I/O最大的不同。也正是I/O复用的精髓所在。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗）。具体的关于I/O多路复用可以查看我的这篇文章：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E7%9A%84IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">I/O多路复用</a></p><p>Redis是用C语言实现的。一般来说C语言实现的程序“距离”操作系统更近，执行速度相对会更快。</p><p>（2）基于键值对的数据结构服务器</p><p>与很多键值对数据库不同的是，Redis中的值不仅可以是字符串，而且还可以是具体的数据结构，Redis它主要提供了5种数据结构：字符串（String）、哈希（Hash)、列表（List）、集合（Set）、有序集合（Sorted Set），同时在字符串的基础之上演变出了位图（Bitmaps）和HyperLogLog两种神奇的“数据结构”，并且随着 LBS（Location Based Service，基于位置服务）的不断发展，Redis3.2版本中加入有关GEO（地理信息定位）的功能，在这些数据结构的帮助下，不仅提高了开发的效率，而且适用于更多的应用场景。</p><p>（3）丰富的功能</p><pre><code>1、提供了键过期功能，可以用来实现缓存。2、提供了发布订阅功能，可以用来实现消息系统。3、支持Lua脚本功能，可以利用Lua创造出新的Redis命令。4、提供了简单的事务功能，能在一定程度上保证事务特性。5、提供了流水线（Pipeline）功能，这样客户端能将一批命令一次性传到 Redis，减少了网络的开销。</code></pre><p>（4）简单稳定</p><p>Redis的源码很少，早期版本的代码只有2万行左右，3.0版本以后由于添加了集群特性，代码增至5万行左右，也就意味着普通的开发和运维人员完全可以“吃透”它。</p><p>Redis使用单线程模型，这样不仅使得Redis服务端处理模型变得简单，而且也使得客户端开发变得简单。</p><p>Redis不需要依赖于操作系统中的类库（例如Memcache需要依赖 libevent这样的系统类库），Redis自己实现了事件处理的相关功能。</p><p>（5）客户端语言多</p><p>Redis提供了简单的TCP通信协议，很多编程语言可以很方便地接入到 Redis，几乎涵盖了主流的编程语言，例如Java、PHP、 Python、C、C++、Nodejs等。</p><p>（6）持久化</p><p>我们都知道的是：将数据放在内存中是不安全的，一旦发生断电或者机器故障，重要的数据可能就会丢失。Redis提供了两种持久化方式用来将内存的数据保存到硬盘：RDB和 AOF。</p><p>RDB(Redis DataBase)是在某个时间点将数据（Database中的key-value的二进制形式数据）写入一个临时的rdb文件，持久化结束后，用这个临时文件替换上次持久化的文件，达到数据恢复。它是通过配置Redis在n秒内如果超过m个key被修改就执行一次RDB操作，这中持久化的方式也叫做snapshots。RDB是间隔一段时间进行持久化，如果在持久化之间发生故障，会发生数据的丢失，所以这种方式更适合数据要求不严谨的时候。</p><p>AOF(Append Only File)把数据的每一条修改命令都追加到aof文件。该“日志文件”保存了历史所有的操作过程，虽然可以保证数据的不易丢失，但是这样也造成了其文件势必会比rdb文件大很多，且aof文件中存储的是命令，导致其恢复的速度变慢。</p><p>（7）主从复制</p><p>Redis提供了复制功能，实现了多个相同数据的Redis副本，复制功能是分布式Redis的基础。</p><p>（8）高可用和分布式</p><p>Redis从2.8版本正式提供了高可用实现Redis Sentinel，它能够保证Redis 节点的故障发现和故障自动转移。Redis从3.0版本正式提供了分布式实现 Redis Cluster，它是Redis真正的分布式实现，提供了高可用、读写和容量的扩展性。</p><p>3，Redis使用场景</p><p>（1）缓存</p><p>Redis提供了键值过期时间设置，也提供了灵活控制最大内存和内存溢出后的淘汰策略。</p><p>（2）排行榜系统</p><p>Redis提供了列表和有序集合数据结构。</p><p>（3）计数器应用</p><p>传统关系型数据库如果并发量很大，为了保证数据的实时性，对其性能是一种很大的挑战。Redis天然支持计数功能而且计数的性能也非常好。</p><p>（4）社交网络</p><p>由于社交网站访问量通常比较大，而且传统的关系型数据不太适合保存点赞，推送，下拉刷新等类型的数据，而Redis提供的数据结构可以相对比较容易地实现这些功能。</p><p>（5）消息队列系统</p><p>Redis提供了发布订阅功能和阻塞队列的功能。</p><p>（6）Redis不适合的场景</p><p>不适合存储大规模的数据和冷数据。</p><p>4，安装Redis</p><p>（1）在Linux上安装Redis</p><pre><code>$ wget http://download.redis.io/releases/redis-3.0.7.tar.gz $ tar xzf redis-3.0.7.tar.gz $ ln -s redis-3.0.7 redis $ cd redis $ make $ make install1、下载Redis指定版本的源码压缩包到当前目录。2、解压缩Redis源码压缩包。3、建立一个redis目录的软连接，指向redis-3.0.7。这是为了不把redis目录固定在指定版本上，有利于Redis未来版本升级， 是安装软件的一种好习惯。4、进入redis目录。5、编译（编译之前确保操作系统已经安装gcc）。6、安装。将Redis的相关运行文 件放到/usr/local/bin/下，这样就可以在任意目录下执行Redis的命令。</code></pre><p>（2）在Windows上安装Redis</p><p>5，启动、操作、关闭Redis</p><p>启动Redis服务</p><p>（1）默认配置</p><pre><code>$ redis-server</code></pre><p>（2）运行启动</p><pre><code>$ redis-server --configKey1 configValue1 --configKey2 configValue2</code></pre><p>（3）配置文件启动</p><pre><code>$ redis-server /opt/redis/redis.conf</code></pre><p>Redis命令行客户端</p><p>（1）交互式方式</p><pre><code>$ redis-cli -h 127.0.0.1 -p 6379 $ 127.0.0.1:6379&gt; set hello world$ OK$ 127.0.0.1:6379&gt; get hello$ &quot;world&quot;</code></pre><p>（2）命令方式</p><pre><code>$ redis-cli -h 127.0.0.1 -p 6379 get hello$ &quot;world&quot;</code></pre><p>注：如果没有-h参数，那么默认连接127.0.0.1；如 果没有-p，那么默认6379端口，也就是说如果-h和-p都没写就是连接 127.0.0.1：6379这个Redis实例。</p><p>停止Redis服务</p><p>Redis提供了shutdown命令来停止Redis服务，如果要停掉127.0.0.1上 6379端口上的Redis服务：</p><pre><code>$ redis-cli shutdown</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;1，盛赞Redis&quot;&gt;&lt;a href=&quot;#1，盛赞Redis&quot; class=&quot;headerlink&quot; title=&quot;1，盛赞Redis&quot;&gt;&lt;/a&gt;1，盛赞Redis&lt;/h3&gt;&lt;p&gt;Redis（REmote Dictionary Server）的前身是一个叫做LLO
+        &lt;center&gt;你身体里的每一粒原子都来自一颗爆炸了的恒星。形成你左手的原子和形成你右手的原子也许来自不同的恒星。这是我所知的物理学中最富有诗意的事情：你们都是星辰。—-劳伦斯·克劳斯《一颗原子的时空之旅》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;1，盛赞Redis&quot;&gt;&lt;a
       
     
     </summary>
@@ -72,16 +309,19 @@
     <link href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E7%9A%84IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/"/>
     <id>http://www.echodemo.cc/2019/04/05/Redis中的IO多路复用/</id>
     <published>2019-04-05T01:10:56.000Z</published>
-    <updated>2019-04-05T03:20:05.703Z</updated>
+    <updated>2019-04-13T02:38:14.070Z</updated>
     
-    <content type="html"><![CDATA[<p>在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。</p><h3 id="1、阻塞I-O"><a href="#1、阻塞I-O" class="headerlink" title="1、阻塞I/O"></a>1、阻塞I/O</h3><p>我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状态，我们就称之为阻塞I/O。</p><h3 id="2、非阻塞I-O"><a href="#2、非阻塞I-O" class="headerlink" title="2、非阻塞I/O"></a>2、非阻塞I/O</h3><p>非阻塞IO是通过fcntl（POSIX）或ioctl（Unix）设为非阻塞模式。此时，当你调用read时，如果有数据收到，就返回数据；如果没有数据收到，就立刻返回一个错误。这样的话就不存在线程的阻塞了，但是你还是要不断的轮询来读取或写入。相当于你去查看有没有数据，告诉你没有，过一会再来吧！应用过一会再来问，有没有数据？没有数据，会有一个返回。但是依旧很不好。应用必须得过一会来一下，问问内核有木有数据啊。</p><h3 id="3、I-O多路复用"><a href="#3、I-O多路复用" class="headerlink" title="3、I/O多路复用"></a>3、I/O多路复用</h3><p>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。多路复用是指使用一个线程来检查多个Socket的就绪状态，比如调用select和poll函数，传入多个文件描述符（FileDescription，简称FD），如果有一个文件描述符就绪，则返回，否则阻塞直到超时。得到就绪状态后进行真正的操作可以在同一个线程里执行，也可以启动线程执行（比如使用线程池）。什么意思呢？就是派一个代表，同时监听多个文件描述符是否有数据到来。等着等着，如果有数据，就告诉某某你的数据来啦！赶紧来处理吧。</p><p>我们先来看一张JDK的基于I/O多路复用技术的NIO实现的图片，如下：</p><p><img src="/images/2019/4/selector.png" alt="&quot;JDK的基于I/O多路复用技术的NIO实现&quot;"></p><p>从图片中我们可以看到，很多的网络连接都向Selector进行注册，Selector会对已经向它注册了的网络连接进行轮询监控，一旦发现某个网络连接有了数据的返回，便通过SelectKey通知相应的Channel。从而达到多路复用的目的。</p><p>Redis的I/O多路复用程序的所有功能都是通过包装常见的select、epoll、evport和kqueue这些I/O多路复用函数库来实现的，每个I/O多路复用函数库在Redis源码中都对应一个单独的文件，比如ae_select.c、ae_epoll.c、ae_kqueue.c，诸如此类。因为Redis为每个I/O多路复用函数库都实现了相同的API，所以I/O多路复用程序的底层实现是可以互换。下面是redis线程模型，如图所示：</p><p><img src="/images/2019/4/IO.png" alt="&quot;redis线程模型&quot;"></p><p>我们的redis-client在操作的时候，会产生具有不同事件类型的socket。在服务端，有一段I/0多路复用程序，将其置入队列之中。然后，文件事件分派器，依次去队列中取，转发到不同的事件处理器中。更详细的关于redis中的事件处理请参见我的这篇文章：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/">Redis中的事件处理</a></p>]]></content>
+    <content type="html"><![CDATA[<center>人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》</center><hr><p>在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。</p><h3 id="1、阻塞I-O"><a href="#1、阻塞I-O" class="headerlink" title="1、阻塞I/O"></a>1、阻塞I/O</h3><p>我们常用的IO操作（比如read和write）都是阻塞I/O，也就是说当你调用read时，如果没有收到数据的返回，那么线程或者进程就会被挂起，直到收到数据。阻塞的意思，就是一直等着。阻塞I/O就是等着数据返回，进行读写操作。通过应用的函数进行调用，但是内核一直没有返回，就一直等着。应用的函数长时间处于等待数据返回的状态，我们就称之为阻塞I/O。</p><h3 id="2、非阻塞I-O"><a href="#2、非阻塞I-O" class="headerlink" title="2、非阻塞I/O"></a>2、非阻塞I/O</h3><p>非阻塞IO是通过fcntl（POSIX）或ioctl（Unix）设为非阻塞模式。此时，当你调用read时，如果有数据收到，就返回数据；如果没有数据收到，就立刻返回一个错误。这样的话就不存在线程的阻塞了，但是你还是要不断的轮询来读取或写入。相当于你去查看有没有数据，告诉你没有，过一会再来吧！应用过一会再来问，有没有数据？没有数据，会有一个返回。但是依旧很不好。应用必须得过一会来一下，问问内核有木有数据啊。</p><h3 id="3、I-O多路复用"><a href="#3、I-O多路复用" class="headerlink" title="3、I/O多路复用"></a>3、I/O多路复用</h3><p>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。多路复用是指使用一个线程来检查多个Socket的就绪状态，比如调用select和poll函数，传入多个文件描述符（FileDescription，简称FD），如果有一个文件描述符就绪，则返回，否则阻塞直到超时。得到就绪状态后进行真正的操作可以在同一个线程里执行，也可以启动线程执行（比如使用线程池）。什么意思呢？就是派一个代表，同时监听多个文件描述符是否有数据到来。等着等着，如果有数据，就告诉某某你的数据来啦！赶紧来处理吧。</p><p>我们先来看一张JDK的基于I/O多路复用技术的NIO实现的图片，如下：</p><p><img src="/images/2019/4/selector.png" alt="&quot;JDK的基于I/O多路复用技术的NIO实现&quot;"></p><p>从图片中我们可以看到，很多的网络连接都向Selector进行注册，Selector会对已经向它注册了的网络连接进行轮询监控，一旦发现某个网络连接有了数据的返回，便通过SelectKey通知相应的Channel。从而达到多路复用的目的。</p><p>Redis的I/O多路复用程序的所有功能都是通过包装常见的select、epoll、evport和kqueue这些I/O多路复用函数库来实现的，每个I/O多路复用函数库在Redis源码中都对应一个单独的文件，比如ae_select.c、ae_epoll.c、ae_kqueue.c，诸如此类。因为Redis为每个I/O多路复用函数库都实现了相同的API，所以I/O多路复用程序的底层实现是可以互换。下面是redis线程模型，如图所示：</p><p><img src="/images/2019/4/IO.png" alt="&quot;redis线程模型&quot;"></p><p>我们的redis-client在操作的时候，会产生具有不同事件类型的socket。在服务端，有一段I/0多路复用程序，将其置入队列之中。然后，文件事件分派器，依次去队列中取，转发到不同的事件处理器中。更详细的关于redis中的事件处理请参见我的这篇文章：<a href="http://www.echodemo.cc/2019/04/05/Redis%E4%B8%AD%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/">Redis中的事件处理</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。&lt;/p&gt;
-&lt;h3 id=&quot;1、阻塞I-O&quot;&gt;&lt;a href=&quot;#1、阻塞I-O&quot; class=&quot;headerlink&quot; title=&quot;1、阻塞I/O&quot;&gt;&lt;/a&gt;1、阻塞I/O&lt;/h3&gt;&lt;p&gt;我们常用的IO操作
+        &lt;center&gt;人真正活过的那段生命仅仅是一小部分。其余的部分不能算是生命，仅仅是时间而已。—-伊坂幸太郎《死神的精确度》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;在谈I/O多路复用机制之前，我们先来讲讲阻塞I/O和非阻塞I/O。&lt;/p&gt;
+&lt;h3 id=&quot;1、阻塞I-O&quot;&gt;&lt;a hr
       
     
     </summary>
@@ -328,235 +568,6 @@ int or
     
     
       <category term="Linux" scheme="http://www.echodemo.cc/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker常用命令</title>
-    <link href="http://www.echodemo.cc/2019/01/20/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.echodemo.cc/2019/01/20/Docker常用命令/</id>
-    <published>2019-01-20T04:16:40.000Z</published>
-    <updated>2019-01-30T09:26:43.577Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、查看所有的容器</p><pre><code>[root@jaja docker]# docker ps -a</code></pre><p>2、查看正在运行的容器</p><pre><code>[root@jaja docker]# docker ps</code></pre><p>3、启动已终止的容器</p><pre><code>[root@jaja docker]# docker start (container id)</code></pre><p>4、终止已启动的容器</p><pre><code>[root@jaja docker]# docker stop (container id)</code></pre><p>5、重启容器</p><pre><code>[root@jaja docker]# docker restart (container id)</code></pre><p>6、进入容器交互式环境</p><pre><code>[root@jaja docker]# docker exec -it (container id) /bin/bash</code></pre><p>7、退出容器交互式环境</p><pre><code>[root@jaja docker]# exit 或者使用快捷键 Ctrl + D</code></pre><p>8、导出容器</p><pre><code>[root@jaja docker]# docker export (container id) &gt; (filename).tar</code></pre><p>9、导入容器</p><pre><code>[root@jaja docker]# cat (filename).tar | docker import - (image name):(tag)</code></pre><p>10、查看当前宿主机上的镜像列表</p><pre><code>[root@jaja docker]# docker image ls 或者 docker images</code></pre><p>11、删除处于终止状态的容器</p><pre><code>(1)直接终止容器：[root@jaja docker]# docker rm (container id)(2)如果正在运行则要先终止：[root@jaja docker]# docker stop (container id)</code></pre><p>12、删除所有处于终止状态的容器</p><pre><code>[root@jaja docker]# docker container prune</code></pre><p>13、打印容器的标准输出</p><pre><code>[root@jaja docker]# docker logs</code></pre><p>14、删除镜像(在删除镜像之前需要先停止容器，再删除容器)</p><pre><code>[root@jaja docker]# docker rmi (image id)</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、查看所有的容器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@jaja docker]# docker ps -a
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、查看正在运行的容器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@jaja docker]# docker ps
-&lt;/code
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Linux" scheme="http://www.echodemo.cc/tags/Linux/"/>
-    
-      <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>醒来</title>
-    <link href="http://www.echodemo.cc/2019/01/20/%E9%86%92%E6%9D%A5/"/>
-    <id>http://www.echodemo.cc/2019/01/20/醒来/</id>
-    <published>2019-01-20T02:16:34.000Z</published>
-    <updated>2019-01-20T04:07:40.437Z</updated>
-    
-    <content type="html"><![CDATA[<p>来呀，将我从一场忧伤的梦中惊醒</p><p>把我的沉睡赶走</p><p>这该死的虚无</p><p><br><br>昨夜的大雨</p><p>无尽的黑夜</p><p>喧嚣的逼仄</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;来呀，将我从一场忧伤的梦中惊醒&lt;/p&gt;
-&lt;p&gt;把我的沉睡赶走&lt;/p&gt;
-&lt;p&gt;这该死的虚无&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;昨夜的大雨&lt;/p&gt;
-&lt;p&gt;无尽的黑夜&lt;/p&gt;
-&lt;p&gt;喧嚣的逼仄&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 买卖股票的最佳时机 II</title>
-    <link href="http://www.echodemo.cc/2019/01/19/LeetCode-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-II/"/>
-    <id>http://www.echodemo.cc/2019/01/19/LeetCode-买卖股票的最佳时机-II/</id>
-    <published>2019-01-19T15:49:20.000Z</published>
-    <updated>2019-01-19T16:29:19.452Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p><p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p><p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p><pre><code>示例 1:输入: [7,1,5,3,6,4]输出: 7解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。示例 2:输入: [1,2,3,4,5]输出: 4解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。示例 3:输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</code></pre><p>题目代码：</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。&lt;/p&gt;
-&lt;p&gt;设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。&lt;/p&gt;
-&lt;p&gt;注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。&lt;/p&gt;
-&lt;pre&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CPP" scheme="http://www.echodemo.cc/tags/CPP/"/>
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>装配Bean之通过XML装配Bean</title>
-    <link href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8DBean%E4%B9%8B%E9%80%9A%E8%BF%87XML%E8%A3%85%E9%85%8DBean/"/>
-    <id>http://www.echodemo.cc/2019/01/12/装配Bean之通过XML装配Bean/</id>
-    <published>2019-01-12T08:27:20.000Z</published>
-    <updated>2019-01-27T06:44:14.119Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、创建XML配置规范"><a href="#1、创建XML配置规范" class="headerlink" title="1、创建XML配置规范"></a>1、创建XML配置规范</h3><p>在使用XML为Spring装配bean之前，需要创建一个新的配置规范。在使用JavaConfig的时候，这意味着要创建一个带有@Configuration注解的类，而在XML配置中，这意味着要创建一个XML文件，并且要以beans元素为根。</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context        http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;    &lt;!-- ... --&gt;&lt;/beans&gt;</code></pre><h3 id="2、声明一个简单的bean"><a href="#2、声明一个简单的bean" class="headerlink" title="2、声明一个简单的bean"></a>2、声明一个简单的bean</h3><p>要在基于XML的Spring配置中声明一个bean，我们要使用spring-beans模式中的另外一个元素：bean。bean元素类似于JavaConfig中的@Bean注解。我们可以按照如下的方式声明CompactDisc bean：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.SgtPeppers&quot; /&gt;</code></pre><p>当Spring发现这个bean元素时，它将会调用SgtPeppers的默认构造器来创建bean。</p><h3 id="3、借助构造器注入初始化的bean"><a href="#3、借助构造器注入初始化的bean" class="headerlink" title="3、借助构造器注入初始化的bean"></a>3、借助构造器注入初始化的bean</h3><h4 id="1-构造器注入bean的引用"><a href="#1-构造器注入bean的引用" class="headerlink" title="(1)构造器注入bean的引用"></a>(1)构造器注入bean的引用</h4><p>1)使用constructor-arg元素：</p><pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;&gt;    &lt;constructor-arg ref=&quot;compactDisc&quot;/&gt;&lt;/bean&gt;</code></pre><p>2)使用Spring3.0所引入的c-命名空间：</p><pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;     c:cd-ref=&quot;compactDisc&quot;/&gt;</code></pre><p>属性名以c:开头，也就是命名空间的前缀。接下来就是要装配的构造器参数名，在此之后”-ref”，告诉Spring正在装配的是一个bean的引用。</p><p>在这里它直接引用构造器参数的名称即上面的”cd”，如果参数的名称修改了，此处的配置也要进行修改，因此可以使用参数在整个参数列表中的位置来替代：</p><pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;      c:_0-ref=&quot;compactDisc&quot;/&gt;</code></pre><p>如果只有一个构造器参数则可以使用下面的方案：</p><pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;      c:_-ref=&quot;compactDisc&quot;/&gt;</code></pre><h5 id="注：使用c-命名空间需要先在XML的顶部声明其模式："><a href="#注：使用c-命名空间需要先在XML的顶部声明其模式：" class="headerlink" title="注：使用c-命名空间需要先在XML的顶部声明其模式："></a>注：使用c-命名空间需要先在XML的顶部声明其模式：</h5><pre><code>xmlns:c=&quot;http://www.springframework.org/schema/c&quot;</code></pre><h4 id="2-将字面量注入到构造器中"><a href="#2-将字面量注入到构造器中" class="headerlink" title="(2)将字面量注入到构造器中"></a>(2)将字面量注入到构造器中</h4><pre><code>package soundsystem;public class BlankDisc implements CompactDisc {    private String title;    private String artist;    public BlankDisc(String title, String artist) {        this.title = title;        this.artist = artist;    }}</code></pre><p>1) 使用constructor-arg元素：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;&lt;/bean&gt;</code></pre><p>2)使用c-命名空间：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;      c:_title=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;      c:_artist=&quot;The Beatles&quot;/&gt;</code></pre><p>或</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;      c:_0=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;      c:_1=&quot;The Beatles&quot;/&gt;</code></pre><p>如果只有一个构造器参数：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;      c:_=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;</code></pre><h4 id="3-装配集合"><a href="#3-装配集合" class="headerlink" title="(3)装配集合"></a>(3)装配集合</h4><pre><code>package soundsystem;import java.util.List;import soundsystem.CompactDisc;public class BlankDisc implements CompactDisc {    private String title;    private String artist;    private List&lt;String&gt; tracks;    public BlankDisc(String title, String artist, List&lt;String&gt; tracks) {        this.title = title;        this.artist = artist;        this.tracks = tracks;    }}</code></pre><p>1)使用list元素将其声明为一个列表(目前，使用c-命名空间的属性无法实现装配集合的功能)。</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;    &lt;constructor-arg&gt;        &lt;list&gt;            &lt;value&gt;one&lt;/value&gt;            &lt;value&gt;two&lt;/value&gt;            &lt;value&gt;three&lt;/value&gt;            ...            &lt;value&gt;n&lt;/value&gt;        &lt;/list&gt;    &lt;constructor-arg/&gt;&lt;/bean&gt;</code></pre><p>或</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;    &lt;constructor-arg value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot;/&gt;    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;    &lt;constructor-arg&gt;        &lt;set&gt;            &lt;value&gt;one&lt;/value&gt;            &lt;value&gt;two&lt;/value&gt;            &lt;value&gt;three&lt;/value&gt;            ...            &lt;value&gt;n&lt;/value&gt;        &lt;/set&gt;    &lt;constructor-arg/&gt;&lt;/bean&gt;</code></pre><p>2)使用ref元素替代value,从而实现bean引用列表的装配。</p><p>假设现在有一个Discography类,它的构造器如下：</p><pre><code>public Discography(String artist, List&lt;CompactDisc cds) { ... }</code></pre><p>那么可以以如下的方式配置它的bean：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;    &lt;constructor-arg value=&quot;The Beatles&quot;/&gt;    &lt;constructor-arg&gt;        &lt;list&gt;            &lt;ref bean=&quot;sgtPeppers&quot;/&gt;            &lt;ref bean=&quot;whiteAlbum&quot;/&gt;            ...            &lt;ref bean=&quot;revolver&quot;/&gt;        &lt;/list&gt;    &lt;constructor-arg/&gt;&lt;/bean&gt;</code></pre><h4 id="4-设置属性"><a href="#4-设置属性" class="headerlink" title="(4)设置属性"></a>(4)设置属性</h4><p>(1)setter方法注入bean的引用：</p><pre><code>package soundsystem;import soundsystem.CompactDisc;import soundsystem.MediaPalyer;import org.springframework.beans.factory.annotation.Autowired;public class CDPlayer implements MediaPalyer {    private CompactDisc compactDisc;    @Autowired    public void setCompactDisc(CompactDisc compactDisc) {        this.compactDisc = compactDisc;    }}</code></pre><p>在这之前都是通过构造器来进行注入的，没有使用属性的setter方法，现在我们来看一下如何使用spring XML实现属性的注入。property元素为属性的setter方法所提供的功能与constructor-arg元素为构造器所提供的功能是一样的。</p><pre><code>&lt;bean id=&quot;cdPlayer&quot; class=&quot;soundsystem.CDPlayer&quot;&gt;    &lt;property name=&quot;compactDisc&quot; ref=&quot;compaceDisc&quot; /&gt;&lt;/bean&gt;</code></pre><p>(2)setter方法将字面量注入到属性中：</p><pre><code>package soundsystem;import java.util.List;import soundsystem.CompactDisc;public class BlankDisc implements CompactDisc {    private String title;    private String artist;    private List&lt;String&gt; tracks;    public void setTitle(String title) {        this.title = title;    }    public void setArtist(String artist) {        this.artist = artist;    }    public void setTracks(List&lt;String&gt; tracks) {        this.tracks = tracks;    }}</code></pre><p>这里和先前的constructor-arg装配tracks是完全一样的：</p><pre><code>&lt;bean id=&quot;compactDisc&quot; class=&quot;soundsystem.BlankDisc&quot;&gt;    &lt;property name=&quot;title&quot; value=&quot;Sgt. Pepper&apos;s Lonely Hearts Club Band&quot; /&gt;    &lt;property name=&quot;artist&quot; value=&quot;The Beatles&quot; /&gt;    &lt;property name=&quot;tracks&quot;&gt;        &lt;list&gt;            &lt;value&gt;one&lt;/value&gt;            &lt;value&gt;two&lt;/value&gt;            &lt;value&gt;three&lt;/value&gt;            ...            &lt;value&gt;n&lt;/value&gt;        &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、创建XML配置规范&quot;&gt;&lt;a href=&quot;#1、创建XML配置规范&quot; class=&quot;headerlink&quot; title=&quot;1、创建XML配置规范&quot;&gt;&lt;/a&gt;1、创建XML配置规范&lt;/h3&gt;&lt;p&gt;在使用XML为Spring装配bean之前，需要创建一个新的配置规范
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="Spring" scheme="http://www.echodemo.cc/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>装配Bean之通过Java代码装配Bean</title>
-    <link href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8DBean%E4%B9%8B%E9%80%9A%E8%BF%87Java%E4%BB%A3%E7%A0%81%E8%A3%85%E9%85%8DBean/"/>
-    <id>http://www.echodemo.cc/2019/01/12/装配Bean之通过Java代码装配Bean/</id>
-    <published>2019-01-12T07:37:41.000Z</published>
-    <updated>2019-01-12T08:29:53.196Z</updated>
-    
-    <content type="html"><![CDATA[<p>尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowired注解的，因此就不能使用自动化装配的方案了。此时，你必须采取显式装配的方式，在进行显式配置的时候，有两种可选的方案：Java和XML。下面主要是学习如何使用Java来进行配置。在读这篇文章之前，建议先阅读我的上一篇文章<strong><big><a href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8Dbean%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A3%85%E9%85%8DBean/">装配bean之自动化装配Bean</a><big></big></big></strong></p><h3 id="1、创建配置类"><a href="#1、创建配置类" class="headerlink" title="1、创建配置类"></a>1、创建配置类</h3><pre><code>@Configurationpublic class CDPlayerConfig{    ...}</code></pre><p>创建 JavaConfig 的关键在于为其添加@Configuration注解，此外，该类应该包含在Spring应用上下文中创建bean的细节。</p><h3 id="2、声明简单的bean"><a href="#2、声明简单的bean" class="headerlink" title="2、声明简单的bean"></a>2、声明简单的bean</h3><p>(1)要在JavaConfig中声明bean，我们需要编写一个方法，这个方法会创建所需类型的实例，然后给这个方法添加@Bean注解，下面的代码声明了CompactDisc bean:</p><pre><code>@Beanpublic CompactDisc sgtPeppers(){    return new SgtPeppers();}</code></pre><p>@Bean注解会告诉Spring这个方法会返回一个对象，该对象需要注册为Spring应用上下文中的bean，方法体中包含了最终产生bean实例的逻辑。</p><p>(2)默认情况下，bean的ID与带有@Bean注解的方法名是一样的。如果你想为其设置一个不同的名字的话，你可以重命名该方法，或者通过name属性指定一个不同的名字。如下：</p><pre><code>@Bean(name=&quot;lonelyHeartsClubBand&quot;)public CompactDisc sgtPeppers(){    return new SgtPeppers();}</code></pre><h3 id="3、借助JavaConfig注入"><a href="#3、借助JavaConfig注入" class="headerlink" title="3、借助JavaConfig注入"></a>3、借助JavaConfig注入</h3><p>(1)我们前面所声明的CompactDisc bean是非常简单的，其自身没有其他的依赖。现在，我们需要声明CDPlayer bean，它依赖于CompactDisc，在JavaConfig中要像下面那样将它们装配到一起：</p><pre><code>@Beanpublic CDPlayer cdPlayer(){    return new CDPlayer(sgtPeppers());}</code></pre><p>看起来，CompactDisc是通过调用sgtPeppers()得到的，但情况并非完全如此，在默认情况下，Spring中的bean都是单例的，因为sgtPeppers()方法上添加了@Bean注解，Spring将会拦截所有对它的调用，并确保直接返回该方法所创建的bean，而不是每次都对其进行实际的调用。即对sgtPeppers()方法的调用返回的是Spring本身在调用sgtPeppers()时所创建的CompactDisc bean。</p><p>(2)可以看到，通过方法来引用bean的方式有点令人困惑。其实还有一种理解起来更为简单的方式：</p><pre><code>@Beanpublic CDPlyer cdPlayer(CompactDisc compactDisc) {    return new CDPlayer(compactDisc);}</code></pre><p>通过这种方式引用其他的bean通常是最佳的选择，因为它不会要求将CompactDisc声明到同一个配置类之中。在这里甚至没有要求CompactDisc必须要在JavaConfig中声明，实际上它可以通过组件扫描功能自动发现或者通过XML来进行配置。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;尽管在很多应用场景下通过组件扫描和自动装配来实现Spring的自动化配置是更为推荐的方式，但有时候自动化配置的方案行不通，因此需要明确配置Spring。比如：你想要将第三方库中的组件装配到你的应用中，在这种情况下，是没办法在它的类上添加@Component和@Autowir
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="Spring" scheme="http://www.echodemo.cc/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>装配Bean之自动化装配Bean</title>
-    <link href="http://www.echodemo.cc/2019/01/12/%E8%A3%85%E9%85%8Dbean%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A3%85%E9%85%8DBean/"/>
-    <id>http://www.echodemo.cc/2019/01/12/装配bean之自动化装配Bean/</id>
-    <published>2019-01-12T04:21:32.000Z</published>
-    <updated>2019-01-12T07:26:36.783Z</updated>
-    
-    <content type="html"><![CDATA[<p>Spring从两个角度来实现自动化装配：</p><p>(1)组件扫描(component scanning)：Spring会自动发现应用上下文中所创建的 bean。</p><p>(2)自动装配(autowiring)：Spring自动满足 bean 之间的依赖。</p><h3 id="1、创建可被发现的Bean"><a href="#1、创建可被发现的Bean" class="headerlink" title="1、创建可被发现的Bean"></a>1、创建可被发现的Bean</h3><p>(1)创建一个接口CompactDisc：</p><pre><code>package soundsystem;public interface CompactDisc{    void play();}</code></pre><p>(2)创建带有@Component注解的CompactDisc接口的一个实现类：</p><pre><code>package soundsystem;import org.springframework.stereotype.Component;@Componentpublic class SgtPeppers implements CompactDisc{    private String title = &quot;Sgt, Pepper&apos;s Lonely Hearts Club Band&quot;;    private String artist = &quot;The Beatles&quot;;    public void play(){        System.out.println(&quot;Playing &quot; + title + &quot; By &quot; + artist);    }}</code></pre><h5 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h5><h5 id="Component注解表明，该类会作为组件类，并告知Spring要为这个类创建bean。不过，组件的扫描默认是不启动的，需要显式地对Spring进行配置，从而命令它去寻找带有-Component注解的类，并为其创建bean。"><a href="#Component注解表明，该类会作为组件类，并告知Spring要为这个类创建bean。不过，组件的扫描默认是不启动的，需要显式地对Spring进行配置，从而命令它去寻找带有-Component注解的类，并为其创建bean。" class="headerlink" title="@Component注解表明，该类会作为组件类，并告知Spring要为这个类创建bean。不过，组件的扫描默认是不启动的，需要显式地对Spring进行配置，从而命令它去寻找带有@Component注解的类，并为其创建bean。"></a>@Component注解表明，该类会作为组件类，并告知Spring要为这个类创建bean。不过，组件的扫描默认是不启动的，需要显式地对Spring进行配置，从而命令它去寻找带有@Component注解的类，并为其创建bean。</h5><p>(3)创建配置类:</p><pre><code>package soundsystem;import org.springframework.context.annotation.ComponentScan;import org.springframework.context.annotation.Configuration;@Configuration@ComponentScanpublic class CDPlayerConfig{    ...}</code></pre><h5 id="注：-1"><a href="#注：-1" class="headerlink" title="注："></a>注：</h5><h5 id="ComponentScan注解能够在Spring当中启动组件扫描，它会默认扫描与配置类相同的包以及这个包下的所有子包，查找带有-Component注解的类。如此一来，就能发现CompactDisc，并且会在Spring中自动为其创建一个bean。"><a href="#ComponentScan注解能够在Spring当中启动组件扫描，它会默认扫描与配置类相同的包以及这个包下的所有子包，查找带有-Component注解的类。如此一来，就能发现CompactDisc，并且会在Spring中自动为其创建一个bean。" class="headerlink" title="@ComponentScan注解能够在Spring当中启动组件扫描，它会默认扫描与配置类相同的包以及这个包下的所有子包，查找带有@Component注解的类。如此一来，就能发现CompactDisc，并且会在Spring中自动为其创建一个bean。"></a>@ComponentScan注解能够在Spring当中启动组件扫描，它会默认扫描与配置类相同的包以及这个包下的所有子包，查找带有@Component注解的类。如此一来，就能发现CompactDisc，并且会在Spring中自动为其创建一个bean。</h5><p>(4)当然我们也可以使用XML配置的方式来启动组件扫描：</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context        http://www.springframework.org/schema/context/spring-context-4.2.xsd&quot;&gt;    &lt;context:component-scan base-package=&quot;soundsystem&quot;/&gt;&lt;/beans&gt;</code></pre><p>(5)Junit测试：</p><pre><code>package soundsystem;import org.junit.Test;import static org.junit.Assert.*;import org.junit.runner.RunWith;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.test.context.ContextConfiguration;import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;@RunWith(SpringJunit4ClassRunner.class)@ContextConfiguration(classes = CDPlayerConfig.class)public class CDPlayerTest {    @Autowired    private CompactDisc cd;    @Test    public void cdShuldNotBeNull(){        assertNotNull(cd);    }}</code></pre><h5 id="注：-2"><a href="#注：-2" class="headerlink" title="注："></a>注：</h5><h5 id="a、SpringJUnit4ClassRunner用于在测试开始的时候自动创建Spring的应用上下文。"><a href="#a、SpringJUnit4ClassRunner用于在测试开始的时候自动创建Spring的应用上下文。" class="headerlink" title="a、SpringJUnit4ClassRunner用于在测试开始的时候自动创建Spring的应用上下文。"></a>a、SpringJUnit4ClassRunner用于在测试开始的时候自动创建Spring的应用上下文。</h5><h5 id="b、-ContextConfiguration注解会告诉它需要在CDPlayerConfig中加载配置。由于CDPlayerConfig类当中包含了-ComponentScan注解、SgtPeppers当中包含了-Component注解，因此最终的应用上下文就会包含CompactDisc的bean。"><a href="#b、-ContextConfiguration注解会告诉它需要在CDPlayerConfig中加载配置。由于CDPlayerConfig类当中包含了-ComponentScan注解、SgtPeppers当中包含了-Component注解，因此最终的应用上下文就会包含CompactDisc的bean。" class="headerlink" title="b、@ContextConfiguration注解会告诉它需要在CDPlayerConfig中加载配置。由于CDPlayerConfig类当中包含了@ComponentScan注解、SgtPeppers当中包含了@Component注解，因此最终的应用上下文就会包含CompactDisc的bean。"></a>b、@ContextConfiguration注解会告诉它需要在CDPlayerConfig中加载配置。由于CDPlayerConfig类当中包含了@ComponentScan注解、SgtPeppers当中包含了@Component注解，因此最终的应用上下文就会包含CompactDisc的bean。</h5><h5 id="c、-Autowired注解用于将CompactDisc的bean注入到测试代码当中。"><a href="#c、-Autowired注解用于将CompactDisc的bean注入到测试代码当中。" class="headerlink" title="c、@Autowired注解用于将CompactDisc的bean注入到测试代码当中。"></a>c、@Autowired注解用于将CompactDisc的bean注入到测试代码当中。</h5><h3 id="2、为组件扫描的bean命名"><a href="#2、为组件扫描的bean命名" class="headerlink" title="2、为组件扫描的bean命名"></a>2、为组件扫描的bean命名</h3><p>(1)Spring上下文中所有的bean都会给定一个ID，若直接使用 @Component 注解来声明一个 bean，其bean 的名字默认为类名首字母小写。例如，如上 SgtPeppers 类的默认 bean 名称为 sgtPeppers。当然我们可以在 @Component 注解中说明此 bean 的名称。</p><pre><code>@Component(&quot;lonelyHeartClub&quot;)public class SgtPeppers implements CompactDisc{    ...}</code></pre><p>也可以使用另外一种为bean命名的方式：</p><pre><code>@Named(&quot;lonelyHeartClub&quot;)public class SgtPeppers implements CompactDisc{    ...}</code></pre><h5 id="注：-3"><a href="#注：-3" class="headerlink" title="注："></a>注：</h5><h5 id="Named是Java依赖注入规范-Java-Dependency-Injection-中所提供的为bean设置ID的注解。Spring支持将-Named作为-Component注解的替代方案，两者之间有一些细微的差异，但在大多数场景下，它们是可以相互替换的。然由于-Named其本身并无法表明它是干什么的，因此人们常常会选择使用-Component注解来命名。"><a href="#Named是Java依赖注入规范-Java-Dependency-Injection-中所提供的为bean设置ID的注解。Spring支持将-Named作为-Component注解的替代方案，两者之间有一些细微的差异，但在大多数场景下，它们是可以相互替换的。然由于-Named其本身并无法表明它是干什么的，因此人们常常会选择使用-Component注解来命名。" class="headerlink" title="@Named是Java依赖注入规范(Java Dependency Injection)中所提供的为bean设置ID的注解。Spring支持将@Named作为@Component注解的替代方案，两者之间有一些细微的差异，但在大多数场景下，它们是可以相互替换的。然由于@Named其本身并无法表明它是干什么的，因此人们常常会选择使用@Component注解来命名。"></a>@Named是Java依赖注入规范(Java Dependency Injection)中所提供的为bean设置ID的注解。Spring支持将@Named作为@Component注解的替代方案，两者之间有一些细微的差异，但在大多数场景下，它们是可以相互替换的。然由于@Named其本身并无法表明它是干什么的，因此人们常常会选择使用@Component注解来命名。</h5><h3 id="3、设置组件扫描的基础包"><a href="#3、设置组件扫描的基础包" class="headerlink" title="3、设置组件扫描的基础包"></a>3、设置组件扫描的基础包</h3><p>在之前的案列中，我们没有为 @ComponentScan注解设置任何属性，这意味着，按照默认规则，它会以配置类所在包作为基础包（ base package ）来扫描组件。但是有个原因会促使我们要明确的设置基础包，那就是我们想要将配置类放在单独的包中，使其与其他的应用代码区分开来。</p><p>(1)为了指定不同的包，只需要在 @ComponentScan的value属性中指明包的名称:</p><pre><code>@Configuration@ComponentScan(&quot;soundsystem&quot;)public class CDPlayerConfig{    ...}</code></pre><p>(2)如果你想更加明确的表名你所设置的是基础包，那么你可以通过basePackages属性进行配置:</p><pre><code>@Configuration@ComponentScan(basePackages=&quot;soundsystem&quot;)public class CDPlayerConfig{    ...}</code></pre><p>(3)如果你想扫描多个包，只需要将basePackages属性的值设置为要扫描包的一个数组即可:</p><pre><code>@Configuration@ComponentScan(basePackages={&quot;soundsystem&quot;,&quot;video&quot;})public class CDPlayerConfig{    ...}</code></pre><p>(4)在上面的例子当中，basePackages属性的值是一个String类型的数组，这样配置没有问题，但却是类型不安全的，如果要重构代码的话，这些包的名字可能会被修改，从而导致包扫描出现错误，除了将包设置为简单的String类型之外，@ComponentScan 还提供了另一种方法，那就是将其指定为要扫描包中所含的类或接口。</p><pre><code>@Configuration@ComponentScan(basePackageClasses={CDPlayer.class, DVDPlayer.class})public class CDPlayerConfig{    ...}</code></pre><h5 id="注：-4"><a href="#注：-4" class="headerlink" title="注："></a>注：</h5><h5 id="你可以在包中设置一个专门用来进行包扫描的空标记接口，这样，可以避免对任何实际应用的代码进行重构后，包扫描出现错误。"><a href="#你可以在包中设置一个专门用来进行包扫描的空标记接口，这样，可以避免对任何实际应用的代码进行重构后，包扫描出现错误。" class="headerlink" title="你可以在包中设置一个专门用来进行包扫描的空标记接口，这样，可以避免对任何实际应用的代码进行重构后，包扫描出现错误。"></a>你可以在包中设置一个专门用来进行包扫描的空标记接口，这样，可以避免对任何实际应用的代码进行重构后，包扫描出现错误。</h5><h3 id="4、通过为bean添加注解实现自动装配"><a href="#4、通过为bean添加注解实现自动装配" class="headerlink" title="4、通过为bean添加注解实现自动装配"></a>4、通过为bean添加注解实现自动装配</h3><p>在你的应用程序当中，如果所有的对象都是独立的，彼此之间没有任何的依赖，就像ShtPeppers的bean一样，那么你所需要的可能就是组件的扫描而已。但是很多对象会依赖其他的对象才能完成任务。如此一来，我们就需要有一种方法将组件扫描得到的bean和它们的依赖装配在一起。这就涉及到Spring的自动装配。自动装配就是让Spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在Spring应用上下文中寻找匹配某个bean需求的其他bean，这里借助@Autowired注解来声明自动装配。</p><p>(1)以下示例的构造器上添加了@Autowired注解，这表明当Spring创建CDPlayer bean的时候，会通过这个构造器进行实例化并传入一个CompactDisc类型的 bean。<strong><big>@Autowired 注解可以用在类的任何方法上。</big></strong></p><pre><code>@Componentpublic class CDPlayer implements MediaPlayer{    private CompactDisc cd;    @Autowired    public CDPlayer(CompacrDisc cd){        this.cd = cd;    }    public void play(){        cd.play();    }}</code></pre><p>(2)不管是构造器、Setter 方法还是其他方法，Spring 都会尝试满足方法参数上所声明的依赖，假如有且仅有一个bean依赖需求的话，那么这个bean就会被装填进来。如果没有匹配的bean，那么在应用上下文创建的时候，Spring会抛出一个异常。为了避免异常的出现，你可以将@Autowired的required属性设置为false：</p><pre><code>@Autowired(required=false)public CDPlayer(CompactDisc cd){    this.cd = cd;}</code></pre><h5 id="注：-5"><a href="#注：-5" class="headerlink" title="注："></a>注：</h5><h5 id="但是，把required属性设置为false时，需要谨慎对待。如果你的代码中没有进行null检查的话，这个处于未装配状态的属性可能会出现NullPointerException。"><a href="#但是，把required属性设置为false时，需要谨慎对待。如果你的代码中没有进行null检查的话，这个处于未装配状态的属性可能会出现NullPointerException。" class="headerlink" title="但是，把required属性设置为false时，需要谨慎对待。如果你的代码中没有进行null检查的话，这个处于未装配状态的属性可能会出现NullPointerException。"></a>但是，把required属性设置为false时，需要谨慎对待。如果你的代码中没有进行null检查的话，这个处于未装配状态的属性可能会出现NullPointerException。</h5><p>(3)如果有多个bean都能满足依赖关系的话，Spring也将会抛出一个异常，表明没有明确指定要选择那个bean进行装配。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Spring从两个角度来实现自动化装配：&lt;/p&gt;
-&lt;p&gt;(1)组件扫描(component scanning)：Spring会自动发现应用上下文中所创建的 bean。&lt;/p&gt;
-&lt;p&gt;(2)自动装配(autowiring)：Spring自动满足 bean 之间的依赖。&lt;/p&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="Spring" scheme="http://www.echodemo.cc/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot开发中遇到的几个问题</title>
-    <link href="http://www.echodemo.cc/2018/11/30/SpringBoot%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
-    <id>http://www.echodemo.cc/2018/11/30/SpringBoot开发中遇到的几个问题/</id>
-    <published>2018-11-30T04:42:21.000Z</published>
-    <updated>2018-11-30T06:51:48.235Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、java.net.MalformedURLException: no protocol 异常</p><p>在通过 IP 地址及端口号调用远程方法，进行测试的时候，报出如上的异常。原因是没有指定 http 协议，在 URL 前面加上http://即可解决此异常。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、java.net.MalformedURLException: no protocol 异常&lt;/p&gt;
-&lt;p&gt;在通过 IP 地址及端口号调用远程方法，进行测试的时候，报出如上的异常。原因是没有指定 http 协议，在 URL 前面加上http://即可解决此异常。&lt;/p&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot中的FastJson</title>
-    <link href="http://www.echodemo.cc/2018/11/29/SpringBoot%E4%B8%AD%E7%9A%84FastJson/"/>
-    <id>http://www.echodemo.cc/2018/11/29/SpringBoot中的FastJson/</id>
-    <published>2018-11-29T12:59:47.000Z</published>
-    <updated>2018-11-29T13:54:29.299Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、依赖"><a href="#1、依赖" class="headerlink" title="1、依赖"></a>1、依赖</h3><pre><code>&lt;dependency&gt;  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;  &lt;artifactId&gt;fastjson&lt;/artifactId&gt;  &lt;version&gt;1.2.37&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="2、导入包和主要的方法"><a href="#2、导入包和主要的方法" class="headerlink" title="2、导入包和主要的方法"></a>2、导入包和主要的方法</h3><p>1、导入包</p><pre><code>import com.alibaba.fastjson.JSON;</code></pre><p>2、将JSONObject转化为String</p><pre><code>String jsonStr = JSONObject.toJsonString(jsonObject);</code></pre><p>3、将String转化为JSONObject</p><pre><code>JSONObject jsonObject = JSONObject.parseObject(jsonStr);</code></pre><p>4、将String转化为JSONArray</p><pre><code>JSONArray jsonArray = JSONArray.parseArray(jsonStr);</code></pre><p>5、将JSONArray转化为JSONObject</p><pre><code>JSONObject jsonObject = new JOSNObject();for (int i; i &lt; jsonArray.length(); i++) {    jsonObject = jsonArray.getJSONObject[i];}</code></pre><p>6、将JSONObject转化为JOSNArray</p><pre><code>JSONArray jsonObject = JSONObject.get(&quot;key&quot;);</code></pre><p>7、将List转JSONArray</p><pre><code>JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(list))；</code></pre><p>8、将JSONArray转化为List</p><pre><code>List&lt;EventColAttr&gt; list = JSONObject.parseArray(jsonArray.toJSONString(), EventColAttr.class);</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、依赖&quot;&gt;&lt;a href=&quot;#1、依赖&quot; class=&quot;headerlink&quot; title=&quot;1、依赖&quot;&gt;&lt;/a&gt;1、依赖&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
-  &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/gr
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://www.echodemo.cc/tags/SpringBoot/"/>
     
   </entry>
   
