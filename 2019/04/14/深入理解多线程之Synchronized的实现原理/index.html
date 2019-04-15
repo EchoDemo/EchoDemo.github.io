@@ -100,7 +100,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,内存模型," />
+  <meta name="keywords" content="Java,内存模型,多线程," />
 
 
 
@@ -119,14 +119,14 @@
 
 
 <meta name="description" content="伫倚危楼风细细，望极春愁，黯黯生天际。草色烟光残照里，无言谁会凭阑意。拟把疏狂图一醉，对酒当歌，强乐还无味。衣带渐宽终不悔，为伊消得人憔悴。—-柳永《蝶恋花·伫倚危楼风细细》   在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的">
-<meta name="keywords" content="Java,内存模型">
+<meta name="keywords" content="Java,内存模型,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解多线程之Synchronized的实现原理">
 <meta property="og:url" content="http://www.echodemo.cc/2019/04/14/深入理解多线程之Synchronized的实现原理/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="伫倚危楼风细细，望极春愁，黯黯生天际。草色烟光残照里，无言谁会凭阑意。拟把疏狂图一醉，对酒当歌，强乐还无味。衣带渐宽终不悔，为伊消得人憔悴。—-柳永《蝶恋花·伫倚危楼风细细》   在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-14T03:27:54.304Z">
+<meta property="og:updated_time" content="2019-04-15T15:08:37.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解多线程之Synchronized的实现原理">
 <meta name="twitter:description" content="伫倚危楼风细细，望极春愁，黯黯生天际。草色烟光残照里，无言谁会凭阑意。拟把疏狂图一醉，对酒当歌，强乐还无味。衣带渐宽终不悔，为伊消得人憔悴。—-柳永《蝶恋花·伫倚危楼风细细》   在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的">
@@ -801,6 +801,8 @@ Code:
           
             <a href="/tags/内存模型/" rel="tag"><i class="fa fa-tag"></i> 内存模型</a>
           
+            <a href="/tags/多线程/" rel="tag"><i class="fa fa-tag"></i> 多线程</a>
+          
         </div>
       
 
@@ -936,7 +938,7 @@ Code:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">203</span>
+                <span class="site-state-item-count">207</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -954,7 +956,7 @@ Code:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1089,7 +1091,7 @@ Code:
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共160.5k字</span>
+  <span class="post-count">博客全站共167.4k字</span>
 </div>
 
 
