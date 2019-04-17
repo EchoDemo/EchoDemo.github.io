@@ -127,7 +127,12 @@
 <meta property="og:description" content="似花还似非花，也无人惜从教坠。抛家傍路，思量却是，无情有思。萦损柔肠，困酣娇眼，欲开还闭。梦随风万里，寻郎去处，又还被、莺呼起。不恨此花飞尽，恨西园、落红难缀。晓来雨过，遗踪何在？一池萍碎。春色三分，二分尘土，一分流水。细看来，不是杨花，点点是离人泪。—-苏轼《水龙吟·次韵章质夫杨花词》   我们都知道，几乎所有的Java对象都是保存在堆内存当中（有例外，自行了解），在内存中Java对象包含三部分">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/oops.png">
-<meta property="og:updated_time" content="2019-04-15T15:08:42.516Z">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/OOP结构.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/klass.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/klass链.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/oop-klass-klassKlass.png">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/OOPKlass.png">
+<meta property="og:updated_time" content="2019-04-16T15:49:26.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解多线程之Java的对象模型">
 <meta name="twitter:description" content="似花还似非花，也无人惜从教坠。抛家傍路，思量却是，无情有思。萦损柔肠，困酣娇眼，欲开还闭。梦随风万里，寻郎去处，又还被、莺呼起。不恨此花飞尽，恨西园、落红难缀。晓来雨过，遗踪何在？一池萍碎。春色三分，二分尘土，一分流水。细看来，不是杨花，点点是离人泪。—-苏轼《水龙吟·次韵章质夫杨花词》   我们都知道，几乎所有的Java对象都是保存在堆内存当中（有例外，自行了解），在内存中Java对象包含三部分">
@@ -461,7 +466,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,343
+                  3,139
                 </span>
               
 
@@ -477,7 +482,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5
+                  12
                 </span>
               
             </div>
@@ -548,7 +553,140 @@ typedef class   constantPoolCacheOopDesc*   constantPoolCacheOop;
 typedef class   klassOopDesc*                    klassOop;
 //表示对象头
 typedef class   markOopDesc*                    markOop;
-</code></pre><p>上面列出的是整个Oops模块的组成结构，其中包含多个子模块。每一个子模块对应一个类型，每一个类型的OOP都代表一个在JVM内部使用的特定对象的类型。</p>
+</code></pre><p>上面列出的是整个Oops模块的组成结构，其中包含多个子模块。每一个子模块对应一个类型，每一个类型的OOP都代表一个在JVM内部使用的特定对象的类型。从上面的代码中可以看到，有一个变量opp的类型是oppDesc ，OOPS类的共同基类型为oopDesc。</p>
+<p>在Java程序运行过程中，每创建一个新的对象，在JVM内部就会相应地创建一个对应类型的OOP对象。在HotSpot中，根据JVM内部使用的对象业务类型，具有多种oopDesc的子类。除了oppDesc类型外，opp体系中还有很多instanceOopDesc、arrayOopDesc 等类型的实例，他们都是oopDesc的子类。</p>
+<p><img src="/images/2019/4/OOP结构.png" alt="&quot;oop结构&quot;"></p>
+<p>这些OOPS在JVM内部有着不同的用途，例如，instanceOopDesc表示类实例，arrayOopDesc表示数组。也就是说，当我们使用new创建一个Java对象实例的时候，JVM会创建一个instanceOopDesc对象来表示这个Java对象。同理，当我们使用new创建一个Java数组实例的时候，JVM会创建一个arrayOopDesc对象来表示这个数组对象。</p>
+<p>在HotSpot中，oopDesc类定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/oop.hpp" target="_blank" rel="noopener">oop.hpp</a>中，instanceOopDesc定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/instanceOop.hpp" target="_blank" rel="noopener">instanceOop.hpp</a>中，arrayOopDesc定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/arrayOop.hpp" target="_blank" rel="noopener">arrayOop.hpp</a>中。简单看一下相关定义：</p>
+<pre><code>class oopDesc {
+  friend class VMStructs;
+  private:
+      volatile markOop  _mark;
+      union _metadata {
+        wideKlassOop    _klass;
+        narrowOop       _compressed_klass;
+      } _metadata;
+
+  private:
+      // field addresses in oop
+      void*     field_base(int offset)        const;
+
+      jbyte*    byte_field_addr(int offset)   const;
+      jchar*    char_field_addr(int offset)   const;
+      jboolean* bool_field_addr(int offset)   const;
+      jint*     int_field_addr(int offset)    const;
+      jshort*   short_field_addr(int offset)  const;
+      jlong*    long_field_addr(int offset)   const;
+      jfloat*   float_field_addr(int offset)  const;
+      jdouble*  double_field_addr(int offset) const;
+      address*  address_field_addr(int offset) const;
+}
+
+
+class instanceOopDesc : public oopDesc {
+}
+
+class arrayOopDesc : public oopDesc {
+}
+</code></pre><p>通过上面的源码可以看到，instanceOopDesc实际上就是继承了oopDesc，并没有增加其他的数据结构，也就是说instanceOopDesc中主要包含以下几部分数据：markOop _mark和union _metadata 以及一些不同类型的 field。</p>
+<p>HotSpot虚拟机中，对象在内存中存储的布局可以分为三块区域：对象头、实例数据和对齐填充。在虚拟机内部，一个Java对象对应一个instanceOopDesc的对象。其中对象头包含了两部分内容：_mark和_metadata，而实例数据则保存在oopDesc中定义的各种field中。</p>
+<hr>
+<h4 id="mark"><a href="#mark" class="headerlink" title="_mark"></a>_mark</h4><p>文章开头我们就说过，之所以我们要写这篇文章，是因为对象头中有和锁相关的运行时数据，这些运行时数据是synchronized以及其他类型的锁实现的重要基础，而关于锁标记、GC分代等信息均保存在_mark中。因为本文主要介绍的oop-klass模型，在这里暂时不对对象头做展开，下一篇文章介绍。</p>
+<h4 id="metadata"><a href="#metadata" class="headerlink" title="_metadata"></a>_metadata</h4><p>前面介绍到的_metadata是一个共用体，其中_klass是普通指针，_compressed_klass是压缩类指针。在深入介绍之前，就要来到oop-Klass中的另外一个主角klass了。</p>
+<h4 id="klass"><a href="#klass" class="headerlink" title="klass"></a>klass</h4><p>klass体系</p>
+<pre><code>//klassOop的一部分，用来描述语言层的类型
+class  Klass;
+//在虚拟机层面描述一个Java类
+class   instanceKlass;
+//专有instantKlass，表示java.lang.Class的Klass
+class     instanceMirrorKlass;
+//专有instantKlass，表示java.lang.ref.Reference的子类的Klass
+class     instanceRefKlass;
+//表示methodOop的Klass
+class   methodKlass;
+//表示constMethodOop的Klass
+class   constMethodKlass;
+//表示methodDataOop的Klass
+class   methodDataKlass;
+//最为klass链的端点，klassKlass的Klass就是它自身
+class   klassKlass;
+//表示instanceKlass的Klass
+class     instanceKlassKlass;
+//表示arrayKlass的Klass
+class     arrayKlassKlass;
+//表示objArrayKlass的Klass
+class       objArrayKlassKlass;
+//表示typeArrayKlass的Klass
+class       typeArrayKlassKlass;
+//表示array类型的抽象基类
+class   arrayKlass;
+//表示objArrayOop的Klass
+class     objArrayKlass;
+//表示typeArrayOop的Klass
+class     typeArrayKlass;
+//表示constantPoolOop的Klass
+class   constantPoolKlass;
+//表示constantPoolCacheOop的Klass
+class   constantPoolCacheKlass;
+</code></pre><p>和oopDesc是其他oop类型的父类一样，Klass类是其他klass类型的父类。</p>
+<p><img src="/images/2019/4/klass.png" alt="&quot;klass&quot;"></p>
+<p>Klass向JVM提供两个功能：</p>
+<pre><code>1、实现语言层面的Java类（在Klass基类中已经实现）
+
+2、实现Java对象的分发功能（由Klass的子类提供虚函数实现）
+</code></pre><p>文章开头的时候说过：之所以设计oop-klass模型，是因为HotSopt JVM的设计者不想让每个对象中都含有一个虚函数表。</p>
+<p>HotSopt JVM的设计者把对象一拆为二，分为klass和oop，其中oop的职能主要在于表示对象的实例数据，所以其中不含有任何虚函数。而klass为了实现虚函数多态，所以提供了虚函数表。所以，关于Java的多态，其实也有虚函数的影子在。</p>
+<hr>
+<p>_metadata是一个共用体，其中_klass是普通指针，_compressed_klass是压缩类指针。这两个指针都指向instanceKlass对象，它用来描述对象的具体类型。</p>
+<h4 id="instanceKlass"><a href="#instanceKlass" class="headerlink" title="instanceKlass"></a>instanceKlass</h4><p>JVM在运行时，需要一种用来标识Java内部类型的机制。在HotSpot中的解决方案是：为每一个已加载的Java类创建一个instanceKlass对象，用来在JVM层表示Java类。来看下<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/instanceKlass.hpp" target="_blank" rel="noopener">instanceKlass</a>的内部结构：</p>
+<pre><code>//类拥有的方法列表
+objArrayOop     _methods;
+//描述方法顺序
+typeArrayOop    _method_ordering;
+//实现的接口
+objArrayOop     _local_interfaces;
+//继承的接口
+objArrayOop     _transitive_interfaces;
+//域
+typeArrayOop    _fields;
+//常量
+constantPoolOop _constants;
+//类加载器
+oop             _class_loader;
+//protected域
+oop             _protection_domain;
+    ....
+</code></pre><p>可以看到，一个类该具有的东西，这里面基本都包含了。</p>
+<p>在JVM中，对象在内存中的基本存在形式就是oop。那么，对象所属的类，在JVM中也是一种对象，因此它们实际上也会被组织成一种oop，即klassOop。同样的，对于klassOop，也有对应的一个klass来描述，它就是klassKlass，也是klass的一个子类。klassKlass作为oop的klass链的端点。关于对象和数组的klass链大致如下图：</p>
+<p><img src="/images/2019/4/klass链.png" alt="&quot;klass链&quot;"></p>
+<p>在这种设计下，JVM对内存的分配和回收，都可以采用统一的方式来管理。oop-klass-klassKlass关系如图：</p>
+<p><img src="/images/2019/4/oop-klass-klassKlass.png" alt="&quot;oop-klass-klassKlass&quot;"></p>
+<hr>
+<h3 id="内存存储"><a href="#内存存储" class="headerlink" title="内存存储"></a>内存存储</h3><p>关于一个Java对象，他的存储是怎样的，一般很多人会回答：对象存储在堆上。稍微好一点的人会回答：对象存储在堆上，对象的引用存储在栈上。今天，再给你一个更加显得牛逼的回答：</p>
+<blockquote>
+<p>对象的实例（instantOopDesc)保存在堆上，对象的元数据（instantKlass）保存在方法区，对象的引用保存在栈上。</p>
+</blockquote>
+<p>其实如果细追究的话，上面这句话有点故意卖弄的意思。因为我们都知道。方法区用于存储虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。 所谓加载的类信息，其实不就是给每一个被加载的类都创建了一个 instantKlass对象么。</p>
+<pre><code>class Model
+{
+    public static int a = 1;
+    public int b;
+
+    public Model(int b) {
+        this.b = b;
+    }
+}
+
+public static void main(String[] args) {
+    int c = 10;
+    Model modelA = new Model(2);
+    Model modelB = new Model(3);
+}
+</code></pre><p>存储结构如下：</p>
+<p><img src="/images/2019/4/OOPKlass.png" alt="&quot;OOPKlass&quot;"></p>
+<p>从上图中可以看到，在方法区的instantKlass中有一个int a=1的数据存储。在堆内存中的两个对象的oop中，分别维护着int b=3,int b=2的实例数据。和oopDesc一样，instantKlass也维护着一些fields，用来保存类中定义的类数据，比如int a=1。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
 
       
     </div>
@@ -701,7 +839,7 @@ typedef class   markOopDesc*                    markOop;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">207</span>
+                <span class="site-state-item-count">209</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -812,7 +950,7 @@ typedef class   markOopDesc*                    markOop;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java的对象模型"><span class="nav-number">1.</span> <span class="nav-text">Java的对象模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oop-klass-model"><span class="nav-number">2.</span> <span class="nav-text">oop-klass model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oop-klass结构"><span class="nav-number">3.</span> <span class="nav-text">oop-klass结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java的对象模型"><span class="nav-number">1.</span> <span class="nav-text">Java的对象模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oop-klass-model"><span class="nav-number">2.</span> <span class="nav-text">oop-klass model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oop-klass结构"><span class="nav-number">3.</span> <span class="nav-text">oop-klass结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mark"><span class="nav-number">3.1.</span> <span class="nav-text">_mark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#metadata"><span class="nav-number">3.2.</span> <span class="nav-text">_metadata</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#klass"><span class="nav-number">3.3.</span> <span class="nav-text">klass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceKlass"><span class="nav-number">3.4.</span> <span class="nav-text">instanceKlass</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存存储"><span class="nav-number">4.</span> <span class="nav-text">内存存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -854,7 +992,7 @@ typedef class   markOopDesc*                    markOop;
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共167.4k字</span>
+  <span class="post-count">博客全站共173.5k字</span>
 </div>
 
 
