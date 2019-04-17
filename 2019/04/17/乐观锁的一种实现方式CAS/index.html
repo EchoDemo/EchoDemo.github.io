@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="怒发冲冠，凭栏处、潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。三十功名尘与土，八千里路云和月。莫等闲，白了少年头，空悲切！靖康耻，犹未雪。臣子恨，何时灭！驾长车，踏破贺兰山缺。壮志饥餐胡虏肉，笑谈渴饮匈奴血。待从头、收拾旧山河，朝天阙。—-岳飞《满江红·写怀》   线程安全众所周知，Java是多线程的。但是，Java对多线程的支持其实是一把双刃剑。一旦涉及到多个线程操作共享资源的情况时，处理不好就可能产">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-17T16:26:18.355Z">
+<meta property="og:updated_time" content="2019-04-17T16:32:17.298Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="乐观锁的一种实现方式CAS">
 <meta name="twitter:description" content="怒发冲冠，凭栏处、潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。三十功名尘与土，八千里路云和月。莫等闲，白了少年头，空悲切！靖康耻，犹未雪。臣子恨，何时灭！驾长车，踏破贺兰山缺。壮志饥餐胡虏肉，笑谈渴饮匈奴血。待从头、收拾旧山河，朝天阙。—-岳飞《满江红·写怀》   线程安全众所周知，Java是多线程的。但是，Java对多线程的支持其实是一把双刃剑。一旦涉及到多个线程操作共享资源的情况时，处理不好就可能产">
@@ -545,7 +545,7 @@
         return unsafe.compareAndSwapInt(this, valueOffset, expect, update);  
     }  
 }
-</code></pre><p>在没有锁的机制下需要字段value要借助volatile原语，保证线程间的数据是可见的。这样在获取变量的值的时候才能直接读取。getAndIncrement采用了CAS操作，每次从内存中读取数据然后将此数据和+1后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。而compareAndSet利用JNI来完成CPU指令的操作。从代码中我们可以发现，JAVA中的CAS操作都是通过sun.misc包下Unsafe类实现的，关于Unsafe类更详细的说明，可以查阅我的这篇文章:<a href="">鲜为人知的Unsafe类</a></p>
+</code></pre><p>在没有锁的机制下需要字段value要借助volatile原语，保证线程间的数据是可见的。这样在获取变量的值的时候才能直接读取。getAndIncrement采用了CAS操作，每次从内存中读取数据然后将此数据和+1后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。而compareAndSet利用JNI来完成CPU指令的操作。从代码中我们可以发现，JAVA中的CAS操作都是通过sun.misc包下Unsafe类实现的，关于Unsafe类更详细的说明，可以查阅我的这篇文章:<a href="http://www.echodemo.cc/2019/04/17/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84Unsafe%E7%B1%BB/">鲜为人知的Unsafe类</a></p>
 <hr>
 <h4 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h4><p>CAS会导致“ABA问题”。</p>
 <p>CAS算法实现一个重要前提需要取出内存中某时刻的数据，而在下时刻比较并替换，那么在这个时间差类会导致数据的变化。</p>
