@@ -131,8 +131,8 @@
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/klass.png">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/klass链.png">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/oop-klass-klassKlass.png">
-<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/OOPKlass.png">
-<meta property="og:updated_time" content="2019-04-16T15:49:26.937Z">
+<meta property="og:image" content="http://www.echodemo.cc/images/2019/4/OOPKlass.jpg">
+<meta property="og:updated_time" content="2019-04-18T15:40:16.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解多线程之Java的对象模型">
 <meta name="twitter:description" content="似花还似非花，也无人惜从教坠。抛家傍路，思量却是，无情有思。萦损柔肠，困酣娇眼，欲开还闭。梦随风万里，寻郎去处，又还被、莺呼起。不恨此花飞尽，恨西园、落红难缀。晓来雨过，遗踪何在？一池萍碎。春色三分，二分尘土，一分流水。细看来，不是杨花，点点是离人泪。—-苏轼《水龙吟·次韵章质夫杨花词》   我们都知道，几乎所有的Java对象都是保存在堆内存当中（有例外，自行了解），在内存中Java对象包含三部分">
@@ -683,7 +683,7 @@ public static void main(String[] args) {
     Model modelB = new Model(3);
 }
 </code></pre><p>存储结构如下：</p>
-<p><img src="/images/2019/4/OOPKlass.png" alt="&quot;OOPKlass&quot;"></p>
+<p><img src="/images/2019/4/OOPKlass.jpg" alt="&quot;OOPKlass&quot;"></p>
 <p>从上图中可以看到，在方法区的instantKlass中有一个int a=1的数据存储。在堆内存中的两个对象的oop中，分别维护着int b=3,int b=2的实例数据。和oopDesc一样，instantKlass也维护着一些fields，用来保存类中定义的类数据，比如int a=1。</p>
 <hr>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
@@ -839,7 +839,7 @@ public static void main(String[] args) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">209</span>
+                <span class="site-state-item-count">210</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -992,7 +992,7 @@ public static void main(String[] args) {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共173.5k字</span>
+  <span class="post-count">博客全站共176.4k字</span>
 </div>
 
 

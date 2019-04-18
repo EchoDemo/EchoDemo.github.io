@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="孤山寺北贾亭西，水面初平云脚低。几处早莺争暖树，谁家新燕啄春泥。乱花渐欲迷人眼，浅草才能没马蹄。最爱湖东行不足，绿杨阴里白沙堤。—-白居易《钱塘湖春行》   Unsafe类存在于sun.misc包中，其内部方法操作可以像C的指针一样直接操作内存，单从名称看来就可以知道该类是非安全的，毕竟Unsafe拥有着类似于C的指针操作，因此总是不应该首先使用Unsafe类，Java官方也不建议直接使用的Uns">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T15:23:01.963Z">
+<meta property="og:updated_time" content="2019-04-18T15:29:58.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="鲜为人知的Unsafe类">
 <meta name="twitter:description" content="孤山寺北贾亭西，水面初平云脚低。几处早莺争暖树，谁家新燕啄春泥。乱花渐欲迷人眼，浅草才能没马蹄。最爱湖东行不足，绿杨阴里白沙堤。—-白居易《钱塘湖春行》   Unsafe类存在于sun.misc包中，其内部方法操作可以像C的指针一样直接操作内存，单从名称看来就可以知道该类是非安全的，毕竟Unsafe拥有着类似于C的指针操作，因此总是不应该首先使用Unsafe类，Java官方也不建议直接使用的Uns">
@@ -607,8 +607,7 @@ public final native boolean compareAndSwapLong(Object o, long offset,long expect
 </code></pre><p>第一个参数o为给定对象，offset为对象内存的偏移量，通过这个偏移量迅速定位字段并设置或获取该字段的值。expected表示期望值，x表示要设置的值。</p>
 <hr>
 <h3 id="利用Unsafe类"><a href="#利用Unsafe类" class="headerlink" title="利用Unsafe类"></a>利用Unsafe类</h3><h4 id="获取Unsafe实例"><a href="#获取Unsafe实例" class="headerlink" title="获取Unsafe实例"></a>获取Unsafe实例</h4><pre><code>public static Unsafe getUnsafeInstance() throws Exception{
-    Field unsafeStaticField = 
-    Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
+    Field unsafeStaticField = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
     unsafeStaticField.setAccessible(true);
     return (Unsafe) unsafeStaticField.get(Unsafe.class);
 }
@@ -676,6 +675,7 @@ public void changeStaticField() throws Exception {
 }
 </code></pre><p>打印结果：</p>
 <pre><code>true
+
 staticIntField:10
 </code></pre><p>静态变量与实例变量不同之处在于，静态变量位于方法区中，它的地址偏移值与UnsafeTest类在方法区的地址相关，与UnsafeTest类的实例无关。</p>
 <hr>
@@ -789,6 +789,10 @@ s2:acc s3:acc
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/18/String那些事儿/" rel="prev" title="String那些事儿">
+                String那些事儿 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -862,7 +866,7 @@ s2:acc s3:acc
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">209</span>
+                <span class="site-state-item-count">210</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1015,7 +1019,7 @@ s2:acc s3:acc
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共173.5k字</span>
+  <span class="post-count">博客全站共176.4k字</span>
 </div>
 
 
