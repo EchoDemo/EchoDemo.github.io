@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="孤山寺北贾亭西，水面初平云脚低。几处早莺争暖树，谁家新燕啄春泥。乱花渐欲迷人眼，浅草才能没马蹄。最爱湖东行不足，绿杨阴里白沙堤。—-白居易《钱塘湖春行》   Unsafe类存在于sun.misc包中，其内部方法操作可以像C的指针一样直接操作内存，单从名称看来就可以知道该类是非安全的，毕竟Unsafe拥有着类似于C的指针操作，因此总是不应该首先使用Unsafe类，Java官方也不建议直接使用的Uns">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-17T16:26:27.090Z">
+<meta property="og:updated_time" content="2019-04-18T15:23:01.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="鲜为人知的Unsafe类">
 <meta name="twitter:description" content="孤山寺北贾亭西，水面初平云脚低。几处早莺争暖树，谁家新燕啄春泥。乱花渐欲迷人眼，浅草才能没马蹄。最爱湖东行不足，绿杨阴里白沙堤。—-白居易《钱塘湖春行》   Unsafe类存在于sun.misc包中，其内部方法操作可以像C的指针一样直接操作内存，单从名称看来就可以知道该类是非安全的，毕竟Unsafe拥有着类似于C的指针操作，因此总是不应该首先使用Unsafe类，Java官方也不建议直接使用的Uns">
@@ -459,7 +459,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,146
+                  2,142
                 </span>
               
 
@@ -527,12 +527,6 @@ public native void putAddress(long address, long x);
 
 //获取指定内存地址的值
 public native long getAddress(long address);
-
-//设置给定内存地址的long值
-public native void putLong(long address, long x);
-
-//获取指定内存地址的long值
-public native long getLong(long address);
 
 //设置指定内存的byte值
 //其他基本数据类型(long,char,float,double,short等)的操作与putByte及getByte相同
@@ -618,120 +612,107 @@ public final native boolean compareAndSwapLong(Object o, long offset,long expect
     unsafeStaticField.setAccessible(true);
     return (Unsafe) unsafeStaticField.get(Unsafe.class);
 }
-</code></pre><p>通过java反射机制，我们跳过了安全检测，拿到了一个unsafe类的实例。</p>
+</code></pre><p>通过java反射机制，我们跳过了安全检测，拿到了一个Unsafe类的实例。</p>
 <hr>
-<h4 id="修改和读取数组中的值"><a href="#修改和读取数组中的值" class="headerlink" title="修改和读取数组中的值"></a>修改和读取数组中的值</h4><pre><code>Unsafe u = getUnsafeInstance();
+<h4 id="修改和读取数组中的值"><a href="#修改和读取数组中的值" class="headerlink" title="修改和读取数组中的值"></a>修改和读取数组中的值</h4><pre><code>@RequestMapping(&quot;/readandwritearray&quot;)
+public void readAndWriteArray() throws Exception {
+    Unsafe unsafe = getUnsafeInstance();
+    int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    //返回当前数组的首地址
+    int b = unsafe.arrayBaseOffset(int[].class);
+    //返回当前数组一个元素占用的字节数
+    int s = unsafe.arrayIndexScale(int[].class);
+    //获取数组对象obj的起始地址，加上偏移值，得到对应元素的地址，将intval写入内存
+    unsafe.putInt(arr, (long) b + s * 9, 1);
 
-int[] arr = {1,2,3,4,5,6,7,8,9,10};
-
-//返回当前数组第一个元素地址相对于数组起始地址的偏移值，在本例中返回6
-int b = u.arrayBaseOffset(int[].class);
-
-//返回当前数组一个元素占用的字节数,在本例中返回4
-int s = u.arrayIndexScale(int[].class);
-
-//获取数组对象obj的起始地址，加上偏移值，得到对应元素的地址，将intval写入内存
-u.putInt(arr, (long)b+s*9, 1);
-
-for(int i=0;i&lt;10;i++){
-     //获取数组对象obj的起始地址，加上偏移值，得到对应元素的地址，从而获得元素的值
-    int v = u.getInt(arr, (long)b+s*i);
-
-    System.out.print(v+“ ”);
-
+    for (int i = 0; i &lt; 10; i++) {
+        //获取数组对象obj的起始地址，加上偏移值，得到对应元素的地址，从而获得元素的值
+        int v = unsafe.getInt(arr, (long) b + s * i);
+        System.out.print(v + &quot; &quot;);
+    }
 }
 </code></pre><p>打印结果:1 2 3 4 5 6 7 8 9 1 ,可以看到，成功读出了数组中的值，而且最后一个值由10改为了1。</p>
 <blockquote>
 <p>偏移值: 数组元素偏移值 = arrayBaseOffset + arrayIndexScalse * i。</p>
 </blockquote>
 <hr>
-<h4 id="修改静态变量和实例变量的值"><a href="#修改静态变量和实例变量的值" class="headerlink" title="修改静态变量和实例变量的值"></a>修改静态变量和实例变量的值</h4><p>先定义一个Test类:</p>
-<pre><code>public class Test {
-
-    public int intfield ;
+<h4 id="修改静态变量和实例变量的值"><a href="#修改静态变量和实例变量的值" class="headerlink" title="修改静态变量和实例变量的值"></a>修改静态变量和实例变量的值</h4><p>先定义一个UnsafeTest类:</p>
+<pre><code>public class UnsafeTest {
+    public int infield;
 
     public static int staticIntField;
 
     public static int[] arr;
 
-    private Test(){
-        System.out.println(&quot;constructor called&quot;);
+    private UnsafeTest() {
+        System.out.println(&quot;constructor called!&quot;);
     }
 }
-</code></pre><p>修改Test类的实例变量:</p>
-<pre><code>Unsafe u = getUnsafeInstance();
-
-Test t = (Test) u.allocateInstance(Test.class);
-
-//获取对象某个属性的地址偏移值
-long b1 = u.objectFieldOffset(Test.class.getDeclaredField(&quot;intfield&quot;));
-
-u.putInt(t, b1, 2);
-
-System.out.println(&quot;intfield:&quot;+t.intfield);
-</code></pre><p>这里使用allocateInstance方法获取了一个Test类的实例，并且没有打印“constructor called”，说明构造方法没有调用。修改实例变量与修改数组的值类似，同样要获取地址偏移值，然后调用putInt方法。</p>
-<p>修改Test类的静态变量:</p>
-<pre><code>Field staticIntField = Test.class.getDeclaredField(&quot;staticIntField&quot;);
-
-//获取静态变量所属的类在方法区的首地址。可以看到，返回的对象就是Test.class
-Object o = u.staticFieldBase(staticIntField);
-
-System.out.prinln(o==Test.class);
-
-//获取静态变量地址偏移值
-Long b4 = u.staticFieldOffset(staticIntField);
-
-//因为是静态变量，传入的Object参数应为class对象
-u.putInt(o, b4, 10);
-
-System.out.println(&quot;staticIntField:&quot;+u.getInt(Test.class, b4));
+</code></pre><p>修改UnsafeTest类的实例变量:</p>
+<pre><code>@RequestMapping(&quot;/changeinstancefield&quot;)
+public void changeInstanceField() throws Exception {
+    Unsafe unsafe = getUnsafeInstance();
+    //传入一个对象的class并创建该实例对象，但不会调用构造方法
+    UnsafeTest unsafeTest = (UnsafeTest)unsafe.allocateInstance(UnsafeTest.class);
+    //获取对象某个属性的地址偏移值
+    long b1 = unsafe.objectFieldOffset(UnsafeTest.class.getDeclaredField(&quot;infield&quot;));
+    unsafe.putInt(unsafeTest, b1, 2);
+    System.out.println(&quot;infield:&quot; + unsafeTest.infield);
+}
+</code></pre><p>这里使用allocateInstance方法获取了一个UnsafeTest类的实例，并且没有打印“constructor called”，说明构造方法没有调用。修改实例变量与修改数组的值类似，同样要获取地址偏移值，然后调用putInt方法。</p>
+<p>修改UnsafeTest类的静态变量:</p>
+<pre><code>@RequestMapping(&quot;/changestaticfield&quot;)
+public void changeStaticField() throws Exception {
+    Unsafe unsafe = getUnsafeInstance();
+    Field staticIntField = UnsafeTest.class.getDeclaredField(&quot;staticIntField&quot;);
+    //获取静态变量所属的类在方法区的首地址。可以看到，返回的对象就是UnsafeTes.class
+    Object o = unsafe.staticFieldBase(staticIntField);
+    System.out.println(o == UnsafeTest.class);
+    //获取静态变量地址偏移值
+    Long b4 = unsafe.staticFieldOffset(staticIntField);
+    //因为是静态变量，传入的Object参数应为class对象
+    unsafe.putInt(o, b4, 10);
+    System.out.println(&quot;staticIntField:&quot; + unsafe.getInt(UnsafeTest.class, b4));
+}
 </code></pre><p>打印结果：</p>
 <pre><code>true
 staticIntField:10
-</code></pre><p>静态变量与实例变量不同之处在于，静态变量位于于方法区中，它的地址偏移值与Test类在方法区的地址相关，与Test类的实例无关。</p>
+</code></pre><p>静态变量与实例变量不同之处在于，静态变量位于方法区中，它的地址偏移值与UnsafeTest类在方法区的地址相关，与UnsafeTest类的实例无关。</p>
 <hr>
 <h4 id="调戏String-intern"><a href="#调戏String-intern" class="headerlink" title="调戏String.intern"></a>调戏String.intern</h4><p>在jdk7中，String.intern不再拷贝string对象实例，而是保存第一次出现的对象的引用。在下面的代码中，通过Unsafe修改被引用对象s的私有属性value达到间接修改s1的效果！</p>
-<pre><code>String s = &quot;abc&quot;;
-
-//保存s的引用
-s.intern();
-
-//此时s1==s，地址相同
-String s1 = &quot;abc&quot;;
-
-Unsafe u = getUnsafeInstance();
-
-//获取s的实例变量value
-Field valueInString = String.class.getDeclaredField(&quot;value&quot;);
-
-//获取value的变量偏移值
-long offset = u.objectFieldOffset(valueInString);
-
-//value本身是一个char[],要修改它元素的值，仍要获取baseOffset和indexScale
-long base = u.arrayBaseOffset(char[].class);
-
-long scale = u.arrayIndexScale(char[].class);
-
-//获取value
-char[] values = (char[]) u.getObject(s, offset);
-
-//为value赋值
-u.putChar(values, base + scale, &apos;c&apos;);
-
-System.out.println(&quot;s:&quot;+s+&quot; s1:&quot;+s1);
-
-//将s的值改为 abc
-s = &quot;abc&quot;;
-
-String s2 = &quot;abc&quot;;
-
-String s3 = &quot;abc&quot;;
-
-System.out.println(&quot;s:&quot;+s+&quot; s1:&quot;+s1);
+<pre><code>@RequestMapping(&quot;/stringintern&quot;)
+public void stringIntern() throws Exception {
+    String s = &quot;abc&quot;;
+    //保存s的引用
+    s.intern();
+    //此时s1==s，地址相同
+    String s1 = &quot;abc&quot;;
+    Unsafe unsafe = getUnsafeInstance();
+    //获取s的实例变量value
+    Field valueInString = String.class.getDeclaredField(&quot;value&quot;);
+    //获取value的变量偏移值
+    long offset = unsafe.objectFieldOffset(valueInString);
+    //value本身是一个char[],要修改它元素的值，仍要获取baseOffset和indexScale
+    long base = unsafe.arrayBaseOffset(char[].class);
+    long scale = unsafe.arrayIndexScale(char[].class);
+    //获取value
+    char[] values = (char[]) unsafe.getObject(s, offset);
+    //为value赋值
+    unsafe.putChar(values, base + scale, &apos;c&apos;);
+    System.out.println(&quot;s:&quot; + s + &quot; s1:&quot; + s1);
+    //将s的值改为 abc
+    s = &quot;abc&quot;;
+    String s2 = &quot;abc&quot;;
+    String s3 = &quot;abc&quot;;
+    System.out.println(&quot;s:&quot; + s + &quot; s1:&quot; + s1);
+    System.out.println(&quot;s2:&quot; + s2 +&quot; s3:&quot; + s3);
+}
 </code></pre><p>打印结果：</p>
 <pre><code>s:acc s1:acc
 
-s:acc s1:acc s2:acc s3:acc
+s:acc s1:acc 
+
+s2:acc s3:acc
 </code></pre><p>我们发现了什么？所有值为“abc”的字符串都变成了“acc”。Unsafe类果然不安全！！！</p>
 
       
