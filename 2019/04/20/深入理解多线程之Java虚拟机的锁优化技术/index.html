@@ -118,19 +118,19 @@
 
 
 
-<meta name="description" content="前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到">
+<meta name="description" content="漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。—-秦观《浣溪沙·漠漠轻寒上小楼》   前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitoren">
 <meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解多线程之Java虚拟机的锁优化技术">
 <meta property="og:url" content="http://www.echodemo.cc/2019/04/20/深入理解多线程之Java虚拟机的锁优化技术/index.html">
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
-<meta property="og:description" content="前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到">
+<meta property="og:description" content="漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。—-秦观《浣溪沙·漠漠轻寒上小楼》   前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitoren">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/thread.png">
-<meta property="og:updated_time" content="2019-04-22T15:43:17.766Z">
+<meta property="og:updated_time" content="2019-04-24T13:58:43.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解多线程之Java虚拟机的锁优化技术">
-<meta name="twitter:description" content="前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到">
+<meta name="twitter:description" content="漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。—-秦观《浣溪沙·漠漠轻寒上小楼》   前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitoren">
 <meta name="twitter:image" content="http://www.echodemo.cc/images/2019/4/thread.png">
 
 
@@ -461,7 +461,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,327
+                  3,381
                 </span>
               
 
@@ -477,7 +477,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  11
+                  12
                 </span>
               
             </div>
@@ -499,7 +499,9 @@
       
 
       
-        <hr>
+        <center>漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。</center><br><center>自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。</center><br><center>—-秦观《浣溪沙·漠漠轻寒上小楼》</center>
+
+<hr>
 <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><blockquote>
 <p>1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。<a href="http://www.echodemo.cc/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BSynchronized%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Synchronized的实现原理</a></p>
 <p>2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到monitorexit的时候则要释放锁。<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Moniter的实现原理</a></p>
@@ -652,6 +654,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/24/Java中的Volatile关键字/" rel="prev" title="Java中的Volatile关键字">
+                Java中的Volatile关键字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -725,7 +731,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">211</span>
+                <span class="site-state-item-count">213</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -878,7 +884,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共179.8k字</span>
+  <span class="post-count">博客全站共184.1k字</span>
 </div>
 
 
