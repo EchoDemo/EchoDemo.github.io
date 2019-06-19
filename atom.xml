@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-04-24T15:34:53.200Z</updated>
+  <updated>2019-06-19T13:58:47.679Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis学习笔记(2)-mybatis概述</title>
+    <link href="http://www.echodemo.cc/2019/06/19/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)-mybatis%E6%A6%82%E8%BF%B0/"/>
+    <id>http://www.echodemo.cc/2019/06/19/mybatis学习笔记(2)-mybatis概述/</id>
+    <published>2019-06-19T13:47:20.000Z</published>
+    <updated>2019-06-19T13:58:47.679Z</updated>
+    
+    <content type="html"><![CDATA[<hr><h3 id="mybatis-介绍"><a href="#mybatis-介绍" class="headerlink" title="mybatis 介绍"></a>mybatis 介绍</h3><p>（1）mybatis是一个持久层的框架，是apache下的顶级项目。</p><p>（2）mybatis托管到goolecode下，再后来托管到github(<a href="https://github.com/mybatis/mybatis-3/releases)。" target="_blank" rel="noopener">https://github.com/mybatis/mybatis-3/releases)。</a></p><p>（3）mybatis让程序将主要精力放在sql上，通过mybatis提供的映射方式，自由灵活生成（半自动化，大部分需要程序员编写sql）满足需要sql语句。</p><p>（4）mybatis可以将向 preparedStatement中的输入参数自动进行输入映射，将查询结果集灵活映射成java对象。（输出映射）。</p><hr><h3 id="mybatis框架执行过程"><a href="#mybatis框架执行过程" class="headerlink" title="mybatis框架执行过程"></a>mybatis框架执行过程</h3><p>（1）配置mybatis的配置文件，SqlMapConfig.xml（名称不固定）。</p><p>（2）通过配置文件，加载mybatis运行环境（environment标签），创建SqlSessionFactory会话工厂(SqlSessionFactory在实际使用时按单例方式) 。</p><p>（3）通过SqlSessionFactory创建SqlSession。<strong>SqlSession是一个面向用户接口（提供操作数据库方法），实现对象是线程不安全的，建议sqlSession应用场合在方法体内。 </strong></p><p>（4）调用sqlSession的方法去操作数据。如果需要提交事务，需要执行SqlSession的commit()方法。 </p><p>（5）释放资源，关闭SqlSession。</p><center><br><br><img src="/images/2019/6/SqlSession.png" alt="&quot;SqlSession&quot;"><br><br></center><hr><h3 id="mybatis开发dao的方法"><a href="#mybatis开发dao的方法" class="headerlink" title="mybatis开发dao的方法"></a>mybatis开发dao的方法</h3><p>（1）原始dao 的方法</p><pre><code>a、需要程序员编写dao接口和实现类b、需要在dao实现类中注入一个SqlSessionFactory工厂</code></pre><p>（2）mapper代理开发方法（建议使用）</p><p>只需要程序员编写mapper接口（就是dao接口）。 程序员在编写mapper.xml(映射文件)和mapper.java需要遵循一个开发规范：</p><pre><code>a、mapper.xml中namespace就是mapper.java的类全路径。b、mapper.xml中statement的id和mapper.java中方法名一致。c、mapper.xml中statement的parameterType指定输入参数的类型和mapper.java的方法输入参数类型一致。d、mapper.xml中statement的resultType指定输出结果的类型和mapper.java的方法返回值类型一致。</code></pre><p>SqlMapConfig.xml配置文件：可以配置properties属性、别名、mapper加载。</p><hr><h3 id="输入映射和输出映射"><a href="#输入映射和输出映射" class="headerlink" title="输入映射和输出映射"></a>输入映射和输出映射</h3><p>（1）输入映射：</p><pre><code>a、parameterType：指定输入参数类型可以简单类型、pojo、hashmap。b、对于综合查询，建议parameterType使用包装的pojo，有利于系统 扩展。</code></pre><p>（2）输出映射：</p><pre><code>a、resultType：查询到的列名和resultType指定的pojo的属性名一致，才能映射成功。b、reusltMap：可以通过resultMap 完成一些高级映射。如果查询到的列名和映射的pojo的属性名不一致时，通过resultMap设置列名和属性名之间的对应关系（映射关系）。可以完成映射。 </code></pre><p>（3）高级映射： </p><pre><code>a、将关联查询的列映射到一个pojo属性中。（一对一）b、将关联查询的列映射到一个List中。（一对多）</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><blockquote><p>动态sql：（重点） </p><blockquote><p>if判断（掌握）</p></blockquote><blockquote><p>where</p></blockquote><blockquote><p>foreach</p></blockquote><blockquote><p>sql片段（掌握）</p></blockquote></blockquote><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50756622" target="_blank" rel="noopener">mybatis学习笔记(2)-mybatis概述</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;h3 id=&quot;mybatis-介绍&quot;&gt;&lt;a href=&quot;#mybatis-介绍&quot; class=&quot;headerlink&quot; title=&quot;mybatis 介绍&quot;&gt;&lt;/a&gt;mybatis 介绍&lt;/h3&gt;&lt;p&gt;（1）mybatis是一个持久层的框架，是apache下的顶级项目
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis学习笔记(1)-对原生jdbc程序中的问题总结</title>
+    <link href="http://www.echodemo.cc/2019/06/19/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)-%E5%AF%B9%E5%8E%9F%E7%94%9Fjdbc%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.echodemo.cc/2019/06/19/mybatis学习笔记(1)-对原生jdbc程序中的问题总结/</id>
+    <published>2019-06-19T13:36:54.000Z</published>
+    <updated>2019-06-19T13:48:47.761Z</updated>
+    
+    <content type="html"><![CDATA[<hr><h3 id="jdbc编程步骤"><a href="#jdbc编程步骤" class="headerlink" title="jdbc编程步骤"></a>jdbc编程步骤</h3><pre><code>（1）加载数据库驱动（2）创建并获取数据库连接（3）设置sql语句（4）获取预处理的jdbc statement对象（5）设置sql语句中的参数(使用preparedStatement)（6）通过statement执行sql并获取结果（7）对sql执行结果进行解析处理（8）释放资源(resultSet、preparedstatement、connection)</code></pre><hr><h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><p>（1）数据库连接，使用时就创建，不使用立即释放，对数据库进行频繁连接开启和关闭，造成数据库资源浪费，影响数据库性能。</p><pre><code>设想：使用数据库连接池管理数据库连接。</code></pre><p>（2）将sql语句硬编码到java代码中，如果sql语句修改，需要重新编译java代码，不利于系统维护。</p><pre><code>设想：将sql语句配置在xml配置文件中，即使sql变化，不需要对java代码进行重新编译。</code></pre><p>（3）向preparedStatement中设置参数，对占位符号位置和设置参数值，硬编码在java代码中，不利于系统维护。</p><pre><code>设想：将sql语句及占位符号和参数全部配置在xml中。</code></pre><p>（4）从resutSet中遍历结果集数据时，存在硬编码，将获取表的字段进行硬编码，不利于系统维护。</p><pre><code>设想：将查询的结果集，自动映射成java对象。</code></pre><hr><h3 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h3><pre><code>package com.iot.mybatis.jdbc;//import java.sql.*;import java.sql.Connection;import java.sql.DriverManager;import java.sql.PreparedStatement;import java.sql.ResultSet;import java.sql.SQLException;/** * Created by Administrator on 2016/2/21. */public class JdbcTest {    public static void main(String[] args) {        //数据库连接        Connection connection = null;        //预编译的Statement，使用预编译的Statement提高数据库性能        PreparedStatement preparedStatement = null;        //结果集        ResultSet resultSet = null;        try {            //加载数据库驱动            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);            //通过驱动管理类获取数据库链接            connection =  DriverManager.getConnection(&quot;jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8&quot;, &quot;root&quot;, &quot;123&quot;);            //定义sql语句 ?表示占位符            String sql = &quot;select * from user where username = ?&quot;;            //获取预处理statement            preparedStatement = connection.prepareStatement(sql);            //设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值            preparedStatement.setString(1, &quot;王五&quot;);            //向数据库发出sql执行查询，查询出结果集            resultSet =  preparedStatement.executeQuery();            //遍历查询结果集            while(resultSet.next()){                System.out.println(resultSet.getString(&quot;id&quot;)+&quot;  &quot;+resultSet.getString(&quot;username&quot;));            }        } catch (Exception e) {            e.printStackTrace();        }finally{            //释放资源            if(resultSet!=null){                try {                    resultSet.close();                } catch (SQLException e) {                    // TODO Auto-generated catch block                    e.printStackTrace();                }            }            if(preparedStatement!=null){                try {                    preparedStatement.close();                } catch (SQLException e) {                    // TODO Auto-generated catch block                    e.printStackTrace();                }            }            if(connection!=null){                try {                    connection.close();                } catch (SQLException e) {                    // TODO Auto-generated catch block                    e.printStackTrace();                }            }        }    }}</code></pre><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50756617" target="_blank" rel="noopener">mybatis学习笔记(1)-对原生jdbc程序中的问题总结</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;h3 id=&quot;jdbc编程步骤&quot;&gt;&lt;a href=&quot;#jdbc编程步骤&quot; class=&quot;headerlink&quot; title=&quot;jdbc编程步骤&quot;&gt;&lt;/a&gt;jdbc编程步骤&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;（1）加载数据库驱动
+（2）创建并获取数据库连接
+（3）设置sql
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
+    
+  </entry>
   
   <entry>
     <title>为什么阿里巴巴禁止把SimpleDateFormat定义为static类型</title>
@@ -511,67 +569,6 @@
     
     
       <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql中的行级锁、表级锁、页级锁</title>
-    <link href="http://www.echodemo.cc/2019/04/13/Mysql%E4%B8%AD%E7%9A%84%E8%A1%8C%E7%BA%A7%E9%94%81%E3%80%81%E8%A1%A8%E7%BA%A7%E9%94%81%E3%80%81%E9%A1%B5%E7%BA%A7%E9%94%81/"/>
-    <id>http://www.echodemo.cc/2019/04/13/Mysql中的行级锁、表级锁、页级锁/</id>
-    <published>2019-04-13T03:07:56.000Z</published>
-    <updated>2019-04-13T05:27:41.090Z</updated>
-    
-    <content type="html"><![CDATA[<center>我的建议是：出发吧。给你的宇宙套上马鞍，看它会变成什么样？—-《瑞克和莫蒂》</center><hr><p>在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。在DBMS中，可以按照锁的粒度把数据库锁分为行级锁(INNODB引擎)、表级锁(MYISAM引擎)和页级锁(BDB引擎 )。</p><hr><h3 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h3><p>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为共享锁 和 排他锁。</p><pre><code>特点:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</code></pre><h3 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h3><p>表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。</p><pre><code>特点:开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。</code></pre><h3 id="页级锁"><a href="#页级锁" class="headerlink" title="页级锁"></a>页级锁</h3><p>表级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁.表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。BDB支持页级锁。</p><pre><code>特点：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</code></pre><hr><h3 id="MySQL常用存储引擎的锁机制"><a href="#MySQL常用存储引擎的锁机制" class="headerlink" title="MySQL常用存储引擎的锁机制"></a>MySQL常用存储引擎的锁机制</h3><pre><code>MyISAM和MEMORY采用表级锁(table-level locking)。BDB采用页面锁(page-level locking)或表级锁，默认为页面锁。InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁。</code></pre><h4 id="Innodb中的行锁与表锁"><a href="#Innodb中的行锁与表锁" class="headerlink" title="Innodb中的行锁与表锁"></a>Innodb中的行锁与表锁</h4><p>前面提到过，在Innodb引擎中既支持行锁也支持表锁，那么什么时候会锁住整张表，什么时候或只锁住一行呢？</p><p>InnoDB行锁是通过给索引上的索引项加锁来实现的，这一点MySQL与Oracle不同，后者是通过在数据块中对相应数据行加锁来实现的。InnoDB这种行锁实现特点意味着：<strong>只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！</strong></p><p>在实际应用中，要特别注意InnoDB行锁的这一特性，不然的话，可能导致大量的锁冲突，从而影响并发性能。</p><p>行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁。行级锁的缺点是：由于需要请求大量的锁资源，所以速度慢，内存消耗大。</p><h4 id="行级锁与死锁"><a href="#行级锁与死锁" class="headerlink" title="行级锁与死锁"></a>行级锁与死锁</h4><p>MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。</p><p>在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。</p><p>当两个事务同时执行，一个锁住了主键索引在等待其他相关索引，一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。</p><p>有多种方法可以避免死锁，这里只介绍常见的三种:</p><pre><code>1、如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会。2、在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率；3、对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率；</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;我的建议是：出发吧。给你的宇宙套上马鞍，看它会变成什么样？—-《瑞克和莫蒂》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;在计算机科学中，锁是在执行多线程时用于强行限制资源访问的同步机制，即用于在并发控制中保证对互斥要求的满足。在DBMS中，可以按照锁的粒度把数据库锁分为
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-      <category term="数据库" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库的读现象浅析</title>
-    <link href="http://www.echodemo.cc/2019/04/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AF%BB%E7%8E%B0%E8%B1%A1%E6%B5%85%E6%9E%90/"/>
-    <id>http://www.echodemo.cc/2019/04/13/数据库的读现象浅析/</id>
-    <published>2019-04-13T02:18:27.000Z</published>
-    <updated>2019-04-13T02:31:43.220Z</updated>
-    
-    <content type="html"><![CDATA[<center>别怕美好的一切会消失，咱们先来让它存在。—-王小波《爱你就像爱生命》</center><hr><p>“读现象”是多个事务并发执行时，在读取数据方面可能碰到的状况。先了解它们有助于理解各隔离级别的含义。其中包括脏读、不可重复读和幻读。</p><h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>脏读又称无效数据的读出，是指在数据库访问中，事务T1将某一值修改，然后事务T2读取该值，此后T1因为某种原因撤销对该值的修改，这就导致了T2所读取到的数据是无效的。</p><p>脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交(commit)到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据,那么另外一个事务读到的这个数据是脏数据，依据脏数据所做的操作可能是不正确的。</p><h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读，是指在数据库访问中，一个事务范围内两个相同的查询却返回了不同数据。这是由于查询时系统中其他事务修改的提交而引起的。比如事务T1读取某一数据，事务T2读取并修改了该数据，T1为了对读取值进行检验而再次读取该数据，便得到了不同的结果。</p><p>一种更易理解的说法是：在一个事务内，多次读同一个数据。在这个事务还没有结束时，另一个事务也访问该同一数据。那么，在第一个事务的两次读数据之间。由于第二个事务的修改，那么第一个事务读到的数据可能不一样，这样就发生了在一个事务内两次读到的数据是不一样的，因此称为不可重复读，即原始读取不可重复。</p><h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>幻读是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的“全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入“一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样.一般解决幻读的方法是增加范围锁RangeS，锁定检锁范围为只读，这样就避免了幻读。<br>　　<br>幻读(phantom read)”是不可重复读(Non-repeatable reads)的一种特殊场景：当事务没有获取范围锁的情况下执行SELECT … WHERE操作可能会发生“幻影读(phantom read)”。</p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>要想解决脏读、不可重复读、幻读等读现象，那么就需要提高事务的隔离级别。但与此同时，事务的隔离级别越高，并发能力也就越低。所以，还需要读者根据业务需要进行权衡。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;别怕美好的一切会消失，咱们先来让它存在。—-王小波《爱你就像爱生命》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;“读现象”是多个事务并发执行时，在读取数据方面可能碰到的状况。先了解它们有助于理解各隔离级别的含义。其中包括脏读、不可重复读和幻读。&lt;/p&gt;
-&lt;h3 id=&quot;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-      <category term="数据库" scheme="http://www.echodemo.cc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
