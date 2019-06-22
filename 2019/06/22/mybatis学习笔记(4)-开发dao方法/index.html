@@ -127,7 +127,7 @@
 <meta property="og:description" content="疏雨洗天清，枕簟凉生。井桐一叶做秋声。谁念客身轻似叶，千里飘零？梦断古台城，月淡潮平。便须携酒访新亭。不见当时王谢宅，烟草青青。—-宋·邓剡《浪淘沙·疏雨洗天清》   SqlSession使用范围（1）SqlSessionFactoryBuilder 通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory将SqlSessionFactoryBuilder">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/6/SqlSession.png">
-<meta property="og:updated_time" content="2019-06-22T02:42:04.533Z">
+<meta property="og:updated_time" content="2019-06-22T03:13:19.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习笔记(4)-开发dao方法">
 <meta name="twitter:description" content="疏雨洗天清，枕簟凉生。井桐一叶做秋声。谁念客身轻似叶，千里飘零？梦断古台城，月淡潮平。便须携酒访新亭。不见当时王谢宅，烟草青青。—-宋·邓剡《浪淘沙·疏雨洗天清》   SqlSession使用范围（1）SqlSessionFactoryBuilder 通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory将SqlSessionFactoryBuilder">
@@ -461,7 +461,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,500
+                  2,505
                 </span>
               
 
@@ -508,9 +508,10 @@
 <p>通过SqlSessionFactory创建SqlSession，使用单例模式管理sqlSessionFactory（工厂一旦创建，使用一个实例）。将来mybatis和spring整合后，使用单例模式管理sqlSessionFactory。</p>
 <p>（3）SqlSession</p>
 <p>SqlSession是一个面向用户（程序员）的接口。SqlSession中提供了很多操作数据库的方法。如：selectOne(返回单个对象)、selectList（返回单个或多个对象）。</p>
-<p>SqlSession是线程不安全的，在SqlSesion实现类中除了有接口中的方法（操作数据库的方法）还有数据域属性（比如org.apache.ibatis.session.Configuration和<br>java.sql.Connection）。SqlSession最佳应用场合在方法体内，定义成局部变量使用。</p>
+<p>SqlSession是线程不安全的，在SqlSesion实现类中除了有接口中的方法（操作数据库的方法）还有数据域属性（比如org.apache.ibatis.session.Configuration和java.sql.Connection）。SqlSession最佳应用场合在方法体内，定义成局部变量使用。</p>
 <center><br><br><img src="/images/2019/6/SqlSession.png" alt="&quot;SqlSession&quot;"><br><br></center>
 
+<hr>
 <h3 id="原始dao开发方法"><a href="#原始dao开发方法" class="headerlink" title="原始dao开发方法"></a>原始dao开发方法</h3><h4 id="dao接口"><a href="#dao接口" class="headerlink" title="dao接口"></a>dao接口</h4><pre><code>package com.echodemo.mybatislearning.dao;
 
 import com.echodemo.mybatislearning.bean.User;
@@ -831,7 +832,7 @@ public class UserMapperTest {
 </code></pre><p>（2）mapper接口方法参数只能有一个是否影响系统开发</p>
 <p>mapper接口方法参数只能有一个，系统是否不利于扩展维护?系统框架中，dao层的代码是被业务层公用的。即使mapper接口只有一个参数，可以使用包装类型的pojo满足不同的业务方法的需求。</p>
 <p><strong>注意：持久层方法的参数可以包装类型、map…等，service方法中建议不要使用包装类型（不利于业务层的可扩展）。</strong></p>
-<p><a href="https://blog.csdn.net/h3243212/article/details/50756808" target="_blank" rel="noopener">mybatis学习笔记(3)-入门程序一</a></p>
+<p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50756808" target="_blank" rel="noopener">mybatis学习笔记(4)-开发dao方法</a></p>
 
       
     </div>
@@ -907,6 +908,10 @@ public class UserMapperTest {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/06/22/mybatis学习笔记(5)-配置文件/" rel="prev" title="mybatis学习笔记(5)-配置文件">
+                mybatis学习笔记(5)-配置文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -980,7 +985,7 @@ public class UserMapperTest {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">217</span>
+                <span class="site-state-item-count">220</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1133,7 +1138,7 @@ public class UserMapperTest {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共189.8k字</span>
+  <span class="post-count">博客全站共192.6k字</span>
 </div>
 
 
