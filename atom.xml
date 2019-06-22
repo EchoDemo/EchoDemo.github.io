@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-06-21T16:51:09.601Z</updated>
+  <updated>2019-06-22T02:03:32.169Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis学习笔记(3)-入门程序</title>
+    <link href="http://www.echodemo.cc/2019/06/22/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(3)-%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F%E4%B8%80/"/>
+    <id>http://www.echodemo.cc/2019/06/22/mybatis学习笔记(3)-入门程序一/</id>
+    <published>2019-06-22T01:52:40.000Z</published>
+    <updated>2019-06-22T02:03:32.169Z</updated>
+    
+    <content type="html"><![CDATA[<center>燎沉香，消溽暑。鸟雀呼晴，侵晓窥檐语。叶上初阳干宿雨、水面清圆，一一风荷举。</center><br><center>故乡遥，何日去。家住吴门，久作长安旅。五月渔郎相忆否。小楫轻舟，梦入芙蓉浦。</center><br><center>—-宋·周邦彦《苏幕遮·燎沉香》</center><hr><h3 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h3><p>（1）log4j.properties</p><pre><code># Global logging configurationlog4j.rootLogger=DEBUG, stdout# Console output...log4j.appender.stdout=org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.layout=org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</code></pre><p>（2）SqlMapConfig.xml</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;&lt;configuration&gt;    &lt;!-- 和spring整合后 environments配置将废除--&gt;    &lt;environments default=&quot;development&quot;&gt;        &lt;environment id=&quot;development&quot;&gt;            &lt;!-- 使用jdbc事务管理，事务控制由mybatis--&gt;            &lt;transactionManager type=&quot;JDBC&quot; /&gt;            &lt;!-- 数据库连接池,由mybatis管理--&gt;            &lt;dataSource type=&quot;POOLED&quot;&gt;                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot; /&gt;                &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;                &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;            &lt;/dataSource&gt;        &lt;/environment&gt;    &lt;/environments&gt;&lt;/configuration&gt;</code></pre><h3 id="映射文件"><a href="#映射文件" class="headerlink" title="映射文件"></a>映射文件</h3><p>（1）UserMapper.xml</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE mapper        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;&lt;!-- namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 --&gt;&lt;mapper namespace=&quot;test&quot;&gt;    &lt;!-- 在映射文件中配置很多sql语句 --&gt;    &lt;!--需求:通过id查询用户表的记录 --&gt;    &lt;!-- 通过select执行数据库查询     id:标识映射文件中的sql，称为statement的id     将sql语句封装到mappedStatement对象中，所以将id称为statement的id     parameterType:指定输入参数的类型     #{}标示一个占位符,     #{value}其中value表示接收输入参数的名称，如果输入参数是简单类型，那么#{}中的值可以任意。     resultType：指定sql输出结果的映射的java对象类型，select指定resultType表示将单条记录映射成java对象     --&gt;    &lt;select id=&quot;findUserById&quot; parameterType=&quot;int&quot; resultType=&quot;com.echodemo.mybatislearning.bean.User&quot;&gt;        SELECT * FROM  user  WHERE id=#{value}    &lt;/select&gt;    &lt;!-- 根据用户名称模糊查询用户信息，可能返回多条    resultType：指定就是单条记录所映射的java对象类型    ${}:表示拼接sql串，将接收到参数的内容不加任何修饰拼接在sql中。    使用${}拼接sql，引起 sql注入    ${value}：接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value     --&gt;    &lt;select id=&quot;findUserByName&quot; parameterType=&quot;java.lang.String&quot; resultType=&quot;com.echodemo.mybatislearning.bean.User&quot;&gt;        SELECT * FROM user WHERE username LIKE &apos;%${value}%&apos;    &lt;/select&gt;    &lt;insert id=&quot;insertUser&quot; parameterType=&quot;com.echodemo.mybatislearning.bean.User&quot;&gt;        &lt;!--         将插入数据的主键返回，返回到user对象中         SELECT LAST_INSERT_ID()：得到刚insert进去记录的主键值，只适用于自增主键         keyProperty：将查询到主键值设置到parameterType指定的对象的哪个属性         order：SELECT LAST_INSERT_ID()执行顺序，相对于insert语句来说它的执行顺序         resultType：指定SELECT LAST_INSERT_ID()的结果类型          --&gt;        &lt;selectKey keyProperty=&quot;id&quot; order=&quot;AFTER&quot; resultType=&quot;java.lang.Integer&quot;&gt;            SELECT LAST_INSERT_ID()        &lt;/selectKey&gt;        INSERT INTO user (id,username,birthday,sex,address)values (#{id},#{username},#{birthday},#{sex},#{address})        &lt;!--            使用mysql的uuid（）生成主键            执行过程：            首先通过uuid()得到主键，将主键设置到user对象的id属性中            其次在insert执行时，从user对象中取出id属性值             --&gt;        &lt;!--  &lt;selectKey keyProperty=&quot;id&quot; order=&quot;BEFORE&quot; resultType=&quot;java.lang.String&quot;&gt;            SELECT uuid()        &lt;/selectKey&gt;        insert into user(id,username,birthday,sex,address) value(#{id},#{username},#{birthday},#{sex},#{address}) --&gt;    &lt;/insert&gt;    &lt;!-- 删除 用户        根据id删除用户，需要输入 id值         --&gt;    &lt;delete id=&quot;deleteUser&quot; parameterType=&quot;java.lang.Integer&quot;&gt;        delete from user where id=#{id}    &lt;/delete&gt;    &lt;!-- 根据id更新用户    分析：    需要传入用户的id    需要传入用户的更新信息    parameterType指定user对象，包括 id和更新信息，注意：id必须存在    #{id}：从输入 user对象中获取id属性值     --&gt;    &lt;update id=&quot;updateUser&quot; parameterType=&quot;com.echodemo.mybatislearning.bean.User&quot;&gt;        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}        where id=#{id}    &lt;/update&gt;&lt;/mapper&gt;</code></pre><p>（2）在sqlMapConfig.xml中加载User.xml</p><pre><code>&lt;!-- 加载映射文件--&gt;&lt;mappers&gt;    &lt;mapper resource=&quot;sqlmap/User.xml&quot;/&gt;&lt;/mappers&gt;</code></pre><h3 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h3><p>（1）po类User.java</p><p>package com.echodemo.mybatislearning.bean;</p><p>import lombok.ToString;</p><pre><code>@ToStringpublic class User {    //属性名要和数据库表的字段对应    private int id;    private String username;// 用户姓名    private String sex;// 性别    private String birthday;// 生日    private String address;// 地址    public int getId() {        return id;    }    public void setId(int id) {        this.id = id;    }    public String getUsername() {        return username;    }    public void setUsername(String username) {        this.username = username;    }    public String getSex() {        return sex;    }    public void setSex(String sex) {        this.sex = sex;    }    public String getBirthday() {        return birthday;    }    public void setBirthday(String birthday) {        this.birthday = birthday;    }    public String getAddress() {        return address;    }    public void setAddress(String address) {        this.address = address;    }}</code></pre><p>（2）测试代码</p><pre><code>package com.echodemo.mybatislearning;import com.echodemo.mybatislearning.bean.User;import com.echodemo.mybatislearning.util.DateUtil;import org.apache.ibatis.io.Resources;import org.apache.ibatis.session.SqlSession;import org.apache.ibatis.session.SqlSessionFactory;import org.apache.ibatis.session.SqlSessionFactoryBuilder;import org.junit.Test;import java.io.IOException;import java.io.InputStream;import java.util.List;public class UserTest {    @Test    public void findUserByIdTest() throws IOException {        // mybatis配置文件        String resource = &quot;SqlMapConfig.xml&quot;;        // 得到配置文件流        InputStream inputStream =  Resources.getResourceAsStream(resource);        //创建会话工厂，传入mybatis配置文件的信息        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);        // 通过工厂得到SqlSession        SqlSession sqlSession = sqlSessionFactory.openSession();        // 通过SqlSession操作数据库        // 第一个参数：映射文件中statement的id，等于=namespace+&quot;.&quot;+statement的id        // 第二个参数：指定和映射文件中所匹配的parameterType类型的参数        // sqlSession.selectOne结果是与映射文件中所匹配的resultType类型的对象        // selectOne查询出一条记录        User user = sqlSession.selectOne(&quot;test.findUserById&quot;, 1);        System.out.println(user);        // 释放资源        sqlSession.close();    }    // 根据用户名称模糊查询用户列表    @Test    public void findUserByNameTest() throws IOException {        // mybatis配置文件        String resource = &quot;SqlMapConfig.xml&quot;;        // 得到配置文件流        InputStream inputStream = Resources.getResourceAsStream(resource);        // 创建会话工厂，传入mybatis的配置文件信息        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()                .build(inputStream);        // 通过工厂得到SqlSession        SqlSession sqlSession = sqlSessionFactory.openSession();        // list中的user和映射文件中resultType所指定的类型一致        List&lt;User&gt; list = sqlSession.selectList(&quot;test.findUserByName&quot;, &quot;小明&quot;);        System.out.println(list);        sqlSession.close();    }    // 添加用户信息    @Test    public void insertUserTest() throws IOException {        // mybatis配置文件        String resource = &quot;SqlMapConfig.xml&quot;;        // 得到配置文件流        InputStream inputStream = Resources.getResourceAsStream(resource);        // 创建会话工厂，传入mybatis的配置文件信息        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()                .build(inputStream);        // 通过工厂得到SqlSession        SqlSession sqlSession = sqlSessionFactory.openSession();        // 插入用户对象        User user = new User();        user.setId(5);        user.setUsername(&quot;王小军&quot;);        user.setBirthday(DateUtil.getNow(&quot;yyyy-MM-dd&quot;));        user.setSex(&quot;男&quot;);        user.setAddress(&quot;河南郑州&quot;);        sqlSession.insert(&quot;test.insertUser&quot;, user);        // 提交事务        sqlSession.commit();        // 获取用户信息主键        System.out.println(user.getId());        // 关闭会话        sqlSession.close();    }    // 根据id删除 用户信息    @Test    public void deleteUserTest() throws IOException {        // mybatis配置文件        String resource = &quot;SqlMapConfig.xml&quot;;        // 得到配置文件流        InputStream inputStream = Resources.getResourceAsStream(resource);        // 创建会话工厂，传入mybatis的配置文件信息        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()                .build(inputStream);        // 通过工厂得到SqlSession        SqlSession sqlSession = sqlSessionFactory.openSession();        // 传入id删除 用户        sqlSession.delete(&quot;test.deleteUser&quot;, 1);        // 提交事务        sqlSession.commit();        // 关闭会话        sqlSession.close();    }    // 更新用户信息    @Test    public void updateUserTest() throws IOException {        // mybatis配置文件        String resource = &quot;SqlMapConfig.xml&quot;;        // 得到配置文件流        InputStream inputStream = Resources.getResourceAsStream(resource);        // 创建会话工厂，传入mybatis的配置文件信息        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()                .build(inputStream);        // 通过工厂得到SqlSession        SqlSession sqlSession = sqlSessionFactory.openSession();        // 更新用户信息        User user = new User();        //必须设置id        user.setId(5);        user.setUsername(&quot;王大军&quot;);        user.setBirthday(DateUtil.getNow(&quot;yyyy-MM-dd&quot;));        user.setSex(&quot;2&quot;);        user.setAddress(&quot;河南郑州&quot;);        sqlSession.update(&quot;test.updateUser&quot;, user);        // 提交事务        sqlSession.commit();        // 关闭会话        sqlSession.close();    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;燎沉香，消溽暑。鸟雀呼晴，侵晓窥檐语。叶上初阳干宿雨、水面清圆，一一风荷举。&lt;/center&gt;&lt;br&gt;&lt;center&gt;故乡遥，何日去。家住吴门，久作长安旅。五月渔郎相忆否。小楫轻舟，梦入芙蓉浦。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·周邦彦《苏幕遮·燎沉
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis学习笔记(2)-mybatis概述</title>
@@ -529,34 +556,6 @@
 
 &lt;hr&gt;
 &lt;p&gt;本文提到的读锁和写锁都是MySQL数据库的MyISAM引擎支持的表级锁。而对于行级锁的共享读锁和互斥写锁请阅读MySQL中的共享
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="MYSQL" scheme="http://www.echodemo.cc/tags/MYSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL中的共享锁与排他锁</title>
-    <link href="http://www.echodemo.cc/2019/04/13/MySQL%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E9%94%81%E4%B8%8E%E6%8E%92%E4%BB%96%E9%94%81/"/>
-    <id>http://www.echodemo.cc/2019/04/13/MySQL中的共享锁与排他锁/</id>
-    <published>2019-04-13T05:17:06.000Z</published>
-    <updated>2019-04-13T05:26:38.066Z</updated>
-    
-    <content type="html"><![CDATA[<center>从别后，忆相逢，几回魂梦与君同。—-晏几道《鹧鸪天》</center><hr><p>在MySQL中的行级锁,表级锁,页级锁中介绍过，行级锁是Mysql中锁定粒度最细的一种锁，行级锁能大大减少数据库操作的冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。</p><h3 id="共享锁-Share-Lock"><a href="#共享锁-Share-Lock" class="headerlink" title="共享锁(Share Lock)"></a>共享锁(Share Lock)</h3><p>共享锁又称读锁，是读取操作创建的锁。其他用户可以并发读取数据，但任何事务都不能对数据进行修改（获取数据上的排他锁），直到已释放所有共享锁。如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获得共享锁的事务只能读数据，不能修改数据。</p><pre><code>SELECT ... LOCK IN SHARE MODE;</code></pre><p>在查询语句后面增加LOCK IN SHARE MODE，Mysql会对查询结果中的每行都加共享锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请共享锁，否则会被阻塞。其他线程也可以读取使用了共享锁的表，而且这些线程读取的是同一个版本的数据。</p><h3 id="排他锁（eXclusive-Lock）"><a href="#排他锁（eXclusive-Lock）" class="headerlink" title="排他锁（eXclusive Lock）"></a>排他锁（eXclusive Lock）</h3><p>排他锁又称写锁，如果事务T对数据A加上排他锁后，则其他事务不能再对A加任任何类型的封锁。获得排他锁的事务既能读数据，又能修改数据。</p><pre><code>SELECT ... FOR UPDATE;</code></pre><p>在查询语句后面增加FOR UPDATE，Mysql会对查询结果中的每行都加排他锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请排他锁，否则会被阻塞。</p><h3 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h3><p>InnoDB还有两个表锁：</p><p>意向共享锁（IS）：表示事务准备给数据行加入共享锁，也就是说一个数据行加共享锁前必须先取得该表的IS锁。</p><p>意向排他锁（IX）：类似上面，表示事务准备给数据行加入排他锁，说明事务在一个数据行加排他锁前必须先取得该表的IX锁。</p><pre><code>注：意向锁是InnoDB自动加的，不需要用户干预。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;从别后，忆相逢，几回魂梦与君同。—-晏几道《鹧鸪天》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;在MySQL中的行级锁,表级锁,页级锁中介绍过，行级锁是Mysql中锁定粒度最细的一种锁，行级锁能大大减少数据库操作的冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁
       
     
     </summary>
