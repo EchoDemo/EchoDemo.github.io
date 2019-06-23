@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="楼上谁将玉笛吹？山前水阔暝云低。劳劳燕子人千里，落落梨花雨一枝。修禊近，卖饧时。故乡惟有梦相随。夜来折得江头柳，不是苏堤也皱眉。—-宋·张炎《鹧鸪天·楼上谁将玉笛吹》  张炎（1248年－1320年），字叔夏，号玉田，晚年号乐笑翁。祖籍陕西凤翔。六世祖张俊，宋朝著名将领。父张枢，“西湖吟社”重要成员，妙解音律，与著名词人周密相交。张炎是勋贵之后，前半生居于临安，生活优裕，而宋亡以后则家道中落，晚年">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-23T11:42:34.734Z">
+<meta property="og:updated_time" content="2019-06-23T15:19:07.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习笔记(11)-一对多查询">
 <meta name="twitter:description" content="楼上谁将玉笛吹？山前水阔暝云低。劳劳燕子人千里，落落梨花雨一枝。修禊近，卖饧时。故乡惟有梦相随。夜来折得江头柳，不是苏堤也皱眉。—-宋·张炎《鹧鸪天·楼上谁将玉笛吹》  张炎（1248年－1320年），字叔夏，号玉田，晚年号乐笑翁。祖籍陕西凤翔。六世祖张俊，宋朝著名将领。父张枢，“西湖吟社”重要成员，妙解音律，与著名词人周密相交。张炎是勋贵之后，前半生居于临安，生活优裕，而宋亡以后则家道中落，晚年">
@@ -459,7 +459,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  253
+                  930
                 </span>
               
 
@@ -475,7 +475,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -502,7 +502,87 @@
 <p>张炎（1248年－1320年），字叔夏，号玉田，晚年号乐笑翁。祖籍陕西凤翔。六世祖张俊，宋朝著名将领。父张枢，“西湖吟社”重要成员，妙解音律，与著名词人周密相交。张炎是勋贵之后，前半生居于临安，生活优裕，而宋亡以后则家道中落，晚年漂泊落拓。著有《山中白云词》，存词302首。张炎另一重要的贡献在于创作了中国最早的词论专著《词源》，总结整理了宋末雅词一派的主要艺术思想与成就，其中以“清空”，“骚雅”为主要主张。</p>
 <hr>
 <p>本文实现一对多查询，查询订单及订单明细的信息。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>（1）编写sql</p>
+<pre><code>1、确定主查询表：订单表。
+
+2、确定关联查询表：订单明细表。
+
+3、在一对一查询基础上添加订单明细表关联即可。
+
+SELECT 
+  orders.*,
+  user.username,
+  user.sex,
+  user.address,
+  orderdetail.id orderdetail_id,
+  orderdetail.items_id,
+  orderdetail.items_num,
+  orderdetail.orders_id
+FROM
+  orders,
+  user,
+  orderdetail
+WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id
+</code></pre><p><strong>注意上面的orderdetail.id (AS) orderdetail_id,这里需要取别名，否则由于orders表也有id字段，在后面映射时会冲突。这里需要加入orderdetail表id是因为在resultMap当中需要唯一标识的id标签。</strong></p>
+<p>（2）映射思路</p>
+<p>使用resultType将上边的查询结果映射到pojo中，订单信息的就是重复。但是对orders映射不能出现重复记录。</p>
+<p>在orders.java类中添加List<orderdetail> orderDetails属性。<br>最终会将订单信息映射到orders中，订单所对应的订单明细映射到orders中的orderDetails属性中。映射成的orders记录数为两条（orders信息不重复）,每个orders中的orderDetails属性存储了该订单所对应的订单明细。</orderdetail></p>
+<p>（3）在orders中添加list订单明细属性</p>
+<pre><code>// 订单明细
+private List&lt;Orderdetail&gt; orderdetails;
+</code></pre><p>（4）OrderMapper.xml</p>
+<pre><code>&lt;!-- 查询订单关联查询用户及订单明细，使用resultmap --&gt;
+&lt;select id=&quot;findOrdersAndOrderDetailResultMap&quot; resultMap=&quot;OrdersAndOrderDetailResultMap&quot;&gt;
+   SELECT
+      orders.*,
+      user.username,
+      user.sex,
+      user.address,
+      orderdetail.id orderdetail_id,
+      orderdetail.items_id,
+      orderdetail.items_num,
+      orderdetail.orders_id
+    FROM
+      orders,
+      user,
+      orderdetail
+    WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id
+&lt;/select&gt;
+</code></pre><p>(5)resultMap定义</p>
+<pre><code>&lt;!-- 订单及订单明细的resultMap
+使用extends继承，不用再配置订单信息和用户信息的映射
+ --&gt;
+&lt;resultMap type=&quot;com.echodemo.mybatislearning.bean.Orders&quot; id=&quot;OrdersAndOrderDetailResultMap&quot; extends=&quot;OrdersUserResultMap&quot;&gt;
+    &lt;!-- 订单信息 --&gt;
+    &lt;!-- 用户信息 --&gt;
+    &lt;!-- 使用extends继承，不用再配置订单信息和用户信息的映射 --&gt;
+
+
+    &lt;!-- 订单明细信息
+    一个订单关联查询出了多条明细，要使用collection进行映射
+    collection：对关联查询到多条记录映射到集合对象中
+    property：将关联查询到多条记录映射到com.echodemo.mybatislearning.bean.Orders哪个属性
+    ofType：指定映射到list集合属性中pojo的类型
+     --&gt;
+    &lt;collection property=&quot;orderdetails&quot; ofType=&quot;com.echodemo.mybatislearning.bean.Orderdetail&quot;&gt;
+        &lt;!-- id：订单明细唯 一标识
+        property:要将订单明细的唯 一标识 映射到com.echodemo.mybatislearning.bean.Orderdetail的哪个属性
+          --&gt;
+        &lt;id column=&quot;orderdetail_id&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;items_id&quot; property=&quot;itemsId&quot;/&gt;
+        &lt;result column=&quot;items_num&quot; property=&quot;itemsNum&quot;/&gt;
+        &lt;result column=&quot;orders_id&quot; property=&quot;ordersId&quot;/&gt;
+    &lt;/collection&gt;
+
+&lt;/resultMap&gt;
+</code></pre><p>（6）OrderMapper.java</p>
+<pre><code>// 查询订单(关联用户)及订单明细
+public List&lt;Orders&gt;  findOrdersAndOrderDetailResultMap()throws Exception;
+</code></pre><hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>（1）mybatis使用resultMap的collection对关联查询的多条记录映射到一个list集合属性中。</p>
+<p>（2）使用resultType实现：将订单明细映射到orders中的orderdetails中，需要自己处理，使用双重循环遍历，去掉重复记录，将订单明细放在orderdetails中。</p>
+<p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770026" target="_blank" rel="noopener">mybatis学习笔记(11)-一对多查询</a></p>
+
       
     </div>
 
@@ -761,7 +841,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -803,7 +883,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共196.4k字</span>
+  <span class="post-count">博客全站共197.1k字</span>
 </div>
 
 
