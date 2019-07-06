@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-06-30T11:07:54.954Z</updated>
+  <updated>2019-07-06T04:00:15.050Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis学习中碰到的的一些问题</title>
+    <link href="http://www.echodemo.cc/2019/07/06/mybatis%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.echodemo.cc/2019/07/06/mybatis学习中碰到的一些问题/</id>
+    <published>2019-07-06T03:40:59.000Z</published>
+    <updated>2019-07-06T04:00:15.050Z</updated>
+    
+    <content type="html"><![CDATA[<center>君不见走马川行雪海边，平沙莽莽黄入天。 </center><br><center>轮台九月风夜吼，一川碎石大如斗，随风满地石乱走。</center><br><center>匈奴草黄马正肥，金山西见烟尘飞，汉家大将西出师。</center><br><center>将军金甲夜不脱，半夜军行戈相拨，风头如刀面如割。</center><br><center>马毛带雪汗气蒸，五花连钱旋作冰，幕中草檄砚水凝。 </center><br><center>虏骑闻之应胆慑，料知短兵不敢接，车师西门伫献捷。</center><br><center>—-唐·岑参《走马川行奉送封大夫出师西征》</center><hr><p>1、元素类型为 “configuration” 的内容必须匹配 “(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?<br>,plugins?,environments?,databaseIdProvider?,mappers?)”。</p><pre><code>org.apache.ibatis.exceptions.PersistenceException: ### Error building SqlSession.### Cause: org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 46; columnNumber: 17; 元素类型为 &quot;configuration&quot; 的内容必须匹配 &quot;(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?)&quot;。</code></pre><p>mybatis-config.xml配置文件配置时，要注意节点顺序：</p><p>2、<property name="username" value="jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf-8"></property></p><pre><code>org.apache.ibatis.exceptions.PersistenceException: ### Error querying database.  Cause: java.sql.SQLNonTransientConnectionException: Cannot load connection class because of underlying exception: com.mysql.cj.exceptions.WrongArgumentException: Malformed database URL, failed to parse the connection string near &apos;;serverTimezone=UTC&apos;.</code></pre><p>这是时区问题，只需配置成下面这样就OK了（其中的&amp;表示的是XML的&amp;字符的转义符，所以当你在把这个配置放到db.properties中时就要将&amp;改回&amp;字符了，不然也会报错）：</p><pre><code>&lt;property name=&quot;username&quot; value=&quot;jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf-8&amp;amp;serverTimezone=UTC&quot; /&gt;</code></pre><p>3、org.apache.ibatis.binding.BindingException: Type interface com.echodemo.mybatislearning.mapper.UserMapper is not known to the MapperRegistry</p><pre><code>org.apache.ibatis.binding.BindingException: Type interface com.echodemo.mybatislearning.mapper.UserMapper is not known to the MapperRegistry.</code></pre><p>这个是因为xml文件没有被添加到mybatis的配置文件中扫描。在这里我的mapper当时是这样配置的，看到网上很多都是在前面加个mapper就OK了，but我的目录结构估计和他们不一样。那么如何优雅让工程找到我们的映射文件呢？</p><pre><code>&lt;!--我的--&gt;&lt;mappers&gt;    &lt;mapper resource=&quot;UserMapper.xml&quot;&gt;&lt;/mapper&gt;&lt;/mappers&gt;&lt;!--网上众多博客--&gt;&lt;mappers&gt;    &lt;mapper resource=&quot;mapper/UserMapper.xml&quot;&gt;&lt;/mapper&gt;&lt;/mappers&gt;</code></pre><p>我在pom文件的bulid里面添加了下面这个路径的指引，再也不怕找不到我的映射文件了，哈哈。</p><pre><code>&lt;resources&gt;    &lt;resource&gt;        &lt;directory&gt;src/main/java/com/echodemo/mybatislearning/mapper&lt;/directory&gt;        &lt;includes&gt;            &lt;include&gt;**/*.xml&lt;/include&gt;        &lt;/includes&gt;    &lt;/resource&gt;&lt;/resources&gt;</code></pre><p>当然如果说你是想要配置成批量加载的话，可以像下面这样：</p><pre><code>&lt;mappers&gt;    &lt;!-- 批量加载mapper    指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载    遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，    且在一个目录中上边规范的前提是：使用的是mapper代理方法     --&gt;    &lt;package name=&quot;com.echodemo.mybatislearning.mapper&quot;/&gt;&lt;/mappers&gt;&lt;!--还是要在pom文件当中定义路径哈！--&gt;&lt;resource&gt;    &lt;directory&gt;src/main/java&lt;/directory&gt;    &lt;includes&gt;        &lt;include&gt;**/*.xml&lt;/include&gt;    &lt;/includes&gt;&lt;/resource&gt;</code></pre><p>4、IDEA中使用Mybatis的逆向工程提示说找不到配置文件generatorConfig.xml的问题</p><p>网上很多的文章和博客在指定逆向工程配置文件的时候都是直接用的”generatorConfig.xml”的文件名，而没有前面的路径，虽然按住ctrl可以跳转到该文件，但是在运行main方法的时候却总是报”未找到该文件”的错。我是这样配置的就可以了：</p><pre><code>//指定逆向工程配置文件File configFile = new File(&quot;src\\main\\resources\\generatorConfig.xml&quot;);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;君不见走马川行雪海边，平沙莽莽黄入天。 &lt;/center&gt;&lt;br&gt;&lt;center&gt;轮台九月风夜吼，一川碎石大如斗，随风满地石乱走。&lt;/center&gt;&lt;br&gt;&lt;center&gt;匈奴草黄马正肥，金山西见烟尘飞，汉家大将西出师。&lt;/center&gt;&lt;br&gt;&lt;center&gt;将
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis学习笔记(18)-mybatis逆向工程</title>
+    <link href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(18)-mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+    <id>http://www.echodemo.cc/2019/06/30/mybatis学习笔记(18)-mybatis逆向工程/</id>
+    <published>2019-06-30T15:49:47.000Z</published>
+    <updated>2019-07-06T03:59:50.850Z</updated>
+    
+    <content type="html"><![CDATA[<center>西风吹老洞庭波，一夜湘君白发多。</center><br><center>醉后不知天在水，满船清梦压星河。</center><br><center>—-元·唐珙《题龙阳县青草湖》</center><hr><p>mybaits需要程序员自己编写sql语句,mybatis官方提供逆向工程,可以针对单表自动生成mybatis执行所需要的代码（mapper.java,mapper.xml、po..）企业实际开发中，常用的逆向工程方式：由数据库的表生成java代码。</p><blockquote></blockquote><p><a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">MyBatis Generator</a></p><blockquote></blockquote><p><a href="https://github.com/mybatis/generator" target="_blank" rel="noopener">A code generator for MyBatis and iBATIS. - GitHub</a></p><hr><h3 id="配置maven依赖"><a href="#配置maven依赖" class="headerlink" title="配置maven依赖"></a>配置maven依赖</h3><pre><code>&lt;dependency&gt;    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;    &lt;artifactId&gt;mybatis&lt;/artifactId&gt;    &lt;version&gt;3.4.6&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;    &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;    &lt;version&gt;1.3.5&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;mysql&lt;/groupId&gt;    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;    &lt;version&gt;8.0.15&lt;/version&gt;&lt;/dependency&gt;</code></pre><hr><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>（1）运行逆向工程</p><p>根据官网说的<a href="http://www.mybatis.org/generator/running/running.html" target="_blank" rel="noopener">Running MyBatis Generator</a>：</p><p><strong>Running MyBatis Generator</strong></p><p>MyBatis Generator (MBG) can be run in the following ways:</p><pre><code>From the command prompt with an XML configurationAs an Ant task with an XML configurationAs a Maven PluginFrom another Java program with an XML configurationFrom another Java program with a Java based configuration</code></pre><p>还可以通过eclipse的插件生成代码,建议使用java程序方式，不依赖开发工具。</p><p>(2)生成代码配置文件</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;context id=&quot;testTables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;        &lt;commentGenerator&gt;            &lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;        &lt;/commentGenerator&gt;        &lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.cj.jdbc.Driver&quot;            connectionURL=&quot;jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8&quot;             userId=&quot;root&quot;            password=&quot;123&quot;&gt;        &lt;/jdbcConnection&gt;        &lt;!-- &lt;jdbcConnection driverClass=&quot;oracle.jdbc.OracleDriver&quot;            connectionURL=&quot;jdbc:oracle:thin:@127.0.0.1:1521:yycg&quot;             userId=&quot;yycg&quot;            password=&quot;yycg&quot;&gt;        &lt;/jdbcConnection&gt; --&gt;        &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和             NUMERIC 类型解析为java.math.BigDecimal --&gt;        &lt;javaTypeResolver&gt;            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;        &lt;/javaTypeResolver&gt;        &lt;!-- targetProject:生成PO类的位置 --&gt;        &lt;javaModelGenerator targetPackage=&quot;com.iot.ssm.po&quot;            targetProject=&quot;.\src\main\java&quot;&gt;            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;            &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;        &lt;/javaModelGenerator&gt;        &lt;!-- targetProject:mapper映射文件生成的位置 --&gt;        &lt;sqlMapGenerator targetPackage=&quot;com.iot.ssm.mapper&quot;             targetProject=&quot;.\src\main\java&quot;&gt;            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;        &lt;/sqlMapGenerator&gt;        &lt;!-- targetPackage：mapper接口生成的位置 --&gt;        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;            targetPackage=&quot;com.iot.ssm.mapper&quot;             targetProject=&quot;.\src\main\java&quot;&gt;            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;        &lt;/javaClientGenerator&gt;        &lt;!-- 指定数据库表 --&gt;        &lt;table tableName=&quot;items&quot;&gt;&lt;/table&gt;        &lt;table tableName=&quot;orders&quot;&gt;&lt;/table&gt;        &lt;table tableName=&quot;orderdetail&quot;&gt;&lt;/table&gt;        &lt;table tableName=&quot;user&quot;&gt;&lt;/table&gt;        &lt;!-- &lt;table schema=&quot;&quot; tableName=&quot;sys_user&quot;&gt;&lt;/table&gt;        &lt;table schema=&quot;&quot; tableName=&quot;sys_role&quot;&gt;&lt;/table&gt;        &lt;table schema=&quot;&quot; tableName=&quot;sys_permission&quot;&gt;&lt;/table&gt;        &lt;table schema=&quot;&quot; tableName=&quot;sys_user_role&quot;&gt;&lt;/table&gt;        &lt;table schema=&quot;&quot; tableName=&quot;sys_role_permission&quot;&gt;&lt;/table&gt; --&gt;        &lt;!-- 有些表的字段需要指定java类型         &lt;table schema=&quot;&quot; tableName=&quot;&quot;&gt;            &lt;columnOverride column=&quot;&quot; javaType=&quot;&quot; /&gt;        &lt;/table&gt; --&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;</code></pre><p>需要注意的位置：</p><pre><code>javaModelGenerator,生成PO类的位置sqlMapGenerator,mapper映射文件生成的位置javaClientGenerator,mapper接口生成的位置table,指定数据库表</code></pre><p>(3)执行生成程序</p><pre><code>public class GeneratorSqlmap {    public void generator() throws Exception{        List&lt;String&gt; warnings = new ArrayList&lt;&gt;();        boolean overwrite = true;        // 指定逆向工程配置文件        File configFile = new File(&quot;src\\main\\resources\\generatorConfig.xml&quot;);        ConfigurationParser cp = new ConfigurationParser(warnings);        Configuration config = cp.parseConfiguration(configFile);        DefaultShellCallback callback = new DefaultShellCallback(overwrite);        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,                callback, warnings);        myBatisGenerator.generate(null);    }    public static void main(String[] args) {        try {            GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();            generatorSqlmap.generator();        } catch (Exception e) {            e.printStackTrace();        }    }}</code></pre><p><strong>注：网上很多的文章和博客在指定逆向工程配置文件的时候都是直接用的”generatorConfig.xml”的文件名，而没有前面的路径，虽然按住ctrl可以跳转到该文件，但是在运行main方法的时候却总是报”未找到该文件”的错。</strong></p><hr><h3 id="使用生成的代码"><a href="#使用生成的代码" class="headerlink" title="使用生成的代码"></a>使用生成的代码</h3><pre><code>package com.iot.ssm.mapper;import static org.junit.Assert.*;import java.util.Date;import java.util.List;import com.iot.ssm.po.Items;import com.iot.ssm.po.ItemsExample;import org.junit.Before;import org.junit.Test;import org.springframework.context.ApplicationContext;import org.springframework.context.support.ClassPathXmlApplicationContext;public class ItemsMapperTest {    private ApplicationContext applicationContext;    private ItemsMapper itemsMapper;    //在setUp这个方法得到spring容器    @Before    public void setUp() throws Exception {        applicationContext = new ClassPathXmlApplicationContext(&quot;classpath:spring/applicationContext.xml&quot;);        itemsMapper = (ItemsMapper) applicationContext.getBean(&quot;itemsMapper&quot;);    }    //根据主键删除     @Test    public void testDeleteByPrimaryKey() {    }    //插入    @Test    public void testInsert() {        //构造 items对象        Items items = new Items();        items.setName(&quot;手机&quot;);        items.setPrice(999f);        items.setCreatetime(new Date());        itemsMapper.insert(items);    }    //自定义条件查询    @Test    public void testSelectByExample() {        ItemsExample itemsExample = new ItemsExample();        //通过criteria构造查询条件        ItemsExample.Criteria criteria = itemsExample.createCriteria();        criteria.andNameEqualTo(&quot;笔记本&quot;);        //可能返回多条记录        List&lt;Items&gt; list = itemsMapper.selectByExample(itemsExample);        System.out.println(list);    }    //根据主键查询    @Test    public void testSelectByPrimaryKey() {        Items items = itemsMapper.selectByPrimaryKey(1);        System.out.println(items);    }    //更新数据    @Test    public void testUpdateByPrimaryKey() {        //对所有字段进行更新，需要先查询出来再更新        Items items = itemsMapper.selectByPrimaryKey(1);        items.setName(&quot;手机&quot;);        itemsMapper.updateByPrimaryKey(items);        //如果传入字段不空为才更新，在批量更新中使用此方法，不需要先查询再更新        //itemsMapper.updateByPrimaryKeySelective(record);    }}</code></pre><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50778937" target="_blank" rel="noopener">mybatis学习笔记(18)-mybatis逆向工程</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;西风吹老洞庭波，一夜湘君白发多。&lt;/center&gt;&lt;br&gt;&lt;center&gt;醉后不知天在水，满船清梦压星河。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-元·唐珙《题龙阳县青草湖》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;mybaits需要程序员自己编写sql语句,my
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis学习笔记(17)-spring和mybatis整合</title>
@@ -513,65 +570,6 @@
     
     
       <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中的Volatile关键字</title>
-    <link href="http://www.echodemo.cc/2019/04/24/Java%E4%B8%AD%E7%9A%84Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"/>
-    <id>http://www.echodemo.cc/2019/04/24/Java中的Volatile关键字/</id>
-    <published>2019-04-24T14:08:47.000Z</published>
-    <updated>2019-04-24T14:24:59.221Z</updated>
-    
-    <content type="html"><![CDATA[<center>东城渐觉风光好。縠皱波纹迎客棹。绿杨烟外晓寒轻，红杏枝头春意闹。</center><br><center>浮生长恨欢娱少。肯爱千金轻一笑。为君持酒劝斜阳，且向花间留晚照。</center><br><center>—-宋祁《玉楼春·春景》</center><hr><h3 id="Java内存模型中的可见性、原子性和有序性"><a href="#Java内存模型中的可见性、原子性和有序性" class="headerlink" title="Java内存模型中的可见性、原子性和有序性"></a>Java内存模型中的可见性、原子性和有序性</h3><h4 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性(Atomicity)"></a>原子性(Atomicity)</h4><p>在Java中，对基本数据类型的读取和赋值操作是原子性操作，所谓原子性操作就是指这些操作是不可中断的，要做一定做完，要么就没有执行。比如：</p><pre><code>i = 2;j = i;i++;i = i + 1；</code></pre><p>上面4个操作中，i=2是读取操作，必定是原子性操作，j=i你以为是原子性操作，其实吧，分为三步，一是读取i的值，然后再赋值给j,最后将j的值存到写回主存，称不上原子操作，i++和i = i + 1其实是等效的，读取i的值，加1，再写回主存，也3步操作。所以上面的举例中，最后的值可能出现多种情况，就是因为满足不了原子性。</p><p>这么说来，只有简单的读取，赋值是原子操作，还只能是用数字赋值，用变量的话还多了一步读取变量值的操作。有个例外是，虚拟机规范中允许对64位数据类型(long和double)，分为2次32位的操作来处理，但是最新JDK实现还是实现了原子操作的。</p><p>JMM只实现了基本的原子性，像上面i++那样的操作，必须借助于synchronized和Lock来保证整块代码的原子性了。线程在释放锁之前，必然会把i的值刷回到主存的。</p><hr><h4 id="可见性-Visibility"><a href="#可见性-Visibility" class="headerlink" title="可见性(Visibility)"></a>可见性(Visibility)</h4><p>说到可见性，Java就是利用volatile来提供可见性的。当一个变量被volatile修饰时，那么对它的修改会立刻刷新到主存，当其它线程需要读取该变量时，会去内存中读取新值。而普通变量则不能保证这一点。</p><p>其实通过synchronized和Lock也能够保证可见性，线程在释放锁之前，会把共享变量值都刷回主存，但是synchronized和Lock的开销都更大。</p><hr><h4 id="有序性（Ordering）"><a href="#有序性（Ordering）" class="headerlink" title="有序性（Ordering）"></a>有序性（Ordering）</h4><p>JMM是允许编译器和处理器对指令重排序的，但是规定了as-if-serial语义，即不管怎么重排序，程序的执行结果不能改变。比如下面的程序段：</p><pre><code>double pi = 3.14; //Adouble r = 1; //Bdouble s= pi * r * r;//C</code></pre><p>上面的语句，可以按照A-&gt;B-&gt;C执行，结果为3.14,但是也可以按照B-&gt;A-&gt;C的顺序执行，因为A、B是两句独立的语句，而C则依赖于A、B，所以A、B可以重排序，但是C却不能排到A、B的前面。JMM保证了重排序不会影响到单线程的执行，但是在多线程中却容易出问题。比如这样的代码:</p><pre><code>int a = 0;bool flag = false;public void write() {    a = 2; //1    flag = true; //2}public void multiply() {    if (flag) { //3        int ret = a * a;//4    }}</code></pre><p>假如有两个线程执行上述代码段，线程1先执行write，随后线程2再执行multiply，最后ret的值一定是4吗？结果不一定：</p><p><img src="/images/2019/4/clipboard.png" alt="&quot;clipboard&quot;"></p><p>如图所示，write方法里的1和2做了重排序，线程1先对flag赋值为true，随后执行到线程2，ret直接计算出结果，再到线程1，这时候a才赋值为2,很明显迟了一步。</p><p>这时候可以为flag加上volatile关键字，禁止重排序，可以确保程序的“有序性”，也可以上重量级的synchronized和Lock来保证有序性,它们能保证那一块区域里的代码都是一次性执行完毕的。</p><p>另外，JMM具备一些先天的有序性,即不需要通过任何手段就可以保证的有序性，通常称为happens-before原则。&lt;&lt;JSR-133：Java Memory Model and Thread Specification&gt;&gt;定义了其中包含这样一条规则：volatile变量规则： <strong>对一个volatile域的写，happens-before于后续对这个volatile域的读。即如果一个线程先去写一个变量，另外一个线程再去读，那么写入操作一定在读操作之前。</strong>其实就是如果一个变量声明成是volatile的，那么当我读变量时，总是能读到它的最新值，这里最新值是指不管其它哪个线程对该变量做了写操作，都会立刻被更新到主存里，我也能从主存里读到这个刚写入的值。<strong>也就是说volatile关键字可以保证可见性以及有序性。</strong></p><hr><h3 id="volatile底层的实现机制"><a href="#volatile底层的实现机制" class="headerlink" title="volatile底层的实现机制"></a>volatile底层的实现机制</h3><p>如果把加入volatile关键字的代码和未加入volatile关键字的代码都生成汇编代码，会发现加入volatile关键字的代码会多出一个lock前缀指令。lock前缀指令实际相当于一个内存屏障，内存屏障提供了以下功能：</p><pre><code>1、重排序时不能把后面的指令重排序到内存屏障之前的位置。2、使得本CPU的Cache写入内存。3、写入动作也会引起别的CPU或者别的内核无效化其Cache，相当于让新写入的值对别的线程可见。</code></pre><hr><h3 id="volatile使用场景"><a href="#volatile使用场景" class="headerlink" title="volatile使用场景"></a>volatile使用场景</h3><blockquote><p>状态量标记，就如上面对flag的标记：这种对变量的读写操作，标记为volatile可以保证修改对线程立刻可见。比synchronized,Lock有一定的效率提升。</p><p>单例模式的实现，典型的双重检查锁定（DCL）：<br>    class Singleton{<br>        private volatile static Singleton instance = null;</p></blockquote><pre><code>    private Singleton() {    }    public static Singleton getInstance() {        if(instance==null) {            synchronized (Singleton.class) {                if(instance==null)                instance = new Singleton();            }        }        return instance;    }}</code></pre><blockquote><p>这是一种懒汉的单例模式，使用时才创建对象，而且为了避免初始化操作的指令重排序，给instance加上了volatile。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;东城渐觉风光好。縠皱波纹迎客棹。绿杨烟外晓寒轻，红杏枝头春意闹。&lt;/center&gt;&lt;br&gt;&lt;center&gt;浮生长恨欢娱少。肯爱千金轻一笑。为君持酒劝斜阳，且向花间留晚照。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋祁《玉楼春·春景》&lt;/center&gt;
-
-&lt;hr
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="多线程" scheme="http://www.echodemo.cc/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入理解多线程之Java虚拟机的锁优化技术</title>
-    <link href="http://www.echodemo.cc/2019/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E9%94%81%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/"/>
-    <id>http://www.echodemo.cc/2019/04/20/深入理解多线程之Java虚拟机的锁优化技术/</id>
-    <published>2019-04-19T16:23:29.000Z</published>
-    <updated>2019-04-24T13:58:43.918Z</updated>
-    
-    <content type="html"><![CDATA[<center>漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。</center><br><center>自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。</center><br><center>—-秦观《浣溪沙·漠漠轻寒上小楼》</center><hr><h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><blockquote><p>1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。<a href="http://www.echodemo.cc/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BSynchronized%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Synchronized的实现原理</a></p><p>2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到monitorexit的时候则要释放锁。<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Moniter的实现原理</a></p><p>3、在HotSpot虚拟机中，使用oop-klass模型来表示对象。每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了对象头以及实例数据。<a href="http://www.echodemo.cc/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">深入理解多线程之Java的对象模型</a></p><p>4、对象头中主要包含了GC分代年龄、锁状态标记、哈希码、epoch等信息。对象的状态一共有五种，分别是无锁态、轻量级锁、重量级锁、GC标记和偏向锁。<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%A4%B4/">深入理解多线程之Java的对象头</a></p></blockquote><hr><p>在<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Moniter的实现原理</a>的最后，我们说过，事实上，只有在JDK1.6之前，synchronized的实现才会直接调用ObjectMonitor的enter和exit，这种锁被称之为重量级锁。</p><p>高效并发是从JDK 1.5 到 JDK 1.6的一个重要改进，HotSpot虚拟机开发团队在这个版本中花费了很大的精力去对Java中的锁进行优化，如适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等。这些技术都是为了在线程之间更高效的共享数据，以及解决竞争问题。本文主要先来介绍一下自旋、锁消除以及锁粗化等技术。</p><p>这里简单说明一下，本文要介绍的这几个概念，以及后面要介绍的轻量级锁和偏向锁，其实对于使用他的开发者来说是屏蔽掉了的，也就是说，作为一个Java开发，你只需要知道你想在加锁的时候使用synchronized就可以了，具体的锁的优化是虚拟机根据竞争情况自行决定的。也就是说，在JDK 1.5 以后，我们即将介绍的这些概念，都被封装在synchronized中了。</p><hr><h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>要想把锁说清楚，一个重要的概念不得不提，那就是线程和线程的状态。锁和线程的关系是怎样的呢，举个简单的例子你就明白了。</p><p>比如，你今天要去银行办业务，你到了银行之后，要先取一个号，然后你坐在休息区等待叫号，过段时间，广播叫到你的号码之后，会告诉你去哪个柜台办理业务，这时，你拿着你手里的号码，去到对应的柜台，找相应的柜员开始办理业务。当你办理业务的时候，这个柜台和柜台后面的柜员只能为你自己服务。当你办完业务离开之后，广播再喊其他的顾客前来办理业务。</p><blockquote><p>这个例子中，每个顾客是一个线程。 柜台前面的那把椅子，就是锁。 柜台后面的柜员，就是共享资源。 你发现无法直接办理业务，要取号等待的过程叫做阻塞。 当你听到叫你的号码的时候，你起身去办业务，这就是唤醒。 当你坐在椅子上开始办理业务的时候，你就获得锁。 当你办完业务离开的时候，你就释放锁。</p></blockquote><p>对于线程来说，一共有五种状态，分别为：初始状态(New) 、就绪状态(Runnable) 、运行状态(Running) 、阻塞状态(Blocked) 和死亡状态(Dead) 。</p><p><img src="/images/2019/4/thread.png" alt="&quot;thread&quot;"></p><hr><h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p>在前面的文章中，我们介绍的synchronized的实现方式中使用Monitor进行加锁，这是一种互斥锁，为了表示他对性能的影响我们称之为重量级锁。这种互斥锁在互斥同步上对性能的影响很大，Java的线程是映射到操作系统原生线程之上的，如果要阻塞或唤醒一个线程就需要操作系统的帮忙，这就要从用户态转换到内核态，因此状态转换需要花费很多的处理器时间。</p><blockquote><p>就像去银行办业务的例子，当你来到银行，发现柜台前面都有人的时候，你需要取一个号，然后再去等待区等待，一直等待被叫号。这个过程是比较浪费时间的，那么有没有什么办法改进呢？有一种比较好的设计，那就是银行提供自动取款机，当你去银行取款的时候，你不需要取号，不需要去休息区等待叫号，你只需要找到一台取款机，排在其他人后面等待取款就行了。</p><p>之所以能这样做，是因为取款的这个过程相比较之下是比较节省时间的。如果所有人去银行都只取款，或者办理业务的时间都很短的话，那也就可以不需要取号，不需要去单独的休息区，不需要听叫号，也不需要再跑到对应的柜台了。</p></blockquote><p>在程序中，Java虚拟机的开发工程师们在分析过大量数据后发现：共享数据的锁定状态一般只会持续很短的一段时间，为了这段时间去挂起和恢复线程其实并不值得。如果物理机上有多个处理器，可以让多个线程同时执行的话。我们就可以让后面来的线程“稍微等一下”，但是并不放弃处理器的执行时间，看看持有锁的线程会不会很快释放锁。这个“稍微等一下”的过程就是自旋。自旋锁在JDK 1.4中已经引入，在JDK 1.6中默认开启。</p><p>很多人在对于自旋锁的概念不清楚的时候可能会有以下疑问：这么听上去，自旋锁好像和阻塞锁没啥区别，反正都是等着嘛。</p><blockquote><p>对于去银行取钱的你来说，站在取款机面前等待和去休息区等待叫号有一个很大的区别：那就是如果你在休息区等待，这段时间你什么都不需要管，随意做自己的事情，等着被唤醒就行了。如果你在取款机面前等待，那么你需要时刻关注自己前面还有没有人，因为没人会唤醒你。很明显，这种直接去取款机前面排队取款的效率是比较高。</p></blockquote><p>所以，<strong>自旋锁和阻塞锁最大的区别就是，到底要不要放弃处理器的执行时间。对于阻塞锁和自旋锁来说，都是要等待获得共享资源。但是阻塞锁是放弃了CPU时间，进入了等待区，等待被唤醒。而自旋锁是一直“自旋”在那里，时刻的检查共享资源是否可以被访问。</strong></p><p>由于<strong>自旋锁只是将当前线程不停地执行循环体，不进行线程状态的改变，也就无需调用操作系统原生的线程，所以响应速度更快。</strong>但当线程数不停增加时，性能下降明显，因为每个线程都需要执行，占用CPU时间。如果线程竞争不激烈，并且保持锁的时间段。适合使用自旋锁。</p><hr><h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><p>除了自旋锁之后，JDK中还有一种锁的优化被称之为锁消除。还拿去银行取钱的例子说。</p><blockquote><p>你去银行取钱，所有情况下都需要取号，并且等待吗？其实是不用的，当银行办理业务的人不多的时候，可能根本不需要取号，直接走到柜台前面办理业务就好了。能这么做的前提是，没有人和你抢着办业务。上面的这种例子，在锁优化中被称作“锁消除”，是JIT编译器对内部锁的具体实现所做的一种优化。</p></blockquote><p>在动态编译同步块的时候，JIT编译器可以借助一种被称为逃逸分析（Escape Analysis）的技术来判断同步块所使用的锁对象是否只能够被一个线程访问而没有被发布到其他线程。如果同步块所使用的锁对象通过这种分析被证实只能够被一个线程访问，那么JIT编译器在编译这个同步块的时候就会取消对这部分代码的同步。如以下代码：</p><pre><code>public void f() {    Object hollis = new Object();    synchronized(hollis) {        System.out.println(hollis);    }}</code></pre><p>代码中对hollis这个对象进行加锁，但是hollis对象的生命周期只在f()方法中，并不会被其他线程所访问到，所以在JIT编译阶段就会被优化掉。优化成：</p><pre><code>public void f() {    Object hollis = new Object();    System.out.println(hollis);}</code></pre><p>这里，可能有读者会质疑了，代码是程序员自己写的，程序员难道没有能力判断要不要加锁吗？就像以上代码，完全没必要加锁，有经验的开发者一眼就能看的出来的。其实道理是这样，但是还是有可能有疏忽，比如我们经常在代码中使用StringBuffer作为局部变量，而StringBuffer中的append是线程安全的，有synchronized修饰的，这种情况开发者可能会忽略。这时候，JIT就可以帮忙优化，进行锁消除。</p><p>总之，读者只需要知道，在使用synchronized的时候，如果JIT经过逃逸分析之后发现并无线程安全问题的话，就会做锁消除。</p><hr><h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3><p>很多人都知道，在代码中，需要加锁的时候，我们提倡尽量减小锁的粒度，这样可以避免不必要的阻塞。这也是很多人用同步代码块来代替同步方法的原因，因为往往他的粒度会更小一些，这其实是很有道理的。</p><blockquote><p>还是我们去银行柜台办业务，最高效的方式是你坐在柜台前面的时候，只办和银行相关的事情。如果这个时候，你拿出手机，接打几个电话，问朋友要往哪个账户里面打钱，这就很浪费时间了。最好的做法肯定是提前准备好相关资料，在办理业务时直接办理就好了。</p></blockquote><p><strong>加锁也一样，把无关的准备工作放到锁外面，锁内部只处理和并发相关的内容。这样有助于提高效率。</strong></p><p>那么，这和锁粗化有什么关系呢？可以说，大部分情况下，减小锁的粒度是很正确的做法，只有一种特殊的情况下，会发生一种叫做锁粗化的优化。</p><blockquote><p>就像你去银行办业务，你为了减少每次办理业务的时间，你把要办的五个业务分成五次去办理，这反而适得其反了。因为这平白的增加了很多你重新取号、排队、被唤醒的时间。</p></blockquote><p>如果在一段代码中连续的对同一个对象反复加锁解锁，其实是相对耗费资源的，这种情况可以适当放宽加锁的范围，减少性能消耗。当JIT发现一系列连续的操作都对同一个对象反复加锁和解锁，甚至加锁操作出现在循环体中的时候，会将加锁同步的范围扩散（粗化）到整个操作序列的外部。</p><p>如以下代码：</p><pre><code>for(int i=0;i&lt;100000;i++){      synchronized(this){          do();  }</code></pre><p>会被粗化成：</p><pre><code>synchronized(this){      for(int i=0;i&lt;100000;i++){          do();  }</code></pre><blockquote><p>这其实和我们要求的减小锁粒度并不冲突。减小锁粒度强调的是不要在银行柜台前做准备工作以及和办理业务无关的事情。而锁粗化建议的是，同一个人，要办理多个业务的时候，可以在同一个窗口一次性办完，而不是多次取号多次办理。</p></blockquote><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>自Java 6/Java 7开始，Java虚拟机对内部锁的实现进行了一些优化。这些优化主要包括锁消除（Lock Elision）、锁粗化（Lock Coarsening）、偏向锁（Biased Locking）以及适应性自旋锁（Adaptive Locking）。这些优化仅在Java虚拟机server模式下起作用（即运行Java程序时我们可能需要在命令行中指定Java虚拟机参数“-server”以开启这些优化）。</p><p>本文主要介绍了自旋锁、锁粗化和锁消除的概念。在JIT编译过程中，虚拟机会根据情况使用这三种技术对锁进行优化，目的是减少锁的竞争，提升性能。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。&lt;/center&gt;&lt;br&gt;&lt;center&gt;自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-秦观《浣溪沙·漠漠轻寒上小楼》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&quot;前
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="多线程" scheme="http://www.echodemo.cc/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
