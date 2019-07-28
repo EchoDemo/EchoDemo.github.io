@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-07-14T14:07:29.686Z</updated>
+  <updated>2019-07-28T13:58:29.224Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,206 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springmvc学习笔记(16)-异常处理器</title>
+    <link href="http://www.echodemo.cc/2019/07/28/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(16)-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"/>
+    <id>http://www.echodemo.cc/2019/07/28/springmvc学习笔记(16)-异常处理器/</id>
+    <published>2019-07-28T13:47:57.000Z</published>
+    <updated>2019-07-28T13:58:29.224Z</updated>
+    
+    <content type="html"><![CDATA[<center>窗间梅熟落蒂，墙下笋成出林。</center><br><center>连雨不知春去，一晴方觉夏深。</center><br><center>—-宋·范成大《喜晴》</center><hr><p>本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置。</p><hr><h3 id="异常处理思路"><a href="#异常处理思路" class="headerlink" title="异常处理思路"></a>异常处理思路</h3><p>系统中异常包括两类：</p><pre><code>1、预期异常。2、运行时异常RuntimeException。</code></pre><p>前者通过捕获异常从而获取异常信息，后者主要通过规范代码开发、测试通过手段减少运行时异常的发生。</p><p>系统的dao、service、controller出现都通过throws Exception向上抛出，最后由springmvc前端控制器交由异常处理器进行异常处理。</p><p><strong>springmvc提供全局异常处理器（一个系统只有一个异常处理器）进行统一异常处理。</strong></p><hr><h3 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h3><p>对不同的异常类型定义异常类，继承Exception。</p><pre><code>public class CustomException  extends  Exception{    //异常信息    public String message;    public CustomException(String message){        super(message);        this.message = message;    }    public String getMessage() {        return message;    }    public void setMessage(String message) {        this.message = message;    }}</code></pre><hr><h3 id="全局异常处理器"><a href="#全局异常处理器" class="headerlink" title="全局异常处理器"></a>全局异常处理器</h3><p>思路：</p><p>系统遇到异常，在程序中手动抛出，dao抛给service、service给controller、controller抛给前端控制器，前端控制器调用全局异常处理器。</p><p>全局异常处理器处理思路：</p><p>解析出异常类型</p><pre><code>1、如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示。2、如果该异常类型不是系统自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）。</code></pre><p>springmvc提供一个HandlerExceptionResolver接口：</p><pre><code>public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {        //handler就是处理器适配器要执行Handler对象（只有method）        //解析出异常类型        //如果该 异常类型是系统 自定义的异常，直接取出异常信息，在错误页面展示        //String message = null;        //if(ex instanceof CustomException){            //message = ((CustomException)ex).getMessage();        //}else{            ////如果该 异常类型不是系统 自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）            //message=&quot;未知错误&quot;;        //}        //上边代码变为        CustomException customException;        if(ex instanceof CustomException){            customException = (CustomException)ex;        }else{            customException = new CustomException(&quot;未知错误&quot;);        }        //错误信息        String message = customException.getMessage();        ModelAndView modelAndView = new ModelAndView();        //将错误信息传到页面        modelAndView.addObject(&quot;message&quot;, message);        //指向错误页面        modelAndView.setViewName(&quot;error&quot;);        return modelAndView;    }}</code></pre><hr><h3 id="错误页面"><a href="#错误页面" class="headerlink" title="错误页面"></a>错误页面</h3><pre><code>&lt;%--  Created by IntelliJ IDEA.  User: Brian  Date: 2016/3/4  Time: 10:51  To change this template use File | Settings | File Templates.--%&gt;&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;&lt;html&gt;&lt;head&gt;    &lt;title&gt;错误提示&lt;/title&gt;&lt;/head&gt;&lt;body&gt;${message}&lt;/body&gt;&lt;/html&gt;</code></pre><hr><h3 id="在springmvc-xml配置全局异常处理器"><a href="#在springmvc-xml配置全局异常处理器" class="headerlink" title="在springmvc.xml配置全局异常处理器"></a>在springmvc.xml配置全局异常处理器</h3><pre><code>&lt;!-- 全局异常处理器只要实现HandlerExceptionResolver接口就是全局异常处理器--&gt;&lt;bean class=&quot;com.iot.learnssm.firstssm.exception.CustomExceptionResolver&quot;&gt;&lt;/bean&gt;</code></pre><p><strong>全局异常处理器只有一个，配置多个也没用。</strong></p><hr><h3 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h3><p>在controller、service、dao中任意一处需要手动抛出异常。如果是程序中手动抛出的异常，在错误页面中显示自定义的异常信息，如果不是手动抛出异常说明是一个运行时异常，在错误页面只显示“未知错误”。</p><p>(1)在商品修改的controller方法中抛出异常</p><pre><code>public String editItems(Model model,@RequestParam(value=&quot;id&quot;,required=true) Integer items_id)throws Exception {    //调用service根据商品id查询商品信息    ItemsCustom itemsCustom = itemsService.findItemsById(items_id);    //判断商品是否为空，根据id没有查询到商品，抛出异常，提示用户商品信息不存在    if(itemsCustom == null){        throw new CustomException(&quot;修改的商品信息不存在!&quot;);    }    //通过形参中的model将model数据传到页面    //相当于modelAndView.addObject方法    model.addAttribute(&quot;items&quot;, itemsCustom);    return &quot;items/editItems&quot;;}</code></pre><p>(2)在service接口中抛出异常</p><pre><code>public ItemsCustom findItemsById(Integer id) throws Exception {    Items items = itemsMapper.selectByPrimaryKey(id);    if(items==null){        throw new CustomException(&quot;修改的商品信息不存在!&quot;);    }    //中间对商品信息进行业务处理    //....    //返回ItemsCustom    ItemsCustom itemsCustom = null;    //将items的属性值拷贝到itemsCustom    if(items!=null){        itemsCustom = new ItemsCustom();        BeanUtils.copyProperties(items, itemsCustom);    }    return itemsCustom;}</code></pre><p>1、如果与业务功能相关的异常，建议在service中抛出异常。</p><p>2、与业务功能没有关系的异常，建议在controller中抛出。</p><p>上边的功能，建议在service中抛出异常。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;窗间梅熟落蒂，墙下笋成出林。&lt;/center&gt;&lt;br&gt;&lt;center&gt;连雨不知春去，一晴方觉夏深。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·范成大《喜晴》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;p&gt;本文主要介绍springmvc中异常处理的思路，并展示如何自定义
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(15)-数据回显</title>
+    <link href="http://www.echodemo.cc/2019/07/28/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(15)-%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/"/>
+    <id>http://www.echodemo.cc/2019/07/28/springmvc学习笔记(15)-数据回显/</id>
+    <published>2019-07-28T13:33:23.000Z</published>
+    <updated>2019-07-28T13:46:51.460Z</updated>
+    
+    <content type="html"><![CDATA[<center>阅尽天涯离别苦，不道归来，零落花如许。花底相看无一语，绿窗春与天俱暮。</center><br><center>待把相思灯下诉，一缕新欢，旧恨千千缕。最是人间留不住，朱颜辞镜花辞树。</center><br><center>—-近代·王国维《蝶恋花·阅尽天涯离别苦》</center><hr><p>本文介绍springmvc中数据回显的几种实现方法</p><p>数据回显：提交后，如果出现错误，将刚才提交的数据回显到刚才的提交页面。</p><hr><h3 id="pojo数据回显方法"><a href="#pojo数据回显方法" class="headerlink" title="pojo数据回显方法"></a>pojo数据回显方法</h3><p>（1）springmvc默认对pojo数据进行回显。</p><p>pojo数据传入controller方法后，springmvc自动将pojo数据放到request域，key等于pojo类型（首字母小写）。使用@ModelAttribute(“items”)指定pojo回显到页面在request中的key。这里的items对应的是前端页面里面的input中的name=”items.name”中的items。</p><p>（2）@ModelAttribute还可以将方法的返回值传到页面。在商品查询列表页面，通过商品类型查询商品信息。在controller中定义商品类型查询方法，最终将商品类型传到页面。（请注意，这里并没有指定RequestMapping）</p><pre><code>// 商品分类// itemtypes表示最终将方法返回值放在request中的key@ModelAttribute(&quot;itemtypes&quot;)public Map&lt;String, String&gt; getItemTypes() {    Map&lt;String, String&gt; itemTypes = new HashMap&lt;String, String&gt;();    itemTypes.put(&quot;101&quot;, &quot;数码&quot;);    itemTypes.put(&quot;102&quot;, &quot;母婴&quot;);    return itemTypes;}</code></pre><p>页面上可以得到itemTypes数据。</p><pre><code>&lt;td&gt;    商品名称：&lt;input name=&quot;itemsCustom.name&quot; /&gt;    商品类型：    &lt;select name=&quot;itemtype&quot;&gt;        &lt;c:forEach items=&quot;${itemtypes}&quot; var=&quot;itemtype&quot;&gt;            &lt;option value=&quot;${itemtype.key }&quot;&gt;${itemtype.value }&lt;/option&gt;        &lt;/c:forEach&gt;    &lt;/select&gt;&lt;/td&gt;</code></pre><p>（3）使用最简单方法:使用model，可以不用@ModelAttribute，(对应的是小标题（1）哦！)</p><pre><code>// 可以直接使用model将提交pojo回显到页面// model.addAttribute(&quot;items&quot;, itemsCustom);</code></pre><hr><h3 id="简单类型数据回显"><a href="#简单类型数据回显" class="headerlink" title="简单类型数据回显"></a>简单类型数据回显</h3><p>使用最简单方法使用model：</p><pre><code>model.addAttribute(&quot;id&quot;, id);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;阅尽天涯离别苦，不道归来，零落花如许。花底相看无一语，绿窗春与天俱暮。&lt;/center&gt;&lt;br&gt;&lt;center&gt;待把相思灯下诉，一缕新欢，旧恨千千缕。最是人间留不住，朱颜辞镜花辞树。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-近代·王国维《蝶恋花·阅尽天涯离别苦
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(14)-springmvc校验</title>
+    <link href="http://www.echodemo.cc/2019/07/28/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(14)-springmvc%E6%A0%A1%E9%AA%8C/"/>
+    <id>http://www.echodemo.cc/2019/07/28/springmvc学习笔记(14)-springmvc校验/</id>
+    <published>2019-07-28T11:31:31.000Z</published>
+    <updated>2019-07-28T12:35:08.839Z</updated>
+    
+    <content type="html"><![CDATA[<center>病起萧萧两鬓华，卧看残月上窗纱。豆蔻连梢煎熟水，莫分茶。</center><br><center>枕上诗书闲处好，门前风景雨来佳。终日向人多酝藉，木犀花。</center><br><center>—-宋·李清照《摊破浣溪沙·病起萧萧两鬓华》</center><hr><p>本文主要介绍springmvc校验，包括环境准备，校验器配置，pojo张添加校验规则，捕获和显示检验错误信息以及分组校验简单示例。</p><hr><h3 id="校验理解"><a href="#校验理解" class="headerlink" title="校验理解"></a>校验理解</h3><p>项目中，通常使用较多是前端的校验，比如页面中js校验。对于安全要求较高点建议在服务端进行校验。</p><p>服务端校验：</p><pre><code>1、控制层conroller：校验页面请求的参数的合法性。在服务端控制层conroller校验，不区分客户端类型（浏览器、手机客户端、远程调用）。2、业务层service（使用较多）：主要校验关键业务参数，仅限于service接口中使用的参数。3、持久层dao：一般是不校验的。</code></pre><hr><h3 id="springmvc校验需求"><a href="#springmvc校验需求" class="headerlink" title="springmvc校验需求"></a>springmvc校验需求</h3><p>springmvc使用hibernate的校验框架validation(和hibernate没有任何关系)。</p><p>校验思路：</p><p>页面提交请求的参数，请求到controller方法中，使用validation进行校验。如果校验出错，将错误信息展示到页面。</p><p>具体需求：</p><p>商品修改，添加校验（校验商品名称长度，生产日期的非空校验），如果校验出错，在商品修改页面显示错误信息。</p><hr><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>我们需要三个jar包：</p><pre><code>1、hibernate-validator.jar2、jboss-logging.jar3、validation-api.jar</code></pre><p>这里我们添加maven依赖：</p><pre><code>&lt;!-- hibernate 校验 --&gt;&lt;dependency&gt;    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;    &lt;version&gt;5.2.4.Final&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>查看maven依赖树：</p><pre><code>[INFO] \- org.hibernate:hibernate-validator:jar:5.2.4.Final:compile[INFO]    +- javax.validation:validation-api:jar:1.1.0.Final:compile[INFO]    +- org.jboss.logging:jboss-logging:jar:3.2.1.Final:compile[INFO]    \- com.fasterxml:classmate:jar:1.1.0:compile</code></pre><p>可以看到，另外两个jar包被hibernate-validator依赖，所以不用再额外添加了。</p><hr><h3 id="配置校验器"><a href="#配置校验器" class="headerlink" title="配置校验器"></a>配置校验器</h3><p>（1）在springmvc.xml中添加</p><pre><code>&lt;!-- 校验器 --&gt;&lt;bean id=&quot;validator&quot;      class=&quot;org.springframework.validation.beanvalidation.LocalValidatorFactoryBean&quot;&gt;    &lt;!-- hibernate校验器--&gt;    &lt;property name=&quot;providerClass&quot; value=&quot;org.hibernate.validator.HibernateValidator&quot; /&gt;    &lt;!-- 指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties --&gt;    &lt;property name=&quot;validationMessageSource&quot; ref=&quot;messageSource&quot; /&gt;&lt;/bean&gt;&lt;!-- 校验错误信息配置文件 --&gt;&lt;bean id=&quot;messageSource&quot;      class=&quot;org.springframework.context.support.ReloadableResourceBundleMessageSource&quot;&gt;    &lt;!-- 资源文件名--&gt;    &lt;property name=&quot;basenames&quot;&gt;        &lt;list&gt;            &lt;value&gt;classpath:CustomValidationMessages&lt;/value&gt;        &lt;/list&gt;    &lt;/property&gt;    &lt;!-- 资源文件编码格式 --&gt;    &lt;property name=&quot;fileEncodings&quot; value=&quot;utf-8&quot; /&gt;    &lt;!-- 对资源文件内容缓存时间，单位秒 --&gt;    &lt;property name=&quot;cacheSeconds&quot; value=&quot;120&quot; /&gt;&lt;/bean&gt;</code></pre><p>（2)校验器注入到处理器适配器中</p><pre><code>&lt;mvc:annotation-driven conversion-service=&quot;conversionService&quot;                       validator=&quot;validator&quot;&gt;&lt;/mvc:annotation-driven&gt;</code></pre><p>(3)在CustomValidationMessages.properties配置校验错误信息：</p><pre><code>#添加校验的错误提示信息items.name.length.error=请输入1到30个字符的商品名称items.createtime.isNUll=请输入商品的生产日期</code></pre><hr><h3 id="在pojo中添加校验规则"><a href="#在pojo中添加校验规则" class="headerlink" title="在pojo中添加校验规则"></a>在pojo中添加校验规则</h3><p>(1)在ItemsCustom.java中添加校验规则：</p><pre><code>public class Items {    private Integer id;    //校验名称在1到30字符中间    //message是提示校验出错显示的信息    //groups：此校验属于哪个分组，groups可以定义多个分组    @Size(min=1,max=30,message=&quot;{items.name.length.error}&quot;)    private String name;    private Float price;    private String pic;    //非空校验    @NotNull(message=&quot;{items.createtime.isNUll}&quot;)    private Date createtime;)</code></pre><hr><h3 id="捕获和显示校验错误信息"><a href="#捕获和显示校验错误信息" class="headerlink" title="捕获和显示校验错误信息"></a>捕获和显示校验错误信息</h3><pre><code>@RequestMapping(&quot;/editItemsSubmit&quot;)public String editItemsSubmit(        Model model,        HttpServletRequest request,        Integer id,        @Validated ItemsCustom itemsCustom,        BindingResult bindingResult)throws Exception {}</code></pre><p>(1)在controller中将错误信息传到页面即可</p><pre><code>//获取校验错误信息if(bindingResult.hasErrors()){    // 输出错误信息    List&lt;ObjectError&gt; allErrors = bindingResult.getAllErrors();    for (ObjectError objectError :allErrors){        // 输出错误信息        System.out.println(objectError.getDefaultMessage());    }    // 将错误信息传到页面    model.addAttribute(&quot;allErrors&quot;, allErrors);    //可以直接使用model将提交pojo回显到页面    model.addAttribute(&quot;items&quot;, itemsCustom);    // 出错重新到商品修改页面    return &quot;items/editItems&quot;;}</code></pre><p>(2)页面显示错误信息：</p><pre><code>&lt;!-- 显示错误信息 --&gt;&lt;c:if test=&quot;${allErrors!=null }&quot;&gt;    &lt;c:forEach items=&quot;${allErrors }&quot; var=&quot;error&quot;&gt;        ${ error.defaultMessage}&lt;br/&gt;    &lt;/c:forEach&gt;&lt;/c:if&gt;</code></pre><hr><h3 id="分组校验"><a href="#分组校验" class="headerlink" title="分组校验"></a>分组校验</h3><p>需求： </p><p>在pojo中定义校验规则，而pojo是被多个controller所共用，当不同的controller方法对同一个pojo进行校验，但是每个controller方法需要不同的校验。</p><p>解决方法： </p><p>定义多个校验分组（其实是一个java接口），分组中定义有哪些规则，每个controller方法使用不同的校验分组。</p><p>1.校验分组</p><pre><code>public interface ValidGroup1 {    //接口中不需要定义任何方法，仅是对不同的校验规则进行分组    //此分组只校验商品名称长度}</code></pre><p>2.在校验规则中添加分组</p><pre><code>//校验名称在1到30字符中间//message是提示校验出错显示的信息//groups：此校验属于哪个分组，groups可以定义多个分组@Size(min=1,max=30,message=&quot;{items.name.length.error}&quot;,groups = {ValidGroup1.class})private String name;</code></pre><p>3.在controller方法使用指定分组的校验</p><pre><code>// value={ValidGroup1.class}指定使用ValidGroup1分组的校验@RequestMapping(&quot;/editItemsSubmit&quot;)public String editItemsSubmit(        Model model,        HttpServletRequest request,        Integer id,        @Validated(value = ValidGroup1.class)ItemsCustom itemsCustom,        BindingResult bindingResult)throws Exception {}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;病起萧萧两鬓华，卧看残月上窗纱。豆蔻连梢煎熟水，莫分茶。&lt;/center&gt;&lt;br&gt;&lt;center&gt;枕上诗书闲处好，门前风景雨来佳。终日向人多酝藉，木犀花。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·李清照《摊破浣溪沙·病起萧萧两鬓华》&lt;/center&gt;
+
+&lt;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定</title>
+    <link href="http://www.echodemo.cc/2019/07/26/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(13)-springmvc%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E4%B9%8B%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/"/>
+    <id>http://www.echodemo.cc/2019/07/26/springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定/</id>
+    <published>2019-07-26T14:24:12.000Z</published>
+    <updated>2019-07-27T06:58:51.088Z</updated>
+    
+    <content type="html"><![CDATA[<center>大鹏一日同风起，扶摇直上九万里。</center><br><center>假令风歇时下来，犹能簸却沧溟水。</center><br><center>世人见我恒殊调，闻余大言皆冷笑。</center><br><center>宣父犹能畏后生，丈夫未可轻年少。</center><br><center>—-唐·李白《上李邕》</center><hr><h3 id="数组绑定"><a href="#数组绑定" class="headerlink" title="数组绑定"></a>数组绑定</h3><h4 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h4><p>商品批量删除，用户在页面选择多个商品，批量删除。</p><h4 id="表现层实现"><a href="#表现层实现" class="headerlink" title="表现层实现"></a>表现层实现</h4><p>关键：将页面选择(多选)的商品id，传到controller方法的形参，方法形参使用数组接收页面请求的多个商品id。</p><p>（1）controller方法定义：</p><pre><code>// 批量删除 商品信息@RequestMapping(&quot;/deleteItems&quot;)public String deleteItems(Integer[] items_id) throws Exception{}</code></pre><p>(2)页面定义：</p><pre><code>&lt;c:forEach items=&quot;${itemsList }&quot; var=&quot;item&quot;&gt;&lt;tr&gt;    &lt;td&gt;&lt;input type=&quot;checkbox&quot; name=&quot;items_id&quot; value=&quot;${item.id}&quot;/&gt;&lt;/td&gt;    &lt;td&gt;${item.name }&lt;/td&gt;    &lt;td&gt;${item.price }&lt;/td&gt;    &lt;td&gt;&lt;fmt:formatDate value=&quot;${item.createtime}&quot; pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;/&gt;&lt;/td&gt;    &lt;td&gt;${item.detail }&lt;/td&gt;    &lt;td&gt;&lt;a href=&quot;${pageContext.request.contextPath }/items/editItems.action?id=${item.id}&quot;&gt;修改&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/c:forEach&gt;</code></pre><hr><h3 id="list绑定"><a href="#list绑定" class="headerlink" title="list绑定"></a>list绑定</h3><h4 id="需求-1"><a href="#需求-1" class="headerlink" title="需求"></a>需求</h4><p>通常在需要批量提交数据时，将提交的数据绑定到list<pojo>中，比如：成绩录入（录入多门课成绩，批量提交），</pojo></p><p>本例子需求：批量商品修改，在页面输入多个商品信息，将多个商品信息提交到controller方法中。</p><h4 id="表现层实现-1"><a href="#表现层实现-1" class="headerlink" title="表现层实现"></a>表现层实现</h4><p>(1)controller方法定义： </p><pre><code>进入批量商品修改页面(页面样式参考商品列表实现)。批量修改商品提交。</code></pre><p>使用List接收页面提交的批量数据，通过包装pojo接收，在包装pojo中定义list<pojo>属性</pojo></p><pre><code>public class ItemsQueryVo {    //商品信息    private Items items;    //为了系统 可扩展性，对原始生成的po进行扩展    private ItemsCustom itemsCustom;    //批量商品信息    private List&lt;ItemsCustom&gt; itemsList;}// 批量修改商品提交// 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。@RequestMapping(&quot;/editItemsAllSubmit&quot;)public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {    return &quot;success&quot;;}</code></pre><p>（2）页面定义：</p><pre><code>&lt;c:forEach items=&quot;${itemsList }&quot; var=&quot;item&quot; varStatus=&quot;status&quot;&gt;    &lt;tr&gt;        &lt;td&gt;&lt;input name=&quot;itemsList[${status.index }].name&quot; value=&quot;${item.name }&quot;/&gt;&lt;/td&gt;        &lt;td&gt;&lt;input name=&quot;itemsList[${status.index }].price&quot; value=&quot;${item.price }&quot;/&gt;&lt;/td&gt;        &lt;td&gt;&lt;input name=&quot;itemsList[${status.index }].createtime&quot; value=&quot;&lt;fmt:formatDate value=&quot;${item.createtime}&quot; pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;/&gt;&quot;/&gt;&lt;/td&gt;        &lt;td&gt;&lt;input name=&quot;itemsList[${status.index }].detail&quot; value=&quot;${item.detail }&quot;/&gt;&lt;/td&gt;    &lt;/tr&gt;&lt;/c:forEach&gt;</code></pre><p>（3）name的格式：</p><p>对应包装pojo中的list类型属性名[下标(从0开始)].包装pojo中List类型的属性中pojo的属性名</p><p>例子：</p><p>“name=”itemsList[${status.index }].price”</p><p>可以和包装类型的参数绑定归纳对比一下，其实就是在包装类的pojo基础上多了个下标。只不过包装类参数绑定时，要和包装pojo中的pojo类性的属性名一致，而list参数绑定时，要和包装pojo中的list类型的属性名一致。</p><hr><h3 id="map绑定"><a href="#map绑定" class="headerlink" title="map绑定"></a>map绑定</h3><p>也通过在包装pojo中定义map类型属性。在包装类中定义Map对象，并添加get/set方法，action使用包装对象接收。 </p><p>（1）包装类中定义Map对象如下：</p><pre><code>Public class QueryVo {    private Map&lt;String, Object&gt; itemInfo = new HashMap&lt;String, Object&gt;();      //get/set方法...}</code></pre><p>(2)页面定义如下：</p><pre><code>&lt;tr&gt;    &lt;td&gt;学生信息：&lt;/td&gt;    &lt;td&gt;        姓名：&lt;inputtype=&quot;text&quot; name=&quot;itemInfo[&apos;name&apos;]&quot;/&gt;        年龄：&lt;inputtype=&quot;text&quot; name=&quot;itemInfo[&apos;price&apos;]&quot;/&gt;        .. .. ..    &lt;/td&gt;&lt;/tr&gt;</code></pre><p>(3)Contrller方法定义如下：</p><pre><code>public String useraddsubmit(Model model,QueryVo queryVo)throws Exception{    System.out.println(queryVo.getStudentinfo());}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;大鹏一日同风起，扶摇直上九万里。&lt;/center&gt;&lt;br&gt;&lt;center&gt;假令风歇时下来，犹能簸却沧溟水。&lt;/center&gt;&lt;br&gt;&lt;center&gt;世人见我恒殊调，闻余大言皆冷笑。&lt;/center&gt;&lt;br&gt;&lt;center&gt;宣父犹能畏后生，丈夫未可轻年少。&lt;/cen
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定</title>
+    <link href="http://www.echodemo.cc/2019/07/26/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(12)-springmvc%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E4%B9%8B%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/"/>
+    <id>http://www.echodemo.cc/2019/07/26/springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定/</id>
+    <published>2019-07-26T14:13:43.000Z</published>
+    <updated>2019-07-26T14:20:07.138Z</updated>
+    
+    <content type="html"><![CDATA[<center>自君之出矣，不复理残机。</center><br><center>思君如满月，夜夜减清辉。</center><br><center>—-唐·张九龄《赋得自君之出矣》</center><hr><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>商品查询controller方法中实现商品查询条件传入。</p><hr><pre><code>第一种方法：在形参中添加HttpServletRequest request参数，通过request接收查询条件参数。第二种方法：在形参中让包装类型的pojo接收查询条件参数。</code></pre><p>分析：</p><p>页面传参数的特点：复杂，多样性。条件包括：用户账号、商品编号、订单信息。。。</p><p>如果将用户账号、商品编号、订单信息等放在简单pojo（属性是简单类型）中，pojo类属性比较多，比较乱。建议使用包装类型的pojo，pojo中属性是pojo。</p><hr><h3 id="页面参数和controller方法形参定义"><a href="#页面参数和controller方法形参定义" class="headerlink" title="页面参数和controller方法形参定义"></a>页面参数和controller方法形参定义</h3><p>（1）页面参数：</p><p>商品名称：<input name="itemsCustom.name"></p><p>注意：itemsCustom和包装pojo中的属性名一致即可。</p><p>（2）controller方法形参：</p><pre><code>public ModelAndView queryItems(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception</code></pre><p>（3）包装类ItemsQueryVo中部分属性：</p><pre><code>public class ItemsQueryVo {    //商品信息    private Items items;    //为了系统 可扩展性，对原始生成的po进行扩展    private ItemsCustom itemsCustom;}</code></pre><p>可见，ItemsQueryVo中属性itemsCustom和页面参数中一致</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;自君之出矣，不复理残机。&lt;/center&gt;&lt;br&gt;&lt;center&gt;思君如满月，夜夜减清辉。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-唐·张九龄《赋得自君之出矣》&lt;/center&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;h
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(11)-springmvc注解开发之简单参数绑定</title>
+    <link href="http://www.echodemo.cc/2019/07/23/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(11)-springmvc%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AE%80%E5%8D%95%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/"/>
+    <id>http://www.echodemo.cc/2019/07/23/springmvc学习笔记(11)-springmvc注解开发之简单参数绑定/</id>
+    <published>2019-07-23T14:58:37.000Z</published>
+    <updated>2019-07-24T15:49:31.618Z</updated>
+    
+    <content type="html"><![CDATA[<center>秋风起兮白云飞，草木黄落兮雁南归。</center><br><center>兰有秀兮菊有芳，怀佳人兮不能忘。</center><br><center>泛楼船兮济汾河，横中流兮扬素波。</center><br><center>箫鼓鸣兮发棹歌，欢乐极兮哀情多。</center><br><center>少壮几时兮奈老何！</center><br><center>—-两汉·刘彻《秋风辞》</center><hr><p>本文主要介绍注解开发的简单参数绑定，包括简单类型、简单pojo以及自定义绑定实现类型转换</p><hr><h3 id="spring参数绑定过程"><a href="#spring参数绑定过程" class="headerlink" title="spring参数绑定过程"></a>spring参数绑定过程</h3><p>从客户端请求key/value数据，经过参数绑定，将key/value数据绑定到controller方法的形参上。springmvc中，接收页面提交的数据是通过方法形参来接收。而不是在controller类定义成员变量接收！！！！</p><p>处理器适配器调用springmvc提供参数绑定组件将key/value数据转成controller方法的形参。在springmvc早期版本使用PropertyEditor(只能将字符串转化成java对象)，后期使用converter(进行任意类型的转换)，在特殊情况下需要自定义converter。</p><hr><h3 id="默认支持的类型"><a href="#默认支持的类型" class="headerlink" title="默认支持的类型"></a>默认支持的类型</h3><p>直接在controller方法形参上定义下边类型的对象，就可以使用这些对象。在参数绑定过程中，如果遇到下边类型直接进行绑定。</p><pre><code>1、HttpServletRequest：通过request对象获取请求信息。2、HttpServletResponse：通过response处理响应信息。3、HttpSession：通过session对象得到session中存放的对象。4、Model/ModelMap：model是一个接口，modelMap是一个接口实现。作用：将model数据填充到request域。</code></pre><hr><h3 id="简单类型"><a href="#简单类型" class="headerlink" title="简单类型"></a>简单类型</h3><p>通过@RequestParam对简单类型的参数进行绑定。如果不使用@RequestParam，要求request传入参数名称和controller方法的形参名称一致，方可绑定成功。</p><p>如果使用@RequestParam，不用限制request传入参数名称和controller方法的形参名称一致。</p><p>通过required属性指定参数是否必须要传入，如果设置为true，没有传入参数，则会报错。</p><pre><code>@RequestMapping(value=&quot;/editItems&quot;,method={RequestMethod.POST,RequestMethod.GET})//@RequestParam里边指定request传入参数名称(即下边的value=&quot;id&quot;)和形参进行绑定。//通过required属性指定参数是否必须要传入//通过defaultValue可以设置默认值，如果id参数没有传入，将默认值和形参绑定。public String editItems(Model model,@RequestParam(value=&quot;id&quot;,required=true) Integer items_id)throws Exception {}</code></pre><hr><h3 id="pojo绑定"><a href="#pojo绑定" class="headerlink" title="pojo绑定"></a>pojo绑定</h3><p>页面中input的name和controller的pojo形参中的属性名称一致，将页面中数据绑定到pojo。</p><p>注意:这里只是要求name和形参的属性名一致，而不是要求和形参的名称一致，这点不要混淆了，框架会进入形参内部自动匹配pojo类的属性名。(我没看源码，但应该是用反射实现的)</p><p>(1)页面定义：</p><pre><code>&lt;table width=&quot;100%&quot; border=1&gt;&lt;tr&gt;    &lt;td&gt;商品名称&lt;/td&gt;    &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;${itemsCustom.name }&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;    &lt;td&gt;商品价格&lt;/td&gt;    &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;price&quot; value=&quot;${itemsCustom.price }&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</code></pre><p>(2)controller的pojo形参的定义：</p><pre><code>public class Items {    private Integer id;    private String name;    private Float price;    private String pic;    private Date createtime;    private String detail;    ......}</code></pre><p>（3）为了防止前端传入的中文数据出现乱码问题，使用Spring提供的编码过滤器来统一编码，在web.xml中添加如下代码：</p><pre><code>&lt;filter&gt;    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;    &lt;init-param&gt;        &lt;param-name&gt;encoding&lt;/param-name&gt;        &lt;param-value&gt;UTF-8&lt;/param-value&gt;    &lt;/init-param&gt;&lt;/filter&gt;&lt;filter-mapping&gt;    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;&lt;/filter-mapping&gt;</code></pre><p>（4）以上可以解决post请求乱码问题，对于get请求中文参数出现乱码解决方法有两个：</p><p>a、修改tomcat配置文件添加编码与工程编码一致：</p><pre><code>&lt;Connector URIEncoding=&quot;utf-8&quot; connectionTimeout=&quot;20000&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;</code></pre><p>b、对接收的参数进行重新编码：</p><pre><code>String userName new String(request.getParamter(&quot;userName&quot;).getBytes(&quot;ISO8859-1&quot;),&quot;utf-8&quot;)</code></pre><p><strong>其中IOS8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8重新编码。</strong></p><hr><h3 id="自定义参数绑定实现日期类型绑定"><a href="#自定义参数绑定实现日期类型绑定" class="headerlink" title="自定义参数绑定实现日期类型绑定"></a>自定义参数绑定实现日期类型绑定</h3><p>对于controller形参中pojo对象，如果属性中有日期类型，需要自定义参数绑定。</p><p>将请求日期数据串传成日期类型，要转换的日期类型和pojo中日期属性的类型保持一致。本文示例中，自定义参数绑定将日期串转成java.util.Date类型。需要向处理器适配器中注入自定义的参数绑定组件。</p><p>(1)自定义日期类型绑定:</p><pre><code>public class CustomDateConverter implements Converter&lt;String,Date&gt;{    public Date convert(String s) {        //实现 将日期串转成日期类型(格式是yyyy-MM-dd HH:mm:ss)        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);        try {            //转成直接返回            return simpleDateFormat.parse(s);        } catch (ParseException e) {            // TODO Auto-generated catch block            e.printStackTrace();        }        //如果参数绑定失败返回null        return null;    }}</code></pre><p>(2)配置方式</p><pre><code>&lt;mvc:annotation-driven conversion-service=&quot;conversionService&quot;&gt;&lt;/mvc:annotation-driven&gt;&lt;!-- 自定义参数绑定 --&gt;&lt;bean id=&quot;conversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;    &lt;!-- 转换器 --&gt;    &lt;property name=&quot;converters&quot;&gt;        &lt;list&gt;            &lt;!-- 日期类型转换 --&gt;            &lt;bean class=&quot;com.echodemo.springmvcmybatis.controller.converter.CustomDateConverter&quot;/&gt;       &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;</code></pre><hr><h3 id="springmvc和struts2的区别"><a href="#springmvc和struts2的区别" class="headerlink" title="springmvc和struts2的区别"></a>springmvc和struts2的区别</h3><p>（1）springmvc基于方法开发的，struts2基于类开发的。springmvc将url和controller方法映射。映射成功后springmvc生成一个Handler对象，对象中只包括了一个method。方法执行结束，形参数据销毁。springmvc的controller开发类似service开发。</p><p>（2）springmvc可以进行单例开发，并且建议使用单例开发，struts2通过类的成员变量接收参数，无法使用单例，只能使用多例。</p><p>（3）经过实际测试，struts2速度慢，在于使用struts标签，如果使用struts建议使用jstl。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;秋风起兮白云飞，草木黄落兮雁南归。&lt;/center&gt;&lt;br&gt;&lt;center&gt;兰有秀兮菊有芳，怀佳人兮不能忘。&lt;/center&gt;&lt;br&gt;&lt;center&gt;泛楼船兮济汾河，横中流兮扬素波。&lt;/center&gt;&lt;br&gt;&lt;center&gt;箫鼓鸣兮发棹歌，欢乐极兮哀情多。&lt;/ce
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springmvc学习笔记(10)-springmvc注解开发之商品修改功能</title>
+    <link href="http://www.echodemo.cc/2019/07/23/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(10)-springmvc%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E4%B9%8B%E5%95%86%E5%93%81%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD/"/>
+    <id>http://www.echodemo.cc/2019/07/23/springmvc学习笔记(10)-springmvc注解开发之商品修改功能/</id>
+    <published>2019-07-23T14:27:09.000Z</published>
+    <updated>2019-07-23T14:57:05.667Z</updated>
+    
+    <content type="html"><![CDATA[<center>劝君今夜须沉醉，尊前莫话明朝事。珍重主人心，酒深情亦深。 </center><br><center>须愁春漏短，莫诉金杯满。遇酒且呵呵，人生能几何。</center><br><center>—-唐·韦庄《《菩萨蛮·劝君今夜须沉醉》》</center><hr><p>本文以商品修改为例，记录springmvc的注解开发，包括mapper,service,controller,@RequestMapping,controller方法的返回值等。</p><hr><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><pre><code>1、进入商品查询列表页面。2、点击修改，进入商品修改页面，页面中显示了要修改的商品。要修改的商品从数据库查询，根据商品id(主键)查询商品信息。3、在商品修改页面，修改商品信息，修改后，点击提交。</code></pre><h3 id="开发mapper"><a href="#开发mapper" class="headerlink" title="开发mapper"></a>开发mapper</h3><p>1、根据id查询商品信息</p><p>2、根据id更新Items表的数据</p><hr><h3 id="开发service"><a href="#开发service" class="headerlink" title="开发service"></a>开发service</h3><p>（1）在com.echodemo.springmvcmybatis.service.ItemsService中添加两个接口。</p><pre><code>//根据id查询商品信息ItemsCustom findItemsById(Integer id) throws Exception;//修改商品信息void updateItems(Integer id,ItemsCustom itemsCustom) throws Exception;</code></pre><p>（2）在com.echodemo.springmvcmybatis.service..impl.ItemsServiceImpl中实现接口，增加itemsMapper属性。</p><pre><code>@Autowiredprivate ItemsMapper itemsMapper;public ItemsCustom findItemsById(Integer id) throws Exception {    Items items = itemsMapper.selectByPrimaryKey(id);    //中间对商品信息进行业务处理    //....    //返回ItemsCustom    ItemsCustom itemsCustom = new ItemsCustom();    //将items的属性值拷贝到itemsCustom    BeanUtils.copyProperties(items, itemsCustom);    return itemsCustom;}public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {    //添加业务校验，通常在service接口对关键参数进行校验    //校验 id是否为空，如果为空抛出异常    //更新商品信息使用updateByPrimaryKeyWithBLOBs根据id更新items表中所有字段，包括 大文本类型字段    //updateByPrimaryKeyWithBLOBs要求必须转入id    itemsCustom.setId(id);    itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);}</code></pre><hr><h3 id="开发controller"><a href="#开发controller" class="headerlink" title="开发controller"></a>开发controller</h3><pre><code>//使用@Controller来标识它是一个控制器@Controller//为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径//比如：商品列表：/items/queryItems.action//@RequestMapping(&quot;/items&quot;)public class ItemsController {    @Autowired    private ItemsService itemsService;    //商品查询列表    @RequestMapping(&quot;/queryItems&quot;)    //实现 对queryItems方法和url进行映射，一个方法对应一个url    //一般建议将url和方法写成一样    public ModelAndView queryItems() throws Exception{        //调用service查找数据库，查询商品列表        List&lt;ItemsCustom&gt; itemsList = itemsService.findItemsList(null);        //返回ModelAndView        ModelAndView modelAndView = new ModelAndView();        //相当于request的setAttribute方法,在jsp页面中通过itemsList取数据        modelAndView.addObject(&quot;itemsList&quot;,itemsList);        //指定视图        //下边的路径，如果在视图解析器中配置jsp的路径前缀和后缀，修改为items/itemsList        //modelAndView.setViewName(&quot;/WEB-INF/jsp/items/itemsList.jsp&quot;);        //下边的路径配置就可以不在程序中指定jsp路径的前缀和后缀        modelAndView.setViewName(&quot;items/itemsList&quot;);        return modelAndView;    }    //商品信息修改页面显示    @RequestMapping(&quot;/editItems&quot;)    //限制http请求方法，可以post和get    //@RequestMapping(value=&quot;/editItems&quot;,method={RequestMethod.POST, RequestMethod.GET})    public ModelAndView editItems()throws Exception {        //调用service根据商品id查询商品信息        ItemsCustom itemsCustom = itemsService.findItemsById(1);        // 返回ModelAndView        ModelAndView modelAndView = new ModelAndView();        //将商品信息放到model        modelAndView.addObject(&quot;itemsCustom&quot;, itemsCustom);        //商品修改页面        modelAndView.setViewName(&quot;items/editItems&quot;);        return modelAndView;    }    //商品信息修改提交    @RequestMapping(&quot;/editItemsSubmit&quot;)    public ModelAndView editItemsSubmit(HttpServletRequest request, Integer id, ItemsCustom itemsCustom)throws Exception {        //调用service更新商品信息，页面需要将商品信息传到此方法        itemsService.updateItems(id, itemsCustom);        //返回ModelAndView        ModelAndView modelAndView = new ModelAndView();        //返回一个成功页面        modelAndView.setViewName(&quot;success&quot;);        return modelAndView;    }}</code></pre><hr><h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h3><p>（1）URL映射</p><p>定义controller方法对应的url，进行处理器映射使用。</p><p>（2）窄化请求映射</p><pre><code>//使用@Controller来标识它是一个控制器@Controller//为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径//比如：商品列表：/items/queryItems.action@RequestMapping(&quot;/items&quot;)public class ItemsController {}</code></pre><p>（3）限制http请求方法</p><pre><code>//商品信息修改页面显示//@RequestMapping(&quot;/editItems&quot;)//限制http请求方法，可以post和get@RequestMapping(value=&quot;/editItems&quot;,method={RequestMethod.POST, RequestMethod.GET})public ModelAndView editItems()throws Exception {}</code></pre><hr><h3 id="controller方法的返回值"><a href="#controller方法的返回值" class="headerlink" title="controller方法的返回值"></a>controller方法的返回值</h3><p>（1）返回ModelAndView</p><p>需要方法结束时，定义ModelAndView，将model和view分别进行设置。</p><p>（2）返回string</p><p>如果controller方法返回string：</p><p>a、表示返回逻辑视图名：</p><p><strong>真正视图(jsp路径)=前缀+逻辑视图名+后缀</strong></p><pre><code>@RequestMapping(value=&quot;/editItems&quot;,method={RequestMethod.POST,RequestMethod.GET})//@RequestParam里边指定request传入参数名称和形参进行绑定。//通过required属性指定参数是否必须要传入//通过defaultValue可以设置默认值，如果id参数没有传入，将默认值和形参绑定。//public String editItems(Model model, @RequestParam(value=&quot;id&quot;,required=true) Integer items_id)throws Exception {public String editItems(Model model)throws Exception {    //调用service根据商品id查询商品信息    ItemsCustom itemsCustom = itemsService.findItemsById(1);    //通过形参中的model将model数据传到页面    //相当于modelAndView.addObject方法    model.addAttribute(&quot;itemsCustom&quot;, itemsCustom);    return &quot;items/editItems&quot;;}</code></pre><p>b、redirect重定向</p><p>商品修改提交后，重定向到商品查询列表。</p><p>redirect重定向特点：浏览器地址栏中的url会变化。修改提交的request数据无法传到重定向的地址。因为重定向后重新进行request（request无法共享）</p><pre><code>//重定向到商品查询列表//return &quot;redirect:queryItems.action&quot;;</code></pre><p>c、forward页面转发</p><p>通过forward进行页面转发，浏览器地址栏url不变，request可以共享。</p><pre><code>//页面转发return &quot;forward:queryItems.action&quot;;</code></pre><p>(3)返回void</p><p>在controller方法形参上可以定义request和response，使用request或response指定响应结果：</p><pre><code>// 使用request转向页面，如下：request.getRequestDispatcher(&quot;页面路径&quot;).forward(request, response);// 也可以通过response页面重定向：response.sendRedirect(&quot;url&quot;)// 也可以通过response指定响应结果，例如响应json数据如下：response.setCharacterEncoding(&quot;utf-8&quot;);response.setContentType(&quot;application/json;charset=utf-8&quot;);response.getWriter().write(&quot;json串&quot;);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;劝君今夜须沉醉，尊前莫话明朝事。珍重主人心，酒深情亦深。 &lt;/center&gt;&lt;br&gt;&lt;center&gt;须愁春漏短，莫诉金杯满。遇酒且呵呵，人生能几何。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-唐·韦庄《《菩萨蛮·劝君今夜须沉醉》》&lt;/center&gt;
+
+&lt;hr&gt;
+
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
+    
+  </entry>
   
   <entry>
     <title>springmvc学习笔记(9)-springmvc整合mybatis之controller</title>
@@ -374,204 +574,6 @@
       
       
         &lt;center&gt;夜来携手梦同游，晨起盈巾泪莫收。&lt;/center&gt;&lt;br&gt;&lt;center&gt;漳浦老身三度病，咸阳宿草八回秋。&lt;/center&gt;&lt;br&gt;&lt;center&gt;君埋泉下泥销骨，我寄人间雪满头。&lt;/center&gt;&lt;br&gt;&lt;center&gt;阿卫韩郎相次去，夜台茫昧得知不？&lt;/cen
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(15)-查询缓存之二级缓存</title>
-    <link href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(15)-%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E4%B9%8B%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://www.echodemo.cc/2019/06/30/mybatis学习笔记(15)-查询缓存之二级缓存/</id>
-    <published>2019-06-30T07:28:07.000Z</published>
-    <updated>2019-06-30T08:21:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<center>一上高城万里愁，蒹葭杨柳似汀洲。</center><br><center>溪云初起日沉阁，山雨欲来风满楼。</center><br><center>鸟下绿芜秦苑夕，蝉鸣黄叶汉宫秋。</center><br><center>行人莫问当年事，故国东来渭水流。</center><br><center>—-唐·许浑《咸阳城东楼》</center><hr><p>本文主要讲mybatis的二级缓存，二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p><h3 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h3><p>（1）二级缓存原理</p><p>首先开启mybatis的二级缓存。</p><pre><code>1、sqlSession1去查询用户id为1的用户信息，查询到用户信息会将查询数据存储到二级缓存中。2、如果SqlSession3去执行相同mapper下sql，执行commit提交，清空该mapper下的二级缓存区域的数据。3、sqlSession2去查询用户id为1的用户信息，去缓存中找是否存在数据，如果存在直接从缓存中取出数据。</code></pre><p>二级缓存与一级缓存区别：<strong>二级缓存的范围更大，多个sqlSession可以共享一个UserMapper的二级缓存区域。</strong></p><p>UserMapper有一个二级缓存区域（按namespace分），其它mapper也有自己的二级缓存区域（按namespace分）。每一个namespace的mapper都有一个二缓存区域，两个mapper的namespace如果相同，这两个mapper执行sql查询到数据将存在相同的二级缓存区域中。</p><hr><h3 id="开启二级缓存"><a href="#开启二级缓存" class="headerlink" title="开启二级缓存"></a>开启二级缓存</h3><p>mybaits的二级缓存是mapper范围级别，除了在SqlMapConfig.xml设置二级缓存的总开关，还要在具体的mapper.xml中开启二级缓存。</p><p>在核心配置文件SqlMapConfig.xml的settings标签中加入：</p><pre><code>// 对在此配置文件下的所有cache 进行全局性开/关设置。&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code></pre><p>在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）:</p><pre><code>&lt;mapper namespace=&quot;com.iot.mybatis.mapper.UserMapper&quot;&gt;&lt;!-- 开启本mapper的namespace下的二级缓存--&gt;&lt;cache /&gt;...&lt;/mapper&gt;</code></pre><hr><h3 id="调用pojo类实现序列化接口"><a href="#调用pojo类实现序列化接口" class="headerlink" title="调用pojo类实现序列化接口"></a>调用pojo类实现序列化接口</h3><pre><code>public class User implements Serializable{    ....}</code></pre><p>为了将缓存数据取出执行反序列化操作，因为二级缓存数据存储介质多种多样，不一定在内存。</p><hr><h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><pre><code>// 二级缓存测试@Testpublic void testCache2() throws Exception {    SqlSession sqlSession1 = sqlSessionFactory.openSession();    SqlSession sqlSession2 = sqlSessionFactory.openSession();    SqlSession sqlSession3 = sqlSessionFactory.openSession();    // 创建代理对象    UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);    // 第一次发起请求，查询id为1的用户    User user1 = userMapper1.findUserById(1);    System.out.println(user1);    //这里执行关闭操作，将sqlsession中的数据写到二级缓存区域    sqlSession1.close();//      //使用sqlSession3执行commit()操作//      UserMapper userMapper3 = sqlSession3.getMapper(UserMapper.class);//      User user  = userMapper3.findUserById(1);//      user.setUsername(&quot;张明明&quot;);//      userMapper3.updateUser(user);//      //执行提交，清空UserMapper下边的二级缓存//      sqlSession3.commit();//      sqlSession3.close();    UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);    // 第二次发起请求，查询id为1的用户    User user2 = userMapper2.findUserById(1);    System.out.println(user2);    sqlSession2.close();}</code></pre><p>无更新，输出：</p><pre><code>DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Created connection 103887628.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=测试用户22, sex=2, birthday=null, address=null]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Returned connection 103887628 to pool.DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5User [id=1, username=测试用户22, sex=2, birthday=null, address=null]</code></pre><p>有更新，输出：</p><pre><code>DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Created connection 103887628.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=测试用户22, sex=2, birthday=null, address=null]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Returned connection 103887628 to pool.DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Checked out connection 103887628 from pool.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - ==&gt;  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=? DEBUG [main] - ==&gt; Parameters: 张明明(String), null, 2(String), null, 1(Integer)DEBUG [main] - &lt;==    Updates: 1DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Returned connection 103887628 to pool.DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.3333333333333333DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Checked out connection 103887628 from pool.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=张明明, sex=2, birthday=null, address=null]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]DEBUG [main] - Returned connection 103887628 to pool.</code></pre><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>（1）useCache配置</p><p>在statement中设置useCache=false可以禁用当前select语句的二级缓存，即每次查询都会发出sql去查询，默认情况是true，即该sql使用二级缓存。</p><pre><code>&lt;select id=&quot;findOrderListResultMap&quot; resultMap=&quot;ordersUserMap&quot; useCache=&quot;false&quot;&gt;</code></pre><p>针对每次查询都需要最新的数据sql，要设置成useCache=false，禁用二级缓存。</p><p>（2）刷新缓存（就是清空缓存）</p><p>刷新缓存就是清空缓存。在mapper的同一个namespace中，如果有其它insert、update、delete操作数据后需要刷新缓存，如果不执行刷新缓存会出现脏读。</p><p>设置statement配置中的flushCache=”true”属性，默认情况下为true即刷新缓存，如果改成false则不会刷新。<strong>使用缓存时如果手动修改数据库表中的查询数据会出现脏读。</strong>如下：</p><pre><code>&lt;insert id=&quot;insertUser&quot; parameterType=&quot;cn.itcast.mybatis.po.User&quot; flushCache=&quot;true&quot;&gt;</code></pre><p>一般下执行完commit操作都需要刷新缓存，flushCache=true表示刷新缓存，这样可以避免数据库脏读。</p><p>(3)应用场景和局限性</p><p>应用场景：</p><p>对于访问多的查询请求且用户对查询结果实时性要求不高，此时可采用mybatis二级缓存技术降低数据库访问量，提高访问速度，业务场景比如：耗时较高的统计分析sql、电话账单查询sql等。</p><p>实现方法如下：通过设置刷新间隔时间，由mybatis每隔一段时间自动清空缓存，根据数据变化频率设置缓存刷新间隔flushInterval，比如设置为30分钟、60分钟、24小时等，根据需求而定。</p><p>局限性：</p><p>mybatis二级缓存对细粒度的数据级别的缓存实现不好，比如如下需求：对商品信息进行缓存，由于商品信息查询访问量大，但是要求用户每次都能查询最新的商品信息，此时如果使用mybatis的二级缓存就无法实现当一个商品变化时只刷新该商品的缓存信息而不刷新其它商品的信息，因为mybaits的二级缓存区域以mapper为单位划分，当一个商品信息变化会将所有商品信息的缓存数据全部清空。解决此类问题需要在业务层根据需求对数据有针对性缓存。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50778927" target="_blank" rel="noopener">mybatis学习笔记(15)-查询缓存之二级缓存</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;一上高城万里愁，蒹葭杨柳似汀洲。&lt;/center&gt;&lt;br&gt;&lt;center&gt;溪云初起日沉阁，山雨欲来风满楼。&lt;/center&gt;&lt;br&gt;&lt;center&gt;鸟下绿芜秦苑夕，蝉鸣黄叶汉宫秋。&lt;/center&gt;&lt;br&gt;&lt;center&gt;行人莫问当年事，故国东来渭水流。&lt;/cen
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(14)-查询缓存之一级缓存</title>
-    <link href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(14)-%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E4%B9%8B%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://www.echodemo.cc/2019/06/30/mybatis学习笔记(14)-查询缓存之一级缓存/</id>
-    <published>2019-06-30T07:02:26.000Z</published>
-    <updated>2019-06-30T07:26:19.630Z</updated>
-    
-    <content type="html"><![CDATA[<center>一别都门三改火，天涯踏尽红尘。依然一笑作春温。无波真古井，有节是秋筠。</center><br><center>惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。人生如逆旅，我亦是行人。</center><br><center>—-宋·苏轼《临江仙·送钱穆父》</center><hr><p>本文主要讲mybatis的一级缓存，一级缓存是SqlSession级别的缓存。</p><h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3><p>mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。mybaits提供一级缓存，和二级缓存。</p><p>一级缓存是SqlSession级别的缓存。在操作数据库时需要构造sqlSession对象，在对象中有一个数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。</p><p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p><hr><h3 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h3><p>（1）一级缓存工作原理</p><p>第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。得到用户信息，将用户信息存储到一级缓存中。</p><p>如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</p><p>第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p><p>（2）一级缓存测试</p><p>mybatis默认支持一级缓存，不需要在配置文件去配置。按照上边一级缓存原理步骤去测试。测试代码如下：</p><pre><code>// 一级缓存测试@Testpublic void testCache1() throws Exception {    SqlSession sqlSession = sqlSessionFactory.openSession();// 创建代理对象    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);    // 下边查询使用一个SqlSession    // 第一次发起请求，查询id为1的用户    User user1 = userMapper.findUserById(1);    System.out.println(user1);    // 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。    // 更新user1的信息    // user1.setUsername(&quot;测试用户22&quot;);    // userMapper.updateUser(user1);    // //执行commit操作去清空缓存    // sqlSession.commit();    // 第二次发起请求，查询id为1的用户    User user2 = userMapper.findUserById(1);    System.out.println(user2);    sqlSession.close();}</code></pre><p>不执行更新操作，输出:</p><pre><code>DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Created connection 110771485.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=王五, sex=2, birthday=null, address=null]User [id=1, username=王五, sex=2, birthday=null, address=null]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - Returned connection 110771485 to pool.</code></pre><p>取消测试代码中更新的的注释，输出：</p><pre><code>DEBUG [main] - Opening JDBC ConnectionDEBUG [main] - Created connection 110771485.DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=王五, sex=2, birthday=null, address=null]DEBUG [main] - ==&gt;  Preparing: update user set username=?,birthday=?,sex=?,address=? where id=? DEBUG [main] - ==&gt; Parameters: 测试用户22(String), null, 2(String), null, 1(Integer)DEBUG [main] - &lt;==    Updates: 1DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - ==&gt;  Preparing: SELECT * FROM user WHERE id=? DEBUG [main] - ==&gt; Parameters: 1(Integer)DEBUG [main] - &lt;==      Total: 1User [id=1, username=测试用户22, sex=2, birthday=null, address=null]DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@69a3d1d]DEBUG [main] - Returned connection 110771485 to pool.</code></pre><p>（3）一级缓存应用</p><p>正式开发，是将mybatis和spring进行整合开发，事务控制在service中。一个service方法中包括很多mapper方法调用。</p><p>如果是执行两次service调用查询相同的用户信息，不走一级缓存，因为session方法结束，sqlSession就关闭，一级缓存就清空。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50774921" target="_blank" rel="noopener">mybatis学习笔记(14)-查询缓存之一级缓存</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;一别都门三改火，天涯踏尽红尘。依然一笑作春温。无波真古井，有节是秋筠。&lt;/center&gt;&lt;br&gt;&lt;center&gt;惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。人生如逆旅，我亦是行人。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·苏轼《临江仙·送钱穆父》&lt;/ce
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(13)-延迟加载</title>
-    <link href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(13)-%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/"/>
-    <id>http://www.echodemo.cc/2019/06/30/mybatis学习笔记(13)-延迟加载/</id>
-    <published>2019-06-30T00:03:09.000Z</published>
-    <updated>2019-06-30T07:01:09.319Z</updated>
-    
-    <content type="html"><![CDATA[<center>一夕轻雷落万丝，霁光浮瓦碧参差。</center><br><center>有情芍药含春泪，无力蔷薇卧晓枝。</center><br><center>—-宋·秦观《春日》</center><hr><p>resultMap可以实现高级映射（使用association、collection实现一对一及一对多映射），association、collection具备延迟加载功能。</p><p>延迟加载：先从单表查询、需要时再从关联表去关联查询，大大提高数据库性能，因为查询单表要比关联查询多张表速度要快。</p><p>需求：</p><p>如果查询订单并且关联查询用户信息。如果先查询订单信息即可满足要求，当我们需要查询用户信息时再查询用户信息。把对用户信息的按需去查询就是延迟加载。</p><hr><h3 id="使用association实现延迟加载"><a href="#使用association实现延迟加载" class="headerlink" title="使用association实现延迟加载"></a>使用association实现延迟加载</h3><p>（1）OrdersMapper.xml</p><p>需要定义两个mapper的方法对应的statement。</p><pre><code>// 只查询订单信息&lt;!-- 查询订单关联查询用户，用户信息需要延迟加载 --&gt;&lt;select id=&quot;findOrdersUserLazyLoading&quot; resultMap=&quot;OrdersUserLazyLoadingResultMap&quot;&gt;    SELECT * FROM orders&lt;/select&gt;// 关联查询用户信息&lt;select id=&quot;findUserById&quot; parameterType=&quot;int&quot; resultType=&quot;com.iot.mybatis.po.User&quot;&gt;    SELECT * FROM  user  WHERE id=#{value}&lt;/select&gt;</code></pre><p>在查询订单的statement中使用association去延迟加载（执行）下边的satatement(关联查询用户信息)。通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById。上边先去执行findOrdersUserLazyLoading，当需要去查询用户的时候再去执行findUserById，通过resultMap的定义将延迟加载执行配置起来。</p><p>（2）延迟加载resultMap</p><pre><code>&lt;!-- 延迟加载的resultMap --&gt;&lt;resultMap type=&quot;com.iot.mybatis.po.Orders&quot; id=&quot;OrdersUserLazyLoadingResultMap&quot;&gt;    &lt;!--对订单信息进行映射配置  --&gt;    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;    &lt;!-- 实现对用户信息进行延迟加载    select：指定延迟加载需要执行的statement的id（是根据user_id查询用户信息的statement）    要使用userMapper.xml中findUserById完成根据用户id(user_id)用户信息的查询，如果findUserById不在本mapper中需要前边加namespace    column：订单信息中关联用户信息查询的列，是user_id    关联查询的sql理解为：    SELECT orders.*,    (SELECT username FROM USER WHERE orders.user_id = user.id)username,    (SELECT sex FROM USER WHERE orders.user_id = user.id)sex     FROM orders     --&gt;    &lt;association property=&quot;user&quot;  javaType=&quot;com.iot.mybatis.po.User&quot;                 select=&quot;com.iot.mybatis.mapper.UserMapper.findUserById&quot;                 column=&quot;user_id&quot;&gt;     &lt;!-- 实现对用户信息进行延迟加载 --&gt;    &lt;/association&gt;&lt;/resultMap&gt;</code></pre><p><strong>与非延迟加载的主要区别就在association标签属性多了select和column。</strong></p><p>(3)OrdersMapper.java</p><pre><code>//查询订单关联查询用户，用户信息是延迟加载public List&lt;Orders&gt; findOrdersUserLazyLoading()throws Exception;</code></pre><p>(4)延迟加载配置</p><p>mybatis默认没有开启延迟加载，需要在SqlMapConfig.xml中setting配置:lazyLoadingEnabled、aggressiveLazyLoading。</p><pre><code>lazyLoadingEnabled：全局性设置懒加载。如果设为‘false’，则所有相关联的都会被初始化加载。默认值为false。aggressiveLazyLoading：当设置为‘true’的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。默认为true。</code></pre><p>在SqlMapConfig.xml中配置：</p><pre><code>&lt;settings&gt;    &lt;!-- 打开延迟加载 的开关 --&gt;    &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;    &lt;!-- 将积极加载改为消极加载即按需要加载 --&gt;    &lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;    &lt;!-- 开启二级缓存 --&gt;   &lt;!-- &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;--&gt;&lt;/settings&gt;</code></pre><p>（5）测试代码</p><pre><code>// 查询订单关联查询用户，用户信息使用延迟加载@Testpublic void testFindOrdersUserLazyLoading() throws Exception {    SqlSession sqlSession = sqlSessionFactory.openSession();// 创建代理对象    OrdersMapperCustom ordersMapperCustom = sqlSession            .getMapper(OrdersMapperCustom.class);    // 查询订单信息（单表）    List&lt;Orders&gt; list = ordersMapperCustom.findOrdersUserLazyLoading();    // 遍历上边的订单列表    for (Orders orders : list) {        // 执行getUser()去查询用户信息，这里实现按需加载        User user = orders.getUser();        System.out.println(user);    }}</code></pre><hr><h3 id="延迟加载思考"><a href="#延迟加载思考" class="headerlink" title="延迟加载思考"></a>延迟加载思考</h3><p>不使用mybatis提供的association及collection中的延迟加载功能，如何实现延迟加载？</p><p>定义两个mapper方法：</p><pre><code>1、查询订单列表。2、根据用户id查询用户信息。</code></pre><p>先去查询第一个mapper方法，获取订单信息列表；在程序中（service），按需去调用第二个mapper方法去查询用户信息。</p><p>总之，使用延迟加载方法，先去查询简单的sql（最好单表，也可以关联查询），再去按需要加载关联查询的其它信息。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770050" target="_blank" rel="noopener">mybatis学习笔记(13)-延迟加载</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;一夕轻雷落万丝，霁光浮瓦碧参差。&lt;/center&gt;&lt;br&gt;&lt;center&gt;有情芍药含春泪，无力蔷薇卧晓枝。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·秦观《春日》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;resultMap可以实现高级映射（使用associati
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(12)-多对多查询</title>
-    <link href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(12)-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://www.echodemo.cc/2019/06/30/mybatis学习笔记(12)-多对多查询/</id>
-    <published>2019-06-29T23:06:01.000Z</published>
-    <updated>2019-06-30T00:06:26.950Z</updated>
-    
-    <content type="html"><![CDATA[<center>无花无酒过清明，兴味萧然似野僧。</center><br><center>昨日邻家乞新火，晓窗分与读书灯。</center><br><center>—-宋·王禹偁《清明》</center><hr><p>本文实现多对多查询，查询用户及用户购买商品信息。</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>（1）编写sql</p><pre><code>1、查询主表是：用户表。2、关联表：由于用户和商品没有直接关联，通过订单和订单明细进行关联，所以关联表：orders、orderdetail、items。SELECT   orders.*,  user.username,  user.sex,  user.address,  orderdetail.id orderdetail_id,  orderdetail.items_id,  orderdetail.items_num,  orderdetail.orders_id,  items.name items_name,  items.detail items_detail,  items.price items_priceFROM  orders,  user,  orderdetail,  itemsWHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdetail.items_id = items.id</code></pre><p>（2）映射思路</p><pre><code>1、将用户信息映射到user中。2、在user类中添加订单列表属性List&lt;Orders&gt; orderslist，将用户创建的订单映射到orderslist3、在Orders中添加订单明细列表属性List&lt;OrderDetail&gt;orderdetials，将订单的明细映射到orderdetials。4、在OrderDetail中添加Items属性，将订单明细所对应的商品映射到Items。</code></pre><p>（3）UserMapper.xml</p><pre><code>&lt;!-- 查询用户及购买的商品信息，使用resultmap --&gt;&lt;select id=&quot;findUserAndItemsResultMap&quot; resultMap=&quot;UserAndItemsResultMap&quot;&gt;   SELECT      orders.*,      user.username,      user.sex,      user.address,      orderdetail.id orderdetail_id,      orderdetail.items_id,      orderdetail.items_num,      orderdetail.orders_id,      items.name items_name,      items.detail items_detail,      items.price items_price    FROM      orders,      user,      orderdetail,      items    WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdetail.items_id = items.id&lt;/select&gt;</code></pre><p>(4)resultMap</p><pre><code>&lt;!-- 查询用户及购买的商品 --&gt;&lt;resultMap type=&quot;com.iot.mybatis.po.User&quot; id=&quot;UserAndItemsResultMap&quot;&gt;    &lt;!-- 用户信息 --&gt;    &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;    &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;    &lt;result column=&quot;sex&quot; property=&quot;sex&quot;/&gt;    &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;    &lt;!-- 订单信息    一个用户对应多个订单，使用collection映射     --&gt;    &lt;collection property=&quot;ordersList&quot; ofType=&quot;com.iot.mybatis.po.Orders&quot;&gt;        &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;        &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;        &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;        &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;        &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;        &lt;!-- 订单明细         一个订单包括 多个明细         --&gt;        &lt;collection property=&quot;orderdetails&quot; ofType=&quot;com.iot.mybatis.po.Orderdetail&quot;&gt;            &lt;id column=&quot;orderdetail_id&quot; property=&quot;id&quot;/&gt;            &lt;result column=&quot;items_id&quot; property=&quot;itemsId&quot;/&gt;            &lt;result column=&quot;items_num&quot; property=&quot;itemsNum&quot;/&gt;            &lt;result column=&quot;orders_id&quot; property=&quot;ordersId&quot;/&gt;            &lt;!-- 商品信息             一个订单明细对应一个商品             --&gt;            &lt;association property=&quot;items&quot; javaType=&quot;com.iot.mybatis.po.Items&quot;&gt;                &lt;id column=&quot;items_id&quot; property=&quot;id&quot;/&gt;                &lt;result column=&quot;items_name&quot; property=&quot;name&quot;/&gt;                &lt;result column=&quot;items_detail&quot; property=&quot;detail&quot;/&gt;                &lt;result column=&quot;items_price&quot; property=&quot;price&quot;/&gt;            &lt;/association&gt;        &lt;/collection&gt;    &lt;/collection&gt;&lt;/resultMap&gt;</code></pre><p>(5)UserMapper.java</p><pre><code>//查询用户购买商品信息public List&lt;User&gt;  findUserAndItemsResultMap()throws Exception;</code></pre><hr><h3 id="多对多查询总结"><a href="#多对多查询总结" class="headerlink" title="多对多查询总结"></a>多对多查询总结</h3><p>一对多是多对多的特例，如下需求：</p><p>查询用户购买的商品信息，用户和商品的关系是多对多关系。</p><pre><code>需求1：查询字段：用户账号、用户名称、用户性别、商品名称、商品价格(最常见)。企业开发中常见明细列表，用户购买商品明细列表。使用resultType将上边查询列映射到pojo输出。需求2：查询字段：用户账号、用户名称、购买商品数量、商品明细（鼠标移上显示明细）使用resultMap将用户购买的商品明细列表映射到user对象中。</code></pre><p>总结：</p><p>使用resultMap是针对那些对查询结果映射有特殊要求的功能，比如特殊要求映射成list中包括多个list。</p><hr><h3 id="resultMap总结"><a href="#resultMap总结" class="headerlink" title="resultMap总结"></a>resultMap总结</h3><p>（1）resultType</p><p>作用：将查询结果按照sql列名pojo属性名一致性映射到pojo中。</p><p>场合：常见一些明细记录的展示，比如用户购买商品明细，将关联查询信息全部展示在页面时，此时可直接使用resultType将每一条记录映射到pojo中，在前端页面遍历list（list中是pojo）即可。</p><p>（2）resultMap</p><p>使用association和collection完成一对一和一对多高级映射（对结果有特殊的映射要求）。</p><p>（3）association：</p><p>作用：将关联查询信息映射到一个pojo对象中。</p><p>场合：为了方便查询关联信息可以使用association将关联订单信息映射为用户对象的pojo属性中，比如：查询订单及关联用户信息。</p><p>使用resultType无法将查询结果映射到pojo对象的pojo属性中，根据对结果集查询遍历的需要选择使用resultType还是resultMap。</p><p>（4）collection：</p><p>作用：将关联查询信息映射到一个list集合中。</p><p>场合：为了方便查询遍历关联信息可以使用collection将关联信息映射到list集合中，比如：查询用户权限范围模块及模块下的菜单，可使用collection将模块映射到模块list中，将菜单列表映射到模块对象的菜单list属性中，这样的作的目的也是方便对查询结果集进行遍历查询。如果使用resultType无法将查询结果映射到list集合中。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770032" target="_blank" rel="noopener">mybatis学习笔记(12)-多对多查询</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;无花无酒过清明，兴味萧然似野僧。&lt;/center&gt;&lt;br&gt;&lt;center&gt;昨日邻家乞新火，晓窗分与读书灯。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·王禹偁《清明》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;本文实现多对多查询，查询用户及用户购买商品信息。&lt;/p&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(11)-一对多查询</title>
-    <link href="http://www.echodemo.cc/2019/06/23/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(11)-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://www.echodemo.cc/2019/06/23/mybatis学习笔记(11)-一对多查询/</id>
-    <published>2019-06-23T11:31:38.000Z</published>
-    <updated>2019-06-23T15:19:07.397Z</updated>
-    
-    <content type="html"><![CDATA[<center>楼上谁将玉笛吹？山前水阔暝云低。劳劳燕子人千里，落落梨花雨一枝。</center><br><center>修禊近，卖饧时。故乡惟有梦相随。夜来折得江头柳，不是苏堤也皱眉。</center><br><center>—-宋·张炎《鹧鸪天·楼上谁将玉笛吹》</center><p>张炎（1248年－1320年），字叔夏，号玉田，晚年号乐笑翁。祖籍陕西凤翔。六世祖张俊，宋朝著名将领。父张枢，“西湖吟社”重要成员，妙解音律，与著名词人周密相交。张炎是勋贵之后，前半生居于临安，生活优裕，而宋亡以后则家道中落，晚年漂泊落拓。著有《山中白云词》，存词302首。张炎另一重要的贡献在于创作了中国最早的词论专著《词源》，总结整理了宋末雅词一派的主要艺术思想与成就，其中以“清空”，“骚雅”为主要主张。</p><hr><p>本文实现一对多查询，查询订单及订单明细的信息。</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>（1）编写sql</p><pre><code>1、确定主查询表：订单表。2、确定关联查询表：订单明细表。3、在一对一查询基础上添加订单明细表关联即可。SELECT   orders.*,  user.username,  user.sex,  user.address,  orderdetail.id orderdetail_id,  orderdetail.items_id,  orderdetail.items_num,  orderdetail.orders_idFROM  orders,  user,  orderdetailWHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id</code></pre><p><strong>注意上面的orderdetail.id (AS) orderdetail_id,这里需要取别名，否则由于orders表也有id字段，在后面映射时会冲突。这里需要加入orderdetail表id是因为在resultMap当中需要唯一标识的id标签。</strong></p><p>（2）映射思路</p><p>使用resultType将上边的查询结果映射到pojo中，订单信息的就是重复。但是对orders映射不能出现重复记录。</p><p>在orders.java类中添加List<orderdetail> orderDetails属性。<br>最终会将订单信息映射到orders中，订单所对应的订单明细映射到orders中的orderDetails属性中。映射成的orders记录数为两条（orders信息不重复）,每个orders中的orderDetails属性存储了该订单所对应的订单明细。</orderdetail></p><p>（3）在orders中添加list订单明细属性</p><pre><code>// 订单明细private List&lt;Orderdetail&gt; orderdetails;</code></pre><p>（4）OrderMapper.xml</p><pre><code>&lt;!-- 查询订单关联查询用户及订单明细，使用resultmap --&gt;&lt;select id=&quot;findOrdersAndOrderDetailResultMap&quot; resultMap=&quot;OrdersAndOrderDetailResultMap&quot;&gt;   SELECT      orders.*,      user.username,      user.sex,      user.address,      orderdetail.id orderdetail_id,      orderdetail.items_id,      orderdetail.items_num,      orderdetail.orders_id    FROM      orders,      user,      orderdetail    WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id&lt;/select&gt;</code></pre><p>(5)resultMap定义</p><pre><code>&lt;!-- 订单及订单明细的resultMap使用extends继承，不用再配置订单信息和用户信息的映射 --&gt;&lt;resultMap type=&quot;com.echodemo.mybatislearning.bean.Orders&quot; id=&quot;OrdersAndOrderDetailResultMap&quot; extends=&quot;OrdersUserResultMap&quot;&gt;    &lt;!-- 订单信息 --&gt;    &lt;!-- 用户信息 --&gt;    &lt;!-- 使用extends继承，不用再配置订单信息和用户信息的映射 --&gt;    &lt;!-- 订单明细信息    一个订单关联查询出了多条明细，要使用collection进行映射    collection：对关联查询到多条记录映射到集合对象中    property：将关联查询到多条记录映射到com.echodemo.mybatislearning.bean.Orders哪个属性    ofType：指定映射到list集合属性中pojo的类型     --&gt;    &lt;collection property=&quot;orderdetails&quot; ofType=&quot;com.echodemo.mybatislearning.bean.Orderdetail&quot;&gt;        &lt;!-- id：订单明细唯 一标识        property:要将订单明细的唯 一标识 映射到com.echodemo.mybatislearning.bean.Orderdetail的哪个属性          --&gt;        &lt;id column=&quot;orderdetail_id&quot; property=&quot;id&quot;/&gt;        &lt;result column=&quot;items_id&quot; property=&quot;itemsId&quot;/&gt;        &lt;result column=&quot;items_num&quot; property=&quot;itemsNum&quot;/&gt;        &lt;result column=&quot;orders_id&quot; property=&quot;ordersId&quot;/&gt;    &lt;/collection&gt;&lt;/resultMap&gt;</code></pre><p>（6）OrderMapper.java</p><pre><code>// 查询订单(关联用户)及订单明细public List&lt;Orders&gt;  findOrdersAndOrderDetailResultMap()throws Exception;</code></pre><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>（1）mybatis使用resultMap的collection对关联查询的多条记录映射到一个list集合属性中。</p><p>（2）使用resultType实现：将订单明细映射到orders中的orderdetails中，需要自己处理，使用双重循环遍历，去掉重复记录，将订单明细放在orderdetails中。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770026" target="_blank" rel="noopener">mybatis学习笔记(11)-一对多查询</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;楼上谁将玉笛吹？山前水阔暝云低。劳劳燕子人千里，落落梨花雨一枝。&lt;/center&gt;&lt;br&gt;&lt;center&gt;修禊近，卖饧时。故乡惟有梦相随。夜来折得江头柳，不是苏堤也皱眉。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·张炎《鹧鸪天·楼上谁将玉笛吹》&lt;/cente
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(10)-一对一查询</title>
-    <link href="http://www.echodemo.cc/2019/06/23/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(10)-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://www.echodemo.cc/2019/06/23/mybatis学习笔记(10)-一对一查询/</id>
-    <published>2019-06-23T09:11:45.000Z</published>
-    <updated>2019-06-23T11:09:14.494Z</updated>
-    
-    <content type="html"><![CDATA[<center>梅子留酸软齿牙，芭蕉分绿与窗纱。</center><br><center>日长睡起无情思，闲看儿童捉柳花。</center><br><center>—-宋·杨万里《闲居初夏午睡起·其一》</center><hr><p>本文使用两种方式(resultType和resultMap)实现一对一查询，查询订单信息，关联查询创建订单的用户信息。</p><h3 id="resultType实现"><a href="#resultType实现" class="headerlink" title="resultType实现"></a>resultType实现</h3><p>（1）sql语句</p><pre><code>1、确定查询的主表：订单表。2、确定查询的关联表：用户表。3、关联查询使用内连接？还是外连接？4、由于orders表中有一个外键（user_id），通过外键关联查询用户表只能查询出一条记录，可以使用内连接。</code></pre><p>sql语句如下：</p><pre><code>SELECT   orders.*,  user.username,  user.sex,  user.address FROM  orders,  user WHERE orders.user_id = user.id</code></pre><p>（2）创建pojo</p><pre><code>1、将上边sql查询的结果映射到pojo中，pojo中必须包括所有查询列名。2、原始的Orders.java不能映射全部字段，需要新创建的pojo。3、创建一个pojo继承包括查询字段较多的po类。4、对应数据表的几个pojo类(Items,Orderdetail,Orders)就是把该类的属性名设为和数据表列字段名相同，并为这些属性添加getter和setter，在这里就不贴代码了，只贴出对应于关联查询的自定义pojo类OrdersCustom的代码。</code></pre><p>pojo类如下：</p><pre><code>/** *  * &lt;p&gt;Title: OrdersCustom&lt;/p&gt; * &lt;p&gt;Description: 订单的扩展类&lt;/p&gt; *///通过此类映射订单和用户查询的结果，让此类继承包括字段较多的pojo类public class OrdersCustom extends Orders{    //添加用户属性    /*user.username,      user.sex,      user.address */    private String username;    private String sex;    private String address;    public String getUsername() {        return username;    }    public void setUsername(String username) {        this.username = username;    }    public String getSex() {        return sex;    }    public void setSex(String sex) {        this.sex = sex;    }    public String getAddress() {        return address;    }    public void setAddress(String address) {        this.address = address;    }}</code></pre><p>（3）OrdersCustomMapper.xml</p><pre><code>&lt;!-- 查询订单关联查询用户信息 --&gt;&lt;select id=&quot;findOrdersUser&quot;  resultType=&quot;com.echodemo.mybatislearning.bean.OrdersCustom&quot;&gt;  SELECT      orders.*,      user.username,      user.sex,      user.address    FROM      orders,      user    WHERE orders.user_id = user.id&lt;/select&gt;</code></pre><p>（4）OrdersCustomMapper.java</p><pre><code>// 查询订单关联查询用户信息public List&lt;OrdersCustom&gt; findOrdersUser()throws Exception;}</code></pre><hr><h3 id="resultMap实现"><a href="#resultMap实现" class="headerlink" title="resultMap实现"></a>resultMap实现</h3><p>使用resultMap将查询结果中的订单信息映射到Orders对象中，在orders类中添加User属性，将关联查询出来的用户信息映射到orders对象中的user属性中。</p><p>（1）定义resultMap</p><pre><code>&lt;!-- 订单查询关联用户的resultMap将整个查询的结果映射到com.echodemo.mybatislearning.bean.Orders中 --&gt;&lt;resultMap type=&quot;com.echodemo.mybatislearning.bean.Orders&quot; id=&quot;OrdersUserResultMap&quot;&gt;    &lt;!-- 配置映射的订单信息 --&gt;    &lt;!-- id：指定查询列中的唯一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id        column：订单信息的唯一标识列        property：订单信息的唯一标识列所映射到Orders中哪个属性      --&gt;    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;    &lt;!-- 配置映射的关联的用户信息 --&gt;    &lt;!-- association：用于映射关联查询单个对象的信息    property：要将关联查询的用户信息映射到Orders中哪个属性     --&gt;    &lt;association property=&quot;user&quot;  javaType=&quot;com.echodemo.mybatislearning.bean.User&quot;&gt;        &lt;!-- id：关联查询用户的唯 一标识        column：指定唯 一标识用户信息的列        javaType：映射到user的哪个属性         --&gt;        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;        &lt;result column=&quot;sex&quot; property=&quot;sex&quot;/&gt;        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;    &lt;/association&gt;&lt;/resultMap&gt;</code></pre><p>（2）statement定义</p><pre><code>&lt;!-- 查询订单关联查询用户信息 --&gt;&lt;select id=&quot;findOrdersUserResultMap&quot; resultMap=&quot;OrdersUserResultMap&quot;&gt;    SELECT    orders.*,    user.username,    user.sex,    user.address    FROM    orders,    user    WHERE orders.user_id = user.id&lt;/select&gt;</code></pre><p>（3）OrdersMapper.java</p><pre><code>// 查询订单关联查询用户使用resultMappublic List&lt;Orders&gt; findOrdersUserResultMap()throws Exception;</code></pre><p>（4）测试代码</p><pre><code>@Testpublic void testFindOrdersUserResultMap() throws Exception {    SqlSession sqlSession = sqlSessionFactory.openSession();    // 创建代理对象    OrdersMapperCustom ordersMapperCustom = sqlSession            .getMapper(OrdersMapperCustom.class);    // 调用maper的方法    List&lt;Orders&gt; list = ordersMapperCustom.findOrdersUserResultMap();    System.out.println(list);    sqlSession.close();}</code></pre><hr><h3 id="resultType和resultMap实现一对一查询小结"><a href="#resultType和resultMap实现一对一查询小结" class="headerlink" title="resultType和resultMap实现一对一查询小结"></a>resultType和resultMap实现一对一查询小结</h3><p>（1）resultType：使用resultType实现较为简单，如果pojo中没有包括查询出来的列名，需要增加列名对应的属性，即可完成映射。如果没有查询结果的特殊要求建议使用resultType。</p><p>（2）resultMap：需要单独定义resultMap，实现有点麻烦，如果对查询结果有特殊的要求，使用resultMap可以完成将关联查询映射pojo的属性中。</p><p>（3）resultMap可以实现延迟加载，resultType无法实现延迟加载。</p><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770023" target="_blank" rel="noopener">mybatis学习笔记(10)-一对一查询</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;梅子留酸软齿牙，芭蕉分绿与窗纱。&lt;/center&gt;&lt;br&gt;&lt;center&gt;日长睡起无情思，闲看儿童捉柳花。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·杨万里《闲居初夏午睡起·其一》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;本文使用两种方式(resultType和
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="MyBatis" scheme="http://www.echodemo.cc/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis学习笔记(9)-订单商品数据模型分析</title>
-    <link href="http://www.echodemo.cc/2019/06/23/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(9)-%E8%AE%A2%E5%8D%95%E5%95%86%E5%93%81%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90/"/>
-    <id>http://www.echodemo.cc/2019/06/23/mybatis学习笔记(9)-订单商品数据模型分析/</id>
-    <published>2019-06-23T08:36:12.000Z</published>
-    <updated>2019-06-23T09:10:14.994Z</updated>
-    
-    <content type="html"><![CDATA[<center>九月江南花事休, 芙蓉宛转在中洲。</center><br><center>美人笑隔盈盈水, 落日还生渺渺愁。</center><br><center>露洗玉盘金殿冷, 风吹罗带锦城秋。</center><br><center>相看未用伤迟暮, 别有池塘一种幽。</center><br><center>—-明·文徵明《钱氏池上芙蓉》</center><hr><p>本文对接下来几篇博客中用到的数据模型进行分析，并附上建表sql文件和测试数据文件。</p><h3 id="数据模型分析思路"><a href="#数据模型分析思路" class="headerlink" title="数据模型分析思路"></a>数据模型分析思路</h3><p>（1）每张表记录的数据内容</p><pre><code>分模块对每张表记录的内容进行熟悉，相当于你学习系统需求（功能）的过程。</code></pre><p>（2）每张表重要的字段设置</p><pre><code>非空字段、外键字段。</code></pre><p>（3）数据库级别表与表之间的关系</p><pre><code>外键关系。</code></pre><p>（4）表与表之间的业务关系</p><pre><code>在分析表与表之间的业务关系时一定要建立在某个业务意义基础上去分析。</code></pre><hr><h3 id="数据模型分析"><a href="#数据模型分析" class="headerlink" title="数据模型分析"></a>数据模型分析</h3><pre><code>1、用户表user：记录了购买商品的用户信息。2、订单表orders：记录了用户所创建的订单（购买商品的订单）。3、订单明细表orderdetail：记录了订单的详细信息以及购买商品的信息。4、商品表items：记录了商品信息。</code></pre><p>表与表之间的业务关系<strong>（在分析表与表之间的业务关系时需要建立在某个业务意义基础上去分析。先分析数据级别之间有关系的表之间的业务关系）</strong>：</p><p>（1）user和orders：</p><pre><code>user—&gt;orders：一个用户可以创建多个订单，一对多。orders—&gt;user：一个订单只由一个用户创建，一对一。</code></pre><p>（2）orders和orderdetail：</p><pre><code>orders—&gt;orderdetail：一个订单可以包括多个订单明细，因为一个订单可以购买多个商品，每个商品的购买信息在orderdetail记录，一对多关系。orderdetail—&gt; orders：一个订单明细只能包括在一个订单中，一对一。</code></pre><p>（3）orderdetail和items：</p><pre><code>orderdetail—&gt;itesms：一个订单明细只对应一个商品信息，一对一。items—&gt; orderdetail:一个商品可以存在于多个订单明细中，一对多。</code></pre><p>再分析数据库级别没有关系的表之间是否有业务关系：</p><p>（4）orders和items：</p><pre><code>orders和items之间可以通过orderdetail表建立关系。</code></pre><hr><h3 id="订单商品数据模型建表sql"><a href="#订单商品数据模型建表sql" class="headerlink" title="订单商品数据模型建表sql"></a>订单商品数据模型建表sql</h3><p>（1）商品信息表</p><pre><code>CREATE TABLE `items` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `name` varchar(32) NOT NULL COMMENT &apos;商品名称&apos;,  `price` float(10,1) NOT NULL COMMENT &apos;商品定价&apos;,  `detail` text COMMENT &apos;商品描述&apos;,  `pic` varchar(64) DEFAULT NULL COMMENT &apos;商品图片&apos;,  `createtime` datetime NOT NULL COMMENT &apos;生产日期&apos;,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;</code></pre><p>（2）用户信息表</p><pre><code>CREATE TABLE `user` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `username` varchar(32) NOT NULL COMMENT &apos;用户名称&apos;,  `birthday` date DEFAULT NULL COMMENT &apos;生日&apos;,  `sex` char(1) DEFAULT NULL COMMENT &apos;性别&apos;,  `address` varchar(256) DEFAULT NULL COMMENT &apos;地址&apos;,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;</code></pre><p>（3）订单表</p><pre><code>CREATE TABLE `orders` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `user_id` int(11) NOT NULL COMMENT &apos;下单用户id&apos;,  `number` varchar(32) NOT NULL COMMENT &apos;订单号&apos;,  `createtime` datetime NOT NULL COMMENT &apos;创建订单时间&apos;,  `note` varchar(100) DEFAULT NULL COMMENT &apos;备注&apos;,  PRIMARY KEY (`id`),  KEY `FK_orders_1` (`user_id`),  CONSTRAINT `FK_orders_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;</code></pre><p>（4）订单详情表</p><pre><code>CREATE TABLE `orderdetail` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `orders_id` int(11) NOT NULL COMMENT &apos;订单id&apos;,  `items_id` int(11) NOT NULL COMMENT &apos;商品id&apos;,  `items_num` int(11) DEFAULT NULL COMMENT &apos;商品购买数量&apos;,  PRIMARY KEY (`id`),  KEY `FK_orderdetail_1` (`orders_id`),  KEY `FK_orderdetail_2` (`items_id`),  CONSTRAINT `FK_orderdetail_1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  CONSTRAINT `FK_orderdetail_2` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;</code></pre><hr><h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><p>（1）商品信息表数据</p><pre><code>insert  into `items`(`id`,`name`,`price`,`detail`,`pic`,`createtime`) values (1,&apos;台式机&apos;,3000.0,&apos;该电脑质量非常好！！！！&apos;,NULL,&apos;2015-02-03 13:22:53&apos;),(2,&apos;笔记本&apos;,6000.0,&apos;笔记本性能好，质量好！！！！！&apos;,NULL,&apos;2015-02-09 13:22:57&apos;),(3,&apos;背包&apos;,200.0,&apos;名牌背包，容量大质量好！！！！&apos;,NULL,&apos;2015-02-06 13:23:02&apos;);</code></pre><p>（2）用户信息表数据</p><pre><code>insert  into `user`(`id`,`username`,`birthday`,`sex`,`address`) values (1,&apos;王五&apos;,NULL,&apos;2&apos;,NULL),(10,&apos;张三&apos;,&apos;2014-07-10&apos;,&apos;1&apos;,&apos;北京市&apos;),(16,&apos;张小明&apos;,NULL,&apos;1&apos;,&apos;河南郑州&apos;),(22,&apos;陈小明&apos;,NULL,&apos;1&apos;,&apos;河南郑州&apos;),(24,&apos;张三丰&apos;,NULL,&apos;1&apos;,&apos;河南郑州&apos;),(25,&apos;陈小明&apos;,NULL,&apos;1&apos;,&apos;河南郑州&apos;),(26,&apos;王五&apos;,NULL,NULL,NULL);</code></pre><p>（3）订单表数据</p><pre><code>insert  into `orders`(`id`,`user_id`,`number`,`createtime`,`note`) values (3,1,&apos;1000010&apos;,&apos;2015-02-04 13:22:35&apos;,NULL),(4,1,&apos;1000011&apos;,&apos;2015-02-03 13:22:41&apos;,NULL),(5,10,&apos;1000012&apos;,&apos;2015-02-12 16:13:23&apos;,NULL);</code></pre><p>（4）订单详情表数据</p><pre><code>insert  into `orderdetail`(`id`,`orders_id`,`items_id`,`items_num`) values (1,3,1,1),(2,3,2,3),(3,4,3,4),(4,4,2,3);</code></pre><p>改文章转载自：<a href="https://blog.csdn.net/h3243212/article/details/50770013" target="_blank" rel="noopener">mybatis学习笔记(9)-订单商品数据模型分析</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;九月江南花事休, 芙蓉宛转在中洲。&lt;/center&gt;&lt;br&gt;&lt;center&gt;美人笑隔盈盈水, 落日还生渺渺愁。&lt;/center&gt;&lt;br&gt;&lt;center&gt;露洗玉盘金殿冷, 风吹罗带锦城秋。&lt;/center&gt;&lt;br&gt;&lt;center&gt;相看未用伤迟暮, 别有池塘一种幽。&lt;
       
     
     </summary>
