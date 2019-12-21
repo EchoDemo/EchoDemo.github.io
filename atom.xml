@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-12-13T14:30:04.557Z</updated>
+  <updated>2019-12-21T13:06:23.748Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 查找常用字符</title>
+    <link href="http://www.echodemo.cc/2019/12/21/LeetCode-%E6%9F%A5%E6%89%BE%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6/"/>
+    <id>http://www.echodemo.cc/2019/12/21/LeetCode-查找常用字符/</id>
+    <published>2019-12-21T11:02:36.000Z</published>
+    <updated>2019-12-21T13:06:23.748Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。</p><p>你可以按任意顺序返回答案。</p><pre><code>示例 1：输入：[&quot;bella&quot;,&quot;label&quot;,&quot;roller&quot;]输出：[&quot;e&quot;,&quot;l&quot;,&quot;l&quot;]示例 2：输入：[&quot;cool&quot;,&quot;lock&quot;,&quot;cook&quot;]输出：[&quot;c&quot;,&quot;o&quot;]</code></pre><h3 id="题解一（利用set和map）："><a href="#题解一（利用set和map）：" class="headerlink" title="题解一（利用set和map）："></a>题解一（利用set和map）：</h3><pre><code>@ApiOperation(&quot;LeetCode算法题测试&quot;)@RequestMapping(value = &quot;/algorithm&quot;, method = RequestMethod.POST)@ResponseBodypublic List&lt;String&gt; algorithm(String[] A) {    // 存放第一个字符串的字符    Set&lt;Character&gt; characterSet = new HashSet&lt;&gt;(A[0].length());    // 存放第一个字符串字符出现的次数，初始值为1    Map&lt;Character, Integer&gt; a0CharacterIntegerMap = new HashMap&lt;&gt;(A[0].length());    // 将第一个字符串中字符装载进set和map    for (int i = 0; i&lt; A[0].length(); i++) {        // 如果set里面已经有该字符，则第一个字符串map对应的字符出现次数加一        if (characterSet.contains(A[0].charAt(i))) {            a0CharacterIntegerMap.put(A[0].charAt(i), a0CharacterIntegerMap.get(A[0].charAt(i)) + 1);        } else {            // 如果没有，则将该字符都初始化进map和set            characterSet.add(A[0].charAt(i));            a0CharacterIntegerMap.put(A[0].charAt(i), 1);        }    }    // 对剩下的字符串进行处理    for (int i = 1; i &lt; A.length; i++) {        // 每个字符串字符的临时map，初始值为0        Map&lt;Character, Integer&gt; tempCharacterIntegerMap = new HashMap&lt;&gt;(A[0].length());        for (int j = 0; j&lt; A[i].length(); j++) {            if (!tempCharacterIntegerMap.containsKey(A[i].charAt(j))) {                tempCharacterIntegerMap.put(A[i].charAt(j), 0);            }            if (characterSet.contains((A[i].charAt(j)))) {                tempCharacterIntegerMap.put(A[i].charAt(j), tempCharacterIntegerMap.get(A[i].charAt(j)) + 1);            }        }        // 将临时map和第一个字符串的map作比较并处理        for (int j = 0; j &lt; A[0].length(); j++) {            // 如果临时map没有第一个字符串map里面的字符，则第一个字符串map的该字符出现次数置为0            if (!tempCharacterIntegerMap.containsKey(A[0].charAt(j))) {                a0CharacterIntegerMap.put(A[0].charAt(j), 0);            } else {                // 如果临时map有第一个字符串map里面的字符，且临时map出现的次数更少，则取更少次数的值                if (a0CharacterIntegerMap                        .get(A[0].charAt(j)) &gt; tempCharacterIntegerMap.get(A[0].charAt(j))) {                    a0CharacterIntegerMap.put(A[0].charAt(j), tempCharacterIntegerMap.get(A[0].charAt(j)));                }            }        }    }    List&lt;String&gt; list = new ArrayList&lt;&gt;();    // 遍历set，取第一个字符串字符对应的出现次数    for (Character character : characterSet) {        if (a0CharacterIntegerMap.get(character) &gt; 0) {            for (int i = 0; i &lt; a0CharacterIntegerMap.get(character); i++) {                list.add(String.valueOf(character));            }        }    }    return list;}</code></pre><h3 id="题解二（抓住提示字符都是小写字母）："><a href="#题解二（抓住提示字符都是小写字母）：" class="headerlink" title="题解二（抓住提示字符都是小写字母）："></a>题解二（抓住提示字符都是小写字母）：</h3><pre><code>@ApiOperation(&quot;LeetCode算法题测试&quot;)@RequestMapping(value = &quot;/algorithm&quot;, method = RequestMethod.POST)@ResponseBodypublic List&lt;String&gt; algorithm(String[] A) {    int[] a0 = new int[26];    for (int i = 0; i &lt; 26; i++) {        a0[i] = Integer.MAX_VALUE;    }    for (String str : A) {        // 初始化        int[] temp = new int[26];        for (int i = 0; i &lt; 26; i++) {            temp[i] = 0;        }        // 统计字符出现次数        for (char c : str.toCharArray()) {            temp[c - &apos;a&apos;]++;        }        for (int i = 0; i &lt; 26; i++) {            a0[i] = Math.min(a0[i], temp[i]);        }    }    List&lt;String&gt; list = new ArrayList&lt;&gt;();    for (int i = 0; i &lt; 26; i++) {        while (a0[i] &gt; 0) {            list.add(String.valueOf((char)(&apos;a&apos; + i)));            a0[i]--;        }    }    return list;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。&lt;/p&gt;
+&lt;p&gt;你可以按任意顺序返回答案。&lt;/p&gt;
+&lt;pre&gt;&lt;co
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 两数之和</title>
@@ -531,33 +558,6 @@
       
       
         &lt;center&gt;肃肃凉风生，加我林壑清。&lt;/center&gt;&lt;br&gt;&lt;center&gt;驱烟寻涧户，卷雾出山楹。&lt;/center&gt;&lt;br&gt;&lt;center&gt;去来固无迹，动息如有情。&lt;/center&gt;&lt;br&gt;&lt;center&gt;日落山水静，为君起松声。&lt;/center&gt;&lt;br&gt;&lt;center&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(5)-入门程序小结</title>
-    <link href="http://www.echodemo.cc/2019/07/14/2019-07-14springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-5-%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F%E5%B0%8F%E7%BB%93/"/>
-    <id>http://www.echodemo.cc/2019/07/14/2019-07-14springmvc学习笔记-5-入门程序小结/</id>
-    <published>2019-07-14T08:26:35.000Z</published>
-    <updated>2019-07-14T08:42:58.755Z</updated>
-    
-    <content type="html"><![CDATA[<center>凉风起天末，君子意如何。</center><br><center>鸿雁几时到，江湖秋水多。</center><br><center>文章憎命达，魑魅喜人过。</center><br><center>应共冤魂语，投诗赠汨罗。</center><br><center>—-唐·杜甫《天末怀李白》</center><hr><h3 id="入门程序配置小结"><a href="#入门程序配置小结" class="headerlink" title="入门程序配置小结"></a>入门程序配置小结</h3><p>1、前端控制器配置：</p><p>（1）第一种：*.action，访问以.action结尾 由DispatcherServlet进行解析。</p><p>（2）第二种：/，所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置不让DispatcherServlet进行解析,使用此种方式可以实现RESTful风格的url。</p><p>2、处理器映射器：</p><pre><code>（1）非注解处理器映射器（了解）。（2）注解的处理器映射器（掌握）。</code></pre><p>对标记@Controller类中标识有@RequestMapping的方法进行映射。在@RequestMapping里边定义映射的url。使用注解的映射器不用在xml中配置url和Handler的映射关系。</p><p>3、处理器适配器：</p><p>（1）非注解处理器适配器（了解） 。</p><p>（2）注解的处理器适配器（掌握） 。</p><p>注解处理器适配器和注解的处理器映射器是配对使用。理解为不能使用非注解映射器进行映射。</p><pre><code>&lt;mvc:annotation-driven&gt;&lt;/mvc:annotation-driven&gt; </code></pre><p>可以代替下面的配置：</p><pre><code>&lt;!--注解映射器 --&gt;  &lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;/&gt;  &lt;!--注解适配器 --&gt;  &lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;/&gt;</code></pre><hr><h3 id="非注解的完整的配置文件"><a href="#非注解的完整的配置文件" class="headerlink" title="非注解的完整的配置文件"></a>非注解的完整的配置文件</h3><p>src/main/resources/springmvc.xml：</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd&quot;&gt;    &lt;!-- 配置Handler --&gt;    &lt;bean id=&quot;itemsController&quot; name=&quot;/queryItems.action&quot; class=&quot;com.echodemo.ssm.controller.ItemsController&quot;/&gt;    &lt;!-- 处理器映射器    将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)    所有的映射器都实现HandlerMapping接口    --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;/&gt;    &lt;!-- 配置处理器适配器，所有处理器适配器都实现了HandlerAdapter接口，编写的Handler实现Controller接口 --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;/&gt;    &lt;!-- 视图解析器    解析jsp,默认使用jstl,classpath下要有jstl的包    --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;        &lt;!-- 配置jsp路径的前缀 --&gt;        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;        &lt;!-- 配置jsp路径的后缀 --&gt;        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;    &lt;/bean&gt;&lt;/beans&gt;</code></pre><p>或者：</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd&quot;&gt;    &lt;!-- 配置Handler --&gt;    &lt;bean id=&quot;itemsController&quot; name=&quot;/queryItems.action&quot; class=&quot;com.echodemo.ssm.controller.ItemsController&quot;/&gt;    &lt;bean id=&quot;itemsController1&quot; class=&quot;com.echodemo.ssm.controller.ItemsController1&quot;/&gt;    &lt;!-- 简单的url映射 --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping&quot;&gt;        &lt;property name=&quot;mappings&quot;&gt;            &lt;props&gt;                &lt;!-- 对itemsController进行url映射，key表示访问的路径，itemsController表示Handler的id --&gt;                &lt;prop key=&quot;/queryItems0.action&quot;&gt;itemsController&lt;/prop&gt;                &lt;prop key=&quot;/queryItems1.action&quot;&gt;itemsController1&lt;/prop&gt;            &lt;/props&gt;        &lt;/property&gt;    &lt;/bean&gt;    &lt;!-- 另一个处理器适配器，编写的Handler实现HttpRequestHandler接口 --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter&quot;/&gt;    &lt;!-- 视图解析器    解析jsp,默认使用jstl,classpath下要有jstl的包    --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;        &lt;!-- 配置jsp路径的前缀 --&gt;        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;        &lt;!-- 配置jsp路径的后缀 --&gt;        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;    &lt;/bean&gt;&lt;/beans&gt;</code></pre><p><strong>注：以上这两种不同的处理器和适配器的配置方式是可以并存的。</strong></p><hr><h3 id="注解的完整配置文件"><a href="#注解的完整配置文件" class="headerlink" title="注解的完整配置文件"></a>注解的完整配置文件</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd&quot;&gt;    &lt;!-- 对于注解的Handler 可以单个配置    实际开发中建议使用组件扫描    --&gt;    &lt;!--&lt;bean class=&quot;com.echodemo.ssm.controller.ItemsController2&quot;/&gt;--&gt;    &lt;!-- 可以扫描controller、service、...    这里让扫描controller，指定controller的包     --&gt;    &lt;context:component-scan base-package=&quot;com.echodemo.ssm.controller&quot;&gt;&lt;/context:component-scan&gt;    &lt;!-- 注解的映射器 --&gt;    &lt;!--&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;/&gt;--&gt;    &lt;!-- 注解的适配器 --&gt;    &lt;!--&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;/&gt;--&gt;    &lt;!-- 使用mvc:annotation-driven代替上面两个注解映射器和注解适配的配置     mvc:annotation-driven默认加载很多的参数绑定方法，     比如json转换解析器默认加载了，如果使用mvc:annotation-driven则不用配置上面的RequestMappingHandlerMapping和RequestMappingHandlerAdapter     实际开发时使用mvc:annotation-driven     --&gt;    &lt;mvc:annotation-driven&gt;&lt;/mvc:annotation-driven&gt;    &lt;!-- 视图解析器    解析jsp,默认使用jstl,classpath下要有jstl的包    --&gt;    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;        &lt;!-- 配置jsp路径的前缀 --&gt;        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;        &lt;!-- 配置jsp路径的后缀 --&gt;        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;    &lt;/bean&gt;&lt;/beans&gt;</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;凉风起天末，君子意如何。&lt;/center&gt;&lt;br&gt;&lt;center&gt;鸿雁几时到，江湖秋水多。&lt;/center&gt;&lt;br&gt;&lt;center&gt;文章憎命达，魑魅喜人过。&lt;/center&gt;&lt;br&gt;&lt;center&gt;应共冤魂语，投诗赠汨罗。&lt;/center&gt;&lt;br&gt;&lt;center&gt;
       
     
     </summary>
