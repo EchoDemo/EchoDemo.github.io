@@ -73,6 +73,33 @@
   </entry>
   
   <entry>
+    <title>临飞鸟</title>
+    <link href="http://www.echodemo.cc/2019/11/30/%E4%B8%B4%E9%A3%9E%E9%B8%9F/"/>
+    <id>http://www.echodemo.cc/2019/11/30/临飞鸟/</id>
+    <published>2019-11-30T14:32:52.000Z</published>
+    <updated>2019-12-26T14:11:58.535Z</updated>
+    
+    <content type="html"><![CDATA[<center><br><br>我看着窗边的单向历一页页地薄下去<br><br>就像天边的光亮一点点地变暗<br><br>他们都在悄悄地告诉我<br><br>距离见到你又更近了一步<br><br><br><br><br>此刻，我的心在扑通扑通地跳动<br><br>右手的指头轮询地敲打着木桃色的桌面<br><br>神经递质游走的能量来自于对你的思念<br><br>是你予我的记忆陪伴我度过难熬的夜晚<br><br><br><br><br>也许你不太知道的是<br><br>我想和你一起去发现杭州冬天的讯息<br><br>去看曲院风荷里一陇又一陇的残荷<br><br>傍晚在苏堤春晓的尽头看雷峰夕照的倩影<br><br>以及站在断桥残雪上看整条北山街泛红的梧桐树叶<br><br><br><br><br>我想你，甚至是在梦里<br><br>我想这我不必告诉你<br><br>在飞鸟来临的清晨<br><br>当你看到松的沉默，雪的孤寂就能明了<br><br><br><br><br>如果定要我说点什么的话<br><br>那么我所想过的最浪漫的事情<br><br>便是与你一起看遍西湖的春夏与秋冬<br><br>###### 注：致一段还未开始就夭折的经历<br><br></center>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;&lt;br&gt;&lt;br&gt;我看着窗边的单向历一页页地薄下去&lt;br&gt;&lt;br&gt;就像天边的光亮一点点地变暗&lt;br&gt;&lt;br&gt;他们都在悄悄地告诉我&lt;br&gt;&lt;br&gt;距离见到你又更近了一步&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;此刻，我的心在扑通扑通地跳动&lt;br&gt;&lt;br&gt;右手的指头轮询地
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+  </entry>
+  
+  <entry>
     <title>秋夜</title>
     <link href="http://www.echodemo.cc/2019/09/05/%E7%A7%8B%E5%A4%9C/"/>
     <id>http://www.echodemo.cc/2019/09/05/秋夜/</id>
@@ -531,33 +558,6 @@
       
       
         &lt;center&gt;元丰六年十月十二日夜，解衣欲睡，月色入户，欣然起行。念无与为乐者，遂至承天寺寻张怀民。怀民亦未寝，相与步于中庭。&lt;/center&gt;&lt;br&gt;&lt;center&gt;庭下如积水空明，水中藻、荇交横，盖竹柏影也。何夜无月？何处无竹柏？但少闲人如吾两人者耳。&lt;/center&gt;&lt;b
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(6)-springmvc整合mybatis</title>
-    <link href="http://www.echodemo.cc/2019/07/14/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(6)-springmvc%E6%95%B4%E5%90%88mybatis/"/>
-    <id>http://www.echodemo.cc/2019/07/14/springmvc学习笔记(6)-springmvc整合mybatis/</id>
-    <published>2019-07-14T13:22:47.000Z</published>
-    <updated>2019-07-14T13:37:37.945Z</updated>
-    
-    <content type="html"><![CDATA[<center>肃肃凉风生，加我林壑清。</center><br><center>驱烟寻涧户，卷雾出山楹。</center><br><center>去来固无迹，动息如有情。</center><br><center>日落山水静，为君起松声。</center><br><center>—-唐·王勃《咏风》</center><hr><h3 id="整合思路"><a href="#整合思路" class="headerlink" title="整合思路"></a>整合思路</h3><p>通过spring管理持久层的mapper(相当于dao接口)；通过spring管理业务层的service，service中可以调用mapper接口；通过spring管理表现层的Handler（也就是controller），Handler里面可以调用service接口。像mapper、service、Handler都是javaBean，所以用到的是spring的IOC的容器。</p><p>1、第一步：整合dao层</p><pre><code>（1）mybatis和spring整合，通过spring管理mapper接口。（2）使用mapper的扫描器自动扫描mapper接口在spring中进行注册。</code></pre><p>第二步：整合service层</p><pre><code>（1）通过spring管理service接口。（2）使用配置方式将service接口配置在spring配置文件中。（3）实现事务控制。</code></pre><p>第三步：整合springmvc</p><pre><code>（1）由于springmvc是spring的模块，不需要整合。</code></pre><hr><h3 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h3><p>如何创建使用maven构建的web应用可以参考前面的一篇：<a href="http://www.echodemo.cc/2019/07/13/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1">springmvc学习笔记(1)-框架原理和入门配置</a>-%E6%A1%86%E6%9E%B6%E5%8E%9F%E7%90%86%E5%92%8C%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE/)</p><p>1、添加依赖</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  &lt;groupId&gt;com.echodemo&lt;/groupId&gt;  &lt;artifactId&gt;springmvc-mybatis&lt;/artifactId&gt;  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;  &lt;packaging&gt;war&lt;/packaging&gt;  &lt;name&gt;springmvc-mybatis Maven Webapp&lt;/name&gt;  &lt;!-- FIXME change it to the project&apos;s website --&gt;  &lt;url&gt;http://www.example.com&lt;/url&gt;  &lt;properties&gt;    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;    &lt;spring-base-version&gt;4.2.4.RELEASE&lt;/spring-base-version&gt;  &lt;/properties&gt;  &lt;dependencies&gt;    &lt;dependency&gt;      &lt;groupId&gt;junit&lt;/groupId&gt;      &lt;artifactId&gt;junit&lt;/artifactId&gt;      &lt;version&gt;4.11&lt;/version&gt;      &lt;scope&gt;test&lt;/scope&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-core&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-web&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.springframework&lt;/groupId&gt;      &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;      &lt;version&gt;${spring-base-version}&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;      &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;      &lt;version&gt;1.2.4&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;      &lt;version&gt;4.0.1&lt;/version&gt;      &lt;scope&gt;provided&lt;/scope&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;jstl&lt;/groupId&gt;      &lt;artifactId&gt;jstl&lt;/artifactId&gt;      &lt;version&gt;1.2&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;taglibs&lt;/groupId&gt;      &lt;artifactId&gt;standard&lt;/artifactId&gt;      &lt;version&gt;1.1.2&lt;/version&gt;    &lt;/dependency&gt;    &lt;!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;      &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;      &lt;version&gt;1.7.25&lt;/version&gt;    &lt;/dependency&gt;    &lt;!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic --&gt;    &lt;dependency&gt;      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;      &lt;version&gt;1.2.3&lt;/version&gt;      &lt;scope&gt;test&lt;/scope&gt;    &lt;/dependency&gt;    &lt;!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core --&gt;    &lt;dependency&gt;      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;      &lt;artifactId&gt;logback-core&lt;/artifactId&gt;      &lt;version&gt;1.2.3&lt;/version&gt;    &lt;/dependency&gt;    &lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;    &lt;dependency&gt;      &lt;groupId&gt;mysql&lt;/groupId&gt;      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;      &lt;version&gt;8.0.15&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;      &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;      &lt;version&gt;1.4&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;      &lt;version&gt;3.3.0&lt;/version&gt;    &lt;/dependency&gt;      &lt;dependency&gt;          &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;          &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;          &lt;version&gt;1.3.5&lt;/version&gt;      &lt;/dependency&gt;  &lt;/dependencies&gt;  &lt;build&gt;    &lt;finalName&gt;springmvc-mybatis&lt;/finalName&gt;    &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;      &lt;plugins&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;          &lt;version&gt;3.1.0&lt;/version&gt;        &lt;/plugin&gt;        &lt;!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging --&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;          &lt;version&gt;3.0.2&lt;/version&gt;        &lt;/plugin&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;          &lt;version&gt;3.8.0&lt;/version&gt;        &lt;/plugin&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;          &lt;version&gt;2.22.1&lt;/version&gt;        &lt;/plugin&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;          &lt;version&gt;3.2.2&lt;/version&gt;        &lt;/plugin&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;          &lt;version&gt;2.5.2&lt;/version&gt;        &lt;/plugin&gt;        &lt;plugin&gt;          &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;          &lt;version&gt;2.8.2&lt;/version&gt;        &lt;/plugin&gt;      &lt;/plugins&gt;    &lt;/pluginManagement&gt;    &lt;resources&gt;      &lt;!-- 批量加载mapper指定mapper接口的包名的路径依赖指引 --&gt;      &lt;resource&gt;        &lt;directory&gt;src/main/java&lt;/directory&gt;        &lt;includes&gt;          &lt;include&gt;**/*.xml&lt;/include&gt;        &lt;/includes&gt;      &lt;/resource&gt;    &lt;/resources&gt;  &lt;/build&gt;&lt;/project&gt;</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;肃肃凉风生，加我林壑清。&lt;/center&gt;&lt;br&gt;&lt;center&gt;驱烟寻涧户，卷雾出山楹。&lt;/center&gt;&lt;br&gt;&lt;center&gt;去来固无迹，动息如有情。&lt;/center&gt;&lt;br&gt;&lt;center&gt;日落山水静，为君起松声。&lt;/center&gt;&lt;br&gt;&lt;center&gt;
       
     
     </summary>
