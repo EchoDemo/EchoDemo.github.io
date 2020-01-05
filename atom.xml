@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2019-12-21T13:06:23.748Z</updated>
+  <updated>2020-01-05T12:13:32.386Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 戳气球</title>
+    <link href="http://www.echodemo.cc/2020/01/05/LeetCode-%E6%88%B3%E6%B0%94%E7%90%83/"/>
+    <id>http://www.echodemo.cc/2020/01/05/LeetCode-戳气球/</id>
+    <published>2020-01-05T12:07:36.000Z</published>
+    <updated>2020-01-05T12:13:32.386Z</updated>
+    
+    <content type="html"><![CDATA[<p>有 n 个气球，编号为0 到 n-1，每个气球上都标有一个数字，这些数字存在数组 nums 中。</p><p>现在要求你戳破所有的气球。每当你戳破一个气球 i 时，你可以获得 nums[left] <em> nums[i] </em> nums[right] 个硬币。 这里的 left 和 right 代表和 i 相邻的两个气球的序号。注意当你戳破了气球 i 后，气球 left 和气球 right 就变成了相邻的气球。</p><p>求所能获得硬币的最大数量。</p><p>说明:</p><p>你可以假设 nums[-1] = nums[n] = 1，但注意它们不是真实存在的所以并不能被戳破。<br>0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100<br>示例:</p><pre><code>输入: [3,1,5,8]输出: 167 解释: nums = [3,1,5,8] --&gt; [3,5,8] --&gt;   [3,8]   --&gt;  [8]  --&gt; []     coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167</code></pre><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>dp[i][j]表示第i至第j个元素这个区间能获得的最大硬币数，k表示在i,j这个区间内最后戳破的气球，状态转移方程dp[i][j]=max(dp[i][j],dp[i][k]+dp[k][j]+nums[i]<em>nums[k]</em>nums[j])</p><pre><code>    public int maxCoins(int[] nums) {        int N = nums.length;        int len = N + 2;        int[] newNums = new int[len];        newNums[0] = 1;        newNums[len -1] = 1;        for(int i = 0; i &lt; nums.length; i++){            newNums[i+1] = nums[i];        }        int[][] dp = new int[len][len];        for (int i = 0; i &lt; len; i++) {            for (int j = 0; j &lt; len; j++) {                dp[i][j] = 0;            }        }        for (int c = 2; c &lt;= len; c++) {            for (int i = 0; i &lt; len - c; i++) {                int j = i + c;                for (int k = i + 1; k &lt; j; k++) {                    dp[i][j] = Math.max(dp[i][j], newNums[i] * newNums[k] * newNums[j]                            + dp[i][k] + dp[k][j]);                }            }        }        return dp[0][len - 1];}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;有 n 个气球，编号为0 到 n-1，每个气球上都标有一个数字，这些数字存在数组 nums 中。&lt;/p&gt;
+&lt;p&gt;现在要求你戳破所有的气球。每当你戳破一个气球 i 时，你可以获得 nums[left] &lt;em&gt; nums[i] &lt;/em&gt; nums[right] 个硬币。 这
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 查找常用字符</title>
@@ -531,33 +557,6 @@
 
 &lt;hr&gt;
 &lt;h3 id=&quot;定义service&quot;&gt;&lt;a h
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(7)-springmvc整合mybatis之mapper</title>
-    <link href="http://www.echodemo.cc/2019/07/14/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(7)-springmvc%E6%95%B4%E5%90%88mybatis%E4%B9%8Bmapper/"/>
-    <id>http://www.echodemo.cc/2019/07/14/springmvc学习笔记(7)-springmvc整合mybatis之mapper/</id>
-    <published>2019-07-14T13:38:53.000Z</published>
-    <updated>2019-07-14T13:52:11.999Z</updated>
-    
-    <content type="html"><![CDATA[<center>元丰六年十月十二日夜，解衣欲睡，月色入户，欣然起行。念无与为乐者，遂至承天寺寻张怀民。怀民亦未寝，相与步于中庭。</center><br><center>庭下如积水空明，水中藻、荇交横，盖竹柏影也。何夜无月？何处无竹柏？但少闲人如吾两人者耳。</center><br><center>—-宋·苏轼《记承天寺夜游》</center><hr><h3 id="数据库配置文件和日志配置文件"><a href="#数据库配置文件和日志配置文件" class="headerlink" title="数据库配置文件和日志配置文件"></a>数据库配置文件和日志配置文件</h3><p>在resource文件夹下添加两个文件：数据库配置文件和日志配置文件。</p><p>1、数据库配置文件db.properties</p><pre><code>jdbc.driver=com.mysql.jdbc.Driverjdbc.url=jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf-8&amp;serverTimezone=UTCjdbc.username=rootjdbc.password=</code></pre><p>2、日志配置文件log4j.properties</p><pre><code># Global logging configurationlog4j.rootLogger=DEBUG, stdout# Console output...log4j.appender.stdout=org.apache.log4j.ConsoleAppenderlog4j.appender.stdout.layout=org.apache.log4j.PatternLayoutlog4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</code></pre><hr><h3 id="sqlMapConfig-xml（mybatis自己的配置文件）"><a href="#sqlMapConfig-xml（mybatis自己的配置文件）" class="headerlink" title="sqlMapConfig.xml（mybatis自己的配置文件）"></a>sqlMapConfig.xml（mybatis自己的配置文件）</h3><p>在resources目录下新建mybatis文件夹，并新建sqlMapConfig.xml文件：</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;&lt;configuration&gt;    &lt;!-- 全局setting配置，根据需要添加 --&gt;    &lt;!-- 别名定义 --&gt;    &lt;typeAliases&gt;        &lt;!-- 批量别名定义        指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名        （首字母大写或小写都可以）        --&gt;        &lt;package name=&quot;com.echodemo.springmvcmybatis.bean&quot;/&gt;    &lt;/typeAliases&gt;    &lt;!-- 配置mapper     由于使用spring和mybatis的整合包进行mapper扫描，这里不需要进行配置     必须遵循：mapper.xml和mapper.java文件同名，且在同一个目录下--&gt;    &lt;!--&lt;mappers&gt;--&gt;        &lt;!--&amp;lt;!&amp;ndash;通过resource方法一次加载一个映射文件 &amp;ndash;&amp;gt;--&gt;        &lt;!--&amp;lt;!&amp;ndash;&lt;mapper resource=&quot;UserMapper.xml&quot;&gt;&lt;/mapper&gt;&amp;ndash;&amp;gt;--&gt;        &lt;!--&amp;lt;!&amp;ndash; 批量加载mapper--&gt;        &lt;!--指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载--&gt;        &lt;!--遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，--&gt;        &lt;!--且在一个目录中上边规范的前提是：使用的是mapper代理方法--&gt;         &lt;!--&amp;ndash;&amp;gt;--&gt;        &lt;!--&lt;package name=&quot;com.echodemo.springmybatis.mapper&quot;/&gt;--&gt;    &lt;!--&lt;/mappers&gt;--&gt;&lt;/configuration&gt;</code></pre><hr><h3 id="applicationContext-dao-xml"><a href="#applicationContext-dao-xml" class="headerlink" title="applicationContext-dao.xml"></a>applicationContext-dao.xml</h3><p>在resources目录下新建spring文件夹，并新建applicationContext-dao.xml文件。分别配置：数据源、SqlSessionFactory、mapper扫描器。</p><pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd        http://www.springframework.org/schema/mvc        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd        http://www.springframework.org/schema/context        http://www.springframework.org/schema/context/spring-context-3.2.xsd        http://www.springframework.org/schema/aop        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd        http://www.springframework.org/schema/tx        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd &quot;&gt;    &lt;!-- 加载配置文件 --&gt;    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;    &lt;!-- 数据源，使用dbcp --&gt;    &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;    destroy-method=&quot;close&quot;&gt;        &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driver}&quot;/&gt;        &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;/&gt;        &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot;/&gt;        &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;        &lt;property name=&quot;maxActive&quot; value=&quot;10&quot;/&gt;        &lt;property name=&quot;minIdle&quot; value=&quot;5&quot;/&gt;    &lt;/bean&gt;    &lt;!-- sqlSessionFactory --&gt;    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;        &lt;!-- 加载mybatis配置文件 --&gt;        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis/SqlMapConfig.xml&quot;/&gt;        &lt;!-- 数据源 --&gt;        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;    &lt;/bean&gt;    &lt;!-- mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注册        遵循规范：将mapper.java和mapper.xml映射文件名称保持一致，且在一个目录中        自动扫描出来的mapper的bean的id为mapper类名（首字母小写）        --&gt;    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;        &lt;!-- 指定扫描的包名，如果需要扫描多个包，中间使用半角的逗号隔开 --&gt;        &lt;property name=&quot;basePackage&quot; value=&quot;com.echodemo.springmvcmybatis.mapper&quot;/&gt;        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;    &lt;/bean&gt;&lt;/beans&gt;</code></pre><hr><h3 id="逆向工程生成po类及mapper-单表增删改查"><a href="#逆向工程生成po类及mapper-单表增删改查" class="headerlink" title="逆向工程生成po类及mapper(单表增删改查)"></a>逆向工程生成po类及mapper(单表增删改查)</h3><p>具体参见：<a href="http://www.echodemo.cc/2019/06/30/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(18">mybatis学习笔记(18)-mybatis逆向工程</a>-mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/)</p><h3 id="手动定义商品查询mapper"><a href="#手动定义商品查询mapper" class="headerlink" title="手动定义商品查询mapper"></a>手动定义商品查询mapper</h3><p>针对综合查询mapper，一般情况会有关联查询，建议自定义mapper。</p><p>1、ItemsMapperCustom.xml</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;&lt;mapper namespace=&quot;com.echodemo.springmvcmybatis.mapper.ItemsMapperCustom&quot;&gt;    &lt;!-- 定义商品查询的SQL片段 --&gt;    &lt;sql id=&quot;query_items_where&quot;&gt;        &lt;!-- 使用动态sql，通过if判断，满足条件进行sql拼接 --&gt;        &lt;!-- 商品中的查询条件通过ItemsQueryVo包装对象中itemsCustom属性值传递 --&gt;        &lt;if test=&quot;itemsCustom!=null&quot;&gt;            &lt;if test=&quot;itemsCustom.name!=null and itemsCustom.name!=&apos;&apos;&quot;&gt;                items.name LIEK &apos;${itemsCustom.name}&apos;            &lt;/if&gt;        &lt;/if&gt;    &lt;/sql&gt;    &lt;!-- 商品的列表查询 --&gt;    &lt;!-- 建议paramterType传入包装对象         resultType建议使用扩展对象    --&gt;    &lt;select id=&quot;findItemsList&quot; parameterType=&quot;com.echodemo.springmvcmybatis.bean.ItemsQueryVo&quot; resultType=&quot;com.echodemo.springmvcmybatis.bean.ItemsCustom&quot;&gt;      SELECT * FROM items      &lt;where&gt;          &lt;include refid=&quot;query_items_where&quot;&gt;&lt;/include&gt;      &lt;/where&gt;    &lt;/select&gt;&lt;/mapper&gt;</code></pre><p>2、ItemsMapperCustom.java</p><pre><code>package com.echodemo.springmvcmybatis.mapper;import com.echodemo.springmvcmybatis.bean.ItemsCustom;import com.echodemo.springmvcmybatis.bean.ItemsQueryVo;import java.util.List;public interface ItemsMapperCustom {    // 查询商品列表    List&lt;ItemsCustom&gt; findItemsList(ItemsQueryVo itemsQueryVo) throws Exception;}</code></pre><p>3、po类ItemsCustom</p><pre><code>package com.echodemo.springmvcmybatis.bean;/** * 商品信息的扩展类 */public class ItemsCustom extends Items{    // 添加商品信息的扩展属性}</code></pre><p>4、输入pojo的包装类</p><pre><code>package com.echodemo.springmvcmybatis.bean;/** * 商品的包装对象 */public class ItemsQueryVo {    // 商品信息    private Items items;    // 为了系统的可扩展性，对原始生成的po类进行扩展    private ItemsCustom itemsCustom;    public Items getItems() {        return items;    }    public void setItems(Items items) {        this.items = items;    }    public ItemsCustom getItemsCustom() {        return itemsCustom;    }    public void setItemsCustom(ItemsCustom itemsCustom) {        this.itemsCustom = itemsCustom;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;元丰六年十月十二日夜，解衣欲睡，月色入户，欣然起行。念无与为乐者，遂至承天寺寻张怀民。怀民亦未寝，相与步于中庭。&lt;/center&gt;&lt;br&gt;&lt;center&gt;庭下如积水空明，水中藻、荇交横，盖竹柏影也。何夜无月？何处无竹柏？但少闲人如吾两人者耳。&lt;/center&gt;&lt;b
       
     
     </summary>
