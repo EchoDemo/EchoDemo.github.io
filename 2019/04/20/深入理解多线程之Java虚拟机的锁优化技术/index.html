@@ -127,7 +127,7 @@
 <meta property="og:description" content="漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。—-秦观《浣溪沙·漠漠轻寒上小楼》   前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitoren">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.echodemo.cc/images/2019/4/thread.png">
-<meta property="og:updated_time" content="2019-04-24T13:58:43.918Z">
+<meta property="og:updated_time" content="2020-01-18T01:38:53.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解多线程之Java虚拟机的锁优化技术">
 <meta name="twitter:description" content="漠漠轻寒上小楼，晓阴无赖似穷秋。淡烟流水画屏幽。自在飞花轻似梦，无边丝雨细如愁。宝帘闲挂小银钩。—-秦观《浣溪沙·漠漠轻寒上小楼》   前情提要 1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。深入理解多线程之Synchronized的实现原理 2、同步代码块通过monitoren">
@@ -503,13 +503,13 @@
 
 <hr>
 <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><blockquote>
-<p>1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。<a href="http://www.echodemo.cc/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BSynchronized%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Synchronized的实现原理</a></p>
-<p>2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到monitorexit的时候则要释放锁。<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Moniter的实现原理</a></p>
-<p>3、在HotSpot虚拟机中，使用oop-klass模型来表示对象。每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了对象头以及实例数据。<a href="http://www.echodemo.cc/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">深入理解多线程之Java的对象模型</a></p>
-<p>4、对象头中主要包含了GC分代年龄、锁状态标记、哈希码、epoch等信息。对象的状态一共有五种，分别是无锁态、轻量级锁、重量级锁、GC标记和偏向锁。<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%A4%B4/">深入理解多线程之Java的对象头</a></p>
+<p>1、同步方法通过ACC_SYNCHRONIZED关键字隐式的对方法进行加锁。当线程要执行的方法被标注上ACC_SYNCHRONIZED时，需要先获得锁才能执行该方法。<a href="https://echodemo.github.io/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BSynchronized%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">深入理解多线程之Synchronized的实现原理</a></p>
+<p>2、同步代码块通过monitorenter和monitorexit执行来进行加锁。当线程执行到monitorenter的时候要先获得所锁，才能执行后面的方法。当线程执行到monitorexit的时候则要释放锁。<a href="https://echodemo.github.io/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">深入理解多线程之Moniter的实现原理</a></p>
+<p>3、在HotSpot虚拟机中，使用oop-klass模型来表示对象。每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了对象头以及实例数据。<a href="https://echodemo.github.io/2019/04/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/" target="_blank" rel="noopener">深入理解多线程之Java的对象模型</a></p>
+<p>4、对象头中主要包含了GC分代年龄、锁状态标记、哈希码、epoch等信息。对象的状态一共有五种，分别是无锁态、轻量级锁、重量级锁、GC标记和偏向锁。<a href="https://echodemo.github.io/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BJava%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%A4%B4/" target="_blank" rel="noopener">深入理解多线程之Java的对象头</a></p>
 </blockquote>
 <hr>
-<p>在<a href="http://www.echodemo.cc/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">深入理解多线程之Moniter的实现原理</a>的最后，我们说过，事实上，只有在JDK1.6之前，synchronized的实现才会直接调用ObjectMonitor的enter和exit，这种锁被称之为重量级锁。</p>
+<p>在<a href="https://echodemo.github.io/2019/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BMoniter%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">深入理解多线程之Moniter的实现原理</a>的最后，我们说过，事实上，只有在JDK1.6之前，synchronized的实现才会直接调用ObjectMonitor的enter和exit，这种锁被称之为重量级锁。</p>
 <p>高效并发是从JDK 1.5 到 JDK 1.6的一个重要改进，HotSpot虚拟机开发团队在这个版本中花费了很大的精力去对Java中的锁进行优化，如适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等。这些技术都是为了在线程之间更高效的共享数据，以及解决竞争问题。本文主要先来介绍一下自旋、锁消除以及锁粗化等技术。</p>
 <p>这里简单说明一下，本文要介绍的这几个概念，以及后面要介绍的轻量级锁和偏向锁，其实对于使用他的开发者来说是屏蔽掉了的，也就是说，作为一个Java开发，你只需要知道你想在加锁的时候使用synchronized就可以了，具体的锁的优化是虚拟机根据竞争情况自行决定的。也就是说，在JDK 1.5 以后，我们即将介绍的这些概念，都被封装在synchronized中了。</p>
 <hr>
@@ -731,7 +731,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">265</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -884,7 +884,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共229.6k字</span>
+  <span class="post-count">博客全站共230.8k字</span>
 </div>
 
 

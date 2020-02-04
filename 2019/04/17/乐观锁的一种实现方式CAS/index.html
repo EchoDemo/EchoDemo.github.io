@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="怒发冲冠，凭栏处、潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。三十功名尘与土，八千里路云和月。莫等闲，白了少年头，空悲切！靖康耻，犹未雪。臣子恨，何时灭！驾长车，踏破贺兰山缺。壮志饥餐胡虏肉，笑谈渴饮匈奴血。待从头、收拾旧山河，朝天阙。—-岳飞《满江红·写怀》   线程安全众所周知，Java是多线程的。但是，Java对多线程的支持其实是一把双刃剑。一旦涉及到多个线程操作共享资源的情况时，处理不好就可能产">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T14:20:19.051Z">
+<meta property="og:updated_time" content="2020-01-18T01:37:44.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="乐观锁的一种实现方式CAS">
 <meta name="twitter:description" content="怒发冲冠，凭栏处、潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。三十功名尘与土，八千里路云和月。莫等闲，白了少年头，空悲切！靖康耻，犹未雪。臣子恨，何时灭！驾长车，踏破贺兰山缺。壮志饥餐胡虏肉，笑谈渴饮匈奴血。待从头、收拾旧山河，朝天阙。—-岳飞《满江红·写怀》   线程安全众所周知，Java是多线程的。但是，Java对多线程的支持其实是一把双刃剑。一旦涉及到多个线程操作共享资源的情况时，处理不好就可能产">
@@ -502,7 +502,7 @@
 <hr>
 <h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>众所周知，Java是多线程的。但是，Java对多线程的支持其实是一把双刃剑。一旦涉及到多个线程操作共享资源的情况时，处理不好就可能产生线程安全问题。线程安全性可能是非常复杂的，在没有充足的同步的情况下，多个线程中的操作执行顺序是不可预测的。</p>
 <p>Java里面进行多线程通信的主要方式就是共享内存的方式，共享内存主要的关注点有两个：可见性和有序性。加上复合操作的原子性，我们可以认为Java的线程安全性问题主要关注点有3个：可见性、有序性和原子性。</p>
-<p><a href="http://www.echodemo.cc/2019/04/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">Java内存模型</a>（JMM）解决了可见性和有序性的问题，而锁解决了原子性的问题。这里不再详细介绍JMM及锁的其他相关知识。但是我们要讨论一个问题，那就是锁到底是不是有利无弊的？</p>
+<p><a href="https://echodemo.github.io/2019/04/13/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" target="_blank" rel="noopener">Java内存模型</a>（JMM）解决了可见性和有序性的问题，而锁解决了原子性的问题。这里不再详细介绍JMM及锁的其他相关知识。但是我们要讨论一个问题，那就是锁到底是不是有利无弊的？</p>
 <hr>
 <h3 id="锁存在的问题"><a href="#锁存在的问题" class="headerlink" title="锁存在的问题"></a>锁存在的问题</h3><p>Java在JDK1.5之前都是靠synchronized关键字保证同步的，这种通过使用一致的锁定协议来协调对共享状态的访问，可以确保无论哪个线程持有共享变量的锁，都采用独占的方式来访问这些变量。独占锁其实就是一种悲观锁，所以可以说synchronized是悲观锁。但是悲观锁机制存在以下问题：</p>
 <blockquote>
@@ -545,7 +545,7 @@
         return unsafe.compareAndSwapInt(this, valueOffset, expect, update);  
     }  
 }
-</code></pre><p>在没有锁的机制下需要字段value要借助volatile原语，保证线程间的数据是可见的。这样在获取变量的值的时候才能直接读取。getAndIncrement采用了CAS操作，每次从内存中读取数据然后将此数据和+1后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。而compareAndSet利用JNI来完成CPU指令的操作。从代码中我们可以发现，JAVA中的CAS操作都是通过sun.misc包下Unsafe类实现的，关于Unsafe类更详细的说明，可以查阅我的这篇文章:<a href="http://www.echodemo.cc/2019/04/17/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84Unsafe%E7%B1%BB/">鲜为人知的Unsafe类</a></p>
+</code></pre><p>在没有锁的机制下需要字段value要借助volatile原语，保证线程间的数据是可见的。这样在获取变量的值的时候才能直接读取。getAndIncrement采用了CAS操作，每次从内存中读取数据然后将此数据和+1后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。而compareAndSet利用JNI来完成CPU指令的操作。从代码中我们可以发现，JAVA中的CAS操作都是通过sun.misc包下Unsafe类实现的，关于Unsafe类更详细的说明，可以查阅我的这篇文章:<a href="https://echodemo.github.io/2019/04/17/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84Unsafe%E7%B1%BB/" target="_blank" rel="noopener">鲜为人知的Unsafe类</a></p>
 <hr>
 <h4 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h4><p>CAS会导致“ABA问题”。</p>
 <p>CAS算法实现一个重要前提需要取出内存中某时刻的数据，而在下时刻比较并替换，那么在这个时间差类会导致数据的变化。</p>
@@ -708,7 +708,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">265</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -861,7 +861,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共229.6k字</span>
+  <span class="post-count">博客全站共230.8k字</span>
 </div>
 
 

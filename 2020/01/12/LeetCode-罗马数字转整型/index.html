@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符          数值 I             1 V             5 X             10 L             50 C             100 D             500 M             1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-12T09:04:50.553Z">
+<meta property="og:updated_time" content="2020-01-13T13:17:50.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 罗马数字转整型">
 <meta name="twitter:description" content="罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符          数值 I             1 V             5 X             10 L             50 C             100 D             500 M             1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12">
@@ -459,7 +459,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  410
+                  774
                 </span>
               
 
@@ -475,7 +475,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  4
                 </span>
               
             </div>
@@ -534,7 +534,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 输入: &quot;MCMXCIV&quot;
 输出: 1994
 解释: M = 1000, CM = 900, XC = 90, IV = 4.
-</code></pre><h3 id="题解：纯遍历"><a href="#题解：纯遍历" class="headerlink" title="题解：纯遍历"></a>题解：纯遍历</h3><pre><code>class Solution {
+</code></pre><h3 id="题解一：纯遍历（map）"><a href="#题解一：纯遍历（map）" class="headerlink" title="题解一：纯遍历（map）:"></a>题解一：纯遍历（map）:</h3><pre><code>class Solution {
     public int romanToInt(String s) {
         Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;(7);
         map.put(&apos;I&apos;, 1);
@@ -563,7 +563,59 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
         return sum;
     }
 }
-</code></pre>
+</code></pre><h3 id="题解二-switch-："><a href="#题解二-switch-：" class="headerlink" title="题解二(switch)："></a>题解二(switch)：</h3><pre><code>class Solution {
+    public int romanToInt(String s) {
+        int sum = 0;
+        int len = s.length();
+        for (int i = 0; i &lt; len; i++) {
+            int current = getValue(s.charAt(i));
+            if (i == len - 1) {
+                sum += current;
+                break;
+            }
+            int right = getValue(s.charAt(i + 1));
+            if (current &lt; right) {
+                sum += (right - current);
+                i++;
+            } else {
+                sum += current;
+            }
+        }
+        return sum;
+    }
+
+    private int getValue(char c) {
+        switch (c) {
+            case &apos;I&apos;: return 1;
+            case &apos;V&apos;: return 5;
+            case &apos;X&apos;: return 10;
+            case &apos;L&apos;: return 50;
+            case &apos;C&apos;: return 100;
+            case &apos;D&apos;: return 500;
+            case &apos;M&apos;: return 1000;
+            default : return 0;
+        }
+    }
+}
+
+(1)执行用时 :4 ms, 在所有 Java 提交中击败了99.96%的用户
+(2)内存消耗 :35.9 MB, 在所有 Java 提交中击败了99.59%的用户
+</code></pre><p>switch语句被编译后，对应得是jvm的tableswitch指令，执行起来也就几条指令就完成了;而HashMap的get操作源码如下:</p>
+<pre><code>public V get(Object key) {
+    if (key == null)
+        return getForNullKey();
+    int hash = hash(key.hashCode());
+    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];
+         e != null;
+         e = e.next) {
+        Object k;
+        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))
+            return e.value;
+    }
+    return null;
+}
+</code></pre><p>所以map.get执行的jvm指令肯定是要比tableswitch要多的。但是如果JVM在执行的过程中进行JIT优化会发现，map的执行速度会大大加快，而使用switch实现的方法并不会被优化。</p>
+<h4 id="所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。"><a href="#所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。" class="headerlink" title="所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。"></a>所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。</h4>
       
     </div>
 
@@ -635,6 +687,10 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/18/LeetCode-最长公共前缀/" rel="prev" title="LeetCode 最长公共前缀">
+                LeetCode 最长公共前缀 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -709,7 +765,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">265</span>
+                <span class="site-state-item-count">267</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -820,7 +876,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解：纯遍历"><span class="nav-number">1.</span> <span class="nav-text">题解：纯遍历</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解一：纯遍历（map）"><span class="nav-number">1.</span> <span class="nav-text">题解一：纯遍历（map）:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解二-switch-："><span class="nav-number">2.</span> <span class="nav-text">题解二(switch)：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。"><span class="nav-number">2.1.</span> <span class="nav-text">所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -862,7 +918,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共229.6k字</span>
+  <span class="post-count">博客全站共230.8k字</span>
 </div>
 
 
