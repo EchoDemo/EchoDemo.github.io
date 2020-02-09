@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2020-02-04T02:04:57.135Z</updated>
+  <updated>2020-02-09T10:18:44.192Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -17,11 +17,113 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>搭建私有仓库</title>
+    <link href="http://www.echodemo.cc/2020/02/09/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+    <id>http://www.echodemo.cc/2020/02/09/搭建私有仓库/</id>
+    <published>2020-02-09T09:51:12.000Z</published>
+    <updated>2020-02-09T10:18:44.192Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候使用 Docker Hub 这样的公共仓库可能不方便，那么，用户也可以创建一个本地仓库供私人使用。docker-registry 是官方提供的工具，可以用于构建私有的镜像仓库。</p><h3 id="Registry的部署"><a href="#Registry的部署" class="headerlink" title="Registry的部署"></a>Registry的部署</h3><p>1、镜像下载与启动</p><pre><code>docker pull registry// 这里的 /opt/registry 是我们本地的目录，用于存储上传的镜象，/var/lib/registry是Registry服务默认的保存镜象目录docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry</code></pre><p>2、镜像运行情况查看</p><pre><code>docker ps</code></pre><p>打开浏览器输入<a href="http://127.0.0.1:5000/v2，正常返回如下数据如下：" target="_blank" rel="noopener">http://127.0.0.1:5000/v2，正常返回如下数据如下：</a></p><blockquote><p>{}</p></blockquote><h3 id="上传镜像至私有仓库并验证"><a href="#上传镜像至私有仓库并验证" class="headerlink" title="上传镜像至私有仓库并验证"></a>上传镜像至私有仓库并验证</h3><p>创建好私有仓库之后，就可以使用 docker tag 来标记一个镜像，然后推送它到仓库。例如私有仓库地址为 127.0.0.1:5000。</p><p>1、先在本机查看已有的镜像</p><pre><code>docker images</code></pre><p>2、镜像打标记</p><p>假设在客户机上有个hello-world的镜像，我们要通过docker tag将该镜像标志为要推送到私有仓库。这里的客户端就是服务端。</p><pre><code>// 打标记docker tag hello-world 127.0.0.1:5000/hello-world// 标记成功之后查看docker image ls 127.0.0.1:5000/hello-world</code></pre><p>3、上传标记镜像</p><pre><code>docker push 127.0.0.1:5000/hello-world</code></pre><p>4、查看客户端上传的镜像目录</p><p>在浏览器中输入<a href="http://127.0.0.1:5000/v2/_catalog，正常返回如下数据如下：" target="_blank" rel="noopener">http://127.0.0.1:5000/v2/_catalog，正常返回如下数据如下：</a></p><blockquote><p>{“repositories”:{hello-world}}</p></blockquote><p>5、删除本地标记和镜像</p><pre><code>docker rmi hello-worlddocker rmi 127.0.0.1:5000/hello-world</code></pre><p>6、从私有仓库中获取镜像</p><pre><code>docker pull 127.0.0.1:5000/hello-world</code></pre><h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>可能会出现无法push镜像到私有仓库的问题。这是因为我们启动的registry服务不是安全可信赖的。我们可以通过Docker的配置选项来取消这个限制。对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）</p><pre><code>{  &quot;registry-mirror&quot;: [    &quot;https://registry.docker-cn.com&quot;  ],  &quot;insecure-registries&quot;: [    &quot;172.16.213.230:5000&quot;  ]}</code></pre><p>添加完成，重启docker服务才能生效。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;有时候使用 Docker Hub 这样的公共仓库可能不方便，那么，用户也可以创建一个本地仓库供私人使用。docker-registry 是官方提供的工具，可以用于构建私有的镜像仓库。&lt;/p&gt;
+&lt;h3 id=&quot;Registry的部署&quot;&gt;&lt;a href=&quot;#Registry的部
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper入门</title>
+    <link href="http://www.echodemo.cc/2020/02/04/Zookeeper%E5%85%A5%E9%97%A8/"/>
+    <id>http://www.echodemo.cc/2020/02/04/Zookeeper入门/</id>
+    <published>2020-02-04T07:05:01.000Z</published>
+    <updated>2020-02-04T08:14:34.500Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、什么是ZooKeeper"><a href="#1、什么是ZooKeeper" class="headerlink" title="1、什么是ZooKeeper"></a>1、什么是ZooKeeper</h3><p>ZooKeeper 由 Yahoo 开发，后来捐赠给了 Apache ，现已成为 Apache 顶级项目。ZooKeeper 是一个开源的分布式应用程序协调服务器，其为分布式系统提供一致性服务。其一致性是通过基于 Paxos 算法的 ZAB 协议完成的。其主要功能包括：配置维护、分布式同步、集群管理、分布式事务等。简单来说， ZooKeeper 是一个分布式协调服务框架。</p><p>(1)分布式和集群</p><p>有人说分布式不就是加机器吗？一台机器不够用再加一台抗压呗。当然加机器这种说法也无可厚非，你一个分布式系统必定涉及到多个机器，但是你别忘了，计算机学科中还有一个相似的概念—— Cluster ，集群不也是加机器吗？但是 集群 和 分布式 其实就是两个完全不同的概念。</p><p>比如，我现在有一个秒杀服务，并发量太大单机系统承受不住，那我加几台服务器也一样提供秒杀服务，这个时候就是 Cluster 集群 。</p><p>但是，我现在换一种方式，我将一个秒杀服务 拆分成多个子服务 ，比如创建订单服务，增加积分服务，扣优惠券服务等等，然后我将这些子服务都部署在不同的服务器上 ，这个时候就是  Distributed 分布式 。</p><h3 id="2、ZooKeeper基本概念"><a href="#2、ZooKeeper基本概念" class="headerlink" title="2、ZooKeeper基本概念"></a>2、ZooKeeper基本概念</h3><p>(1)集群角色</p><pre><code>&gt; Master&gt; Follower&gt; Observer</code></pre><p>一个 ZooKeeper 集群同一时刻只会有一个 Master，其他都是 Follower 或 Observer。</p><p>ZooKeeper 默认只有 Leader 和 Follower 两种角色，没有 Observer 角色。为了使用 Observer 模式，在任何想变成Observer的节点的配置文件中加入:peerType=observer 并在所有 server 的配置文件中，配置成 observer 模式的 server 的那行配置追加 :observer</p><p>(2)数据模型</p><p>zookeeper 数据存储结构与标准的 Unix 文件系统非常相似，都是在根节点下挂很多子节点(树型)。但是 zookeeper 中没有文件系统中目录与文件的概念，而是 使用了 znode 作为数据节点 。znode 是 zookeeper 中的最小数据单元，每个 znode 上都可以保存数据，同时还可以挂载子节点，形成一个树形化命名空间。</p><p>每个 znode 都有自己所属的 节点类型 和 节点状态。zookeeper的节点分两类：持久节点和临时节点</p><blockquote><p>持久节点：</p><blockquote><p>所谓持久节点是指一旦这个 树形结构上被创建了，除非主动进行对树节点的移除操作，否则这个节点将一直保存在 ZooKeeper 上。</p></blockquote><p>临时节点：</p><blockquote><p>临时节点的生命周期跟客户端会话绑定，一旦客户端会话失效，那么这个客户端创建的所有临时节点都会被移除。</p></blockquote></blockquote><p>(3)Watcher(事件监听器)</p><p>Watcher 为事件监听器，是 zookeeper 非常重要的一个特性，很多功能都依赖于它，它有点类似于订阅的方式，即客户端向服务端注册指定的 watcher ，当服务端符合了 watcher 的某些事件或要求则会 向客户端发送事件通知 ，客户端收到通知后找到自己定义的 Watcher 然后执行相应的回调方法 。</p><p>(4)节点读写服务分工</p><p>ZooKeeper 集群的所有机器通过一个 Leader 选举过程来选定一台被称为『Leader』的机器，Leader服务器为客户端提供读和写服务。</p><p>Follower 和 Observer 都能提供读服务，不能提供写服务。两者唯一的区别在于，Observer机器不参与 Leader 选举过程，也不参与写操作的『过半写成功』策略，因此 Observer 可以在不影响写性能的情况下提升集群的读性能。</p><p>(5)Session</p><p>ZooKeeper 客户端和服务端是通过 TCP 长连接维持的会话机制，其实对于会话来说你可以理解为:保持连接状态 。</p><p>ZooKeeper 对外的服务端口默认是2181，客户端启动时，首先会与服务器建立一个TCP连接，从第一次连接建立开始，客户端会话的生命周期也开始了，通过这个连接，客户端能够通过心跳检测和服务器保持有效的会话，也能够向 ZooKeeper 服务器发送请求并接受响应，同时还能通过该连接接收来自服务器的 Watcher 事件通知。</p><h3 id="3、ZooKeeper应用的典型场景"><a href="#3、ZooKeeper应用的典型场景" class="headerlink" title="3、ZooKeeper应用的典型场景"></a>3、ZooKeeper应用的典型场景</h3><p>(1)数据发布与订阅（配置中心）</p><p>数据发布与订阅，即所谓的配置中心，顾名思义就是发布者将数据发布到 ZooKeeper 节点上,供订阅者进行数据订阅，进而达到动态获取数据的目的，实现配置信息的集中式管理和动态更新。</p><p>(2)命名服务</p><p>命名服务也是分布式系统中比较常见的一类场景。在分布式系统中，通过使用命名服务，客户端应用能够根据指定名字来获取资源或服务的地址，提供者等信息。被命名的实体通常可以是集群中的机器，提供的服务，远程对象等等——这些我们都可以统称他们为名字。</p><p>其中较为常见的就是一些分布式服务框架（如RPC）中的服务地址列表。通过在ZooKeepr里创建顺序节点，能够很容易创建一个全局唯一的路径，这个路径就可以作为一个名字。ZooKeeper 的命名服务即生成全局唯一的ID。</p><p>(3)Master 选举</p><p>Master 选举可以说是 ZooKeeper 最典型的应用场景了。比如 HDFS 中 Active NameNode 的选举、YARN 中 Active ResourceManager 的选举和 HBase 中 Active HMaster 的选举等。</p><p>针对 Master 选举的需求，通常情况下，我们可以选择常见的关系型数据库中的主键特性来实现：希望成为 Master 的机器都向数据库中插入一条相同主键ID的记录，数据库会帮我们进行主键冲突检查，也就是说，只有一台机器能插入成功——那么，我们就认为向数据库中成功插入数据的客户端机器成为Master。</p><p>但是，如果当前选举出的 Master 挂了，那么该如何处理？谁来告诉我 Master 挂了呢？显然，关系型数据库无法通知我们这个事件。但是，ZooKeeper 可以做到！</p><p>利用 ZooKeepr 的强一致性，能够很好地保证在分布式高并发情况下节点的创建一定能够保证全局唯一性，即 ZooKeeper 将会保证客户端无法创建一个已经存在的数据单元节点。也就是说，如果同时有多个客户端请求创建同一个临时节点，那么最终一定只有一个客户端请求能够创建成功。利用这个特性，就能很容易地在分布式环境中进行 Master 选举了。</p><p>成功创建该节点的客户端所在的机器就成为了 Master。同时，其他没有成功创建该节点的客户端，都会在该节点上注册一个子节点变更的 Watcher，用于监控当前 Master 机器是否存活，一旦发现当前的Master挂了，那么其他客户端将会重新进行 Master 选举。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、什么是ZooKeeper&quot;&gt;&lt;a href=&quot;#1、什么是ZooKeeper&quot; class=&quot;headerlink&quot; title=&quot;1、什么是ZooKeeper&quot;&gt;&lt;/a&gt;1、什么是ZooKeeper&lt;/h3&gt;&lt;p&gt;ZooKeeper 由 Yahoo 开发，后
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="ZooKeeper" scheme="http://www.echodemo.cc/tags/ZooKeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正向代理和反向代理</title>
+    <link href="http://www.echodemo.cc/2020/02/04/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    <id>http://www.echodemo.cc/2020/02/04/正向代理和反向代理/</id>
+    <published>2020-02-04T02:41:07.000Z</published>
+    <updated>2020-02-04T02:48:50.754Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、什么是代理服务器（Proxy-Serve）？"><a href="#1、什么是代理服务器（Proxy-Serve）？" class="headerlink" title="1、什么是代理服务器（Proxy Serve）？"></a>1、什么是代理服务器（Proxy Serve）？</h3><pre><code>提供代理服务的电脑系统或其它类型的网络终端,代替网络用户去取得网络信息。</code></pre><h3 id="2、为什么使用代理服务器？"><a href="#2、为什么使用代理服务器？" class="headerlink" title="2、为什么使用代理服务器？"></a>2、为什么使用代理服务器？</h3><p>(1)提高访问速度</p><p>由于目标主机返回的数据会存放在代理服务器的硬盘中，因此下一次客户再访问相同的站点数据时，会直接从代理服务器的硬盘中读取，起到了缓存的作用，尤其对于热门网站能明显提高访问速度。</p><p>(2)防火墙作用</p><p>由于所有的客户机请求都必须通过代理服务器访问远程站点，因此可以在代理服务器上设限，过滤掉某些不安全信息。同时正向代理中上网者可以隐藏自己的IP,免受攻击。</p><p>(3)突破访问限制</p><p>互联网上有许多开发的代理服务器，客户机在访问受限时，可通过不受限的代理服务器访问目标站点，通俗说，我们使用的翻墙浏览器就是利用了代理服务器，可以直接访问外网。</p><h3 id="3、正向代理"><a href="#3、正向代理" class="headerlink" title="3、正向代理"></a>3、正向代理</h3><p>正向代理（forward proxy） ，一个位于客户端和原始服务器之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并制定目标（原始服务器），然后代理向原始服务器转发请求并将获得的内容返回给客户端，客户端才能使用正向代理。我们平时说的代理就是指正向代理。 </p><p>简单一点：A向C借钱，由于一些情况不能直接向C借钱，于是A想了一个办法，他让B去向C借钱，这样B就代替A向C借钱，A就得到了C的钱，C并不知道A的存在，B就充当了A的代理人的角色。 </p><h3 id="4、反向代理"><a href="#4、反向代理" class="headerlink" title="4、反向代理"></a>4、反向代理</h3><p>反向代理（Reverse Proxy），以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求的客户端，此时代理服务器对外表现为一个反向代理服务器。 </p><p>理解起来有些抽象，可以这么说：A向B借钱，B没有拿自己的钱，而是悄悄地向C借钱，拿到钱之后再交给A,A以为是B的钱，他并不知道C的存在。 </p><h3 id="5、正向代理和反向代理的区别"><a href="#5、正向代理和反向代理的区别" class="headerlink" title="5、正向代理和反向代理的区别"></a>5、正向代理和反向代理的区别</h3><p>(1)位置不同</p><pre><code>正向代理，架设在客户机和目标主机之间； 反向代理，架设在服务器端；</code></pre><p>(2)代理对象不同 </p><pre><code>正向代理，代理客户端，服务端不知道实际发起请求的客户端； 反向代理，代理服务端，客户端不知道实际提供服务的服务端； </code></pre><p>(3)用途不同 </p><pre><code>正向代理，为在防火墙内的局域网客户端提供访问Internet的途径； 反向代理，将防火墙后面的服务器提供给Internet访问；</code></pre><p>(4)安全性不同 </p><pre><code>正向代理允许客户端通过它访问任意网站并且隐藏客户端自身，因此必须采取安全措施以确保仅为授权的客户端提供服务； 反向代理都对外都是透明的，访问者并不知道自己访问的是哪一个代理。</code></pre><h3 id="6、正向代理的应用"><a href="#6、正向代理的应用" class="headerlink" title="6、正向代理的应用"></a>6、正向代理的应用</h3><pre><code>1. 访问原来无法访问的资源 2. 用作缓存，加速访问速度3. 对客户端访问授权，上网进行认证4. 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息</code></pre><h3 id="7、反向代理的应用"><a href="#7、反向代理的应用" class="headerlink" title="7、反向代理的应用"></a>7、反向代理的应用</h3><pre><code>1. 保护内网安全2. 负载均衡3. 缓存，减少服务器的压力</code></pre><p>Nginx作为较火的反向代理服务器，安装在目的主机端，主要用于转发客户机请求，后台有多个http服务器提供服务，nginx的功能就是把请求转发给后台的服务器，决定哪台目标主机来处理当前请求。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、什么是代理服务器（Proxy-Serve）？&quot;&gt;&lt;a href=&quot;#1、什么是代理服务器（Proxy-Serve）？&quot; class=&quot;headerlink&quot; title=&quot;1、什么是代理服务器（Proxy Serve）？&quot;&gt;&lt;/a&gt;1、什么是代理服务器（Pro
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Nginx" scheme="http://www.echodemo.cc/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx(upstream机制)的几种负载均衡策略</title>
+    <link href="http://www.echodemo.cc/2020/02/04/nginx(upstream%E6%9C%BA%E5%88%B6)%E7%9A%84%E5%87%A0%E7%A7%8D%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5/"/>
+    <id>http://www.echodemo.cc/2020/02/04/nginx(upstream机制)的几种负载均衡策略/</id>
+    <published>2020-02-04T02:28:29.000Z</published>
+    <updated>2020-02-04T02:55:46.051Z</updated>
+    
+    <content type="html"><![CDATA[<p>upstream机制使得Nginx以反向代理的方式运行，因此Nginx接受客户端的请求，并根据客户端的请求，Nginx选择合适的后端服务器来处理改请求。</p><h3 id="1、轮询（默认）"><a href="#1、轮询（默认）" class="headerlink" title="1、轮询（默认）"></a>1、轮询（默认）</h3><p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，会自动剔除；</p><pre><code>upstream test {    server 10.0.0.7:80;    server 10.0.0.8:80;}</code></pre><h3 id="2、指定权重"><a href="#2、指定权重" class="headerlink" title="2、指定权重"></a>2、指定权重</h3><p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况；</p><pre><code>upstream test {    server 10.0.0.7:80 weight=2;    server 10.0.0.8:80 weight=1;}</code></pre><h3 id="3、ip-hash（客户端ip绑定）"><a href="#3、ip-hash（客户端ip绑定）" class="headerlink" title="3、ip_hash（客户端ip绑定）"></a>3、ip_hash（客户端ip绑定）</h3><p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端的服务器，可以解决session问题；</p><pre><code>upstream test {    ip_hash;    server 10.0.0.7:80;    server 10.0.0.8:80;}</code></pre><h3 id="4、least-conn（最少连接）"><a href="#4、least-conn（最少连接）" class="headerlink" title="4、least_conn（最少连接）"></a>4、least_conn（最少连接）</h3><p>下一个请求将被分配到活动连接数量最少的服务器；</p><pre><code>upstream test {    server 10.0.0.7:80;    server 10.0.0.8:80;    least_conn;}</code></pre><h3 id="5、fair（第三方）"><a href="#5、fair（第三方）" class="headerlink" title="5、fair（第三方）"></a>5、fair（第三方）</h3><p>按后端服务器的响应时间来请求分配，响应时间短的优先分配；</p><pre><code>upstream test {    fair;    server 10.0.0.7:80;    server 10.0.0.8:80;}</code></pre><h3 id="6、url-hash（第三方）"><a href="#6、url-hash（第三方）" class="headerlink" title="6、url_hash（第三方）"></a>6、url_hash（第三方）</h3><p>按访问url的hash结果来分配请求，按每个url定向到同一个后端服务器，后端服务器为缓存时比较有效；</p><pre><code>upstream test {    server 10.0.0.7:80;    server 10.0.0.8:80;    hash $request_uri;    hash_method crc32;}</code></pre><h3 id="7、综合使用"><a href="#7、综合使用" class="headerlink" title="7、综合使用"></a>7、综合使用</h3><pre><code>upstream test {    ip_hash;    server 10.0.0.7:80 weight=10;    server 10.0.0.8:80 down（表示当前的server暂时不参加负载）;    server 10.0.0.9:80;    server 10.0.0.10:80 backup（其他所有的非backup机器down或者忙的时候，请求backup机器）;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;upstream机制使得Nginx以反向代理的方式运行，因此Nginx接受客户端的请求，并根据客户端的请求，Nginx选择合适的后端服务器来处理改请求。&lt;/p&gt;
+&lt;h3 id=&quot;1、轮询（默认）&quot;&gt;&lt;a href=&quot;#1、轮询（默认）&quot; class=&quot;headerlink&quot;
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Nginx" scheme="http://www.echodemo.cc/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Git高级用法</title>
     <link href="http://www.echodemo.cc/2020/02/04/Git%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"/>
     <id>http://www.echodemo.cc/2020/02/04/Git高级用法/</id>
     <published>2020-02-04T00:21:29.000Z</published>
-    <updated>2020-02-04T02:04:57.135Z</updated>
+    <updated>2020-02-04T02:28:14.302Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/images/2020/2/git工作流程图.png" alt="&quot;git工作流程图&quot;"></p><h3 id="1、跳到之前的分支"><a href="#1、跳到之前的分支" class="headerlink" title="1、跳到之前的分支"></a>1、跳到之前的分支</h3><pre><code>git checkout -</code></pre><h3 id="2、查看历史"><a href="#2、查看历史" class="headerlink" title="2、查看历史"></a>2、查看历史</h3><pre><code># 每个提交在一行内显示git log --oneline# 在所有提交日志中搜索包含「homepage」的提交git log --all --grep=&apos;homepage&apos;# 获取某人的提交日志git log --author=&quot;Maxence&quot;</code></pre><h3 id="3、之前重置了一个不想保留的提交，但是现在又想要回滚"><a href="#3、之前重置了一个不想保留的提交，但是现在又想要回滚" class="headerlink" title="3、之前重置了一个不想保留的提交，但是现在又想要回滚"></a>3、之前重置了一个不想保留的提交，但是现在又想要回滚</h3><pre><code># 获取所有操作历史git reflog# 重置到相应提交git reset HEAD@{4}# ……或者……git reset --hard &lt;提交的哈希值&gt;</code></pre><h3 id="4、我把本地仓库搞得一团糟，应该怎么清理？"><a href="#4、我把本地仓库搞得一团糟，应该怎么清理？" class="headerlink" title="4、我把本地仓库搞得一团糟，应该怎么清理？"></a>4、我把本地仓库搞得一团糟，应该怎么清理？</h3><pre><code>git fetch origingit checkout mastergit reset --hard origin/master</code></pre><h3 id="5、查看我的分支和-master-的不同"><a href="#5、查看我的分支和-master-的不同" class="headerlink" title="5、查看我的分支和 master 的不同"></a>5、查看我的分支和 master 的不同</h3><pre><code>git diff master..my-branch</code></pre><h3 id="6、定制提交"><a href="#6、定制提交" class="headerlink" title="6、定制提交"></a>6、定制提交</h3><pre><code># 编辑上次提交git commit --amend -m &quot;更好的提交日志&quot;# 在上次提交中附加一些内容，保持提交日志不变git add . &amp;&amp; git commit --amend --no-edit# 空提交 —— 可以用来重新触发 CI 构建git commit --allow-empty -m &quot;chore: re-trigger build&quot;</code></pre><h3 id="7、squash-提交"><a href="#7、squash-提交" class="headerlink" title="7、squash 提交"></a>7、squash 提交</h3><p>比方说我想要 rebase 最近 3 个提交：</p><pre><code>- git rebase -i HEAD~3- 保留第一行的 pick，剩余提交替换为 squash 或 s- 清理提交日志并保存（vi 编辑器中键入 :wq 即可保存）pick 64d26a1 feat: add index.jss 45f0259 fix: update index.jss 8b15b0a fix: typo in index.js</code></pre><h3 id="8、修正"><a href="#8、修正" class="headerlink" title="8、修正"></a>8、修正</h3><p>比方说想在提交 fed14a4c 加上一些内容。</p><p><img src="/images/2020/2/git提交分支.png" alt="&quot;git工作流程图&quot;"></p><pre><code>git add .git commit --fixup HEAD~1# 或者也可以用提交的哈希值（fed14a4c）替换 HEAD~1git rebase -i HEAD~3 --autosquash# 保存并退出文件（VI 中输入 `:wq`）</code></pre><h3 id="9、rebase-的时候在每个提交上执行命令"><a href="#9、rebase-的时候在每个提交上执行命令" class="headerlink" title="9、rebase 的时候在每个提交上执行命令"></a>9、rebase 的时候在每个提交上执行命令</h3><p>如果特性很多，一个分支里可能有多个提交。如果测试失败了，你希望能找到导致测试失败的提交。这时候你可以使用 rebase –exec 命令在每个提交上执行命令。</p><pre><code># 在最近 3 个提交上运行 `npm test` 命令git rebase HEAD~3 --exec &quot;npm test&quot;</code></pre><p><img src="/images/2020/2/在每个提交上执行命令.png" alt="&quot;git工作流程图&quot;"></p><h3 id="10、暂存"><a href="#10、暂存" class="headerlink" title="10、暂存"></a>10、暂存</h3><p>暂存不止是 git stash 和 git stash pop ;)</p><pre><code># 保存所有正在追踪的文件git stash save &quot;日志信息&quot;# 列出所有的暂存项git stash list# 获取并删除暂存项git stash apply stash@{1}git stash drop stash@{1}# ……或使用一条命令……git stash pop stash@{1}</code></pre><h3 id="11、清理"><a href="#11、清理" class="headerlink" title="11、清理"></a>11、清理</h3><pre><code># 移除远程仓库上不存在的分支git fetch -p# 移除所有包含 `greenkeeper` 的分支git fetch -p &amp;&amp; git branch --remote | fgrep greenkeeper | sed &apos;s/^.\{9\}//&apos; | xargs git push origin --delete</code></pre>]]></content>
     
@@ -110,15 +212,15 @@ C
     <link href="http://www.echodemo.cc/2020/01/11/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://www.echodemo.cc/2020/01/11/docker常用命令/</id>
     <published>2020-01-11T13:00:23.000Z</published>
-    <updated>2020-01-11T13:01:19.856Z</updated>
+    <updated>2020-02-08T03:55:23.859Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="docker镜像常用命令"><a href="#docker镜像常用命令" class="headerlink" title="docker镜像常用命令"></a>docker镜像常用命令</h3><h4 id="1、搜索镜像"><a href="#1、搜索镜像" class="headerlink" title="1、搜索镜像"></a>1、搜索镜像</h4><pre><code>docker search java</code></pre><h4 id="2、下载镜像"><a href="#2、下载镜像" class="headerlink" title="2、下载镜像"></a>2、下载镜像</h4><pre><code>// 由于docker search命令只能查找出是否有该镜像，不能找到该镜像支持的版本，所以我们需要通过docker hub来搜索支持的版本。进入docker hub的官网，地址：https://hub.docker.com。然后搜索需要的镜像，查看镜像支持的版本。docker pull java:8</code></pre><h4 id="3、列出镜像"><a href="#3、列出镜像" class="headerlink" title="3、列出镜像"></a>3、列出镜像</h4><pre><code>docker images</code></pre><h4 id="4、删除镜像"><a href="#4、删除镜像" class="headerlink" title="4、删除镜像"></a>4、删除镜像</h4><pre><code>// 指定名称删除镜像docker rmi java:8// 指定名称删除镜像（强制）docker rmi -f java:8// 强制删除所有镜像docker rmi -f $(docker images)</code></pre><h3 id="docker容器常用命令"><a href="#docker容器常用命令" class="headerlink" title="docker容器常用命令"></a>docker容器常用命令</h3><h4 id="1、新建并启动容器"><a href="#1、新建并启动容器" class="headerlink" title="1、新建并启动容器"></a>1、新建并启动容器</h4><pre><code>docker run -p 80:80 --name nginx -d nginx:1.17.0-d选项：表示后台运行--name选项：指定运行后容器的名字为nginx,之后可以通过名字来操作容器-p选项：指定端口映射，格式为：hostPort:containerPort</code></pre><h4 id="2、列出容器"><a href="#2、列出容器" class="headerlink" title="2、列出容器"></a>2、列出容器</h4><pre><code>// 列出运行中的容器docker ps// 列出所有容器docker ps -a</code></pre><h4 id="3、停止容器"><a href="#3、停止容器" class="headerlink" title="3、停止容器"></a>3、停止容器</h4><pre><code>// $ContainerName及$ContainerId可以用docker ps命令查询出来docker stop $ContainerName(或者$ContainerId)// 强制停止容器docker kill $ContainerName(或者$ContainerId)// 启动已停止的容器docker start $ContainerName(或者$ContainerId)</code></pre><h4 id="4、进入容器"><a href="#4、进入容器" class="headerlink" title="4、进入容器"></a>4、进入容器</h4><pre><code>// 先查询出容器的piddocker inspect --format &quot;{{.State.Pid}}&quot; $ContainerName(或者$ContainerId)// 根据容器的pid进入容器nsenter --target &quot;$pid&quot; --mount --uts --ipc --net --pid</code></pre><h4 id="5、删除容器"><a href="#5、删除容器" class="headerlink" title="5、删除容器"></a>5、删除容器</h4><pre><code>// 删除指定容器docker rm $ContainerName(或者$ContainerID)// 强制删除所有容器docker rm -f $(docker ps -a -q)</code></pre><h4 id="6、查看容器的日志"><a href="#6、查看容器的日志" class="headerlink" title="6、查看容器的日志"></a>6、查看容器的日志</h4><pre><code>docker logs $ContainerName(或者$ContainerId)</code></pre><h4 id="7、查看容器的IP地址"><a href="#7、查看容器的IP地址" class="headerlink" title="7、查看容器的IP地址"></a>7、查看容器的IP地址</h4><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; $ContainerName(或者$ContainerId)</code></pre><h4 id="8、同步宿主机时间到容器"><a href="#8、同步宿主机时间到容器" class="headerlink" title="8、同步宿主机时间到容器"></a>8、同步宿主机时间到容器</h4><pre><code>docker cp /etc/localtime $ContainerName(或者$ContainerId):/etc/</code></pre><h4 id="9、在宿主机查看docker使用cpu、内存、网络、io情况"><a href="#9、在宿主机查看docker使用cpu、内存、网络、io情况" class="headerlink" title="9、在宿主机查看docker使用cpu、内存、网络、io情况"></a>9、在宿主机查看docker使用cpu、内存、网络、io情况</h4><pre><code>// 查看指定容器情况docker stats $ContainerName(或者$ContainerId)// 查看所有容器情况docker stats -a</code></pre><h4 id="10、进入Docker容器内部的bash"><a href="#10、进入Docker容器内部的bash" class="headerlink" title="10、进入Docker容器内部的bash"></a>10、进入Docker容器内部的bash</h4><pre><code>docker exec -it $ContainerName /bin/bash</code></pre><h3 id="修改Docker镜像的存放位置"><a href="#修改Docker镜像的存放位置" class="headerlink" title="修改Docker镜像的存放位置"></a>修改Docker镜像的存放位置</h3><h4 id="1、查看docker镜像的存放位置"><a href="#1、查看docker镜像的存放位置" class="headerlink" title="1、查看docker镜像的存放位置"></a>1、查看docker镜像的存放位置</h4><pre><code>docker info | grep &quot;Docker Root Dir&quot;</code></pre><h4 id="2、关闭Docker服务"><a href="#2、关闭Docker服务" class="headerlink" title="2、关闭Docker服务"></a>2、关闭Docker服务</h4><pre><code>systemctl stop docker</code></pre><h4 id="3、移动目录到目标路径"><a href="#3、移动目录到目标路径" class="headerlink" title="3、移动目录到目标路径"></a>3、移动目录到目标路径</h4><pre><code>mv /var/lib/docker /mydata/docker</code></pre><h4 id="4、建立软连接"><a href="#4、建立软连接" class="headerlink" title="4、建立软连接"></a>4、建立软连接</h4><pre><code>ln -s /mydata/docker /var/lib/docker</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="docker镜像常用命令"><a href="#docker镜像常用命令" class="headerlink" title="docker镜像常用命令"></a>docker镜像常用命令</h3><h4 id="什么是docker镜像？"><a href="#什么是docker镜像？" class="headerlink" title="什么是docker镜像？"></a>什么是docker镜像？</h4><p>操作系统分为内核和用户空间。对于Linux而言，内核启动后，会挂载root文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root文件系统。比如官方镜像centos:latest 就包含了完整的一套centos:latest最小系统的root文件系统。</p><p>Docker镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。<strong>镜像不包含任何动态数据，其内容在构建之后也不会被改变。</strong></p><p>镜像由多层文件系统联合组成。被称之为<strong>分层存储。</strong>镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。<strong>分层存储这一特点会在下载镜像的时候显现出来。</strong></p><h4 id="1、搜索镜像"><a href="#1、搜索镜像" class="headerlink" title="1、搜索镜像"></a>1、搜索镜像</h4><pre><code>docker search java</code></pre><h4 id="2、下载镜像"><a href="#2、下载镜像" class="headerlink" title="2、下载镜像"></a>2、下载镜像</h4><pre><code>// 由于docker search命令只能查找出是否有该镜像，不能找到该镜像支持的版本，所以我们需要通过docker hub来搜索支持的版本。进入docker hub的官网，地址：https://hub.docker.com。然后搜索需要的镜像，查看镜像支持的版本。docker pull java:8</code></pre><h4 id="3、列出镜像"><a href="#3、列出镜像" class="headerlink" title="3、列出镜像"></a>3、列出镜像</h4><pre><code>// 查看所有镜像docker images 或 docker image ls// 查看某一个指定镜像docker image ls nginx:1.14.2// 过滤匹配镜像(nginx:latest之后下载的镜像，之前用before)docker image ls -f since=nginx:latest</code></pre><h4 id="4、删除镜像"><a href="#4、删除镜像" class="headerlink" title="4、删除镜像"></a>4、删除镜像</h4><pre><code>// 指定名称删除镜像docker rmi java:8// 指定名称删除镜像（强制）docker rmi -f java:8// 强制删除所有镜像docker rmi -f $(docker images)// 删除所有未被 tag 标记和未被容器使用的镜像docker image prune// 删除所有未被容器使用的镜像docker image prune -a</code></pre><h3 id="docker容器常用命令"><a href="#docker容器常用命令" class="headerlink" title="docker容器常用命令"></a>docker容器常用命令</h3><h4 id="什么是docker容器-Container-？"><a href="#什么是docker容器-Container-？" class="headerlink" title="什么是docker容器(Container)？"></a>什么是docker容器(Container)？</h4><p>镜像（Image）和容器（Container）有紧密的关系，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</p><p><strong>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。</strong></p><p>前面讲过镜像使用的是分层存储，容器也是如此。每一个容器运行时，是以镜像为基础层，在其上创建一个当前容器的存储层，我们可以称这个为容器运行时读写而准备的存储层为容器存储层。容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。</p><p>容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p><h4 id="1、新建并启动容器"><a href="#1、新建并启动容器" class="headerlink" title="1、新建并启动容器"></a>1、新建并启动容器</h4><pre><code>docker run -it --rm -p 80:80 --name nginx -d nginx:1.17.0 /bin/bash-i: 以交互模式运行容器，通常与 -t 同时使用-t: 为容器重新分配一个伪输入终端，进入 bash 执行一些命令并查看返回结果，因此我们需要交互式终端。--rm：这个参数是说容器退出后随之将其删除。默认情况下，为了排障需求，退出的容器并不会立即删除，除非手动 docker rm。使用 --rm 可以避免浪费空间。-p：指定端口映射，格式为：hostPort:containerPort--name：指定运行后容器的名字为nginx,之后可以通过名字来操作容器-d：表示后台运行/bin/bash:以交互模式启动一个容器,在容器内执行/bin/bash命令。</code></pre><h4 id="2、列出容器"><a href="#2、列出容器" class="headerlink" title="2、列出容器"></a>2、列出容器</h4><pre><code>// 列出运行中的容器docker ps// 列出所有容器docker ps -a</code></pre><h4 id="3、停止-启动容器"><a href="#3、停止-启动容器" class="headerlink" title="3、停止/启动容器"></a>3、停止/启动容器</h4><pre><code>// $ContainerName及$ContainerId可以用docker ps命令查询出来docker stop $ContainerName(或者$ContainerId)// 强制停止容器docker kill $ContainerName(或者$ContainerId)// 启动已停止的容器docker start $ContainerName(或者$ContainerId)// 重启容器docker restart $ContainerName(或者$ContainerId)</code></pre><h4 id="4、进入-导入-导出容器"><a href="#4、进入-导入-导出容器" class="headerlink" title="4、进入/导入/导出容器"></a>4、进入/导入/导出容器</h4><pre><code>// 进入容器（推荐）docker exec -it $ContainerId /bin/bash// 进入容器docker attach $ContainerId// 导出容器docker export $ContainerId &gt; filename.tar// 导入容器(生成镜像)cat filename.tar | docker import - $imagename:$tag</code></pre><h4 id="5、删除容器"><a href="#5、删除容器" class="headerlink" title="5、删除容器"></a>5、删除容器</h4><pre><code>// 删除指定容器docker rm $ContainerName(或者$ContainerID)// 强制删除所有容器docker rm -f $(docker ps -a -q)// 删除所有已退出或者终止的容器docker container prune</code></pre><h4 id="6、查看容器的日志"><a href="#6、查看容器的日志" class="headerlink" title="6、查看容器的日志"></a>6、查看容器的日志</h4><pre><code>docker logs $ContainerName(或者$ContainerId)</code></pre><h4 id="7、查看容器的IP地址"><a href="#7、查看容器的IP地址" class="headerlink" title="7、查看容器的IP地址"></a>7、查看容器的IP地址</h4><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; $ContainerName(或者$ContainerId)</code></pre><h4 id="8、同步宿主机时间到容器"><a href="#8、同步宿主机时间到容器" class="headerlink" title="8、同步宿主机时间到容器"></a>8、同步宿主机时间到容器</h4><pre><code>docker cp /etc/localtime $ContainerName(或者$ContainerId):/etc/</code></pre><h4 id="9、在宿主机查看docker使用cpu、内存、网络、io情况"><a href="#9、在宿主机查看docker使用cpu、内存、网络、io情况" class="headerlink" title="9、在宿主机查看docker使用cpu、内存、网络、io情况"></a>9、在宿主机查看docker使用cpu、内存、网络、io情况</h4><pre><code>// 查看指定容器情况docker stats $ContainerName(或者$ContainerId)// 查看所有容器情况docker stats -a</code></pre><h4 id="10、进入Docker容器内部的bash"><a href="#10、进入Docker容器内部的bash" class="headerlink" title="10、进入Docker容器内部的bash"></a>10、进入Docker容器内部的bash</h4><pre><code>docker exec -it $ContainerName /bin/bash</code></pre><h3 id="修改Docker镜像的存放位置"><a href="#修改Docker镜像的存放位置" class="headerlink" title="修改Docker镜像的存放位置"></a>修改Docker镜像的存放位置</h3><h4 id="1、查看docker镜像的存放位置"><a href="#1、查看docker镜像的存放位置" class="headerlink" title="1、查看docker镜像的存放位置"></a>1、查看docker镜像的存放位置</h4><pre><code>docker info | grep &quot;Docker Root Dir&quot;</code></pre><h4 id="2、关闭Docker服务"><a href="#2、关闭Docker服务" class="headerlink" title="2、关闭Docker服务"></a>2、关闭Docker服务</h4><pre><code>systemctl stop docker</code></pre><h4 id="3、移动目录到目标路径"><a href="#3、移动目录到目标路径" class="headerlink" title="3、移动目录到目标路径"></a>3、移动目录到目标路径</h4><pre><code>mv /var/lib/docker /mydata/docker</code></pre><h4 id="4、建立软连接"><a href="#4、建立软连接" class="headerlink" title="4、建立软连接"></a>4、建立软连接</h4><pre><code>ln -s /mydata/docker /var/lib/docker</code></pre><h4 id="什么是docker仓库-Repository-？"><a href="#什么是docker仓库-Repository-？" class="headerlink" title="什么是docker仓库(Repository)？"></a>什么是docker仓库(Repository)？</h4><p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p><p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。以Ubuntu镜像为例，ubuntu是仓库的名字，其内包含有不同的版本标签，如，14.04, 16.04。我们可以通过 ubuntu:14.04，或者 ubuntu:16.04来具体指定所需哪个版本的镜像。如果忽略了标签，比如 ubuntu，那将视为 ubuntu:latest。</p><p>仓库名经常以两段式路径形式出现，比如jwilder/nginx-proxy，前者往往意味着Docker Registry多用户环境下的用户名，后者则是对应的软件名。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;docker镜像常用命令&quot;&gt;&lt;a href=&quot;#docker镜像常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker镜像常用命令&quot;&gt;&lt;/a&gt;docker镜像常用命令&lt;/h3&gt;&lt;h4 id=&quot;1、搜索镜像&quot;&gt;&lt;a href=&quot;#1、搜索镜像&quot;
+        &lt;h3 id=&quot;docker镜像常用命令&quot;&gt;&lt;a href=&quot;#docker镜像常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker镜像常用命令&quot;&gt;&lt;/a&gt;docker镜像常用命令&lt;/h3&gt;&lt;h4 id=&quot;什么是docker镜像？&quot;&gt;&lt;a href=&quot;#什
       
     
     </summary>
@@ -353,9 +455,9 @@ C
       <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -451,119 +553,6 @@ C
 
 &lt;hr&gt;
 &lt;h3 id=&quot;拦截定义&quot;&gt;&lt;a href=&quot;#拦截定
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(19)-RESTful支持</title>
-    <link href="http://www.echodemo.cc/2019/08/04/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(19)-RESTful%E6%94%AF%E6%8C%81/"/>
-    <id>http://www.echodemo.cc/2019/08/04/springmvc学习笔记(19)-RESTful支持/</id>
-    <published>2019-08-04T11:40:38.000Z</published>
-    <updated>2019-08-04T12:25:39.479Z</updated>
-    
-    <content type="html"><![CDATA[<center>人生到处知何似，应似飞鸿踏雪泥。</center><br><center>泥上偶然留指爪，鸿飞那复计东西。</center><br><center>老僧已死成新塔，坏壁无由见旧题。</center><br><center>往日崎岖还记否，路长人困蹇驴嘶。</center><br><center>—-宋·苏轼《和子由渑池怀旧》</center><hr><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>RESTful架构，就是目前最流行的一种互联网软件架构。它结构清晰、符合标准、易于理解、扩展方便，所以正得到越来越多网站的采用。RESTful（即Representational State Transfer的缩写）其实是一个开发理念，是对http的很好的诠释。</p><p>（1）对url进行规范，写RESTful格式的url</p><pre><code>1、非REST的url：http://...../queryItems.action?id=001&amp;type=T012、REST的url风格：http://..../items/001</code></pre><p>特点：url简洁，将参数通过url传到服务端。</p><p>（2）http的方法规范</p><p>不管是删除、添加、更新，等等。使用url是一致的，如果进行删除，需要设置http的方法为delete，其他同理。后台controller方法：判断http方法，如果是delete执行删除，如果是post执行添加。</p><p>（3）对http的contentType规范</p><p>请求时指定contentType，要json数据，设置成json格式的type。</p><hr><h3 id="REST的例子"><a href="#REST的例子" class="headerlink" title="REST的例子"></a>REST的例子</h3><p>查询商品信息，返回json数据。</p><p>（1）controller</p><p>定义方法，进行url映射使用REST风格的url，将查询商品信息的id传入controller。输出json使用@ResponseBody将java对象输出json。</p><pre><code>//查询商品信息，输出json//itemsView/{id}里边的{id}表示表示将这个位置的参数传到@PathVariable指定名称中。//如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称@RequestMapping(&quot;/itemsView/{id}&quot;)public @ResponseBody ItemsCustom itemsView(@PathVariable(&quot;id&quot;) Integer items_id)throws Exception{    //调用service查询商品信息    ItemsCustom itemsCustom = itemsService.findItemsById(items_id);    return itemsCustom;}</code></pre><p>@RequestMapping(value=”/itemsView/{id}”)：{×××}占位符，请求的URL可以是/viewItems/1或/viewItems/2，通过在方法中使用@PathVariable获取{×××}中的×××变量。@PathVariable用于将请求URL中的模板变量映射到功能处理方法的参数上。</p><p>如果@RequestMapping中表示为/itemsView/{id}，id和形参名称一致，@PathVariable不用指定名称。</p><p>（2）REST方法的前端控制器配置</p><pre><code>&lt;!-- springmvc前端控制器，rest配置 --&gt;&lt;servlet&gt;    &lt;servlet-name&gt;springmvc_rest&lt;/servlet-name&gt;    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;    &lt;!-- contextConfigLocation配置springmvc加载的配置文件（配置处理器映射器、适配器等等） 如果不配置contextConfigLocation，默认加载的是/WEB-INF/servlet名称-serlvet.xml（springmvc-servlet.xml） --&gt;    &lt;init-param&gt;        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;        &lt;param-value&gt;classpath:spring/springmvc.xml&lt;/param-value&gt;    &lt;/init-param&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt;    &lt;servlet-name&gt;springmvc_rest&lt;/servlet-name&gt;    &lt;url-pattern&gt;/&lt;/url-pattern&gt;&lt;/servlet-mapping&gt;</code></pre><p>（3)对静态资源的解析</p><p>配置前端控制器的url-pattern中指定/，对静态资源的解析会出现问题，报404错误。在springmvc.xml中添加静态资源解析方法。</p><pre><code>&lt;!-- 静态资源解析    包括 ：js、css、img、..     --&gt;&lt;mvc:resources location=&quot;/js/&quot; mapping=&quot;/js/**&quot;/&gt;</code></pre><p>这时访问<a href="http://localhost:8080/ssm1/js/jquery-1.4.4.min.js，可以在浏览器中看到js的内容。" target="_blank" rel="noopener">http://localhost:8080/ssm1/js/jquery-1.4.4.min.js，可以在浏览器中看到js的内容。</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;人生到处知何似，应似飞鸿踏雪泥。&lt;/center&gt;&lt;br&gt;&lt;center&gt;泥上偶然留指爪，鸿飞那复计东西。&lt;/center&gt;&lt;br&gt;&lt;center&gt;老僧已死成新塔，坏壁无由见旧题。&lt;/center&gt;&lt;br&gt;&lt;center&gt;往日崎岖还记否，路长人困蹇驴嘶。&lt;/cen
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(18)-json数据交互</title>
-    <link href="http://www.echodemo.cc/2019/08/01/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(18)-json%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/"/>
-    <id>http://www.echodemo.cc/2019/08/01/springmvc学习笔记(18)-json数据交互/</id>
-    <published>2019-08-01T15:39:09.000Z</published>
-    <updated>2019-08-01T15:53:19.608Z</updated>
-    
-    <content type="html"><![CDATA[<center>我居北海君南海，寄雁传书谢不能。</center><br><center>桃李春风一杯酒，江湖夜雨十年灯。</center><br><center>持家但有四立壁，治病不蕲三折肱。</center><br><center>想见读书头已白，隔溪猿哭瘴溪藤。</center><br><center>—-宋·黄庭坚《寄黄几复》</center><hr><p>本文主要介绍如何在springmvc中进行json数据的交互，先是环境准备和配置，然后分别展示了“输入json串，输出是json串”和“输入key/value，输出是json串”两种情况下的交互。</p><hr><h3 id="springmvc进行json交互"><a href="#springmvc进行json交互" class="headerlink" title="springmvc进行json交互"></a>springmvc进行json交互</h3><p>json数据格式在接口调用中、html页面中较常用，json格式比较简单，解析还比较方便。</p><p>（1）请求json、输出json，要求请求的是json串，所以在前端页面中需要将请求的内容转成json，不太方便。</p><p>（2）请求key/value、输出json。此方法比较常用。</p><hr><h3 id="添加json转换的依赖"><a href="#添加json转换的依赖" class="headerlink" title="添加json转换的依赖"></a>添加json转换的依赖</h3><pre><code>&lt;!-- json 转换--&gt;&lt;dependency&gt;    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;    &lt;version&gt;2.7.2&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.codehaus.jackson&lt;/groupId&gt;    &lt;artifactId&gt;jackson-mapper-asl&lt;/artifactId&gt;    &lt;version&gt;1.9.13&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>查看依赖树：</p><pre><code>[INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.7.2:compile[INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.7.0:compile[INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.7.2:compile[INFO] \- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile[INFO]    \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile</code></pre><hr><h3 id="配置json转换器"><a href="#配置json转换器" class="headerlink" title="配置json转换器"></a>配置json转换器</h3><p>在注解适配器中加入messageConverters：</p><pre><code>&lt;!--注解适配器 --&gt;&lt;bean class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;&gt;    &lt;property name=&quot;messageConverters&quot;&gt;    &lt;list&gt;    &lt;bean class=&quot;org.springframework.http.converter.json.MappingJacksonHttpMessageConverter&quot;&gt;&lt;/bean&gt;    &lt;/list&gt;    &lt;/property&gt;&lt;/bean&gt;</code></pre><p><strong>注意：如果使用&lt;mvc:annotation-driven /&gt;则不用定义上边的内容。</strong></p><hr><h3 id="json交互测试"><a href="#json交互测试" class="headerlink" title="json交互测试"></a>json交互测试</h3><p>显示两个按钮分别测试:</p><p>(1)jsp页面</p><pre><code>&lt;%--  Created by IntelliJ IDEA.  User: brian  Date: 2016/3/7  Time: 20:49  To change this template use File | Settings | File Templates.--%&gt;&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;&lt;html&gt;&lt;head&gt;    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;    &lt;title&gt;json交互测试&lt;/title&gt;    &lt;script type=&quot;text/javascript&quot; src=&quot;${pageContext.request.contextPath }/js/jquery-1.4.4.min.js&quot;&gt;&lt;/script&gt;    &lt;script type=&quot;text/javascript&quot;&gt;        //请求json，输出是json        function requestJson(){     省略    }        //请求key/value，输出是json        function responseJson(){    省略    }    &lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;input type=&quot;button&quot; onclick=&quot;requestJson()&quot; value=&quot;请求json，输出是json&quot;/&gt;&lt;input type=&quot;button&quot; onclick=&quot;responseJson()&quot; value=&quot;请求key/value，输出是json&quot;/&gt;&lt;/body&gt;</code></pre><p>(2)controller</p><pre><code>@Controllerpublic class JsonTest {    ...}</code></pre><hr><h3 id="输入json串，输出是json串"><a href="#输入json串，输出是json串" class="headerlink" title="输入json串，输出是json串"></a>输入json串，输出是json串</h3><p>使用jquery的ajax提交json串，对输出的json结果进行解析。</p><p>(1)jsp页面</p><pre><code>// 请求json，输出是jsonfunction requestJson(){    $.ajax({        type:&apos;post&apos;,        url:&apos;${pageContext.request.contextPath }/requestJson.action&apos;,        contentType:&apos;application/json;charset=utf-8&apos;,        //数据格式是json串，商品信息        data:&apos;{&quot;name&quot;:&quot;手机&quot;,&quot;price&quot;:999}&apos;,        success:function(data){//返回json结果            alert(data);        }    });}</code></pre><p>(2)controller</p><pre><code>//请求json串(商品信息)，输出json(商品信息)//@RequestBody将请求的商品信息的json串转成itemsCustom对象//@ResponseBody将itemsCustom转成json输出@RequestMapping(&quot;/requestJson&quot;)public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCustom){    //@ResponseBody将itemsCustom转成json输出    return itemsCustom;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;我居北海君南海，寄雁传书谢不能。&lt;/center&gt;&lt;br&gt;&lt;center&gt;桃李春风一杯酒，江湖夜雨十年灯。&lt;/center&gt;&lt;br&gt;&lt;center&gt;持家但有四立壁，治病不蕲三折肱。&lt;/center&gt;&lt;br&gt;&lt;center&gt;想见读书头已白，隔溪猿哭瘴溪藤。&lt;/cen
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(17)-上传图片</title>
-    <link href="http://www.echodemo.cc/2019/07/31/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(17)-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/"/>
-    <id>http://www.echodemo.cc/2019/07/31/springmvc学习笔记(17)-上传图片/</id>
-    <published>2019-07-31T15:03:42.000Z</published>
-    <updated>2019-07-31T15:25:44.253Z</updated>
-    
-    <content type="html"><![CDATA[<center>黄水塘里游着白鸭</center><br><center>高粱梗油青的刚高过头</center><br><center>这跳动的心怎样安插</center><br><center>田里一窄条路，八月里这忧愁？</center><center>天是昨夜雨洗过的，山岗</center><br><center>照着太阳又留一片影</center><br><center>羊跟着放羊的转进村庄</center><br><center>一大棵树荫下罩着井，又像是心！</center><center>从没有人说过八月什么话</center><br><center>夏天过去了，也不到秋天</center><br><center>但我望着田垄，土墙上的瓜</center><br><center>仍不明白生活同梦怎样的连牵</center><br><center>—-现代·林徽因《八月的忧愁》节选</center><hr><h3 id="springmvc中对多部件类型解析"><a href="#springmvc中对多部件类型解析" class="headerlink" title="springmvc中对多部件类型解析"></a>springmvc中对多部件类型解析</h3><p>在修改商品页面，添加上传商品图片功能。在页面form中提交enctype=”multipart/form-data”的数据时，需要springmvc对multipart类型的数据进行解析。通过在springmvc.xml中配置multipart类型解析器来完成。</p><pre><code>&lt;!-- 文件上传 --&gt;&lt;bean id=&quot;multipartResolver&quot;      class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;    &lt;!-- 设置上传文件的最大尺寸为5MB --&gt;    &lt;property name=&quot;maxUploadSize&quot;&gt;        &lt;value&gt;5242880&lt;/value&gt;    &lt;/property&gt;&lt;/bean&gt;</code></pre><hr><h3 id="加入上传图片的jar"><a href="#加入上传图片的jar" class="headerlink" title="加入上传图片的jar"></a>加入上传图片的jar</h3><p>（1）添加依赖</p><pre><code>&lt;!-- 文件上传 --&gt;&lt;dependency&gt;    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;    &lt;version&gt;1.3.1&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>（2）依赖树</p><pre><code>[INFO] \- commons-fileupload:commons-fileupload:jar:1.3.1:compile[INFO]    \- commons-io:commons-io:jar:2.2:compile</code></pre><p><strong>可以看到，其实还间接依赖了commons-io:commons-io:jar。</strong></p><h3 id="创建图片虚拟目录存储图片"><a href="#创建图片虚拟目录存储图片" class="headerlink" title="创建图片虚拟目录存储图片"></a>创建图片虚拟目录存储图片</h3><p>直接修改tomcat的配置,在conf/server.xml文件，添加虚拟目录。</p><pre><code>&lt;Context docBase=&quot;图片存放的磁盘路径&quot; path=&quot;/pic&quot; reloadable=&quot;false&quot;/&gt;</code></pre><p>注意：在图片虚拟目录中，一定将图片目录分级创建（提高i/o性能），一般我们采用按日期(年、月、日)进行分级创建。</p><hr><h3 id="上传图片代码"><a href="#上传图片代码" class="headerlink" title="上传图片代码"></a>上传图片代码</h3><p>(1)页面</p><pre><code>&lt;tr&gt;    &lt;td&gt;商品图片&lt;/td&gt;    &lt;td&gt;        &lt;c:if test=&quot;${items.pic !=null}&quot;&gt;            &lt;img src=&quot;/pic/${items.pic}&quot; width=100 height=100/&gt;            &lt;br/&gt;        &lt;/c:if&gt;        &lt;input type=&quot;file&quot;  name=&quot;items_pic&quot;/&gt;    &lt;/td&gt;&lt;/tr&gt;</code></pre><p>(2)controller方法</p><p>修改：商品修改controller方法：</p><pre><code>@RequestMapping(&quot;/editItemsSubmit&quot;)public String editItemsSubmit(        Model model,        HttpServletRequest request,        Integer id,        @ModelAttribute(&quot;items&quot;)        @Validated(value = ValidGroup1.class)ItemsCustom itemsCustom,        BindingResult bindingResult,        MultipartFile items_pic)throws Exception {...}</code></pre><p>(3)实现</p><pre><code>// 原始名称String originalFilename = items_pic.getOriginalFilename();// 上传图片if(items_pic!=null &amp;&amp; originalFilename!=null &amp;&amp; originalFilename.length()&gt;0){    // 存储图片的物理路径    String pic_path = &quot;D:\\tmp\\&quot;;    // 新的图片名称    String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf(&quot;.&quot;));    // 新图片    File newFile = new File(pic_path+newFileName);    // 将内存中的数据写入磁盘    items_pic.transferTo(newFile);    //将新图片名称写到itemsCustom中    itemsCustom.setPic(newFileName);}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;黄水塘里游着白鸭&lt;/center&gt;&lt;br&gt;&lt;center&gt;高粱梗油青的刚高过头&lt;/center&gt;&lt;br&gt;&lt;center&gt;这跳动的心怎样安插&lt;/center&gt;&lt;br&gt;&lt;center&gt;田里一窄条路，八月里这忧愁？&lt;/center&gt;
-
-&lt;center&gt;天是昨夜雨洗过的，
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
-    
-      <category term="SpringMVC" scheme="http://www.echodemo.cc/tags/SpringMVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc学习笔记(16)-异常处理器</title>
-    <link href="http://www.echodemo.cc/2019/07/28/springmvc%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(16)-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"/>
-    <id>http://www.echodemo.cc/2019/07/28/springmvc学习笔记(16)-异常处理器/</id>
-    <published>2019-07-28T13:47:57.000Z</published>
-    <updated>2019-07-28T13:58:29.224Z</updated>
-    
-    <content type="html"><![CDATA[<center>窗间梅熟落蒂，墙下笋成出林。</center><br><center>连雨不知春去，一晴方觉夏深。</center><br><center>—-宋·范成大《喜晴》</center><hr><p>本文主要介绍springmvc中异常处理的思路，并展示如何自定义异常处理类以及全局异常处理器的配置。</p><hr><h3 id="异常处理思路"><a href="#异常处理思路" class="headerlink" title="异常处理思路"></a>异常处理思路</h3><p>系统中异常包括两类：</p><pre><code>1、预期异常。2、运行时异常RuntimeException。</code></pre><p>前者通过捕获异常从而获取异常信息，后者主要通过规范代码开发、测试通过手段减少运行时异常的发生。</p><p>系统的dao、service、controller出现都通过throws Exception向上抛出，最后由springmvc前端控制器交由异常处理器进行异常处理。</p><p><strong>springmvc提供全局异常处理器（一个系统只有一个异常处理器）进行统一异常处理。</strong></p><hr><h3 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h3><p>对不同的异常类型定义异常类，继承Exception。</p><pre><code>public class CustomException  extends  Exception{    //异常信息    public String message;    public CustomException(String message){        super(message);        this.message = message;    }    public String getMessage() {        return message;    }    public void setMessage(String message) {        this.message = message;    }}</code></pre><hr><h3 id="全局异常处理器"><a href="#全局异常处理器" class="headerlink" title="全局异常处理器"></a>全局异常处理器</h3><p>思路：</p><p>系统遇到异常，在程序中手动抛出，dao抛给service、service给controller、controller抛给前端控制器，前端控制器调用全局异常处理器。</p><p>全局异常处理器处理思路：</p><p>解析出异常类型</p><pre><code>1、如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示。2、如果该异常类型不是系统自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）。</code></pre><p>springmvc提供一个HandlerExceptionResolver接口：</p><pre><code>public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {        //handler就是处理器适配器要执行Handler对象（只有method）        //解析出异常类型        //如果该 异常类型是系统 自定义的异常，直接取出异常信息，在错误页面展示        //String message = null;        //if(ex instanceof CustomException){            //message = ((CustomException)ex).getMessage();        //}else{            ////如果该 异常类型不是系统 自定义的异常，构造一个自定义的异常类型（信息为“未知错误”）            //message=&quot;未知错误&quot;;        //}        //上边代码变为        CustomException customException;        if(ex instanceof CustomException){            customException = (CustomException)ex;        }else{            customException = new CustomException(&quot;未知错误&quot;);        }        //错误信息        String message = customException.getMessage();        ModelAndView modelAndView = new ModelAndView();        //将错误信息传到页面        modelAndView.addObject(&quot;message&quot;, message);        //指向错误页面        modelAndView.setViewName(&quot;error&quot;);        return modelAndView;    }}</code></pre><hr><h3 id="错误页面"><a href="#错误页面" class="headerlink" title="错误页面"></a>错误页面</h3><pre><code>&lt;%--  Created by IntelliJ IDEA.  User: Brian  Date: 2016/3/4  Time: 10:51  To change this template use File | Settings | File Templates.--%&gt;&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;&lt;html&gt;&lt;head&gt;    &lt;title&gt;错误提示&lt;/title&gt;&lt;/head&gt;&lt;body&gt;${message}&lt;/body&gt;&lt;/html&gt;</code></pre><hr><h3 id="在springmvc-xml配置全局异常处理器"><a href="#在springmvc-xml配置全局异常处理器" class="headerlink" title="在springmvc.xml配置全局异常处理器"></a>在springmvc.xml配置全局异常处理器</h3><pre><code>&lt;!-- 全局异常处理器只要实现HandlerExceptionResolver接口就是全局异常处理器--&gt;&lt;bean class=&quot;com.iot.learnssm.firstssm.exception.CustomExceptionResolver&quot;&gt;&lt;/bean&gt;</code></pre><p><strong>全局异常处理器只有一个，配置多个也没用。</strong></p><hr><h3 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h3><p>在controller、service、dao中任意一处需要手动抛出异常。如果是程序中手动抛出的异常，在错误页面中显示自定义的异常信息，如果不是手动抛出异常说明是一个运行时异常，在错误页面只显示“未知错误”。</p><p>(1)在商品修改的controller方法中抛出异常</p><pre><code>public String editItems(Model model,@RequestParam(value=&quot;id&quot;,required=true) Integer items_id)throws Exception {    //调用service根据商品id查询商品信息    ItemsCustom itemsCustom = itemsService.findItemsById(items_id);    //判断商品是否为空，根据id没有查询到商品，抛出异常，提示用户商品信息不存在    if(itemsCustom == null){        throw new CustomException(&quot;修改的商品信息不存在!&quot;);    }    //通过形参中的model将model数据传到页面    //相当于modelAndView.addObject方法    model.addAttribute(&quot;items&quot;, itemsCustom);    return &quot;items/editItems&quot;;}</code></pre><p>(2)在service接口中抛出异常</p><pre><code>public ItemsCustom findItemsById(Integer id) throws Exception {    Items items = itemsMapper.selectByPrimaryKey(id);    if(items==null){        throw new CustomException(&quot;修改的商品信息不存在!&quot;);    }    //中间对商品信息进行业务处理    //....    //返回ItemsCustom    ItemsCustom itemsCustom = null;    //将items的属性值拷贝到itemsCustom    if(items!=null){        itemsCustom = new ItemsCustom();        BeanUtils.copyProperties(items, itemsCustom);    }    return itemsCustom;}</code></pre><p>1、如果与业务功能相关的异常，建议在service中抛出异常。</p><p>2、与业务功能没有关系的异常，建议在controller中抛出。</p><p>上边的功能，建议在service中抛出异常。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;窗间梅熟落蒂，墙下笋成出林。&lt;/center&gt;&lt;br&gt;&lt;center&gt;连雨不知春去，一晴方觉夏深。&lt;/center&gt;&lt;br&gt;&lt;center&gt;—-宋·范成大《喜晴》&lt;/center&gt;
-
-&lt;hr&gt;
-&lt;p&gt;本文主要介绍springmvc中异常处理的思路，并展示如何自定义
       
     
     </summary>
