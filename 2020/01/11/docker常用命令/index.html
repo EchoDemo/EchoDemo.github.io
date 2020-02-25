@@ -126,7 +126,7 @@
 <meta property="og:site_name" content="EchoDemo&#39;s Blogs">
 <meta property="og:description" content="docker镜像常用命令什么是docker镜像？操作系统分为内核和用户空间。对于Linux而言，内核启动后，会挂载root文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root文件系统。比如官方镜像centos:latest 就包含了完整的一套centos:latest最小系统的root文件系统。 Docker镜像是一个特殊的文件系统，除了提供容器运行时所需的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-08T03:55:23.859Z">
+<meta property="og:updated_time" content="2020-02-24T14:17:38.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker常用命令">
 <meta name="twitter:description" content="docker镜像常用命令什么是docker镜像？操作系统分为内核和用户空间。对于Linux而言，内核启动后，会挂载root文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root文件系统。比如官方镜像centos:latest 就包含了完整的一套centos:latest最小系统的root文件系统。 Docker镜像是一个特殊的文件系统，除了提供容器运行时所需的">
@@ -459,7 +459,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,967
+                  2,238
                 </span>
               
 
@@ -475,7 +475,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -590,7 +590,24 @@ docker stats -a
 </code></pre><h4 id="什么是docker仓库-Repository-？"><a href="#什么是docker仓库-Repository-？" class="headerlink" title="什么是docker仓库(Repository)？"></a>什么是docker仓库(Repository)？</h4><p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p>
 <p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。以Ubuntu镜像为例，ubuntu是仓库的名字，其内包含有不同的版本标签，如，14.04, 16.04。我们可以通过 ubuntu:14.04，或者 ubuntu:16.04来具体指定所需哪个版本的镜像。如果忽略了标签，比如 ubuntu，那将视为 ubuntu:latest。</p>
 <p>仓库名经常以两段式路径形式出现，比如jwilder/nginx-proxy，前者往往意味着Docker Registry多用户环境下的用户名，后者则是对应的软件名。</p>
-
+<h3 id="镜像加速器配置"><a href="#镜像加速器配置" class="headerlink" title="镜像加速器配置"></a>镜像加速器配置</h3><p>国内从 Docker Hub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：Docker官方提供的中国registry mirror(<a href="https://registry.docker-cn.com);七牛云加速器(https://reg-mirror.qiniu.com/)" target="_blank" rel="noopener">https://registry.docker-cn.com);七牛云加速器(https://reg-mirror.qiniu.com/)</a></p>
+<p>我们以 Docker 官方加速器 <a href="https://registry.docker-cn.com" target="_blank" rel="noopener">https://registry.docker-cn.com</a> 为例进行介绍。对于使用systemd的系统（Debian 8+、CentOS 7），可以在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）</p>
+<pre><code>{
+  &quot;registry-mirrors&quot;: [
+    &quot;https://registry.docker-cn.com&quot;
+  ]
+}
+</code></pre><p><strong>注意，一定要保证该文件符合 json 规范，否则 Docker 将不能启动。之后重新启动服务。</strong></p>
+<pre><code>[root@localhost ~]# systemctl daemon-reload
+[root@localhost ~]# systemctl restart docker
+</code></pre><p>配置加速器之后，如果拉取镜像仍然十分缓慢，请手动检查加速器配置是否生效，在命令行执行docker info，如果从结果中看到了如下内容，说明配置成功。</p>
+<pre><code>[root@localhost home]# docker info
+......
+Registry Mirrors:
+https://registry.docker-cn.com/
+Live Restore Enabled: false
+Product License: Community Engine
+</code></pre>
       
     </div>
 
@@ -740,7 +757,7 @@ docker stats -a
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">270</span>
+                <span class="site-state-item-count">273</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -851,7 +868,7 @@ docker stats -a
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker镜像常用命令"><span class="nav-number">1.</span> <span class="nav-text">docker镜像常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker镜像？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是docker镜像？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、搜索镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1、搜索镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、下载镜像"><span class="nav-number">1.3.</span> <span class="nav-text">2、下载镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、列出镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3、列出镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、删除镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4、删除镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器常用命令"><span class="nav-number">2.</span> <span class="nav-text">docker容器常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker容器-Container-？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是docker容器(Container)？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、新建并启动容器"><span class="nav-number">2.2.</span> <span class="nav-text">1、新建并启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、列出容器"><span class="nav-number">2.3.</span> <span class="nav-text">2、列出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、停止-启动容器"><span class="nav-number">2.4.</span> <span class="nav-text">3、停止/启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、进入-导入-导出容器"><span class="nav-number">2.5.</span> <span class="nav-text">4、进入/导入/导出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、删除容器"><span class="nav-number">2.6.</span> <span class="nav-text">5、删除容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、查看容器的日志"><span class="nav-number">2.7.</span> <span class="nav-text">6、查看容器的日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、查看容器的IP地址"><span class="nav-number">2.8.</span> <span class="nav-text">7、查看容器的IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、同步宿主机时间到容器"><span class="nav-number">2.9.</span> <span class="nav-text">8、同步宿主机时间到容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、在宿主机查看docker使用cpu、内存、网络、io情况"><span class="nav-number">2.10.</span> <span class="nav-text">9、在宿主机查看docker使用cpu、内存、网络、io情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、进入Docker容器内部的bash"><span class="nav-number">2.11.</span> <span class="nav-text">10、进入Docker容器内部的bash</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改Docker镜像的存放位置"><span class="nav-number">3.</span> <span class="nav-text">修改Docker镜像的存放位置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、查看docker镜像的存放位置"><span class="nav-number">3.1.</span> <span class="nav-text">1、查看docker镜像的存放位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、关闭Docker服务"><span class="nav-number">3.2.</span> <span class="nav-text">2、关闭Docker服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、移动目录到目标路径"><span class="nav-number">3.3.</span> <span class="nav-text">3、移动目录到目标路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、建立软连接"><span class="nav-number">3.4.</span> <span class="nav-text">4、建立软连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker仓库-Repository-？"><span class="nav-number">3.5.</span> <span class="nav-text">什么是docker仓库(Repository)？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker镜像常用命令"><span class="nav-number">1.</span> <span class="nav-text">docker镜像常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker镜像？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是docker镜像？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、搜索镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1、搜索镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、下载镜像"><span class="nav-number">1.3.</span> <span class="nav-text">2、下载镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、列出镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3、列出镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、删除镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4、删除镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器常用命令"><span class="nav-number">2.</span> <span class="nav-text">docker容器常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker容器-Container-？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是docker容器(Container)？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、新建并启动容器"><span class="nav-number">2.2.</span> <span class="nav-text">1、新建并启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、列出容器"><span class="nav-number">2.3.</span> <span class="nav-text">2、列出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、停止-启动容器"><span class="nav-number">2.4.</span> <span class="nav-text">3、停止/启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、进入-导入-导出容器"><span class="nav-number">2.5.</span> <span class="nav-text">4、进入/导入/导出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、删除容器"><span class="nav-number">2.6.</span> <span class="nav-text">5、删除容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、查看容器的日志"><span class="nav-number">2.7.</span> <span class="nav-text">6、查看容器的日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、查看容器的IP地址"><span class="nav-number">2.8.</span> <span class="nav-text">7、查看容器的IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、同步宿主机时间到容器"><span class="nav-number">2.9.</span> <span class="nav-text">8、同步宿主机时间到容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、在宿主机查看docker使用cpu、内存、网络、io情况"><span class="nav-number">2.10.</span> <span class="nav-text">9、在宿主机查看docker使用cpu、内存、网络、io情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、进入Docker容器内部的bash"><span class="nav-number">2.11.</span> <span class="nav-text">10、进入Docker容器内部的bash</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改Docker镜像的存放位置"><span class="nav-number">3.</span> <span class="nav-text">修改Docker镜像的存放位置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、查看docker镜像的存放位置"><span class="nav-number">3.1.</span> <span class="nav-text">1、查看docker镜像的存放位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、关闭Docker服务"><span class="nav-number">3.2.</span> <span class="nav-text">2、关闭Docker服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、移动目录到目标路径"><span class="nav-number">3.3.</span> <span class="nav-text">3、移动目录到目标路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、建立软连接"><span class="nav-number">3.4.</span> <span class="nav-text">4、建立软连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是docker仓库-Repository-？"><span class="nav-number">3.5.</span> <span class="nav-text">什么是docker仓库(Repository)？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像加速器配置"><span class="nav-number">4.</span> <span class="nav-text">镜像加速器配置</span></a></li></ol></div>
             
 
           </div>
@@ -893,7 +910,7 @@ docker stats -a
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共235.8k字</span>
+  <span class="post-count">博客全站共241.6k字</span>
 </div>
 
 
