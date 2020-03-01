@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2020-02-25T13:21:55.357Z</updated>
+  <updated>2020-03-01T04:51:40.594Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,195 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 用队列实现栈</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-用队列实现栈/</id>
+    <published>2020-03-01T02:22:10.000Z</published>
+    <updated>2020-03-01T04:51:40.594Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用队列实现栈的下列操作：</p><pre><code>1、push(x) -- 元素 x 入栈2、pop() -- 移除栈顶元素3、top() -- 获取栈顶元素4、empty() -- 返回栈是否为空</code></pre><p>注意:</p><pre><code>1、你只能使用队列的基本操作-- 也就是 push to back, peek/pop from front, size, 和 is empty 这些操作是合法的。2、你所使用的语言也许不支持队列。 你可以使用 list 或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。3、你可以假设所有操作都是有效的（例如, 对一个空的栈不会调用 pop 或者 top 操作）。</code></pre><h3 id="题解1-两个队列，压入O-1-，-弹出-O-n"><a href="#题解1-两个队列，压入O-1-，-弹出-O-n" class="headerlink" title="题解1(两个队列，压入O(1)， 弹出 O(n))"></a>题解1(两个队列，压入O(1)， 弹出 O(n))</h3><p>维护一个队列 q2，这个队列用作临时存储 q1 中出队的元素。q2 中最后入队的元素将作为新的栈顶元素。接着将 q1 中最后剩下的元素出队。我们通过把 q1 和 q2 互相交换的方式来避免把 q2 中的元素往 q1 中拷贝。</p><pre><code>public class MyStack {    private Queue&lt;Integer&gt; q1;    private Queue&lt;Integer&gt; q2;    private int top;    public MyStack() {        q1 = new LinkedList&lt;&gt;();        q2 = new LinkedList&lt;&gt;();    }    public void push(int x) {        q1.add(x);        top = x;    }    public int pop() {        while (q1.size() &gt; 1) {            top = q1.remove();            q2.add(top);        }        int popValue = q1.remove();        Queue&lt;Integer&gt; temp = q1;        q1 = q2;        q2 = temp;        return popValue;    }    public int top() {        return top;    }    public boolean empty() {        return q1.isEmpty();    }}执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户内存消耗 :37 MB, 在所有 Java 提交中击败了(木有看到)的用户</code></pre><h3 id="题解2-两个队列，压入O-n-，-弹出-O-1"><a href="#题解2-两个队列，压入O-n-，-弹出-O-1" class="headerlink" title="题解2(两个队列，压入O(n)， 弹出 O(1))"></a>题解2(两个队列，压入O(n)， 弹出 O(1))</h3><p>让每一个新元素从 q2 入队，同时把这个元素作为栈顶元素保存。当 q1 非空（也就是栈非空），我们让 q1 中所有的元素全部出队，再将出队的元素从 q2 入队。通过这样的方式，新元素（栈中的栈顶元素）将会在 q2 的前端。我们通过将 q1， q2 互相交换的方式来避免把 q2 中的元素往 q1 中拷贝。</p><pre><code>public class MyStack {    private Queue&lt;Integer&gt; q1;    private Queue&lt;Integer&gt; q2;    private int top;    public MyStack() {        q1 = new LinkedList&lt;&gt;();        q2 = new LinkedList&lt;&gt;();    }    public void push(int x) {        q2.add(x);        top = x;        while (!q1.isEmpty()) {            q2.add(q1.remove());        }        Queue&lt;Integer&gt; temp = q1;        q1 = q2;        q2 = temp;    }    public int pop() {        int temp = q1.remove();        while (!q1.isEmpty()) {            top = q1.peek();        }        return temp;    }    public int top() {        return top;    }    public boolean empty() {        return q1.isEmpty();    }}</code></pre><p>超时了！</p><h3 id="题解3-一个队列，-压入O-n-，-弹出O-1"><a href="#题解3-一个队列，-压入O-n-，-弹出O-1" class="headerlink" title="题解3(一个队列， 压入O(n)， 弹出O(1))"></a>题解3(一个队列， 压入O(n)， 弹出O(1))</h3><p>每当入队一个新元素的时候，我们可以把队列的顺序反转过来。</p><pre><code>public class MyStack {    private Queue&lt;Integer&gt; q1;    public MyStack() {        q1 = new LinkedList&lt;&gt;();    }    public void push(int x) {        q1.add(x);        int len = q1.size();        while (len &gt; 1) {            q1.add(q1.remove());            len--;        }    }    public int pop() {        return q1.remove();    }    public int top() {        return q1.peek();    }    public boolean empty() {        return q1.isEmpty();    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用队列实现栈的下列操作：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、push(x) -- 元素 x 入栈
+
+2、pop() -- 移除栈顶元素
+
+3、top() -- 获取栈顶元素
+
+4、empty() -- 返回栈是否为空
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意:&lt;/p&gt;
+&lt;pr
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 搜索插入位置</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-搜索插入位置/</id>
+    <published>2020-03-01T01:36:01.000Z</published>
+    <updated>2020-03-01T02:21:04.795Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。</p><pre><code>示例 1:输入: [1,3,5,6], 5输出: 2示例 2:输入: [1,3,5,6], 2输出: 1示例 3:输入: [1,3,5,6], 7输出: 4示例 4:输入: [1,3,5,6], 0输出: 0</code></pre><h3 id="题解-二分查找法"><a href="#题解-二分查找法" class="headerlink" title="题解(二分查找法)"></a>题解(二分查找法)</h3><pre><code>class Solution {    public int strStr(int nums[], int target) {        int len = nums.length;        int left = 0, right = len -1;        int mid = (left + right) / 2;        while (left &lt; right) {            if (nums[mid] == target) {                return mid;            } else if (nums[mid] &gt; target) {                right = mid - 1;            } else {                left = mid + 1;            }            mid = (left + right) / 2;        }        return nums[left] &lt; target ? left + 1 : left;    }}执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户内存消耗 :38.9 MB, 在所有 Java 提交中击败了47.57%的用户</code></pre><p>后来看精选代码可以稍微优化一点点：</p><pre><code>class Solution {    public int searchInsert(int[] nums, int target) {        int left = 0, right = nums.length - 1;        while(left &lt;= right) {            int mid = (left + right) / 2;            if(nums[mid] == target) {                return mid;            } else if(nums[mid] &lt; target) {                left = mid + 1;            } else {                right = mid - 1;            }        }        return left;    }}执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户内存消耗 :38.9 MB, 在所有 Java 提交中击败了41.85%的用户</code></pre><p>由此可见，这个跑分还是在波动的，哈哈！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入: [1,3,5,6], 5
+输出: 2
+
+
+示例 2:
+
+输入: [1,3
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 实现strStr()</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E5%AE%9E%E7%8E%B0strStr()/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-实现strStr()/</id>
+    <published>2020-03-01T01:10:27.000Z</published>
+    <updated>2020-03-01T01:35:45.558Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p><pre><code>示例 1:输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;输出: 2示例 2:输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;输出: -1</code></pre><p>说明:</p><p>当 needle 是空字符串时，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。</p><h3 id="题解1-直接使用java的indexOf-方法-难道它不香吗？"><a href="#题解1-直接使用java的indexOf-方法-难道它不香吗？" class="headerlink" title="题解1(直接使用java的indexOf()方法,难道它不香吗？)"></a>题解1(直接使用java的indexOf()方法,难道它不香吗？)</h3><pre><code>class Solution {    public int strStr(String haystack, String needle) {        return haystack.indexOf(needle);    }}执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户内存消耗 :38.3 MB, 在所有 Java 提交中击败了5.04%的用户</code></pre><h3 id="题解2-在题解区有一个大神给出了详细的KMP算法解析"><a href="#题解2-在题解区有一个大神给出了详细的KMP算法解析" class="headerlink" title="题解2(在题解区有一个大神给出了详细的KMP算法解析)"></a>题解2(在题解区有一个大神给出了详细的KMP算法解析)</h3><h4 id="暴力破解法"><a href="#暴力破解法" class="headerlink" title="暴力破解法"></a>暴力破解法</h4><pre><code>// 伪代码public int strStr(String haystack, String needle) {        int M = needle.length();        int N = haystack.length();        for (int i = 0; i &lt; N - M; i++) {            int j;            for (j = 0; j &lt; M; j++) {                if (needle.charAt(j) != haystack.charAt(i+j))                    break;            }            // 匹配成功            if (j == M) return i;        }        return -1;}</code></pre><p>对于暴力算法，如果出现不匹配字符，同时回退 haystack 和 needle 的指针，嵌套 for 循环，时间复杂度 O(MN)，空间复杂度O(1)。最主要的问题是，如果字符串中重复的字符比较多，该算法就显得很蠢。</p><h4 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h4><p>KMP 算法的不同之处在于，它会花费空间来记录一些信息。KMP 算法永不回退 haystack 的指针 ，不走回头路（不会重复扫描 haystack），而是借助 dp 数组中储存的信息把 needle 移到正确的位置继续匹配，时间复杂度只需 O(N)，用空间换时间。</p><p>KMP 算法的难点在于，如何计算 dp 数组中的信息？如何根据这些信息正确地移动 needle 的指针？这个就需要确定有限状态自动机来辅助了，别怕这种高大上的文学词汇，其实和动态规划的 dp 数组如出一辙，等你学会了也可以拿这个词去吓唬别人。</p><p>还有一点需要明确的是：计算这个 dp 数组，只和 needle 串有关。意思是说，只要给我个 needle，我就能通过这个模式串计算出 dp 数组，然后你可以给我不同的 haystack，我都不怕，利用这个 dp 数组我都能在 O(N) 时间完成字符串匹配。</p><p>明白了 dp 数组只和 needle 有关，那么我们这样设计 KMP 算法就会比较漂亮：</p><pre><code>public class KMP {    private int[][] dp;    private String needle;    public KMP(String pat) {        this.needle = needle;        // 通过 needle 构建 dp 数组        // 需要 O(M) 时间    }    public int search(String haystack) {        // 借助 dp 数组去匹配 haystack        // 需要 O(N) 时间    }}</code></pre><p>这样，当我们需要用同一 needle 去匹配不同 haystack 时，就不需要浪费时间构造 dp 数组了。<br>更详细的原文解析请见原文<a href="https://leetcode-cn.com/problems/implement-strstr/solution/kmp-suan-fa-xiang-jie-by-labuladong/" target="_blank" rel="noopener">KMP算法</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入: haystack = &amp;quot;hel
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 有效的括号</title>
+    <link href="http://www.echodemo.cc/2020/02/29/LeetCode-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/"/>
+    <id>http://www.echodemo.cc/2020/02/29/LeetCode-有效的括号/</id>
+    <published>2020-02-29T12:45:39.000Z</published>
+    <updated>2020-02-29T12:55:02.079Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p><p>有效字符串需满足：</p><pre><code>1、左括号必须用相同类型的右括号闭合。2、左括号必须以正确的顺序闭合。注意：空字符串可被认为是有效字符串。示例 1:输入: &quot;()&quot;输出: true示例 2:输入: &quot;()[]{}&quot;输出: true示例 3:输入: &quot;(]&quot;输出: false示例 4:输入: &quot;([)]&quot;输出: false示例 5:输入: &quot;{[]}&quot;输出: true</code></pre><h3 id="题解-使用栈"><a href="#题解-使用栈" class="headerlink" title="题解(使用栈)"></a>题解(使用栈)</h3><pre><code>class Solution {    public boolean isValid(String s) {        Stack&lt;Character&gt; stack = new Stack&lt;&gt;();        for (int i = 0; i &lt; s.length(); i++) {            char c = s.charAt(i);            if (c == &apos;(&apos; || c == &apos;{&apos; || c == &apos;[&apos;) {                stack.push(c);                continue;            }            if (stack.isEmpty()) return false;            if (c == &apos;)&apos;) {                if (stack.peek() != &apos;(&apos;) break;                stack.pop();            } else if (c == &apos;}&apos;) {                if (stack.peek() != &apos;{&apos;) break;                stack.pop();            } else {                if (stack.peek() != &apos;[&apos;) break;                stack.pop();            }        }        return stack.isEmpty();    }}执行用时 :3 ms, 在所有 Java 提交中击败了56.70%的用户内存消耗 :37.5 MB, 在所有 Java 提交中击败了5.00%的用户</code></pre><h3 id="题解2-官方题解：增加一个map数据结构"><a href="#题解2-官方题解：增加一个map数据结构" class="headerlink" title="题解2(官方题解：增加一个map数据结构)"></a>题解2(官方题解：增加一个map数据结构)</h3><pre><code>class Solution {  private HashMap&lt;Character, Character&gt; mappings;  public Solution() {    this.mappings = new HashMap&lt;Character, Character&gt;();    this.mappings.put(&apos;)&apos;, &apos;(&apos;);    this.mappings.put(&apos;}&apos;, &apos;{&apos;);    this.mappings.put(&apos;]&apos;, &apos;[&apos;);  }  public boolean isValid(String s) {    Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();    for (int i = 0; i &lt; s.length(); i++) {      char c = s.charAt(i);      if (this.mappings.containsKey(c)) {        char topElement = stack.empty() ? &apos;#&apos; : stack.pop();        if (topElement != this.mappings.get(c)) {          return false;        }      } else {        stack.push(c);      }    }    return stack.isEmpty();  }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。&lt;/p&gt;
+&lt;p&gt;有效字符串需满足：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、左括号必须用相同类型的右括号闭合。
+
+2、左括号必须以正确的顺序闭合。
+
+注意：空字符串可被认为是有效字符串。
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 回文数</title>
+    <link href="http://www.echodemo.cc/2020/02/29/LeetCode-%E5%9B%9E%E6%96%87%E6%95%B0/"/>
+    <id>http://www.echodemo.cc/2020/02/29/LeetCode-回文数/</id>
+    <published>2020-02-29T11:38:06.000Z</published>
+    <updated>2020-02-29T12:15:37.611Z</updated>
+    
+    <content type="html"><![CDATA[<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p><pre><code>示例 1:输入: 121输出: true示例 2:输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。示例 3:输入: 10输出: false解释: 从右向左读, 为 01 。因此它不是一个回文数。</code></pre><h3 id="题解1（转字符串）"><a href="#题解1（转字符串）" class="headerlink" title="题解1（转字符串）"></a>题解1（转字符串）</h3><pre><code>class Solution {    public boolean isPalindrome(int x) {        if (x &lt; 0)            return false;        String str = String.valueOf(x);        int len = str.length();        int count = 0;        for (int i = 0; i &lt; len / 2;i++) {            if (str.charAt(i) == str.charAt(len -i - 1)) {                count++;                continue;            }            break;        }        return count == (len / 2);    }}执行用时 :13 ms, 在所有 Java 提交中击败了25.05%的用户内存消耗 :40.5 MB, 在所有 Java 提交中击败了5.00%的用户</code></pre><h3 id="题解2-不转字符串，使用栈"><a href="#题解2-不转字符串，使用栈" class="headerlink" title="题解2(不转字符串，使用栈)"></a>题解2(不转字符串，使用栈)</h3><pre><code>class Solution {    public boolean isPalindrome(int x) {        if (x &lt; 0)            return false;        if (x == 0)            return true;        Stack&lt;Integer&gt; s = new Stack&lt;&gt;();        int i = 0, j =0, y = x;        while (true) {            if (x == 0) break;            s.push(x % 10);            x /= 10;            i++;        }        while (!s.isEmpty()) {            if (s.pop() == (y % 10)) {                j++;                y /= 10;                continue;            }            break;        }        return i == j;    }}执行用时 :22 ms, 在所有 Java 提交中击败了5.05%的用户内存消耗 :40.2 MB, 在所有 Java 提交中击败了5.00%的用户</code></pre><h3 id="题解3-官方题解"><a href="#题解3-官方题解" class="headerlink" title="题解3(官方题解)"></a>题解3(官方题解)</h3><pre><code>class Solution {    public boolean isPalindrome(int x) {        // 特殊情况：        // 如上所述，当 x &lt; 0 时，x 不是回文数。        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，        // 则其第一位数字也应该是 0        // 只有 0 满足这一属性        if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0)) {            return false;        }        int revertedNumber = 0;        while(x &gt; revertedNumber) {            revertedNumber = revertedNumber * 10 + x % 10;            x /= 10;        }        // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。        // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，        // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。        return x == revertedNumber || x == revertedNumber/10;    }}执行用时 :9 ms, 在所有 Java 提交中击败了98.74%的用户内存消耗 :40.2 MB, 在所有 Java 提交中击败了5.00%的用户</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入: 121
+输出: true
+
+
+示例 2:
+
+输入: -121
+输出: false
+解释: 从左向右读, 为 -121 。 从右向左读
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 两数相加</title>
+    <link href="http://www.echodemo.cc/2020/02/29/LeetCode-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/"/>
+    <id>http://www.echodemo.cc/2020/02/29/LeetCode-两数相加/</id>
+    <published>2020-02-29T09:27:58.000Z</published>
+    <updated>2020-02-29T09:33:51.837Z</updated>
+    
+    <content type="html"><![CDATA[<p>给出两个非空的链表用来表示两个非负的整数。其中，它们各自的位数是按照逆序的方式存储的，并且它们的每个节点只能存储一位数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p><pre><code>示例：输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807</code></pre><h3 id="题解：（要考虑int、long等数据类型超长的情况）"><a href="#题解：（要考虑int、long等数据类型超长的情况）" class="headerlink" title="题解：（要考虑int、long等数据类型超长的情况）"></a>题解：（要考虑int、long等数据类型超长的情况）</h3><pre><code>class Solution {    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {        ListNode head = new ListNode(0);        ListNode cur = head;        int carry = 0;        while (l1 != null || l2 != null) {            int x = (l1 != null) ? l1.val : 0;            int y = (l2 != null) ? l2.val : 0;            int sum = carry + x + y;            carry = sum / 10;            cur.next = new ListNode(sum % 10);            cur = cur.next;            if (l1 != null) l1 = l1.next;            if (l2 != null) l2 = l2.next;        }        if (carry &gt; 0) {            cur.next = new ListNode(carry);        }        return head.next;    }    }</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给出两个非空的链表用来表示两个非负的整数。其中，它们各自的位数是按照逆序的方式存储的，并且它们的每个节点只能存储一位数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。&lt;/p&gt;
+&lt;pre&gt;&lt;cod
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker的网络与容器互联</title>
@@ -399,166 +588,6 @@ C
     
     
       <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 可被5整除的二进制前缀</title>
-    <link href="http://www.echodemo.cc/2020/01/11/LeetCode-%E5%8F%AF%E8%A2%AB5%E6%95%B4%E9%99%A4%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%89%8D%E7%BC%80/"/>
-    <id>http://www.echodemo.cc/2020/01/11/LeetCode-可被5整除的二进制前缀/</id>
-    <published>2020-01-11T12:21:29.000Z</published>
-    <updated>2020-01-11T12:46:12.955Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定由若干 0 和 1 组成的数组 A。我们定义 N_i：从 A[0] 到 A[i] 的第 i 个子数组被解释为一个二进制数（从最高有效位到最低有效位）。</p><p>返回布尔值列表 answer，只有当 N_i 可以被 5 整除时，答案 answer[i] 为 true，否则为 false。</p><pre><code>示例 1：输入：[0,1,1]输出：[true,false,false]解释：输入数字为 0, 01, 011；也就是十进制中的 0, 1, 3 。只有第一个数可以被 5 整除，因此 answer[0] 为真。示例 2：输入：[1,1,1]输出：[false,false,false]示例 3：输入：[0,1,1,1,1,1]输出：[true,false,false,false,true,false]示例 4：输入：[1,1,1,0,1]输出：[false,false,false,false,false]</code></pre><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><pre><code>class Solution {    public List&lt;Boolean&gt; prefixesDivBy5(int[] A) {        int len = A.length;        int sum = 0;        List&lt;Boolean&gt; result = new ArrayList&lt;&gt;(len);        for (int i = 0; i &lt; len; i++) {            sum = ((sum &lt;&lt; 1) + A[i]) % 5;            if (sum == 0) {                result.add(i, true);            } else {                result.add(i, false);            }        }        return result;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定由若干 0 和 1 组成的数组 A。我们定义 N_i：从 A[0] 到 A[i] 的第 i 个子数组被解释为一个二进制数（从最高有效位到最低有效位）。&lt;/p&gt;
-&lt;p&gt;返回布尔值列表 answer，只有当 N_i 可以被 5 整除时，答案 answer[i] 为 true
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 戳气球</title>
-    <link href="http://www.echodemo.cc/2020/01/05/LeetCode-%E6%88%B3%E6%B0%94%E7%90%83/"/>
-    <id>http://www.echodemo.cc/2020/01/05/LeetCode-戳气球/</id>
-    <published>2020-01-05T12:07:36.000Z</published>
-    <updated>2020-01-11T12:25:32.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>有 n 个气球，编号为0 到 n-1，每个气球上都标有一个数字，这些数字存在数组 nums 中。</p><p>现在要求你戳破所有的气球。每当你戳破一个气球 i 时，你可以获得 nums[left] <em> nums[i] </em> nums[right] 个硬币。 这里的 left 和 right 代表和 i 相邻的两个气球的序号。注意当你戳破了气球 i 后，气球 left 和气球 right 就变成了相邻的气球。</p><p>求所能获得硬币的最大数量。</p><p>说明:</p><p>你可以假设 nums[-1] = nums[n] = 1，但注意它们不是真实存在的所以并不能被戳破。<br>0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100</p><pre><code>示例:输入: [3,1,5,8]输出: 167 解释: nums = [3,1,5,8] --&gt; [3,5,8] --&gt;   [3,8]   --&gt;  [8]  --&gt; []     coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167</code></pre><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>dp[i][j]表示第i至第j个元素这个区间能获得的最大硬币数，k表示在i,j这个区间内最后戳破的气球，状态转移方程dp[i][j]=max(dp[i][j],dp[i][k]+dp[k][j]+nums[i]<em>nums[k]</em>nums[j])</p><pre><code>    public int maxCoins(int[] nums) {        int N = nums.length;        int len = N + 2;        int[] newNums = new int[len];        newNums[0] = 1;        newNums[len -1] = 1;        for(int i = 0; i &lt; nums.length; i++){            newNums[i+1] = nums[i];        }        int[][] dp = new int[len][len];        for (int i = 0; i &lt; len; i++) {            for (int j = 0; j &lt; len; j++) {                dp[i][j] = 0;            }        }        for (int c = 2; c &lt;= len; c++) {            for (int i = 0; i &lt; len - c; i++) {                int j = i + c;                for (int k = i + 1; k &lt; j; k++) {                    dp[i][j] = Math.max(dp[i][j], newNums[i] * newNums[k] * newNums[j]                            + dp[i][k] + dp[k][j]);                }            }        }        return dp[0][len - 1];}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;有 n 个气球，编号为0 到 n-1，每个气球上都标有一个数字，这些数字存在数组 nums 中。&lt;/p&gt;
-&lt;p&gt;现在要求你戳破所有的气球。每当你戳破一个气球 i 时，你可以获得 nums[left] &lt;em&gt; nums[i] &lt;/em&gt; nums[right] 个硬币。 这
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 查找常用字符</title>
-    <link href="http://www.echodemo.cc/2019/12/21/LeetCode-%E6%9F%A5%E6%89%BE%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6/"/>
-    <id>http://www.echodemo.cc/2019/12/21/LeetCode-查找常用字符/</id>
-    <published>2019-12-21T11:02:36.000Z</published>
-    <updated>2019-12-21T13:06:23.748Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。</p><p>你可以按任意顺序返回答案。</p><pre><code>示例 1：输入：[&quot;bella&quot;,&quot;label&quot;,&quot;roller&quot;]输出：[&quot;e&quot;,&quot;l&quot;,&quot;l&quot;]示例 2：输入：[&quot;cool&quot;,&quot;lock&quot;,&quot;cook&quot;]输出：[&quot;c&quot;,&quot;o&quot;]</code></pre><h3 id="题解一（利用set和map）："><a href="#题解一（利用set和map）：" class="headerlink" title="题解一（利用set和map）："></a>题解一（利用set和map）：</h3><pre><code>@ApiOperation(&quot;LeetCode算法题测试&quot;)@RequestMapping(value = &quot;/algorithm&quot;, method = RequestMethod.POST)@ResponseBodypublic List&lt;String&gt; algorithm(String[] A) {    // 存放第一个字符串的字符    Set&lt;Character&gt; characterSet = new HashSet&lt;&gt;(A[0].length());    // 存放第一个字符串字符出现的次数，初始值为1    Map&lt;Character, Integer&gt; a0CharacterIntegerMap = new HashMap&lt;&gt;(A[0].length());    // 将第一个字符串中字符装载进set和map    for (int i = 0; i&lt; A[0].length(); i++) {        // 如果set里面已经有该字符，则第一个字符串map对应的字符出现次数加一        if (characterSet.contains(A[0].charAt(i))) {            a0CharacterIntegerMap.put(A[0].charAt(i), a0CharacterIntegerMap.get(A[0].charAt(i)) + 1);        } else {            // 如果没有，则将该字符都初始化进map和set            characterSet.add(A[0].charAt(i));            a0CharacterIntegerMap.put(A[0].charAt(i), 1);        }    }    // 对剩下的字符串进行处理    for (int i = 1; i &lt; A.length; i++) {        // 每个字符串字符的临时map，初始值为0        Map&lt;Character, Integer&gt; tempCharacterIntegerMap = new HashMap&lt;&gt;(A[0].length());        for (int j = 0; j&lt; A[i].length(); j++) {            if (!tempCharacterIntegerMap.containsKey(A[i].charAt(j))) {                tempCharacterIntegerMap.put(A[i].charAt(j), 0);            }            if (characterSet.contains((A[i].charAt(j)))) {                tempCharacterIntegerMap.put(A[i].charAt(j), tempCharacterIntegerMap.get(A[i].charAt(j)) + 1);            }        }        // 将临时map和第一个字符串的map作比较并处理        for (int j = 0; j &lt; A[0].length(); j++) {            // 如果临时map没有第一个字符串map里面的字符，则第一个字符串map的该字符出现次数置为0            if (!tempCharacterIntegerMap.containsKey(A[0].charAt(j))) {                a0CharacterIntegerMap.put(A[0].charAt(j), 0);            } else {                // 如果临时map有第一个字符串map里面的字符，且临时map出现的次数更少，则取更少次数的值                if (a0CharacterIntegerMap                        .get(A[0].charAt(j)) &gt; tempCharacterIntegerMap.get(A[0].charAt(j))) {                    a0CharacterIntegerMap.put(A[0].charAt(j), tempCharacterIntegerMap.get(A[0].charAt(j)));                }            }        }    }    List&lt;String&gt; list = new ArrayList&lt;&gt;();    // 遍历set，取第一个字符串字符对应的出现次数    for (Character character : characterSet) {        if (a0CharacterIntegerMap.get(character) &gt; 0) {            for (int i = 0; i &lt; a0CharacterIntegerMap.get(character); i++) {                list.add(String.valueOf(character));            }        }    }    return list;}</code></pre><h3 id="题解二（抓住提示字符都是小写字母）："><a href="#题解二（抓住提示字符都是小写字母）：" class="headerlink" title="题解二（抓住提示字符都是小写字母）："></a>题解二（抓住提示字符都是小写字母）：</h3><pre><code>@ApiOperation(&quot;LeetCode算法题测试&quot;)@RequestMapping(value = &quot;/algorithm&quot;, method = RequestMethod.POST)@ResponseBodypublic List&lt;String&gt; algorithm(String[] A) {    int[] a0 = new int[26];    for (int i = 0; i &lt; 26; i++) {        a0[i] = Integer.MAX_VALUE;    }    for (String str : A) {        // 初始化        int[] temp = new int[26];        for (int i = 0; i &lt; 26; i++) {            temp[i] = 0;        }        // 统计字符出现次数        for (char c : str.toCharArray()) {            temp[c - &apos;a&apos;]++;        }        for (int i = 0; i &lt; 26; i++) {            a0[i] = Math.min(a0[i], temp[i]);        }    }    List&lt;String&gt; list = new ArrayList&lt;&gt;();    for (int i = 0; i &lt; 26; i++) {        while (a0[i] &gt; 0) {            list.add(String.valueOf((char)(&apos;a&apos; + i)));            a0[i]--;        }    }    return list;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。&lt;/p&gt;
-&lt;p&gt;你可以按任意顺序返回答案。&lt;/p&gt;
-&lt;pre&gt;&lt;co
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 两数之和</title>
-    <link href="http://www.echodemo.cc/2019/12/13/LeetCode-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
-    <id>http://www.echodemo.cc/2019/12/13/LeetCode-两数之和/</id>
-    <published>2019-12-13T14:29:40.000Z</published>
-    <updated>2019-12-13T14:30:04.557Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p><pre><code>示例:给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]</code></pre><h3 id="题解一（自写暴力破解法）："><a href="#题解一（自写暴力破解法）：" class="headerlink" title="题解一（自写暴力破解法）："></a>题解一（自写暴力破解法）：</h3><pre><code>class Solution {    public int[] twoSum(int[] nums, int target) {        int numsLen = nums.length;        int i;        int j = 0;        for (i = 0; i &lt; numsLen; i++) {            boolean k = false;            for (j = i + 1; j &lt; numsLen; j++) {                if ((nums[i] + nums[j]) == target) {                    k = true;                    break;                }            }            if (k) {                break;            }        }        int[] resultIntArray = new int[2];        resultIntArray[0] = i;        resultIntArray[1] = j;        return resultIntArray;    }}</code></pre><h3 id="题解二（官方暴力破解法）："><a href="#题解二（官方暴力破解法）：" class="headerlink" title="题解二（官方暴力破解法）："></a>题解二（官方暴力破解法）：</h3><pre><code>class Solution {    public int[] twoSum(int[] nums, int target) {        int numsLen = nums.length;        for (int i = 0; i &lt; numsLen; i++) {            for (int j = i + 1; j &lt; numsLen; j++) {                if ((nums[i] + nums[j]) == target) {                    return new int[] { i, j };                }            }        }        throw new IllegalArgumentException(&quot;No two sum solution&quot;);    }}</code></pre><p>以上两种解法的复杂度分析：</p><p>时间复杂度：O(n^2)O(n2)，对于每个元素，我们试图通过遍历数组的其余部分来寻找它所对应的目标元素，这将耗费 O(n)O(n) 的时间。因此时间复杂度为 O(n^2)O(n2)。</p><p>空间复杂度：O(1)O(1)。</p><h3 id="题解三（两遍哈希表）："><a href="#题解三（两遍哈希表）：" class="headerlink" title="题解三（两遍哈希表）："></a>题解三（两遍哈希表）：</h3><p>通过以空间换取速度的方式，我们可以将查找时间从 O(n)O(n) 降低到 O(1)O(1)。哈希表正是为此目的而构建的，它支持以近似恒定的时间进行快速查找。用“近似”来描述，是因为一旦出现冲突，查找用时可能会退化到 O(n)O(n)。但只要仔细地挑选哈希函数，在哈希表中进行查找的用时应当被摊销为 O(1)O(1)。</p><p>一个简单的实现使用了两次迭代。在第一次迭代中，我们将每个元素的值和它的索引添加到表中。然后，在第二次迭代中，我们将检查每个元素所对应的目标元素（target - nums[i]target−nums[i]）是否存在于表中。注意，该目标元素不能是 nums[i]nums[i] 本身！</p><pre><code>class Solution {    public int[] twoSum(int[] nums, int target) {        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();        for (int i = 0; i &lt; nums.length; i++) {            map.put(nums[i], i);        }        for (int i = 0; i &lt; nums.length; i++) {            int complement = target - nums[i];            if (map.containsKey(complement) &amp;&amp; map.get(complement) != i) {                return new int[] { i, map.get(complement) };            }        }        throw new IllegalArgumentException(&quot;No two sum solution&quot;);    }}</code></pre><h3 id="题解四（一遍哈希表）："><a href="#题解四（一遍哈希表）：" class="headerlink" title="题解四（一遍哈希表）："></a>题解四（一遍哈希表）：</h3><p>事实证明，我们可以一次完成。在进行迭代并将元素插入到表中的同时，我们还会回过头来检查表中是否已经存在当前元素所对应的目标元素。如果它存在，那我们已经找到了对应解，并立即将其返回。</p><pre><code>class Solution {    public int[] twoSum(int[] nums, int target) {        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();        for (int i = 0; i &lt; nums.length; i++) {            int complement = target - nums[i];            if (map.containsKey(complement)) {                return new int[] { map.get(complement), i };            }            map.put(nums[i], i);        }        throw new IllegalArgumentException(&quot;No two sum solution&quot;);    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。&lt;/p&gt;
-&lt;p&gt;你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;示例:
-
-给定 nums
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>临飞鸟</title>
-    <link href="http://www.echodemo.cc/2019/11/30/%E4%B8%B4%E9%A3%9E%E9%B8%9F/"/>
-    <id>http://www.echodemo.cc/2019/11/30/临飞鸟/</id>
-    <published>2019-11-30T14:32:52.000Z</published>
-    <updated>2019-12-26T14:23:49.748Z</updated>
-    
-    <content type="html"><![CDATA[<center><br><br>我看着窗边的单向历一页页地薄下去<br><br>就像天边的光亮一点点地变暗<br><br>他们都在悄悄地告诉我<br><br>距离见到你又更近了一步<br><br><br><br><br>此刻，我的心在扑通扑通地跳动<br><br>右手的指头轮询地敲打着木桃色的桌面<br><br>神经递质游走的能量来自于对你的想念<br><br>是你予我的记忆陪伴我度过一个个夜晚<br><br><br><br><br>也许你不太知道的是<br><br>我想和你一起去发现杭州冬天的讯息<br><br>去看曲院风荷里一陇又一陇的残荷<br><br>傍晚在苏堤春晓的尽头看雷峰夕照的倩影<br><br>以及站在断桥残雪上看整条北山街泛红的梧桐树叶<br><br><br><br><br>所有这些，甚至是在梦里<br><br>我想这我不必告诉你<br><br>在飞鸟来临的清晨<br><br>当你看到松的沉默，雪的孤寂就能明了<br><br><br><br><br>如果定要我说点什么的话<br><br>那么我所想过的最浪漫的事情<br><br>便是与你一起看遍西湖的春夏与秋冬<br><br></center><h6 id="注：致一段还未开始就已夭折的经历"><a href="#注：致一段还未开始就已夭折的经历" class="headerlink" title="注：致一段还未开始就已夭折的经历"></a>注：致一段还未开始就已夭折的经历</h6>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;&lt;br&gt;&lt;br&gt;我看着窗边的单向历一页页地薄下去&lt;br&gt;&lt;br&gt;就像天边的光亮一点点地变暗&lt;br&gt;&lt;br&gt;他们都在悄悄地告诉我&lt;br&gt;&lt;br&gt;距离见到你又更近了一步&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;此刻，我的心在扑通扑通地跳动&lt;br&gt;&lt;br&gt;右手的指头轮询地
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://www.echodemo.cc/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>秋夜</title>
-    <link href="http://www.echodemo.cc/2019/09/05/%E7%A7%8B%E5%A4%9C/"/>
-    <id>http://www.echodemo.cc/2019/09/05/秋夜/</id>
-    <published>2019-09-05T13:45:58.000Z</published>
-    <updated>2019-09-15T03:19:53.438Z</updated>
-    
-    <content type="html"><![CDATA[<center><br><br>秋天的夜晚能否告诉我<br><br>有谁？曾在这样的时刻走进你的心房<br><br>倾听你的低语<br><br>聆听你的呢喃<br><br>为你沉默寡言<br><br></center>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;&lt;br&gt;&lt;br&gt;秋天的夜晚能否告诉我&lt;br&gt;&lt;br&gt;有谁？曾在这样的时刻走进你的心房&lt;br&gt;&lt;br&gt;倾听你的低语&lt;br&gt;&lt;br&gt;聆听你的呢喃&lt;br&gt;&lt;br&gt;为你沉默寡言&lt;br&gt;&lt;br&gt;&lt;/center&gt;
-      
-    
-    </summary>
-    
-      <category term="生活" scheme="http://www.echodemo.cc/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="诗词" scheme="http://www.echodemo.cc/tags/%E8%AF%97%E8%AF%8D/"/>
     
   </entry>
   
