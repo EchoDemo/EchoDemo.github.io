@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2020-03-01T04:51:40.594Z</updated>
+  <updated>2020-03-01T10:25:31.126Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,91 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 加一</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E5%8A%A0%E4%B8%80/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-加一/</id>
+    <published>2020-03-01T10:18:16.000Z</published>
+    <updated>2020-03-01T10:25:31.126Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。</p><pre><code>示例 1:输入: [1,2,3]输出: [1,2,4]解释: 输入数组表示数字 123。示例 2:输入: [4,3,2,1]输出: [4,3,2,2]解释: 输入数组表示数字 4321</code></pre><h3 id="题解-Java"><a href="#题解-Java" class="headerlink" title="题解(Java)"></a>题解(Java)</h3><pre><code>class Solution {    public int[] plusOne() {        int count = 0;        int len = digits.length;        for (int i = len - 1; i &gt;= 0; i--) {            if (digits[i] == 9) {                digits[i] = 0;                count++;                continue;            }            digits[i] = digits[i]++;            return digits;        }        int[] result = new int[len + 1];        result[0] = 1;        for (int i = 0; i &lt; len + 1; i++) {            result[i] = 0;        }        return result;    }}</code></pre><h3 id="题解2（C-）"><a href="#题解2（C-）" class="headerlink" title="题解2（C++）"></a>题解2（C++）</h3><pre><code>class Solution {public:    vector&lt;int&gt; plusOne(vector&lt;int&gt;&amp; digits) {        for(int i=digits.size()-1;i&gt;=0;i--){            if(digits[i]==9){                digits[i]=0;            }            else{                digits[i]++;                return digits;            }        }        digits[0]=1;        digits.push_back(0);        return digits;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入: [1,2,3]
+输出: [1,2,4]
+解
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 至少是其他数字两倍的最大数</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E8%87%B3%E5%B0%91%E6%98%AF%E5%85%B6%E4%BB%96%E6%95%B0%E5%AD%97%E4%B8%A4%E5%80%8D%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-至少是其他数字两倍的最大数/</id>
+    <published>2020-03-01T08:59:07.000Z</published>
+    <updated>2020-03-01T09:49:25.528Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个给定的数组nums中，总是存在一个最大元素 。查找数组中的最大元素是否至少是数组中每个其他数字的两倍。如果是，则返回最大元素的索引，否则返回-1。</p><pre><code>示例 1:输入: nums = [3, 6, 1, 0]输出: 1解释: 6是最大的整数, 对于数组中的其他整数,6大于数组中其他元素的两倍。6的索引是1, 所以我们返回1.示例 2:输入: nums = [1, 2, 3, 4]输出: -1解释: 4没有超过3的两倍大, 所以我们返回 -1.</code></pre><p>提示:</p><pre><code>nums 的长度范围在[1, 50].每个 nums[i] 的整数范围在 [0, 100].</code></pre><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>找出最大和第二大的数</p><pre><code>class Solution {    public int dominantIndex(int nums[]) {        int len = nums.length;        if (len == 0) {            return -1;        } else if (len == 1) {            return 0;        }        int max = nums[0];        int j = 0;        int secondMax = 0;        for (int i = 1; i &lt; len; i++) {            if (nums[i] &gt; max) {                max = nums[i];                j = i;            }        }        for (int i = 0; i &lt; len; i++) {            if ((nums[i] &lt; max) &amp;&amp; (nums[i] &gt; secondMax)) {                secondMax = nums[i];            }        }        return (max &gt;= (secondMax * 2)) ? j : -1;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在一个给定的数组nums中，总是存在一个最大元素 。查找数组中的最大元素是否至少是数组中每个其他数字的两倍。如果是，则返回最大元素的索引，否则返回-1。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入: nums = [3, 6, 1, 0]
+输出: 1
+解释: 6是最大
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 寻找数组的中心索引</title>
+    <link href="http://www.echodemo.cc/2020/03/01/LeetCode-%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E7%B4%A2%E5%BC%95/"/>
+    <id>http://www.echodemo.cc/2020/03/01/LeetCode-寻找数组的中心索引/</id>
+    <published>2020-03-01T08:59:07.000Z</published>
+    <updated>2020-03-01T09:49:45.747Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。</p><pre><code>示例 1:输入: nums = [1, 7, 3, 6, 5, 6]输出: 3解释: 索引3 (nums[3] = 6) 的左侧数之和(1 + 7 + 3 = 11)，与右侧数之和(5 + 6 = 11)相等。同时, 3 也是第一个符合要求的中心索引。示例 2:输入: nums = [1, 2, 3]输出: -1解释: 数组中不存在满足此条件的中心索引。</code></pre><p>说明:</p><pre><code>nums 的长度范围为 [0, 10000]。任何一个 nums[i] 将会是一个范围在 [-1000, 1000]的整数。</code></pre><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先计算总和，然后从左边开始累积左边的和，右边的和就用总和去减左边的总和。</p><pre><code>class Solution {    public int pivotIndex(int nums[]) {        int len = nums.length;        if (len &lt; 3) {            return -1;        }        int leftSum = 0;        int rightSum;        int sum = 0;        for (int i = 0; i &lt; len; i++) {            sum += nums[i];        }        for (int i = 0; i &lt; len; i++) {            if (i==0){                leftSum = 0;            }else {                leftSum = leftSum + nums[i-1];            }            rightSum = sum - leftSum - nums[i];            if (leftSum == rightSum) {                return i;            }        }        return -1;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 用队列实现栈</title>
@@ -494,100 +579,6 @@ C
     
     
       <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在centos7的docker当中安装MongoDB</title>
-    <link href="http://www.echodemo.cc/2020/01/11/%E5%9C%A8centos7%E7%9A%84docker%E5%BD%93%E4%B8%AD%E5%AE%89%E8%A3%85MongoDB/"/>
-    <id>http://www.echodemo.cc/2020/01/11/在centos7的docker当中安装MongoDB/</id>
-    <published>2020-01-11T12:50:17.000Z</published>
-    <updated>2020-01-11T12:51:41.041Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、搜索MongoDB镜像"><a href="#1、搜索MongoDB镜像" class="headerlink" title="1、搜索MongoDB镜像"></a>1、搜索MongoDB镜像</h3><pre><code>docker search mongodb</code></pre><h3 id="2、拉取MongoDB镜像"><a href="#2、拉取MongoDB镜像" class="headerlink" title="2、拉取MongoDB镜像"></a>2、拉取MongoDB镜像</h3><pre><code>docker pull mongo:4.0.14</code></pre><h3 id="3-查看本地的镜像"><a href="#3-查看本地的镜像" class="headerlink" title="3.查看本地的镜像"></a>3.查看本地的镜像</h3><pre><code>docker images mongo</code></pre><h3 id="4、启动mongo-27017为端口号"><a href="#4、启动mongo-27017为端口号" class="headerlink" title="4、启动mongo (27017为端口号)"></a>4、启动mongo (27017为端口号)</h3><pre><code>docker run -p 27017:27017 -td mongo</code></pre><h3 id="5、查看启动情况"><a href="#5、查看启动情况" class="headerlink" title="5、查看启动情况"></a>5、查看启动情况</h3><pre><code>docker ps</code></pre><h3 id="6、win10下载进行navicat连接"><a href="#6、win10下载进行navicat连接" class="headerlink" title="6、win10下载进行navicat连接"></a>6、win10下载进行navicat连接</h3><h3 id="7、进入到mongodb容器"><a href="#7、进入到mongodb容器" class="headerlink" title="7、进入到mongodb容器"></a>7、进入到mongodb容器</h3><pre><code>docker exec -it  371601d910b8  mongo admin (以管理员身份进入 371601d910b8 镜像运行id通过docker ps查看)容器停止退出，命令： exit</code></pre><h3 id="8、docker-exec进入Docker容器"><a href="#8、docker-exec进入Docker容器" class="headerlink" title="8、docker exec进入Docker容器"></a>8、docker exec进入Docker容器</h3><pre><code>sudo docker exec -it 775c7c9ee1e1 /bin/bash (-it 标准输入和关联伪终端，-it后跟容器ID，/bin/bash是命令，表示在该容器中运行该命令)</code></pre><h3 id="9、停止docker服务-docker-stop-42141931ccd6-42141931ccd6-为容器ID"><a href="#9、停止docker服务-docker-stop-42141931ccd6-42141931ccd6-为容器ID" class="headerlink" title="9、停止docker服务  docker stop 42141931ccd6 (42141931ccd6 为容器ID)"></a>9、停止docker服务  docker stop 42141931ccd6 (42141931ccd6 为容器ID)</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、搜索MongoDB镜像&quot;&gt;&lt;a href=&quot;#1、搜索MongoDB镜像&quot; class=&quot;headerlink&quot; title=&quot;1、搜索MongoDB镜像&quot;&gt;&lt;/a&gt;1、搜索MongoDB镜像&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;docker search mong
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
-    
-      <category term="MongoDB" scheme="http://www.echodemo.cc/tags/MongoDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在centos7的docker当中安装RabbitMQ</title>
-    <link href="http://www.echodemo.cc/2020/01/11/%E5%9C%A8centos7%E7%9A%84docker%E5%BD%93%E4%B8%AD%E5%AE%89%E8%A3%85RabbitMQ/"/>
-    <id>http://www.echodemo.cc/2020/01/11/在centos7的docker当中安装RabbitMQ/</id>
-    <published>2020-01-11T12:48:06.000Z</published>
-    <updated>2020-01-11T12:50:15.805Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、访问：https-hub-docker-com"><a href="#1、访问：https-hub-docker-com" class="headerlink" title="1、访问：https://hub.docker.com/"></a>1、访问：<a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></h3><h3 id="2、搜索rabbitmq，进入该镜像的标签页，选择一个合适的版本，这里选择3-7-17-management。"><a href="#2、搜索rabbitmq，进入该镜像的标签页，选择一个合适的版本，这里选择3-7-17-management。" class="headerlink" title="2、搜索rabbitmq，进入该镜像的标签页，选择一个合适的版本，这里选择3.7.17-management。"></a>2、搜索rabbitmq，进入该镜像的标签页，选择一个合适的版本，这里选择3.7.17-management。</h3><h3 id="3、拉取镜像："><a href="#3、拉取镜像：" class="headerlink" title="3、拉取镜像："></a>3、拉取镜像：</h3><pre><code>docker pull rabbitmq:3.7.17-management</code></pre><h3 id="4、查看是否拉取成功"><a href="#4、查看是否拉取成功" class="headerlink" title="4、查看是否拉取成功"></a>4、查看是否拉取成功</h3><pre><code>docker images</code></pre><h3 id="启动RabbitMQ"><a href="#启动RabbitMQ" class="headerlink" title="启动RabbitMQ"></a>启动RabbitMQ</h3><pre><code>docker run -d -p 5672:5672 -p 15672:15672  --name rabbitmq  7601e834fa14-d：后台运行-p：映射端口-p 5672:5672 ：把主机的5672端口映射成rabbitMQ的5672端口-p 15672:15672 ： web管理界面的–name :起个名字7601e834fa14：镜像的id</code></pre><h3 id="测试是否访问成功"><a href="#测试是否访问成功" class="headerlink" title="测试是否访问成功:"></a>测试是否访问成功:</h3><pre><code>在浏览器中输入：http://安装RabbitMQ的主机IP:15672 (默认的账号密码皆为guest)</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、访问：https-hub-docker-com&quot;&gt;&lt;a href=&quot;#1、访问：https-hub-docker-com&quot; class=&quot;headerlink&quot; title=&quot;1、访问：https://hub.docker.com/&quot;&gt;&lt;/a&gt;1、访问：&lt;a 
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
-    
-      <category term="RabbitMQ" scheme="http://www.echodemo.cc/tags/RabbitMQ/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 整数反转</title>
-    <link href="http://www.echodemo.cc/2020/01/11/LeetCode-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/"/>
-    <id>http://www.echodemo.cc/2020/01/11/LeetCode-整数反转/</id>
-    <published>2020-01-11T12:23:49.000Z</published>
-    <updated>2020-01-11T12:42:15.257Z</updated>
-    
-    <content type="html"><![CDATA[<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p><pre><code>示例 1:输入: 123输出: 321示例 2:输入: -123输出: -321示例 3:输入: 120输出: 21</code></pre><p>注意:</p><p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p><h3 id="题解-一-：转化为字符串，再转回整型"><a href="#题解-一-：转化为字符串，再转回整型" class="headerlink" title="题解(一)：转化为字符串，再转回整型"></a>题解(一)：转化为字符串，再转回整型</h3><pre><code>class Solution{    public static int reverse(int x) {        String str = String.valueOf(x);        String result = &quot;&quot;;        if (&apos;-&apos; == str.charAt(0)) {            result = result + &quot;-&quot;;            str = str.substring(1);        }        int strLen = str.length();        for (int i = strLen - 1; i &gt; -1; i--) {            result = result + str.charAt(i);        }        try {            int iResult = Integer.parseInt(result);            return iResult;        } catch (NumberFormatException e) {            return 0;        }    }}</code></pre><h3 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h3><pre><code>// pop operation:pop = x % 10;x /= 10;// push operation:temp = rev * 10 + pop;rev = temp;</code></pre><p>这种方法很危险，因为当 temp = rev * 10 + pop 时会导致溢出。幸运的是，事先检查这个语句是否会导致溢出很容易。为了便于解释，我们假设 rev 是正数。</p><pre><code>(1）如果 temp = rev * 10 + pop 导致溢出，那么一定有 rev ≥ INTMAX / 10。(2)如果 rev &gt; INTMAX / 10 ，那么 temp = rev * 10 + pop 一定会溢出。(3)如果 rev == INTMAX / 10，那么只要 pop &gt; 7，temp = rev * 10 + pop 就会溢出。当 rev 为负时可以应用类似的逻辑。class Solution {    public int reverse(int x) {        int rev = 0;        while (x != 0) {            int pop = x % 10;            x /= 10;            if (rev &gt; Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 &amp;&amp; pop &gt; 7)) return 0;            if (rev &lt; Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 &amp;&amp; pop &lt; -8)) return 0;            rev = rev * 10 + pop;        }        return rev;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;示例 1:
-
-输入: 123
-输出: 321
-
-示例 2:
-
-输入: -123
-输出: -321
-
-示例 3:
-
-输入: 120
-输出: 21
-&lt;/code&gt;&lt;/pre&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
     
   </entry>
   

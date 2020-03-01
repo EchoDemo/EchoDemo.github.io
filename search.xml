@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode 加一]]></title>
+    <url>%2F2020%2F03%2F01%2FLeetCode-%E5%8A%A0%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321 题解(Java)class Solution { public int[] plusOne() { int count = 0; int len = digits.length; for (int i = len - 1; i &gt;= 0; i--) { if (digits[i] == 9) { digits[i] = 0; count++; continue; } digits[i] = digits[i]++; return digits; } int[] result = new int[len + 1]; result[0] = 1; for (int i = 0; i &lt; len + 1; i++) { result[i] = 0; } return result; } } 题解2（C++）class Solution { public: vector&lt;int&gt; plusOne(vector&lt;int&gt;&amp; digits) { for(int i=digits.size()-1;i&gt;=0;i--){ if(digits[i]==9){ digits[i]=0; } else{ digits[i]++; return digits; } } digits[0]=1; digits.push_back(0); return digits; } };]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode 至少是其他数字两倍的最大数]]></title>
+    <url>%2F2020%2F03%2F01%2FLeetCode-%E8%87%B3%E5%B0%91%E6%98%AF%E5%85%B6%E4%BB%96%E6%95%B0%E5%AD%97%E4%B8%A4%E5%80%8D%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[在一个给定的数组nums中，总是存在一个最大元素 。查找数组中的最大元素是否至少是数组中每个其他数字的两倍。如果是，则返回最大元素的索引，否则返回-1。 示例 1: 输入: nums = [3, 6, 1, 0] 输出: 1 解释: 6是最大的整数, 对于数组中的其他整数, 6大于数组中其他元素的两倍。6的索引是1, 所以我们返回1. 示例 2: 输入: nums = [1, 2, 3, 4] 输出: -1 解释: 4没有超过3的两倍大, 所以我们返回 -1. 提示: nums 的长度范围在[1, 50]. 每个 nums[i] 的整数范围在 [0, 100]. 题解找出最大和第二大的数 class Solution { public int dominantIndex(int nums[]) { int len = nums.length; if (len == 0) { return -1; } else if (len == 1) { return 0; } int max = nums[0]; int j = 0; int secondMax = 0; for (int i = 1; i &lt; len; i++) { if (nums[i] &gt; max) { max = nums[i]; j = i; } } for (int i = 0; i &lt; len; i++) { if ((nums[i] &lt; max) &amp;&amp; (nums[i] &gt; secondMax)) { secondMax = nums[i]; } } return (max &gt;= (secondMax * 2)) ? j : -1; } }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode 寻找数组的中心索引]]></title>
+    <url>%2F2020%2F03%2F01%2FLeetCode-%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E7%B4%A2%E5%BC%95%2F</url>
+    <content type="text"><![CDATA[给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。 示例 1: 输入: nums = [1, 7, 3, 6, 5, 6] 输出: 3 解释: 索引3 (nums[3] = 6) 的左侧数之和(1 + 7 + 3 = 11)，与右侧数之和(5 + 6 = 11)相等。 同时, 3 也是第一个符合要求的中心索引。 示例 2: 输入: nums = [1, 2, 3] 输出: -1 解释: 数组中不存在满足此条件的中心索引。 说明: nums 的长度范围为 [0, 10000]。 任何一个 nums[i] 将会是一个范围在 [-1000, 1000]的整数。 题解先计算总和，然后从左边开始累积左边的和，右边的和就用总和去减左边的总和。 class Solution { public int pivotIndex(int nums[]) { int len = nums.length; if (len &lt; 3) { return -1; } int leftSum = 0; int rightSum; int sum = 0; for (int i = 0; i &lt; len; i++) { sum += nums[i]; } for (int i = 0; i &lt; len; i++) { if (i==0){ leftSum = 0; }else { leftSum = leftSum + nums[i-1]; } rightSum = sum - leftSum - nums[i]; if (leftSum == rightSum) { return i; } } return -1; } }]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode 用队列实现栈]]></title>
     <url>%2F2020%2F03%2F01%2FLeetCode-%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%2F</url>
     <content type="text"><![CDATA[使用队列实现栈的下列操作： 1、push(x) -- 元素 x 入栈 2、pop() -- 移除栈顶元素 3、top() -- 获取栈顶元素 4、empty() -- 返回栈是否为空 注意: 1、你只能使用队列的基本操作-- 也就是 push to back, peek/pop from front, size, 和 is empty 这些操作是合法的。 2、你所使用的语言也许不支持队列。 你可以使用 list 或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。 3、你可以假设所有操作都是有效的（例如, 对一个空的栈不会调用 pop 或者 top 操作）。 题解1(两个队列，压入O(1)， 弹出 O(n))维护一个队列 q2，这个队列用作临时存储 q1 中出队的元素。q2 中最后入队的元素将作为新的栈顶元素。接着将 q1 中最后剩下的元素出队。我们通过把 q1 和 q2 互相交换的方式来避免把 q2 中的元素往 q1 中拷贝。 public class MyStack { private Queue&lt;Integer&gt; q1; private Queue&lt;Integer&gt; q2; private int top; public MyStack() { q1 = new LinkedList&lt;&gt;(); q2 = new LinkedList&lt;&gt;(); } public void push(int x) { q1.add(x); top = x; } public int pop() { while (q1.size() &gt; 1) { top = q1.remove(); q2.add(top); } int popValue = q1.remove(); Queue&lt;Integer&gt; temp = q1; q1 = q2; q2 = temp; return popValue; } public int top() { return top; } public boolean empty() { return q1.isEmpty(); } } 执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户 内存消耗 :37 MB, 在所有 Java 提交中击败了(木有看到)的用户 题解2(两个队列，压入O(n)， 弹出 O(1))让每一个新元素从 q2 入队，同时把这个元素作为栈顶元素保存。当 q1 非空（也就是栈非空），我们让 q1 中所有的元素全部出队，再将出队的元素从 q2 入队。通过这样的方式，新元素（栈中的栈顶元素）将会在 q2 的前端。我们通过将 q1， q2 互相交换的方式来避免把 q2 中的元素往 q1 中拷贝。 public class MyStack { private Queue&lt;Integer&gt; q1; private Queue&lt;Integer&gt; q2; private int top; public MyStack() { q1 = new LinkedList&lt;&gt;(); q2 = new LinkedList&lt;&gt;(); } public void push(int x) { q2.add(x); top = x; while (!q1.isEmpty()) { q2.add(q1.remove()); } Queue&lt;Integer&gt; temp = q1; q1 = q2; q2 = temp; } public int pop() { int temp = q1.remove(); while (!q1.isEmpty()) { top = q1.peek(); } return temp; } public int top() { return top; } public boolean empty() { return q1.isEmpty(); } } 超时了！ 题解3(一个队列， 压入O(n)， 弹出O(1))每当入队一个新元素的时候，我们可以把队列的顺序反转过来。 public class MyStack { private Queue&lt;Integer&gt; q1; public MyStack() { q1 = new LinkedList&lt;&gt;(); } public void push(int x) { q1.add(x); int len = q1.size(); while (len &gt; 1) { q1.add(q1.remove()); len--; } } public int pop() { return q1.remove(); } public int top() { return q1.peek(); } public boolean empty() { return q1.isEmpty(); } }]]></content>
