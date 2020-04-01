@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.echodemo.cc/"/>
-  <updated>2020-03-01T10:25:31.126Z</updated>
+  <updated>2020-04-01T14:08:54.097Z</updated>
   <id>http://www.echodemo.cc/</id>
   
   <author>
@@ -15,6 +15,133 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式之单例模式</title>
+    <link href="http://www.echodemo.cc/2020/04/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://www.echodemo.cc/2020/04/01/设计模式之单例模式/</id>
+    <published>2020-04-01T14:08:24.000Z</published>
+    <updated>2020-04-01T14:08:54.097Z</updated>
+    
+    <content type="html"><![CDATA[<p>单例模式（Singleton Pattern）是 Java 中最简单、使用最为普遍的设计模式之一。它是一种对象创建型模式。用于产生一个对象的具体实例，<strong>它可以确保系统中一个类只产生一个实例</strong>。在Java语言中这样的行为能带来两大好处：</p><blockquote><p>1、对于频繁使用的对象，可以省略创建对象所花费的时间，这对于那些重量级对象而言，是非常可观的一笔系统开销。</p><p>2、由于new操作次数的减少，对系统内存的使用频率也会降低，这将会减轻GC的压力，缩短GC停顿的时间。</p></blockquote><p>单例模式的参与者只有单例类和使用者两个：</p><blockquote><p>1、单例类：提供单例的工厂，返回单例。</p><p>2、使用者：获取并使用单例类。</p></blockquote><p>一个类的对象的产生是由类的构造函数来完成的。如果一个类对外提供了public的构造方法，那么外界就可以任意创建该类的对象。所以，如果想限制对象的产生，一个办法就是将构造函数变为私有的，使外面的类不能通过new来产生对象。同时为了保证类的可用性，就必须提供一个自己的实例，以及访问这个实例的静态方法。</p><h3 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h3><p>1、代码示例</p><pre><code>public class Singleton {    // 私有的构造函数,外部无法访问    private Singleton() {        System.out.println(&quot;Singleton is created&quot;);    }    // 在类内部实例化一个实例    private static Singleton instance = new Singleton();    // 对外提供获取实例的静态方法    public static Singleton getInstance() {        return instance;    }}</code></pre><p>2、代码测试</p><pre><code>public class Main {    public static void main(String[] args) {        Singleton singleton1 = Singleton.getInstance();        Singleton singleton2 = Singleton.getInstance();        System.out.println(singleton1 == singleton2);    }}</code></pre><p>3、测试结果</p><pre><code>true</code></pre><p>这里还有一种饿汉式的变种：</p><pre><code>public class Singleton1 {    // 私有的构造函数,外部无法访问    private Singleton1() {        System.out.println(&quot;Singleton1 is created&quot;);    }    // 在类内部定义一个实例    private static Singleton1 instance = null;    static {        // 实例化该实例        instance = new Singleton1();    }    // 对外提供获取实例的静态方法    public static Singleton1 getInstance() {        return instance;    }}</code></pre><p>这种单例的实现方式非常简单，被称之为饿汉式。所谓饿汉指的是对于一个饿汉来说，在他希望用到该实例的时候就能够立即拿到，而不需要进行任何等待。所以，通过static的静态初始化方式，在该类第一次被加载的时候，就有一个Singleton的实例被创建出来。这样就可以保证在第一次想要使用该对象时，它就被初始化好了。</p><p>但与此同时，这样会造成不必要的消耗，因为有可能这个实例根本就不会被用到。假如该单例的创建过程很慢，而由于instance成员变量是static定义的，因此在JVM加载单例类的时候，单例对象就会被创建。如果此时这个单例类在系统中还扮演其他的角色，那么在任何使用这个单例类的地方都会初始化这个单例变量，而不管是否会被用到。也就无法做到延迟加载。</p><pre><code>// 代码示例public class Singleton2 {    // 私有的构造函数,外部无法访问    private Singleton2() {        System.out.println(&quot;Singleton2 is created&quot;);    }    // 在类内部实例化一个实例    private static Singleton2 instance = new Singleton2();    // 对外提供获取实例的静态方法    public static Singleton2 getInstance() {        return instance;    }    // 模拟单例类扮演其他角色    public static void doSomething() {        System.out.println(&quot;doSomething in Singleton2&quot;);    }}// 代码测试public class Main {    public static void main(String[] args) {        Singleton2 singleton2 = Singleton2.getInstance();        singleton2.doSomething();    }}// 测试结果Singleton2 is createddoSomething in Singleton2</code></pre><p>下面提供两种解决方式，第一种是使用懒汉式。第二种是使用静态内部类的形式。</p><h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>代码示例</p><pre><code>public class LazySingleton {    // 私有的构造函数,外部无法访问    private LazySingleton () {        System.out.println(&quot;LazySingleton is created&quot;);    }    // 在类内部定义一个实例    private static LazySingleton instance = null;    // 对外提供获取实例的静态方法    public static LazySingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            instance = new LazySingleton();        }        return instance;    }}</code></pre><p>在懒汉式的模式当中，不会提前把实例创建出来，它将类对自己的实例化延迟到第一次被引用的时候。但其实该懒汉式的实现还存在一个线程安全的问题。在多线程的环境下，当线程1新建单例时，在完成赋值操作前；线程2可能判断instance为null，故线程2也将启动新建单例的程序，从而导致多个实例被创建。当然，其实解决方式很简单，就是给创建对象的步骤加锁。</p><p>线程安全的懒汉式代码示例：</p><pre><code>public class SynchronizedLazySingleton {    // 私有的构造函数,外部无法访问    private SynchronizedLazySingleton () {        System.out.println(&quot;SynchronizedLazySingleton is created&quot;);    }    // 在类内部定义一个实例    private static SynchronizedLazySingleton instance = null;    // 对外提供获取实例的静态方法    public static synchronized SynchronizedLazySingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            instance = new SynchronizedLazySingleton();        }        return instance;    }}</code></pre><p>虽然使用以上代码实现了延迟加载的功能，但是因为引入了同步关键字，因此在多线程环境中，它的耗时要大大增加，反而降低了系统的性能，导致有点得不偿失，为了解决这个问题，引入了以下的双重校验锁和静态内部类式。</p><p>双重校验锁代码示例：</p><pre><code>public class DoubleLockSingleton {    // 私有的构造函数,外部无法访问    private DoubleLockSingleton () {        System.out.println(&quot;DoubleLockSingleton is created&quot;);    }    // 在类内部定义一个实例    private static DoubleLockSingleton instance = null;    // 对外提供获取实例的静态方法    public static DoubleLockSingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            synchronized (DoubleLockSingleton.class) {                if (instance == null) {                    instance = new DoubleLockSingleton();                }            }        }        return instance;    }}</code></pre><p>通过使用同步代码块的方式减小了锁的范围。这样可以大大提高效率。但是，该代码还存在隐患。隐患的原因主要和Java内存模型（JMM）有关。在J2SE 1.4或更早的版本中使用双重检查锁有潜在的危险，有时会正常工作（区分正确实现和有小问题的实现是很困难的。取决于编译器，线程的调度和其他并发系统活动，不正确的实现双重检查锁导致的异常结果可能会间歇性出现。重现异常是十分困难的。） 在J2SE 5.0中，这一问题被修正了。volatile关键字保证多个线程可以正确处理单件实例。</p><pre><code>public class VolatileSingleton {    // 私有的构造函数,外部无法访问    private VolatileSingleton () {        System.out.println(&quot;VolatileSingleton is created&quot;);    }    // 在类内部定义一个实例    private static volatile VolatileSingleton instance = null;    // 对外提供获取实例的静态方法    public static VolatileSingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            synchronized (VolatileSingleton.class) {                if (instance == null) {                    instance = new VolatileSingleton();                }            }        }        return instance;    }}</code></pre><h3 id="静态内部类式"><a href="#静态内部类式" class="headerlink" title="静态内部类式"></a>静态内部类式</h3><p>代码示例：</p><pre><code>public class StaticInnerClassSingleton {    // 私有的构造函数    private StaticInnerClassSingleton() {        System.out.println(&quot;StaticInnerClassSingleton is created&quot;);    }    // 在静态内部类中初始化实例对象    private static class SingletonHolder {        private static StaticInnerClassSingleton instance = new StaticInnerClassSingleton();    }    // 对外提供获取实例的静态方法    public static StaticInnerClassSingleton getInstance() {        return SingletonHolder.instance;    }}</code></pre><p>在这个实现中单例模式使用内部类来维护单例的实例，当StaticInnerClassSingleton被加载时，其内部类并不会被初始化，故可以确保当StaticInnerClassSingleton类被载入JVM时，不会初始化单例类，而只有当getInstance()方法被调用时，才会加载SingletonHolder，从而初始化instance。</p><p>同时，由于实例的建立是在类加载时完成，故天生对多线程友好，getInstance()方法也不需要使用同步关键字。</p><h3 id="防止序列化破坏单例模式"><a href="#防止序列化破坏单例模式" class="headerlink" title="防止序列化破坏单例模式"></a>防止序列化破坏单例模式</h3><p>通常情况下，用以上方式实现的单例已经可以确保在系统中只存在唯一实例了。但仍然有例外的情况，可能导致系统生成多个实例。比如，<strong>在代码中，通过反射机制，强行调用单例类的私有构造方法，生成多个单例。</strong>比如使用可以序列化的双重校验锁进行测试：</p><p>代码示例：</p><pre><code>public class VolatileSingleton implements Serializable {    // 私有的构造函数,外部无法访问    private VolatileSingleton () {        System.out.println(&quot;VolatileSingleton is created&quot;);    }    // 在类内部定义一个实例    private static volatile VolatileSingleton instance = null;    // 对外提供获取实例的静态方法    public static VolatileSingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            synchronized (VolatileSingleton.class) {                if (instance == null) {                    instance = new VolatileSingleton();                }            }        }        return instance;    }}</code></pre><p>代码测试：</p><pre><code>public class Main {    public static void main(String[] args) throws Exception{        VolatileSingleton s1 = null;        VolatileSingleton s = VolatileSingleton.getInstance();        // 先将实例串行化到文件        FileOutputStream fos = new FileOutputStream(&quot;F:\\VolatileSingleton.txt&quot;);        ObjectOutputStream oos = new ObjectOutputStream(fos);        oos.writeObject(s);        oos.flush();        oos.close();        // 从文件读出原有的单例类        FileInputStream fis = new FileInputStream(&quot;F:\\VolatileSingleton.txt&quot;);        ObjectInputStream ois = new ObjectInputStream(fis);        s1 = (VolatileSingleton) ois.readObject();        System.out.println(s == s1);    }}</code></pre><p>测试结果：</p><pre><code>false</code></pre><p>以上说明：<strong>通过对VolatileSingleton的序列化与反序列化得到的对象是一个新的对象，这就破坏了VolatileSingleton的单例性。</strong>那么要如何解决这个问题呢？只要在VolatileSingleton类中定义readResolve就可以解决该问题：</p><pre><code>public class VolatileSingleton implements Serializable {    // 私有的构造函数,外部无法访问    private VolatileSingleton () {        System.out.println(&quot;VolatileSingleton is created&quot;);    }    // 在类内部定义一个实例    private static volatile VolatileSingleton instance = null;    // 对外提供获取实例的静态方法    public static VolatileSingleton getInstance() {        // 在对象被使用的时候才进行初始化        if (instance == null) {            synchronized (VolatileSingleton.class) {                if (instance == null) {                    instance = new VolatileSingleton();                }            }        }        return instance;    }    private Object readResolve () {        return instance;    }}</code></pre><p>事实上，在实现了私有的readResolve()方法之后，readObject()已经形同虚设，它直接使用readResolve()替换了原本的返回值，从而在形式上构造了单例。具体的序列化是如何破坏单例性分析请参见该文章<a href="http://www.hollischuang.com/archives/1144" target="_blank" rel="noopener">单例与序列化的那些事儿</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;单例模式（Singleton Pattern）是 Java 中最简单、使用最为普遍的设计模式之一。它是一种对象创建型模式。用于产生一个对象的具体实例，&lt;strong&gt;它可以确保系统中一个类只产生一个实例&lt;/strong&gt;。在Java语言中这样的行为能带来两大好处：&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://www.echodemo.cc/tags/Java/"/>
+    
+      <category term="设计模式" scheme="http://www.echodemo.cc/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 螺旋矩阵</title>
+    <link href="http://www.echodemo.cc/2020/03/02/LeetCode-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/"/>
+    <id>http://www.echodemo.cc/2020/03/02/LeetCode-螺旋矩阵/</id>
+    <published>2020-03-02T14:33:06.000Z</published>
+    <updated>2020-03-02T14:34:58.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。</p><pre><code>示例 1:输入:[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ]]输出: [1,2,3,6,9,8,7,4,5]示例 2:输入:[  [1, 2, 3, 4],  [5, 6, 7, 8],  [9,10,11,12]]输出: [1,2,3,4,8,12,11,10,9,5,6,7]</code></pre><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><pre><code>class Solution {    public List&lt;Integer&gt; spiralOrder(int[][] matrix) {        if (matrix.length == 0) {            return new ArrayList&lt;&gt;(0);        }        int M = matrix.length;        int N = matrix[0].length;        List&lt;Integer&gt; list = new ArrayList&lt;&gt;(M * N);        int i,j;        int p = M, q = N;        int m = 0;        while(p&gt;0 &amp;&amp; q&gt;0) {            i = m; j= m;            while(j&lt;=N-m-1) list.add(matrix[i][j++]);            i = i+1; j = N-m-1;            while(i&lt;=M-m-1) list.add(matrix[i++][j]);            i = M-m-1; j=j-1;            while(i&gt;m &amp;&amp; j&gt;=m) list.add(matrix[i][j--]);            i = i-1; j=m;            while(i&gt;m &amp;&amp; j&lt;N-m-1) list.add(matrix[i--][j]);            m++;            p-=2;            q-=2;        }        return list;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例 1:
+
+输入:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+输出: [1,2,3,6,
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 对角线遍历</title>
+    <link href="http://www.echodemo.cc/2020/03/02/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/"/>
+    <id>http://www.echodemo.cc/2020/03/02/LeetCode-对角线遍历/</id>
+    <published>2020-03-02T14:23:06.000Z</published>
+    <updated>2020-03-02T14:31:02.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>给定一个含有 M x N 个元素的矩阵（M 行，N 列），请以对角线遍历的顺序返回这个矩阵中的所有元素，对角线遍历如下图所示。</p><pre><code>示例:输入:[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ]]输出:  [1,2,4,7,5,3,6,8,9]</code></pre><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>改解法的关键在于确定每一层的坐标范围，其中下边界low = Math.max(0, i - n + 1)，这样可以保证下边界不会小于0，而上边界high = Math.min(i, m - 1)，这样也保证了上边界不会大于m-1，如果是偶数层，则从上边界往下边界遍历，反之如果是奇数层，则从下边界往上边界遍历</p><pre><code>class Solution {    public int[] findDiagonalOrder(int[] matrix) {        if (matrix.length == 0) {            return new int[0];        }        int M = matrix.length;        int N = matrix[0].length;        int[] result = new int[M * N];        int k = 0;        // 对角线的层数        for (int i = 0; i &lt; M + N - 1; i++) {            int low = Math.max(0, i - N + 1);            int high = Math.min(i, M - 1);            // 判别方向            if (i % 2 == 0) {                for (int j = high; j &gt;= low; j--) {                    result[k++] = matrix[j][i - j];                }            } else {                for (int j = low; j &lt;= high; j++) {                    result[k++] = matrix[j][i - j];                }            }        }        return result;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;给定一个含有 M x N 个元素的矩阵（M 行，N 列），请以对角线遍历的顺序返回这个矩阵中的所有元素，对角线遍历如下图所示。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例:
+
+输入:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+
+输出:
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 反转链表</title>
+    <link href="http://www.echodemo.cc/2020/03/02/LeetCode-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
+    <id>http://www.echodemo.cc/2020/03/02/LeetCode-反转链表/</id>
+    <published>2020-03-02T14:00:37.000Z</published>
+    <updated>2020-03-02T14:22:29.028Z</updated>
+    
+    <content type="html"><![CDATA[<p>反转一个单链表。</p><pre><code>示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</code></pre><p>进阶:你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p><h3 id="题解1（头插法反转链表）"><a href="#题解1（头插法反转链表）" class="headerlink" title="题解1（头插法反转链表）"></a>题解1（头插法反转链表）</h3><pre><code>class Solution {    public ListNode reverseList(ListNode head) {        ListNode head1 = new ListNode(0);        while (head != null) {            ListNode temp = head1.next;            head1.next = new ListNode(head.val);            head1.next.next = temp;            head = head.next;        }        return head1.next;    }}</code></pre><h3 id="题解2（递归）"><a href="#题解2（递归）" class="headerlink" title="题解2（递归）"></a>题解2（递归）</h3><pre><code>class Solution {    public ListNode reverseList(ListNode head) {        //递归终止条件是当前为空，或者下一个节点为空        if(head==null || head.next==null) {            return head;        }        //这里的cur就是最后一个节点        ListNode cur = reverseList(head.next);        //这里请配合动画演示理解        //如果链表是 1-&gt;2-&gt;3-&gt;4-&gt;5，那么此时的cur就是5        //而head是4，head的下一个是5，下下一个是空        //所以head.next.next 就是5-&gt;4        head.next.next = head;        //防止链表循环，需要将head.next设置为空        head.next = null;        //每层递归函数都返回cur，也就是最后一个节点        return cur;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;反转一个单链表。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;示例:
+
+输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
+输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进阶:你可以迭代或递归地反转
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 加一</title>
@@ -465,120 +592,6 @@
     
     
       <category term="Nginx" scheme="http://www.echodemo.cc/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git高级用法</title>
-    <link href="http://www.echodemo.cc/2020/02/04/Git%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"/>
-    <id>http://www.echodemo.cc/2020/02/04/Git高级用法/</id>
-    <published>2020-02-04T00:21:29.000Z</published>
-    <updated>2020-02-04T02:28:14.302Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/2020/2/git工作流程图.png" alt="&quot;git工作流程图&quot;"></p><h3 id="1、跳到之前的分支"><a href="#1、跳到之前的分支" class="headerlink" title="1、跳到之前的分支"></a>1、跳到之前的分支</h3><pre><code>git checkout -</code></pre><h3 id="2、查看历史"><a href="#2、查看历史" class="headerlink" title="2、查看历史"></a>2、查看历史</h3><pre><code># 每个提交在一行内显示git log --oneline# 在所有提交日志中搜索包含「homepage」的提交git log --all --grep=&apos;homepage&apos;# 获取某人的提交日志git log --author=&quot;Maxence&quot;</code></pre><h3 id="3、之前重置了一个不想保留的提交，但是现在又想要回滚"><a href="#3、之前重置了一个不想保留的提交，但是现在又想要回滚" class="headerlink" title="3、之前重置了一个不想保留的提交，但是现在又想要回滚"></a>3、之前重置了一个不想保留的提交，但是现在又想要回滚</h3><pre><code># 获取所有操作历史git reflog# 重置到相应提交git reset HEAD@{4}# ……或者……git reset --hard &lt;提交的哈希值&gt;</code></pre><h3 id="4、我把本地仓库搞得一团糟，应该怎么清理？"><a href="#4、我把本地仓库搞得一团糟，应该怎么清理？" class="headerlink" title="4、我把本地仓库搞得一团糟，应该怎么清理？"></a>4、我把本地仓库搞得一团糟，应该怎么清理？</h3><pre><code>git fetch origingit checkout mastergit reset --hard origin/master</code></pre><h3 id="5、查看我的分支和-master-的不同"><a href="#5、查看我的分支和-master-的不同" class="headerlink" title="5、查看我的分支和 master 的不同"></a>5、查看我的分支和 master 的不同</h3><pre><code>git diff master..my-branch</code></pre><h3 id="6、定制提交"><a href="#6、定制提交" class="headerlink" title="6、定制提交"></a>6、定制提交</h3><pre><code># 编辑上次提交git commit --amend -m &quot;更好的提交日志&quot;# 在上次提交中附加一些内容，保持提交日志不变git add . &amp;&amp; git commit --amend --no-edit# 空提交 —— 可以用来重新触发 CI 构建git commit --allow-empty -m &quot;chore: re-trigger build&quot;</code></pre><h3 id="7、squash-提交"><a href="#7、squash-提交" class="headerlink" title="7、squash 提交"></a>7、squash 提交</h3><p>比方说我想要 rebase 最近 3 个提交：</p><pre><code>- git rebase -i HEAD~3- 保留第一行的 pick，剩余提交替换为 squash 或 s- 清理提交日志并保存（vi 编辑器中键入 :wq 即可保存）pick 64d26a1 feat: add index.jss 45f0259 fix: update index.jss 8b15b0a fix: typo in index.js</code></pre><h3 id="8、修正"><a href="#8、修正" class="headerlink" title="8、修正"></a>8、修正</h3><p>比方说想在提交 fed14a4c 加上一些内容。</p><p><img src="/images/2020/2/git提交分支.png" alt="&quot;git工作流程图&quot;"></p><pre><code>git add .git commit --fixup HEAD~1# 或者也可以用提交的哈希值（fed14a4c）替换 HEAD~1git rebase -i HEAD~3 --autosquash# 保存并退出文件（VI 中输入 `:wq`）</code></pre><h3 id="9、rebase-的时候在每个提交上执行命令"><a href="#9、rebase-的时候在每个提交上执行命令" class="headerlink" title="9、rebase 的时候在每个提交上执行命令"></a>9、rebase 的时候在每个提交上执行命令</h3><p>如果特性很多，一个分支里可能有多个提交。如果测试失败了，你希望能找到导致测试失败的提交。这时候你可以使用 rebase –exec 命令在每个提交上执行命令。</p><pre><code># 在最近 3 个提交上运行 `npm test` 命令git rebase HEAD~3 --exec &quot;npm test&quot;</code></pre><p><img src="/images/2020/2/在每个提交上执行命令.png" alt="&quot;git工作流程图&quot;"></p><h3 id="10、暂存"><a href="#10、暂存" class="headerlink" title="10、暂存"></a>10、暂存</h3><p>暂存不止是 git stash 和 git stash pop ;)</p><pre><code># 保存所有正在追踪的文件git stash save &quot;日志信息&quot;# 列出所有的暂存项git stash list# 获取并删除暂存项git stash apply stash@{1}git stash drop stash@{1}# ……或使用一条命令……git stash pop stash@{1}</code></pre><h3 id="11、清理"><a href="#11、清理" class="headerlink" title="11、清理"></a>11、清理</h3><pre><code># 移除远程仓库上不存在的分支git fetch -p# 移除所有包含 `greenkeeper` 的分支git fetch -p &amp;&amp; git branch --remote | fgrep greenkeeper | sed &apos;s/^.\{9\}//&apos; | xargs git push origin --delete</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/images/2020/2/git工作流程图.png&quot; alt=&quot;&amp;quot;git工作流程图&amp;quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;1、跳到之前的分支&quot;&gt;&lt;a href=&quot;#1、跳到之前的分支&quot; class=&quot;headerlink&quot; title=&quot;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="git" scheme="http://www.echodemo.cc/tags/git/"/>
-    
-      <category term="github" scheme="http://www.echodemo.cc/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 最长公共前缀</title>
-    <link href="http://www.echodemo.cc/2020/01/18/LeetCode-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/"/>
-    <id>http://www.echodemo.cc/2020/01/18/LeetCode-最长公共前缀/</id>
-    <published>2020-01-18T02:20:19.000Z</published>
-    <updated>2020-01-18T11:41:00.979Z</updated>
-    
-    <content type="html"><![CDATA[<p>编写一个函数来查找字符串数组中的最长公共前缀。</p><p>如果不存在公共前缀，返回空字符串 “”。</p><pre><code>示例 1:输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]输出: &quot;fl&quot;示例 2:输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]输出: &quot;&quot;解释: 输入不存在公共前缀。</code></pre><p>说明:</p><p>所有输入只包含小写字母 a-z 。</p><h3 id="题解：一个字符一个字符比较"><a href="#题解：一个字符一个字符比较" class="headerlink" title="题解：一个字符一个字符比较"></a>题解：一个字符一个字符比较</h3><pre><code>class Solution {    public String longestCommonPrefix(String[] strs) {        int strsLen = strs.length;        if (strsLen == 0) {            return &quot;&quot;;        }        int str1Len = strs[0].length();        int i = 0;        String str1 = strs[0];        for (i = 0; i &lt; str1Len; i++) {            char c = str1.charAt(i);            int k = 1;            for (int j = 1; j &lt; strsLen; j++) {                if (strs[j].length() &lt;= i)                    break;                if (c == strs[j].charAt(i))                    k++;            }            if (k == strsLen) {                continue;            } else {                break;            }        }        if (i == 0) {            return &quot;&quot;;        } else {            return str1.substring(0, i);        }    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;编写一个函数来查找字符串数组中的最长公共前缀。&lt;/p&gt;
-&lt;p&gt;如果不存在公共前缀，返回空字符串 “”。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;示例 1:
-
-输入: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot;,&amp;quot;flight&amp;quot;]
-输出
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 罗马数字转整型</title>
-    <link href="http://www.echodemo.cc/2020/01/12/LeetCode-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E5%9E%8B/"/>
-    <id>http://www.echodemo.cc/2020/01/12/LeetCode-罗马数字转整型/</id>
-    <published>2020-01-12T09:04:35.000Z</published>
-    <updated>2020-01-13T13:17:50.336Z</updated>
-    
-    <content type="html"><![CDATA[<p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p><pre><code>字符          数值I             1V             5X             10L             50C             100D             500M             1000</code></pre><p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p><p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p><pre><code>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code></pre><p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p><pre><code>示例 1:输入: &quot;III&quot;输出: 3示例 2:输入: &quot;IV&quot;输出: 4示例 3:输入: &quot;IX&quot;输出: 9示例 4:输入: &quot;LVIII&quot;输出: 58解释: L = 50, V= 5, III = 3.示例 5:输入: &quot;MCMXCIV&quot;输出: 1994解释: M = 1000, CM = 900, XC = 90, IV = 4.</code></pre><h3 id="题解一：纯遍历（map）"><a href="#题解一：纯遍历（map）" class="headerlink" title="题解一：纯遍历（map）:"></a>题解一：纯遍历（map）:</h3><pre><code>class Solution {    public int romanToInt(String s) {        Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;(7);        map.put(&apos;I&apos;, 1);        map.put(&apos;V&apos;, 5);        map.put(&apos;X&apos;, 10);        map.put(&apos;L&apos;, 50);        map.put(&apos;C&apos;, 100);        map.put(&apos;D&apos;, 500);        map.put(&apos;M&apos;, 1000);        int sum = 0;        int len = s.length();        for (int i = 0; i &lt; len; i++) {            int current = map.get(s.charAt(i));            if (i == len - 1) {                sum += current;                break;            }            int right = map.get(s.charAt(i + 1));            if (current &lt; right) {                sum += (right - current);                i++;            } else {                sum += current;            }        }        return sum;    }}</code></pre><h3 id="题解二-switch-："><a href="#题解二-switch-：" class="headerlink" title="题解二(switch)："></a>题解二(switch)：</h3><pre><code>class Solution {    public int romanToInt(String s) {        int sum = 0;        int len = s.length();        for (int i = 0; i &lt; len; i++) {            int current = getValue(s.charAt(i));            if (i == len - 1) {                sum += current;                break;            }            int right = getValue(s.charAt(i + 1));            if (current &lt; right) {                sum += (right - current);                i++;            } else {                sum += current;            }        }        return sum;    }    private int getValue(char c) {        switch (c) {            case &apos;I&apos;: return 1;            case &apos;V&apos;: return 5;            case &apos;X&apos;: return 10;            case &apos;L&apos;: return 50;            case &apos;C&apos;: return 100;            case &apos;D&apos;: return 500;            case &apos;M&apos;: return 1000;            default : return 0;        }    }}(1)执行用时 :4 ms, 在所有 Java 提交中击败了99.96%的用户(2)内存消耗 :35.9 MB, 在所有 Java 提交中击败了99.59%的用户</code></pre><p>switch语句被编译后，对应得是jvm的tableswitch指令，执行起来也就几条指令就完成了;而HashMap的get操作源码如下:</p><pre><code>public V get(Object key) {    if (key == null)        return getForNullKey();    int hash = hash(key.hashCode());    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];         e != null;         e = e.next) {        Object k;        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))            return e.value;    }    return null;}</code></pre><p>所以map.get执行的jvm指令肯定是要比tableswitch要多的。但是如果JVM在执行的过程中进行JIT优化会发现，map的执行速度会大大加快，而使用switch实现的方法并不会被优化。</p><h4 id="所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。"><a href="#所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。" class="headerlink" title="所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。"></a>所以我们可以得出结论：leetcode的代码性能测试，都是基于java原生的数据结构进行的。因此我们不能为了做算法题而做算法题，代码性能优化的过程才能让我们更了解底层的数据结构。</h4>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;字符          数值
-I             1
-V             5
-X             10
-L             50
-C      
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="LeetCode" scheme="http://www.echodemo.cc/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker常用命令</title>
-    <link href="http://www.echodemo.cc/2020/01/11/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://www.echodemo.cc/2020/01/11/docker常用命令/</id>
-    <published>2020-01-11T13:00:23.000Z</published>
-    <updated>2020-02-24T14:17:38.821Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="docker镜像常用命令"><a href="#docker镜像常用命令" class="headerlink" title="docker镜像常用命令"></a>docker镜像常用命令</h3><h4 id="什么是docker镜像？"><a href="#什么是docker镜像？" class="headerlink" title="什么是docker镜像？"></a>什么是docker镜像？</h4><p>操作系统分为内核和用户空间。对于Linux而言，内核启动后，会挂载root文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root文件系统。比如官方镜像centos:latest 就包含了完整的一套centos:latest最小系统的root文件系统。</p><p>Docker镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。<strong>镜像不包含任何动态数据，其内容在构建之后也不会被改变。</strong></p><p>镜像由多层文件系统联合组成。被称之为<strong>分层存储。</strong>镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。<strong>分层存储这一特点会在下载镜像的时候显现出来。</strong></p><h4 id="1、搜索镜像"><a href="#1、搜索镜像" class="headerlink" title="1、搜索镜像"></a>1、搜索镜像</h4><pre><code>docker search java</code></pre><h4 id="2、下载镜像"><a href="#2、下载镜像" class="headerlink" title="2、下载镜像"></a>2、下载镜像</h4><pre><code>// 由于docker search命令只能查找出是否有该镜像，不能找到该镜像支持的版本，所以我们需要通过docker hub来搜索支持的版本。进入docker hub的官网，地址：https://hub.docker.com。然后搜索需要的镜像，查看镜像支持的版本。docker pull java:8</code></pre><h4 id="3、列出镜像"><a href="#3、列出镜像" class="headerlink" title="3、列出镜像"></a>3、列出镜像</h4><pre><code>// 查看所有镜像docker images 或 docker image ls// 查看某一个指定镜像docker image ls nginx:1.14.2// 过滤匹配镜像(nginx:latest之后下载的镜像，之前用before)docker image ls -f since=nginx:latest</code></pre><h4 id="4、删除镜像"><a href="#4、删除镜像" class="headerlink" title="4、删除镜像"></a>4、删除镜像</h4><pre><code>// 指定名称删除镜像docker rmi java:8// 指定名称删除镜像（强制）docker rmi -f java:8// 强制删除所有镜像docker rmi -f $(docker images)// 删除所有未被 tag 标记和未被容器使用的镜像docker image prune// 删除所有未被容器使用的镜像docker image prune -a</code></pre><h3 id="docker容器常用命令"><a href="#docker容器常用命令" class="headerlink" title="docker容器常用命令"></a>docker容器常用命令</h3><h4 id="什么是docker容器-Container-？"><a href="#什么是docker容器-Container-？" class="headerlink" title="什么是docker容器(Container)？"></a>什么是docker容器(Container)？</h4><p>镜像（Image）和容器（Container）有紧密的关系，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</p><p><strong>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。</strong></p><p>前面讲过镜像使用的是分层存储，容器也是如此。每一个容器运行时，是以镜像为基础层，在其上创建一个当前容器的存储层，我们可以称这个为容器运行时读写而准备的存储层为容器存储层。容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。</p><p>容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p><h4 id="1、新建并启动容器"><a href="#1、新建并启动容器" class="headerlink" title="1、新建并启动容器"></a>1、新建并启动容器</h4><pre><code>docker run -it --rm -p 80:80 --name nginx -d nginx:1.17.0 /bin/bash-i: 以交互模式运行容器，通常与 -t 同时使用-t: 为容器重新分配一个伪输入终端，进入 bash 执行一些命令并查看返回结果，因此我们需要交互式终端。--rm：这个参数是说容器退出后随之将其删除。默认情况下，为了排障需求，退出的容器并不会立即删除，除非手动 docker rm。使用 --rm 可以避免浪费空间。-p：指定端口映射，格式为：hostPort:containerPort--name：指定运行后容器的名字为nginx,之后可以通过名字来操作容器-d：表示后台运行/bin/bash:以交互模式启动一个容器,在容器内执行/bin/bash命令。</code></pre><h4 id="2、列出容器"><a href="#2、列出容器" class="headerlink" title="2、列出容器"></a>2、列出容器</h4><pre><code>// 列出运行中的容器docker ps// 列出所有容器docker ps -a</code></pre><h4 id="3、停止-启动容器"><a href="#3、停止-启动容器" class="headerlink" title="3、停止/启动容器"></a>3、停止/启动容器</h4><pre><code>// $ContainerName及$ContainerId可以用docker ps命令查询出来docker stop $ContainerName(或者$ContainerId)// 强制停止容器docker kill $ContainerName(或者$ContainerId)// 启动已停止的容器docker start $ContainerName(或者$ContainerId)// 重启容器docker restart $ContainerName(或者$ContainerId)</code></pre><h4 id="4、进入-导入-导出容器"><a href="#4、进入-导入-导出容器" class="headerlink" title="4、进入/导入/导出容器"></a>4、进入/导入/导出容器</h4><pre><code>// 进入容器（推荐）docker exec -it $ContainerId /bin/bash// 进入容器docker attach $ContainerId// 导出容器docker export $ContainerId &gt; filename.tar// 导入容器(生成镜像)cat filename.tar | docker import - $imagename:$tag</code></pre><h4 id="5、删除容器"><a href="#5、删除容器" class="headerlink" title="5、删除容器"></a>5、删除容器</h4><pre><code>// 删除指定容器docker rm $ContainerName(或者$ContainerID)// 强制删除所有容器docker rm -f $(docker ps -a -q)// 删除所有已退出或者终止的容器docker container prune</code></pre><h4 id="6、查看容器的日志"><a href="#6、查看容器的日志" class="headerlink" title="6、查看容器的日志"></a>6、查看容器的日志</h4><pre><code>docker logs $ContainerName(或者$ContainerId)</code></pre><h4 id="7、查看容器的IP地址"><a href="#7、查看容器的IP地址" class="headerlink" title="7、查看容器的IP地址"></a>7、查看容器的IP地址</h4><pre><code>docker inspect --format &apos;{{ .NetworkSettings.IPAddress }}&apos; $ContainerName(或者$ContainerId)</code></pre><h4 id="8、同步宿主机时间到容器"><a href="#8、同步宿主机时间到容器" class="headerlink" title="8、同步宿主机时间到容器"></a>8、同步宿主机时间到容器</h4><pre><code>docker cp /etc/localtime $ContainerName(或者$ContainerId):/etc/</code></pre><h4 id="9、在宿主机查看docker使用cpu、内存、网络、io情况"><a href="#9、在宿主机查看docker使用cpu、内存、网络、io情况" class="headerlink" title="9、在宿主机查看docker使用cpu、内存、网络、io情况"></a>9、在宿主机查看docker使用cpu、内存、网络、io情况</h4><pre><code>// 查看指定容器情况docker stats $ContainerName(或者$ContainerId)// 查看所有容器情况docker stats -a</code></pre><h4 id="10、进入Docker容器内部的bash"><a href="#10、进入Docker容器内部的bash" class="headerlink" title="10、进入Docker容器内部的bash"></a>10、进入Docker容器内部的bash</h4><pre><code>docker exec -it $ContainerName /bin/bash</code></pre><h3 id="修改Docker镜像的存放位置"><a href="#修改Docker镜像的存放位置" class="headerlink" title="修改Docker镜像的存放位置"></a>修改Docker镜像的存放位置</h3><h4 id="1、查看docker镜像的存放位置"><a href="#1、查看docker镜像的存放位置" class="headerlink" title="1、查看docker镜像的存放位置"></a>1、查看docker镜像的存放位置</h4><pre><code>docker info | grep &quot;Docker Root Dir&quot;</code></pre><h4 id="2、关闭Docker服务"><a href="#2、关闭Docker服务" class="headerlink" title="2、关闭Docker服务"></a>2、关闭Docker服务</h4><pre><code>systemctl stop docker</code></pre><h4 id="3、移动目录到目标路径"><a href="#3、移动目录到目标路径" class="headerlink" title="3、移动目录到目标路径"></a>3、移动目录到目标路径</h4><pre><code>mv /var/lib/docker /mydata/docker</code></pre><h4 id="4、建立软连接"><a href="#4、建立软连接" class="headerlink" title="4、建立软连接"></a>4、建立软连接</h4><pre><code>ln -s /mydata/docker /var/lib/docker</code></pre><h4 id="什么是docker仓库-Repository-？"><a href="#什么是docker仓库-Repository-？" class="headerlink" title="什么是docker仓库(Repository)？"></a>什么是docker仓库(Repository)？</h4><p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p><p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。以Ubuntu镜像为例，ubuntu是仓库的名字，其内包含有不同的版本标签，如，14.04, 16.04。我们可以通过 ubuntu:14.04，或者 ubuntu:16.04来具体指定所需哪个版本的镜像。如果忽略了标签，比如 ubuntu，那将视为 ubuntu:latest。</p><p>仓库名经常以两段式路径形式出现，比如jwilder/nginx-proxy，前者往往意味着Docker Registry多用户环境下的用户名，后者则是对应的软件名。</p><h3 id="镜像加速器配置"><a href="#镜像加速器配置" class="headerlink" title="镜像加速器配置"></a>镜像加速器配置</h3><p>国内从 Docker Hub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：Docker官方提供的中国registry mirror(<a href="https://registry.docker-cn.com);七牛云加速器(https://reg-mirror.qiniu.com/)" target="_blank" rel="noopener">https://registry.docker-cn.com);七牛云加速器(https://reg-mirror.qiniu.com/)</a></p><p>我们以 Docker 官方加速器 <a href="https://registry.docker-cn.com" target="_blank" rel="noopener">https://registry.docker-cn.com</a> 为例进行介绍。对于使用systemd的系统（Debian 8+、CentOS 7），可以在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）</p><pre><code>{  &quot;registry-mirrors&quot;: [    &quot;https://registry.docker-cn.com&quot;  ]}</code></pre><p><strong>注意，一定要保证该文件符合 json 规范，否则 Docker 将不能启动。之后重新启动服务。</strong></p><pre><code>[root@localhost ~]# systemctl daemon-reload[root@localhost ~]# systemctl restart docker</code></pre><p>配置加速器之后，如果拉取镜像仍然十分缓慢，请手动检查加速器配置是否生效，在命令行执行docker info，如果从结果中看到了如下内容，说明配置成功。</p><pre><code>[root@localhost home]# docker info......Registry Mirrors:https://registry.docker-cn.com/Live Restore Enabled: falseProduct License: Community Engine</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;docker镜像常用命令&quot;&gt;&lt;a href=&quot;#docker镜像常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker镜像常用命令&quot;&gt;&lt;/a&gt;docker镜像常用命令&lt;/h3&gt;&lt;h4 id=&quot;什么是docker镜像？&quot;&gt;&lt;a href=&quot;#什
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://www.echodemo.cc/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Docker" scheme="http://www.echodemo.cc/tags/Docker/"/>
     
   </entry>
   
